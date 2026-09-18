@@ -1,0 +1,28 @@
+/* Decorative track plus semantic list: text, badges and icons do not rely on colour. */
+.transit-timeline {list-style:none;margin:1.1rem 0;padding:0;}
+.transit-timeline .timeline-leg {position:relative;display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.7rem;margin:0;padding:0 0 1.35rem;}
+.transit-timeline .timeline-leg:last-child {padding-bottom:0;}
+.timeline-leg:not(:last-child)::after {content:"";position:absolute;left:.93rem;top:2rem;bottom:0;width:2px;background:#c5d6dd;}
+.timeline-marker {width:2rem;height:2rem;border:1px solid #d4e0e5;border-radius:50%;display:grid;place-items:center;background:#f3f8fb;color:#37647a;z-index:1;}
+.timeline-ride .timeline-marker {background:#e4f3fa;}
+.timeline-transfer .timeline-marker {background:#f4f0fa;}
+.timeline-content {min-width:0;padding-top:.1rem;}
+.timeline-title {font-weight:650;line-height:1.45;overflow-wrap:anywhere;}
+.transit-timeline .timeline-time {margin-top:.3rem;color:#526472;font-size:.88em;font-variant-numeric:tabular-nums;}
+.transit-badge {display:inline-flex;align-items:center;border-radius:7px;padding:.16rem .5rem;margin:0 0 .45rem;font-size:.83em;line-height:1.4;font-weight:700;border:1px solid #c9d8df;background:#edf3f7;color:#284858;}
+.transit-badge.line-circle {background:#fff1c9;border-color:#e8c659;color:#624800;}
+.transit-badge.line-eastwest {background:#e3f2e7;border-color:#9dc9aa;color:#225e39;}
+.transit-badge.line-northsouth {background:#fbe6e9;border-color:#edb2bc;color:#913b4a;}
+.transit-badge.line-northeast {background:#f0e5f6;border-color:#d5b6e6;color:#6c3689;}
+.transit-badge.line-downtown {background:#e3edfa;border-color:#afc4e6;color:#2c528b;}
+.transit-badge.line-thomson {background:#f1e8e2;border-color:#d8bcac;color:#73513c;}
+.transit-badge.line-bus {background:#e8f4ef;border-color:#a8d0c1;color:#286550;}
+.timeline-phases {margin-top:.55rem;font-size:.9em;}
+.transit-timeline .timeline-phases summary {font-weight:500;color:#49687b;cursor:pointer;}
+.timeline-phases ul {list-style:none;padding:0;margin:.5rem 0 0;}
+.timeline-phases li {display:flex;flex-wrap:wrap;gap:.2rem 1rem;justify-content:space-between;padding:.3rem 0;line-height:1.45;}
+.timeline-phases li span:first-child {flex:1 1 14rem;}
+.timeline-phases li span:last-child {color:#526472;}
+.timeline-leg.is-current .timeline-marker {outline:3px solid #95d6f3;outline-offset:2px;}
+.timeline-leg.is-current .timeline-title {color:#175d82;}
+@media (max-width:360px) {.transit-timeline .timeline-leg {gap:.5rem;}.timeline-phases li span:first-child {flex-basis:100%;}}

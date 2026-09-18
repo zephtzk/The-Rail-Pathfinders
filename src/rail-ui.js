@@ -1,11 +1,13 @@
 import {fareEstimateHTML} from './fare-ui.js';
 import {mountCompanion} from './copilot-ui.js';
 import {createRailRouter} from './rail-engine.js';
+import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
 
 // Presentation owns form state and rendering. The routing engine owns every timing decision.
 const SAVE_KEY = 'commute-copilot-rail-guidance-v1';
 const app = document.querySelector('#app');
-let network, manifest, router, result, selectedRoute, submittedInput, lookup, dirty = false;
+let network, manifest, router, result, selectedRoute, submittedInput, lookup, companion, dirty = false;
+let planningPreferences = legacyPlannerSettings();
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const minutes = seconds => {
   if (!Number.isFinite(seconds)) return '—';
@@ -80,8 +82,8 @@ function formMarkup(input, disabled = false) {
       <div class="form-pair"><label>Travel date<input type="date" name="date" required value="${escape(input.date)}"></label><label>Depart at<input type="time" name="departureTime" required value="${escape(input.departureTime)}"></label></div>
       <div class="form-pair"><label>Arrive-by date<input type="date" name="deadlineDate" value="${escape(input.deadlineDate)}"></label><label>Arrive by <small>(optional)</small><input type="time" name="deadlineTime" value="${escape(input.deadlineTime)}"></label></div>
       <p class="field-note">For arrival after midnight, choose the following date. Clear the arrive-by time to search without a deadline.</p>
-      <div class="form-pair"><label>Total walking limit<select name="walkingLimitMinutes">${[0,4,5,8,10,12,15,20,30,45,60].map(n => `<option value="${n}" ${n === Number(input.walkingLimitMinutes) ? 'selected' : ''}>${n} minutes</option>`).join('')}</select></label><label>Preference<select name="preference">${[['fastest','Fastest arrival'],['fewer-transfers','Fewer transfers'],['less-walking','Less walking'],['quieter','Quieter (unavailable)']].map(([value,label]) => `<option value="${value}" ${input.preference === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label></div>
-      <label>Extra time allowed for preferences<select name="maxExtraMinutes">${[0,5,10,15,20,30,45,60].map(n => `<option value="${n}" ${n === Number(input.maxExtraMinutes) ? 'selected' : ''}>Up to ${n} minutes</option>`).join('')}</select></label>
+      <div class="form-pair"><label>Total walking limit<select name="walkingLimitMinutes">${[...new Set([0,4,5,8,10,12,15,20,30,45,60,Number(input.walkingLimitMinutes)])].sort((a,b)=>a-b).map(n => `<option value="${n}" ${n === Number(input.walkingLimitMinutes) ? 'selected' : ''}>${n} minutes</option>`).join('')}</select></label><label>Preference<select name="preference">${[['fastest','Fastest arrival'],['fewer-transfers','Fewer transfers'],['less-walking','Less walking'],['quieter','Quieter (unavailable)']].map(([value,label]) => `<option value="${value}" ${input.preference === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label></div>
+      <label>Extra time allowed for preferences<select name="maxExtraMinutes">${[...new Set([0,5,10,15,20,30,45,60,Number(input.maxExtraMinutes)])].sort((a,b)=>a-b).map(n => `<option value="${n}" ${n === Number(input.maxExtraMinutes) ? 'selected' : ''}>Up to ${n} minutes</option>`).join('')}</select></label>
       <p class="field-note">Measured against the fastest feasible journey. Walking includes assumed station access, exit and interchange walking.</p>
       <p id="preference-note" class="notice subtle" ${input.preference === 'quieter' ? '' : 'hidden'}>Crowding is unavailable for this timetable. Quieter falls back to fastest arrival.</p>
       <button class="primary plan-button" type="submit">Find rail journeys <span aria-hidden="true">→</span></button>
@@ -99,6 +101,7 @@ function bindForm() {
   form.addEventListener('submit', event => { event.preventDefault(); search({focus:true}); });
   form.addEventListener('input', () => {
     dirty = true;
+    companion?.clearPrepared();
     const note = document.querySelector('#stale-results');
     if (note) note.hidden = false;
     document.querySelector('#preference-note').hidden = form.elements.preference.value !== 'quieter';
@@ -116,10 +119,11 @@ function parseForm() {
   const errors = [];
   if (!originId) errors.push({code:'unsupported-station',message:`Origin “${data.origin}” is outside imported coverage. Choose a station from the list.`});
   if (!destinationId) errors.push({code:'unsupported-station',message:`Destination “${data.destination}” is outside imported coverage. Choose a station from the list.`});
-  return {errors,input:{originId,destinationId,date:data.date,departureTime:data.departureTime,deadlineDate:data.deadlineTime ? data.deadlineDate : undefined,deadlineTime:data.deadlineTime || undefined,walkingLimitMinutes:Number(data.walkingLimitMinutes),preference:data.preference,maxExtraMinutes:Number(data.maxExtraMinutes)}};
+  return {errors,input:legacyPlannerInput({originId,destinationId,date:data.date,departureTime:data.departureTime,deadlineDate:data.deadlineTime ? data.deadlineDate : undefined,deadlineTime:data.deadlineTime || undefined,walkingLimitMinutes:Number(data.walkingLimitMinutes),preference:data.preference,maxExtraMinutes:Number(data.maxExtraMinutes)},planningPreferences)};
 }
 
 function search({focus = false} = {}) {
+  companion?.clearPrepared();
   const parsed = parseForm();
   dirty = false;
   submittedInput = parsed.input;
@@ -193,6 +197,7 @@ function renderResult({saved = false,savedAt} = {}) {
     ${renderAlternatives()}`;
   document.querySelector('#save-rail').addEventListener('click', saveGuidance);
   for (const button of document.querySelectorAll('[data-rail-route]')) button.addEventListener('click', () => {
+    companion?.clearPrepared();
     selectedRoute = result.routes.find(route => route.id === button.dataset.railRoute);
     renderResult();
   });
@@ -304,6 +309,7 @@ async function start() {
     router = createRailRouter(network); makeLookup();
     const saved = readSaved();
     const input = saved && lookup.stations.has(saved.input.originId) && lookup.stations.has(saved.input.destinationId) ? saved.input : defaults();
+    planningPreferences = legacyPlannerInput(input,planningPreferences);
     document.querySelector('#planner').innerHTML = formMarkup(input);
     bindForm(); renderCoverage();
     const load = document.querySelector('#load-state');
@@ -335,7 +341,7 @@ async function start() {
     }
     console.warn('Rail timetable unavailable:',error.message);
   }
-  mountCompanion({getSelected:()=>dirty?null:({route:selectedRoute,input:submittedInput}),name:id=>lookup?.labels.get(id)??stopLabel(id),getPlaces:()=>network?.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{const f=document.querySelector('#rail-form');if(!f)return;f.elements.origin.value=stationLabel(p.origin.stationId??p.origin.id);f.elements.destination.value=stationLabel(p.destination.stationId??p.destination.id);f.elements.date.value=p.departureDate;f.elements.departureTime.value=p.departureTime;f.elements.deadlineTime.value='';if(p.preferences?.walkingLimitMinutes!=null)f.elements.walkingLimitMinutes.value=String(p.preferences.walkingLimitMinutes);f.dispatchEvent(new Event('input'));f.scrollIntoView();},onEndpoint:(endpoint,place)=>{const f=document.querySelector('#rail-form');if(f){f.elements[endpoint].value=stationLabel(place.stationId??place.id);f.dispatchEvent(new Event('input'));}}});
+  companion=mountCompanion({getSelected:()=>dirty?null:({route:selectedRoute,input:submittedInput}),name:id=>lookup?.labels.get(id)??stopLabel(id),getPlaces:()=>network?.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{const f=document.querySelector('#rail-form');if(!f)return;planningPreferences=legacyPlannerInput({},p.preferences);f.elements.origin.value=stationLabel(p.origin.stationId??p.origin.id);f.elements.destination.value=stationLabel(p.destination.stationId??p.destination.id);f.elements.date.value=p.departureDate;f.elements.departureTime.value=p.departureTime;f.elements.deadlineTime.value='';for(const key of ['walkingLimitMinutes','preference','maxExtraMinutes'])if(p.preferences?.[key]!=null){const field=f.elements[key],value=String(p.preferences[key]);if(![...field.options].some(option=>option.value===value))field.add(new Option(value,value));field.value=value;}f.dispatchEvent(new Event('input'));f.scrollIntoView();},onEndpoint:(endpoint,place)=>{const f=document.querySelector('#rail-form');if(f){f.elements[endpoint].value=stationLabel(place.stationId??place.id);f.dispatchEvent(new Event('input'));}}});
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
 

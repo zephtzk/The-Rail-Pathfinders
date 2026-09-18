@@ -1,0 +1,99 @@
+{
+  "baseline": "5b089bb9cfb09ec5df4fa314f3fb2b55074d8e55",
+  "applicationSha256": "287b0001707380ab1ffe129ae4b6985192a402f92e40efc3ccaed9129534c734",
+  "workerSha256": "2e6b6c5d35d477ab865bd9e84b9b98dc68e705e8cc5f96db97a8c25c6d657b19",
+  "javascriptTests": 274,
+  "pythonTests": 40,
+  "r3BrowserSuites": [
+    {
+      "suite": "R3 unified flow",
+      "checks": [
+        "app responses preserve a valid origin referrer",
+        "six reachable pages share one map",
+        "blocked tiles leave a usable schematic and a deliberate retry",
+        "tile request sends origin only",
+        "no unsupported connection form before a trip",
+        "station layout and toilet entry points remain",
+        "preference choices omit persona names",
+        "caregiver controller lives on its own page",
+        "spending controller lives on its own page",
+        "home icon returns to Plan without a document reload",
+        "save confirms the chosen name and location",
+        "one saved route without duplicated manager",
+        "saving a route does not start a trip or add station bookmarks",
+        "add a place does not ask for coordinates",
+        "reopened route retains preferences in the canonical journey",
+        "technical trip detail is collapsed by default",
+        "connection helper explains its purpose",
+        "position correction opens the relevant form",
+        "page navigation retains one trip identity and controller",
+        "cancel requires a clear in-app choice",
+        "keep trip preserves active guidance",
+        "cancel ends same trip and clears geographic permissions",
+        "cancel is excluded from completed spending",
+        "cancel preserves reusable routes",
+        "ended trip hides obsolete active tools",
+        "cancelled state survives reload",
+        "a new trip can start after cancellation",
+        "completed fare action opens Spending",
+        "completed journey is recorded once",
+        "plan fits 320px at large text",
+        "current fits 320px at large text",
+        "saved fits 320px at large text",
+        "caregiver fits 320px at large text",
+        "spending fits 320px at large text",
+        "preferences fits 320px at large text",
+        "no runtime errors"
+      ],
+      "passed": 36
+    },
+    {
+      "suite": "R3 saved places",
+      "checks": [
+        "automatic legacy stations and imported journeys are hidden",
+        "deliberately saved route remains visible",
+        "reading saved data leaves original bytes intact",
+        "add a place has no coordinate inputs",
+        "typing a personal label and address makes no external request",
+        "unselected address cannot be saved",
+        "explicit search sends address without personal label",
+        "chosen result enables Save place",
+        "editing selected address invalidates the selection",
+        "selected address is persisted under a local ID without station snapping",
+        "only explicitly added places appear",
+        "saving a place preserves imported records for export",
+        "the saved address survives reload",
+        "a stale reply cannot select or display the old address",
+        "no-match search offers a retry and leaves Save disabled",
+        "offline search reports failure without creating a place",
+        "address flow has no uncaught browser errors"
+      ],
+      "passed": 17
+    },
+    {
+      "suite": "R3 current trip and privacy",
+      "checks": [
+        "current summary stays concise while route details and station tools remain available",
+        "plain-language route check converts walking minutes without bypassing progress safeguards",
+        "cancellation is explicitly confirmed; keeping the trip preserves guidance and local collection",
+        "offline cancellation survives reload, blocks queued location fixes, and creates no completed-trip spending",
+        "completed-trip spending opens its own page and repeated visits cannot duplicate its record",
+        "offline cancellation persists pending caregiver privacy change and reconnect confirms the cancelled server state without revoking access",
+        "online cancellation clears shared location and records cancelled state after privacy changes",
+        "no browser runtime errors"
+      ],
+      "passed": 8
+    },
+    {
+      "suite": "R3 map failures",
+      "checks": [
+        "real browser sends origin-only tile Referer without query or fragment",
+        "HTTP 403 removes failed base tiles and keeps station/route overlays",
+        "map recovers only after deliberate Retry street map action",
+        "no map lifecycle browser errors"
+      ],
+      "passed": 4
+    }
+  ],
+  "environment": "Windows; Node24.16.0; Edge153.0.4234.32; desktop mobile/touch emulation, not physical devices"
+}
