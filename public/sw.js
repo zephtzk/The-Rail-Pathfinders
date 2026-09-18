@@ -1,5 +1,5 @@
 const CACHE='commute-copilot-v1';
-const SHELL=['/','/index.html','/icon.svg','/manifest.webmanifest','/src/app.js','/src/styles.css','/src/engine.js','/src/data.js','/src/storage.js','/vendor/leaflet.js','/vendor/leaflet.css','/data/corridor.json','/data/sources.json'];
+const SHELL=['/','/index.html','/icon.svg','/manifest.webmanifest','/src/app.js','/src/styles.css','/src/engine.js','/src/data.js','/src/storage.js','/src/live-data.js','/src/live-ui.js','/vendor/leaflet.js','/vendor/leaflet.css','/data/corridor.json','/data/sources.json'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('commute-copilot-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

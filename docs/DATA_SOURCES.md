@@ -1,8 +1,70 @@
-# Phase 0 — data availability and boundaries
+# Data availability, integration and boundaries
 
-Reviewed 18 September 2026. This is an access/contract audit, not feature integration.
+Reviewed 18 September 2026. The Phase 1 section records the implemented corridor integration;
+the Phase 0 inventory and audit evidence below remain historical access/contract evidence.
 Documentation, synthetic tests, authenticated responses and physical-device observations are separate evidence classes.
 See [MILESTONES.md](MILESTONES.md) for the acceptance decision and current live results.
+
+## Phase 1 — integrated notices and station reports
+
+The application now uses only `TrainServiceAlerts` and `PCDRealTime?TrainLine=EWL|CCL|DTL` (three separate line requests).
+The latest [live application-adapter evidence](evidence/phase1/live-adapter.json) was recorded at
+21:09:57 Singapore time on 18 September 2026. All four feeds had successful parsed HTTP 200 responses.
+Crowd retrieval occurred at 21:07:20 and was reused from the unchanged ten-minute cache; the later report timestamp
+is not an additional upstream crowd fetch or a new source observation. No credential, header, notice text or raw response is retained.
+
+| Integrated feed | Actual observed contract / mapping | What it supports and remaining limits |
+| --- | --- | --- |
+| TrainServiceAlerts | `value` object; numeric `Status:1`; three `Message` records with text and `CreatedDate`; empty `AffectedSegments`; no missing expected fields or malformed records. | Display source advisories. Status 1 includes minor delays. Message timestamps lack timezone offsets; one retained timestamp dates from April. The response supplies no message expiry or message-to-segment association. Current applicability, real nonempty affected-segment mapping and disruption/recovery variants remain NOT TESTED. |
+| EWL PCDRealTime | 33 rows; all 11 corridor codes EW2–EW12 matched exactly. | Station-level reports for Tampines, Simei, Tanah Merah, Bedok, Kembangan, Eunos, Paya Lebar, Aljunied, Kallang, Lavender and Bugis. Other line rows are outside the implemented corridor. |
+| CCL PCDRealTime | 34 rows; all six corridor codes CC4–CC9 matched exactly. | Promenade, Nicoll Highway, Stadium, Mountbatten, Dakota and Paya Lebar. Counts include separate line-specific interchange positions; they are not distinct physical station counts. |
+| DTL PCDRealTime | 37 rows; both DT14/DT15 matched exactly. | Bugis and Promenade only. Does not expand routing to the rest of DTL. |
+
+Every matched crowd record in this sample had band `l` and interval **20:40–20:50 +08**. At upstream retrieval,
+that interval had already expired by about 17 minutes 20 seconds. Source access and exact code mapping PASS;
+fresh live observation availability is NOT TESTED. Bands `m`, `h`, `NA`, malformed records and conflicts are covered by
+synthetic tests, not claimed as observed variants. A station reporting interval is not an individual observation instant,
+train position, carriage load, seat count or forecast for a later planned departure.
+
+The implementation accepts the documented/observed single station code. It does not split an unvalidated compound code
+or infer a code range. Structured notice lists match exact codes on their stated line. Supported-line notices with no
+stations are line-only; unknown/range/prose identifiers remain unmapped rather than being declared irrelevant.
+General messages remain separately labelled with corridor relevance unconfirmed. No source text is turned into delay minutes,
+closures or changes to route ranking. Live information is informational; the existing route engine remains replay.
+
+### Runtime freshness, caching and persistence
+
+- Current crowding requires a recognised band, valid explicit-offset timestamps, `StartTime <= now < EndTime`,
+  an online successful source and a retrieval time between interval start and now. At the exact end it becomes expired.
+  A report fetched before its stated start cannot become observed merely because the clock advances.
+- Expired bands can remain visible only as **last reported**, with the original interval and age; current crowding is unavailable.
+  Missing, reversed, conflicting, future and NA values never become a quiet/current observation. Freshness uses real time,
+  independently of the replay date. Local device/server clock errors remain a limitation.
+- Notice retrieval establishes when a response arrived, not when a notice expires. Source `CreatedDate` without an offset is
+  displayed as timezone/format unconfirmed. A recently connected source is not a proof of current notice applicability.
+- Each of four fixed upstream requests is limited to six seconds and 2 MiB. Redirects are rejected and the key is sent only
+  in the HTTPS `AccountKey` header. Returned fields are bounded/allowlisted; reflected key values and raw error bodies are excluded.
+- Per-process/Worker-isolate caches coalesce simultaneous requests: notices 60 seconds; crowding 600 seconds.
+  General failures retry no sooner than 60 seconds, authentication failures 300 seconds; 429 respects a longer numeric/date
+  Retry-After. Cache hits and failures preserve the original successful retrieval/interval, not an invented refresh time.
+  Failed refreshes cannot pass the live verifier using a previously successful HTTP status. No persistent/global rate limiter is claimed.
+- The visible online browser refreshes its application source on a 60-second timer and explicit/resume events; upstream caching
+  still applies. It re-evaluates visible expiry each second and on resume/offline/reconnection. These are implementation limits,
+  not LTA service-level guarantees or permission to load-test the shared resource.
+- Saved snapshots retain bounded normalised notices/station reports and their provenance separately from replay timestamps.
+  Offline reports are saved information, never labelled current. The service worker excludes API responses; the app shell,
+  saved journey steps and bundled geometry remain available. Standard map tiles are not an offline promise.
+
+Use the masked launcher in the [README](../README.md#run); the DataMall key is present only in local process memory during a session.
+This phase did not configure a hosting secret or deploy a version. EXTOL uses its separate native SDK Account Key and is not integrated.
+
+The product credits LTA DataMall and links to the official [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence),
+without linking directly to DataMall APIs/downloads. Both official licence pages require source acknowledgement plus a licence link;
+the source acknowledgement need not itself be a hyperlink. This is an implementation reading, not a definitive LTA interpretation of
+the account email. Any later direct product link to DataMall still needs that account restriction resolved; no LTA contact occurred.
+
+Timetable routing, forecasts, bus feeds, GTFS trip effects and wider geographic coverage remain outside Phase 1. The following
+inventory retains the Phase 0 observations and unperformed checks; deferred checks have not been promoted to PASS.
 
 ## Official references and contract digest
 
@@ -28,7 +90,7 @@ Bus arrival requires `BusStopCode`; `ServiceNo` is optional. Crowd feeds require
 this audit selects EWL/CCL/DTL. GTFS download links expire after 15 minutes.
 These are producer cadences, not polling entitlements. [Guide, §§1–2](https://datamall.lta.gov.sg/content/dam/datamall/datasets/LTA_DataMall_API_User_Guide.pdf)
 
-## What must be demonstrated before use
+## Phase 0 inventory: what must be demonstrated before use
 
 The following are project acceptance requirements, not claims that the provider has met them.
 The Phase 0 probe checks selected envelopes and field presence; it is not a full schema validator.
@@ -91,11 +153,11 @@ bus services returned 500 + 301 records without a uniqueness/overlap check; arri
 Train notices included three message timestamps ranging from April to September with no timezone offset;
 retained metadata cannot decide their ongoing relevance. Full details and next-phase gates are in [MILESTONES.md](MILESTONES.md).
 
-Phase 1 retains its original notices/station-crowding scope on the current corridor; timetable/network routing belongs to Phase 2.
-Data access is sufficient to begin Phase 1 implementation when requested, not to claim the integrated app passes acceptance.
-Its [required crowding behavior](MILESTONES.md#required-expired-crowding-behavior-for-phase-1) makes source interval validity
-authoritative: expired bands become unavailable-current, optionally retained as explicitly historical; fetching them again never
-refreshes observation time. Unknown/NA is not quiet, and forecasts remain separate. This behavior is specified, not yet implemented.
+At the end of Phase 0, data access was sufficient to begin the original Phase 1 notices/station-crowding implementation;
+the runtime behavior was then untested. The Phase 1 section above now records its implementation and evidence separately.
+Its [required crowding behavior](MILESTONES.md#required-expired-crowding-behavior-for-phase-1) is implemented and tested:
+expired bands become unavailable-current, optionally retained as historical; fetching them again does not renew source time.
+Unknown/NA is not quiet. Forecast integration and timetable/network routing remain later work.
 
 The reusable runner requests one notice snapshot, three GTFS metadata responses and at most three downloads,
 current/forecast crowding for three corridor lines, two pages of each bus directory, and arrivals at one returned stop.
@@ -127,9 +189,9 @@ The replacement-key sample demonstrates accepted API authentication; account-spe
 The [Singapore Open Data Licence](https://datamall.lta.gov.sg/content/datamall/en/SingaporeOpenDataLicence.html)
 requires source attribution and a licence link, permits reuse of covered datasets, excludes personal data and certain
 third-party rights, and prohibits implying endorsement. LTA datasets do not become MIT-licensed project code.
-Retain dataset/access-date attribution when integrating later. The email's hyperlink restriction and the licence's required
-attribution links need clarification from LTA if a public product links directly to DataMall. Until clarified, do not add
-product-facing API/download hyperlinks; documentation citations here are research references, not a new product feature.
+Phase 1 retains dataset/access-date attribution with the official data.gov.sg licence link as described above. The email's
+hyperlink restriction needs clarification from LTA if a later public product links directly to DataMall. Until clarified, do not
+add product-facing DataMall API/download hyperlinks; documentation citations here remain research references.
 Signed-link expiry is not schedule validity or a retention policy.
 
 ## DataMall versus EXTOL

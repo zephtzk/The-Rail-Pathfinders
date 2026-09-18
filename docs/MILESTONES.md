@@ -1,5 +1,132 @@
 # Commute Copilot milestones
 
+## Phase 1 — live information on the existing corridor
+
+**18 September 2026 decision: implementation ready for local inspection; live-validation coverage remains incomplete.
+Phase 1 is not declared fully complete.** The integrated application authenticated successfully and mapped all 19 crowd
+station codes. All automated and browser checks pass. Actual fresh crowd intervals and nonempty affected-segment/disruption
+variants were absent from the sampled responses, so those live checks remain NOT TESTED. They have not been replaced with
+fixture evidence. No deployment, audience change, timetable routing, network expansion, bus integration or EXTOL work occurred.
+
+### Starting milestone checks and prerequisites
+
+The requested checks are the eleven acceptance rows below. This phase started from a clean
+`codex/phase-0-baseline` at `6722f3fb8fb4921fdab89cf424dc1ef53efc5850`, after inspecting the source, instructions,
+README, hosting configuration, latest ledger and both replacement-key/GTFS evidence files. The remote matched that
+Phase 0 revision; `main` remained `4838c0458e95c89b16817eb89bcd49608f2d04ce`. The new branch is
+`codex/phase-1-live-corridor`, preserving Phase 0 history. No `AGENTS.md` was found in the checkout or checked ancestors.
+
+| Prerequisite at Phase 1 start | Classification | Resolution / boundary |
+| --- | --- | --- |
+| Correct checkout, Phase 0 history and Git write access | AVAILABLE | Named The-Rail-Pathfinders checkout, existing origin and authenticated `zephtzk` Git access. Older sibling `app/` was not used. |
+| Local Node/npm, dependencies, Edge and baseline tests | AVAILABLE | Node 24.16.0, npm 11.13.0, Edge 153.0.4234.32; baseline reproduced before integration. |
+| Current official contracts and sanitised successful audits | AVAILABLE | DataMall guide v6.9, observed lower-case bands, exact interval fields and source-time limitations. |
+| Key in application runtime | MISSING → AVAILABLE | Prior audit entry did not configure the app. The first terminal prompt did not appear; the replacement masked desktop launcher accepted the key and started the application. No key file/provider secret was created. |
+| Actual integrated corridor code coverage and live variants | UNVERIFIED → partly AVAILABLE | All 19 station codes validated. Fresh crowding and real nonempty notice segments remain NOT TESTED. |
+| Existing hosting identity/access | AVAILABLE, read-only | Sites owner access, project `appgprj_6aad0ab90e5881919eca01b79f19aa24`, custom private access, version 2 confirmed. No deployment authorized in this phase. |
+| Physical phones, native SDK key/OBU | UNVERIFIED | No physical tests. EXTOL is outside this browser phase and does not share the DataMall credential. |
+
+### What changed and how to try it
+
+The server now reads TrainServiceAlerts and station reports for EWL/CCL/DTL with bounded requests, shared caches and backoff.
+A separate live panel displays notices and 19 station positions, exact source intervals, retrieval/receipt times and unavailable,
+expired or offline states. Notice prose and crowd bands do not modify replay journeys. Saved guidance retains live-source metadata
+without making it current after reload. The reproducible demo, existing preferences and route calculation engine are preserved.
+
+From this checkout, run `npm ci` if dependencies are absent, then `npm run check`.
+For the demo, `npm run dev` serves `http://localhost:4173`. For live data, stop any server on that port and run
+`python scripts/run-live-local.py --gui` using Python 3.10+ with Tkinter. Enter the DataMall key only in the masked local field.
+The current task's live session already has the replacement key in memory; no further key entry is needed while it stays running.
+Open `http://localhost:4173` and select **View live corridor notices and station reports**. Close the masked-entry window to
+terminate its server. On this machine Python is available at
+`C:\Users\simho\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe` if `python` is not on PATH.
+
+Use **Reset demo**, **Planned track works**, **Disruption during travel**, **Compare options**, **Use this route**, then
+**Save for offline** to reproduce the labelled scenarios. Disconnect and reload after “Offline app ready”; reconnect without
+losing the selected route. The currently hosted private preview still has the older implementation and cannot demonstrate Phase 1.
+
+### Acceptance ledger
+
+Evidence classes: **automated** means synthetic unit/integration tests; **browser** means desktop Edge with emulated viewports
+and actual browser network-offline transitions; **live API** means the real built application's adapter using the masked key;
+**physical** means an actual phone/OBU. One class never substitutes for another.
+
+| Requested acceptance check | Status | Evidence / limits |
+| --- | --- | --- |
+| The application adapter successfully retrieves the required live feeds using securely configured credentials. | PASS | **Live API:** all four required feeds returned parsed HTTP 200 with no error. Key injected only into the loopback Node process, never the browser or Git. [Live evidence](evidence/phase1/live-adapter.json). |
+| Actual response fields and corridor station mappings are validated. | PASS for observed envelopes and all 19 crowd codes; NOT TESTED for nonempty live affected-segment mapping | **Live API:** notices Status 1, three messages, empty affected segments; EWL/CCL/DTL source counts 33/34/37, exact matches 11/6/2, no missing corridor codes or invalid records. All sampled crowd bands `l`. **Automated:** other bands, exact code/line matching, malformed/compound identifiers and conflicts. A real nonempty affected-segment contract was not observed. |
+| Normal service, relevant notices, irrelevant notices and valid empty responses behave correctly. | PASS in automated/browser tests; NOT TESTED for live nonempty disruption/recovery variants | **Automated/browser:** status 1 includes minor delays, status 2, relevant/outside/line-only/unmapped segments, empty/missing/malformed distinction and escaped prose. **Live API:** status 1 and three general messages only. Messages are never assigned to segments by array order or guessed meaning. |
+| Fresh, expired, missing-timestamp and future-timestamp cases are handled accurately. | PASS in automated/browser tests; PASS for observed expired live intervals; NOT TESTED for fresh live intervals | Inclusive start/exclusive end, expiry while page stays open, refetch/reconnect without renewed source time, NA/conflicts, missing offsets, impossible/reversed dates and future-report maturation prevention tested. Actual 20:40–20:50 +08 intervals were already about 17m20s expired at retrieval. No freshness threshold was widened. |
+| Authentication errors, rate limits, timeouts, malformed responses and partial feed failures degrade gracefully without leaking secrets. | PASS in automated/browser tests | Synthetic auth failures, changed/missing keys, 429 Retry-After, bounded timeout/body/redirect handling, one-feed failure, corrupt snapshot, HTML escaping and reflected-key redaction. Preserved records after a failed refresh cannot falsely pass live validation. Deliberate live failure injection/rate-limit triggering was NOT TESTED. |
+| Live information and replay calculations remain visibly distinct. | PASS | **Browser:** separate live panel, real source times and replay-calculated timestamp; route calculations retain their replay labels. Actual live report provenance is separate from the demo's 19 September journey date. No assertion that today's observations validate another date's itinerary. |
+| Existing route calculations, preferences and demonstration scenarios remain functional. | PASS | **Automated/browser:** existing engine scenarios, walking limits, preference behavior, direct/Circle alternatives and route acceptance. Live refresh/failure leaves the selected replay route and its timed legs unchanged. Engine/data fixtures were not changed. |
+| Actual browser network loss, offline reload and reconnection preserve useful saved guidance. | PASS in browser emulation | Network disabled through the browser context, page reloaded, selected instructions/arrival/geometry and original source metadata restored, editing disabled offline, no current-live claim, reconnection preserves selection. Tests include absent/corrupt saved state. This is not airplane-mode testing on physical phones. |
+| Appropriate existing regression suites and meaningful new integration/browser tests pass. | PASS | `npm run check`: 48 tests (30 existing + 18 Phase 1), zero failures; 16-asset Worker build. Existing browser suite 30 PASS; new live UI suite 23 PASS. [Verification summary](evidence/phase1/verification.json), [browser](evidence/phase1/browser-results.json), [live UI browser](evidence/phase1/live-browser-results.json). |
+| Physical-device results are reported separately from browser emulation. | NOT TESTED on physical devices; reporting requirement satisfied | No physical iPhone Safari or Android Chrome available/exercised in this task. 320/390px and 200% text are browser emulation only. Native EXTOL/OBU testing is outside scope. |
+| No unsupported claims about live arrival times, carriage crowding or expanded coverage are introduced. | PASS | Static/automated/browser review: station bands expressly exclude carriage/door/seat meaning; advisory data cannot change replay ranking, delays or closures. No train-arrival endpoint, GTFS router, bus router or network expansion added. |
+
+The independent read-only review found two defects during development (corrupt scalar band names causing a UI crash and
+failed refreshes preserving an old HTTP success in evidence). Both were fixed and regression-tested before the final passes.
+Initial new browser test failures were collapsed-details locator assumptions; the corrected suite opens the appropriate panels
+and passes. The Sites generic build helper failed on this Windows installation's npm wrapper resolution; the repository's
+direct `C:\Program Files\nodejs\npm.cmd run check` succeeded. This helper issue is not hidden as a passed helper check.
+
+### Live sample, freshness and known coverage limits
+
+The final report was recorded at **21:09:57 SGT on 18 September 2026**. Notices were retrieved then; the crowd cache holds
+the successful **21:07:20 SGT** retrieval. All crowd intervals are **20:40–20:50 +08**. At report time they were approximately
+20 minutes expired. Upstream retrieval, report recording and source interval times remain distinct in the archived JSON.
+General notice timestamps have no offset/expiry; one dates from April. No notice-to-segment association or validity is invented.
+
+At the interval end, the current band becomes unavailable immediately; a retained band is labelled last reported/expired with
+its original interval and age. A fetch/cache hit does not reset that age. Offline and failed-source reports cannot claim current
+observations. Future, missing, conflicting and NA values never earn a comfort preference benefit. All recommendation values,
+walk/wait/ride durations, closures and replay crowd levels remain simulated. There is no live routing effect to validate or promise.
+
+Remaining risks: source omissions/lag/availability, unidentified future contract variants, local clock accuracy, unsurveyed indoor
+transfer walking, desktop-to-phone differences and per-isolate caching rather than a global distributed rate limiter. The app
+covers only the two existing predefined alternatives. No ongoing polling campaign or provider load test was performed; local
+preview refreshes use the bounded adapter. A successful snapshot is not an availability or freshness SLA.
+
+### Exact remaining user actions and next phase
+
+| Item | Purpose | Secure place / action | Check it blocks |
+| --- | --- | --- | --- |
+| No new credential needed for the running local session | Inspect the completed implementation | Use localhost while its masked-entry window stays open. On restart, re-enter the replacement DataMall key in `scripts/run-live-local.py --gui`; no chat or key-bearing command. | None currently. After shutdown, authenticated application checks need a new local session. |
+| Confirm old exposed key revocation, if replacement did not revoke it | Finish credential lifecycle follow-up | DataMall account's official key/support channel; report only whether revocation succeeded. No key needed in this task. | Security follow-up remains UNVERIFIED; current replacement-key authentication already PASS. |
+| Representative fresh crowd interval and nonempty affected-segment/disruption/recovery response | Close remaining live-variant validation | Provider availability; when appropriate, make a bounded local application check and retain only sanitised metadata. Do not paste raw notices/credentials or repeatedly poll to force an event. | Fresh-live and real affected-segment checks remain NOT TESTED. Synthetic passes do not clear them. No new dataset request is needed. |
+| Separate Phase 2 execution request | Authorize timetable-based routing work | Request Phase 2 in this task with its milestone boundary. No extra key is needed merely to authorize it; a repeat download later uses secure local entry. | Starting Phase 2. It has not begun. |
+| Hosting secret and deployment authorization, only in a later hosting phase | Enable this code in the existing private hosted project | Existing Sites runtime secret settings, `LTA_ACCOUNT_KEY`, marked secret; preserve project/audience. Never use an EXTOL key here. | Hosted Phase 1 verification is NOT TESTED and out of this authorized phase. No deployment action is required now. |
+| Physical iOS/Android checks for later release | Validate real-device display and offline/reconnect behavior | Authorized HTTPS build and actual phones; no extra credential in browser code. | Physical release acceptance remains NOT TESTED, independently of browser passes. |
+
+**Phase 2 readiness is separate:** the earlier schedule download/basic parsing evidence is available, so its engineering work
+can be scoped on request. Timetable-based routing itself is not ready. It still needs a reproducible versioned importer,
+trip→route/service validation, exact platform/direction identities, ordered/valid stop times, service-date/exception/overnight
+handling, validated transfers and independently checked journeys. Empty trip updates do not establish live timing semantics;
+continuous network-wide real-time arrivals remain unsupported. These deferred checks do not block the informational Phase 1
+implementation and have not been counted as passed. No EXTOL credential or native work is needed for Phase 2 rail schedules.
+
+### Git and hosting provenance
+
+- Source: `C:\Users\simho\OneDrive\Documents\ChatGPT\Neblala\The-Rail-Pathfinders`; origin
+  `https://github.com/zephtzk/The-Rail-Pathfinders.git`.
+- Parent: `6722f3fb8fb4921fdab89cf424dc1ef53efc5850`. Delivery branch: `codex/phase-1-live-corridor`.
+  The commit containing this Phase 1 section is the delivery revision; resolve it with
+  `git log -1 --format=%H -- docs/MILESTONES.md`. Exact commit/push outcome is reported in the task handoff to avoid a
+  self-referential hash. No PR was created as part of this milestone.
+- Existing Sites project `appgprj_6aad0ab90e5881919eca01b79f19aa24` was inspected read-only: owner access, custom/private,
+  latest version 2. Hosted source remains `f8546eef7e950ffb3e50f98a6867b4e73f3dedf2`, deployment
+  `appgdep_6aad11c6077881919115c818eff5f41a`. [Private preview](https://commute-copilot-nebula.simhongmen.chatgpt.site).
+- `.openai/hosting.json`, hosting secrets, hosted versions and access audience were not changed. **Phase 1 is not deployed.**
+
+**Boundary:** stop after this local implementation, Git delivery and report. Full live-validation sign-off remains open;
+unobserved live variants and physical/hosted checks retain their stated statuses. No deferred check is silently accepted.
+
+---
+
+The Phase 0 record below is retained as historical evidence. Its references to Phase 1 not yet started describe that earlier
+checkpoint; the Phase 1 section above is the current status.
+
 ## Phase 0 — baseline and usable-data audit
 
 **Decision after GTFS reassessment: ready to begin the original Phase 1 implementation; not ready for live release.

@@ -1,0 +1,246 @@
+{
+  "mode": "live-application-adapter",
+  "recordedAt": "2026-09-18T13:09:57.998Z",
+  "schemaVersion": 1,
+  "rawPayloadsRetained": false,
+  "credentialsRetained": false,
+  "noticeTextRetained": false,
+  "notices": {
+    "status": "available",
+    "httpStatus": 200,
+    "error": null,
+    "retrievedAt": "2026-09-18T13:09:57.993Z",
+    "serviceStatus": 1,
+    "itemCount": 3,
+    "segmentCount": 0,
+    "missingFields": [],
+    "invalidRecords": 0,
+    "sourceTimes": [
+      "2026-09-18 20:06:30",
+      "2026-09-18 17:33:27",
+      "2026-04-18 11:50:27"
+    ],
+    "segmentRelevance": []
+  },
+  "crowding": [
+    {
+      "line": "EWL",
+      "status": "available",
+      "httpStatus": 200,
+      "error": null,
+      "retrievedAt": "2026-09-18T13:07:20.051Z",
+      "receivedRecords": 33,
+      "invalidRecords": 0,
+      "unmappedRecords": 22,
+      "missingCodes": [],
+      "expectedCorridorCodes": [
+        "EW2",
+        "EW3",
+        "EW4",
+        "EW5",
+        "EW6",
+        "EW7",
+        "EW8",
+        "EW9",
+        "EW10",
+        "EW11",
+        "EW12"
+      ],
+      "records": [
+        {
+          "code": "EW10",
+          "reportedStation": "EW10",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW11",
+          "reportedStation": "EW11",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW12",
+          "reportedStation": "EW12",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW2",
+          "reportedStation": "EW2",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW3",
+          "reportedStation": "EW3",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW4",
+          "reportedStation": "EW4",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW5",
+          "reportedStation": "EW5",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW6",
+          "reportedStation": "EW6",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW7",
+          "reportedStation": "EW7",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW8",
+          "reportedStation": "EW8",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "EW9",
+          "reportedStation": "EW9",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        }
+      ]
+    },
+    {
+      "line": "CCL",
+      "status": "available",
+      "httpStatus": 200,
+      "error": null,
+      "retrievedAt": "2026-09-18T13:07:20.048Z",
+      "receivedRecords": 34,
+      "invalidRecords": 0,
+      "unmappedRecords": 28,
+      "missingCodes": [],
+      "expectedCorridorCodes": [
+        "CC4",
+        "CC5",
+        "CC6",
+        "CC7",
+        "CC8",
+        "CC9"
+      ],
+      "records": [
+        {
+          "code": "CC4",
+          "reportedStation": "CC4",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "CC5",
+          "reportedStation": "CC5",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "CC6",
+          "reportedStation": "CC6",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "CC7",
+          "reportedStation": "CC7",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "CC8",
+          "reportedStation": "CC8",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "CC9",
+          "reportedStation": "CC9",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        }
+      ]
+    },
+    {
+      "line": "DTL",
+      "status": "available",
+      "httpStatus": 200,
+      "error": null,
+      "retrievedAt": "2026-09-18T13:07:20.047Z",
+      "receivedRecords": 37,
+      "invalidRecords": 0,
+      "unmappedRecords": 35,
+      "missingCodes": [],
+      "expectedCorridorCodes": [
+        "DT14",
+        "DT15"
+      ],
+      "records": [
+        {
+          "code": "DT14",
+          "reportedStation": "DT14",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        },
+        {
+          "code": "DT15",
+          "reportedStation": "DT15",
+          "level": "l",
+          "startTime": "2026-09-18T20:40:00+08:00",
+          "endTime": "2026-09-18T20:50:00+08:00",
+          "freshness": "expired"
+        }
+      ]
+    }
+  ],
+  "limits": "One application snapshot. Fresh observations and real disruption/recovery variants may not be present; absence is not a test pass.",
+  "accessCheck": "PASS",
+  "corridorMappingCheck": "PASS"
+}
