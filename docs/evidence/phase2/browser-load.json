@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-09-18T13:35:00.876Z",
+  "browser": "153.0.4234.32",
+  "evidenceClass": "Desktop Edge, loopback network, no CPU/network throttling, not physical mobile",
+  "initialReadyMs": 457.62310000000014,
+  "resources": [
+    {
+      "encodedBodySize": 1947956,
+      "decodedBodySize": 13426545,
+      "durationMs": 152.59999999403954
+    }
+  ],
+  "heap": {
+    "usedJSHeapSize": 66143327,
+    "totalJSHeapSize": 123169715
+  }
+}

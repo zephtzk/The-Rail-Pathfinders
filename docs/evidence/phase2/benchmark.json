@@ -1,0 +1,273 @@
+{
+  "recordedAt": "2026-09-18T13:33:14.965Z",
+  "evidenceClass": "desktop Node benchmark, not phone or network latency",
+  "runtime": "v24.16.0",
+  "platform": "win32",
+  "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+  "buildId": "6880404c3da027e811f28de1d043f0c500b2b5b978073c8da29a5d4ffbd07bf2",
+  "targets": {
+    "warmP95Ms": 500,
+    "coldParseIndexAndFirstQueryMs": 2000,
+    "networkGzipBytes": 2621440
+  },
+  "measurements": {
+    "queries": 64,
+    "coldParseIndexAndFirstQueryMs": 246.89200000000002,
+    "warmMedianMs": 32.80729999999994,
+    "warmP95Ms": 40.528999999999996,
+    "warmMaxMs": 65.11849999999998,
+    "networkBytes": 13426545,
+    "networkGzipBytes": 1947956,
+    "sourceArchiveBytes": 2348183,
+    "processRssBytes": 562798592
+  },
+  "checks": {
+    "cold": true,
+    "warm": true,
+    "size": true
+  },
+  "firstStatus": "ok",
+  "cases": [
+    {
+      "input": {
+        "origin": "DT32",
+        "destination": "DT14",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 31820,
+      "transfers": 0,
+      "walkSeconds": 240
+    },
+    {
+      "input": {
+        "origin": "DT14",
+        "destination": "DT32",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 31510,
+      "transfers": 0,
+      "walkSeconds": 240
+    },
+    {
+      "input": {
+        "origin": "NS5",
+        "destination": "NE18",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 34570,
+      "transfers": 2,
+      "walkSeconds": 840
+    },
+    {
+      "input": {
+        "origin": "NE18",
+        "destination": "NS5",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 34480,
+      "transfers": 2,
+      "walkSeconds": 840
+    },
+    {
+      "input": {
+        "origin": "NS23",
+        "destination": "PE6",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 33080,
+      "transfers": 2,
+      "walkSeconds": 1020
+    },
+    {
+      "input": {
+        "origin": "PE6",
+        "destination": "NS23",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 33080,
+      "transfers": 2,
+      "walkSeconds": 1020
+    },
+    {
+      "input": {
+        "origin": "TE1",
+        "destination": "CG2",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 36080,
+      "transfers": 2,
+      "walkSeconds": 1020
+    },
+    {
+      "input": {
+        "origin": "CG2",
+        "destination": "TE1",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 35900,
+      "transfers": 3,
+      "walkSeconds": 1200
+    },
+    {
+      "input": {
+        "origin": "BP2",
+        "destination": "NE18",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 35560,
+      "transfers": 3,
+      "walkSeconds": 1260
+    },
+    {
+      "input": {
+        "origin": "NE18",
+        "destination": "BP2",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 35170,
+      "transfers": 3,
+      "walkSeconds": 1260
+    },
+    {
+      "input": {
+        "origin": "CC29",
+        "destination": "EW24",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 32390,
+      "transfers": 1,
+      "walkSeconds": 540
+    },
+    {
+      "input": {
+        "origin": "EW24",
+        "destination": "CC29",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "ok",
+      "arrivalSeconds": 31950,
+      "transfers": 1,
+      "walkSeconds": 540
+    },
+    {
+      "input": {
+        "origin": "BP2",
+        "destination": "BP3",
+        "date": "2026-09-20",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "no-service",
+      "arrivalSeconds": null,
+      "transfers": null,
+      "walkSeconds": null
+    },
+    {
+      "input": {
+        "origin": "DT32",
+        "destination": "DT14",
+        "date": "2026-09-19",
+        "departure": "23:50",
+        "deadline": "01:00",
+        "walkingLimit": 30,
+        "preference": "fastest",
+        "deadlineDate": "2026-09-20"
+      },
+      "status": "no-feasible",
+      "arrivalSeconds": null,
+      "transfers": null,
+      "walkSeconds": null
+    },
+    {
+      "input": {
+        "origin": "NS5",
+        "destination": "NE18",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "11:00",
+        "walkingLimit": 4,
+        "preference": "fastest"
+      },
+      "status": "no-feasible",
+      "arrivalSeconds": null,
+      "transfers": null,
+      "walkSeconds": null
+    },
+    {
+      "input": {
+        "origin": "DT32",
+        "destination": "DT14",
+        "date": "2026-09-19",
+        "departure": "08:10",
+        "deadline": "08:11",
+        "walkingLimit": 30,
+        "preference": "fastest"
+      },
+      "status": "deadline",
+      "arrivalSeconds": 31820,
+      "transfers": null,
+      "walkSeconds": null
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import {chromium} from 'playwright';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const base=process.env.TEST_BASE_URL??'http://localhost:4173';
+const base=process.env.TEST_BASE_URL??'http://localhost:4173/replay.html';
 const output=process.env.CAPTURE_DIR??'test-results';await mkdir(output,{recursive:true});
 const launch={headless:true};if(process.env.BROWSER_EXECUTABLE)launch.executablePath=process.env.BROWSER_EXECUTABLE;
 const browser=await chromium.launch(launch);

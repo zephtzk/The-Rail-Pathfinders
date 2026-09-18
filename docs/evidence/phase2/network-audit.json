@@ -1,0 +1,216 @@
+{
+  "recordedAt": "2026-09-18T13:37:00.324Z",
+  "buildId": "6880404c3da027e811f28de1d043f0c500b2b5b978073c8da29a5d4ffbd07bf2",
+  "distinctOrderedStationPairsConnected": 34410,
+  "sourceCases": [
+    {
+      "input": {
+        "origin": "BP2",
+        "destination": "BP1",
+        "date": "2026-09-18",
+        "departure": "00:01",
+        "deadline": "01:00",
+        "walkingLimit": 20
+      },
+      "status": "ok",
+      "route": {
+        "id": "2026-09-17/BPLRT_B_WD_226/BP2_A/BP1_B",
+        "originId": "BP2",
+        "destinationId": "BP1",
+        "date": "2026-09-18",
+        "departureSeconds": 60,
+        "arrivalSeconds": 390,
+        "totalSeconds": 330,
+        "accessSeconds": 120,
+        "waitSeconds": 30,
+        "rideSeconds": 60,
+        "transferSeconds": 0,
+        "transferWalkSeconds": 0,
+        "exitSeconds": 120,
+        "walkingSeconds": 240,
+        "transfers": 0,
+        "deadlineSeconds": 3600,
+        "deadlineMet": true,
+        "deadlineBufferSeconds": 3210,
+        "crowding": null,
+        "legs": [
+          {
+            "type": "access",
+            "fromStopId": "BP2_A",
+            "toStopId": "BP2_A",
+            "startSeconds": 60,
+            "endSeconds": 180,
+            "durationSeconds": 120,
+            "walkingSeconds": 120,
+            "assumed": true
+          },
+          {
+            "type": "wait",
+            "fromStopId": "BP2_A",
+            "toStopId": "BP2_A",
+            "startSeconds": 180,
+            "endSeconds": 210,
+            "durationSeconds": 30
+          },
+          {
+            "type": "ride",
+            "fromStopId": "BP2_A",
+            "toStopId": "BP1_B",
+            "startSeconds": 210,
+            "endSeconds": 270,
+            "durationSeconds": 60,
+            "tripId": "BPLRT_B_WD_226",
+            "routeId": "BP",
+            "serviceId": "SERVICE_WD",
+            "serviceDate": "2026-09-17",
+            "directionId": 1,
+            "headsign": "Choa Chu Kang Service B",
+            "stopIds": [
+              "BP2_A",
+              "BP1_B"
+            ]
+          },
+          {
+            "type": "exit",
+            "fromStopId": "BP1_B",
+            "toStopId": "BP1_B",
+            "startSeconds": 270,
+            "endSeconds": 390,
+            "durationSeconds": 120,
+            "walkingSeconds": 120,
+            "assumed": true
+          }
+        ],
+        "assumptions": [
+          "Station access: 120 seconds; station exit: 120 seconds. These are station-level allowances, not validated address or entrance walking routes."
+        ],
+        "preferenceScore": 390
+      }
+    },
+    {
+      "input": {
+        "origin": "BP10",
+        "destination": "BP1",
+        "date": "2026-09-20",
+        "departure": "08:10",
+        "walkingLimit": 20
+      },
+      "status": "no-service",
+      "route": null
+    },
+    {
+      "input": {
+        "origin": "BP10",
+        "destination": "BP1",
+        "date": "2026-09-27",
+        "departure": "08:10",
+        "walkingLimit": 20
+      },
+      "status": "no-service",
+      "route": null
+    },
+    {
+      "input": {
+        "origin": "BP10",
+        "destination": "BP1",
+        "date": "2026-10-04",
+        "departure": "08:10",
+        "walkingLimit": 20
+      },
+      "status": "ok",
+      "route": {
+        "id": "2026-10-04/BPLRT_A_PH_28/BP10_B/BP1_A",
+        "originId": "BP10",
+        "destinationId": "BP1",
+        "date": "2026-10-04",
+        "departureSeconds": 29400,
+        "arrivalSeconds": 30750,
+        "totalSeconds": 1350,
+        "accessSeconds": 120,
+        "waitSeconds": 250,
+        "rideSeconds": 860,
+        "transferSeconds": 0,
+        "transferWalkSeconds": 0,
+        "exitSeconds": 120,
+        "walkingSeconds": 240,
+        "transfers": 0,
+        "deadlineSeconds": null,
+        "deadlineMet": true,
+        "deadlineBufferSeconds": null,
+        "crowding": null,
+        "legs": [
+          {
+            "type": "access",
+            "fromStopId": "BP10_B",
+            "toStopId": "BP10_B",
+            "startSeconds": 29400,
+            "endSeconds": 29520,
+            "durationSeconds": 120,
+            "walkingSeconds": 120,
+            "assumed": true
+          },
+          {
+            "type": "wait",
+            "fromStopId": "BP10_B",
+            "toStopId": "BP10_B",
+            "startSeconds": 29520,
+            "endSeconds": 29770,
+            "durationSeconds": 250
+          },
+          {
+            "type": "ride",
+            "fromStopId": "BP10_B",
+            "toStopId": "BP1_A",
+            "startSeconds": 29770,
+            "endSeconds": 30630,
+            "durationSeconds": 860,
+            "tripId": "BPLRT_A_PH_28",
+            "routeId": "BP",
+            "serviceId": "SERVICE_PH_BP",
+            "serviceDate": "2026-10-04",
+            "directionId": 0,
+            "headsign": "Choa Chu Kang Service A",
+            "stopIds": [
+              "BP10_B",
+              "BP9_B",
+              "BP8_B",
+              "BP7_B",
+              "BP6_A",
+              "BP5_A",
+              "BP4_A",
+              "BP3_A",
+              "BP2_A",
+              "BP1_A"
+            ]
+          },
+          {
+            "type": "exit",
+            "fromStopId": "BP1_A",
+            "toStopId": "BP1_A",
+            "startSeconds": 30630,
+            "endSeconds": 30750,
+            "durationSeconds": 120,
+            "walkingSeconds": 120,
+            "assumed": true
+          }
+        ],
+        "assumptions": [
+          "Station access: 120 seconds; station exit: 120 seconds. These are station-level allowances, not validated address or entrance walking routes."
+        ],
+        "preferenceScore": 30750
+      }
+    },
+    {
+      "input": {
+        "origin": "DT32",
+        "destination": "DT14",
+        "date": "2026-09-19",
+        "departure": "02:30",
+        "searchHorizonSeconds": 3600,
+        "walkingLimit": 20
+      },
+      "status": "no-service",
+      "route": null
+    }
+  ]
+}

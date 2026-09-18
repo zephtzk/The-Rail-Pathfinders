@@ -1,5 +1,28 @@
 # Commute Copilot milestones
 
+## Phase 2 — imported rail network and general scheduled routing
+
+**18 September 2026: ready within the declared imported schedule coverage.** Default planning now searches a validated
+GTFS rail network instead of two predefined alternatives. Coverage is 186 source station records, 434 boarding stops,
+19 service patterns and 17,575 accepted trips, for 18 September–31 December 2026 with exact service calendars/carryover.
+One invalid trip is explicitly quarantined. Twenty-seven standard interchanges have reviewed topology and stated
+walking assumptions; Newton, Tampines and Bukit Panjang tap-out links are omitted.
+
+All seven requested milestone checks PASS for this bounded scheduled-data implementation. **72 Node tests, 27 importer
+tests, 90 browser checks and 6 HTTP/build checks pass.** Two imports are byte-identical. Warm desktop query p95 is 40.53ms
+against 500ms; compressed network is 1,947,956 bytes against 2.5MiB. The original corridor replay and Phase 1 panel remain
+separate and regression-tested. No bus, address, entrance, live-rerouting or physical-device/hosted-release claim is made.
+
+See the complete [Phase 2 report and acceptance ledger](PHASE2_REPORT.md), [coverage summary](RAIL_COVERAGE.md) and
+[verification evidence](evidence/phase2/verification.json) for source hashes, counts, assumptions, holiday limitations,
+performance profile, user requirements and Git status. Branch `codex/phase-2-rail-routing` is a local delivery;
+no push, PR, deployment or hosting-audience change. No further user input is needed for these milestone checks.
+
+The Phase 1/Phase 0 records below remain historical. Their statements that network routing had not begun describe those
+earlier checkpoints; Phase 1's unobserved live variants remain unverified and have not been cleared by scheduled routing.
+
+---
+
 ## Phase 1 — live information on the existing corridor
 
 **18 September 2026 decision: implementation ready for local inspection; live-validation coverage remains incomplete.

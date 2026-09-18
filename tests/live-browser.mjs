@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {createTransportAdapter} from '../server/adapter.js';
 import {LIVE_STATIONS} from '../src/live-data.js';
 
-const base=process.env.TEST_BASE_URL??'http://localhost:4174',output=process.env.CAPTURE_DIR??'test-results/phase1';
+const base=process.env.TEST_BASE_URL??'http://localhost:4173/replay.html',output=process.env.CAPTURE_DIR??'test-results/phase1';
 await mkdir(output,{recursive:true});
 const initial=Date.parse('2026-09-18T12:05:00Z');
 const adapter=createTransportAdapter({clock:()=>initial,fetcher:async url=>Response.json(url.includes('TrainServiceAlerts')?{value:{Status:1,Message:[{Content:'Synthetic advisory <img src=x onerror=bad()>',CreatedDate:'2026-09-18 20:00:00'}],AffectedSegments:[{Line:'EWL',Stations:'EW8,EW9',Direction:'Both'},{Line:'NSL',Stations:'NS13',Direction:'Both'}]}}:{value:LIVE_STATIONS.filter(s=>s.line===new URL(url).searchParams.get('TrainLine')).map(s=>({Station:s.code,StartTime:'2026-09-18T20:00:00+08:00',EndTime:'2026-09-18T20:10:00+08:00',CrowdLevel:'l'}))})});

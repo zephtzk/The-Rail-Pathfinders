@@ -1,0 +1,5 @@
+# Import provenance hashes exact bytes. Preserve these inputs/outputs on every OS.
+# -text disables newline conversion; it does not disable readable text diffs.
+data/rail/** -text
+public/data/rail-*.json -text
+scripts/import-rail.py -text

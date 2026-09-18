@@ -1,0 +1,54 @@
+{
+  "recordedAt": "2026-09-18T13:37:00.324Z",
+  "branch": "codex/phase-2-rail-routing",
+  "parent": "c7f71e5da3197640eb6bf0372e8669de7c41b6fa",
+  "buildId": "6880404c3da027e811f28de1d043f0c500b2b5b978073c8da29a5d4ffbd07bf2",
+  "node": "v24.16.0",
+  "commands": [
+    {
+      "command": "npm run check",
+      "status": "PASS",
+      "nodeTests": 72,
+      "pythonImporterTests": 27,
+      "build": "PASS"
+    },
+    {
+      "command": "node tests/rail-browser.mjs",
+      "status": "PASS",
+      "checks": 29
+    },
+    {
+      "command": "node tests/rail-offline-browser.mjs",
+      "status": "PASS",
+      "checks": 8
+    },
+    {
+      "command": "node tests/browser.mjs",
+      "status": "PASS",
+      "checks": 30
+    },
+    {
+      "command": "node tests/live-browser.mjs",
+      "status": "PASS",
+      "checks": 23,
+      "syntheticLiveFeeds": true
+    },
+    {
+      "command": "node scripts/verify-rail-build.mjs",
+      "status": "PASS",
+      "checks": 6
+    },
+    {
+      "command": "npm run benchmark:rail",
+      "status": "PASS",
+      "queries": 64
+    }
+  ],
+  "browser": "Edge153.0.4234.32",
+  "physicalDevices": "NOT TESTED",
+  "deployment": "NOT PERFORMED",
+  "sourceAcquisition": "Authenticated real GTFS download; same archive SHA as Phase0",
+  "liveRerouting": "Unsupported; live-panel regression uses synthetic fixtures",
+  "busRouting": false,
+  "addressRouting": false
+}

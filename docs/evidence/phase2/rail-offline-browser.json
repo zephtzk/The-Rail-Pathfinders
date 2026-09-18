@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-09-18T13:33:49.407Z",
+  "browser": "153.0.4234.32",
+  "emulationOnly": true,
+  "realBrowserOffline": true,
+  "results": [
+    {
+      "name": "service worker cached the routing network and manifest",
+      "passed": true
+    },
+    {
+      "name": "real offline reload preserves chosen scheduled journey",
+      "passed": true
+    },
+    {
+      "name": "offline view is explicitly labelled cached guidance",
+      "passed": true
+    },
+    {
+      "name": "full cached validated network supports offline station search",
+      "passed": true
+    },
+    {
+      "name": "offline restoration keeps selected journey identity",
+      "passed": true
+    },
+    {
+      "name": "reconnection preserves selected journey",
+      "passed": true
+    },
+    {
+      "name": "rail planner never requests the live adapter",
+      "passed": true
+    },
+    {
+      "name": "no offline browser exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

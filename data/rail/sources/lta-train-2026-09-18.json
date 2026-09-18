@@ -1,0 +1,16 @@
+{
+  "publisher": "Land Transport Authority Singapore",
+  "dataset": "GTFS Schedule (Train)",
+  "sourceUrl": "https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html",
+  "endpoint": "GTFSScheduleTrain",
+  "retrievedAt": "2026-09-18T13:21:49.530Z",
+  "sourceTimestamp": "2026-09-18T21:21:49+08:00",
+  "lastModified": "Fri, 18 Sep 2026 13:00:30 GMT",
+  "version": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7",
+  "sha256": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7",
+  "bytes": 2348183,
+  "license": "Singapore Open Data Licence v1.0",
+  "licenseUrl": "https://data.gov.sg/open-data-licence",
+  "credentialPersisted": false,
+  "signedUrlRetained": false
+}

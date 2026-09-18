@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-09-18T13:33:44.500Z",
+  "checks": [
+    {
+      "acceptEncoding": "gzip, deflate, br",
+      "contentEncoding": "gzip",
+      "bytes": 1947956,
+      "status": "PASS"
+    },
+    {
+      "acceptEncoding": "identity",
+      "contentEncoding": "identity",
+      "bytes": 13426545,
+      "status": "PASS"
+    },
+    {
+      "acceptEncoding": "gzip;q=0",
+      "contentEncoding": "identity",
+      "bytes": 13426545,
+      "status": "PASS"
+    },
+    {
+      "acceptEncoding": "gzip;q=0 , br",
+      "contentEncoding": "identity",
+      "bytes": 13426545,
+      "status": "PASS"
+    },
+    {
+      "acceptEncoding": "gzip;q=0.5",
+      "contentEncoding": "gzip",
+      "bytes": 1947956,
+      "status": "PASS"
+    },
+    {
+      "name": "Local HTTP server forwards compression negotiation; downloaded data equals canonical import",
+      "status": "PASS"
+    }
+  ]
+}
