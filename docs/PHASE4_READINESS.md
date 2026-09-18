@@ -1,5 +1,7 @@
 # Phase 4 user-testing readiness and proposed publication
 
+**Publication update:** the owner has confirmed written redistribution permission for the two maps and authorized proceeding with the original branch and existing Site. See [PUBLICATION_AUTHORIZATION.md](PUBLICATION_AUTHORIZATION.md). The report below preserves the earlier readiness findings; final acceptance/deployment receipts record the release outcome.
+
 Prepared 18 September 2026. Scope: scheduled planning, accepted journeys, confirmed progress, saved/offline guidance and clearly labelled synthetic rerouting. **Real-provider routing effects remain disabled and unfinished. No Phase 5 work is included.**
 
 The local candidate is prepared for a bounded test round. Publication remains a separate decision: the public-history review has an unresolved operator-map redistribution item; hosted candidate verification, owner phone smoke tests and external access are still outstanding. No push, deployment or access change was performed.

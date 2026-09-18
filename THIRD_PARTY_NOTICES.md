@@ -2,6 +2,8 @@
 
 The application code is MIT licensed. That licence does not replace the following rights.
 
+Publication update: the owner confirmed written redistribution permission for the two operator maps on 18 September 2026; see [the authorization record](docs/PUBLICATION_AUTHORIZATION.md). The agent has not independently reviewed that document. Original copyright notices remain and no broad relicensing is claimed. This supersedes the earlier missing-permission finding below.
+
 | Material | Attribution / licence | Included use |
 | --- | --- | --- |
 | Rail GTFS, bus directories and DataMall-derived data | Land Transport Authority (LTA), Singapore; [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence) | Pinned snapshots, compiled routing data and sanitised evidence; retrieval and hashes in manifests. No endorsement implied. |
