@@ -16,8 +16,8 @@ const clock=value=>typeof value==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(val
 function savedTiming(value={}){const deadline=value.deadlineTime??value.deadline??null,mode=value.timeMode??(deadline?'arrive-by':'leave-now');if(!['leave-now','depart-later','arrive-by'].includes(mode))throw Error('Choose a supported travel-time mode.');if(deadline&&!clock(deadline)||value.deadlineDate!=null&&!date(value.deadlineDate)||mode==='arrive-by'&&(!deadline||!date(value.deadlineDate)))throw Error('Choose the complete arrival deadline date and time.');return {timeMode:mode,deadlineTime:deadline||null,deadlineDate:deadline?value.deadlineDate??null:null};}
 const distinctLabel=(label,rows)=>{const base=cleanLabel(label);let candidate=base,n=2;while(rows.some(row=>row.label.toLocaleLowerCase()===candidate.toLocaleLowerCase())){const suffix=` (${n++})`;candidate=base.slice(0,80-suffix.length)+suffix;}return candidate;};
 function appendRoute(s,{label,origin,destination,preferences:p,savedVia='user',...timing}) {
-  const normalized=preferences(p),selection=savedTiming(timing);
-  function endpoint(value){if(!value)throw Error('Choose two resolved endpoints first.');const candidate=resolvedPlace({...value,routingId:value.routingId??value.stationId??(value.coverage==='supported'?value.id:null)});let place=s.places.find(p=>p.id===candidate.id&&p.lat===candidate.lat&&p.lng===candidate.lng);if(!place)place=s.places.find(p=>p.lat===candidate.lat&&p.lng===candidate.lng&&p.entranceId===candidate.entranceId&&(candidate.routingId?p.routingId===candidate.routingId||p.stationId===candidate.routingId:p.sourceId===candidate.sourceId));if(!place){place={...candidate,id:id(),label:distinctLabel(candidate.label,s.places),savedVia:savedVia==='migration'?'migration':'route-endpoint'};s.places.push(place);}return place;}
+  const normalized=preferences(p),selection=savedTiming(timing),visiblePlaces=new Set(visiblePersonalState(s).places.map(p=>p.id));
+  function endpoint(value){if(!value)throw Error('Choose two resolved endpoints first.');const candidate=resolvedPlace({...value,routingId:value.routingId??value.stationId??(value.coverage==='supported'?value.id:null)});let place=s.places.find(p=>p.id===candidate.id&&p.lat===candidate.lat&&p.lng===candidate.lng);if(!place)place=s.places.find(p=>p.lat===candidate.lat&&p.lng===candidate.lng&&p.entranceId===candidate.entranceId&&(candidate.routingId?p.routingId===candidate.routingId||p.stationId===candidate.routingId:p.sourceId===candidate.sourceId));if(!place){place={...candidate,id:id(),label:distinctLabel(candidate.label,s.places),savedVia:savedVia==='migration'?'migration':'route-endpoint'};s.places.push(place);}else if(visiblePlaces.has(place.id)){place.savedVia='user';}return place;}
   const from=endpoint(origin),to=endpoint(destination);if(from.id===to.id)throw Error('Choose two different resolved endpoints.');
   s.templates.push({id:id(),label:distinctLabel(label||`${from.label} → ${to.label}`.slice(0,80),s.templates),originId:from.id,destinationId:to.id,preferences:normalized,...selection,savedAt:new Date().toISOString(),savedVia});return s;
 }
@@ -29,8 +29,10 @@ export function visiblePersonalState(state){
     if(t.id==='legacy-offline-template')return true;
     return [['rail','Imported rail route'],['pilot','Imported bus and rail route']].some(([key,label])=>state.migrations.includes(`route-input:commute-copilot-${key}-guidance-v1`)&&(t.label===label||new RegExp(`^${label} \\(\\d+\\)$`).test(t.label)));
   };
-  const deliberatePairPlaces=new Set(state.templates.filter(t=>!t.savedAt&&!imported(t)).flatMap(t=>[t.originId,t.destinationId]));
-  const automaticEndpoints=new Set(state.templates.filter(t=>t.savedAt||imported(t)).flatMap(t=>[t.originId,t.destinationId]));
+  // R2 bookmarks have no savedVia. A route's timestamp says nothing about how
+  // its endpoint was saved: preserve ambiguous older user intent on upgrade.
+  const deliberatePairPlaces=new Set(state.templates.filter(t=>!imported(t)).flatMap(t=>[t.originId,t.destinationId]));
+  const automaticEndpoints=new Set(state.templates.filter(imported).flatMap(t=>[t.originId,t.destinationId]));
   return {...state,templates:state.templates.filter(t=>!imported(t)),places:state.places.filter(p=>{
     if(p.savedVia)return p.savedVia==='user';
     if(p.id.startsWith('legacy-station:')||p.sourceId.startsWith('legacy:'))return false;

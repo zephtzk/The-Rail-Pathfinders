@@ -75,13 +75,41 @@ test('adding a station already retained for a route makes that place visible wit
  assert.equal(after.places.length,2);assert.equal(visiblePersonalState(after).places[0].id,originId);assert.equal(instantiateTemplate(after,after.templates[0].id).origin.routingId,'EW8');
 });
 
-test('deleting the last R2 route does not reveal its previously hidden automatic endpoints',()=>{
+test('R2 upgrade preserves ambiguous station bookmarks referenced by timestamped routes without rewriting bytes',()=>{
  const storage=memory(),store=createPersonalStore(storage);store.saveRoute({label:'Old R2 commute',origin:endpoint('EW8'),destination:endpoint('EW12',1.31)});
- const old=store.read().state;old.places.forEach(p=>delete p.savedVia);old.templates.forEach(t=>delete t.savedVia);storage.setItem(PERSONAL_KEY,JSON.stringify(old));
- store.addPlace({...endpoint('Home',1.32),id:'my-home'});
- assert.deepEqual(visiblePersonalState(store.read().state).places.map(p=>p.id),['my-home']);
+ const old=store.read().state;old.places.forEach(p=>delete p.savedVia);old.places[0].label='Home';old.templates.forEach(t=>delete t.savedVia);storage.setItem(PERSONAL_KEY,JSON.stringify(old,null,2));
+ const original=storage.getItem(PERSONAL_KEY),ids=old.places.map(p=>p.id);
+ assert.deepEqual(visiblePersonalState(store.read().state).places.map(p=>p.id),ids);assert.equal(storage.getItem(PERSONAL_KEY),original);
+ assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),ids);assert.equal(storage.getItem(PERSONAL_KEY),original);
  store.deleteTemplate(old.templates[0].id);const after=store.read().state;
- assert.deepEqual(visiblePersonalState(after).places.map(p=>p.id),['my-home']);assert.equal(after.places.length,3);assert.equal(after.templates.length,0);
- for(const original of old.places){const retained=after.places.find(p=>p.id===original.id);assert.equal(retained.savedVia,'route-endpoint');const {savedVia,...withoutVisibilityMetadata}=retained;assert.deepEqual(withoutVisibilityMetadata,original);}
- assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),['my-home']);
+ assert.deepEqual(after.places,old.places);assert.equal(after.templates.length,0);
+ assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),ids);
+});
+
+test('saving a route reuses an older visible station bookmark as user intent through deletion and reload',()=>{
+ const storage=memory(),store=createPersonalStore(storage),home={...endpoint('my-home'),label:'Home',routingId:'EW8',entranceId:null};
+ storage.setItem(PERSONAL_KEY,JSON.stringify({schemaVersion:2,places:[home],templates:[],migrations:[]}));
+ store.saveRoute({label:'Daily commute',origin:endpoint('EW8'),destination:endpoint('EW12',1.31)});
+ const saved=store.read().state,route=saved.templates[0];
+ assert.equal(route.originId,home.id);assert.equal(saved.places.length,2);assert.equal(saved.places.find(p=>p.id===home.id).savedVia,'user');
+ assert.deepEqual(visiblePersonalState(saved).places.map(p=>p.label),['Home']);assert.equal(instantiateTemplate(saved,route.id).origin.routingId,'EW8');
+ store.deleteTemplate(route.id);const reloaded=createPersonalStore(storage).read().state;
+ assert.deepEqual(visiblePersonalState(reloaded).places.map(p=>p.label),['Home']);assert.equal(reloaded.places.length,2);assert.equal(reloaded.places.find(p=>p.id!==home.id).savedVia,'route-endpoint');
+});
+
+test('explicit automatic endpoints and migration records stay hidden after route deletion and reload',()=>{
+ const storage=memory(),store=createPersonalStore(storage);
+ store.saveRoute({label:'Commute',origin:endpoint('EW8'),destination:endpoint('EW12',1.31)});
+ store.saveRoute({label:'Imported commute',origin:endpoint('EW9',1.32),destination:endpoint('EW10',1.33),savedVia:'migration'});
+ const before=store.read().state;assert.equal(visiblePersonalState(before).places.length,0);
+ for(const route of before.templates)store.deleteTemplate(route.id);
+ const after=createPersonalStore(storage).read().state;assert.deepEqual(after.places,before.places);assert.equal(after.templates.length,0);assert.equal(visiblePersonalState(after).places.length,0);
+});
+
+test('older identified migration endpoints do not become visible when the imported route is deleted',()=>{
+ const storage=memory(),store=createPersonalStore(storage),places=[endpoint('a'),endpoint('b',1.31)];
+ const old={schemaVersion:2,places,templates:[{id:'old-import',label:'Imported rail route',originId:'a',destinationId:'b',preferences:{},savedAt:'2026-09-18T12:00:00Z'}],migrations:['route-input:commute-copilot-rail-guidance-v1']};
+ storage.setItem(PERSONAL_KEY,JSON.stringify(old));assert.equal(visiblePersonalState(store.read().state).places.length,0);
+ store.deleteTemplate('old-import');const after=createPersonalStore(storage).read().state;
+ assert.equal(visiblePersonalState(after).places.length,0);assert.deepEqual(after.places.map(({savedVia,...p})=>p),places);assert.ok(after.places.every(p=>p.savedVia==='route-endpoint'));
 });
