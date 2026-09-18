@@ -18,7 +18,7 @@ const capture = async name => {
   await page.screenshot({path:`${output}/rail-${name}.png`,fullPage:false});
 };
 try {
-  await page.goto(base);
+  await page.goto(base+'/?legacy=1');
   await page.locator('.route-hero').waitFor({timeout:60000});
   check('default imported timetable journey renders',await page.locator('.route-hero').innerText().then(text => text.includes('Tampines') && text.includes('Buona Vista')));
   check('station choices cover the imported network',await page.locator('#rail-stations option').count() >= 150);

@@ -22,7 +22,7 @@ async function search(origin,destination,mode='mixed',extra={}){
 }
 function arithmetic(r){assert.equal(r.totalSeconds,r.accessSeconds+r.waitSeconds+r.rideSeconds+r.transferSeconds+r.exitSeconds);assert.equal(r.totalSeconds,r.arrivalSeconds-r.departureSeconds);for(let i=1;i<r.legs.length;i++)assert.equal(r.legs[i].startSeconds,r.legs[i-1].endSeconds);assert.ok(r.walkingSeconds<=1200);return true;}
 try{
-  const begin=performance.now();await page.goto(`${base}/multimodal.html`);await page.locator('.route-hero').waitFor({timeout:60000});
+  const begin=performance.now();await page.goto(`${base}/multimodal.html?legacy=1`);await page.locator('.route-hero').waitFor({timeout:60000});
   const coldMs=performance.now()-begin;
   const cdp=await context.newCDPSession(page),heap=await cdp.send('Runtime.getHeapUsage');
   await cdp.detach();

@@ -15,12 +15,15 @@ const plan=()=>({schemaVersion:2,id:crypto.randomUUID(),mode:'replay',origin:{id
 const active=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 async function share(){const response=await fetch(base+'/api/shares',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:plan()})});assert.equal(response.status,201);return response.json();}
 async function client(){const context=await browser.newContext({serviceWorkers:'block'});contexts.push(context);await context.addInitScript(()=>{window.geoWatches=0;Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(success){window.geoWatches++;window.geoSuccess=success;return window.geoWatches;},clearWatch(){},getCurrentPosition(success){success({coords:{latitude:1.3,longitude:103.8,accuracy:50},timestamp:Date.now()});}}});});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));return {context,page};}
-async function paired(){const s=await share(),c=await client();await c.page.goto(`${base}/#invite=${s.id}.${s.inviteToken}`);await c.page.locator('#accept-invite').click();await c.page.locator('#apply-sharing').waitFor();return {...c,share:s};}
+async function paired(){const s=await share(),c=await client();await c.page.goto(`${base}/?legacy=1#invite=${s.id}.${s.inviteToken}`);await c.page.locator('#accept-invite').click();await c.page.locator('#apply-sharing').waitFor();return {...c,share:s};}
 try{
   for(let attempt=0;attempt<100;attempt++){try{if((await fetch(base+'/api/push/config')).ok)break;}catch{}await new Promise(resolve=>setTimeout(resolve,100));}
   browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
   const first=await paired(),p=first.page;
-  await p.locator('#share-progress').check();await p.locator('#share-location').check();await p.locator('#apply-sharing').click();await p.waitForFunction(()=>window.geoWatches===1);
+  await p.locator('#share-progress').check();await p.locator('#share-location').check();await p.locator('#apply-sharing').click();
+  await p.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')).permissions.location);
+  assert.equal(await p.evaluate(()=>window.geoWatches),0);
+  await p.locator('#locate-once').click();await p.waitForFunction(()=>window.geoWatches===1);
   await p.locator('#checkpoint-step').selectOption('1');await p.locator('#checkpoint-step').focus();
   await p.evaluate(()=>window.geoSuccess({coords:{latitude:1.31,longitude:103.81,accuracy:60},timestamp:Date.now()}));
   await p.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')).location?.latitude===1.31);
@@ -44,7 +47,7 @@ try{
   console.log('PASS Completed journey can still revoke caregiver access');
   const recovery=await share(),eventId=crypto.randomUUID();const acceptance=await fetch(`${base}/api/shares/${recovery.id}/accept`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+recovery.inviteToken},body:JSON.stringify({eventId,expectedRevision:1,consent:{progress:false,location:false}})});assert.equal(acceptance.status,200);const accepted=await acceptance.json();
   const third=await client();await third.context.addInitScript(session=>localStorage.setItem('commute-copilot-pairing-v2',JSON.stringify(session)),{id:recovery.id,role:'recipient',inviteToken:recovery.inviteToken,revision:1,pendingAcceptance:{eventId,expectedRevision:1,consent:{progress:false,location:false}}});
-  await third.page.goto(base);await third.page.locator('#start-accepted-trip').click();await third.page.locator('#journey-finish').waitFor();const restored=await active(third.page);assert.equal(restored.plan.id,accepted.acceptedPlan.id);assert.equal(restored.sharing.shareId,recovery.id);assert.equal(restored.permissions.progress,false);assert.equal(restored.permissions.location,false);
+  await third.page.goto(base+'/?legacy=1');await third.page.locator('#start-accepted-trip').click();await third.page.locator('#journey-finish').waitFor();const restored=await active(third.page);assert.equal(restored.plan.id,accepted.acceptedPlan.id);assert.equal(restored.sharing.shareId,recovery.id);assert.equal(restored.permissions.progress,false);assert.equal(restored.permissions.location,false);
   console.log('PASS Lost acceptance response recovers pairing and explicitly starts only its accepted plan with consent off');
   assert.deepEqual(errors,[]);console.log('PASS No browser runtime exceptions (desktop browser automation, no physical-device inference)');
 }finally{for(const context of contexts)await context.close();await browser?.close();if(server.exitCode===null){const exited=once(server,'exit');server.kill();await exited;}await rm(directory,{recursive:true,force:true});}

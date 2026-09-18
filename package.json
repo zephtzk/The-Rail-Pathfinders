@@ -26,7 +26,9 @@
     "test:sharing-http": "node tests/sharing-http.mjs",
     "test:facilities-browser": "node tests/facilities-browser.mjs",
     "test:upgrades-browser": "node tests/upgrades-browser.mjs",
-    "test:sharing-privacy-browser": "node tests/sharing-privacy-browser.mjs"
+    "test:sharing-privacy-browser": "node tests/sharing-privacy-browser.mjs",
+    "test:r2-browser": "node tests/r2-browser.mjs",
+    "test:location-offline-browser": "node tests/location-offline-browser.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",
