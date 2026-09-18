@@ -1,0 +1,396 @@
+{
+  "scope": "Historical allocation investigation checkpoints; not final source or final pass/fail assessment",
+  "finalEvidence": [
+    "bus-benchmark.json",
+    "bus-memory-probe.json",
+    "router-differential.json"
+  ],
+  "checkpoints": {
+    "recordedAt": "2026-09-18T19:48:11.437Z",
+    "evidenceClass": "Node desktop process measurement, no physical-phone claim",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+    "runtime": "v24.16.0",
+    "methodology": {
+      "allocation": "Node inspector HeapProfiler.startSampling at8192-byte samplingInterval, including objects collected by major/minorGC, over3queries after one warmup and explicitGC. Allocation totals are estimated cumulative bytes, not resident memory. No heap snapshots or object contents recorded.",
+      "inSearchPeak": "A source-identical copy with only numeric process.memoryUsage probes every1024 frequency expansions, every128 rail connections and at query boundaries.24queries:8pairs repeated3times. NoGC during queries; explicitGC only after completing all24. This is a sampled highwater bound, so unobserved intervening peaks remain possible. Probe timings are overhead-affected and are not latency-gate evidence.",
+      "memory": "heapUsed is V8 used heap including uncollected temporary objects; external includes arrayBuffers, so those are not added a second time. RSS includes Node runtime and reserved/committed process memory. Maximum heap-plus-external is sampled simultaneously. Allocation before/after revisions include both parent rail changes and timing changes; no isolated causality claim."
+    },
+    "allocationBefore": {
+      "recordedAt": "2026-09-18T19:42:41.035Z",
+      "sourceHashes": {
+        "src/rail-engine.js": "d7efda03372455a560da76f99320b5fc6480ace5642887f0f10e6dbd4b12c03b",
+        "src/multimodal-engine.js": "42abc5c74b856c9d79dcb94f90537eee0c25ba40c65f40cea06ea8f59034761a",
+        "public/data/bus-network.json": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886"
+      },
+      "runtime": "v24.16.0",
+      "querySequence": [
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "DT14",
+          "status": "ok",
+          "arrivalSeconds": 41570
+        },
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240
+        }
+      ],
+      "sampledAllocatedBytes": 1463335968,
+      "baselineMemory": {
+        "rss": 213143552,
+        "heapTotal": 213430272,
+        "heapUsed": 77005872,
+        "external": 2194529,
+        "arrayBuffers": 28927
+      },
+      "retainedMemoryAfterGc": {
+        "rss": 348516352,
+        "heapTotal": 221986816,
+        "heapUsed": 86348152,
+        "external": 2194569,
+        "arrayBuffers": 28927
+      },
+      "largestSelfAllocationFrames": [
+        {
+          "function": "relaxTransfers @ src/rail-engine.js:294",
+          "bytes": 857442808
+        },
+        {
+          "function": "boarding @ src/multimodal-engine.js:50",
+          "bytes": 249693072
+        },
+        {
+          "function": "canAlight @ src/multimodal-engine.js:83",
+          "bytes": 214149328
+        },
+        {
+          "function": "(anonymous) @ src/rail-engine.js:342",
+          "bytes": 35629008
+        },
+        {
+          "function": "spanForDay @ src/multimodal-engine.js:32",
+          "bytes": 18569856
+        },
+        {
+          "function": "route @ src/rail-engine.js:183",
+          "bytes": 18151920
+        },
+        {
+          "function": "advanceStream @ src/rail-engine.js:238",
+          "bytes": 7445992
+        },
+        {
+          "function": "insert @ src/rail-engine.js:37",
+          "bytes": 7141256
+        }
+      ]
+    },
+    "allocationAfter": {
+      "recordedAt": "2026-09-18T19:46:40.611Z",
+      "sourceHashes": {
+        "src/rail-engine.js": "5ffe58dd56cf0973a1e14b8f6889b9e0144f20452cad334f038e6f54d1b564eb",
+        "src/multimodal-engine.js": "ff0cabde53133bfd52c2a8264b756241db1957b3d4c0e6bab124a21a41fdd54b",
+        "public/data/bus-network.json": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886"
+      },
+      "runtime": "v24.16.0",
+      "querySequence": [
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "DT14",
+          "status": "ok",
+          "arrivalSeconds": 41570
+        },
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240
+        }
+      ],
+      "sampledAllocatedBytes": 392111216,
+      "baselineMemory": {
+        "rss": 211722240,
+        "heapTotal": 200462336,
+        "heapUsed": 65356736,
+        "external": 5237077,
+        "arrayBuffers": 3071475
+      },
+      "retainedMemoryAfterGc": {
+        "rss": 318144512,
+        "heapTotal": 203255808,
+        "heapUsed": 67189608,
+        "external": 5237117,
+        "arrayBuffers": 3071475
+      },
+      "largestSelfAllocationFrames": [
+        {
+          "function": "relaxTransfers @ src/rail-engine.js:312",
+          "bytes": 250657520
+        },
+        {
+          "function": "boarding @ src/multimodal-engine.js:63",
+          "bytes": 43181960
+        },
+        {
+          "function": "route @ src/rail-engine.js:201",
+          "bytes": 15424152
+        },
+        {
+          "function": "insert @ src/rail-engine.js:41",
+          "bytes": 14006840
+        },
+        {
+          "function": "next @ :0",
+          "bytes": 9681960
+        },
+        {
+          "function": "advanceStream @ src/rail-engine.js:256",
+          "bytes": 7786072
+        },
+        {
+          "function": "scanConnections @ src/rail-engine.js:275",
+          "bytes": 7061736
+        },
+        {
+          "function": "next @ :0",
+          "bytes": 4270240
+        }
+      ]
+    },
+    "inSearchPeak": {
+      "recordedAt": "2026-09-18T19:46:43.970Z",
+      "sourceHashes": {
+        "rail": "5ffe58dd56cf0973a1e14b8f6889b9e0144f20452cad334f038e6f54d1b564eb",
+        "multi": "ff0cabde53133bfd52c2a8264b756241db1957b3d4c0e6bab124a21a41fdd54b"
+      },
+      "probeCount": 10347,
+      "probeFrequency": {
+        "frequencyExpansions": 1024,
+        "railConnections": 128,
+        "queryBoundaries": true
+      },
+      "peakHeapUsedBytes": 310005368,
+      "peakExternalBytes": 5796630,
+      "peakHeapPlusExternalBytes": 314752647,
+      "peakRssBytes": 443813888,
+      "retainedMemoryAfterGc": {
+        "rss": 432463872,
+        "heapTotal": 223850496,
+        "heapUsed": 63944848,
+        "external": 4748062,
+        "arrayBuffers": 3066110
+      },
+      "heapTargetBytes": 157286400,
+      "passesHeapTarget": false,
+      "allQueriesOkay": true,
+      "queries": [
+        {
+          "originId": "bus:75009",
+          "destinationId": "bus:75059",
+          "status": "ok",
+          "arrivalSeconds": 37170,
+          "peakHeapUsedBytes": 134236312,
+          "afterQueryHeapUsedBytes": 134239584
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "bus:28009",
+          "status": "ok",
+          "arrivalSeconds": 48530,
+          "peakHeapUsedBytes": 156555656,
+          "afterQueryHeapUsedBytes": 149707104
+        },
+        {
+          "originId": "bus:28009",
+          "destinationId": "bus:59009",
+          "status": "ok",
+          "arrivalSeconds": 45210,
+          "peakHeapUsedBytes": 172716344,
+          "afterQueryHeapUsedBytes": 134269296
+        },
+        {
+          "originId": "bus:59009",
+          "destinationId": "bus:77009",
+          "status": "ok",
+          "arrivalSeconds": 42220,
+          "peakHeapUsedBytes": 155935856,
+          "afterQueryHeapUsedBytes": 155936232
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "DT14",
+          "status": "ok",
+          "arrivalSeconds": 41570,
+          "peakHeapUsedBytes": 181881440,
+          "afterQueryHeapUsedBytes": 153348672
+        },
+        {
+          "originId": "DT14",
+          "destinationId": "bus:75009",
+          "status": "ok",
+          "arrivalSeconds": 41510,
+          "peakHeapUsedBytes": 187523640,
+          "afterQueryHeapUsedBytes": 187524048
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "NS22",
+          "status": "ok",
+          "arrivalSeconds": 44340,
+          "peakHeapUsedBytes": 191846016,
+          "afterQueryHeapUsedBytes": 104090920
+        },
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240,
+          "peakHeapUsedBytes": 168724272,
+          "afterQueryHeapUsedBytes": 122850728
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "bus:75059",
+          "status": "ok",
+          "arrivalSeconds": 37170,
+          "peakHeapUsedBytes": 130671536,
+          "afterQueryHeapUsedBytes": 130671944
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "bus:28009",
+          "status": "ok",
+          "arrivalSeconds": 48530,
+          "peakHeapUsedBytes": 176295192,
+          "afterQueryHeapUsedBytes": 138720880
+        },
+        {
+          "originId": "bus:28009",
+          "destinationId": "bus:59009",
+          "status": "ok",
+          "arrivalSeconds": 45210,
+          "peakHeapUsedBytes": 183852512,
+          "afterQueryHeapUsedBytes": 121939128
+        },
+        {
+          "originId": "bus:59009",
+          "destinationId": "bus:77009",
+          "status": "ok",
+          "arrivalSeconds": 42220,
+          "peakHeapUsedBytes": 147122304,
+          "afterQueryHeapUsedBytes": 147122712
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "DT14",
+          "status": "ok",
+          "arrivalSeconds": 41570,
+          "peakHeapUsedBytes": 193692392,
+          "afterQueryHeapUsedBytes": 163573400
+        },
+        {
+          "originId": "DT14",
+          "destinationId": "bus:75009",
+          "status": "ok",
+          "arrivalSeconds": 41510,
+          "peakHeapUsedBytes": 197150848,
+          "afterQueryHeapUsedBytes": 197151256
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "NS22",
+          "status": "ok",
+          "arrivalSeconds": 44340,
+          "peakHeapUsedBytes": 208496296,
+          "afterQueryHeapUsedBytes": 208496704
+        },
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240,
+          "peakHeapUsedBytes": 235960120,
+          "afterQueryHeapUsedBytes": 222690432
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "bus:75059",
+          "status": "ok",
+          "arrivalSeconds": 37170,
+          "peakHeapUsedBytes": 229436544,
+          "afterQueryHeapUsedBytes": 229436952
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "bus:28009",
+          "status": "ok",
+          "arrivalSeconds": 48530,
+          "peakHeapUsedBytes": 243364432,
+          "afterQueryHeapUsedBytes": 233872664
+        },
+        {
+          "originId": "bus:28009",
+          "destinationId": "bus:59009",
+          "status": "ok",
+          "arrivalSeconds": 45210,
+          "peakHeapUsedBytes": 252051912,
+          "afterQueryHeapUsedBytes": 213868872
+        },
+        {
+          "originId": "bus:59009",
+          "destinationId": "bus:77009",
+          "status": "ok",
+          "arrivalSeconds": 42220,
+          "peakHeapUsedBytes": 237372128,
+          "afterQueryHeapUsedBytes": 237372536
+        },
+        {
+          "originId": "bus:75009",
+          "destinationId": "DT14",
+          "status": "ok",
+          "arrivalSeconds": 41570,
+          "peakHeapUsedBytes": 260624976,
+          "afterQueryHeapUsedBytes": 252454912
+        },
+        {
+          "originId": "DT14",
+          "destinationId": "bus:75009",
+          "status": "ok",
+          "arrivalSeconds": 41510,
+          "peakHeapUsedBytes": 269403936,
+          "afterQueryHeapUsedBytes": 223998840
+        },
+        {
+          "originId": "bus:99009",
+          "destinationId": "NS22",
+          "status": "ok",
+          "arrivalSeconds": 44340,
+          "peakHeapUsedBytes": 280572488,
+          "afterQueryHeapUsedBytes": 234420088
+        },
+        {
+          "originId": "NS9",
+          "destinationId": "CG2",
+          "status": "ok",
+          "arrivalSeconds": 41240,
+          "peakHeapUsedBytes": 310005368,
+          "afterQueryHeapUsedBytes": 246342688
+        }
+      ]
+    }
+  }
+}

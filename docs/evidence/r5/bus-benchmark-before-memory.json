@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-09-18T20:01:22.183Z",
+  "recordedAt": "2026-09-18T19:34:06.784Z",
   "evidenceClass": "Node desktop CPU/payload measurement; no physical-phone, browser responsiveness or provider-latency claim",
   "runtime": "v24.16.0",
   "cpu": "Intel(R) Core(TM) Ultra 9 285H",
@@ -33,265 +33,265 @@
     }
   ],
   "compressedCombinedBytes": 2611239,
-  "coldParseIndexFirstQueryMs": 180.3019,
+  "coldParseIndexFirstQueryMs": 224.575,
   "firstStatus": "ok",
-  "warmP95Ms": 162.61900000000003,
+  "warmP95Ms": 508.26890000000003,
   "arrivalIndex": {
     "entries": 16253,
-    "buildMs": 4.464399999999841,
-    "thousandThreePredictionMatchesMs": 3.821999999999889
+    "buildMs": 4.994599999999991,
+    "thousandThreePredictionMatchesMs": 4.016199999999117
   },
   "processMemory": {
-    "rss": 312963072,
-    "heapTotal": 224866304,
-    "heapUsed": 153151576,
-    "external": 33869029,
-    "arrayBuffers": 27018669
+    "rss": 672198656,
+    "heapTotal": 429023232,
+    "heapUsed": 131241504,
+    "external": 25581160,
+    "arrayBuffers": 23451833
   },
-  "sampledPeakHeapUsed": 150278472,
+  "sampledPeakHeapUsed": 455373504,
   "samples": [
     {
       "originId": "bus:75009",
       "destinationId": "bus:75059",
-      "ms": 4.480200000000025,
+      "ms": 28.152499999999975,
       "status": "ok",
       "arrivalSeconds": 37170,
       "frequencyExpansions": 975,
       "labelsCreated": 537,
-      "heapUsedAfterQuery": 79018800
+      "heapUsedAfterQuery": 120105128
     },
     {
       "originId": "bus:99009",
       "destinationId": "bus:28009",
-      "ms": 59.76029999999997,
+      "ms": 132.55079999999998,
       "status": "ok",
       "arrivalSeconds": 48530,
       "frequencyExpansions": 223734,
       "labelsCreated": 12352,
-      "heapUsedAfterQuery": 110766296
+      "heapUsedAfterQuery": 135410632
     },
     {
       "originId": "bus:28009",
       "destinationId": "bus:59009",
-      "ms": 41.10269999999997,
+      "ms": 154.04539999999997,
       "status": "ok",
       "arrivalSeconds": 45210,
       "frequencyExpansions": 136990,
       "labelsCreated": 9754,
-      "heapUsedAfterQuery": 129444760
+      "heapUsedAfterQuery": 173443440
     },
     {
       "originId": "bus:59009",
       "destinationId": "bus:77009",
-      "ms": 14.26660000000004,
+      "ms": 58.38869999999997,
       "status": "ok",
       "arrivalSeconds": 42220,
       "frequencyExpansions": 46730,
       "labelsCreated": 4977,
-      "heapUsedAfterQuery": 77290816
+      "heapUsedAfterQuery": 186551240
     },
     {
       "originId": "bus:75009",
       "destinationId": "DT14",
-      "ms": 78.25420000000003,
+      "ms": 233.92769999999996,
       "status": "ok",
       "arrivalSeconds": 41570,
       "frequencyExpansions": 460290,
       "labelsCreated": 18709,
-      "heapUsedAfterQuery": 88527240
+      "heapUsedAfterQuery": 121450528
     },
     {
       "originId": "DT14",
       "destinationId": "bus:75009",
-      "ms": 24.97520000000003,
+      "ms": 103.67739999999992,
       "status": "ok",
       "arrivalSeconds": 41510,
       "frequencyExpansions": 44062,
       "labelsCreated": 6460,
-      "heapUsedAfterQuery": 100639464
+      "heapUsedAfterQuery": 162651664
     },
     {
       "originId": "bus:99009",
       "destinationId": "NS22",
-      "ms": 54.77750000000003,
+      "ms": 209.83179999999993,
       "status": "ok",
       "arrivalSeconds": 44340,
       "frequencyExpansions": 402357,
       "labelsCreated": 15874,
-      "heapUsedAfterQuery": 111909296
+      "heapUsedAfterQuery": 197864720
     },
     {
       "originId": "NS9",
       "destinationId": "CG2",
-      "ms": 162.61900000000003,
+      "ms": 508.26890000000003,
       "status": "ok",
       "arrivalSeconds": 41240,
       "frequencyExpansions": 1451192,
       "labelsCreated": 57423,
-      "heapUsedAfterQuery": 136434120
+      "heapUsedAfterQuery": 381107616
     },
     {
       "originId": "bus:75009",
       "destinationId": "bus:75059",
-      "ms": 3.251199999999926,
+      "ms": 22.616200000000163,
       "status": "ok",
       "arrivalSeconds": 37170,
       "frequencyExpansions": 975,
       "labelsCreated": 537,
-      "heapUsedAfterQuery": 139236040
+      "heapUsedAfterQuery": 407259984
     },
     {
       "originId": "bus:99009",
       "destinationId": "bus:28009",
-      "ms": 37.20010000000002,
+      "ms": 152.5999999999999,
       "status": "ok",
       "arrivalSeconds": 48530,
       "frequencyExpansions": 223734,
       "labelsCreated": 12352,
-      "heapUsedAfterQuery": 95250704
+      "heapUsedAfterQuery": 423864648
     },
     {
       "originId": "bus:28009",
       "destinationId": "bus:59009",
-      "ms": 26.373299999999972,
+      "ms": 118.08390000000009,
       "status": "ok",
       "arrivalSeconds": 45210,
       "frequencyExpansions": 136990,
       "labelsCreated": 9754,
-      "heapUsedAfterQuery": 107137312
+      "heapUsedAfterQuery": 440654440
     },
     {
       "originId": "bus:59009",
       "destinationId": "bus:77009",
-      "ms": 10.575599999999895,
+      "ms": 64.40730000000008,
       "status": "ok",
       "arrivalSeconds": 42220,
       "frequencyExpansions": 46730,
       "labelsCreated": 4977,
-      "heapUsedAfterQuery": 114717816
+      "heapUsedAfterQuery": 453369136
     },
     {
       "originId": "bus:75009",
       "destinationId": "DT14",
-      "ms": 47.06880000000001,
+      "ms": 182.43290000000025,
       "status": "ok",
       "arrivalSeconds": 41570,
       "frequencyExpansions": 460290,
       "labelsCreated": 18709,
-      "heapUsedAfterQuery": 122805584
+      "heapUsedAfterQuery": 197438328
     },
     {
       "originId": "DT14",
       "destinationId": "bus:75009",
-      "ms": 12.64429999999993,
+      "ms": 80.4989999999998,
       "status": "ok",
       "arrivalSeconds": 41510,
       "frequencyExpansions": 44062,
       "labelsCreated": 6460,
-      "heapUsedAfterQuery": 130740776
+      "heapUsedAfterQuery": 168784784
     },
     {
       "originId": "bus:99009",
       "destinationId": "NS22",
-      "ms": 44.48890000000006,
+      "ms": 160.52390000000014,
       "status": "ok",
       "arrivalSeconds": 44340,
       "frequencyExpansions": 402357,
       "labelsCreated": 15874,
-      "heapUsedAfterQuery": 138391552
+      "heapUsedAfterQuery": 253615032
     },
     {
       "originId": "NS9",
       "destinationId": "CG2",
-      "ms": 163.81010000000003,
+      "ms": 539.2363999999998,
       "status": "ok",
       "arrivalSeconds": 41240,
       "frequencyExpansions": 1451192,
       "labelsCreated": 57423,
-      "heapUsedAfterQuery": 148446720
+      "heapUsedAfterQuery": 421297416
     },
     {
       "originId": "bus:75009",
       "destinationId": "bus:75059",
-      "ms": 2.3560999999999694,
+      "ms": 22.46210000000019,
       "status": "ok",
       "arrivalSeconds": 37170,
       "frequencyExpansions": 975,
       "labelsCreated": 537,
-      "heapUsedAfterQuery": 150278472
+      "heapUsedAfterQuery": 443249992
     },
     {
       "originId": "bus:99009",
       "destinationId": "bus:28009",
-      "ms": 34.399999999999864,
+      "ms": 144.3074999999999,
       "status": "ok",
       "arrivalSeconds": 48530,
       "frequencyExpansions": 223734,
       "labelsCreated": 12352,
-      "heapUsedAfterQuery": 94516040
+      "heapUsedAfterQuery": 455373504
     },
     {
       "originId": "bus:28009",
       "destinationId": "bus:59009",
-      "ms": 24.240600000000086,
+      "ms": 137.56190000000015,
       "status": "ok",
       "arrivalSeconds": 45210,
       "frequencyExpansions": 136990,
       "labelsCreated": 9754,
-      "heapUsedAfterQuery": 102619784
+      "heapUsedAfterQuery": 112555880
     },
     {
       "originId": "bus:59009",
       "destinationId": "bus:77009",
-      "ms": 11.054699999999912,
+      "ms": 91.55630000000019,
       "status": "ok",
       "arrivalSeconds": 42220,
       "frequencyExpansions": 46730,
       "labelsCreated": 4977,
-      "heapUsedAfterQuery": 107849888
+      "heapUsedAfterQuery": 122068336
     },
     {
       "originId": "bus:75009",
       "destinationId": "DT14",
-      "ms": 52.64229999999998,
+      "ms": 170.16460000000006,
       "status": "ok",
       "arrivalSeconds": 41570,
       "frequencyExpansions": 460290,
       "labelsCreated": 18709,
-      "heapUsedAfterQuery": 113911568
+      "heapUsedAfterQuery": 229580536
     },
     {
       "originId": "DT14",
       "destinationId": "bus:75009",
-      "ms": 12.023099999999886,
+      "ms": 68.92220000000043,
       "status": "ok",
       "arrivalSeconds": 41510,
       "frequencyExpansions": 44062,
       "labelsCreated": 6460,
-      "heapUsedAfterQuery": 121851480
+      "heapUsedAfterQuery": 201390592
     },
     {
       "originId": "bus:99009",
       "destinationId": "NS22",
-      "ms": 41.79179999999997,
+      "ms": 129.25700000000006,
       "status": "ok",
       "arrivalSeconds": 44340,
       "frequencyExpansions": 402357,
       "labelsCreated": 15874,
-      "heapUsedAfterQuery": 129555224
+      "heapUsedAfterQuery": 280627168
     },
     {
       "originId": "NS9",
       "destinationId": "CG2",
-      "ms": 152.85299999999984,
+      "ms": 497.40390000000025,
       "status": "ok",
       "arrivalSeconds": 41240,
       "frequencyExpansions": 1451192,
       "labelsCreated": 57423,
-      "heapUsedAfterQuery": 139616088
+      "heapUsedAfterQuery": 117649272
     }
   ],
-  "retainedHeapAfterExplicitGc": 87162448,
+  "retainedHeapAfterExplicitGc": 82339088,
   "runtimeFlags": [
     "--expose-gc"
   ],
@@ -302,5 +302,5 @@
     "routableServiceNumberCount": 297,
     "routableStopCount": 4826
   },
-  "pass": true
+  "pass": false
 }

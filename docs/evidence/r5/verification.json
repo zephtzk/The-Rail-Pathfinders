@@ -1,17 +1,17 @@
 {
-  "recordedAt": "2026-09-18T19:37:09.083270+00:00",
+  "recordedAt": "2026-09-18T20:04:14.064852+00:00",
   "branch": "codex/features-r5",
   "baseCommit": "73bba30de14faddc08ec8f15b862655f888cbbd8",
   "application": {
     "schemaVersion": 1,
-    "applicationSha256": "2f42ee73a0eb1df5e6ff839df813c8ec96537ba6bba70a29519b39297fc5d035",
+    "applicationSha256": "68a498155862e8d7799e9e4908762938563155d5c91eef18c84ff63390ab198c",
     "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
     "busNetworkSha256": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886",
     "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
   },
-  "workerSha256": "11b67ea3e4607cb2e2bd34805bd24ba6da31a0c9f4cb4a80e243654b1d34510a",
+  "workerSha256": "ae3ea92e263220fd151077aff2cd3a5fc8d5001af2c912efa3bb3ec34efbdeb4",
   "plannerWorkerSha256": "c12c63ba6536ee3ee0f08ff13286f947c66e57ff51d2a0c0b4a4ff8e0cc4986f",
-  "serviceWorkerSha256": "5bc414427f0e8356240aa9d368adbbeebd14ee2e9fc851171202b1e512bb2f3b",
+  "serviceWorkerSha256": "69e27e488a7803fe4d1023fc6747a5bc80fb0c843cf18e9558d7f82035e62f94",
   "runtime": {
     "node": "v24.16.0",
     "os": "Windows",
@@ -21,9 +21,9 @@
   "checks": {
     "fullCheck": {
       "status": "passed",
-      "javascript": 359,
+      "javascript": 367,
       "python": 42,
-      "buildAssets": 89
+      "buildAssets": 90
     },
     "r5Browser": {
       "status": "passed",
@@ -101,9 +101,24 @@
     "sharingHttp": {
       "status": "passed",
       "scope": "two isolated clients with persistent restart/consent/revocation"
+    },
+    "routerDifferential": {
+      "status": "passed",
+      "cases": 147,
+      "baselineCommit": "70ae3a80d8c2bf1d9287f10f407e0ba31a96a9fe",
+      "evidence": "router-differential.json",
+      "excludedFields": [
+        "diagnostics"
+      ]
+    },
+    "affectedBrowsersAfterMemory": {
+      "status": "passed",
+      "r5Checks": 101,
+      "retainedRailOfflineAndMultimodalChecks": 72,
+      "evidence": "retained-browser-after-memory.json"
     }
   },
-  "normalization": "Final build normalizes only runtime CRLF to repository-mandated LF after semantic tests; no code behavior changed. Build hashes refer to these canonical bytes.",
+  "normalization": "Final runtime files use repository LF rules; full check/build, differential and affected browser checks were run on the final source.",
   "busAvailability": {
     "registryPatternCount": 416,
     "registryStopCount": 4840,
@@ -112,14 +127,14 @@
     "routableStopCount": 4826
   },
   "benchmark": {
-    "status": "target-unmet",
+    "status": "passed",
     "evidence": "bus-benchmark.json",
-    "coldMs": 224.575,
-    "warmP95Ms": 508.26890000000003,
+    "coldMs": 180.3019,
+    "warmP95Ms": 162.61900000000003,
     "gzipBytes": 2611239,
-    "sampledPeakHeapBytes": 455373504,
+    "sampledPeakHeapBytes": 150278472,
     "heapTargetBytes": 157286400,
-    "retainedHeapAfterExplicitGc": 82339088
+    "retainedHeapAfterExplicitGc": 87162448
   },
   "boundaries": {
     "verifiedRealIndoorPilot": false,
@@ -129,5 +144,27 @@
     "liveOneMap": "one authenticated public-location search/route smoke succeeded",
     "liveLtaArrivals": "two HTTP200 valid empty feeds; matched vehicle UI is separately synthetic"
   },
-  "review": "Independent routing review resolved early-alight retry, all-source terminal gates and worker cancellation race; data/source/credential claims reviewed."
+  "review": "Independent routing review resolved early-alight retry, all-source terminal gates and worker cancellation race; data/source/credential claims reviewed. Allocation changes independently reviewed; pooled outputs remain detached, and all147 public results match the prior committed router. Indoor public-source follow-up found no complete permitted corridor.",
+  "insideSearchMemory": {
+    "status": "passed",
+    "evidence": "bus-memory-probe.json",
+    "probes": 10347,
+    "queries": 24,
+    "sampledMaximum": {
+      "rss": 291819520,
+      "heapTotal": 225071104,
+      "heapUsed": 157025968,
+      "external": 40965796,
+      "arrayBuffers": 20782208,
+      "heapPlusExternal": 162733650
+    },
+    "heapTargetBytes": 157286400,
+    "explicitGcDuringQueries": false,
+    "limitation": "Observed samples with limited headroom; not exact peaks between probes or a hard per-device memory ceiling."
+  },
+  "engineSourceSha256": {
+    "rail-engine.js": "349ecbf61ed66ccb8980b64a3ed1cb1752c8835e021cb64f93c0c495eb69ae91",
+    "multimodal-engine.js": "4a807fd89d3bde704c0abfe3d8ef30ef692e4b8a0baa098e5262da22337323c4",
+    "search-arena.js": "57fa89fd4e583cd5e7d18a71413f83c024ffdfa8f55003c97f5ddf54bc02db8b"
+  }
 }

@@ -22,6 +22,8 @@ R5 runs in the isolated `The-Rail-Pathfinders-r5` application worktree on `codex
 
 See [verification](R5_VERIFICATION.md), [bus audit](R5_BUS_COVERAGE.md), [address integration](R5_ADDRESS_ROUTING.md) and [station guidance](R5_STATION_GUIDANCE.md). Real OneMap search/routing succeeded through a masked, process-only runtime. Real LTA arrival requests returned valid empty feeds around 03:20 SGT; this validates the connection/empty contract, not live vehicle predictions during service. Synthetic prediction tests are labelled separately.
 
+The [allocation review](R5_PERFORMANCE.md) brought the desktop benchmark and stronger inside-search probe below the unchanged 150 MiB sampled-heap target, with p95 query time 162.6 ms. Observed headroom is limited and physical-phone performance remains unverified.
+
 The bus dataset is geographically broad but incomplete. Published headways and first/last-stop spans do not create a timetable; riding remains a distance/speed/dwell estimate. Reviewed road crossings, terminal bays and indoor transfers are not inferred from proximity. Desktop timing and mobile browser emulation do not establish physical-phone memory, responsiveness or navigation reliability. Unknown fares and accessibility remain unknown.
 
 The user-authorized extension clarified that budgets track the existing recorded total, including estimates until actual charges replace them. The progress bar states that basis and reports unknown-price trips separately. Prospective fare incentives never reduce ledger records.

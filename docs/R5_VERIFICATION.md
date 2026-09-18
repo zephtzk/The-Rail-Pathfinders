@@ -4,7 +4,7 @@
 
 ## Candidate verification
 
-Final machine-readable identities and check totals are recorded in [verification.json](evidence/r5/verification.json). `npm run check` covers JavaScript unit/integration tests, Python rail/bus/walking import checks and the application/Worker build. Focused R5 browser suites use actual clicks, keyboard and touch-emulated gestures. The final check passed 359 JavaScript tests, 42 Python tests and the build; 101 R5 browser checks and 139 legacy calendar/planner checks passed. Their screenshots were visually inspected, including 320px with enlarged root text and desktop layout. Runtime line endings were then normalized to the repository LF rules and rebuilt without semantic changes.
+Final machine-readable identities and check totals are recorded in [verification.json](evidence/r5/verification.json). `npm run check` covers JavaScript unit/integration tests, Python rail/bus/walking import checks and the application/Worker build. Focused R5 browser suites use actual clicks, keyboard and touch-emulated gestures. The final check passed 367 JavaScript tests, 42 Python tests and the build; 101 R5 browser checks and 139 legacy calendar/planner checks passed. Their screenshots were visually inspected, including 320px with enlarged root text and desktop layout. The subsequent allocation review preserved runtime LF rules and reran the full check, strict differential comparison and affected browser suites.
 
 | Verification area | Covered behavior |
 | --- | --- |
@@ -30,7 +30,7 @@ The creator share-deletion regression is repaired: deletion uses the actual edit
 
 - [OneMap live smoke](evidence/r5/address-live.json): authenticated searches and a complete public-location itinerary through the user-supplied, process-only runtime. This is one observed contract sample, not general coverage or a continuing availability guarantee.
 - [LTA arrival smoke](evidence/r5/bus-live.json): HTTP 200, valid empty feeds around 03:20 SGT. Synthetic matched-prediction UI checks are separate; these empty feeds do not prove no buses operate.
-- [Bus benchmark](evidence/r5/bus-benchmark.json): CPU/payload and transient/retained memory are recorded separately. The transient Node heap target remains unmet; its nonzero benchmark result is disclosed, not counted as a passing release check. Desktop worker responsiveness and cancellation passed in browser emulation. Physical-phone performance remains unverified.
+- [Bus benchmark](evidence/r5/bus-benchmark.json): CPU/payload and transient/retained memory are recorded separately. The final benchmark and stronger inside-search probe passed the unchanged 150 MiB sampled-heap target. [Performance review](R5_PERFORMANCE.md) records the before/after evidence, limited headroom, external memory and sampling limits. Desktop worker responsiveness and cancellation passed in browser emulation. Physical-phone performance remains unverified.
 - No field survey, verified indoor pilot, live lift inventory, BFA approval, production deployment, audience expansion or physical-phone test is claimed.
 
 ## Reproduce

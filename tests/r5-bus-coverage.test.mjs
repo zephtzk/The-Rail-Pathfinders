@@ -74,6 +74,36 @@ test('R5 early first arrival is usable without inventing a pre-06:30 headway',()
   const after=timing.boarding(p,0,sec('05:31'),'2026-09-18');
   assert.equal(after.seconds,sec('06:36'));assert.equal(after.headwayField,'AM_Peak_Freq');
 });
+test('R5 optional boarding outputs are reused without changing ordinary returned results',()=>{
+  const data=fixture(),timing=createBusTiming(data),p=data.patterns[0];
+  const first=Object.freeze(timing.boarding(p,0,sec('05:20'),'2026-09-18'));
+  const firstSnapshot={...first},same=timing.boarding(p,0,sec('05:20'),'2026-09-18');
+  assert.notEqual(same,first);assert.deepEqual(same,first);
+  const output={};
+  assert.equal(timing.boarding(p,0,sec('17:00'),'2026-09-18',null,0,output),output);
+  assert.deepEqual(output,timing.boarding(p,0,sec('17:00'),'2026-09-18'));
+  assert.equal(timing.boarding(p,0,sec('05:20'),'2026-09-18',null,0,output),output);
+  assert.deepEqual(output,firstSnapshot,'all reused fields, including headway null, are overwritten');
+  assert.deepEqual(first,firstSnapshot,'ordinary callers retain immutable previous values');
+  assert.equal(timing.boarding(p,0,0,'invalid',null,0,output),null);
+  assert.equal(timing.boarding(p,0,sec('10:00'),'2026-10-10',null,0,output),null);
+  assert.deepEqual(output,firstSnapshot,'failed lookup leaves caller scratch state untouched');
+});
+test('R5 retry output remains independent from base boarding and legacy numbers stay numbers',()=>{
+  const data=fixture(),p=data.patterns[0];p.stops[1].firstLast.WD[0]=sec('05:35');
+  const frequency=createMultimodalRouter(rail,data,{links:[]},{busOnly:true}).network.frequency;
+  const baseOutput={},retryOutput={},pattern=frequency.patterns[0];
+  assert.equal(frequency.boarding(pattern,0,sec('05:20'),'2026-09-18',null,0,baseOutput),baseOutput);
+  const original={...baseOutput};
+  assert.equal(frequency.boardingForAlight(pattern,0,1,sec('05:20'),'2026-09-18',230,retryOutput),retryOutput);
+  assert.notEqual(retryOutput,baseOutput);assert.deepEqual(baseOutput,original);
+  assert.equal(baseOutput.seconds,sec('05:30'));assert.equal(retryOutput.seconds,sec('06:36'));
+  const legacy={...data,coverage:{...data.coverage,calendarMode:'legacy'}},timing=createBusTiming(legacy),untouched={sentinel:true};
+  const expected=timing.boarding(p,0,sec('10:00'),'2026-09-18');
+  assert.equal(typeof expected,'number');
+  assert.equal(timing.boarding(p,0,sec('10:00'),'2026-09-18',null,0,untouched),expected);
+  assert.deepEqual(untouched,{sentinel:true});
+});
 test('R5 holiday mapping fails closed and final service day can carry over',()=>{
   const data=fixture();data.coverage={...data.coverage,holidays:['2026-09-21'],validThrough:'2026-09-21'};
   let timing=createBusTiming(data);assert.equal(timing.dayType('2026-09-21'),null);

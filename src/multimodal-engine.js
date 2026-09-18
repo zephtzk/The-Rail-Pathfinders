@@ -9,13 +9,24 @@ const addDays = (date, days) => new Date(Date.parse(`${date}T00:00:00Z`) + days*
 // query may still be using Friday's WD span; do not borrow Saturday's last bus.
 export function createBusTiming(bus) {
   const calendar = bus.coverage.calendarMode === 'service-day';
-  const dayTypeCache = new Map(), shiftedDates = new Map();
+  const dayTypeCache = new Map(), shiftedDates = new Map(), validDates = new Map(), normalizedSpans = new WeakMap();
   const shiftDate = (date,offset) => {
-    const key = `${date}:${offset}`;
-    if (!shiftedDates.has(key)) { if (shiftedDates.size >= 32) shiftedDates.clear(); shiftedDates.set(key,addDays(date,offset)); }
-    return shiftedDates.get(key);
+    let offsets = shiftedDates.get(date);
+    if (!offsets) {
+      if (shiftedDates.size >= 32) shiftedDates.clear();
+      offsets = new Map();
+      shiftedDates.set(date,offsets);
+    }
+    if (!offsets.has(offset)) offsets.set(offset,addDays(date,offset));
+    return offsets.get(offset);
   };
-  const validDate = date => typeof date === 'string' && /^\d{4}-\d\d-\d\d$/.test(date) && Number.isFinite(Date.parse(`${date}T00:00:00Z`)) && new Date(`${date}T00:00:00Z`).toISOString().slice(0,10) === date;
+  const validDate = date => {
+    if (validDates.has(date)) return validDates.get(date);
+    const valid = typeof date === 'string' && /^\d{4}-\d\d-\d\d$/.test(date) && Number.isFinite(Date.parse(`${date}T00:00:00Z`)) && new Date(`${date}T00:00:00Z`).toISOString().slice(0,10) === date;
+    if (validDates.size >= 32) validDates.clear();
+    validDates.set(date,valid);
+    return valid;
+  };
   const dayType = date => {
     if (dayTypeCache.has(date)) return dayTypeCache.get(date);
     if (!validDate(date) || date < bus.coverage.validFrom || date > bus.coverage.validThrough || (bus.coverage.excludedDates ?? []).includes(date)) return null;
@@ -33,12 +44,19 @@ export function createBusTiming(bus) {
     if (kind && pattern.dayTimingExclusions?.[kind]) return null;
     const raw = kind && pattern.stops[index].firstLast[kind];
     if (!raw) return null;
-    let [first,last] = raw;
+    let first = raw[0], last = raw[1];
     const originFirst = pattern.stops[0].firstLast[kind]?.[0];
     // A genuinely late-starting service can reach downstream stops after
     // midnight. Ordinary early-starting/partial first buses are not shifted.
-    if (originFirst >= 18*3600 && first < 6*3600) { first += DAY; if (last < first) last += DAY; }
-    return [first,last];
+    if (originFirst >= 18*3600 && first < 6*3600) {
+      if (normalizedSpans.has(raw)) return normalizedSpans.get(raw);
+      first += DAY;
+      if (last < first) last += DAY;
+      const normalized = [first,last];
+      normalizedSpans.set(raw,normalized);
+      return normalized;
+    }
+    return raw;
   };
   const spans = (pattern,index,serviceDate) => spanForDay(pattern,index,dayType(serviceDate));
   let maxServiceSeconds = 0;
@@ -47,42 +65,71 @@ export function createBusTiming(bus) {
     if (span) maxServiceSeconds = Math.max(maxServiceSeconds,span[1]);
   }
   return {calendar,dayType,supportedDate,windowStart,windowEnd,maxServiceSeconds,
-    boarding(pattern,index,ready,date,alightIndex = null,rideSeconds = 0) {
+    boarding(pattern,index,ready,date,alightIndex = null,rideSeconds = 0,output = null) {
       if (!validDate(date) || !Number.isFinite(ready)) return null;
       if (!calendar) {
-        const [first,last] = spans(pattern,index,date) ?? [];
+        const span = spans(pattern,index,date);
+        if (!span) return null;
+        const first = span[0], last = span[1];
         const waiting = pattern.waitSeconds ?? pattern.headways?.AM_Offpeak_Freq?.[1]*60;
         const estimate = Math.max(ready,windowStart,first) + waiting;
         return Number.isFinite(estimate) && waiting > 0 && estimate <= Math.min(last,windowEnd) ? estimate : null;
       }
-      let best = null;
+      let found = false, bestSeconds = 0, bestServiceDate = null, bestOffsetSeconds = 0, bestDayType = null, bestBasis = null, bestHeadwayField = null;
       const current = Math.floor(ready/DAY);
       for (let offset = current-1; offset <= current+1; offset++) {
-        const serviceDate = shiftDate(date,offset), span = spans(pattern,index,serviceDate);
+        const serviceDate = shiftDate(date,offset), kind = dayType(serviceDate), span = spanForDay(pattern,index,kind);
         if (!span) continue;
-        const [first,last] = span, localReady = ready-offset*DAY;
-        const alightSpan = alightIndex === null ? null : spans(pattern,alightIndex,serviceDate);
+        const first = span[0], last = span[1], offsetSeconds = offset*DAY, localReady = ready-offsetSeconds;
+        const alightSpan = alightIndex === null ? null : spanForDay(pattern,alightIndex,kind);
         if (alightIndex !== null && !alightSpan) continue;
         if (localReady > last) continue;
-        const consider = (localTime, basis, headwayField = null) => {
-          const seconds = localTime+offset*DAY;
-          if (alightSpan && (localTime+rideSeconds < alightSpan[0] || localTime+rideSeconds > alightSpan[1])) return;
-          if (seconds >= ready && localTime >= first && localTime <= last && (!best || seconds < best.seconds)) best = {seconds,serviceDate,offsetSeconds:offset*DAY,dayType:dayType(serviceDate),basis,headwayField};
-        };
         const bands = bus.assumptions.headwayBands ?? [];
-        if (first < (bands[0]?.startSeconds ?? 23400) && localReady <= first) consider(first,'published-first-arrival');
+        if (first < (bands[0]?.startSeconds ?? 23400) && localReady <= first) {
+          const seconds = first+offsetSeconds;
+          if (first <= last && (!alightSpan || (first+rideSeconds >= alightSpan[0] && first+rideSeconds <= alightSpan[1])) && (!found || seconds < bestSeconds)) {
+            found = true;
+            bestSeconds = seconds;
+            bestServiceDate = serviceDate;
+            bestOffsetSeconds = offsetSeconds;
+            bestDayType = kind;
+            bestBasis = 'published-first-arrival';
+            bestHeadwayField = null;
+          }
+        }
         for (const band of bands) {
           const wait = pattern.headways?.[band.field]?.[1]*60;
           if (!Number.isFinite(wait) || wait <= 0) continue;
           const departure = Math.max(localReady,first,band.startSeconds,alightSpan ? alightSpan[0]-rideSeconds-wait : -Infinity)+wait;
-          if (departure < band.endSeconds) consider(departure,'published-headway-estimate',band.field);
+          const seconds = departure+offsetSeconds;
+          if (departure < band.endSeconds && departure <= last && (!alightSpan || (departure+rideSeconds >= alightSpan[0] && departure+rideSeconds <= alightSpan[1])) && (!found || seconds < bestSeconds)) {
+            found = true;
+            bestSeconds = seconds;
+            bestServiceDate = serviceDate;
+            bestOffsetSeconds = offsetSeconds;
+            bestDayType = kind;
+            bestBasis = 'published-headway-estimate';
+            bestHeadwayField = band.field;
+          }
         }
       }
-      return best;
+      if (!found) return null;
+      // Router-private callers may reuse separate base/retry output slots.
+      // Ordinary callers retain a fresh result whose fields never change later.
+      const result = output ?? {seconds:0,serviceDate:null,offsetSeconds:0,dayType:null,basis:null,headwayField:null};
+      result.seconds = bestSeconds;
+      result.serviceDate = bestServiceDate;
+      result.offsetSeconds = bestOffsetSeconds;
+      result.dayType = bestDayType;
+      result.basis = bestBasis;
+      result.headwayField = bestHeadwayField;
+      return result;
     },
     canAlight(pattern,index,time,date,boarding) {
       const serviceDate = boarding?.serviceDate ?? date;
-      const [first,last] = spans(pattern,index,serviceDate) ?? [];
+      const span = spans(pattern,index,serviceDate);
+      if (!span) return false;
+      const first = span[0], last = span[1];
       const localTime = time-(boarding?.offsetSeconds ?? 0);
       return Number.isFinite(first) && Number.isFinite(last) && localTime >= Math.max(first,windowStart) && localTime <= Math.min(last,windowEnd);
     }
@@ -93,9 +140,12 @@ export function createBusTiming(bus) {
 export function createMultimodalRouter(rail, bus, walking, {busOnly = false, closedRailRouteIds = []} = {}) {
   if (bus.schemaVersion !== 1 || !Array.isArray(bus.patterns) || !Array.isArray(walking.links)) throw Error('Unsupported pilot data schema');
   const originalStops = new Map(bus.stops.map(stop => [stop.id,stop]));
-  const patterns = bus.patterns.filter(pattern => pattern.timingSupported !== false).map(pattern => ({...pattern,stops:pattern.stops.map(stop => ({...stop,stopId:busId(stop.stopId)}))}));
-  const busStops = bus.stops.map(stop => ({...stop,id:busId(stop.id),stationId:busId(stop.id),name:`${stop.id} · ${stop.name}`,mode:'bus'}));
-  const stations = busStops.map(stop => ({...stop,stopIds:[stop.id],accessSeconds:0,exitSeconds:0}));
+  const stopIds = new Map(bus.stops.map(stop => [stop.id,busId(stop.id)]));
+  const patterns = bus.patterns.filter(pattern => pattern.timingSupported !== false).map(pattern => ({...pattern,stops:pattern.stops.map(stop => ({...stop,stopId:stopIds.get(stop.stopId) ?? busId(stop.stopId)}))}));
+  // A physical bus stop is also its station-level endpoint. Share the same
+  // immutable routing node rather than duplicate thousands of equal objects.
+  const busStops = bus.stops.map(stop => {const id=stopIds.get(stop.id);return {...stop,id,stationId:id,name:`${stop.id} · ${stop.name}`,mode:'bus',stopIds:[id],accessSeconds:0,exitSeconds:0};});
+  const stations = busStops;
   const unverifiedBays = new Set((bus.assumptions?.unverifiedBayStopCodes ?? []).map(busId));
   const transfers = busStops.filter(stop=>!unverifiedBays.has(stop.id)).map(stop => ({fromStopId:stop.id,toStopId:stop.id,seconds:60,walkSeconds:0,assumed:true,provenance:'Same roadside physical bus stop: assumed 60 seconds to change buses; no street crossing inferred.'}));
   for (const link of walking.links.filter(link => link.enabled)) {
@@ -114,7 +164,7 @@ export function createMultimodalRouter(rail, bus, walking, {busOnly = false, clo
   const frequency = {
     patterns,
     ...timing,
-    boardingForAlight:(pattern,from,to,ready,date,duration)=>timing.calendar ? timing.boarding(pattern,from,ready,date,to,duration) : null,
+    boardingForAlight:(pattern,from,to,ready,date,duration,output=null)=>timing.calendar ? timing.boarding(pattern,from,ready,date,to,duration,output) : null,
     assumptions:[`Bus wait assumes the published applicable dispatch-band maximum headway, not an exact departure or a guaranteed upper bound.`,
       `Bus riding assumes route distance at ${bus.assumptions?.rideSpeedKph ?? 18} km/h plus ${bus.assumptions?.dwellSecondsPerStop ?? 30} seconds per traversed stop; traffic and dwell are unmeasured.`,
       'Every bus boarding and alighting must stay inside reviewed service dates and same-service-day per-stop first/last bounds. First-bus rows are not used as one through-trip timetable.',
