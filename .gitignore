@@ -6,3 +6,5 @@ dist/
 .sites-runtime/
 test-results/
 *.tar.gz
+__pycache__/
+*.pyc

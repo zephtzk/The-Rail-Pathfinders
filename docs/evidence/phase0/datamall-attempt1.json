@@ -1,0 +1,127 @@
+{
+  "startedAt": "2026-09-18T12:10:09.131041+00:00",
+  "mode": "authenticated-live-smoke",
+  "rawPayloadsRetained": false,
+  "signedUrlsRetained": false,
+  "requests": [
+    {
+      "endpoint": "TrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:10:09.131041+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "GTFSScheduleTrain",
+      "retrievedAt": "2026-09-18T12:10:10.247971+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "GTFSRealTimeTrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:10:11.329390+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "GTFSRealtimeTrainTripUpdates",
+      "retrievedAt": "2026-09-18T12:10:12.411798+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=EWL",
+      "retrievedAt": "2026-09-18T12:10:13.549563+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=CCL",
+      "retrievedAt": "2026-09-18T12:10:14.644475+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=DTL",
+      "retrievedAt": "2026-09-18T12:10:15.731706+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=EWL",
+      "retrievedAt": "2026-09-18T12:10:16.842598+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=CCL",
+      "retrievedAt": "2026-09-18T12:10:17.920192+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=DTL",
+      "retrievedAt": "2026-09-18T12:10:19.102819+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusStops?$skip=0",
+      "retrievedAt": "2026-09-18T12:10:20.188631+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusStops?$skip=500",
+      "retrievedAt": "2026-09-18T12:10:21.271883+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusRoutes?$skip=0",
+      "retrievedAt": "2026-09-18T12:10:22.380686+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusRoutes?$skip=500",
+      "retrievedAt": "2026-09-18T12:10:23.501928+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusServices?$skip=0",
+      "retrievedAt": "2026-09-18T12:10:24.584653+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "BusServices?$skip=500",
+      "retrievedAt": "2026-09-18T12:10:25.669328+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "v3/BusArrival",
+      "status": "BLOCKED",
+      "reason": "No stop identifier from the stop directory"
+    }
+  ],
+  "limits": "Small samples, not an exhaustive directory or continuous service validation.",
+  "finishedAt": "2026-09-18T12:10:26.739330+00:00"
+}

@@ -1,0 +1,72 @@
+{
+  "observedAt": "2026-09-18T12:13:25.534296+00:00",
+  "sourceCheckout": "C:\\Users\\simho\\OneDrive\\Documents\\ChatGPT\\Neblala\\The-Rail-Pathfinders",
+  "baselineCommit": "4838c0458e95c89b16817eb89bcd49608f2d04ce",
+  "remoteMainVerified": "4838c0458e95c89b16817eb89bcd49608f2d04ce",
+  "remote": "https://github.com/zephtzk/The-Rail-Pathfinders.git",
+  "initialBranch": "main",
+  "initialWorkingTree": "clean",
+  "instructions": "No AGENTS.md found in checkout or checked ancestors",
+  "node": "24.16.0",
+  "npm": "11.13.0",
+  "platform": "Windows",
+  "install": {
+    "command": "npm ci --ignore-scripts --offline",
+    "status": "PASS",
+    "addedPackages": 3
+  },
+  "build": {
+    "command": "npm run check",
+    "status": "PASS",
+    "unitIntegrationTests": 30,
+    "failedTests": 0,
+    "syntaxChecks": 3,
+    "localAssets": 14,
+    "workerApproxKB": 257,
+    "workerSHA256": "b479b7a239bbcbc5384cec3168223c9249593685384d6fb86e307273d0952049"
+  },
+  "browser": {
+    "command": "node tests/browser.mjs",
+    "status": "PASS",
+    "checks": 30,
+    "emulationOnly": true,
+    "browser": "Microsoft Edge 153.0.4234.32",
+    "realNetworkOfflineReload": true,
+    "evidence": "browser-results.json"
+  },
+  "physicalDevices": "NOT TESTED",
+  "previousEvidence": {
+    "source": "parent results/release-manifest.json and results/browser-results.json; read as historical evidence only",
+    "oldBrowserTimestamp": "2026-09-18T10:25:12.282Z",
+    "oldChecks": 30,
+    "oldPhysicalDevices": false
+  },
+  "hosting": {
+    "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "allowedAccountCount": 1,
+    "externalVisitors": 0,
+    "groups": 0,
+    "projectStatus": "active",
+    "siteVersion": 2,
+    "deployedSourceCommit": "f8546eef7e950ffb3e50f98a6867b4e73f3dedf2",
+    "deploymentId": "appgdep_6aad11c6077881919115c818eff5f41a",
+    "deploymentStatus": "succeeded",
+    "environmentRevision": 0,
+    "configuredEnvironmentKeys": [],
+    "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+    "unauthenticatedHealthHTTP": 403,
+    "healthResponseAttribution": "403 alone does not distinguish site gate from intermediary; access configuration was independently read through Sites",
+    "mutations": false
+  },
+  "runtimeDifferenceBetweenPublishedAndDeployed": "None; only README.md differs",
+  "dataMallLocalCredentialPresentAtStart": false,
+  "secretValuesRetained": false,
+  "auditToolTests": {
+    "command": "python scripts/test-audit-datamall.py",
+    "status": "PASS",
+    "syntheticChecks": 10,
+    "liveAccessEvidence": false
+  }
+}
