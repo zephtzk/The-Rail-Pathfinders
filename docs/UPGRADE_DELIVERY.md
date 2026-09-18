@@ -31,6 +31,8 @@ For the optional supported Cloudflare provider, copy/adapt `wrangler.sharing.exa
 
 ## Verification commands
 
+The clean-checkout results and exact application hashes are recorded in [verification evidence](UPGRADE_VERIFICATION.md).
+
 ```sh
 npm run check
 npm run test:sharing-http
