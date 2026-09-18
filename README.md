@@ -1,26 +1,26 @@
 # Commute Copilot — The Rail Pathfinders
 
-**Six-upgrade review candidate:** start with [completion, limits and setup](docs/UPGRADE_DELIVERY.md), the [two-device rehearsal](docs/UPGRADE_DEMO.md), [facility/toilet coverage](docs/FACILITY_COVERAGE.md), [sharing and database setup](docs/SHARING.md), and [fares](docs/FARES.md). The companion is integrated below all existing planners. Review a selected journey, then start it or create a recipient link.
+**R2 is deployed:** open [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Start with the [R2 publication record](docs/R2_PUBLICATION.md), [completed features and screenshots](docs/R2_DELIVERY.md), and [verification and limits](docs/R2_VERIFICATION.md).
 
-The browser workflows, local durable sharing and tests are implemented. A real verified step-free door-to-door corridor and real verified toilet entrance paths remain blocked by missing checked source data. Deployed D1/push delivery and physical phones are unverified. The existing production site and audience are unchanged.
+The map-led flow is **Plan → compare → review → Start Journey → Current trip**, with **Saved routes** and **Preferences** available throughout. R2 adds original soft icons, clearer current/next actions, editable travel styles, typed endpoint suggestions, persisted civil-time choices, opt-in foreground location assistance and measured offline readiness. One accepted journey survives navigation and reloads.
 
-The following Phase 4 publication information describes the **previous hosted release**, not a deployment of this branch.
+Sites **version 4** deploys merged R2 source `caf24113ff54560c975a5fac8683ec075c108798`. [PR #3](https://github.com/zephtzk/The-Rail-Pathfinders/pull/3) is merged into `main`. The existing URL and access are preserved: the owner plus three previously invited external viewers, access revision 2. Sign in using an authorized account. Local testing needs no account. GitHub and Sites publication are separate; a GitHub push alone does not deploy the app. Later documentation commits do not change the deployed application.
 
 
-Previous hosted delivery: **Phase 4 user-testing build, published for owner testing**. Start with the [publication report](docs/PHASE4_PUBLICATION.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
+The browser workflows and local durable sharing are implemented. Hosted sharing has no declared D1 binding and remains unavailable; external Web Push and live LTA access are unverified. A verified continuous real accessible corridor and real toilet entrance paths remain blocked by missing checked data. Physical phones remain untested. See [R1 completion and setup](docs/UPGRADE_DELIVERY.md), [two-device rehearsal](docs/UPGRADE_DEMO.md), [facility/toilet coverage](docs/FACILITY_COVERAGE.md), [sharing setup](docs/SHARING.md), and [fares](docs/FARES.md).
 
-| Entry page | Use in this round |
+| Entry page | Current use |
 | --- | --- |
-| `/multimodal.html` | Main Phase 4 test: accept a journey, confirm progress, compare synthetic changes and reload offline. |
-| `/` | General station-to-station scheduled rail planner, 186 imported station records. |
-| `/replay.html` | Original fictional corridor replay and optional Phase 1 advisory panel; separate from the scheduled planner. |
+| `/`, `/rail.html`, `/multimodal.html` | Unified R2 Plan, Current trip, Saved routes and Preferences. |
+| `/rail.html?legacy=1`, `/multimodal.html?legacy=1` | Historical planners retained for regression checks. |
+| `/replay.html` | Explicitly labelled fictional disruption Demo. |
 | `/data/application-build.json` | Compare the application SHA-256 with the candidate report before recording a test. |
 
-The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) serves **version 3**, source `32d97e39172827cd31916f62aa39603c2cb3e5b3`, with **owner-only access**. Sign in as the authorized owner; external testers need a separately approved access arrangement after owner phone smoke tests. Local testing needs no account. GitHub and Sites were published separately; a future GitHub push alone will not update the hosted app. The publication report records the verified build and distinguishes later documentation updates from the deployed source.
+The [Phase 4 publication report](docs/PHASE4_PUBLICATION.md) describes the historical version 3 release. Its hosted browser evidence and owner-only audience are historical, not new R2 verification. Use the [device checklist](DEVICE_CHECKLIST.md) alongside the R2 flow; retain the fixed fixture dates for historical tests.
 
 Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
 
-Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. No address search, step-free assurance, broader bus coverage or intermediate onboard alighting was supported in that release. This branch adds the bounded fare and companion features described above. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
+Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. General address geocoding, real step-free assurance and broader bus coverage remain unsupported. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
 
 See [coverage](docs/PHASE3_COVERAGE.md), [historical Phase 4 acceptance](docs/PHASE4_REPORT.md), [operations](docs/PHASE4_OPERATIONS.md) and the [milestone ledger](docs/MILESTONES.md). Physical Android Chrome and iPhone Safari checks remain **NOT TESTED**; desktop emulation does not close them.
 
@@ -100,6 +100,6 @@ For optional Phase 1 live information, build then run `python scripts/run-live-l
 
 ## Deployment and licence
 
-The authorized GitHub push and Sites version 3 deployment are recorded in the [publication report](docs/PHASE4_PUBLICATION.md). The existing Sites identity and owner-only audience are preserved. Owner phone smoke tests and explicitly approved tester access remain before invitations.
+The merged R2 release and Sites version 4 deployment are recorded in the [R2 publication report](docs/R2_PUBLICATION.md). The existing Site identity and custom access revision 2 are preserved: the owner plus three previously invited external viewers. Physical-phone checks remain outstanding; further audience changes require the owner's request.
 
 Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps. The owner's confirmation of written redistribution permission is recorded in [publication authorization](docs/PUBLICATION_AUTHORIZATION.md); the permission document was not independently reviewed. See [third-party notices](THIRD_PARTY_NOTICES.md). Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.

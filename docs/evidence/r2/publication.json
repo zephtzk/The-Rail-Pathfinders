@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "recordedDateSingapore": "2026-09-19",
+  "release": "R2",
+  "pullRequest": "https://github.com/zephtzk/The-Rail-Pathfinders/pull/3",
+  "mergedBy": "zephtzk",
+  "mergeCommit": "caf24113ff54560c975a5fac8683ec075c108798",
+  "sourceHead": "1649d71510cb841af830fc21eb7ce905eeed09e0",
+  "runtimeSource": "72786954b89279b4217c6060cc887b41a253dc1a",
+  "version": {
+    "id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_037f5dd8ef5881918ad34165ea4cf44b",
+    "number": 4,
+    "source": {
+      "commit_sha": "caf24113ff54560c975a5fac8683ec075c108798"
+    },
+    "archiveStorage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000000cf88207807e27c6a9cfd0eb",
+      "content_hash": "sha256:c94de470f0939b161bf077cef668fbdb112f13831ea228c9d1b93028c32df3fb",
+      "size_bytes": 18298880,
+      "file_count": 75
+    }
+  },
+  "deployment": {
+    "id": "appgdep_6aad6da81680819181e11817a51d9fb9",
+    "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "title": "Commute Copilot",
+    "version_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_037f5dd8ef5881918ad34165ea4cf44b",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aad0ab90e5881919eca01b79f19aa24",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-09-18T16:58:37.041297+00:00"
+  },
+  "access": {
+    "mode": "custom",
+    "revision": 2,
+    "ownerCount": 1,
+    "externalViewerCount": 3,
+    "groupCount": 0,
+    "changed": false
+  },
+  "verified": {
+    "sourceTreeUnchanged": true,
+    "applicationSha256": "279031d5b91b9c35e15e1c202bd59ac20f120ea1b1156fdf5c348489291bc749",
+    "workerSha256": "e343583b4a2d86bc4d1d12712e786aac72830d00d5d876486349a97c409c4a30",
+    "submittedGzipSha256": "17c3e5bbf659ac6f7eb75c69539636d8fcc8a1bdcc5aef75f4c30d20e01d436c",
+    "fileCount": 75,
+    "nativeDeploymentSucceeded": true,
+    "accessRechecked": true,
+    "hostedBrowserJourneyRerun": false,
+    "physicalDevicesTested": false
+  }
+}
