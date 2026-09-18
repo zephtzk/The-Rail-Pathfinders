@@ -1,3 +1,4 @@
+import {mountJourney} from './journey-ui.js';
 import {createMultimodalRouter} from './multimodal-engine.js';
 import {validateSavedPilot,validatePilotArrivals,pilotPredictionState} from './pilot-validation.js';
 
@@ -5,16 +6,17 @@ const app = document.querySelector('#app'), SAVE = 'commute-copilot-pilot-guidan
 const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clock = seconds => `${String(Math.floor(seconds/3600)%24).padStart(2,'0')}:${String(Math.floor(seconds/60)%60).padStart(2,'0')}:${String(Math.floor(seconds)%60).padStart(2,'0')}${seconds>=86400?' (+1 day)':''}`;
 const duration = seconds => `${Math.floor(seconds/60)}m ${seconds%60}s`;
+let arrivalEpoch=0,lastArrivalGood=null,busReconnectTimer;const ARRIVAL_SAVE='commute-copilot-bus-last-known-v1';
 let rail,bus,walking,manifest,railManifest,router,lookup,build,route,input,result,feed,liveStop,dirty=false;
 const name = id => lookup?.get(id) ?? id;
 function readSaved() { try { return validateSavedPilot(JSON.parse(localStorage.getItem(SAVE))); } catch { return null; } }
-function connection() { document.querySelector('#pilot-connection').textContent = navigator.onLine ? '' : 'Offline · cached data and timing assumptions; no current arrivals'; renderLive(); }
+function connection() { arrivalEpoch++; if(!navigator.onLine && feed)feed={...feed,status:'unavailable',error:'offline'}; document.querySelector('#pilot-connection').textContent = navigator.onLine ? '' : 'Offline · cached data and timing assumptions; no current arrivals'; renderLive(); }
 function shell() {
   app.innerHTML=`<header class="rail-header"><a class="rail-brand" href="/"><img src="/icon.svg" width="36" height="36" alt=""><span>Commute <strong>Copilot</strong></span></a><a href="/">Scheduled rail planner ↗</a></header>
   <div class="schedule-banner"><strong>Bus & walking pilot</strong><span>Estimated buses · scheduled rail · map-supported exterior paths</span><span id="pilot-connection"></span></div>
   <main id="main"><div class="rail-heading"><div><p class="eyebrow">TAMPINES · PAYA LEBAR · BUGIS</p><h1>A few more connections.</h1><p>Plan between supported stops and stations. Know what each time assumes.</p></div><a href="#pilot-coverage">Pilot coverage ↓</a></div>
   <p id="pilot-status" class="notice" role="status">Loading rail, bus and walking data…</p><div class="planner-layout"><section id="pilot-planner" class="panel planner-panel"></section><section id="pilot-journey" class="journey-panel" aria-live="polite" tabindex="-1"></section></div>
-  <section id="pilot-live" class="panel coverage-panel"></section><section id="pilot-coverage" class="panel coverage-panel"></section>
+  <section id="active-journey" class="panel coverage-panel"></section><section id="pilot-live" class="panel coverage-panel"></section><section id="pilot-coverage" class="panel coverage-panel"></section>
   <footer><p><a href="/">Scheduled rail planner</a> · <a href="/replay.html">Original corridor replay & Phase 1 live information</a></p><p>All times Asia/Singapore. Accessibility and indoor facilities remain unverified.</p></footer></main>`;
   connection();
 }
@@ -41,7 +43,7 @@ function search(data,restoreId) {
   const key=`${data.mode}:${data.fixture}`;
   if(key!==routerKey) { router=createMultimodalRouter(rail,bus,walking,{busOnly:data.mode==='bus-only',closedRailRouteIds:data.fixture==='ewl'?['EWL']:[]});routerKey=key; }
   result=router.route(data);route=result.status==='ok'?(result.routes.find(r=>r.id===restoreId)??result.recommended):null;
-  feed=null;liveStop=null;
+  arrivalEpoch++;feed=null;lastArrivalGood=null;liveStop=null;
   document.querySelector('#pilot-status').textContent=route?'Calculated locally from pinned data. Bus times are estimates; allow a margin for connections and deadlines.':result.errors.map(e=>e.message).join(' ');
   render();
 }
@@ -56,7 +58,7 @@ function render(saved=false) {
   <section class="panel arithmetic"><h3>Where the time goes</h3><dl>${[['Access',r.accessSeconds],['Waiting',r.waitSeconds],['Riding',r.rideSeconds],['Transfers',r.transferSeconds],['Exit',r.exitSeconds],['Total',r.totalSeconds]].map(([label,seconds])=>`<div><dt>${label}</dt><dd>${duration(seconds)}</dd></div>`).join('')}</dl><p>Walking is included in these components, never added twice.</p><details><summary>Timing assumptions</summary><ul>${r.assumptions.map(a=>`<li>${escape(a)}</li>`).join('')}</ul></details></section>
   ${(result?.routes??[]).filter(a=>a.id!==r.id).slice(0,10).map((a,i)=>`<p><button class="secondary" data-route="${escape(a.id)}">Alternative ${i+1}: ${a.estimated?'estimate ':''}${clock(a.arrivalSeconds)}, ${a.transfers} transfers, ${duration(a.walkingSeconds)} walking</button></p>`).join('')}`;
   document.querySelector('#save-pilot').addEventListener('click',()=>{if(dirty){document.querySelector('#pilot-status').textContent='Search again before saving changed details.';return;}try{localStorage.setItem(SAVE,JSON.stringify({schemaVersion:1,savedAt:new Date().toISOString(),input,route,build,labels:[...lookup]}));document.querySelector('#pilot-status').textContent='Pilot guidance saved on this device. No live predictions were saved.';}catch{document.querySelector('#pilot-status').textContent='Device storage unavailable; guidance was not saved.';}});
-  for(const button of el.querySelectorAll('[data-route]'))button.addEventListener('click',()=>{route=result.routes.find(r=>r.id===button.dataset.route);feed=null;liveStop=null;render();});
+  for(const button of el.querySelectorAll('[data-route]'))button.addEventListener('click',()=>{route=result.routes.find(r=>r.id===button.dataset.route);arrivalEpoch++;feed=null;lastArrivalGood=null;liveStop=null;render();});
   renderLive();
 }
 function renderLive() {
@@ -64,14 +66,15 @@ function renderLive() {
   const first=route?.legs.find(l=>l.mode==='bus'&&l.type==='ride');
   if(!first){el.innerHTML='<h2>Current bus arrivals</h2><p>Select a journey containing a bus to inspect its boarding stop.</p>';return;}
   const stop=first.fromStopId.replace('bus:',''),now=Date.now();
+  if(!feed&&!lastArrivalGood&&bus)try{const cached=JSON.parse(localStorage.getItem(ARRIVAL_SAVE));if(validatePilotArrivals(cached,stop,bus.patterns)&&cached.status!=='unavailable'){lastArrivalGood=cached;feed={...cached,status:'unavailable',error:'saved_snapshot'};}}catch{}
   const state=p=>pilotPredictionState(p,feed,now,navigator.onLine);
   const blocked=!navigator.onLine||(feed&&Date.parse(feed.nextRefreshAt)>now);
   el.innerHTML=`<h2>Current bus arrivals · ${escape(stop)}</h2><p>Optional current information at this boarding stop, separate from travel date ${escape(input.date)}. These predictions never alter the itinerary or predict downstream arrival times.</p><button id="refresh-bus" class="secondary" ${blocked?'disabled':''}>Check current arrivals</button><p>Refresh at most every 30 seconds. No automatic polling.</p>
   ${!navigator.onLine?'<p class="notice">Offline · no current arrivals. Previously retrieved predictions are not current.</p>':''}
-  ${feed?`<p>Status: ${escape(feed.status)}${feed.error?' · '+escape(feed.error):''}. Retrieved: ${escape(feed.retrievedAt??'unavailable')}. Provider observation timestamp: unavailable. HTTP response date: ${escape(feed.providerHttpDate??'unavailable')}.</p>${feed.status==='empty'?'<p>Valid empty response. No prediction supplied; this does not prove there is no service.</p>':''}<ul>${feed.predictions.map(p=>`<li>Service ${escape(p.serviceNo)} · ${escape(state(p))} · predicted arrival ${escape(p.predictedArrival)} · ${escape(p.predictionBasis)} · ${p.match?`direction ${p.match.direction}, stop occurrence ${p.match.sequence}`:'direction/variant match unavailable; advisory only'}</li>`).join('')}</ul>`:'<p>No live request made. Timetable and frequency estimates work without a key.</p>'}`;
+  ${feed?`<p>Last successful retrieval: ${escape(feed.lastSuccessfulRetrievalAt??lastArrivalGood?.retrievedAt??feed.retrievedAt??'none')}; source validity: not supplied; retry: ${escape(feed.nextRefreshAt??'manual')}. Status: ${escape(feed.status)}${feed.error?' · '+escape(feed.error):''}. Retrieved: ${escape(feed.retrievedAt??'unavailable')}. Provider observation timestamp: unavailable. HTTP response date: ${escape(feed.providerHttpDate??'unavailable')}.</p>${feed.status==='empty'?'<p>Valid empty response. No prediction supplied; this does not prove there is no service.</p>':''}<ul>${feed.predictions.map(p=>`<li>Service ${escape(p.serviceNo)} · ${escape(state(p))} · predicted arrival ${escape(p.predictedArrival)} · ${escape(p.predictionBasis)} · ${p.match?`direction ${p.match.direction}, stop occurrence ${p.match.sequence}`:'direction/variant match unavailable; advisory only'}</li>`).join('')}</ul>`:'<p>No live request made. Timetable and frequency estimates work without a key.</p>'}`;
   document.querySelector('#refresh-bus').addEventListener('click',async()=>{
-    const button=document.querySelector('#refresh-bus');button.disabled=true;button.textContent='Checking…';liveStop=stop;
-    try{const response=await fetch(`/api/bus-arrivals?stop=${encodeURIComponent(stop)}`,{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!response.ok)throw Error('unavailable');const data=await response.json();if(!validatePilotArrivals(data,stop,bus?.patterns))throw Error('malformed');if(liveStop===stop)feed=data;}catch(error){if(liveStop===stop)feed={status:'unavailable',error:error.message==='malformed'?'malformed':'network_or_timeout',predictions:[],retrievedAt:null,nextRefreshAt:new Date(Date.now()+30000).toISOString()};}renderLive();
+    const button=document.querySelector('#refresh-bus');button.disabled=true;button.textContent='Checking…';liveStop=stop;const epoch=++arrivalEpoch;
+    try{const response=await fetch(`/api/bus-arrivals?stop=${encodeURIComponent(stop)}`,{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!response.ok)throw Error('unavailable');const data=await response.json();if(!validatePilotArrivals(data,stop,bus?.patterns))throw Error('malformed');if(liveStop===stop&&epoch===arrivalEpoch&&navigator.onLine&&(!lastArrivalGood?.retrievedAt||!data.retrievedAt||Date.parse(data.retrievedAt)>=Date.parse(lastArrivalGood.retrievedAt))){feed=data;if(data.status!=='unavailable'){lastArrivalGood=data;try{localStorage.setItem(ARRIVAL_SAVE,JSON.stringify(data));}catch{}}else if(lastArrivalGood)feed={...data,predictions:lastArrivalGood.predictions};}}catch(error){if(liveStop===stop&&epoch===arrivalEpoch)feed={status:'unavailable',error:error.message==='malformed'?'malformed':'network_or_timeout',predictions:lastArrivalGood?.predictions??[],retrievedAt:null,nextRefreshAt:new Date(Date.now()+30000).toISOString()};}renderLive();
   });
 }
 function coverage() {
@@ -92,15 +95,18 @@ async function start() {
     lookup=new Map([...router.network.stops.map(s=>[s.id,`${s.name??s.id} (${s.id})`]),...router.network.stations.map(s=>[s.id,`${s.name}${stationLabels.get(s.name)>1?' ('+s.id+')':''}`])]);
     const initial=saved?.input??{originId:'bus:75009',destinationId:'DT14',date:bus.coverage.validFrom,departureTime:'10:00',deadlineDate:bus.coverage.validFrom,deadlineTime:'12:30',walkingLimitMinutes:20,preference:'fastest',maxExtraMinutes:15,mode:'mixed',fixture:'none'};
     form(initial);coverage();search(initial,saved?.build===build?saved.route.id:undefined);
+    const progressRouter=createMultimodalRouter(rail,bus,walking);
+    mountJourney({host:document.querySelector('#active-journey'),getSelected:()=>dirty?null:({route,input}),getRouter:activeInput=>activeInput?.mode==='bus-only'||activeInput?.fixture==='ewl'?createMultimodalRouter(rail,bus,walking,{busOnly:activeInput?.mode==='bus-only',closedRailRouteIds:activeInput?.fixture==='ewl'?['EWL']:[]}):progressRouter,getBuild:()=>build,name});
     if(saved?.build===build&&route?.id===saved.route.id)render(true);
     else if(saved)document.querySelector('#pilot-status').textContent+=' Data or selected feasibility changed; guidance was recalculated. Review before saving.';
   }catch(error){
     document.querySelector('#pilot-status').textContent='Pilot data unavailable. New pilot searches require cached rail, bus, walking and provenance files. Reconnect and reload.';
     if(saved){route=saved.route;input=saved.input;build=saved.build;lookup=new Map(saved.labels);render(true);}else document.querySelector('#pilot-journey').textContent='No saved pilot guidance.';
+    mountJourney({host:document.querySelector('#active-journey'),getSelected:()=>null,getRouter:()=>null,getBuild:()=>build,name});
     console.warn('Pilot data could not be loaded:',error.message);
   }
   if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
 }
-window.addEventListener('online',connection);window.addEventListener('offline',connection);
+window.addEventListener('online',()=>{connection();clearTimeout(busReconnectTimer);if(liveStop||lastArrivalGood){const retry=Math.max(Date.now(),Date.parse(feed?.nextRefreshAt)||Date.now());busReconnectTimer=setTimeout(()=>{if(navigator.onLine){renderLive();document.querySelector('#refresh-bus:not(:disabled)')?.click();}},Math.min(300000,retry-Date.now()));}});window.addEventListener('offline',()=>{clearTimeout(busReconnectTimer);connection();});
 setInterval(renderLive,10000);
 start();

@@ -1,5 +1,15 @@
 # Commute Copilot milestones
 
+## Phase 4 — confirmed progress and resilient release candidate
+
+**18 September 2026: local engineering PASS; real live-routing validation NOT TESTED; private release BLOCKED.** Explicit confirmed progress, exact-platform recalculation, cumulative walking, accepted/declined guidance, scoped synthetic disruption comparisons, offline persistence and bounded reconnection are implemented. Walking retrieval provenance is pinned and uncertainty corrected. Real notices/GTFS/bus feeds were sampled, but ambiguous/empty live routing inputs remain advisory and their routing effects are disabled.
+
+The [Phase 4 report](PHASE4_REPORT.md) contains every acceptance status and separate engineering/live/release assessments. [Operations and rollback](PHASE4_OPERATIONS.md) give normal/synthetic/offline instructions and the existing private version-2 rollback target. 140 Node, 40 Python, 153 desktop browser and 15 build/performance checks pass. Physical Android/iPhone, hosted candidate behavior and real disruption/recovery semantics remain NOT TESTED.
+
+Branch `codex/phase-4-live-rerouting` preserves parent `38275dcac4d60153f8702eec9dda2582f6ee9969`. Locally committed; no push/PR/merge/deploy or audience change. Sites requires a source push and the request explicitly forbids Git push, so deployment is BLOCKED. The existing project has no runtime secret. Phase 5 and EXTOL were not started. Earlier phase entries below describe their historical checkpoints.
+
+---
+
 ## Phase 3 — bounded bus and map-supported pedestrian pilot
 
 **18 September 2026: implemented for local use within the declared estimated-timing coverage.** Services 2, 23 and 28 retain five complete patterns and 261 bus stops. Four reviewed exterior walks at Paya Lebar/Bugis connect to the wider scheduled rail graph. Weekend/holiday/overnight buses, unverified terminal bay transfers and unreviewed pedestrian shortcuts remain excluded. Arrival estimates do not guarantee deadlines.

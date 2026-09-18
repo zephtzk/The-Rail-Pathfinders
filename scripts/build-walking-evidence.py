@@ -11,10 +11,10 @@ import math
 import html
 from pathlib import Path
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
 DIR = ROOT / 'data/bus/walking-evidence'
+ACQUISITION = json.loads((DIR / 'acquisition.json').read_text(encoding='utf-8'))['sources']
 
 
 def distance(a, b):
@@ -26,9 +26,12 @@ def distance(a, b):
 
 def source(id, filename, url, **extra):
     file = DIR / filename
+    digest = hashlib.sha256(file.read_bytes()).hexdigest()
+    metadata = ACQUISITION[id]
+    if digest != metadata['sha256']:
+        raise ValueError('Acquisition hash mismatch; fresh review required: ' + id)
     return {'id': id, 'url': url, 'file': file.relative_to(ROOT).as_posix(),
-            'sha256': hashlib.sha256(file.read_bytes()).hexdigest(),
-            'retrievedAt': datetime.fromtimestamp(file.stat().st_mtime, timezone.utc).isoformat(), **extra}
+            **metadata, **extra}
 
 
 sources = [
@@ -192,7 +195,7 @@ for spec in curations:
                         'Walking time is an assumption, not an operator guarantee.'],
     })
 
-result = {'schemaVersion': 1, 'version': '2026-09-18.1', 'reviewDate': '2026-09-18', 'timezone': 'Asia/Singapore',
+result = {'schemaVersion': 1, 'version': '2026-09-18.2', 'reviewDate': '2026-09-18', 'timezone': 'Asia/Singapore',
           'coverage': 'Four individually reviewed, bidirectional exterior bus-stop to rail-entrance links at Paya Lebar and Bugis. No Tampines walking link or opposite-side stop shortcut.',
           'sources': sources, 'links': links,
           'excluded': [

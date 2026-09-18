@@ -1,0 +1,112 @@
+{
+  "evidenceClass": "real-provider bounded adapter samples",
+  "recordedAt": "2026-09-18T14:17:51.875Z",
+  "observations": [
+    {
+      "endpoint": "/api/status",
+      "httpStatus": 200,
+      "checkedAt": "2026-09-18T14:17:51.547Z",
+      "status": "partial",
+      "notices": {
+        "status": "available",
+        "retrievedAt": "2026-09-18T14:17:51.632Z",
+        "serviceStatus": 1,
+        "items": 3,
+        "segments": 0,
+        "error": null
+      }
+    },
+    {
+      "endpoint": "/api/bus-arrivals?stop=81119",
+      "httpStatus": 200,
+      "checkedAt": "2026-09-18T14:17:51.778Z",
+      "status": "available",
+      "retrievedAt": "2026-09-18T14:17:51.777Z",
+      "providerTimestamp": null,
+      "predictions": [
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:1",
+            "direction": 1,
+            "sequence": 37
+          },
+          "predictedArrival": "2026-09-18T22:17:45+08:00",
+          "predictionBasis": "vehicle-location-estimate"
+        },
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:1",
+            "direction": 1,
+            "sequence": 37
+          },
+          "predictedArrival": "2026-09-18T22:34:14+08:00",
+          "predictionBasis": "vehicle-location-estimate"
+        },
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:1",
+            "direction": 1,
+            "sequence": 37
+          },
+          "predictedArrival": "2026-09-18T22:45:58+08:00",
+          "predictionBasis": "vehicle-location-estimate"
+        }
+      ],
+      "error": null,
+      "predictionCount": 30,
+      "unmatchedCount": 27
+    },
+    {
+      "endpoint": "/api/bus-arrivals?stop=81111",
+      "httpStatus": 200,
+      "checkedAt": "2026-09-18T14:17:51.874Z",
+      "status": "available",
+      "retrievedAt": "2026-09-18T14:17:51.873Z",
+      "providerTimestamp": null,
+      "predictions": [
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:2",
+            "direction": 2,
+            "sequence": 23
+          },
+          "predictedArrival": "2026-09-18T22:18:10+08:00",
+          "predictionBasis": "vehicle-location-estimate"
+        },
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:2",
+            "direction": 2,
+            "sequence": 23
+          },
+          "predictedArrival": "2026-09-18T22:36:51+08:00",
+          "predictionBasis": "vehicle-location-estimate"
+        },
+        {
+          "serviceNo": "28",
+          "matchStatus": "matched",
+          "match": {
+            "patternId": "28:GAS:2",
+            "direction": 2,
+            "sequence": 23
+          },
+          "predictedArrival": "2026-09-18T22:51:00+08:00",
+          "predictionBasis": "operator-schedule"
+        }
+      ],
+      "error": null,
+      "predictionCount": 29,
+      "unmatchedCount": 26
+    }
+  ]
+}

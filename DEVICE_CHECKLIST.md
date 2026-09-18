@@ -12,3 +12,8 @@ Record phone model, OS version, browser version, tester and timestamp. A desktop
 8. Reset, set walking limit to five minutes, and show the blocked alternative. Restore defaults before pitch.
 
 No physical-device result is recorded yet. Do not describe the supplied emulation screenshots as real-phone captures. No raw phone recording was possible in this environment.
+
+
+## Phase 4 release-candidate status (18 September 2026)
+
+Physical Android Chrome and iPhone Safari: **NOT TESTED**. Real airplane-mode reload/reconnect, mobile keyboard, OS text scaling and screen-reader announcements: **NOT TESTED**. Desktop Edge checks are recorded separately and do not close these rows. After an authorized private candidate deployment, repeat normal/synthetic acceptance, onboard/unknown confirmations, declined proposal persistence, new offline rail/bus/mixed searches, repeated reconnection, 200%/OS large text and keyboard focus; verify exact application-build identity before recording results. See docs/PHASE4_OPERATIONS.md. No current private site contains Phase 4.

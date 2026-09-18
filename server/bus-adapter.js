@@ -62,7 +62,7 @@ export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs =
     const pending = (async () => {
       active++;
       const controller = new AbortController(), timer = setTimeout(() => controller.abort(), timeoutMs);
-      let result, nextAt = now + 60000;
+      let result, nextAt = now + Math.min(600000,60000*2**Math.min(old?.failures??0,4));
       try {
         const response = await fetcher(BUS_BASE + stopCode, {headers:{AccountKey:key,accept:'application/json'},signal:controller.signal,redirect:'error'});
         if (!response.ok) {
@@ -90,13 +90,16 @@ export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs =
       } catch (error) { result = unavailable(controller.signal.aborted ? 'timeout' : error.message === 'malformed' ? 'malformed' : 'network'); }
       finally { clearTimeout(timer); active--; }
       result.nextRefreshAt = isoBus(nextAt);
+      result.lastSuccessfulRetrievalAt=result.retrievedAt??old?.lastGood?.retrievedAt??null;
+      result.sourceValidity=null;
+      result.cacheScope='per-process/isolate; not a distributed cache';
       if (epoch === generation) {
         if (cache.size >= 40) { const evict = [...cache].find(([,entry]) => !entry.pending); if (evict) cache.delete(evict[0]); }
-        cache.set(stopCode,{result,nextAt});
+        cache.set(stopCode,{result,nextAt,lastGood:result.status==='unavailable'?old?.lastGood:result,failures:result.status==='unavailable'?(old?.failures??0)+1:0});
       }
       return result;
     })();
-    cache.set(stopCode,{pending});
+    cache.set(stopCode,{pending,lastGood:old?.lastGood,failures:old?.failures??0});
     return structuredClone(await pending);
   };
 }

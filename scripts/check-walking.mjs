@@ -13,8 +13,11 @@ export async function checkWalking() {
   if (!source.equals(published)) throw new Error('Walking ledger source/public copies differ. Rebuild and review the walking ledger.');
   const ledger = JSON.parse(source);
   if (ledger.schemaVersion !== 1 || typeof ledger.version !== 'string' || !Array.isArray(ledger.links) || !Array.isArray(ledger.sources)) throw new Error('Invalid walking ledger schema.');
+  const acquisition=JSON.parse(await readFile(resolve(root,'data/bus/walking-evidence/acquisition.json'),'utf8')).sources;
   const ids = new Set();
   for (const item of ledger.sources) {
+    const pinned=acquisition[item.id];
+    if(!pinned || Object.entries(pinned).some(([key,value])=>item[key]!==value)) throw Error('Walking acquisition metadata mismatch: '+item.id);
     const path = resolve(root, item.file);
     const rel = relative(root, path);
     if (isAbsolute(rel) || rel.startsWith('..')) throw new Error(`Walking evidence escapes repository: ${item.id}`);

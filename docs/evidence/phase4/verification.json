@@ -1,0 +1,220 @@
+{
+  "recordedAt": "2026-09-18T14:25:05.766Z",
+  "evidenceClass": "local complete Worker and Node comparison benchmark; no WAN/physical-device inference",
+  "sourceBase": "38275dcac4d60153f8702eec9dda2582f6ee9969",
+  "branch": "codex/phase-4-live-rerouting",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "e49211ee0f2947fa1290d079d0fe431bbdcdc02024eee34d865bea056eb25357",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "99c48a7adeb7e2fb934db150511f62cab56a48b1e42e01476a9fbb40adfa8af4",
+  "node": "v24.16.0",
+  "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+  "targets": {
+    "startupBrowserMs": 3000,
+    "warmComparisonP95Ms": 1000,
+    "firstResultHeapBytes": 157286400,
+    "compressedDataBytes": 3145728,
+    "automaticStartupLiveRequests": 0,
+    "noticeMinimumRefreshMs": 60000,
+    "busMinimumRefreshMs": 30000,
+    "upstreamTimeoutMs": 6000
+  },
+  "coldIndexRouteAndComparisonMs": 224.3243,
+  "warmP95Ms": 48.61069999999995,
+  "compressedBytes": 1972408,
+  "processMemory": {
+    "rss": 644710400,
+    "heapTotal": 455823360,
+    "heapUsed": 353257648,
+    "external": 28002289,
+    "arrayBuffers": 17590317
+  },
+  "samples": [
+    {
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 39.75189999999998,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 39.24800000000005,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 37.75800000000004,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 35.603399999999965,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 44.52800000000002,
+      "status": "continue"
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 48.61069999999995,
+      "status": "continue"
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 40.75689999999986,
+      "status": "continue"
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 40.91820000000007,
+      "status": "continue"
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 44.456699999999955,
+      "status": "continue"
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 43.82489999999984,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 40.331500000000005,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 56.15070000000014,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 34.623800000000074,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 35.35149999999999,
+      "status": "continue"
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 34.5492999999999,
+      "status": "continue"
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 34.08860000000027,
+      "status": "continue"
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 36.32580000000007,
+      "status": "continue"
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 36.50279999999975,
+      "status": "continue"
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 35.26419999999962,
+      "status": "continue"
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 34.154199999999946,
+      "status": "continue"
+    }
+  ],
+  "results": [
+    {
+      "name": "rail-network correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "rail-network correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "rail-network correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "/api/notices honest no-secret and no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "/api/status honest no-secret and no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "delivered Worker has no transient local credential probe",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTP application identity matches built artifact",
+      "status": "PASS"
+    },
+    {
+      "name": "complete comparison warm p95 <=1000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "routing data gzip <=3MiB",
+      "status": "PASS"
+    }
+  ]
+}

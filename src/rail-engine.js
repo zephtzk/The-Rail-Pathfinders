@@ -200,11 +200,13 @@ export function createRailRouter(network) {
     const firstCovered = civilDay(coverage.startDate), lastCovered = civilDay(coverage.endDate);
     const carryover = day > lastCovered && (day - lastCovered) * DAY + departure <= maxTripSeconds;
     if (day < firstCovered || (day > lastCovered && !carryover)) return result('unsupported-date', `The imported timetable covers service dates ${coverage.startDate} through ${coverage.endDate}. Select a supported date; no timetable is inferred outside that range.`);
-    if (originId === destinationId) return result('same-station', 'Origin and destination are the same station; no rail journey is needed.');
+    if (originId === destinationId && !input.progressSeed) return result('same-station', 'Origin and destination are the same station; no rail journey is needed.');
     const origin = stations.get(originId), destination = stations.get(destinationId);
-    const originStops = stationStops.get(originId), destinationStops = stationStops.get(destinationId);
+    const seed = input.progressSeed;
+    if (seed && (!stops.has(seed.stopId) || stops.get(seed.stopId).stationId !== originId || typeof seed.canBoard !== 'boolean' || typeof seed.externalSinceRide !== 'boolean' || typeof seed.hasBoarded !== 'boolean')) return result('invalid-input', 'Confirm an exact supported stop/platform and boarding state.');
+    const originStops = seed ? [seed.stopId] : stationStops.get(originId), destinationStops = stationStops.get(destinationId);
     if (!connected(originStops, destinationStops)) return result('disconnected', 'These stations have no directed rail path connected by validated interchanges in the imported network. Nearby map lines or stations do not establish a connection.');
-    const access = origin.accessSeconds ?? accessDefault, exit = destination.exitSeconds ?? exitDefault;
+    const access = seed ? 0 : origin.accessSeconds ?? accessDefault, exit = destination.exitSeconds ?? exitDefault;
     const maxWalk = walkingMinutes * 60;
     if (access + exit > maxWalk) return result('no-feasible', `The assumed station access and exit alone require ${(access + exit) / 60} minutes of walking, exceeding the ${walkingMinutes}-minute limit.`, 'walking-limit');
     const horizon = departure + Math.max(requestedHorizon, deadline === null ? 0 : deadline - departure);
@@ -221,6 +223,7 @@ export function createRailRouter(network) {
       let used = false;
       for (let i = lowerBound(scheduled, departure - offset); i < scheduled.length; i++) {
         const connection = scheduled[i];
+        if ((input.excludedConnections ?? []).some(e => e.tripId === connection.trip.id && e.serviceDate === dayString(serviceDay) && (e.impactStartSeconds===undefined || (connection.arrival>=e.impactStartSeconds && connection.departure<=e.impactEndSeconds)) && (!e.fromStopId || (e.fromStopId === connection.from && e.toStopId === connection.to)))) continue;
         if (connection.departure + offset > horizon) break;
         if (connection.arrival + offset + exit > horizon) continue;
         connections.push({ ...connection, departure: connection.departure + offset, arrival: connection.arrival + offset, serviceDate: dayString(serviceDay), occurrence: `${serviceDay}:${connection.trip.id}` });
@@ -229,7 +232,7 @@ export function createRailRouter(network) {
       if (used) diagnostics.serviceDates.push(dayString(serviceDay));
     }
     connections.sort((a, b) => a.departure - b.departure || a.arrival - b.arrival || a.occurrence.localeCompare(b.occurrence) || a.index - b.index);
-    if (!connections.length && !frequency?.patterns.length) return result('no-service', 'No scheduled rail services operate in the searched time window on the covered service calendars. The last service may already have departed.', 'no-scheduled-service');
+    if (!connections.length && !frequency?.patterns.length && !seed) return result('no-service', 'No scheduled rail services operate in the searched time window on the covered service calendars. The last service may already have departed.', 'no-scheduled-service');
     const ready = new Map([...stops.keys()].map((id) => [id, []]));
     const arrived = new Map([...stops.keys()].map((id) => [id, []]));
     const aboard = new Map();
@@ -241,7 +244,7 @@ export function createRailRouter(network) {
       // Rail endpoints retain their station-level allowance. Do not enter and
       // immediately exit an unverified indoor path solely to finish at a station.
       if (frequency && !destinationId.startsWith('bus:') && label.externalSinceRide) return;
-      if (!targetSet.has(label.stop) || label.boardings === 0 || label.time + exit > horizon || label.walk + exit > maxWalk) return;
+      if (!targetSet.has(label.stop) || (label.boardings === 0 && !seed?.hasBoarded) || label.time + exit > horizon || label.walk + exit > maxWalk) return;
       insert(candidates, { ...label, time: label.time + exit, walk: label.walk + exit, chain: append(label.chain, { type: 'exit', fromStopId: label.stop, toStopId: label.stop, startSeconds: label.time, endSeconds: label.time + exit, durationSeconds: exit, walkingSeconds: exit, assumed: true }) });
     }
     function relaxTransfers(startLabel, initiallyReady = false) {
@@ -249,7 +252,7 @@ export function createRailRouter(network) {
       for (let i = 0; i < queue.length; i++) {
         const {label,canBoard} = queue[i];
         for (const edge of transferEdges.get(label.stop)) {
-          if (edge.external && label.boardings === 0 && !originId.startsWith('bus:')) continue;
+          if (edge.external && label.boardings === 0 && !seed?.hasBoarded && !originId.startsWith('bus:')) continue;
           // Two exterior paths cannot create an unreviewed walk through a station.
           if (edge.external && label.externalSinceRide) continue;
           const time = label.time + edge.seconds, walk = label.walk + edge.walkSeconds;
@@ -280,8 +283,10 @@ export function createRailRouter(network) {
     }
     for (const stop of originStops) {
       const initial = { stop, time: departure + access, walk: access, boardings: 0, chain: append(null, { type: 'access', fromStopId: stop, toStopId: stop, startSeconds: departure, endSeconds: departure + access, durationSeconds: access, walkingSeconds: access, assumed: true }) };
-      ready.get(stop).push(initial);
-      relaxTransfers(initial,true);
+      initial.externalSinceRide = seed?.externalSinceRide ?? false;
+      if (!seed || seed.canBoard) ready.get(stop).push(initial);
+      if(seed) considerDestination(initial);
+      relaxTransfers(initial, !seed || seed.canBoard);
     }
     for (const connection of connections) {
       diagnostics.connectionsScanned++;

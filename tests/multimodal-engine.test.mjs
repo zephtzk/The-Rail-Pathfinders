@@ -1,3 +1,4 @@
+import {acceptJourney,confirmProgress,compareJourney} from '../src/journey-state.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createMultimodalRouter} from '../src/multimodal-engine.js';
@@ -218,4 +219,15 @@ test('explicit rail-disruption fixture leaves a bus alternative labelled synthet
   assert.ok(route.assumptions.some(text => /SYNTHETIC DISRUPTION FIXTURE/.test(text) && /Not a live closure/.test(text)));
   assert.ok(route.legs.filter(leg => leg.type === 'ride').every(leg => leg.mode === 'bus'));
   assert.notEqual(router.route({...query,destinationId:'D'}).status,'ok');
+});
+
+test('confirmed bus alighting oracle: 10:17 +210s misses 10:20 train; 10:52 is seven minutes late',()=>{
+ const data=fixture(),router=build(data),input={...query,destinationId:'D',deadlineDate:'2026-09-18',deadlineTime:'10:45'};
+ let state=acceptJourney(router.route(input).recommended,input,'reference');
+ const index=state.route.legs.findIndex(l=>l.type==='transfer');
+ state=confirmProgress(state,{kind:'transferring',legIndex:index,confirmedSeconds:sec('10:17'),walkedSeconds:0});
+ const comparison=compareJourney(state,router);
+ assert.equal(comparison.continuing.feasible,false);
+ assert.equal(comparison.status,'all-late');assert.equal(comparison.alternative.arrivalSeconds,sec('10:52'));
+ assert.equal(comparison.alternative.walkingSeconds,330);assert.equal(comparison.alternative.deadlineBufferSeconds,-420);
 });

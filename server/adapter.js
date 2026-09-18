@@ -58,7 +58,7 @@ export function createTransportAdapter({fetcher=fetch,clock=Date.now,timeoutMs=6
     if(entry&&entry.nextAt>now)return structuredClone(entry.result);
     const previous=entry?.lastGood,epoch=generation;
     const pending=(async()=>{
-      let result,nextAt=now+60000,lastGood=previous;
+      let result,nextAt=now+Math.min(600000,60000*2**Math.min(entry?.failures??0,4)),lastGood=previous;
       const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
       try{
         const response=await fetcher(DATAMALL_BASE+path,{headers:{AccountKey:key,accept:'application/json'},redirect:'error',signal:controller.signal});
@@ -76,18 +76,18 @@ export function createTransportAdapter({fetcher=fetch,clock=Date.now,timeoutMs=6
         }
       }catch(error){result={...(previous??{}),status:'unavailable',httpStatus:null,error:controller.signal.aborted?'timeout':error?.message==='malformed'?'malformed':'network',attemptedAt:iso(now),nextRefreshAt:iso(nextAt)};}
       finally{clearTimeout(timer);}
-      if(epoch===generation)cache.set(path,{result,lastGood,nextAt});return result;
+      if(epoch===generation)cache.set(path,{result,lastGood,nextAt,failures:result.status==='unavailable'?(entry?.failures??0)+1:0});return result;
     })();
     cache.set(path,{pending,lastGood:previous});return structuredClone(await pending);
   }
-  return async function status(env={}) {
+  return async function status(env={}, noticesOnly=false) {
     const key=typeof env.LTA_ACCOUNT_KEY==='string'?env.LTA_ACCOUNT_KEY.trim():'';
     if(credential!==key){cache.clear();credential=key;generation++;}
     const checkedAt=iso(clock());
     if(!key)return {schemaVersion:1,status:'unavailable',checkedAt,source:'LTA DataMall',alerts:[],notices:{status:'unavailable',error:'not_configured',items:[],segments:[]},
       crowding:{status:'unavailable',lines:LIVE_LINES.map(line=>({line,status:'unavailable',error:'not_configured',records:[],missingCodes:LIVE_STATIONS.filter(s=>s.line===line).map(s=>s.code)}))},routing:{status:'replay'},message:'Live information is not connected. Journey calculations remain labelled replay.'};
     const [notices,...lines]=await Promise.all([readFeed('TrainServiceAlerts',key,p=>normalizeNotices(p,key),60000),
-      ...LIVE_LINES.map(line=>readFeed(`PCDRealTime?TrainLine=${line}`,key,p=>normalizeCrowding(p,line,key),600000).then(r=>({line,records:[],...r})))]);
+      ...(noticesOnly?[]:LIVE_LINES).map(line=>readFeed(`PCDRealTime?TrainLine=${line}`,key,p=>normalizeCrowding(p,line,key),600000).then(r=>({line,records:[],...r})))]);
     const available=lines.filter(l=>l.status!=='unavailable').length;
     return {schemaVersion:1,status:available||notices.status!=='unavailable'?'partial':'unavailable',checkedAt,source:'LTA DataMall',notices,alerts:notices.items??[],
       crowding:{status:available===3?'available':available?'partial':'unavailable',lines},routing:{status:'replay'},
@@ -100,6 +100,7 @@ export async function transportStatus(env={},fetcher,now) {
 }
 export async function handleApi(request,env) {
   if(request.method!=='GET')return json({error:'Method not allowed'},405);
+  if(new URL(request.url).pathname==='/api/notices')return json(await defaultTransportAdapter(env,true));
   if(new URL(request.url).pathname==='/api/status')return json(await transportStatus(env));
   if(new URL(request.url).pathname==='/api/health')return json({ok:true,version:'1.1.0'});
   return json({error:'Not found'},404);

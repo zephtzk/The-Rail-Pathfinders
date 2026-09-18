@@ -1,5 +1,14 @@
 # Data availability, integration and boundaries
 
+## Phase 4 provenance and live-applicability correction
+
+The [Phase 4 report](PHASE4_REPORT.md) is the current acceptance record. Walking ledger `2026-09-18.2` replaces mtime-derived retrieval claims with explicit hash-pinned acquisition metadata: original exact acquisition times are unknown, legacy values are retained as filesystem timestamps, and the first archive commit is separate. Supported SMRT source dates and OSM edit dates remain unchanged. Copy/checkout/mtime changes cannot renew provenance; all reviewed geometry and limitations remain.
+
+Current bounded real samples are [GTFS metadata](evidence/phase4/gtfs-real.json) and [notices/bus arrivals](evidence/phase4/live-real.json). LTA guide v6.9 was checked. Two GTFS alerts are MODIFIED_SERVICE with route-only SK/BP selectors, no direction/stop/trip or impact period; realtime feed_version is absent. Trip updates are empty. Notices contain no affected segments. Bus service 28 matches the exact opposite stops/directions, but one ETA was already past and samples were outside the pilot daytime window. Real routing effects remain disabled; no closure/delay/restoration is extracted from prose or status codes. Source time, retrieval, effect interval and prediction time are distinct. Empty/stale/expired data is not normal-service proof.
+
+Synthetic tests validate engineering only. Static rail/bus coverage and calendars are unchanged. No data refresh or date-window extension was necessary for supported examples. Genuine shared infrastructure limits, secure runtime configuration and future release gates are in [operations](PHASE4_OPERATIONS.md).
+
+
 ## Phase 3 — versioned bus data and reviewed exterior walking
 
 The current source ledger is [BUS_DATA.md](BUS_DATA.md), with [WALKING_COVERAGE.md](WALKING_COVERAGE.md) and [end-to-end coverage](PHASE3_COVERAGE.md). BusStops, BusRoutes and BusServices were fully acquired and repeated against current official DataMall guide **v6.9 (3 August 2026)**. Raw/accepted/excluded counts, terminal pages, per-page hashes, service variants and ordered occurrences are retained. Five complete patterns of services 2, 23 and 28 support explicitly estimated weekday travel, not an invented departure timetable. The bounded ordinary-weekday date policy and unverified frequency day scope are documented.

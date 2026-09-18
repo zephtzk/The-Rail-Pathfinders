@@ -1,5 +1,8 @@
 # Commute Copilot — The Rail Pathfinders
 
+Current delivery: **Phase 4 local release candidate**. Confirmed progress and resilient accepted guidance are available in `/multimodal.html`; real routing effects remain disabled. See [acceptance report](docs/PHASE4_REPORT.md) and [operating / rollback instructions](docs/PHASE4_OPERATIONS.md). Deployment is blocked by the explicit no-push instruction and Sites source-push requirement; the existing private site remains version 2.
+
+
 A Singapore **station-to-station scheduled rail planner**, using a general routing engine and a pinned, reproducible LTA GTFS import. Choose any pair of **186 imported station records**, with calendars, directed trips and reviewed interchange connections. Access, waiting, riding, transfers and exit all count.
 
 The **[Phase 3 bus & walking pilot](docs/PHASE3_REPORT.md)** is at `/multimodal.html`: complete services **2, 23 and 28**, 261 bus stops, estimated weekday timing and four map-supported bus/rail paths at Paya Lebar and Bugis. Wider scheduled rail stays at `/`. Address search, fare and step-free routing are not supported. The original corridor replay and Phase 1 live information remain separate at `/replay.html`.

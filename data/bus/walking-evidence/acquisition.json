@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "smrt-paya-lebar": {
+      "sha256": "2970e3b78e0f55ccc3483219c60e90442797e21bdcaaffd4aae0858bfc5cff1b",
+      "retrievedAt": null,
+      "retrievalTimeStatus": "unknown",
+      "legacyReportedRetrievedAt": "2026-09-18T13:48:12.391431+00:00",
+      "legacyTimestampBasis": "Filesystem modification time; not evidence of acquisition.",
+      "archivedBy": "2026-09-18T22:04:33+08:00",
+      "archiveCommit": "38275dcac4d60153f8702eec9dda2582f6ee9969"
+    },
+    "smrt-bugis": {
+      "sha256": "761f5e5a2ba03df965dcc0574efa75f78cb0140c79965e54a7dbfd75ebbbd982",
+      "retrievedAt": null,
+      "retrievalTimeStatus": "unknown",
+      "legacyReportedRetrievedAt": "2026-09-18T13:48:12.492238+00:00",
+      "legacyTimestampBasis": "Filesystem modification time; not evidence of acquisition.",
+      "archivedBy": "2026-09-18T22:04:33+08:00",
+      "archiveCommit": "38275dcac4d60153f8702eec9dda2582f6ee9969"
+    },
+    "osm-paya-lebar": {
+      "sha256": "943885ab3d5243112f56bd2d08fb8b237cbcac4504554cc2fb01f55061b6e092",
+      "retrievedAt": null,
+      "retrievalTimeStatus": "unknown",
+      "legacyReportedRetrievedAt": "2026-09-18T13:49:08.312183+00:00",
+      "legacyTimestampBasis": "Filesystem modification time; not evidence of acquisition.",
+      "archivedBy": "2026-09-18T22:04:33+08:00",
+      "archiveCommit": "38275dcac4d60153f8702eec9dda2582f6ee9969"
+    },
+    "osm-bugis": {
+      "sha256": "ac9b5e21b07bde9e7676f3398637d11d9695d0121ed0e6760a4766155dd69b27",
+      "retrievedAt": null,
+      "retrievalTimeStatus": "unknown",
+      "legacyReportedRetrievedAt": "2026-09-18T13:49:09.709153+00:00",
+      "legacyTimestampBasis": "Filesystem modification time; not evidence of acquisition.",
+      "archivedBy": "2026-09-18T22:04:33+08:00",
+      "archiveCommit": "38275dcac4d60153f8702eec9dda2582f6ee9969"
+    }
+  }
+}

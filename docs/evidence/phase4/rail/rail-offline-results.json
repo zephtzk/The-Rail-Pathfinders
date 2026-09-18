@@ -1,0 +1,282 @@
+{
+  "timestamp": "2026-09-18T14:25:26.983Z",
+  "base": "http://127.0.0.1:4177",
+  "browser": "153.0.4234.32",
+  "platform": "win32",
+  "emulationOnly": true,
+  "physicalDeviceTested": false,
+  "realBrowserOffline": true,
+  "build": {
+    "sourceRevision": "38275dcac4d60153f8702eec9dda2582f6ee9969",
+    "branch": "codex/phase-4-live-rerouting",
+    "workingTreeChanges": [
+      "M data/bus/walking-links.json",
+      " M package.json",
+      " M public/data/walking-links.json",
+      " M public/sw.js",
+      " M scripts/build-walking-evidence.py",
+      " M scripts/check-walking.mjs",
+      " M server/adapter.js",
+      " M server/bus-adapter.js",
+      " M src/multimodal-ui.js",
+      " M src/rail-engine.js",
+      " M src/rail.css",
+      " M tests/multimodal-engine.test.mjs",
+      "?? data/bus/walking-evidence/acquisition.json",
+      "?? docs/evidence/phase4/",
+      "?? scripts/probe-phase4-session.mjs",
+      "?? scripts/probe-phase4.py",
+      "?? scripts/verify-phase4.mjs",
+      "?? src/feed-health.js",
+      "?? src/journey-state.js",
+      "?? src/journey-ui.js",
+      "?? tests/journey.test.mjs",
+      "?? tests/phase4-browser.mjs",
+      "?? tests/phase4-resilience.test.mjs",
+      "?? tests/test_walking_metadata.py"
+    ],
+    "files": {
+      "dist/server/index.js": "99c48a7adeb7e2fb934db150511f62cab56a48b1e42e01476a9fbb40adfa8af4",
+      "dist/client/sw.js": "6122020b40a971f939d9e2e3c2dc089c6572572a668878d0252bb69d79916c6a",
+      "dist/client/src/rail-ui.js": "c2f0689d330abdcdb6f2342c444ecd794bd0d4954735d7828adc4baace71c6e6",
+      "dist/client/src/rail-engine.js": "3f6c679b356724a97864d2e5e4dad0115da8b2a91950419b99ee8738dfe89675",
+      "dist/client/data/rail-network.json": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+      "dist/client/data/rail-manifest.json": "54602a8ff23c29f99e9ba310952a2654a623b1a29255c92a5f099a3fad978115",
+      "tests/rail-offline-browser.mjs": "a0b6de60c0dd842e9a2068721d2884028d834471377daf6fabb1f983eb1b11b2"
+    },
+    "railImportBuildId": "6880404c3da027e811f28de1d043f0c500b2b5b978073c8da29a5d4ffbd07bf2"
+  },
+  "offlineSearch": {
+    "input": {
+      "originId": "DT32",
+      "destinationId": "DT14",
+      "date": "2026-09-19",
+      "departureTime": "08:10",
+      "deadlineDate": "2026-09-19",
+      "deadlineTime": "09:00",
+      "walkingLimitMinutes": 15,
+      "preference": "fastest",
+      "maxExtraMinutes": 15
+    },
+    "route": {
+      "id": "2026-09-19/EWL_Main_WB_WE_31/EW2_B/EW12_B",
+      "originId": "DT32",
+      "destinationId": "DT14",
+      "date": "2026-09-19",
+      "departureSeconds": 29400,
+      "arrivalSeconds": 31820,
+      "totalSeconds": 2420,
+      "accessSeconds": 120,
+      "waitSeconds": 320,
+      "rideSeconds": 1860,
+      "transferSeconds": 0,
+      "transferWalkSeconds": 0,
+      "exitSeconds": 120,
+      "walkingSeconds": 240,
+      "transfers": 0,
+      "deadlineSeconds": 32400,
+      "deadlineMet": true,
+      "deadlineBufferSeconds": 580,
+      "crowding": null,
+      "legs": [
+        {
+          "type": "access",
+          "fromStopId": "EW2_B",
+          "toStopId": "EW2_B",
+          "startSeconds": 29400,
+          "endSeconds": 29520,
+          "durationSeconds": 120,
+          "walkingSeconds": 120,
+          "assumed": true
+        },
+        {
+          "type": "wait",
+          "fromStopId": "EW2_B",
+          "toStopId": "EW2_B",
+          "startSeconds": 29520,
+          "endSeconds": 29840,
+          "durationSeconds": 320
+        },
+        {
+          "type": "ride",
+          "mode": "rail",
+          "timing": "scheduled",
+          "fromStopId": "EW2_B",
+          "toStopId": "EW12_B",
+          "startSeconds": 29840,
+          "endSeconds": 31700,
+          "durationSeconds": 1860,
+          "tripId": "EWL_Main_WB_WE_31",
+          "routeId": "EWL",
+          "serviceId": "SERVICE_WE",
+          "serviceDate": "2026-09-19",
+          "directionId": 1,
+          "headsign": "Tuas Link",
+          "stopIds": [
+            "EW2_B",
+            "EW3_B",
+            "EW4_B",
+            "EW5_B",
+            "EW6_B",
+            "EW7_B",
+            "EW8_B",
+            "EW9_B",
+            "EW10_B",
+            "EW11_B",
+            "EW12_B"
+          ]
+        },
+        {
+          "type": "exit",
+          "fromStopId": "EW12_B",
+          "toStopId": "EW12_B",
+          "startSeconds": 31700,
+          "endSeconds": 31820,
+          "durationSeconds": 120,
+          "walkingSeconds": 120,
+          "assumed": true
+        }
+      ],
+      "assumptions": [
+        "Station access: 120 seconds; station exit: 120 seconds. These are station-level allowances, not validated address or entrance walking routes."
+      ],
+      "preferenceScore": 31820,
+      "estimated": false,
+      "timing": "scheduled"
+    },
+    "rawReference": {
+      "tripId": "EWL_Main_WB_WE_31",
+      "fromStopId": "EW2_B",
+      "toStopId": "EW12_B",
+      "departureSeconds": 29840,
+      "arrivalSeconds": 31700
+    },
+    "expectedComponents": {
+      "accessSeconds": 120,
+      "waitSeconds": 320,
+      "rideSeconds": 1860,
+      "transferSeconds": 0,
+      "exitSeconds": 120
+    },
+    "offlineStates": [
+      {
+        "stage": "before reload",
+        "online": false
+      },
+      {
+        "stage": "after reload",
+        "online": false
+      },
+      {
+        "stage": "after new search",
+        "online": false
+      }
+    ]
+  },
+  "offlineResponses": [
+    {
+      "path": "/",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/src/rail.css",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/src/rail-ui.js",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/src/rail-engine.js",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/data/rail-network.json",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/data/rail-manifest.json",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "fromServiceWorker": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "fromServiceWorker": true
+    }
+  ],
+  "liveRequests": 0,
+  "results": [
+    {
+      "name": "served rail assets match recorded tested build and data hashes",
+      "passed": true
+    },
+    {
+      "name": "service worker cached the routing network and manifest",
+      "passed": true
+    },
+    {
+      "name": "real offline reload preserves chosen scheduled journey",
+      "passed": true
+    },
+    {
+      "name": "offline view is explicitly labelled cached guidance",
+      "passed": true
+    },
+    {
+      "name": "offline restoration keeps selected journey identity",
+      "passed": true
+    },
+    {
+      "name": "offline reload obtains complete network and manifest from service worker",
+      "passed": true
+    },
+    {
+      "name": "new offline form submission renders the changed origin and destination",
+      "passed": true
+    },
+    {
+      "name": "new offline search replaces the previous saved journey identity",
+      "passed": true
+    },
+    {
+      "name": "new offline journey arithmetic independently matches source-backed exact timing",
+      "passed": true
+    },
+    {
+      "name": "offline UI exposes the independently checked arrival and total",
+      "passed": true
+    },
+    {
+      "name": "browser remains offline before reload and throughout new calculation",
+      "passed": true
+    },
+    {
+      "name": "reconnection preserves the new selected guidance and saved snapshot",
+      "passed": true
+    },
+    {
+      "name": "online reload restores the journey selected and saved while offline",
+      "passed": true
+    },
+    {
+      "name": "rail planner never requests the live adapter",
+      "passed": true
+    },
+    {
+      "name": "no offline browser exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
