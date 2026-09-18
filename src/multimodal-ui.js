@@ -3,13 +3,15 @@ import {mountCompanion} from './copilot-ui.js';
 import {mountJourney} from './journey-ui.js';
 import {createMultimodalRouter} from './multimodal-engine.js';
 import {validateSavedPilot,validatePilotArrivals,pilotPredictionState} from './pilot-validation.js';
+import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
 
 const app = document.querySelector('#app'), SAVE = 'commute-copilot-pilot-guidance-v1';
 const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clock = seconds => `${String(Math.floor(seconds/3600)%24).padStart(2,'0')}:${String(Math.floor(seconds/60)%60).padStart(2,'0')}:${String(Math.floor(seconds)%60).padStart(2,'0')}${seconds>=86400?' (+1 day)':''}`;
 const duration = seconds => `${Math.floor(seconds/60)}m ${seconds%60}s`;
 let arrivalEpoch=0,lastArrivalGood=null,busReconnectTimer;const ARRIVAL_SAVE='commute-copilot-bus-last-known-v1';
-let rail,bus,walking,manifest,railManifest,router,lookup,build,route,input,result,feed,liveStop,dirty=false;
+let rail,bus,walking,manifest,railManifest,router,lookup,build,route,input,result,feed,liveStop,companion,dirty=false;
+let planningPreferences=legacyPlannerSettings();
 const name = id => lookup?.get(id) ?? id;
 function readSaved() { try { return validateSavedPilot(JSON.parse(localStorage.getItem(SAVE))); } catch { return null; } }
 function connection() { arrivalEpoch++; if(!navigator.onLine && feed)feed={...feed,status:'unavailable',error:'offline'}; document.querySelector('#pilot-connection').textContent = navigator.onLine ? '' : 'Offline · cached data and timing assumptions; no current arrivals'; renderLive(); }
@@ -23,25 +25,27 @@ function shell() {
   connection();
 }
 function form(initial) {
+  planningPreferences=legacyPlannerInput(initial,planningPreferences);
   const fields = [['originId','From stop or station'],['destinationId','To stop or station']];
   document.querySelector('#pilot-planner').innerHTML=`<div class="panel-heading"><h2>Plan your journey</h2><span class="tag">Pilot</span></div><form id="pilot-form"><fieldset><legend class="sr-only">Pilot journey details</legend>
   ${fields.map(([key,label])=>`<label>${label}<input name="${key}" list="pilot-places" required autocomplete="off" value="${escape(name(initial[key]))}"></label>`).join('')}<datalist id="pilot-places">${[...lookup].filter(([id])=>router.network.stations.some(s=>s.id===id)).map(([id,label])=>`<option value="${escape(label)}">${escape(id)}</option>`).join('')}</datalist>
   <div class="form-pair"><label>Travel date<input type="date" name="date" required value="${initial.date}"></label><label>Depart at<input type="time" name="departureTime" required value="${initial.departureTime}"></label></div>
   <div class="form-pair"><label>Arrive-by date<input type="date" name="deadlineDate" value="${initial.deadlineDate||initial.date}"></label><label>Arrive by (optional)<input type="time" name="deadlineTime" value="${initial.deadlineTime||''}"></label></div>
-  <label>Total walking limit<select name="walkingLimitMinutes">${[0,4,5,8,10,15,20,30,45,60].map(n=>`<option value="${n}" ${n===Number(initial.walkingLimitMinutes)?'selected':''}>${n} minutes</option>`).join('')}</select></label>
+  <label>Total walking limit<select name="walkingLimitMinutes">${[...new Set([0,4,5,8,10,15,20,30,45,60,Number(initial.walkingLimitMinutes)])].sort((a,b)=>a-b).map(n=>`<option value="${n}" ${n===Number(initial.walkingLimitMinutes)?'selected':''}>${n} minutes</option>`).join('')}</select></label>
   <label>Preference<select name="preference">${[['fastest','Fastest arrival'],['fewer-transfers','Fewer transfers'],['less-walking','Less walking'],['quieter','Quieter (comparison unavailable)']].map(([v,t])=>`<option value="${v}" ${v===initial.preference?'selected':''}>${t}</option>`).join('')}</select></label>
-  <label>Extra time for preferences<select name="maxExtraMinutes">${[0,5,10,15,30,60].map(n=>`<option value="${n}" ${n===Number(initial.maxExtraMinutes)?'selected':''}>${n} minutes</option>`).join('')}</select></label>
+  <label>Extra time for preferences<select name="maxExtraMinutes">${[...new Set([0,5,10,15,30,60,Number(initial.maxExtraMinutes)])].sort((a,b)=>a-b).map(n=>`<option value="${n}" ${n===Number(initial.maxExtraMinutes)?'selected':''}>${n} minutes</option>`).join('')}</select></label>
   <label>Modes<select name="mode"><option value="mixed">Bus + rail</option><option value="bus-only" ${initial.mode==='bus-only'?'selected':''}>Bus only</option></select></label>
   <label>Demonstration<select name="fixture"><option value="none">Normal pilot</option><option value="ewl" ${initial.fixture==='ewl'?'selected':''}>Synthetic fixture: EWL unavailable</option></select></label>
   <p class="field-note">Bus estimates: weekdays ${escape(bus.coverage.validFrom)}–${escape(bus.coverage.validThrough)}, 09:30–16:30. Boarding and alighting must both fit. Clear the deadline for an unconstrained search.</p><button class="primary" type="submit">Find pilot journeys →</button></fieldset></form>`;
   const f=document.querySelector('#pilot-form'); let previous=f.elements.date.value;
   f.elements.date.addEventListener('change',()=>{if(f.elements.deadlineDate.value===previous)f.elements.deadlineDate.value=f.elements.date.value;previous=f.elements.date.value;});
-  f.addEventListener('input',()=>{dirty=true;document.querySelector('#pilot-status').textContent='Journey details changed. Search again before saving.';});
+  f.addEventListener('input',()=>{dirty=true;companion?.clearPrepared();document.querySelector('#pilot-status').textContent='Journey details changed. Search again before saving.';});
   f.addEventListener('submit',event=>{event.preventDefault();const data=Object.fromEntries(new FormData(f));for(const key of ['originId','destinationId'])data[key]=[...lookup].find(([id,label])=>label.toLowerCase()===data[key].trim().toLowerCase()||id===data[key])?.[0]??data[key]; search(data);});
 }
 let routerKey='';
 function search(data,restoreId) {
-  input=data; dirty=false;
+  companion?.clearPrepared();
+  data=legacyPlannerInput(data,planningPreferences);input=data; dirty=false;
   const key=`${data.mode}:${data.fixture}`;
   if(key!==routerKey) { router=createMultimodalRouter(rail,bus,walking,{busOnly:data.mode==='bus-only',closedRailRouteIds:data.fixture==='ewl'?['EWL']:[]});routerKey=key; }
   result=router.route(data);route=result.status==='ok'?(result.routes.find(r=>r.id===restoreId)??result.recommended):null;
@@ -60,7 +64,7 @@ function render(saved=false) {
   <section class="panel arithmetic"><h3>Where the time goes</h3><dl>${[['Access',r.accessSeconds],['Waiting',r.waitSeconds],['Riding',r.rideSeconds],['Transfers',r.transferSeconds],['Exit',r.exitSeconds],['Total',r.totalSeconds]].map(([label,seconds])=>`<div><dt>${label}</dt><dd>${duration(seconds)}</dd></div>`).join('')}</dl><p>Walking is included in these components, never added twice.</p><details><summary>Timing assumptions</summary><ul>${r.assumptions.map(a=>`<li>${escape(a)}</li>`).join('')}</ul></details></section>
   ${(result?.routes??[]).filter(a=>a.id!==r.id).slice(0,10).map((a,i)=>`<p><button class="secondary" data-route="${escape(a.id)}">Alternative ${i+1}: ${a.estimated?'estimate ':''}${clock(a.arrivalSeconds)}, ${a.transfers} transfers, ${duration(a.walkingSeconds)} walking</button></p>`).join('')}`;
   document.querySelector('#save-pilot').addEventListener('click',()=>{if(dirty){document.querySelector('#pilot-status').textContent='Search again before saving changed details.';return;}try{localStorage.setItem(SAVE,JSON.stringify({schemaVersion:1,savedAt:new Date().toISOString(),input,route,build,labels:[...lookup]}));document.querySelector('#pilot-status').textContent='Pilot guidance saved on this device. No live predictions were saved.';}catch{document.querySelector('#pilot-status').textContent='Device storage unavailable; guidance was not saved.';}});
-  for(const button of el.querySelectorAll('[data-route]'))button.addEventListener('click',()=>{route=result.routes.find(r=>r.id===button.dataset.route);arrivalEpoch++;feed=null;lastArrivalGood=null;liveStop=null;render();});
+  for(const button of el.querySelectorAll('[data-route]'))button.addEventListener('click',()=>{companion?.clearPrepared();route=result.routes.find(r=>r.id===button.dataset.route);arrivalEpoch++;feed=null;lastArrivalGood=null;liveStop=null;render();});
   renderLive();
 }
 function renderLive() {
@@ -108,7 +112,7 @@ async function start() {
     mountJourney({host:document.querySelector('#active-journey'),getSelected:()=>null,getRouter:()=>null,getBuild:()=>build,name});
     console.warn('Pilot data could not be loaded:',error.message);
   }
-  mountCompanion({getSelected:()=>dirty?null:({route,input}),name,getFareOptions:()=>({busNetwork:bus}),getPlaces:()=>router?.network.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{form({...input,...p.preferences,originId:p.origin.stationId??p.origin.id,destinationId:p.destination.stationId??p.destination.id,date:p.departureDate,departureTime:p.departureTime,deadlineTime:''});dirty=true;document.querySelector('#pilot-form').scrollIntoView();},onEndpoint:(endpoint,p)=>{const f=document.querySelector('#pilot-form');f.elements[endpoint+'Id'].value=name(p.stationId??p.id);f.dispatchEvent(new Event('input'));dirty=true;}});
+  companion=mountCompanion({getSelected:()=>dirty?null:({route,input}),name,getFareOptions:()=>({busNetwork:bus}),getPlaces:()=>router?.network.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{form({...input,...p.preferences,originId:p.origin.stationId??p.origin.id,destinationId:p.destination.stationId??p.destination.id,date:p.departureDate,departureTime:p.departureTime,deadlineTime:''});dirty=true;document.querySelector('#pilot-form').scrollIntoView();},onEndpoint:(endpoint,p)=>{const f=document.querySelector('#pilot-form');f.elements[endpoint+'Id'].value=name(p.stationId??p.id);f.dispatchEvent(new Event('input'));dirty=true;}});
   if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
 }
 window.addEventListener('online',()=>{connection();clearTimeout(busReconnectTimer);if(liveStop||lastArrivalGood){const retry=Math.max(Date.now(),Date.parse(feed?.nextRefreshAt)||Date.now());busReconnectTimer=setTimeout(()=>{if(navigator.onLine){renderLive();document.querySelector('#refresh-bus:not(:disabled)')?.click();}},Math.min(300000,retry-Date.now()));}});window.addEventListener('offline',()=>{clearTimeout(busReconnectTimer);connection();});

@@ -1,9 +1,13 @@
-.commute-app .time-picker-button{border:0;background:transparent;color:#286787;padding:8px 0;text-align:left;font-size:.75rem;min-height:44px;cursor:pointer}
+.commute-app .time-picker-button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--ink);padding:12px 14px;text-align:left;font:inherit;cursor:pointer}
+.commute-app .time-picker-button .time-value{font-variant-numeric:tabular-nums;font-weight:650}
+.commute-app .time-picker-button svg{flex-shrink:0}
 .commute-app .time-dialog{color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:24px;width:min(360px,calc(100vw - 28px));max-height:90dvh;overflow:auto;box-shadow:var(--shadow)}
 .commute-app .time-dialog::backdrop{background:#18344566;backdrop-filter:blur(3px)}
+.commute-app .time-dialog h2{font-size:1.2rem}
 .commute-app .time-dialog p{font-size:.85rem;color:var(--muted);margin:10px 0}
-.commute-app .time-wheels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;position:relative}
+.commute-app .time-wheels{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin:20px 0;position:relative}
+.commute-app .time-wheel-label{display:block;text-align:center;font-size:.8rem;margin-bottom:8px;color:var(--muted)}
 .commute-app .time-wheel{height:240px;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;padding-block:96px;border-radius:18px;background:#eff5f4;scrollbar-width:thin}
-.commute-app .time-wheel button{display:block;min-height:48px;height:48px;width:100%;border:0;border-radius:12px;background:transparent;font-size:1.2rem;scroll-snap-align:center;color:var(--muted)}
+.commute-app .time-wheel button{display:block;min-height:48px;height:48px;width:100%;padding:0;border:0;border-radius:12px;background:transparent;font-size:1.2rem;line-height:1.15;scroll-snap-align:center;color:var(--muted)}
 .commute-app .time-wheel [aria-selected=true]{background:#bfeafa;color:#1d465d;font-weight:750}
 @media(max-height:520px){.commute-app .time-wheel{height:144px;padding-block:48px}.commute-app .time-dialog{padding:16px}}

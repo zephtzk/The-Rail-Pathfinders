@@ -1,3 +1,4 @@
+@import './fare.css';
 /* Commute Copilot: original, soft map-first interface. */
 .commute-app {
   --ink: #233346;
@@ -402,7 +403,7 @@
   .commute-app .app-nav .icon { width: 21px; height: 21px; }
 }
 
-.commute-app .app-nav { grid-template-columns: repeat(auto-fit, minmax(3.2rem, 1fr)); }
+.commute-app .app-nav { grid-template-columns: repeat(var(--nav-columns,6), minmax(0, 1fr)); }
 .commute-app .current-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 14px; }
 .commute-app .current-actions .trip-cancel { color: #913f3f; }
 .commute-app .address-results { list-style: none; margin: 10px 0; padding: 0; }
@@ -417,3 +418,16 @@
 @media (max-width: 680px) {
   .commute-app .map-caption { max-height: calc(var(--mobile-map-height) - 108px); overflow-y: auto; overscroll-behavior: contain; }
 }
+
+.commute-app .wip-banner,.commute-app .planner-status.wip-banner{display:block;margin:1rem 0;padding:1rem 1.1rem;border:1px solid #eadbaa;border-left:5px solid #a07b32;border-radius:12px;background:#fcf6df;color:#514524;line-height:1.5}
+.commute-app .wip-banner strong{display:block;color:#39423f;font-weight:750}
+.commute-app .wip-banner p{margin:.4rem 0 0}
+.commute-app #companion-plan .c-route{padding:0;border:0}
+.commute-app .confirmation-details,.commute-app .confirmation-location{margin:1rem 0}
+.commute-app .confirmation-details>summary,.commute-app .confirmation-location>summary{padding:.6rem 0;color:#456779;cursor:pointer}
+.commute-app #start-companion{margin:1.1rem 0 0;width:100%}
+.commute-app #current-summary:focus{outline-offset:4px}
+
+.commute-app .app-nav button,.commute-app .app-nav span{overflow-wrap:normal;word-break:normal}
+.commute-app .trip-peek span{min-width:0}
+.commute-app .trip-peek strong,.commute-app .trip-peek small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -29,7 +29,8 @@
     "test:sharing-privacy-browser": "node tests/sharing-privacy-browser.mjs",
     "test:r3-browser": "node tests/r3-browser.mjs",
     "test:r2-browser": "node tests/r2-browser.mjs",
-    "test:location-offline-browser": "node tests/location-offline-browser.mjs"
+    "test:location-offline-browser": "node tests/location-offline-browser.mjs",
+    "test:r4-browser": "node tests/r4-flow-browser.mjs && node tests/r4-planner-browser.mjs && node tests/r4-spending-browser.mjs && node tests/r4-legacy-browser.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",

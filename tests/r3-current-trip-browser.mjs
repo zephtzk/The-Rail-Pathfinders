@@ -29,8 +29,11 @@ try{
   const {context,page}=await client(seed);
   assert.equal(await page.locator('#trip-details').evaluate(el=>el.open),false);
   assert.equal(await page.locator('#companion-active .trip-guidance').count(),0);
-  assert.equal(await page.locator('#map-layout').isVisible(),true);
-  assert.equal(await page.locator('#map-find-toilet').isVisible(),true);
+  assert.equal(await page.locator('#station-tools > summary').isVisible(),true);
+  await page.locator('#station-tools > summary').click();
+  assert.equal(await page.locator('#companion-facilities [data-action=layout]').isVisible(),true);
+  assert.equal(await page.locator('#companion-facilities [data-action=toilets]').isVisible(),true);
+  await page.locator('#station-tools > summary').click();
   console.log('PASS current summary stays concise while route details and station tools remain available');
   await page.locator('.reroute-tools > summary').click();
   assert.match(await page.locator('.reroute-tools').innerText(),/Update my position & check route/);

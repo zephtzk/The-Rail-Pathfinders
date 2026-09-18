@@ -1,3 +1,4 @@
+import {choosePlannerTime} from './planner-browser-helpers.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -9,7 +10,7 @@ page.on('pageerror',e=>errors.push(e.message));
 const check=(label,ok)=>{assert.ok(ok,label);results.push(label);console.log('PASS '+label);};
 const active=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 async function endpoint(role,query){await page.locator('#'+role).fill(query);await page.locator('#'+role).press('ArrowDown');await page.locator('#'+role).press('Enter');}
-async function later(date='2026-09-21',time='10:00'){await page.locator('[data-time="depart-later"]').click();await page.locator('[name=date]').fill(date);await page.locator('[name=departureTime]').fill(time);}
+async function later(date='2026-09-21',time='10:00'){await page.locator('[data-time="depart-later"]').click();await page.locator('[name=date]').fill(date);await choosePlannerTime(page,'departureTime',time);}
 async function plan(from='EW2',to='EW12'){await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin',from);await endpoint('destination',to);await later();await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
@@ -19,8 +20,8 @@ try{
  await page.screenshot({path:out+'/plan-mobile.png'});
  await page.locator('#origin').fill('unknown private address');check('unknown address is unresolved',await page.locator('#origin-suggestions').innerText().then(t=>t.includes('No supported match')));
  await endpoint('origin','EW2');await endpoint('destination','EW12');check('keyboard suggestion selects stable rail codes',await page.locator('#origin').inputValue().then(t=>t.includes('EW2')));
- await page.locator('#destination').fill('01012');check('bus suggestions include direction and code',await page.locator('#destination-suggestions').innerText().then(t=>t.includes('01012')&&t.includes('direction')));
- await endpoint('destination','EW12');await later();await page.getByRole('button',{name:'Choose departure time by scrolling'}).click();await page.locator('.time-wheel').nth(0).getByRole('option',{name:'10',exact:true}).click();await page.locator('.time-wheel').nth(1).getByRole('option',{name:'30',exact:true}).click();await page.getByRole('button',{name:'Use this time',exact:true}).click();await page.waitForFunction(()=>document.querySelector('[name=departureTime]').value==='10:30');check('touch-scroll time picker and keyboard entry agree',await page.locator('[name=departureTime]').inputValue()==='10:30');await page.locator('[name=departureTime]').fill('10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
+ await page.locator('#destination').fill('01012');check('bus suggestions include terminal direction and code',await page.locator('#destination-suggestions').innerText().then(t=>t.includes('01012')&&t.includes('Bus 2')&&t.includes('Changi Village Ter')&&t.includes('Kampong Bahru Ter')));
+ await endpoint('destination','EW12');await later();await page.getByRole('button',{name:/Choose departure time/}).click();await page.locator('.time-wheel').nth(0).getByRole('option',{name:'10',exact:true}).click();await page.locator('.time-wheel').nth(1).getByRole('option',{name:'30',exact:true}).click();await page.getByRole('button',{name:'Use this time',exact:true}).click();await page.waitForFunction(()=>document.querySelector('[name=departureTime]').value==='10:30');check('scroll picker preserves the selected civil time',await page.locator('[name=departureTime]').inputValue()==='10:30');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
  check('real imported route comparison renders',await page.locator('.route-card').count()>0);
  await page.locator('#save-route').click();await page.locator('#save-route-form').getByRole('button').click();await page.locator('.app-nav [data-view=saved]').click();
  check('Save Route stores reusable pair without starting trip',await page.locator('.saved-route-card').count()===1&&await active()===null);
@@ -38,7 +39,7 @@ try{
  await page.locator('.app-nav [data-view=preferences]').click();await page.locator('[data-preset=rachel]').click();check('preference edit leaves accepted route untouched',(await active()).plan.preferences.travelStyle==='arjun'&&(await active()).route.id===first.route.id);
  await plan('NS9','CG2');check('planner supports endpoints beyond demo corridor',await page.locator('.route-card').count()>0&&(await active()).id===first.id);
  await page.locator('#swap').click();check('swap invalidates old preview',await page.locator('.route-card').count()===0);
- await page.locator('[data-time="arrive-by"]').click();await page.locator('[name=date]').fill('2026-09-21');await page.locator('[name=departureTime]').fill('10:00');await page.locator('[name=deadlineDate]').fill('2026-09-22');await page.locator('[name=deadlineTime]').fill('00:20');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();await page.locator('#review-route').click();
+ await page.locator('[data-time="arrive-by"]').click();await page.locator('[name=date]').fill('2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('[name=deadlineDate]').fill('2026-09-22');await choosePlannerTime(page,'deadlineTime','00:20');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();await page.locator('#review-route').click();
  await page.locator('#save-route').click();await page.locator('#save-route-form [name=label]').fill('Night deadline');await page.locator('#save-route-form').getByRole('button').click();await page.locator('.app-nav [data-view=saved]').click();await page.locator('.saved-route-card').filter({hasText:'Night deadline'}).locator('[data-open]').click();check('saved arrival date and clock survive reopening',await page.locator('[name=deadlineDate]').inputValue()==='2026-09-22'&&await page.locator('[name=deadlineTime]').inputValue()==='00:20'&&await page.locator('[name=timeMode]').inputValue()==='arrive-by');
  check('arrive-by is explicitly deadline filtering',await page.locator('#time-note').innerText().then(t=>t.includes('does not find a latest departure')));
  await page.locator('.app-nav [data-view=current]').click();await page.locator('#journey-pause').click();check('pause preserves same journey',(await active()).status==='paused'&&(await active()).id===first.id);await page.locator('#journey-pause').click();

@@ -1,0 +1,205 @@
+{
+  "baseline": "20513f636f2db339f9a02c1a6f1297d9ea8516bf",
+  "applicationSha256": "ba7a5d331214217873db84a0f33a3f16cffad3dad6a3def0ac2c9f3c0560283a",
+  "workerSha256": "091a6c07d8ccedd5e865f504b3699be34fcbf12beb2c5a60b2e3a53170091d3b",
+  "javascriptTests": 306,
+  "pythonTests": 40,
+  "assets": 72,
+  "suites": {
+    "flow": {
+      "passed": 33,
+      "checks": [
+        "one confirmation section with no duplicate preference editors",
+        "human timeline retains Circle-to-East West transfer",
+        "toilet and caregiver controls are outside confirmation",
+        "selected preferences and canonical leg mapping reach active journey",
+        "start clears obsolete confirmation controls",
+        "checkpoint display is grouped without raw indices or platform IDs",
+        "real interchange remains selectable at original index",
+        "successful checkpoint focuses current guidance and scrolls the trip sheet",
+        "checkpoint preserves canonical route and explicit position",
+        "failed confirmation leaves checkpoint and scroll unchanged",
+        "paused guidance stays human-readable",
+        "station and toilet tools share one section",
+        "station limitation is distinct and real toilet directions stay gated",
+        "shared invitation uses same human timeline",
+        "accepted invitation retains preferences and sharing starts off",
+        "reload preserves confirmed canonical index and preferences",
+        "new selection cannot start while another trip is active",
+        "editing endpoints removes obsolete confirmation",
+        "ending current trip restores Start for already prepared next trip",
+        "new start keeps canonical identity distinct",
+        "plan fits desktop",
+        "current fits desktop",
+        "saved fits desktop",
+        "caregiver fits desktop",
+        "spending fits desktop",
+        "preferences fits desktop",
+        "plan fits large-text",
+        "current fits large-text",
+        "saved fits large-text",
+        "caregiver fits large-text",
+        "spending fits large-text",
+        "preferences fits large-text",
+        "no browser runtime errors"
+      ],
+      "errors": []
+    },
+    "planner": {
+      "passed": 24,
+      "checks": [
+        "station suggestion shows BP1 once",
+        "interchange suggestion preserves distinct public codes",
+        "bus stop code appears once with accurate terminal direction",
+        "service 23 shows its real loop via Rochor Canal Road",
+        "one time button replaces native editor and separate scroll action",
+        "selected Singapore civil time is visible despite another browser timezone",
+        "clock opens picker at selected hour",
+        "arrow keys move focus across columns",
+        "minute keyboard selection wraps at midnight",
+        "apply preserves exact 23:59 without shifting civil date",
+        "apply returns focus to the time button",
+        "cancel discards wheel changes and restores focus",
+        "Escape after an earlier Apply never applies stale dialog return value",
+        "scrolling updates the applied minute",
+        "picker-selected timing produces real route options",
+        "saved deadline and displayed picker remain synchronized on reopen",
+        "fresh saved departure timing refreshes visible button",
+        "unsupported timetable date has a distinct coverage banner and action",
+        "weekend bus restriction is a data limit with a supported time window",
+        "known walking constraint identifies the actionable setting",
+        "available routes outside arrival deadline explain the actual constraint",
+        "large-text picker fits a narrow screen",
+        "large-text picker keeps apply reachable by scrolling",
+        "no browser runtime errors"
+      ],
+      "errors": []
+    },
+    "spending": {
+      "passed": 21,
+      "checks": [
+        "Today starts open; calendar week and month start collapsed",
+        "each period has its own transactions",
+        "pending count is in every applicable header at normal weight",
+        "periods have visible spacing",
+        "transaction rows retain padding inside their period card",
+        "earlier records remain accessible without appearing in current period totals",
+        "only the selected overlapping row opens an editor",
+        "confirming from week updates the single transaction and all overlapping totals",
+        "expanded periods remain open after saving",
+        "refund from month affects only the intended transaction once",
+        "removing an adjustment through another period targets the same transaction",
+        "pricing pending trip clears all three pending labels and retains other rows",
+        "deleting from month removes all copies and preserves the tombstone",
+        "reload retains edited records and default collapsed week/month",
+        "replay records stay separate from period spending",
+        "narrow large text spending fits without horizontal overflow",
+        "integrated Spending page shows Today transactions and collapsed larger periods",
+        "integrated Spending page fits narrow large text",
+        "saved route remains available beside spending",
+        "visiting Saved routes cannot replace a fare deletion handler",
+        "no browser exceptions"
+      ],
+      "errors": []
+    },
+    "legacy": {
+      "passed": 16,
+      "checks": [
+        {
+          "name": "rail saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "rail prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "rail editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "rail replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "rail unverified saved step-free requirement still blocks starting",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot unverified saved step-free requirement still blocks starting",
+          "status": "PASS"
+        },
+        {
+          "name": "replay saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "replay prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "replay editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "replay replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "replay accepted plan retains explicit walking edit and saved fare",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy preference and invalidation flows have no uncaught page errors",
+          "status": "PASS"
+        }
+      ],
+      "errors": []
+    },
+    "savedPlaces": {
+      "passed": 20,
+      "checks": [
+        "automatic legacy stations and imported journeys are hidden",
+        "deliberately saved route remains visible",
+        "ambiguous older places reused by a deliberate route remain visible",
+        "reading saved data leaves original bytes intact",
+        "add a place has no coordinate inputs",
+        "typing a personal label and address makes no external request",
+        "unselected address cannot be saved",
+        "explicit search sends address without personal label",
+        "chosen result enables Save place",
+        "editing selected address invalidates the selection",
+        "selected address is persisted under a local ID without station snapping",
+        "ambiguous older places and the newly added address appear",
+        "saving a place preserves imported records for export",
+        "the saved address survives reload",
+        "a stale reply cannot select or display the old address",
+        "no-match search offers a retry and leaves Save disabled",
+        "offline search reports failure without creating a place",
+        "deleting a user route preserves shared older bookmarks and the imported route",
+        "shared older bookmarks survive route deletion and reload",
+        "address flow has no uncaught browser errors"
+      ],
+      "errors": []
+    }
+  },
+  "environment": "Windows; Node24.16.0; Edge153.0.4234.32; browser emulation, not physical devices",
+  "sourceDataChanged": false,
+  "productionDeployment": false
+}
