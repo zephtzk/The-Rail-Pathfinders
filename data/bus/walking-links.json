@@ -1,0 +1,679 @@
+{
+  "schemaVersion": 1,
+  "version": "2026-09-18.1",
+  "reviewDate": "2026-09-18",
+  "timezone": "Asia/Singapore",
+  "coverage": "Four individually reviewed, bidirectional exterior bus-stop to rail-entrance links at Paya Lebar and Bugis. No Tampines walking link or opposite-side stop shortcut.",
+  "sources": [
+    {
+      "id": "smrt-paya-lebar",
+      "url": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Paya%20Lebar.jpg",
+      "file": "data/bus/walking-evidence/smrt-paya-lebar-map.jpg",
+      "sha256": "2970e3b78e0f55ccc3483219c60e90442797e21bdcaaffd4aae0858bfc5cff1b",
+      "retrievedAt": "2026-09-18T13:48:12.391431+00:00",
+      "publisher": "SMRT; map copyright LTA",
+      "sourceDate": "2021-02",
+      "pageUrl": "https://journey.smrt.com.sg/journey/station_info/paya-lebar/map/",
+      "sourceDateBasis": "SMRT station map page template states accurate as of February 2021; image has no independent revision date."
+    },
+    {
+      "id": "smrt-bugis",
+      "url": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Bugis.jpg",
+      "file": "data/bus/walking-evidence/smrt-bugis-map.jpg",
+      "sha256": "761f5e5a2ba03df965dcc0574efa75f78cb0140c79965e54a7dbfd75ebbbd982",
+      "retrievedAt": "2026-09-18T13:48:12.492238+00:00",
+      "publisher": "SMRT; map copyright LTA",
+      "sourceDate": "2021-02",
+      "pageUrl": "https://journey.smrt.com.sg/journey/station_info/bugis/map/",
+      "sourceDateBasis": "SMRT station map page template states accurate as of February 2021; image has no independent revision date."
+    },
+    {
+      "id": "osm-paya-lebar",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=103.8908,1.3166,103.8935,1.3205",
+      "file": "data/bus/walking-evidence/osm-paya-lebar.osm",
+      "sha256": "943885ab3d5243112f56bd2d08fb8b237cbcac4504554cc2fb01f55061b6e092",
+      "retrievedAt": "2026-09-18T13:49:08.312183+00:00",
+      "publisher": "OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "attributionUrl": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "id": "osm-bugis",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=103.8547,1.3001,103.8572,1.3019",
+      "file": "data/bus/walking-evidence/osm-bugis.osm",
+      "sha256": "ac9b5e21b07bde9e7676f3398637d11d9695d0121ed0e6760a4766155dd69b27",
+      "retrievedAt": "2026-09-18T13:49:09.709153+00:00",
+      "publisher": "OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "attributionUrl": "https://www.openstreetmap.org/copyright"
+    }
+  ],
+  "links": [
+    {
+      "id": "walk-81111-paya-lebar-b",
+      "enabled": true,
+      "busStopId": "81111",
+      "railStationId": "CC9",
+      "railPlatformIds": [
+        "CC9_A",
+        "CC9_B"
+      ],
+      "entrance": "B",
+      "entranceId": "CC9_EB",
+      "entranceName": "Paya Lebar Exit B",
+      "directionality": "bidirectional",
+      "evidenceLevel": "map-supported",
+      "fieldSurveyed": false,
+      "accessibility": "unknown",
+      "externalDistanceMeters": 60,
+      "externalSeconds": 90,
+      "railAllowanceSeconds": 120,
+      "railAllowanceBasis": "Existing estimated access/exit allowance, once per bus-rail transition. Exterior path excludes indoor travel. Other rail line requires the existing reviewed interchange transfer.",
+      "sourceIds": [
+        "smrt-paya-lebar",
+        "osm-paya-lebar"
+      ],
+      "sourceUrl": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Paya%20Lebar.jpg",
+      "sourceUrls": [
+        "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Paya%20Lebar.jpg",
+        "https://www.openstreetmap.org/way/877813337",
+        "https://www.openstreetmap.org/way/188867235"
+      ],
+      "description": "Leave bus stop 81111 on the Paya Lebar Square side, staying within its shelter/boarding forecourt. Follow the mapped east-side concrete footway south beside Paya Lebar Road. Turn onto the mapped station approach at Exit B; stop the exterior trace at the station-building threshold.",
+      "source": {
+        "type": "operator-locality-map-plus-curated-pedestrian-ways",
+        "reviewedAt": "2026-09-18",
+        "provenance": "data/bus/walking-links.json#sources",
+        "reviewFile": "data/bus/walking-evidence/path-review.html#walk-81111-paya-lebar-b"
+      },
+      "distanceAssumptions": {
+        "tracedMeters": 41.37,
+        "busMarkerDiscrepancyMeters": 10.17,
+        "basis": "Polyline trace plus full DataMall-versus-OSM stop-marker separation, rounded up to 10 m. The extra separation is position uncertainty allowance, not an invented pedestrian link.",
+        "speedMetersPerSecond": 1.2,
+        "orientationSeconds": 30,
+        "roundingSeconds": 30,
+        "measuredOnFoot": false
+      },
+      "path": {
+        "waypoints": [
+          {
+            "lat": 1.3185242,
+            "lon": 103.8921644,
+            "osmNodeId": "410464255"
+          },
+          {
+            "lat": 1.318525555,
+            "lon": 103.892173968,
+            "osmWayId": "877813337",
+            "onSegmentBetweenNodeIds": [
+              "8167238191",
+              "8169270118"
+            ]
+          },
+          {
+            "lat": 1.3183792,
+            "lon": 103.8921947,
+            "osmNodeId": "8169270118"
+          },
+          {
+            "lat": 1.3181808,
+            "lon": 103.8922189,
+            "osmNodeId": "8167238189"
+          },
+          {
+            "lat": 1.3181782,
+            "lon": 103.8922044,
+            "osmNodeId": "6333789484"
+          }
+        ],
+        "mappedWays": [
+          {
+            "id": "877813337",
+            "version": 4,
+            "timestamp": "2025-08-02T16:59:33Z",
+            "nodeIds": [
+              "8166860164",
+              "8167238177",
+              "8167238178",
+              "8167238179",
+              "8167238181",
+              "8167238180",
+              "8167238182",
+              "8167238183",
+              "8167238184",
+              "8167238185",
+              "8167238186",
+              "8167238187",
+              "8167238192",
+              "8167238191",
+              "8169270118",
+              "8167238189",
+              "8167238188",
+              "8169270119"
+            ],
+            "tags": {
+              "highway": "footway",
+              "surface": "concrete"
+            },
+            "selectedNodeIds": [
+              "8167238191",
+              "8169270118",
+              "8167238189"
+            ],
+            "url": "https://www.openstreetmap.org/way/877813337"
+          },
+          {
+            "id": "188867235",
+            "version": 9,
+            "timestamp": "2026-05-31T09:18:15Z",
+            "nodeIds": [
+              "6333789484",
+              "8167238189",
+              "1995029568",
+              "1995029567",
+              "3737709020",
+              "2011841403",
+              "13891576480",
+              "13891576476"
+            ],
+            "tags": {
+              "foot": "yes",
+              "highway": "footway",
+              "surface": "concrete"
+            },
+            "selectedNodeIds": [
+              "8167238189",
+              "6333789484"
+            ],
+            "url": "https://www.openstreetmap.org/way/188867235"
+          }
+        ],
+        "busPlatformOsmNodeId": "410464255",
+        "entranceOsmNodeId": "2402427003",
+        "exteriorThresholdOsmNodeId": "6333789484",
+        "stationBuildingOsmWayId": "231917983",
+        "boardingForecourtConnectorMeters": 1.07,
+        "boardingForecourtReview": "The bus platform marker and selected footway lie within the same mapped bus shelter footprint. The short lateral connector stays inside that shelter; it does not cross Paya Lebar Road.",
+        "instructions": [
+          "Leave bus stop 81111 on the Paya Lebar Square side, staying within its shelter/boarding forecourt.",
+          "Follow the mapped east-side concrete footway south beside Paya Lebar Road.",
+          "Turn onto the mapped station approach at Exit B; stop the exterior trace at the station-building threshold."
+        ],
+        "reverseInstructions": "Follow the same exterior path in reverse; verify the exact five-digit boarding stop.",
+        "crossings": [],
+        "barriersReview": "Paya Lebar Road separates this stop from 81119. Remain on the east side. No road, driveway, railway or canal crossing on the selected exterior path."
+      },
+      "limitations": [
+        "Map-supported only; no field survey or current closure inspection.",
+        "Indoor route, stairs, escalators, lift operation, tactile guidance and step-free access are unverified.",
+        "Map entrance symbols and DataMall markers are not surveyed doorway or boarding positions.",
+        "Walking time is an assumption, not an operator guarantee."
+      ]
+    },
+    {
+      "id": "walk-81119-paya-lebar-c",
+      "enabled": true,
+      "busStopId": "81119",
+      "railStationId": "CC9",
+      "railPlatformIds": [
+        "CC9_A",
+        "CC9_B"
+      ],
+      "entrance": "C",
+      "entranceId": "CC9_EC",
+      "entranceName": "Paya Lebar Exit C",
+      "directionality": "bidirectional",
+      "evidenceLevel": "map-supported",
+      "fieldSurveyed": false,
+      "accessibility": "unknown",
+      "externalDistanceMeters": 60,
+      "externalSeconds": 90,
+      "railAllowanceSeconds": 120,
+      "railAllowanceBasis": "Existing estimated access/exit allowance, once per bus-rail transition. Exterior path excludes indoor travel. Other rail line requires the existing reviewed interchange transfer.",
+      "sourceIds": [
+        "smrt-paya-lebar",
+        "osm-paya-lebar"
+      ],
+      "sourceUrl": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Paya%20Lebar.jpg",
+      "sourceUrls": [
+        "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Paya%20Lebar.jpg",
+        "https://www.openstreetmap.org/way/547109567",
+        "https://www.openstreetmap.org/way/1415207209",
+        "https://www.openstreetmap.org/way/370173956"
+      ],
+      "description": "Leave bus stop 81119 onto the same west-side boarding forecourt. Follow the mapped shared cycleway south; this way explicitly permits pedestrians (foot=designated). Continue on the adjoining footway, then turn west along the mapped Exit C approach. End the exterior trace before the underground walkway.",
+      "source": {
+        "type": "operator-locality-map-plus-curated-pedestrian-ways",
+        "reviewedAt": "2026-09-18",
+        "provenance": "data/bus/walking-links.json#sources",
+        "reviewFile": "data/bus/walking-evidence/path-review.html#walk-81119-paya-lebar-c"
+      },
+      "distanceAssumptions": {
+        "tracedMeters": 37.83,
+        "busMarkerDiscrepancyMeters": 16.18,
+        "basis": "Polyline trace plus full DataMall-versus-OSM stop-marker separation, rounded up to 10 m. The extra separation is position uncertainty allowance, not an invented pedestrian link.",
+        "speedMetersPerSecond": 1.2,
+        "orientationSeconds": 30,
+        "roundingSeconds": 30,
+        "measuredOnFoot": false
+      },
+      "path": {
+        "waypoints": [
+          {
+            "lat": 1.3184219,
+            "lon": 103.891701,
+            "osmNodeId": "410470849"
+          },
+          {
+            "lat": 1.318426439,
+            "lon": 103.891727711,
+            "osmWayId": "547109567",
+            "onSegmentBetweenNodeIds": [
+              "5286398024",
+              "13004673986"
+            ]
+          },
+          {
+            "lat": 1.3182676,
+            "lon": 103.8917547,
+            "osmNodeId": "13004673986"
+          },
+          {
+            "lat": 1.3182491,
+            "lon": 103.8917578,
+            "osmNodeId": "5286398023"
+          },
+          {
+            "lat": 1.3181592,
+            "lon": 103.891778,
+            "osmNodeId": "5286398022"
+          },
+          {
+            "lat": 1.3181516,
+            "lon": 103.8917376,
+            "osmNodeId": "3738967183"
+          }
+        ],
+        "mappedWays": [
+          {
+            "id": "547109567",
+            "version": 3,
+            "timestamp": "2025-07-16T16:30:47Z",
+            "nodeIds": [
+              "8167237708",
+              "5286398029",
+              "5286398028",
+              "5286398027",
+              "5286398026",
+              "5286398025",
+              "5286398024",
+              "13004673986"
+            ],
+            "tags": {
+              "bicycle": "designated",
+              "foot": "designated",
+              "highway": "cycleway",
+              "segregated": "no"
+            },
+            "selectedNodeIds": [
+              "5286398024",
+              "13004673986"
+            ],
+            "url": "https://www.openstreetmap.org/way/547109567"
+          },
+          {
+            "id": "1415207209",
+            "version": 1,
+            "timestamp": "2025-07-16T16:30:47Z",
+            "nodeIds": [
+              "13004673986",
+              "5286398023",
+              "5286398022",
+              "5286398033"
+            ],
+            "tags": {
+              "highway": "footway"
+            },
+            "selectedNodeIds": [
+              "13004673986",
+              "5286398023",
+              "5286398022"
+            ],
+            "url": "https://www.openstreetmap.org/way/1415207209"
+          },
+          {
+            "id": "370173956",
+            "version": 2,
+            "timestamp": "2017-12-15T18:45:44Z",
+            "nodeIds": [
+              "3738967183",
+              "5286398022"
+            ],
+            "tags": {
+              "highway": "footway"
+            },
+            "selectedNodeIds": [
+              "5286398022",
+              "3738967183"
+            ],
+            "url": "https://www.openstreetmap.org/way/370173956"
+          }
+        ],
+        "busPlatformOsmNodeId": "410470849",
+        "entranceOsmNodeId": "3986226732",
+        "exteriorThresholdOsmNodeId": "3738967183",
+        "stationBuildingOsmWayId": "188867429",
+        "boardingForecourtConnectorMeters": 3.01,
+        "boardingForecourtReview": "The bus marker is beside the foot-designated shared path on the same west-side stop forecourt shown by the operator map. The lateral connector stays on that forecourt; no carriageway is crossed.",
+        "instructions": [
+          "Leave bus stop 81119 onto the same west-side boarding forecourt.",
+          "Follow the mapped shared cycleway south; this way explicitly permits pedestrians (foot=designated).",
+          "Continue on the adjoining footway, then turn west along the mapped Exit C approach. End the exterior trace before the underground walkway."
+        ],
+        "reverseInstructions": "Follow the same exterior path in reverse; verify the exact five-digit boarding stop.",
+        "crossings": [],
+        "barriersReview": "Do not cross Paya Lebar Road to Exit B. The route ends before OSM underground walkway 188867494. Shared cycling is mapped; conflict-free passage is not promised."
+      },
+      "limitations": [
+        "Map-supported only; no field survey or current closure inspection.",
+        "Indoor route, stairs, escalators, lift operation, tactile guidance and step-free access are unverified.",
+        "Map entrance symbols and DataMall markers are not surveyed doorway or boarding positions.",
+        "Walking time is an assumption, not an operator guarantee."
+      ]
+    },
+    {
+      "id": "walk-01059-bugis-b",
+      "enabled": true,
+      "busStopId": "01059",
+      "railStationId": "DT14",
+      "railPlatformIds": [
+        "EW12_A",
+        "EW12_B"
+      ],
+      "entrance": "B",
+      "entranceId": "DT14_EB",
+      "entranceName": "Bugis Exit B",
+      "directionality": "bidirectional",
+      "evidenceLevel": "map-supported",
+      "fieldSurveyed": false,
+      "accessibility": "unknown",
+      "externalDistanceMeters": 50,
+      "externalSeconds": 90,
+      "railAllowanceSeconds": 120,
+      "railAllowanceBasis": "Existing estimated access/exit allowance, once per bus-rail transition. Exterior path excludes indoor travel. Other rail line requires the existing reviewed interchange transfer.",
+      "sourceIds": [
+        "smrt-bugis",
+        "osm-bugis"
+      ],
+      "sourceUrl": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Bugis.jpg",
+      "sourceUrls": [
+        "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Bugis.jpg",
+        "https://www.openstreetmap.org/way/545573091",
+        "https://www.openstreetmap.org/way/545573093",
+        "https://www.openstreetmap.org/way/164882621"
+      ],
+      "description": "From stop 01059, follow the mapped footway northeast along the Raffles Hospital side of Victoria Street. At the path junction, turn southeast toward the station approach, then south to Exit B. End the exterior trace at the mapped station-building boundary; continue indoors using station signs.",
+      "source": {
+        "type": "operator-locality-map-plus-curated-pedestrian-ways",
+        "reviewedAt": "2026-09-18",
+        "provenance": "data/bus/walking-links.json#sources",
+        "reviewFile": "data/bus/walking-evidence/path-review.html#walk-01059-bugis-b"
+      },
+      "distanceAssumptions": {
+        "tracedMeters": 44.55,
+        "busMarkerDiscrepancyMeters": 4.43,
+        "basis": "Polyline trace plus full DataMall-versus-OSM stop-marker separation, rounded up to 10 m. The extra separation is position uncertainty allowance, not an invented pedestrian link.",
+        "speedMetersPerSecond": 1.2,
+        "orientationSeconds": 30,
+        "roundingSeconds": 30,
+        "measuredOnFoot": false
+      },
+      "path": {
+        "waypoints": [
+          {
+            "lat": 1.3007182,
+            "lon": 103.8561204,
+            "osmNodeId": "410483661"
+          },
+          {
+            "lat": 1.3009221,
+            "lon": 103.8562918,
+            "osmNodeId": "1839636508"
+          },
+          {
+            "lat": 1.3008696,
+            "lon": 103.8563467,
+            "osmNodeId": "1764839474"
+          },
+          {
+            "lat": 1.3008113,
+            "lon": 103.8563439,
+            "osmNodeId": "1764839483"
+          }
+        ],
+        "mappedWays": [
+          {
+            "id": "545573091",
+            "version": 4,
+            "timestamp": "2025-12-20T15:20:25Z",
+            "nodeIds": [
+              "5272779832",
+              "410483661",
+              "1839636508"
+            ],
+            "tags": {
+              "highway": "footway",
+              "lit": "yes",
+              "surface": "paving_stones"
+            },
+            "selectedNodeIds": [
+              "410483661",
+              "1839636508"
+            ],
+            "url": "https://www.openstreetmap.org/way/545573091"
+          },
+          {
+            "id": "545573093",
+            "version": 10,
+            "timestamp": "2026-02-04T12:29:03Z",
+            "nodeIds": [
+              "3979870493",
+              "6213830798",
+              "1839636511",
+              "5777059900",
+              "1839636508",
+              "1764839474",
+              "1764839466",
+              "9014235379",
+              "7870908618",
+              "1764839472",
+              "5777057478",
+              "6898222159",
+              "5586072926",
+              "5586072927",
+              "5272779832"
+            ],
+            "tags": {
+              "footway": "sidewalk",
+              "highway": "footway",
+              "lit": "yes",
+              "surface": "paving_stones"
+            },
+            "selectedNodeIds": [
+              "1839636508",
+              "1764839474"
+            ],
+            "url": "https://www.openstreetmap.org/way/545573093"
+          },
+          {
+            "id": "164882621",
+            "version": 2,
+            "timestamp": "2026-02-04T12:29:09Z",
+            "nodeIds": [
+              "1764839474",
+              "1764839483"
+            ],
+            "tags": {
+              "highway": "footway",
+              "lit": "yes"
+            },
+            "selectedNodeIds": [
+              "1764839474",
+              "1764839483"
+            ],
+            "url": "https://www.openstreetmap.org/way/164882621"
+          }
+        ],
+        "busPlatformOsmNodeId": "410483661",
+        "entranceOsmNodeId": "1839626455",
+        "exteriorThresholdOsmNodeId": "1764839483",
+        "stationBuildingOsmWayId": "164882623",
+        "boardingForecourtConnectorMeters": 0,
+        "boardingForecourtReview": "None: OSM bus stop node 410483661 is itself a vertex of footway 545573091, and the final node is a vertex of station building 164882623.",
+        "instructions": [
+          "From stop 01059, follow the mapped footway northeast along the Raffles Hospital side of Victoria Street.",
+          "At the path junction, turn southeast toward the station approach, then south to Exit B.",
+          "End the exterior trace at the mapped station-building boundary; continue indoors using station signs."
+        ],
+        "reverseInstructions": "Follow the same exterior path in reverse; verify the exact five-digit boarding stop.",
+        "crossings": [],
+        "barriersReview": "Stay on the Raffles Hospital side. Do not cross Victoria Street or Rochor Road. The selected path stops before the hospital driveway crossings farther northeast."
+      },
+      "limitations": [
+        "Map-supported only; no field survey or current closure inspection.",
+        "Indoor route, stairs, escalators, lift operation, tactile guidance and step-free access are unverified.",
+        "Map entrance symbols and DataMall markers are not surveyed doorway or boarding positions.",
+        "Walking time is an assumption, not an operator guarantee."
+      ]
+    },
+    {
+      "id": "walk-01113-bugis-a",
+      "enabled": true,
+      "busStopId": "01113",
+      "railStationId": "DT14",
+      "railPlatformIds": [
+        "EW12_A",
+        "EW12_B"
+      ],
+      "entrance": "A",
+      "entranceId": "DT14_EA",
+      "entranceName": "Bugis Exit A",
+      "directionality": "bidirectional",
+      "evidenceLevel": "map-supported",
+      "fieldSurveyed": false,
+      "accessibility": "unknown",
+      "externalDistanceMeters": 20,
+      "externalSeconds": 60,
+      "railAllowanceSeconds": 120,
+      "railAllowanceBasis": "Existing estimated access/exit allowance, once per bus-rail transition. Exterior path excludes indoor travel. Other rail line requires the existing reviewed interchange transfer.",
+      "sourceIds": [
+        "smrt-bugis",
+        "osm-bugis"
+      ],
+      "sourceUrl": "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Bugis.jpg",
+      "sourceUrls": [
+        "https://connect-cdn.smrt.wwprojects.com/autoupdate/images/locality/Bugis.jpg",
+        "https://www.openstreetmap.org/way/739532532"
+      ],
+      "description": "Leave stop 01113 through its boarding forecourt to the adjoining footway on the same side of Victoria Street. Turn northwest along the mapped station approach to Exit A. End the exterior trace at the station-building boundary.",
+      "source": {
+        "type": "operator-locality-map-plus-curated-pedestrian-ways",
+        "reviewedAt": "2026-09-18",
+        "provenance": "data/bus/walking-links.json#sources",
+        "reviewFile": "data/bus/walking-evidence/path-review.html#walk-01113-bugis-a"
+      },
+      "distanceAssumptions": {
+        "tracedMeters": 12.33,
+        "busMarkerDiscrepancyMeters": 4.25,
+        "basis": "Polyline trace plus full DataMall-versus-OSM stop-marker separation, rounded up to 10 m. The extra separation is position uncertainty allowance, not an invented pedestrian link.",
+        "speedMetersPerSecond": 1.2,
+        "orientationSeconds": 30,
+        "roundingSeconds": 30,
+        "measuredOnFoot": false
+      },
+      "path": {
+        "waypoints": [
+          {
+            "lat": 1.3011705,
+            "lon": 103.8560759,
+            "osmNodeId": "610707573"
+          },
+          {
+            "lat": 1.3011588,
+            "lon": 103.8560119,
+            "osmNodeId": "6924431331"
+          },
+          {
+            "lat": 1.3011882,
+            "lon": 103.8559767,
+            "osmNodeId": "1780030019"
+          }
+        ],
+        "mappedWays": [
+          {
+            "id": "739532532",
+            "version": 3,
+            "timestamp": "2026-02-04T12:45:29Z",
+            "nodeIds": [
+              "6053966487",
+              "1780030054",
+              "1780030019",
+              "6924431331"
+            ],
+            "tags": {
+              "highway": "footway",
+              "lit": "yes"
+            },
+            "selectedNodeIds": [
+              "6924431331",
+              "1780030019"
+            ],
+            "url": "https://www.openstreetmap.org/way/739532532"
+          }
+        ],
+        "busPlatformOsmNodeId": "610707573",
+        "entranceOsmNodeId": "1839626456",
+        "exteriorThresholdOsmNodeId": "1780030019",
+        "stationBuildingOsmWayId": "166554010",
+        "boardingForecourtConnectorMeters": 7.23,
+        "boardingForecourtReview": "The reviewed seven-metre connector joins the bus platform marker to its same-side footway junction. The official locality map places both stop 4 and Exit A on this forecourt, without an intervening carriageway.",
+        "instructions": [
+          "Leave stop 01113 through its boarding forecourt to the adjoining footway on the same side of Victoria Street.",
+          "Turn northwest along the mapped station approach to Exit A.",
+          "End the exterior trace at the station-building boundary."
+        ],
+        "reverseInstructions": "Follow the same exterior path in reverse; verify the exact five-digit boarding stop.",
+        "crossings": [],
+        "barriersReview": "Victoria Street separates this stop from 01059. No Victoria Street or Rochor Road crossing is enabled. Do not substitute stop 01112."
+      },
+      "limitations": [
+        "Map-supported only; no field survey or current closure inspection.",
+        "Indoor route, stairs, escalators, lift operation, tactile guidance and step-free access are unverified.",
+        "Map entrance symbols and DataMall markers are not surveyed doorway or boarding positions.",
+        "Walking time is an assumption, not an operator guarantee."
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "id": "tampines-bus-rail",
+      "reason": "Interchange indoor pedestrian route, boarding-berth access and corresponding rail entrance not validated; no edge enabled."
+    },
+    {
+      "id": "different-stop-bus-bus",
+      "reason": "No additional cross-stop pedestrian connection validated. A same-stop service change does not license walking to an opposite-direction stop."
+    },
+    {
+      "id": "newton-tampines-bukit-panjang-tap-out",
+      "reason": "Phase 2 omitted rail tap-out connections remain omitted; this ledger enables no rail-to-rail exterior edge."
+    }
+  ],
+  "routingContract": {
+    "walkSecondsPerBusRailTransition": "externalSeconds + railAllowanceSeconds, counted once",
+    "walkBudget": "Count both exterior time and the indoor allowance.",
+    "platformRestriction": "Use only railPlatformIds. Do not expand to every platform sharing railStationId.",
+    "noStationShortcut": "Do not chain bus-rail and rail-bus exterior links through a station without a rail ride.",
+    "noLiveAccessClaim": "Rail operating calendars constrain train use; current entrance opening or lift availability is not verified."
+  }
+}

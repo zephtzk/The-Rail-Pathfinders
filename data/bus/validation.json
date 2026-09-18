@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "serviceNumbers": ["2", "23", "28"],
+  "coverage": {
+    "name": "Tampines–Paya Lebar–Bugis bus pilot",
+    "validFrom": "2026-09-18",
+    "validThrough": "2026-10-02",
+    "weekdays": [1, 2, 3, 4, 5],
+    "earliestSeconds": 34200,
+    "latestSeconds": 59400,
+    "excludedDates": [],
+    "holidaySource": "https://www.mom.gov.sg/newsroom/press-releases/2025/0616-public-holidays-for-2026",
+    "holidayReview": "The bounded weekday pilot contains no public holidays in MOM's 2026 published list. Weekend and overnight planning excluded."
+  },
+  "assumptions": {
+    "unverifiedBayStopCodes": ["75009", "52009", "99009", "10499"],
+    "unverifiedBayReason": "Tampines Int, Toa Payoh Int, Changi Village Ter and Kampong Bahru Ter may use different alighting and boarding bays under one DataMall stop identifier. No internal bay path has been verified. Bus-to-bus transfers at these identifiers are disabled; journey starts/ends remain allowed.",
+    "timingKind": "frequency-estimate",
+    "waitField": "AM_Offpeak_Freq",
+    "waitStrategy": "maximum-published-headway",
+    "waitBasis": "Use the upper bound of the published dispatch interval as an estimated wait at boarding stops. Headways can vary downstream; this is not a guaranteed wait or an exact departure.",
+    "rideSpeedKph": 18,
+    "dwellSecondsPerStop": 30,
+    "rideBasis": "Distance differences from DataMall at an assumed 18 km/h, plus 30 seconds for each downstream stop. An explicit uncalibrated planning model, not measured or scheduled running times.",
+    "headwayDayScope": "Guide supplies time bands but no operating-day applicability for frequency fields. Pilot assumes the published off-peak range is representative on ordinary weekdays only; weekend/holiday estimates excluded.",
+    "firstLastBasis": "HHMM first/last arrivals constrain stop service spans, not departures between them. Preserve source values; 2400 is midnight. A last value earlier than first is marked as rollover and normalized to the following day for audit, but overnight journeys remain unsupported.",
+    "deadlineGuarantee": false,
+    "accessibility": "unknown"
+  }
+}

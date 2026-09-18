@@ -1,0 +1,164 @@
+
+> commute-copilot@1.0.0 check
+> node --check src/app.js && node --check src/engine.js && node --check src/rail-engine.js && node --check src/rail-ui.js && node --check src/multimodal-engine.js && node --check src/multimodal-ui.js && node --check server/adapter.js && node --check server/bus-adapter.js && npm test && npm run test:import && npm run test:bus-import && npm run build
+
+
+> commute-copilot@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ bus arrival matches exact service, operator, termini and repeated stop occurrence without losing leading zeros (1.7739ms)
+✔ opposite-direction stop matches only the corresponding pattern and stop occurrence (0.2463ms)
+✔ service variant, operator, origin, destination or occurrence mismatches never become a timing match (0.2142ms)
+✔ ambiguous pattern match is explicitly retained without choosing a direction (0.1082ms)
+✔ valid empty service list and empty prediction slots differ from malformed and partial records (0.3889ms)
+✔ invalid prediction fields are excluded while other slots remain usable (0.2035ms)
+✔ impossible civil timestamps and non-string service identifiers are malformed records (0.1088ms)
+✔ freshness uses retrieval and prediction times independently and never makes offline or unmatched arrivals current (1.4157ms)
+✔ adapter permits only declared stops, needs configuration and never fetches unsupported input (0.4935ms)
+✔ adapter separates HTTP date, retrieval time and prediction time; keeps credential server-side (20.0525ms)
+✔ same-stop concurrent requests coalesce and cached results cannot be mutated by callers (1.1167ms)
+✔ different-stop concurrency is bounded without queuing unbounded provider requests (1.1065ms)
+✔ authentication failures use shared five-minute backoff and sanitize response bodies (1.3652ms)
+✔ rate limits honor Retry-After seconds and dates within bounded shared backoff (1.8878ms)
+✔ network and HTTP failures are sanitized, cached and isolated across stops (0.5688ms)
+✔ timeout aborts a pending provider request and returns bounded unavailable fallback (4.9211ms)
+✔ malformed, oversized and mismatched-stop responses fail closed (1.943ms)
+✔ empty and partially valid responses preserve their distinct status through caching (0.4899ms)
+✔ credential changes invalidate cached data and old in-flight responses cannot overwrite the new cache (0.3732ms)
+✔ 36 actual bus-only stop pairs match an independent exact-arithmetic Dijkstra oracle (151.787ms)
+✔ normal total includes access, waiting, both rides and exit; stay wins (2.1031ms)
+✔ closure makes direct unavailable; alternative meets deadline (0.4501ms)
+✔ mid-trip disruption excludes completed legs and compares full remaining journeys (0.2894ms)
+✔ confirmed later time preserves elapsed delay (0.1758ms)
+✔ wrong direction, wrong line and expired event do not affect journey (0.4142ms)
+✔ time-window match uses affected edge timing, not entire ride (0.2789ms)
+✔ event spanning multiple ride legs is applied once (0.2393ms)
+✔ walk limit is inclusive, completed walking counts, no invented viable route (1.0137ms)
+✔ unverified connection cannot be recommended (0.1681ms)
+✔ relative waits never board before transfer completes (0.1653ms)
+✔ if all late, recommend earliest feasible arrival and disclose lateness (0.2604ms)
+✔ normal stays normal for both preferences within detour tolerance (0.1284ms)
+✔ quieter preference can trade six minutes for lower fixture crowding when deadline permits (0.1326ms)
+✔ Paya Lebar-origin alternative enters Circle directly and has only one transfer (0.3354ms)
+✔ scores bounded, unknown crowding never receives comfort advantage (0.1247ms)
+✔ repeated alert is deduplicated; irrelevant alert is suppressed (0.1727ms)
+✔ invalid input rejected without exceptions or false feasibility (0.1511ms)
+✔ boarding refuses expired, departed, wrong train/direction, incomplete observations and invalid loads (0.2348ms)
+✔ exact doors require matching verified mapping; no mapping never invents doors (0.1328ms)
+✔ bus acquisition paginates through empty terminal pages and never persists key (75.7792ms)
+✔ repeated nonempty page aborts instead of falsely claiming pagination complete (2.4918ms)
+✔ authentication, rate limits, malformed and network failures stop safely without retry storms (14.302ms)
+✔ source interval uses exact inclusive start/exclusive end; refetch cannot renew it (2.2747ms)
+✔ missing timezone, impossible dates, NA, conflicts and reversed intervals never become current (0.2798ms)
+✔ crowd records map exact requested-line codes, not prefixes or other platforms (0.6832ms)
+✔ duplicate contradictory station reports fail to unknown; missing and empty are distinct (0.3631ms)
+✔ notice status 1, valid emptiness, missing fields and malformed records remain distinct (0.2293ms)
+✔ structured notices separate corridor, outside, line-only and unknown relevance (1.2991ms)
+✔ messages are never assigned segment meaning, time validity or a delay from prose (0.2028ms)
+✔ parallel callers share four bounded fetches, honor per-feed TTL and cannot mutate the cache (64.1506ms)
+✔ missing or changed credentials never inherit a successful cached feed (1.8743ms)
+✔ 429 Retry-After suppresses shared retries without changing source timestamps (2.0713ms)
+✔ one malformed feed leaves others usable; reflected key and unexpected fields are excluded (1.1683ms)
+✔ timeout and network failures are bounded and never disclose exception text (8.439ms)
+✔ bounded response rejects oversized data and unexpected redirects fail closed (0.9599ms)
+✔ source metadata survives saved-journey restore independently of demo timestamp (5.5959ms)
+✔ live UI excludes unrelated segments, escapes advisories, and never labels expired/NA/offline bands current (26.9619ms)
+✔ future source reports cannot mature into observations without a new validating retrieval (8.3705ms)
+✔ corrupt live snapshots cannot crash restored UI or persist nested unknown properties (15.8443ms)
+✔ failed refresh cannot reuse previous HTTP success as live validation evidence (1.3547ms)
+✔ direct bus arithmetic uses maximum-headway waiting and distance plus each traversed-stop dwell (5.8299ms)
+✔ bus to rail meets a feasible train with one exterior path and one indoor allowance (2.3635ms)
+✔ rail to bus accounts for endpoint access, full pedestrian allowance and a fresh bus wait (0.5425ms)
+✔ missed rail connection waits for a genuinely later scheduled service (0.4039ms)
+✔ same physical stop bus transfer includes change allowance and separate waiting (0.3082ms)
+✔ bus alternatives preserve preference budgets and explicitly disclose unavailable crowding (0.5633ms)
+✔ repeated stop visits keep their occurrence sequence rather than collapsing the loop (0.4411ms)
+✔ opposite-direction stops and coincident coordinates never imply a connection (0.3139ms)
+✔ only enabled path directionality permits bus/rail transfers (0.3581ms)
+✔ two pedestrian links never create an unreviewed walk through a station (1.206ms)
+✔ rail endpoints require a rail ride on their applicable side rather than charging indoor access twice (0.4767ms)
+✔ walking budget and arrival deadlines include full transfer and station-exit allowances (0.5331ms)
+✔ each boarding and alighting respects last-service and the declared estimate window (1.0588ms)
+✔ weekends, excluded dates, peak and overnight bus requests fail explicitly while rail keeps its wider calendar (0.3353ms)
+✔ unsupported timing patterns are excluded instead of being assigned departures (0.1538ms)
+✔ explicit rail-disruption fixture leaves a bus alternative labelled synthetic without claiming live closures (0.4294ms)
+✔ actual complete loop supports a direct bus ride with independently computed arithmetic (12.181ms)
+✔ decimal source distances do not add a spurious second to exact ride arithmetic (4.4229ms)
+✔ actual mixed journeys work in both directions over enabled path IDs (359.3422ms)
+✔ actual bus transfer, loops, deadlines and total walk bound remain explicit (172.7173ms)
+✔ valid saved pilot guidance is usable with and without an arrival deadline (4.0698ms)
+✔ malformed saved nested maps, inputs, legs and assumptions are rejected without throwing (0.6847ms)
+✔ saved inconsistent timing, bounds and mode provenance fail closed (0.4536ms)
+✔ client timestamp validation rejects impossible civil dates and accepts explicit valid offsets (0.1173ms)
+✔ normalized live records are accepted only for their exact requested stop and checked pattern occurrence (1.2812ms)
+✔ empty, partial, unmatched, ambiguous and unavailable feeds preserve their distinct meaning (0.1955ms)
+✔ client freshness never labels invalid, expired, future-observation or offline predictions current (0.2078ms)
+✔ reference arithmetic: two interchanges, all five journey components, exact arrival (11.6962ms)
+✔ same connected reference network routes in the opposite direction with two transfers (0.5945ms)
+✔ preferences select nondominated alternatives inside the additional-time limit (1.6584ms)
+✔ walking bound is inclusive and includes station access and exit (0.8022ms)
+✔ nearby or co-station platforms never create a transfer edge (0.3024ms)
+✔ minimum interchange time prevents boarding before the full allowance finishes (0.4567ms)
+✔ a train change on one stop requires an explicit same-stop allowance (0.7703ms)
+✔ remaining aboard preserves dwell, direction, pickup/dropoff restrictions and one boarding (1.2766ms)
+✔ calendar weekdays and added / cancelled exceptions control service (0.5265ms)
+✔ previous service day after-midnight trips use that day’s calendar and identity (0.4594ms)
+✔ first supported civil date still uses a preceding raw calendar service day (0.2517ms)
+✔ explicit next-day deadline permits boarding the next service day (0.2398ms)
+✔ last imported service day retains its midnight spillover without inventing next-day service (0.2048ms)
+✔ last-service misses, disconnected stations, unsupported dates and stations are explicit (0.1979ms)
+✔ deadline includes exit time; late candidates are explained and never recommended (0.6386ms)
+✔ invalid civil dates, time strings, bounds and preferences do not silently normalize (0.2599ms)
+✔ network ingestion fails early for invalid IDs, times, direction or interchange provenance (1.5573ms)
+✔ router is deterministic, preserves source data, and reuses service-date indexes (1.1353ms)
+✔ pinned schedule import hashes match source, rules, importer and compiled data (23.4237ms)
+✔ independently checked source corridor has exact scheduled arithmetic, distinct from replay (140.5213ms)
+✔ outside-corridor routes work both ways with two and three validated train changes (220.9742ms)
+✔ actual source Sunday BP exception removes service without inventing rail replacement (45.5004ms)
+✔ tap-out connections remain omitted, bad source trip quarantined, unsupported coverage explicit (36.3141ms)
+✔ 100 seeded event networks agree with an independent earliest-arrival oracle (118.7242ms)
+✔ save/restore preserves selected journey; broken storage never acknowledges save (4.1704ms)
+✔ corrupt and old payloads rejected (0.5772ms)
+✔ corrupt saved ride stops and geometry cannot crash offline recovery (1.1565ms)
+✔ freshness is independent of journey state and rejects invalid/future stamps (0.2069ms)
+✔ missing key does not fetch and exposes unavailable not live (0.7355ms)
+✔ upstream failure does not leak credentials or erase source quality (0.8549ms)
+✔ live notices are partial and do not pretend to supply carriage or route predictions (22.3724ms)
+✔ malformed notice envelope fails closed independently of valid empty crowd lists (0.8472ms)
+✔ API health endpoint works without secret (1.8362ms)
+✔ GIS contains actual directed tracks and explicitly indicative transfer links (4.6687ms)
+✔ service worker never caches OSM tiles or API responses (1.1605ms)
+ℹ tests 122
+ℹ suites 0
+ℹ pass 122
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 795.7043
+
+> commute-copilot@1.0.0 test:import
+> python -m unittest discover -s tests -p test_import_rail.py
+
+...Rail import failed: Source is not a readable ZIP archive
+........................
+----------------------------------------------------------------------
+Ran 27 tests in 0.090s
+
+OK
+{"buildId": "c25f71736cb21c917320d60b9f0c909347e94abd21c01dc55e5f9e28d8a1634f", "coverage": {"activeServiceDateCount": 4, "endDate": "2026-09-21", "maxStopTimeSeconds": 87000, "startDate": "2026-09-17", "timeZone": "Asia/Singapore"}, "included": {"routes": 2, "services": 1, "stations": 3, "stopTimes": 4, "stops": 4, "transfers": 1, "trips": 2}, "sizes": {"networkBytes": 1437, "networkGzipBytes": 566, "networkSha256": "f12befee69d64d403c9be58edc085fcc5189ddeeffd834e1ed3a06242d3b625c"}}
+{"buildId": "c25f71736cb21c917320d60b9f0c909347e94abd21c01dc55e5f9e28d8a1634f", "coverage": {"activeServiceDateCount": 4, "endDate": "2026-09-21", "maxStopTimeSeconds": 87000, "startDate": "2026-09-17", "timeZone": "Asia/Singapore"}, "included": {"routes": 2, "services": 1, "stations": 3, "stopTimes": 4, "stops": 4, "transfers": 1, "trips": 2}, "sizes": {"networkBytes": 1437, "networkGzipBytes": 566, "networkSha256": "f12befee69d64d403c9be58edc085fcc5189ddeeffd834e1ed3a06242d3b625c"}}
+
+> commute-copilot@1.0.0 test:bus-import
+> python -m unittest discover -s tests -p test_import_bus.py
+
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.228s
+
+OK
+
+> commute-copilot@1.0.0 build
+> node scripts/build.mjs
+
+Built 31 local assets and Worker (3160 KB).

@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "ledgerVersion": "2026-09-18.1",
+  "checkKind": "Pinned-source integrity, source-way continuity and independent distance/time arithmetic; not field verification",
+  "ledgerSha256": "262856a9824a27088ec6f42b5877d74fa0572bc9dfbf40e75195ec20ccc12620",
+  "checks": [
+    {
+      "id": "walk-81111-paya-lebar-b",
+      "status": "PASS",
+      "exteriorDistanceMeters": 60,
+      "exteriorSeconds": 90,
+      "indoorAllowanceSeconds": 120,
+      "totalTransitionSeconds": 210,
+      "curatedMappedWayCount": 2,
+      "forecourtConnectorMeters": 1.07
+    },
+    {
+      "id": "walk-81119-paya-lebar-c",
+      "status": "PASS",
+      "exteriorDistanceMeters": 60,
+      "exteriorSeconds": 90,
+      "indoorAllowanceSeconds": 120,
+      "totalTransitionSeconds": 210,
+      "curatedMappedWayCount": 3,
+      "forecourtConnectorMeters": 3.01
+    },
+    {
+      "id": "walk-01059-bugis-b",
+      "status": "PASS",
+      "exteriorDistanceMeters": 50,
+      "exteriorSeconds": 90,
+      "indoorAllowanceSeconds": 120,
+      "totalTransitionSeconds": 210,
+      "curatedMappedWayCount": 3,
+      "forecourtConnectorMeters": 0
+    },
+    {
+      "id": "walk-01113-bugis-a",
+      "status": "PASS",
+      "exteriorDistanceMeters": 20,
+      "exteriorSeconds": 60,
+      "indoorAllowanceSeconds": 120,
+      "totalTransitionSeconds": 180,
+      "curatedMappedWayCount": 1,
+      "forecourtConnectorMeters": 7.23
+    }
+  ],
+  "notTested": [
+    "Physical path survey",
+    "Current closures",
+    "Indoor access route",
+    "Step-free accessibility and lift operation"
+  ]
+}

@@ -1,0 +1,620 @@
+{
+  "schemaVersion": 1,
+  "kind": "offline-independent-oracle",
+  "status": "PASS",
+  "caseCount": 36,
+  "method": "Independent directed-graph Dijkstra using exact 0.1km distance costs; compared with production Pareto frequency closure. No provider requests.",
+  "limitations": "Validates the stated model arithmetic and earliest arrival, not real traffic, waiting guarantees, physical-device performance or field walking.",
+  "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+  "multimodalEngineSha256": "cb79831704c3d6e7ea276dd705701fc70c428598aa2ecbbbd2dab607a0440238",
+  "railEngineSha256": "9fdbc8c38186905aff57e470489c32092b281369f051a7df85272cc39aef8963",
+  "oracleSha256": "cb56ee088ebbf97a3456a1c472e4a71cea6263faf699c6a01efb1ce0b25fa131",
+  "terminalChecks": [
+    {
+      "code": "75009",
+      "selfTransferPresent": false
+    },
+    {
+      "code": "52009",
+      "selfTransferPresent": false
+    },
+    {
+      "code": "99009",
+      "selfTransferPresent": false
+    },
+    {
+      "code": "10499",
+      "selfTransferPresent": false
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:05023",
+        "destinationId": "bus:76081"
+      },
+      "expectedArrivalSeconds": 42020,
+      "actualArrivalSeconds": 42020,
+      "status": "ok",
+      "route": {
+        "totalSeconds": 6020,
+        "waitSeconds": 1740,
+        "rideSeconds": 4220,
+        "transferSeconds": 60,
+        "transfers": 1,
+        "patterns": [
+          "2:GAS:2",
+          "28:GAS:2"
+        ]
+      }
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:52369",
+        "destinationId": "bus:82069"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:66079",
+        "destinationId": "bus:96079"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:75249",
+        "destinationId": "bus:04229"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:76391",
+        "destinationId": "bus:62081"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:82011",
+        "destinationId": "bus:76101"
+      },
+      "expectedArrivalSeconds": 39420,
+      "actualArrivalSeconds": 39420,
+      "status": "ok",
+      "route": {
+        "totalSeconds": 3420,
+        "waitSeconds": 840,
+        "rideSeconds": 2580,
+        "transferSeconds": 0,
+        "transfers": 0,
+        "patterns": [
+          "28:GAS:2"
+        ]
+      }
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:84191",
+        "destinationId": "bus:83031"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:96071",
+        "destinationId": "bus:96099"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:99011",
+        "destinationId": "bus:05023"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:05023",
+        "destinationId": "bus:62101"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:52369",
+        "destinationId": "bus:76251"
+      },
+      "expectedArrivalSeconds": 41950,
+      "actualArrivalSeconds": 41950,
+      "status": "ok",
+      "route": {
+        "totalSeconds": 5950,
+        "waitSeconds": 840,
+        "rideSeconds": 5110,
+        "transferSeconds": 0,
+        "transfers": 0,
+        "patterns": [
+          "28:GAS:2"
+        ]
+      }
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:66079",
+        "destinationId": "bus:83079"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:75249",
+        "destinationId": "bus:97039"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:76391",
+        "destinationId": "bus:05069"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:82011",
+        "destinationId": "bus:66071"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:84191",
+        "destinationId": "bus:76271"
+      },
+      "expectedArrivalSeconds": 38770,
+      "actualArrivalSeconds": 38770,
+      "status": "ok",
+      "route": {
+        "totalSeconds": 2770,
+        "waitSeconds": 840,
+        "rideSeconds": 1930,
+        "transferSeconds": 0,
+        "transfers": 0,
+        "patterns": [
+          "28:GAS:2"
+        ]
+      }
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:96071",
+        "destinationId": "bus:84019"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:99011",
+        "destinationId": "bus:97059"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:05023",
+        "destinationId": "bus:07221"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:52369",
+        "destinationId": "bus:70251"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:66079",
+        "destinationId": "bus:76361"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:75249",
+        "destinationId": "bus:84039"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:76391",
+        "destinationId": "bus:97079"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:82011",
+        "destinationId": "bus:07529"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:84191",
+        "destinationId": "bus:70271"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:96071",
+        "destinationId": "bus:76411"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:99011",
+        "destinationId": "bus:84059"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:05023",
+        "destinationId": "bus:97099"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:52369",
+        "destinationId": "bus:10041"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:66079",
+        "destinationId": "bus:70291"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:75249",
+        "destinationId": "bus:76461"
+      },
+      "expectedArrivalSeconds": 44880,
+      "actualArrivalSeconds": 44880,
+      "status": "ok",
+      "route": {
+        "totalSeconds": 8880,
+        "waitSeconds": 1560,
+        "rideSeconds": 7260,
+        "transferSeconds": 60,
+        "transfers": 1,
+        "patterns": [
+          "23:GAS:1",
+          "28:GAS:2"
+        ]
+      }
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:76391",
+        "destinationId": "bus:84199"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:82011",
+        "destinationId": "bus:98069"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:84191",
+        "destinationId": "bus:52051"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:96071",
+        "destinationId": "bus:72171"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    },
+    {
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 0,
+        "preference": "fastest",
+        "maxExtraMinutes": 0,
+        "originId": "bus:99011",
+        "destinationId": "bus:80031"
+      },
+      "expectedArrivalSeconds": null,
+      "actualArrivalSeconds": null,
+      "status": "no-feasible",
+      "route": null
+    }
+  ]
+}

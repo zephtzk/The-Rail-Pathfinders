@@ -1,0 +1,11 @@
+{
+  "kind": "real-api-repeat-acquisition",
+  "sourceDirectory": "data/bus/sources/lta-bus-2026-09-18-439b6cf16c91",
+  "version": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "counts": {"BusStops": 5208, "BusRoutes": 26823, "BusServices": 801},
+  "credentialPersisted": false,
+  "reusedExisting": true,
+  "repeatVerifiedAt": "2026-09-18T13:52:18.022Z",
+  "repeatRequestCount": 70,
+  "result": "PASS: second complete download exactly matched the first combined source version. Original immutable files retained."
+}

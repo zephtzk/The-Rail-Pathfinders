@@ -1,5 +1,15 @@
 # Data availability, integration and boundaries
 
+## Phase 3 — versioned bus data and reviewed exterior walking
+
+The current source ledger is [BUS_DATA.md](BUS_DATA.md), with [WALKING_COVERAGE.md](WALKING_COVERAGE.md) and [end-to-end coverage](PHASE3_COVERAGE.md). BusStops, BusRoutes and BusServices were fully acquired and repeated against current official DataMall guide **v6.9 (3 August 2026)**. Raw/accepted/excluded counts, terminal pages, per-page hashes, service variants and ordered occurrences are retained. Five complete patterns of services 2, 23 and 28 support explicitly estimated weekday travel, not an invented departure timetable. The bounded ordinary-weekday date policy and unverified frequency day scope are documented.
+
+Four exterior walks combine operator locality maps and exact OSM footway evidence. Attribution: © OpenStreetMap contributors, ODbL; operator map images retain their original rights and are evidence references, not application basemaps. Indoor allowances and accessibility are not verified. Build gates check all bus source hashes, source/public walking identity and referenced map hashes.
+
+The server-only `LTA_ACCOUNT_KEY` enables optional BusArrival v3. Two real observations matched the pilot's exact stop/service/operator/termini/visit identities. Provider HTTP Date, retrieval time and predicted arrival are separate; no provider observation timestamp is supplied. All current arrivals stay advisory, including for future-date searches. Failure cases are synthetic evidence, not deliberately induced provider events. [Real arrival evidence](evidence/phase3/bus-live-real.json) is historical and is never loaded as live data.
+
+The existing rail schedule provenance is in [PHASE2_REPORT.md](PHASE2_REPORT.md). The sections below retain historical Phase 1/0 boundaries; they do not describe the expanded Phase 3 planner. Outstanding Phase 1 live variants, physical-device checks and release constraints remain open.
+
 Reviewed 18 September 2026. The Phase 1 section records the implemented corridor integration;
 the Phase 0 inventory and audit evidence below remain historical access/contract evidence.
 Documentation, synthetic tests, authenticated responses and physical-device observations are separate evidence classes.

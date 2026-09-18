@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "publisher": "Land Transport Authority Singapore",
+  "dataset": "BusStops, BusRoutes, BusServices",
+  "sourceUrl": "https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html",
+  "documentationUrl": "https://datamall.lta.gov.sg/content/dam/datamall/datasets/LTA_DataMall_API_User_Guide.pdf",
+  "documentationVersion": "6.9 (3 Aug 2026)",
+  "retrievalStartedAt": "2026-09-18T13:46:22.405Z",
+  "retrievedAt": "2026-09-18T13:46:41.120Z",
+  "version": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "credentialPersisted": false,
+  "license": "Singapore Open Data Licence v1.0",
+  "licenseUrl": "https://data.gov.sg/open-data-licence",
+  "datasets": {
+    "BusStops": {
+      "endpoint": "https://datamall2.mytransport.sg/ltaodataservice/BusStops",
+      "rawCount": 5208,
+      "pageSize": 500,
+      "paginationComplete": true,
+      "terminalEmptyPage": true,
+      "pages": [
+        {
+          "skip": 0,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:22.405Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:22 GMT",
+          "lastModified": null,
+          "sha256": "94a07c221847a40e74451b17cb01e017411a934445a9a49a7d5432ce61f12a2e",
+          "contentSha256": "9ab632d6dcf0a96ce7552cb104a99c319fbffbb8393cfb8fcedccfe7408f54bf",
+          "file": "BusStops/000000.json"
+        },
+        {
+          "skip": 500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:22.632Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:22 GMT",
+          "lastModified": null,
+          "sha256": "6762eb3a5689d78c189a2f8b0452c97fda5e45b8bff07b3803f30c46ebcf788e",
+          "contentSha256": "2f5c0ee9c05a2c472228a0b526620e177bdbd44d22be415d4d58cbbece36477c",
+          "file": "BusStops/000500.json"
+        },
+        {
+          "skip": 1000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:22.883Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:23 GMT",
+          "lastModified": null,
+          "sha256": "f609974a09f463aa4618239c4d83e7072e2bc761720f6f1b9ffe5a3f34199f97",
+          "contentSha256": "29d2b756c8bb69af0e7af2be3a7e134bd54c5e2ab0f07d6b2b7d6fcf4a2aa3e9",
+          "file": "BusStops/001000.json"
+        },
+        {
+          "skip": 1500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:23.084Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:23 GMT",
+          "lastModified": null,
+          "sha256": "dd8158ce01311f3bae8e641bbf3b32460217026499bf9e2075aaa2743822e16b",
+          "contentSha256": "6e8ff0af44ae66de673a736e7aa65f3de25735494f7b60992b19df54fa155a18",
+          "file": "BusStops/001500.json"
+        },
+        {
+          "skip": 2000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:23.286Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:23 GMT",
+          "lastModified": null,
+          "sha256": "c538ecd37d8900a302c6b9d911fac2b409ab2064f71715baab18066d8d70d975",
+          "contentSha256": "06bb3d5fee24d57d3640fa721b15696f7ffb6f29ad164e79afb246c6679dec40",
+          "file": "BusStops/002000.json"
+        },
+        {
+          "skip": 2500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:23.536Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:23 GMT",
+          "lastModified": null,
+          "sha256": "ac8c0a2bacf0f24debce60f4109081db1f45310ceba767c5c33caa3c893eca65",
+          "contentSha256": "f78fe7c21c0e15c98f6c670daea9e286c158e176b8cf5a1c9fbe427bc81b0045",
+          "file": "BusStops/002500.json"
+        },
+        {
+          "skip": 3000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:23.752Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:24 GMT",
+          "lastModified": null,
+          "sha256": "56698b6970b7f14e5f8315ac734c97a80e64169a63dbb35aaed11dbe03dc585f",
+          "contentSha256": "11fcc7d169d557a2dd860a13e167b5651ad44314ae30d973df76a91c06e73c5d",
+          "file": "BusStops/003000.json"
+        },
+        {
+          "skip": 3500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:23.969Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:24 GMT",
+          "lastModified": null,
+          "sha256": "c41de402f54213df6255ac95c0e355e3e68e048e4e24c9b0a80bf2f5df0f434d",
+          "contentSha256": "129180fa1ad14757161b7d1aff764b5d7aaef805864487c0be47ecbf63313442",
+          "file": "BusStops/003500.json"
+        },
+        {
+          "skip": 4000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:24.169Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:24 GMT",
+          "lastModified": null,
+          "sha256": "3909611a8e86afbfd0f5f4c089b91a4676aa890790ff8cbd568c3fc22f78e0e5",
+          "contentSha256": "82d1c5923770d146fdf854fdf5619207060e6a5f5a3a1b07bf95240f0e40fbe8",
+          "file": "BusStops/004000.json"
+        },
+        {
+          "skip": 4500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:24.388Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:24 GMT",
+          "lastModified": null,
+          "sha256": "35a3b64ffcd606659b3f449e203f1cd8dfa89b92502f843b575529c66b41a70b",
+          "contentSha256": "50c1c72441200255a0d542e5bee3a7a2b815205bf19c5b490fd557cb69070be7",
+          "file": "BusStops/004500.json"
+        },
+        {
+          "skip": 5000,
+          "count": 208,
+          "retrievedAt": "2026-09-18T13:46:24.591Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:24 GMT",
+          "lastModified": null,
+          "sha256": "7418baa1855fc1efa172e5d3075e1fb9138ff697c71f83056a46002c896f8893",
+          "contentSha256": "0e09107cf7a65f5167ca12263ed3b49e32ce3396bc9900eaeecc803a2a5b7e19",
+          "file": "BusStops/005000.json"
+        },
+        {
+          "skip": 5500,
+          "count": 0,
+          "retrievedAt": "2026-09-18T13:46:24.779Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:25 GMT",
+          "lastModified": null,
+          "sha256": "2a3bcda5c875d53056d243ba2563dafff165e63b524805314c6c2e97ee94062e",
+          "contentSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "file": "BusStops/005500.json"
+        }
+      ]
+    },
+    "BusRoutes": {
+      "endpoint": "https://datamall2.mytransport.sg/ltaodataservice/BusRoutes",
+      "rawCount": 26823,
+      "pageSize": 500,
+      "paginationComplete": true,
+      "terminalEmptyPage": true,
+      "pages": [
+        {
+          "skip": 0,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:24.806Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:25 GMT",
+          "lastModified": null,
+          "sha256": "2f1ad9050680ba29e8cde9b8240601175c91d3a4e91d018b1e9eb6c7d39d13f5",
+          "contentSha256": "4efd4cd6ce40deb50f4a1d0bfc7c8b8bafc1dfbfe4987ec77ed41835c2e60306",
+          "file": "BusRoutes/000000.json"
+        },
+        {
+          "skip": 500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:25.101Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:25 GMT",
+          "lastModified": null,
+          "sha256": "dc870286fe48153021f7d4868080ba64a3e5111ad287a693459d70b7175f1785",
+          "contentSha256": "974d1dfff134c46b04fdc99c57ee9c0aba3e28a70a860c812114f624204394c1",
+          "file": "BusRoutes/000500.json"
+        },
+        {
+          "skip": 1000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:25.426Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:25 GMT",
+          "lastModified": null,
+          "sha256": "047e82db8a8d7bb983bf6a0a7b4e2d119e11880d885e33c3d3359c48b4205cf8",
+          "contentSha256": "127478f7a26dec3331ecc33198f4aa7c636e44d64e0cb7c97263fe7c3817dcc4",
+          "file": "BusRoutes/001000.json"
+        },
+        {
+          "skip": 1500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:25.688Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:26 GMT",
+          "lastModified": null,
+          "sha256": "ea92f6e5080e93f36229f8c2b7da494b5e5e748050d1d4c3f044e048e93e3caf",
+          "contentSha256": "eda5dbcfe2559bee791b78bf4835c6f6ba4b40005d0abcc2d2e3db6c48733b72",
+          "file": "BusRoutes/001500.json"
+        },
+        {
+          "skip": 2000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:25.964Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:26 GMT",
+          "lastModified": null,
+          "sha256": "c7f140f1a3d08c4a7a88a9aa6cf468a593fb44ea4b46659786f7e6e5839aabb5",
+          "contentSha256": "8e8f538bd90ffb876923b332ad3e348fcf070fc435320a49991318617e58fb86",
+          "file": "BusRoutes/002000.json"
+        },
+        {
+          "skip": 2500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:26.228Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:26 GMT",
+          "lastModified": null,
+          "sha256": "6026e23a7a4942f505e6fd4608a3b2cfcca537d731567bcafc572d22e489783b",
+          "contentSha256": "bb9ab10d0fa4866e70379ca5c172a58bf2f6546182c1c604afc93f0fe81ad416",
+          "file": "BusRoutes/002500.json"
+        },
+        {
+          "skip": 3000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:26.555Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:26 GMT",
+          "lastModified": null,
+          "sha256": "61a0ab68690baff19fba3e64fd6e90808a2c6efda4c6ce21f1c109e977a010fe",
+          "contentSha256": "054322fe9290e15ad91bfd02f4094cab1e555bb0e23b676148ec8fbcdd6b03ef",
+          "file": "BusRoutes/003000.json"
+        },
+        {
+          "skip": 3500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:26.836Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:27 GMT",
+          "lastModified": null,
+          "sha256": "f605c595d85378cb618abadd6205a89dfda27cc917cb0ed91afa63ffc8211a5c",
+          "contentSha256": "06950a66e595258f85803e8e5a348fd7e5e66b4378169be6a85bb21f59dd2087",
+          "file": "BusRoutes/003500.json"
+        },
+        {
+          "skip": 4000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:27.113Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:27 GMT",
+          "lastModified": null,
+          "sha256": "f8f0ba69efc481aa86b551a601d0ebf6a48fdf43a13590d78adb23330a1aa1ea",
+          "contentSha256": "59d3854dca2eac75a73a6b764bec637d4bc64c38040228b7a3e10cc3c9ee9e4b",
+          "file": "BusRoutes/004000.json"
+        },
+        {
+          "skip": 4500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:27.378Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:27 GMT",
+          "lastModified": null,
+          "sha256": "6d8942f24c36d3442f37123baf31dba697a0744e83b49dcae36067321eb547f2",
+          "contentSha256": "476652d29fe876b3c8809a79f2c96978ae32a04f62102ae6fcb2b37c83909c31",
+          "file": "BusRoutes/004500.json"
+        },
+        {
+          "skip": 5000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:27.658Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:28 GMT",
+          "lastModified": null,
+          "sha256": "133963317a63b026c4ebff34440673986c545c9e86699350809169aff2dbeb1c",
+          "contentSha256": "131bb09d1a52ebe52d1641843665672d7693fa9812af8ea2f6e3b11d1f3ce017",
+          "file": "BusRoutes/005000.json"
+        },
+        {
+          "skip": 5500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:27.970Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:28 GMT",
+          "lastModified": null,
+          "sha256": "6be7c3d08c19c6ed1f40d6ebabb7e4a1dc2ddf8a271a91b0a89ad4399ef3d980",
+          "contentSha256": "fc0f3f2c9c15c419a3386b5634f6a60bc55b20114b8fd498a2a9725ef6a6117c",
+          "file": "BusRoutes/005500.json"
+        },
+        {
+          "skip": 6000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:28.268Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:28 GMT",
+          "lastModified": null,
+          "sha256": "0afe972e56e8da04cef2304d38fe5e8739acfd7fbdcd6e8d5532fecc7649ff03",
+          "contentSha256": "581eded6a7bd200e724da8dd970a0ce4c1633825d6f5798da6a031561d9b7b75",
+          "file": "BusRoutes/006000.json"
+        },
+        {
+          "skip": 6500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:28.552Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:28 GMT",
+          "lastModified": null,
+          "sha256": "9cde13d84e154ea68deb9a2f2ec6a7d7a046c25853f4036ed96ec1c282333e05",
+          "contentSha256": "f1e8cab4db32bf24f4a40f0eec878eb35b6c4c66c8ec74c207ee711e99e45f63",
+          "file": "BusRoutes/006500.json"
+        },
+        {
+          "skip": 7000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:28.818Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:29 GMT",
+          "lastModified": null,
+          "sha256": "e634cd255a62724728d546ee8c6bc79c0cba477453a0ac6abe0f1c8a00f4f51e",
+          "contentSha256": "0352cb2e4a1ab31b6b317ec229d90dec531a46c7866017653fa48fbd2df5617d",
+          "file": "BusRoutes/007000.json"
+        },
+        {
+          "skip": 7500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:29.115Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:29 GMT",
+          "lastModified": null,
+          "sha256": "9c8efc149b4dbd27e8124274eac5750748fbb5355962d08e457f025df98e5749",
+          "contentSha256": "9db54ae5566e7abc383d9ca76558354e35bf3cb0bacfbcda1c865f5e581f3880",
+          "file": "BusRoutes/007500.json"
+        },
+        {
+          "skip": 8000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:29.396Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:29 GMT",
+          "lastModified": null,
+          "sha256": "da2ac510e3e95acf6e23015df26cb3a42bb59876361483721819dd49ab21a6a9",
+          "contentSha256": "16c4b6f0e7365087c8553b4e729351bf6f2938bb5564624e08f3f25d2101b3a8",
+          "file": "BusRoutes/008000.json"
+        },
+        {
+          "skip": 8500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:29.665Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:30 GMT",
+          "lastModified": null,
+          "sha256": "ebb6f8e384f09c5fb092b3d2f40a8603c49c21c2db7fc4d13365504da4db88eb",
+          "contentSha256": "fd03fc9f6d5146a002cd39eb5136e70b8e27a43b0e8c6d36e4c944915dbed947",
+          "file": "BusRoutes/008500.json"
+        },
+        {
+          "skip": 9000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:29.960Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:30 GMT",
+          "lastModified": null,
+          "sha256": "46f4a3caf648859152111dd1e62536d666661ed9ead9954423bfa90f351b4dad",
+          "contentSha256": "41a9702f4d79a51064f3fbb0f9b80ea1df586f48b236cb2fc85cbed2d3a70dfa",
+          "file": "BusRoutes/009000.json"
+        },
+        {
+          "skip": 9500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:30.242Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:30 GMT",
+          "lastModified": null,
+          "sha256": "4388a46f0ca9fded3b70a36fdfb556563e87ba7252af80754e9588e7476271cf",
+          "contentSha256": "4b21863b3b096992ede23cd5982b425c7097a585513ec7c7e1bdb609568ee0b8",
+          "file": "BusRoutes/009500.json"
+        },
+        {
+          "skip": 10000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:30.523Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:30 GMT",
+          "lastModified": null,
+          "sha256": "d8f6b83f2bc0f362c731452344ac3e0ef75a348e8db5a9d5034ce363521f4f6c",
+          "contentSha256": "4208427bb24d1eefb1caf490d82b49f3f26f6282f11cf59142d4a09dfcd4e5ed",
+          "file": "BusRoutes/010000.json"
+        },
+        {
+          "skip": 10500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:30.786Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:31 GMT",
+          "lastModified": null,
+          "sha256": "8815e206148b1b6f2ff97cf2abf8de1694e22e235a983e249b4174ccbd12170f",
+          "contentSha256": "74a4a3d4cbb536820d9d13b64e415ed3acee1513e54763f7b8ea8f620a905005",
+          "file": "BusRoutes/010500.json"
+        },
+        {
+          "skip": 11000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:31.096Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:31 GMT",
+          "lastModified": null,
+          "sha256": "2a16c1bb0a249bf3ddd4ec3ed6f49a80a12a0f5f129e58eaa2c686fde008a670",
+          "contentSha256": "d0f07e017415fe21689a1d1c124bdd91c482b4b2958f13677e02df55f4278854",
+          "file": "BusRoutes/011000.json"
+        },
+        {
+          "skip": 11500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:31.375Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:31 GMT",
+          "lastModified": null,
+          "sha256": "8c3ee3826d963d5a5bcd8b5966a72bf6b7c044bdb1c5b1545bb64f44a01e5b8a",
+          "contentSha256": "3f2dbd21955d6b316541183344e61bc411af8ae8c3ae934a1bdc016733fd7742",
+          "file": "BusRoutes/011500.json"
+        },
+        {
+          "skip": 12000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:31.639Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:32 GMT",
+          "lastModified": null,
+          "sha256": "9841ff1d6cccc2af9301e2a14b33183f4e4dee203a5f1af374d0d944781edd0f",
+          "contentSha256": "1dec06ae1eb110ab39bac15e8165344116dc5e03a62e7e7f611306966da614e7",
+          "file": "BusRoutes/012000.json"
+        },
+        {
+          "skip": 12500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:31.950Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:32 GMT",
+          "lastModified": null,
+          "sha256": "4715bc8e8fbc9032a88684d8bd99165aae8bc8eaf494e0772b9f4a92fc653610",
+          "contentSha256": "55643b0a9f6c78544528276116ab791afeb33bce2f596f24db40328287f1f895",
+          "file": "BusRoutes/012500.json"
+        },
+        {
+          "skip": 13000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:32.227Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:32 GMT",
+          "lastModified": null,
+          "sha256": "8971076fba094bf78a2228d2bdf629b497397c196dcc57c196a51dfdde196fcc",
+          "contentSha256": "f5365e03b0f23a9a8cd324f64926ce5eed6dbf264d67b67c4dc245374ea4d87e",
+          "file": "BusRoutes/013000.json"
+        },
+        {
+          "skip": 13500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:32.507Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:32 GMT",
+          "lastModified": null,
+          "sha256": "17768eab650d41e0e6ec833cffe060668c6918a66742a2893656ca4b43a6d097",
+          "contentSha256": "0b3cb808daaa967246f3181f30f30a0907a90326b22317597eec7a115161dabc",
+          "file": "BusRoutes/013500.json"
+        },
+        {
+          "skip": 14000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:32.802Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:33 GMT",
+          "lastModified": null,
+          "sha256": "a39010c4ea0425bc7831216d9604901f365de607b99eacf702112d4a59ce77eb",
+          "contentSha256": "8a33819502196151e618462388d072d3cacd6754fed03edc648afbbdb7dffde4",
+          "file": "BusRoutes/014000.json"
+        },
+        {
+          "skip": 14500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:33.102Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:33 GMT",
+          "lastModified": null,
+          "sha256": "a3350b70fcf2eda94fe0793ed4b2c733c8e188d5a2c95132f3463f11775cd74d",
+          "contentSha256": "716104a9e4ef2d7cf76655dafb21cf0b65782ccce13b12246b3fefac23b2f78f",
+          "file": "BusRoutes/014500.json"
+        },
+        {
+          "skip": 15000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:33.371Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:33 GMT",
+          "lastModified": null,
+          "sha256": "0d09c91366e71abdd346e487520d6a97dbf0d25ce123b898c84a69417a5811b6",
+          "contentSha256": "5aac034ff3a241d528d8bd4cd407d77e35259373bad4888ade66330ee9a8d677",
+          "file": "BusRoutes/015000.json"
+        },
+        {
+          "skip": 15500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:33.651Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:33 GMT",
+          "lastModified": null,
+          "sha256": "e80a2a9f0eb63c305697dae45f0c0169a08a20b244d773aa43c79975a36e7b99",
+          "contentSha256": "ec6a5cec88f1a67b4baee59504f0ea740dc54baf6dea405325cf33728edab5b6",
+          "file": "BusRoutes/015500.json"
+        },
+        {
+          "skip": 16000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:33.913Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:34 GMT",
+          "lastModified": null,
+          "sha256": "9605b2b32c86d221b90a16581c5dbdcfe1a02cc84e3dedd5e0c36db4bb178bd8",
+          "contentSha256": "acb7d0eca74052003468aff3f660fd0a4aeec22a8e0d57a69dc11c543677ab51",
+          "file": "BusRoutes/016000.json"
+        },
+        {
+          "skip": 16500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:34.268Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:34 GMT",
+          "lastModified": null,
+          "sha256": "df4c63d0cd2e2b6e51fa5637e7808271197a96356ad1d9c6c9fe999e91a6b44a",
+          "contentSha256": "f7eb5047d16ffbdf8b97e149be15f19f57b2c20525e12c38b058724731a32e26",
+          "file": "BusRoutes/016500.json"
+        },
+        {
+          "skip": 17000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:34.579Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:34 GMT",
+          "lastModified": null,
+          "sha256": "a64509feb5cfdeeeda8bd081dd37b80514bd618032097ba357259b8a253fb2f3",
+          "contentSha256": "1922f3de1e4e9aa895c92371c41a81ed9964f0109f3851810f30790299e01d9e",
+          "file": "BusRoutes/017000.json"
+        },
+        {
+          "skip": 17500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:34.906Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:35 GMT",
+          "lastModified": null,
+          "sha256": "62c7fa0346917b46a9a3ff94b938d9d2bd3adaed2d42f64ca49a06d956ad50d2",
+          "contentSha256": "35d694cd7bc73d4ac0a22cbd1f2f1db260afd13d80cfeb0eeed54b0b03fbdc01",
+          "file": "BusRoutes/017500.json"
+        },
+        {
+          "skip": 18000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:35.199Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:35 GMT",
+          "lastModified": null,
+          "sha256": "d640c9341eb3be78828ffd6e5397247925c52abac70a7f7eb179734666ed6b8f",
+          "contentSha256": "c6faa62ced28fa6ef021f2d978501f6a70c582ed5f043edcf488253a49ebe20f",
+          "file": "BusRoutes/018000.json"
+        },
+        {
+          "skip": 18500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:35.528Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:35 GMT",
+          "lastModified": null,
+          "sha256": "8843487acbb3e3724c1e00f19e212bd916a304e20fd9909e122c56e855f947fe",
+          "contentSha256": "55f590df77dba211a4de5c613ac3087e9f63b4144f1ca506205cada7386bf263",
+          "file": "BusRoutes/018500.json"
+        },
+        {
+          "skip": 19000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:35.836Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:36 GMT",
+          "lastModified": null,
+          "sha256": "5fedaddd60328074b2632121d588eb506bbee0669bc6f1433365393370171529",
+          "contentSha256": "ca3b1e4ca1b7d9720238a493ab279567631cb1cf6679165d5c00b161a5d0f7f4",
+          "file": "BusRoutes/019000.json"
+        },
+        {
+          "skip": 19500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:36.134Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:36 GMT",
+          "lastModified": null,
+          "sha256": "05323c0a8ac2c898f636b084a3d2147564c9c8295d7757bd61ab7b3114437964",
+          "contentSha256": "d12dd080bc00ee7d64ab1eafb649b84893dde74755007c78dbb86c027ed6ae77",
+          "file": "BusRoutes/019500.json"
+        },
+        {
+          "skip": 20000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:36.411Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:36 GMT",
+          "lastModified": null,
+          "sha256": "577d44d3355acba89b04f49dff4f2dd490f4d54d5874f25666401d454af3bf6d",
+          "contentSha256": "9b77506a8982487ba0e2c69e78e210ce78882d603c833cb2a2fdd066e435a752",
+          "file": "BusRoutes/020000.json"
+        },
+        {
+          "skip": 20500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:36.690Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:37 GMT",
+          "lastModified": null,
+          "sha256": "06625cf2d92a75d7058a1672eb2b0da71eae443478de561da1c573cc52110011",
+          "contentSha256": "f6fb8b9c49be4b4b5c82a844e9aef527410692a31aaaf93d67a00a07bd22de48",
+          "file": "BusRoutes/020500.json"
+        },
+        {
+          "skip": 21000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:36.985Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:37 GMT",
+          "lastModified": null,
+          "sha256": "67f062db7cc74546b0ab2183d105892dd42fddabcd5792e93ec51985061d5c82",
+          "contentSha256": "8bd7e94ee5a25e7ab2d3bac212177eab9f0e94eeefc57cac324fc12bcc5c7136",
+          "file": "BusRoutes/021000.json"
+        },
+        {
+          "skip": 21500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:37.265Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:37 GMT",
+          "lastModified": null,
+          "sha256": "fdd724af7f39ba303d242406953afe4a2931b466ce84ad550f5d16d60c1a65f2",
+          "contentSha256": "ea4427288dc8c39297260d23d9af70678ed4cda878365bf3fee65be1c60224b7",
+          "file": "BusRoutes/021500.json"
+        },
+        {
+          "skip": 22000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:37.546Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:37 GMT",
+          "lastModified": null,
+          "sha256": "dffc6e5bd03a2ebffb43791e8e81069e210bdf739fb3de54ba6a9f7dc0b12ddd",
+          "contentSha256": "b0a5d76a8bc33b79a78dd7f17a3575f6c2e2f5d33a3b4169bd93a81233a3c6cd",
+          "file": "BusRoutes/022000.json"
+        },
+        {
+          "skip": 22500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:37.810Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:38 GMT",
+          "lastModified": null,
+          "sha256": "649c137277a312f4f503e9c265bf84bc0cc92591b63a5441b633bfa5314d26b2",
+          "contentSha256": "4d94429419ced618f5e0aa6075dab112342f872fcaa09793b31922ff33214a42",
+          "file": "BusRoutes/022500.json"
+        },
+        {
+          "skip": 23000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:38.090Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:38 GMT",
+          "lastModified": null,
+          "sha256": "9494986bc6418447d3fce992c8877a97fddfba0b373ace9351d52f8c959b750d",
+          "contentSha256": "fa73466648e76f62ac2674afb476be50b850905621e383bc3013d2d41905bc38",
+          "file": "BusRoutes/023000.json"
+        },
+        {
+          "skip": 23500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:38.371Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:38 GMT",
+          "lastModified": null,
+          "sha256": "b33a4f29016a5198fab276bb8e6fe119511e2a77aa642d3b34ed7aa99672c154",
+          "contentSha256": "e79887dab9419169bd1cd38783e6e37c3a410ad0f8548df991060f07b9eece88",
+          "file": "BusRoutes/023500.json"
+        },
+        {
+          "skip": 24000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:38.650Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:38 GMT",
+          "lastModified": null,
+          "sha256": "2005ef7e91c264a43eed0bda255d58b3bbf521beb1cccae5ec2f1fd8a9ef5334",
+          "contentSha256": "67fa76a93fbcba26cddebbcca07a3c9b22604d313da4ab2ce274bae9df1ef8b5",
+          "file": "BusRoutes/024000.json"
+        },
+        {
+          "skip": 24500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:38.929Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:39 GMT",
+          "lastModified": null,
+          "sha256": "4bcfeba2e84e7df7f7be3b776d493eec43aec236d8219b9c6bdd801599cac19b",
+          "contentSha256": "d4d2689c0bec081960da027f50abdb80619984fe4528f088c60ff88f3d33518e",
+          "file": "BusRoutes/024500.json"
+        },
+        {
+          "skip": 25000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:39.209Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:39 GMT",
+          "lastModified": null,
+          "sha256": "9e7ab15cbd8586ca18cd9d746bee70f359a3ef496f2e9c90b89de760973362e3",
+          "contentSha256": "f9458f9dc100886d77f6c8da22fb7d38ed4db526b3f4c9b7398f76703d7acc78",
+          "file": "BusRoutes/025000.json"
+        },
+        {
+          "skip": 25500,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:39.582Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:39 GMT",
+          "lastModified": null,
+          "sha256": "65b7d5de5821bbb25fc6bdb2a56f626da6327f66aaef89b619a548cf0f204999",
+          "contentSha256": "dc647febceea320a9716d74ce2308a1901c4732e432c5bb7144475a21f3f4eee",
+          "file": "BusRoutes/025500.json"
+        },
+        {
+          "skip": 26000,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:39.861Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:40 GMT",
+          "lastModified": null,
+          "sha256": "14bf6b5f8f9f3a9b13662ddf28729432d86947cf0c5f8260c52a3e36c6d96969",
+          "contentSha256": "c4f597eda35af68c2db874cad11eb9555ad8929b91d84acbb4ea89d1669b0775",
+          "file": "BusRoutes/026000.json"
+        },
+        {
+          "skip": 26500,
+          "count": 323,
+          "retrievedAt": "2026-09-18T13:46:40.157Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:40 GMT",
+          "lastModified": null,
+          "sha256": "cf28593c1b1e17fa9910e1ede698669fb6d285fa9f891335ef9818fa80e343b9",
+          "contentSha256": "fcbc2c735783f54cfa837feef90732d6e3bbaa0a320b7ef987db4d7542ae057b",
+          "file": "BusRoutes/026500.json"
+        },
+        {
+          "skip": 27000,
+          "count": 0,
+          "retrievedAt": "2026-09-18T13:46:40.531Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:40 GMT",
+          "lastModified": null,
+          "sha256": "0fd5a6ed95c54995202e47683ad89db83540d0d4e7331a55587f36a27a67ea4a",
+          "contentSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "file": "BusRoutes/027000.json"
+        }
+      ]
+    },
+    "BusServices": {
+      "endpoint": "https://datamall2.mytransport.sg/ltaodataservice/BusServices",
+      "rawCount": 801,
+      "pageSize": 500,
+      "paginationComplete": true,
+      "terminalEmptyPage": true,
+      "pages": [
+        {
+          "skip": 0,
+          "count": 500,
+          "retrievedAt": "2026-09-18T13:46:40.622Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:40 GMT",
+          "lastModified": null,
+          "sha256": "034a3593d18c906ef03d5cd5a8edf20e0df20f00d05e0df362edeb2fc680b86c",
+          "contentSha256": "214d27cfcfafc5110f955eada380ba321abb7a88c89797aeaf9c57ce40c2af85",
+          "file": "BusServices/000000.json"
+        },
+        {
+          "skip": 500,
+          "count": 301,
+          "retrievedAt": "2026-09-18T13:46:40.857Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:41 GMT",
+          "lastModified": null,
+          "sha256": "e4ff78712b9aed816458b6bd2fb4708f4ae471450532e51567f2e5b25fcac2d9",
+          "contentSha256": "a5161913043d9a361161f0e97e509b57d9a146ee04904125795eafa31dc583dc",
+          "file": "BusServices/000500.json"
+        },
+        {
+          "skip": 1000,
+          "count": 0,
+          "retrievedAt": "2026-09-18T13:46:41.059Z",
+          "httpDate": "Fri, 18 Sep 2026 13:46:41 GMT",
+          "lastModified": null,
+          "sha256": "bd849f0c517ca8028ecaf1deec6bfc3778b42ec9e02f54205106e1f3baea699d",
+          "contentSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "file": "BusServices/001000.json"
+        }
+      ]
+    }
+  }
+}

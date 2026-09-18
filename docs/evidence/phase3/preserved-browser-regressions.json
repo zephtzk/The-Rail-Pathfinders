@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-09-18T14:00:39.412Z",
+  "classification": "desktop Edge browser emulation; real browser offline transitions; synthetic Phase1 live feeds; no physical device acceptance",
+  "base": "http://127.0.0.1:4176",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "e0d5673312d049b91c102fd64d371be61c5d8f366bc16cb59ecb0f6887ca77fc",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "262856a9824a27088ec6f42b5877d74fa0572bc9dfbf40e75195ec20ccc12620"
+  },
+  "workerSha256": "e5e2c4d0b68ceec0637dda3aeb2a82ef7ac5cb559d138b085d23ec3661e83533",
+  "suites": [
+    {
+      "name": "rail",
+      "evidence": "docs/evidence/phase3/rail-regression/rail-browser-results.json",
+      "checks": 29,
+      "status": "PASS",
+      "timestamp": "2026-09-18T13:59:55.299Z",
+      "browser": "153.0.4234.32",
+      "sha256": "e021030e41e78378e4a288b5f368ff657789e95b68e130987f1700c7d23bef65"
+    },
+    {
+      "name": "rail-offline",
+      "evidence": "docs/evidence/phase3/rail-offline-results.json",
+      "checks": 15,
+      "status": "PASS",
+      "timestamp": "2026-09-18T13:59:55.225Z",
+      "browser": "153.0.4234.32",
+      "sha256": "7cc8c41f4fd44b996212a03b3058d10c1cf176a82d024f1808dc639d001542d4"
+    },
+    {
+      "name": "replay",
+      "evidence": "docs/evidence/phase3/replay-regression/browser-results.json",
+      "checks": 30,
+      "status": "PASS",
+      "timestamp": "2026-09-18T14:00:16.142Z",
+      "browser": "153.0.4234.32",
+      "sha256": "9a6f21c0b4005f7a46e6bef018decb616a8e56486fe8fa05f3ebc4e11745693c"
+    },
+    {
+      "name": "live-panel",
+      "evidence": "docs/evidence/phase3/live-regression/live-browser-results.json",
+      "checks": 23,
+      "status": "PASS",
+      "timestamp": "2026-09-18T14:00:01.581Z",
+      "browser": "153.0.4234.32",
+      "sha256": "58e4019183b275f8a74a8a6c8ad58543edce7aeebe8e7c3e62ed686662a5b10e"
+    }
+  ],
+  "totalChecks": 97,
+  "baseRevision": "d1a432b57bec2074bc05ee5c22f4d3f97c4ae5f2",
+  "testedWorkingTree": true
+}

@@ -33,7 +33,7 @@ function indexById(items, kind) {
 function requireSeconds(value, context) {
   if (!Number.isFinite(value) || value < 0) throw new Error(`Invalid nonnegative seconds for ${context}.`);
 }
-function dominates(a, b) { return a.time <= b.time && a.boardings <= b.boardings && a.walk <= b.walk; }
+function dominates(a, b) { return a.time <= b.time && a.boardings <= b.boardings && a.walk <= b.walk && (!a.externalSinceRide || b.externalSinceRide); }
 function insert(frontier, label) {
   if (frontier.some((other) => dominates(other, label))) return false;
   for (let i = frontier.length - 1; i >= 0; i--) if (dominates(label, frontier[i])) frontier.splice(i, 1);
@@ -77,6 +77,18 @@ export function createRailRouter(network) {
   const stationStops = new Map([...stations.keys()].map((id) => [id, []]));
   const transferEdges = new Map([...stops.keys()].map((id) => [id, []]));
   const topology = new Map([...stops.keys()].map((id) => [id, new Set()]));
+  // Optional frequency edges are query-time estimates, never fabricated GTFS trips.
+  const frequency = network.frequency;
+  const busOccurrences = new Map();
+  for (const pattern of frequency?.patterns ?? []) {
+    for (let i = 0; i < pattern.stops.length - 1; i++) {
+      const occurrence = pattern.stops[i];
+      if (!stops.has(occurrence.stopId) || !stops.has(pattern.stops[i + 1].stopId)) throw Error('Unknown frequency stop');
+      if (!busOccurrences.has(occurrence.stopId)) busOccurrences.set(occurrence.stopId, []);
+      busOccurrences.get(occurrence.stopId).push({pattern,index:i});
+      topology.get(occurrence.stopId).add(pattern.stops[i + 1].stopId);
+    }
+  }
   const accessDefault = network.assumptions?.accessSeconds ?? 120;
   const exitDefault = network.assumptions?.exitSeconds ?? 120;
   requireSeconds(accessDefault, 'access allowance');
@@ -217,7 +229,7 @@ export function createRailRouter(network) {
       if (used) diagnostics.serviceDates.push(dayString(serviceDay));
     }
     connections.sort((a, b) => a.departure - b.departure || a.arrival - b.arrival || a.occurrence.localeCompare(b.occurrence) || a.index - b.index);
-    if (!connections.length) return result('no-service', 'No scheduled rail services operate in the searched time window on the covered service calendars. The last service may already have departed.', 'no-scheduled-service');
+    if (!connections.length && !frequency?.patterns.length) return result('no-service', 'No scheduled rail services operate in the searched time window on the covered service calendars. The last service may already have departed.', 'no-scheduled-service');
     const ready = new Map([...stops.keys()].map((id) => [id, []]));
     const arrived = new Map([...stops.keys()].map((id) => [id, []]));
     const aboard = new Map();
@@ -226,25 +238,50 @@ export function createRailRouter(network) {
     let boardingsAtOrigin = 0;
 
     function considerDestination(label) {
+      // Rail endpoints retain their station-level allowance. Do not enter and
+      // immediately exit an unverified indoor path solely to finish at a station.
+      if (frequency && !destinationId.startsWith('bus:') && label.externalSinceRide) return;
       if (!targetSet.has(label.stop) || label.boardings === 0 || label.time + exit > horizon || label.walk + exit > maxWalk) return;
       insert(candidates, { ...label, time: label.time + exit, walk: label.walk + exit, chain: append(label.chain, { type: 'exit', fromStopId: label.stop, toStopId: label.stop, startSeconds: label.time, endSeconds: label.time + exit, durationSeconds: exit, walkingSeconds: exit, assumed: true }) });
     }
-    function relaxTransfers(startLabel) {
-      const queue = [startLabel];
+    function relaxTransfers(startLabel, initiallyReady = false) {
+      const queue = [{label:startLabel,canBoard:initiallyReady}];
       for (let i = 0; i < queue.length; i++) {
-        const label = queue[i];
+        const {label,canBoard} = queue[i];
         for (const edge of transferEdges.get(label.stop)) {
+          if (edge.external && label.boardings === 0 && !originId.startsWith('bus:')) continue;
+          // Two exterior paths cannot create an unreviewed walk through a station.
+          if (edge.external && label.externalSinceRide) continue;
           const time = label.time + edge.seconds, walk = label.walk + edge.walkSeconds;
           if (time + exit > horizon || walk + exit > maxWalk) continue;
-          const next = { ...label, stop: edge.toStopId, time, walk, chain: append(label.chain, { type: 'transfer', fromStopId: edge.fromStopId, toStopId: edge.toStopId, startSeconds: label.time, endSeconds: time, durationSeconds: edge.seconds, walkingSeconds: edge.walkSeconds, allowanceSeconds: edge.seconds - edge.walkSeconds, provenance: edge.provenance, assumed: edge.assumed === true }) };
-          if (insert(ready.get(next.stop), next)) { diagnostics.labelsCreated++; queue.push(next); considerDestination(next); }
+          const next = { ...label, externalSinceRide:label.externalSinceRide || edge.external, stop: edge.toStopId, time, walk, chain: append(label.chain, { type: 'transfer', fromStopId: edge.fromStopId, toStopId: edge.toStopId, startSeconds: label.time, endSeconds: time, durationSeconds: edge.seconds, walkingSeconds: edge.walkSeconds, allowanceSeconds: edge.seconds - edge.walkSeconds, provenance: edge.provenance, pathId:edge.pathId, assumed: edge.assumed === true }) };
+          if (insert(ready.get(next.stop), next)) { diagnostics.labelsCreated++; queue.push({label:next,canBoard:true}); considerDestination(next); }
+        }
+        if (!canBoard || !frequency) continue;
+        for (const {pattern,index} of busOccurrences.get(label.stop) ?? []) {
+          const departureEstimate = frequency.boarding(pattern,index,label.time,date);
+          if (departureEstimate === null || departureEstimate > horizon || departureEstimate < label.time) continue;
+          if (label.boardings === 0) boardingsAtOrigin++;
+          const boarding = pattern.stops[index];
+          const waitChain = departureEstimate > label.time ? append(label.chain,{type:'wait',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:label.stop,startSeconds:label.time,endSeconds:departureEstimate,durationSeconds:departureEstimate-label.time}) : label.chain;
+          for (let j = index + 1; j < pattern.stops.length; j++) {
+            const alight = pattern.stops[j];
+            const duration = frequency.riding(pattern,index,j), time = departureEstimate + duration;
+            if (!Number.isFinite(duration) || duration <= 0 || time + exit > horizon || !frequency.canAlight(pattern,j,time,date)) continue;
+            const next = {stop:alight.stopId,time,walk:label.walk,boardings:label.boardings+1,externalSinceRide:false,
+              chain:append(waitChain,{type:'ride',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:alight.stopId,startSeconds:departureEstimate,endSeconds:time,durationSeconds:duration,
+                tripId:`estimate:${pattern.id}:${index}:${departureEstimate}`,routeId:pattern.id,serviceId:pattern.serviceNo,serviceNo:pattern.serviceNo,operator:pattern.operator,serviceDate:date,directionId:pattern.direction,
+                patternId:pattern.id,fromSequence:boarding.sequence,toSequence:alight.sequence,visitNumber:boarding.visitNumber,headsign:pattern.destinationCode,stopIds:pattern.stops.slice(index,j+1).map(s=>s.stopId)})};
+            considerDestination(next);
+            if (insert(arrived.get(next.stop),next)) { diagnostics.labelsCreated++; queue.push({label:next,canBoard:false}); }
+          }
         }
       }
     }
     for (const stop of originStops) {
       const initial = { stop, time: departure + access, walk: access, boardings: 0, chain: append(null, { type: 'access', fromStopId: stop, toStopId: stop, startSeconds: departure, endSeconds: departure + access, durationSeconds: access, walkingSeconds: access, assumed: true }) };
       ready.get(stop).push(initial);
-      relaxTransfers(initial);
+      relaxTransfers(initial,true);
     }
     for (const connection of connections) {
       diagnostics.connectionsScanned++;
@@ -261,7 +298,7 @@ export function createRailRouter(network) {
       const riding = [];
       for (const label of choices) {
         const start = label.newlyBoarded ? connection.departure : label.time;
-        const next = { stop: connection.to, time: connection.arrival, walk: label.walk, boardings: label.boardings, segment: connection.index, chain: append(label.chain, { type: 'ride', fromStopId: connection.from, toStopId: connection.to, startSeconds: start, endSeconds: connection.arrival, durationSeconds: connection.arrival - start, tripId: trip.id, routeId: trip.routeId, serviceId: trip.serviceId, serviceDate: connection.serviceDate, directionId: trip.directionId, headsign: trip.headsign, stopIds: [connection.from, connection.to] }) };
+        const next = { stop: connection.to, time: connection.arrival, walk: label.walk, boardings: label.boardings, externalSinceRide:false, segment: connection.index, chain: append(label.chain, { type: 'ride', mode:'rail', timing:'scheduled', fromStopId: connection.from, toStopId: connection.to, startSeconds: start, endSeconds: connection.arrival, durationSeconds: connection.arrival - start, tripId: trip.id, routeId: trip.routeId, serviceId: trip.serviceId, serviceDate: connection.serviceDate, directionId: trip.directionId, headsign: trip.headsign, stopIds: [connection.from, connection.to] }) };
         insert(riding, next);
       }
       aboard.set(connection.occurrence, riding);
@@ -284,12 +321,14 @@ export function createRailRouter(network) {
         ...legs.filter((leg) => leg.type === 'transfer' && leg.assumed).map((leg) => `Assumed transfer allowance ${leg.fromStopId} → ${leg.toStopId}: ${leg.durationSeconds} seconds total, including ${leg.walkingSeconds} seconds walking.`),
       ];
       if (preference === 'quieter') assumptions.push('Comparable measured crowding is unavailable; quieter preference falls back to fastest arrival without claiming a quieter train.');
+      const estimated = rideLegs.some(leg => leg.mode === 'bus');
+      if (estimated) assumptions.push(...frequency.assumptions, 'Arrival and rail-connection feasibility depend on estimated bus timing; deadline outcomes are not guaranteed. No live arrivals changed this itinerary.');
       return {
         id: rideLegs.map((leg) => `${leg.serviceDate}/${leg.tripId}/${leg.fromStopId}/${leg.toStopId}`).join('|'),
         originId, destinationId, date, departureSeconds: departure, arrivalSeconds: label.time, totalSeconds: label.time - departure,
         accessSeconds: sum('access'), waitSeconds: sum('wait'), rideSeconds: sum('ride'), transferSeconds: sum('transfer'), transferWalkSeconds: sum('transfer', 'walkingSeconds'), exitSeconds: sum('exit'), walkingSeconds: label.walk, transfers: Math.max(0, label.boardings - 1),
         deadlineSeconds: deadline, deadlineMet: deadline === null || label.time <= deadline, deadlineBufferSeconds: deadline === null ? null : deadline - label.time,
-        crowding: null, legs, assumptions, preferenceScore: 0,
+        crowding: null, legs, assumptions, preferenceScore: 0, estimated, timing:estimated ? 'frequency-estimated + scheduled rail where used' : 'scheduled',
       };
     });
     journeys.sort((a, b) => a.arrivalSeconds - b.arrivalSeconds || a.transfers - b.transfers || a.walkingSeconds - b.walkingSeconds || a.id.localeCompare(b.id));

@@ -1,5 +1,17 @@
 # Commute Copilot milestones
 
+## Phase 3 — bounded bus and map-supported pedestrian pilot
+
+**18 September 2026: implemented for local use within the declared estimated-timing coverage.** Services 2, 23 and 28 retain five complete patterns and 261 bus stops. Four reviewed exterior walks at Paya Lebar/Bugis connect to the wider scheduled rail graph. Weekend/holiday/overnight buses, unverified terminal bay transfers and unreviewed pedestrian shortcuts remain excluded. Arrival estimates do not guarantee deadlines.
+
+The [Phase 3 report](PHASE3_REPORT.md) gives the final PASS / FAIL / BLOCKED / NOT TESTED ledger, exact tested build/data identities, performance, secure configuration and delivery details. See [coverage](PHASE3_COVERAGE.md), [bus sources](BUS_DATA.md) and [walking evidence](WALKING_COVERAGE.md). Complete acquisition was repeated with the identical source hash. Real bus arrival samples and synthetic failure/matching tests are separate evidence classes. New offline searches are exercised after browser networking is disabled and the page is reloaded.
+
+**Phase 2 evidence correction:** its original offline check proved restoration and an enabled button, not a new calculation. The expanded [real-offline check](evidence/phase3/rail-offline-results.json) changes the journey, submits while offline, independently checks 08:50:20 arithmetic and verifies the selected saved guidance through reconnection. The old broad sentence in PHASE2_REPORT.md is corrected; the original test counts below remain historical.
+
+Delivery is `codex/phase-3-bus-walking`, descended from `d1a432b57bec2074bc05ee5c22f4d3f97c4ae5f2`, preserving both Phase 2 commits. Local commit only; no push, PR, merge, deployment, replacement project or visibility change. Phase 4 and EXTOL have not started. Unattended live rerouting is not release-ready: live incident applicability, timing calibration and device/release acceptance remain open.
+
+---
+
 ## Phase 2 — imported rail network and general scheduled routing
 
 **18 September 2026: ready within the declared imported schedule coverage.** Default planning now searches a validated

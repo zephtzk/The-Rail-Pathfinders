@@ -2,7 +2,11 @@
 
 A Singapore **station-to-station scheduled rail planner**, using a general routing engine and a pinned, reproducible LTA GTFS import. Choose any pair of **186 imported station records**, with calendars, directed trips and reviewed interchange connections. Access, waiting, riding, transfers and exit all count.
 
-**No bus, address-to-address, entrance, fare or step-free routing is claimed.** Timetable routes do not incorporate live disruptions or crowding. The original corridor replay and Phase 1 live information remain separate at `/replay.html`.
+The **[Phase 3 bus & walking pilot](docs/PHASE3_REPORT.md)** is at `/multimodal.html`: complete services **2, 23 and 28**, 261 bus stops, estimated weekday timing and four map-supported bus/rail paths at Paya Lebar and Bugis. Wider scheduled rail stays at `/`. Address search, fare and step-free routing are not supported. The original corridor replay and Phase 1 live information remain separate at `/replay.html`.
+
+Bus estimates support ordinary weekdays **18 September–2 October 2026, 09:30–16:30**. Published maximum off-peak headway is the wait assumption; distance at 18 km/h plus 30 seconds per stop is the uncalibrated ride model. An estimated deadline is not guaranteed. Current arrivals are optional advisory information and never alter future-date or downstream timings. See [bus data](docs/BUS_DATA.md), [walking evidence](docs/WALKING_COVERAGE.md), and [combined coverage](docs/PHASE3_COVERAGE.md).
+
+Phase 3 is committed locally only. No push, PR, hosting or audience change is part of this delivery.
 
 See the [Phase 2 report](docs/PHASE2_REPORT.md), [coverage summary](docs/RAIL_COVERAGE.md) and [milestone ledger](docs/MILESTONES.md). The [existing private hosted preview](https://commute-copilot-nebula.simhongmen.chatgpt.site) remains an older release. **Phase 2 is not deployed.**
 
@@ -24,6 +28,12 @@ npm run test:import
 npm test
 npm run benchmark:rail
 npm run test:rail-browser
+npm run test:multimodal-browser
+npm run import:bus
+npm run test:bus-import
+npm run benchmark:multimodal
+node tests/rail-offline-browser.mjs
+python scripts/verify-walking.py
 npm run test:browser
 node tests/live-browser.mjs
 ```
