@@ -2,6 +2,8 @@
 
 A mobile browser MVP for NEBULA X PS2: decide when to leave, understand a disruption and choose a feasible route to Bugis. No login or installation is needed for the app. **Journey times, crowding and transport events are labelled deterministic replay, not live travel advice.**
 
+Hosted preview: [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Hosting access is currently owner-private; approval to make it public is pending. The app itself has no account system. Public judge access must be enabled before submission.
+
 ## Run
 
 Requires Node.js 22 or newer and npm. Validated with Node 24.16.0 and npm 11.13.0 on Windows.
