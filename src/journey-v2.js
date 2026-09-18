@@ -1,4 +1,6 @@
 // One accepted state for guidance, sharing, facilities, detours and completion.
+import {normalizePreferences,validatePreferences} from './preferences.js';
+import {validateJourney} from './journey-state.js';
 export const JOURNEY_KEY='commute-copilot-journey-v2';
 export const SCHEMA_VERSION=2;
 const copy=value=>structuredClone(value);
@@ -40,14 +42,16 @@ function validDetourPreview(d){
 }
 function validStops(stops,mode){return Array.isArray(stops)&&stops.length<=100&&stops.every(s=>record(s)&&s.type==='toilet'&&text(s.facilityId??s.toiletId,1000)&&(s.id==null||text(s.id,1000))&&(s.status==null||['accepted','reached','returning','resumed','cancelled','planned'].includes(s.status))&&(s.preview==null||validDetourPreview(s.preview)&&!(s.preview.fixture&&mode!=='replay')));}
 function validCheckpoint(cp){return cp==null||record(cp)&&optionalText(cp.nodeId,1000)&&optionalText(cp.stationId,1000)&&optionalText(cp.label,4000)&&(cp.floor==null||typeof cp.floor==='string'&&cp.floor.length>0&&cp.floor.length<=80||Number.isFinite(cp.floor));}
-export function makePlan({origin,destination,date,departureTime,deadline=null,preferences={},route,mode='real',stops=[]},now=Date.now()) {
+export function makePlan({origin,destination,date,departureTime,deadline=null,deadlineDate=null,timeMode=null,preferences={},route,mode='real',stops=[]},now=Date.now()) {
   if(!origin?.id||!destination?.id||!route?.steps?.length||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!/^\d{2}:\d{2}/.test(departureTime))throw Error('Choose supported endpoints, a date, time and a calculated route.');
-  const plan={schemaVersion:2,id:uid(),origin:copy(origin),destination:copy(destination),departureDate:date,departureTime,deadline,preferences:{stepFree:false,walkingLimitMinutes:30,...preferences},route:copy(route),mode,stops:copy(stops),createdAt:now,sourceTimes:route.sourceTimes??{},estimateProvenance:route.provenance??'See route source'};
+  const plan={schemaVersion:2,id:uid(),origin:copy(origin),destination:copy(destination),departureDate:date,departureTime,deadline:deadline||null,deadlineDate:deadline?deadlineDate??date:null,timeMode:timeMode??(deadline?'arrive-by':'depart-later'),timeZone:'Asia/Singapore',preferences:normalizePreferences(preferences),route:copy(route),mode,stops:copy(stops),createdAt:now,sourceTimes:route.sourceTimes??{},estimateProvenance:route.provenance??'See route source'};
   if(!validatePlan(plan))throw Error('Invalid trip plan.');return plan;
 }
 export function validatePlan(plan) {
   if(!record(plan)||plan.schemaVersion!==2||!['real','replay'].includes(plan.mode)||!text(plan.id,1000)||!validPlace(plan.origin)||!validPlace(plan.destination)||!validStops(plan.stops,plan.mode)||!record(plan.preferences)||!finite(plan.preferences.walkingLimitMinutes)||plan.preferences.walkingLimitMinutes>240||typeof plan.preferences.stepFree!=='boolean'||!instant(plan.createdAt))return null;
-  if(!validRoute(plan.route)||!civilDate(plan.departureDate)||!clock(plan.departureTime)||plan.deadline!=null&&plan.deadline!==''&&!clock(plan.deadline))return null;
+  if(!validRoute(plan.route)||!civilDate(plan.departureDate)||!clock(plan.departureTime)||plan.deadline!=null&&plan.deadline!==''&&!clock(plan.deadline)||!validatePreferences(plan.preferences))return null;
+  // R1 snapshots remain readable. New plans carry the civil deadline date and mode.
+  if(plan.deadlineDate!=null&&!civilDate(plan.deadlineDate)||plan.timeMode!=null&&!['leave-now','depart-later','arrive-by'].includes(plan.timeMode)||plan.timeZone!=null&&plan.timeZone!=='Asia/Singapore'||plan.timeMode==='arrive-by'&&(!clock(plan.deadline)||!civilDate(plan.deadlineDate)))return null;
   return plan;
 }
 export function startJourney(plan,now=Date.now()) {
@@ -57,6 +61,7 @@ export function startJourney(plan,now=Date.now()) {
 }
 export function validateActive(value) {
   if(!record(value)||value.schemaVersion!==2||!validatePlan(value.plan)||!text(value.id,1000)||!['started','paused','completed','cancelled'].includes(value.status)||!counter(value.revision)||!instant(value.startedAt)||!instant(value.updatedAt)||!validRoute(value.route)||!record(value.progress)||!counter(value.progress.stepIndex)||value.progress.stepIndex>=value.route.steps.length||!progressKinds.includes(value.progress.kind)||!validCheckpoint(value.progress.checkpoint)||value.progress.confirmedAt!=null&&!instant(value.progress.confirmedAt)||!validStops(value.stops,value.plan.mode)||!Array.isArray(value.routeRevisions)||value.routeRevisions.length>1000||!record(value.permissions))return null;
+  if(value.routingContext!=null&&!validateJourney(value.routingContext))return null;
   const p=value.permissions;
   if(['progress','location','paused','revoked'].some(k=>typeof p[k]!=='boolean')||!geoStates.includes(p.geolocation)||p.revoked&&(p.progress||p.location))return null;
   if(value.status==='paused'&&!instant(value.pausedAt)||value.pausedAt!=null&&!instant(value.pausedAt)||terminal(value.status)&&(!instant(value.completedAt)||p.progress||p.location||value.location!=null)||!terminal(value.status)&&value.completedAt!=null)return null;
@@ -89,10 +94,12 @@ export function confirmCheckpoint(state,{stepIndex=state.progress.stepIndex,node
     if(d.status==='returning'&&nodeId===d.onward){d.status='resumed';next.stops.find(s=>s.id===d.id).status='resumed';}
   }return next;
 }
-export function setPermissions(state,changes,now=Date.now()) {
+export function setPermissions(state,changes,now=Date.now(),{preserveLocalLocation=false}={}) {
   const next=mutate(state,now);if(!record(changes)||Object.keys(changes).some(k=>!['progress','location','paused','revoked','geolocation'].includes(k))||changes.geolocation!==undefined&&!geoStates.includes(changes.geolocation))throw Error('Invalid consent');for(const k of ['progress','location','paused','revoked'])if(changes[k]!==undefined&&typeof changes[k]!=='boolean')throw Error('Invalid consent');
   next.permissions={...next.permissions,...changes};if(next.permissions.revoked){next.permissions.progress=false;next.permissions.location=false;}
-  if(!next.permissions.location||next.permissions.paused||next.permissions.revoked)next.location=null;return next;
+  // Independent local assistance may keep its current fix while upload consent changes.
+  // Callers must opt in only while their separate local runtime consent is active.
+  if(!preserveLocalLocation&&(!next.permissions.location||next.permissions.paused||next.permissions.revoked))next.location=null;return next;
 }
 export function setApproximateLocation(state,position,now=Date.now()) {
   const next=mutate(state,now);const {latitude,longitude,accuracy,timestamp}=position;
@@ -160,5 +167,5 @@ export function migrateActive(storage,validateV1,name=id=>id){
 export function routeFromLegacy(route,input,{name=id=>id,mode='real',source='Imported timetable / planning allowances'}={}) {
   const replay=mode==='replay',date=input.date,originId=input.originId??input.origin,destinationId=input.destinationId??input.destination;
   const steps=route.legs.map((l,i)=>({id:`${route.id}:${i}`,type:l.type,text:l.text??`${l.type==='ride'?(l.mode==='bus'?'Bus '+l.serviceNo:l.routeId+' train'):l.type}: ${name(l.fromStopId)} → ${name(l.toStopId)}`,durationSeconds:replay?(l.minutes+(l.delay??0))*60:l.durationSeconds,facilityId:null,stationId:l.station??null,fromStopId:l.fromStopId,toStopId:l.toStopId,stopIds:l.stopIds??l.stops??[],source:l}));
-  return makePlan({origin:{id:originId,label:name(originId)},destination:{id:destinationId,label:name(destinationId)},date,departureTime:input.departureTime??input.departure,deadline:input.deadlineTime??input.deadline,mode,preferences:{walkingLimitMinutes:Number(input.walkingLimitMinutes??input.walkingLimit??30),stepFree:false},route:{id:route.id,steps,departureSeconds:replay?route.legs[0].start*60:route.departureSeconds,arrivalSeconds:replay?route.arrival*60:route.arrivalSeconds,walkingSeconds:replay?route.totalWalking*60:route.walkingSeconds,accessibility:'unknown',provenance:source,legacyRoute:copy(route),legacyInput:copy(input)}});
+  return makePlan({origin:{id:originId,label:name(originId)},destination:{id:destinationId,label:name(destinationId)},date,departureTime:input.departureTime??input.departure,deadline:input.deadlineTime??input.deadline,deadlineDate:input.deadlineDate,timeMode:input.timeMode,mode,preferences:normalizePreferences({...input,...input.preferences}),route:{id:route.id,steps,departureSeconds:replay?route.legs[0].start*60:route.departureSeconds,arrivalSeconds:replay?route.arrival*60:route.arrivalSeconds,walkingSeconds:replay?route.totalWalking*60:route.walkingSeconds,accessibility:'unknown',provenance:source,legacyRoute:copy(route),legacyInput:copy(input)}});
 }

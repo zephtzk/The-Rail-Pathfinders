@@ -11,7 +11,7 @@ const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copil
 async function preview(origin,destination,mode='mixed') {const f=page.locator('#pilot-form');await f.locator('[name=originId]').fill(origin);await f.locator('[name=destinationId]').fill(destination);await f.locator('[name=deadlineTime]').fill('');await f.locator('[name=mode]').selectOption(mode);await page.getByRole('button',{name:'Find pilot journeys'}).click();await page.locator('.route-hero').waitFor();}
 async function confirm(kind,step,time,walk){const f=page.locator('#progress-form');await f.locator('[name=kind]').selectOption(kind);await f.locator('[name=legIndex]').selectOption(String(step-1));await f.locator('[name=time]').fill(time);await f.locator('[name=walk]').fill(String(walk));await f.getByRole('button',{name:'Confirm progress'}).click();}
 try{
- const start=performance.now();await page.goto(base+'/multimodal.html');await page.locator('#accept-search').waitFor();const coldMs=performance.now()-start;
+ const start=performance.now();await page.goto(base+'/multimodal.html?legacy=1');await page.locator('#accept-search').waitFor();const coldMs=performance.now()-start;
  const cdp=await context.newCDPSession(page),heap=await cdp.send('Runtime.getHeapUsage');await cdp.detach();
  const resources=await page.evaluate(()=>performance.getEntriesByType('resource').map(e=>({name:new URL(e.name).pathname,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize})));
  check('complete changed application cold startup <=3000ms',coldMs<=3000);check('complete changed application heap <=150MiB',heap.usedSize<=150*1024*1024);check('initial request budget: zero automatic live requests',apiRequests===0);
@@ -61,7 +61,7 @@ try{
  check('no browser exceptions',errors.length===0);
  const isolated=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'}),fallback=await isolated.newPage();
  const retained=await saved();await isolated.addInitScript(value=>localStorage.setItem('commute-copilot-active-journey-v1',JSON.stringify(value)),retained);
- await isolated.route('**/data/bus-network.json',r=>r.abort('failed'));await fallback.goto(base+'/multimodal.html');await fallback.locator('#accepted-next').waitFor();
+ await isolated.route('**/data/bus-network.json',r=>r.abort('failed'));await fallback.goto(base+'/multimodal.html?legacy=1');await fallback.locator('#accepted-next').waitFor();
  check('partial routing asset failure retains accepted guidance independently of legacy save',(await fallback.locator('#progress-summary').innerText()).includes(retained.progress.kind));
  await fallback.locator('#reassess').click();check('partial data disables recalculation without erasing instructions',(await fallback.locator('#comparison').innerText()).includes('Saved guidance remains'));
  await isolated.close();

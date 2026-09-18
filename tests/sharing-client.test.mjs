@@ -20,6 +20,19 @@ test('default browser fetch is invoked with its Window/global receiver',async()=
   }finally{globalThis.fetch=original;}
 });
 
+test('consuming an invitation removes the secret fragment and retains the compatibility entry query',()=>{
+  const previousLocation=Object.getOwnPropertyDescriptor(globalThis,'location'),previousHistory=Object.getOwnPropertyDescriptor(globalThis,'history');let replaced;
+  try {
+    Object.defineProperty(globalThis,'location',{configurable:true,value:{pathname:'/',search:'?legacy=1',hash:'#invite='+'a'.repeat(22)+'.'+'b'.repeat(43)}});
+    Object.defineProperty(globalThis,'history',{configurable:true,value:{replaceState(_state,_title,url){replaced=url;}}});
+    const client=new SharingClient(storage(),{fetcher:async()=>{throw Error('No network needed to consume invitation');}});
+    assert.equal(client.useFragment(),true);assert.equal(replaced,'/?legacy=1');assert.equal(replaced.includes('#'),false);assert.equal(client.session.inviteToken,'b'.repeat(43));
+  } finally {
+    if(previousLocation)Object.defineProperty(globalThis,'location',previousLocation);else delete globalThis.location;
+    if(previousHistory)Object.defineProperty(globalThis,'history',previousHistory);else delete globalThis.history;
+  }
+});
+
 test('lost acceptance responses recover the same claimant after reload, without another pairing grant',async t=>{
   const {fetcher,traveller,recipientStorage,store,share}=await setup(t);let losses=0;
   traveller.fetcher=async(url,options)=>{const response=await fetcher(url,options);if(url.endsWith('/accept')){losses++;throw Error('Response lost after server commit');}return response;};

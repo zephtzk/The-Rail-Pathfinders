@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {makePlan,startJourney,transition,confirmCheckpoint,setPermissions,setApproximateLocation,acceptDetour,stopAction,journeyCard,proposeRoute,acceptRoute,restoreActive,saveActive,validatePlan,validateActive} from '../src/journey-v2.js';
 import {FIXTURE_LAYOUT,fixtureStatuses} from '../src/facility-data.js';
 import {rankToilets,previewToiletDetour} from '../src/toilet-engine.js';
+import {acceptJourney} from '../src/journey-state.js';
 const plan=(mode='replay')=>makePlan({origin:{id:'a',label:'Origin'},destination:{id:'b',label:'Destination'},date:'2026-09-18',departureTime:'10:00',mode,preferences:{stepFree:true},route:{id:'r',departureSeconds:36000,arrivalSeconds:36600,walkingSeconds:100,accessibility:'unknown',provenance:'fixture',steps:[{id:'s1',text:'Use lift A',durationSeconds:120},{id:'s2',text:'Exit B',durationSeconds:200}]}},100);
 const preview={toiletId:'fixture:t1',addedSeconds:500,walkingSeconds:100,breakMinutes:5,fixture:true,steps:[{text:'Use alternative lift B',durationSeconds:100}]};
 test('real unverified step-free routes fail closed; timetable never establishes arrival',()=>{assert.throws(()=>startJourney(plan('real')),/verified/);const s=startJourney(plan());assert.equal(journeyCard(s,{now:Date.now()+86400000}).status,'started');assert.equal(s.progress.kind,'unknown');});
@@ -25,6 +26,16 @@ test('plan identity, coordinates, route costs and steps are validated before acc
 test('active snapshots reject corrupt counters, permission shapes and impossible progress',()=>{
   const mutations=[s=>s.revision=-1,s=>s.revision=0.5,s=>s.updatedAt=NaN,s=>s.startedAt=-1,s=>s.route.walkingSeconds=NaN,s=>s.route.arrivalSeconds=-1,s=>s.progress.stepIndex=99,s=>s.progress.kind='teleported',s=>s.progress.checkpoint=[],s=>s.progress.confirmedAt=-1,s=>s.permissions.progress='true',s=>s.permissions.geolocation='invented',s=>s.permissions={progress:false},s=>s.routeRevisions=[null],s=>s.facilityBlocked='false',s=>{s.status='paused';s.pausedAt=null;},s=>{s.status='completed';s.completedAt=100;s.permissions.location=true;}];
   for(const mutate of mutations){const s=startJourney(plan(),100);mutate(s);assert.equal(validateActive(s),null);assert.equal(restoreActive({getItem:()=>JSON.stringify(s)}),null);assert.equal(saveActive({setItem(){throw Error('must not write invalid state');}},s),false);}
+});
+
+test('restored rerouting context is validated before a controller consumes its route and progress',()=>{
+  const active=startJourney(plan(),100),route={id:'r',departureSeconds:36000,arrivalSeconds:36600,deadlineSeconds:null,legs:[{type:'ride',fromStopId:'a',toStopId:'b',durationSeconds:600,startSeconds:36000,endSeconds:36600}]};
+  active.routingContext=acceptJourney(route,{walkingLimitMinutes:30},'test-build',100);
+  const before=structuredClone(active);assert.ok(validateActive(active));assert.deepEqual(active,before,'validation must not mutate the accepted snapshot');
+  for(const context of [{},{route:{legs:[]}}, {...active.routingContext,progress:{}},{...active.routingContext,route:{...route,legs:[null]}}]){
+    const corrupt={...active,routingContext:context};assert.equal(validateActive(corrupt),null);assert.equal(restoreActive({getItem:()=>JSON.stringify(corrupt)}),null);
+  }
+  const withoutContext={...active,routingContext:null};assert.ok(validateActive(withoutContext));
 });
 test('a prepared graph path is checked for connectivity and consistent costs when restored',()=>{
   const now=1000,result=rankToilets(FIXTURE_LAYOUT,{from:'platform',allowFixtures:true,statuses:fixtureStatuses('none',now),now,arrivalBaseMs:Date.parse('2026-09-18T08:00:00Z')})[0],full=previewToiletDetour(FIXTURE_LAYOUT,result,{now}),accepted=acceptDetour(startJourney(plan(),100),full,now);

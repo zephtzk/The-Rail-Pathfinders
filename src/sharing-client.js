@@ -44,7 +44,7 @@ export class SharingClient {
   useFragment(){
     const match=location.hash.match(/^#(invite|caregiver)=([A-Za-z0-9_-]{22})\.([A-Za-z0-9_-]{43})$/);if(!match)return false;
     // Strip before storage or any later application navigation can expose it.
-    history.replaceState(null,'',location.pathname);this.epoch++;this.lastSent=null;
+    history.replaceState(null,'',location.pathname+location.search);this.epoch++;this.lastSent=null;
     this.session={id:match[2],role:match[1]==='invite'?'recipient':'caregiver',[match[1]==='invite'?'inviteToken':'viewerToken']:match[3]};this.persist();return true;
   }
   accept(consent={progress:false,location:false}) {return this.enqueue(()=>this.acceptNow(consent));}
