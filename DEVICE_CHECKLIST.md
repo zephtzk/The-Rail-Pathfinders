@@ -5,9 +5,9 @@ Allow about 20–30 minutes per device. Evaluate scheduled planning, acceptance,
 ## Entry, access and build
 
 - Start at `/multimodal.html` on the candidate host; `/` is the wider scheduled rail planner and `/replay.html` is the separate historical corridor replay.
-- The existing [Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) currently serves older **version 2** with **owner-only access**. It is not the Phase 4 candidate. After separately authorized publication, sign in with the approved owner/tester account. External tester access must be explicitly approved; do not assume a public URL works without login.
+- The existing [Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) serves Phase 4 **version 3** with **owner-only access**. Sign in as the owner. External tester access must be explicitly approved after owner phone smoke tests; do not assume a public URL works without login.
 - Local option: `npm ci`, `npm run check`, `npm run dev`; open `http://127.0.0.1:4173/multimodal.html`. Use a separate unused port if an existing session owns 4173. Local access needs no login.
-- Match `/data/application-build.json` to the [readiness report](docs/PHASE4_READINESS.md) and record the candidate commit and Worker hash from its acceptance receipt. Stop if the hosted identity differs.
+- Match `/data/application-build.json` to the [publication report](docs/PHASE4_PUBLICATION.md) and record the deployed source commit and Worker hash from its acceptance receipt. Stop if the hosted identity differs. Later documentation commits do not change the deployed application identity.
 - Record physical phone tests separately from desktop emulation. Android Chrome, iPhone Safari, mobile keyboards, OS large text and real airplane-mode behavior remain **NOT TESTED** until completed on actual devices.
 
 All times are Asia/Singapore. Keep the fixture date **18 September 2026**, rather than today's date. Rail coverage is **18 September–31 December 2026**, subject to calendars/exceptions and genuine carryover. Bus services **2, 23, 28** operate in this pilot on ordinary weekdays **18 September–2 October 2026**, with boarding and alighting **09:30–16:30**. Bus timing is an uncalibrated estimate; four reviewed exterior links cover Paya Lebar/Bugis. No address search, fare, step-free guarantee, broader bus coverage or intermediate onboard alighting is supported.
@@ -51,4 +51,4 @@ For every case, record device/model, OS, browser/version, timestamp/time zone, U
 
 ## Current result boundary
 
-Automated local results in the readiness report are desktop emulation and deterministic engineering checks. Hosted candidate identity/access, owner phone smoke tests and external tester comprehension remain **NOT TESTED**. Do not convert these to PASS based on local tests.
+Automated local results are desktop emulation and deterministic engineering checks. Hosted identity, owner-only access and the bounded desktop journey smoke passed, as recorded in the publication report. Hosted airplane-mode/reconnect behavior, physical owner phone smoke tests and external tester comprehension remain **NOT TESTED**. Do not convert these to PASS based on local or hosted desktop tests.

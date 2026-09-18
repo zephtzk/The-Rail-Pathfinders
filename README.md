@@ -1,6 +1,6 @@
 # Commute Copilot — The Rail Pathfinders
 
-Current delivery: **Phase 4 user-testing candidate, local only**. Start with the [readiness report](docs/PHASE4_READINESS.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
+Current delivery: **Phase 4 user-testing build, published for owner testing**. Start with the [publication report](docs/PHASE4_PUBLICATION.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
 
 | Entry page | Use in this round |
 | --- | --- |
@@ -9,7 +9,7 @@ Current delivery: **Phase 4 user-testing candidate, local only**. Start with the
 | `/replay.html` | Original fictional corridor replay and optional Phase 1 advisory panel; separate from the scheduled planner. |
 | `/data/application-build.json` | Compare the application SHA-256 with the candidate report before recording a test. |
 
-The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) still serves older **version 2**, with **owner-only access**. It does not contain this candidate. Sign in as the authorized owner for the current Site; external testers need a separately approved access arrangement after publication. Local testing needs no account. A GitHub push alone will not update the hosted app. This readiness pass does not push, deploy or change access.
+The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) serves **version 3**, source `32d97e39172827cd31916f62aa39603c2cb3e5b3`, with **owner-only access**. Sign in as the authorized owner; external testers need a separately approved access arrangement after owner phone smoke tests. Local testing needs no account. GitHub and Sites were published separately; a future GitHub push alone will not update the hosted app. The publication report records the verified build and distinguishes later documentation updates from the deployed source.
 
 Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
 
@@ -93,6 +93,6 @@ For optional Phase 1 live information, build then run `python scripts/run-live-l
 
 ## Deployment and licence
 
-Publication actions remain proposed in the [readiness report](docs/PHASE4_READINESS.md). Preserve the existing Sites identity in `.openai/hosting.json`. Approve the GitHub branch push, then the separate Sites source publication and hosted verification; approve tester access explicitly before invitations. Perform owner phone smoke tests first.
+The authorized GitHub push and Sites version 3 deployment are recorded in the [publication report](docs/PHASE4_PUBLICATION.md). The existing Sites identity and owner-only audience are preserved. Owner phone smoke tests and explicitly approved tester access remain before invitations.
 
-Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps; redistribution permission is not recorded. See [third-party notices](THIRD_PARTY_NOTICES.md) and the publication-review caveat in the readiness report. Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.
+Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps. The owner's confirmation of written redistribution permission is recorded in [publication authorization](docs/PUBLICATION_AUTHORIZATION.md); the permission document was not independently reviewed. See [third-party notices](THIRD_PARTY_NOTICES.md). Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.

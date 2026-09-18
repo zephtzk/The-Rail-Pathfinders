@@ -1,6 +1,6 @@
 # Phase 4 user-testing readiness and proposed publication
 
-**Publication update:** the owner has confirmed written redistribution permission for the two maps and authorized proceeding with the original branch and existing Site. See [PUBLICATION_AUTHORIZATION.md](PUBLICATION_AUTHORIZATION.md). The report below preserves the earlier readiness findings; final acceptance/deployment receipts record the release outcome.
+**Historical prepublication report:** the owner subsequently confirmed written redistribution permission for the two maps and authorized publication. GitHub was pushed and existing Sites version 3 was deployed and checked. The [publication report](PHASE4_PUBLICATION.md) supersedes the version 2, unresolved-permission and hosted-not-tested statements below. See [PUBLICATION_AUTHORIZATION.md](PUBLICATION_AUTHORIZATION.md). This report preserves the original readiness findings rather than rewriting their history.
 
 Prepared 18 September 2026. Scope: scheduled planning, accepted journeys, confirmed progress, saved/offline guidance and clearly labelled synthetic rerouting. **Real-provider routing effects remain disabled and unfinished. No Phase 5 work is included.**
 

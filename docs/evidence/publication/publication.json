@@ -1,0 +1,57 @@
+{
+  "recordedAt": "2026-09-18T15:18:58.737Z",
+  "sourceCommit": "32d97e39172827cd31916f62aa39603c2cb3e5b3",
+  "github": {
+    "repository": "https://github.com/zephtzk/The-Rail-Pathfinders.git",
+    "branch": "codex/phase-4-live-rerouting",
+    "releasePush": "PASS",
+    "subsequentDocumentationUpdates": "See branch log; deployed source remains the release commit."
+  },
+  "sites": {
+    "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+    "version": 3,
+    "versionId": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_280c415cbd1081918c1ad802dedadef2",
+    "sourceRepository": "https://git.chatgpt-team.site/87da70e4-fc14-4ba8-8070-27f1291fe023/appgprj_6aad0ab90e5881919eca01b79f19aa24.git",
+    "sourceBranch": "main",
+    "sourceCommit": "32d97e39172827cd31916f62aa39603c2cb3e5b3",
+    "deploymentId": "appgdep_6aad546b59008191b50ac520ba58c01a",
+    "deploymentStatus": "succeeded",
+    "environmentRevision": 0,
+    "accessRevision": 1,
+    "ownerCount": 1,
+    "groupCount": 0,
+    "externalVisitors": 0,
+    "accessChanged": false
+  },
+  "archives": {
+    "localGzipSha256": "5e9f90a10d06189c8a9b7e2f4be71381bfa0e8da38fb8faf9b538a43ef663364",
+    "sitesStoredTarContentHash": "sha256:b8d95d1841152cf36eb78e91a3714ca474c46897b46226a50b64f90054dde4ab",
+    "fileCount": 36,
+    "note": "Separate archive representations; no byte-equivalence assertion. Worker hash checked inside submitted archive and source provenance verified."
+  },
+  "hostedDesktopSmoke": {
+    "browser": "Codex in-app browser on Windows; not a physical phone",
+    "status": "PASS",
+    "checks": [
+      "Fixture A scheduled arrival 10:24 and walking 540 seconds",
+      "Accepted guidance survives distinct preview and reload",
+      "Waiting, onboard, transfer progress preserve 120 seconds walking used and original 20-minute limit",
+      "Transfer retains 420 seconds remaining planned walking",
+      "Synthetic cancellation displays scoped trip/direction/date and source/expiry timestamps",
+      "Decline survives reload and duplicate comparison is suppressed",
+      "Accepted alternative EWL leg 10:06:30-10:08:30 survives reload",
+      "Optional notices show not_configured and no routing effect",
+      "No captured console errors"
+    ],
+    "testerComprehension": "NOT TESTED"
+  },
+  "remaining": [
+    "Physical Android Chrome and iPhone Safari smoke",
+    "Phone keyboard and OS large text",
+    "Hosted airplane-mode reload and reconnect",
+    "External tester identities and explicitly approved access",
+    "Tester comprehension"
+  ],
+  "permissionBasis": "Owner confirmation of written redistribution permission; underlying document not independently reviewed"
+}

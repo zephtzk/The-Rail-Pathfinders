@@ -1,0 +1,567 @@
+{
+  "recordedAt": "2026-09-18T15:07:04.368Z",
+  "evidenceClass": "local complete Worker and Node comparison benchmark; no WAN/physical-device inference",
+  "sourceBase": "32d97e39172827cd31916f62aa39603c2cb3e5b3",
+  "branch": "codex/phase-4-live-rerouting",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "c24517f7ea8f2d4b797d7ab7b88083a327ab6e1bc59f3c9c82de312be725def9",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "8980fe6564cffe5679f6dd747e8c0f9f68372c2b3803094888b9f50ae2c6ccff",
+  "node": "v24.16.0",
+  "zlib": "1.3.1-e00f703",
+  "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+  "targets": {
+    "startupBrowserMs": 3000,
+    "warmComparisonP95Ms": 1000,
+    "firstResultHeapBytes": 157286400,
+    "compressedDataBytes": 3145728,
+    "automaticStartupLiveRequests": 0,
+    "noticeMinimumRefreshMs": 60000,
+    "busMinimumRefreshMs": 30000,
+    "upstreamTimeoutMs": 6000
+  },
+  "coldIndexRouteAndComparisonMs": 245.1097000000001,
+  "coldScenarios": [
+    {
+      "scenario": "undisrupted",
+      "indexRouteEventAndComparisonMs": 177.92549999999994,
+      "status": "continue"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "indexRouteEventAndComparisonMs": 183.99909999999988,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "indexRouteEventAndComparisonMs": 184.27670000000012,
+      "status": "offer"
+    }
+  ],
+  "scenarioMetrics": [
+    {
+      "scenario": "undisrupted",
+      "samples": 20,
+      "warmP95Ms": 49.699600000000146
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "samples": 20,
+      "warmP95Ms": 60.310599999999795
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "samples": 20,
+      "warmP95Ms": 54.86229999999978
+    }
+  ],
+  "warmP95Ms": 60.310599999999795,
+  "compressedBytes": 1972408,
+  "processMemory": {
+    "rss": 782344192,
+    "heapTotal": 497266688,
+    "heapUsed": 413835040,
+    "external": 27998923,
+    "arrayBuffers": 17590317
+  },
+  "samples": [
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 39.94489999999996,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 47.45839999999998,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 37.641599999999926,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 36.52570000000014,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 38.9831999999999,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 49.699600000000146,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 75.72299999999996,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 40.45310000000018,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 43.884199999999964,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 43.70559999999978,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 35.6568000000002,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 38.83660000000009,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 35.71549999999979,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 38.34140000000025,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 36.35620000000017,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 35.591199999999844,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 37.971000000000004,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 42.56930000000011,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 36.69770000000017,
+      "status": "continue"
+    },
+    {
+      "scenario": "undisrupted",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 38.105299999999716,
+      "status": "continue"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 39.414999999999964,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 60.310599999999795,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 35.849199999999655,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 35.66989999999987,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 38.13119999999981,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 43.46419999999989,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 51.261499999999614,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 45.073199999999815,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 44.00500000000011,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 43.255899999999656,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 36.70960000000014,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 37.78650000000016,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 36.905799999999545,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 40.447400000000016,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 36.30619999999999,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 36.215799999999945,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 61.841599999999744,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 36.08259999999973,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 37.821899999999914,
+      "status": "offer"
+    },
+    {
+      "scenario": "synthetic-cancelled",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 35.202400000000125,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 37.58179999999993,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 36.490499999999884,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 39.20880000000034,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 40.02150000000074,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "NS22",
+      "ms": 40.05799999999999,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 54.86229999999978,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 33.394500000000335,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 32.204099999999926,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 33.41229999999996,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 29.608100000000377,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 41.63510000000042,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 62.055200000000696,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 41.746000000000095,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 46.16679999999997,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 39.14860000000044,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 35.95479999999952,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 39.994300000000294,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 39.885700000000725,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 38.15090000000055,
+      "status": "offer"
+    },
+    {
+      "scenario": "confirmed-missed-connection",
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 43.19300000000021,
+      "status": "offer"
+    }
+  ],
+  "results": [
+    {
+      "name": "rail-network correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "rail-network correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "rail-network correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-network correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding gzip",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding identity",
+      "status": "PASS"
+    },
+    {
+      "name": "walking-links correct bytes and encoding gzip;q=0",
+      "status": "PASS"
+    },
+    {
+      "name": "/api/notices honest no-secret and no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "/api/status honest no-secret and no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "delivered Worker has no transient local credential probe",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTP application identity matches built artifact",
+      "status": "PASS"
+    },
+    {
+      "name": "undisrupted comparison warm p95 <=1000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic-cancelled comparison warm p95 <=1000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "confirmed-missed-connection comparison warm p95 <=1000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "complete comparison warm p95 <=1000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "routing data gzip <=3MiB",
+      "status": "PASS"
+    }
+  ]
+}
