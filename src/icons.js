@@ -1,5 +1,6 @@
 /** Original rounded, decorative UI icons. Give the containing control its accessible name. */
 const paths = {
+  wallet: '<rect x="3" y="5" width="18" height="15" rx="4"/><path d="M17 5V3H7a4 4 0 0 0-4 4m18 4h-5a3 3 0 0 0 0 6h5"/><circle cx="16" cy="14" r=".8" fill="currentColor" stroke="none"/>',
   plan: '<path d="M4 8.5 9 6l6 2.5L20 6v12l-5 2.5L9 18l-5 2.5z"/><path d="M9 6v12m6-9.5v12"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/>',
   route: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6h7a4 4 0 0 1 0 8h-7a4 4 0 0 0 0 8h3"/>',

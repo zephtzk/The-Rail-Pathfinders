@@ -67,7 +67,7 @@
 .commute-app .eyebrow { display: block; color: #557981; font-size: .65rem; font-weight: 750; line-height: 1.5; letter-spacing: .13em; text-transform: uppercase; margin: 0 0 7px; }
 .commute-app .section-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 700; font-size: .82rem; margin: 23px 0 10px; }
 .commute-app .section-label small { font-weight: 450; color: var(--muted); }
-.commute-app .app-nav { position: relative; grid-row: 3; align-self: end; z-index: 1000; margin: 0 0 max(20px, env(safe-area-inset-bottom)) 24px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; width: min(440px, calc(100% - 48px)); padding: 7px; border: 1px solid #e3e9e9; border-radius: 23px; background: #fffefaf5; backdrop-filter: blur(16px); box-shadow: 0 8px 28px #24374b1a; }
+.commute-app .app-nav { position: relative; grid-row: 3; align-self: end; z-index: 1000; margin: 0 0 max(20px, env(safe-area-inset-bottom)) 24px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; width: min(440px, calc(100% - 48px)); padding: 7px; border: 1px solid #e3e9e9; border-radius: 23px; background: #fffefaf5; backdrop-filter: blur(16px); box-shadow: 0 8px 28px #24374b1a; }
 .commute-app .app-nav button, .commute-app .app-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-height: 63px; padding: 7px 3px; border: 0; background: transparent; border-radius: 16px; color: #61717b; font-size: .68rem; line-height: 1.15; font-weight: 650; text-decoration: none; }
 .commute-app .app-nav [aria-current="page"], .commute-app .app-nav .is-active, .commute-app .app-nav [aria-selected="true"] { background: var(--blue-soft); color: #245671; }
 .commute-app .app-nav [aria-current="page"] .icon, .commute-app .app-nav .is-active .icon { --icon-fill: #bee7f7; }
@@ -378,4 +378,42 @@
 @media (forced-colors: active) {
   .commute-app .primary, .commute-app .secondary, .commute-app .app-nav button, .commute-app .route-card, .commute-app .style-card { border: 1px solid ButtonText; }
   .commute-app .app-nav [aria-current="page"], .commute-app .route-card[aria-pressed="true"], .commute-app .style-card[aria-pressed="true"] { outline: 2px solid Highlight; }
+}
+
+/* Separate tool pages share the same controls and spacing as the trip sheet. */
+.commute-app .app-nav button { min-width: 0; }
+.commute-app .app-nav span { max-width: 100%; }
+.commute-app .saved-confirmation { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 14px; margin-block: 12px; border: 1px solid #bddccb; background: var(--mint); border-radius: 15px; font-size: .85rem; }
+.commute-app .saved-confirmation strong { display: inline-flex; gap: 7px; align-items: center; }
+.commute-app #saved-companion { margin-top: 24px; }
+.commute-app #caregiver-companion .companion-panel, .commute-app #spending-companion .companion-panel, .commute-app #saved-companion .companion-panel { margin: 0; }
+.commute-app .companion-panel > section > p, .commute-app .companion-panel > p { margin-block: 10px; }
+.commute-app .companion-panel button:not(.icon-button), .commute-app .reroute-tools button { min-height: 44px; border: 1px solid #d6e0e4; border-radius: 13px; padding: 10px 14px; background: white; font-size: .82rem; font-weight: 650; margin: 5px 3px 5px 0; }
+.commute-app .companion-panel button.primary { background: var(--accent); }
+.commute-app .companion-panel label { margin-block: 12px; }
+.commute-app .companion-panel h3 { margin-top: 18px; }
+.commute-app .companion-panel .danger, .commute-app #journey-cancel, .commute-app #confirm-journey-cancel { color: #943e3e; border-color: #ddb6af; background: #fff5f1; }
+.commute-app .cancel-confirmation { border: 1px solid #ddb6af; background: #fff5f1; border-radius: 14px; padding: 15px; margin-block: 12px; }
+.commute-app .current-route-summary > button { margin-top: 15px; }
+.commute-app .map-retry { display: block; border: 0; padding: 5px 0; background: none; color: #186789; font: inherit; text-decoration: underline; min-height: 32px; }
+@media (max-width: 680px) {
+  .commute-app .app-nav { padding-inline: max(4px, env(safe-area-inset-left)); gap: 1px; }
+  .commute-app .app-nav button { font-size: .61rem; min-height: 63px; padding-inline: 1px; border-radius: 12px; }
+  .commute-app .app-nav .icon { width: 21px; height: 21px; }
+}
+
+.commute-app .app-nav { grid-template-columns: repeat(auto-fit, minmax(3.2rem, 1fr)); }
+.commute-app .current-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 14px; }
+.commute-app .current-actions .trip-cancel { color: #913f3f; }
+.commute-app .address-results { list-style: none; margin: 10px 0; padding: 0; }
+.commute-app .address-results button { display: block; width: 100%; text-align: left; }
+.commute-app .address-results button[aria-pressed="true"] { border-color: #79b7d2; background: var(--blue-soft); }
+.commute-app .address-results small { display: block; font-weight: 400; color: var(--muted); margin-top: 5px; }
+@media (max-width: 680px) {
+  .commute-app .trip-peek { bottom: calc(var(--nav-height, 78px) + 9px); }
+  .commute-app .app-toast { bottom: calc(var(--nav-height, 78px) + 18px); }
+}
+
+@media (max-width: 680px) {
+  .commute-app .map-caption { max-height: calc(var(--mobile-map-height) - 108px); overflow-y: auto; overscroll-behavior: contain; }
 }

@@ -1,3 +1,62 @@
+const OSM_TILES='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OSM_ATTRIBUTION='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+
+// Browsers can decode a valid error image even when its HTTP status is 403.
+// Check the response before giving Leaflet any image bytes, so a provider's
+// access-denied raster cannot cover the route. This requires provider CORS.
+function checkTileResponses(layer,fetcher){
+  const requests=new WeakMap();
+  layer.createTile=function(coords,done){
+    const tile=document.createElement('img');tile.alt='';tile.setAttribute('role','presentation');
+    const controller=new AbortController();let disposed=false,objectUrl=null;
+    const timer=setTimeout(()=>controller.abort(),12000);
+    const release=()=>{if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}};
+    const cleanup=()=>{disposed=true;clearTimeout(timer);controller.abort();tile.onload=null;tile.onerror=null;release();};
+    requests.set(tile,cleanup);
+    tile.onload=()=>{clearTimeout(timer);release();if(!disposed)done(null,tile);};
+    tile.onerror=()=>{clearTimeout(timer);release();if(!disposed)done(Error('Street map image is unavailable.'),tile);};
+    fetcher(this.getTileUrl(coords),{signal:controller.signal,referrerPolicy:'origin',credentials:'omit'}).then(async response=>{
+      if(!response.ok)throw Error('Street map request was refused.');
+      const blob=await response.blob();
+      if(!blob.size||blob.size>2*1024*1024||!/^image\//i.test(blob.type))throw Error('Street map response is not a usable image.');
+      if(disposed)return;
+      objectUrl=URL.createObjectURL(blob);tile.src=objectUrl;
+    }).catch(error=>{clearTimeout(timer);release();if(!disposed)done(error,tile);});
+    return tile;
+  };
+  layer.on('tileunload',event=>requests.get(event.tile)?.());
+}
+
+// Request only the visible map. Browser HTTP caching applies; the service worker
+// deliberately excludes third-party tiles. Never prefetch an offline map here.
+export function addStreetMap(map,{onStatus=()=>{},leaflet=globalThis.L,isOnline=()=>globalThis.navigator?.onLine!==false,url=OSM_TILES,attribution=OSM_ATTRIBUTION,fetcher=globalThis.fetch}={}) {
+  let layer=null,disposed=false,status=null;
+  const report=(next,message)=>{if(status===next)return;status=next;onStatus({status:next,available:next==='ready',message});};
+  function retry(){
+    if(disposed)return;
+    if(layer){map.removeLayer(layer);layer=null;}
+    if(!isOnline()){report('offline','Street map is offline. Your route and station guidance remain available.');return;}
+    report('loading','Loading street map…');
+    const candidate=leaflet.tileLayer(url,{
+      attribution,maxZoom:19,referrerPolicy:'origin',
+      updateWhenIdle:true,keepBuffer:1
+    });
+    checkTileResponses(candidate,fetcher);
+    layer=candidate;
+    candidate.on('tileload',()=>{if(layer===candidate)report('ready','Street map available.');});
+    candidate.on('tileerror',()=>{
+      if(layer!==candidate)return;
+      // Remove the failed base layer so a provider's error image never obscures
+      // journey geometry. Retry only after a deliberate user action.
+      layer=null;map.removeLayer(candidate);
+      report(isOnline()?'unavailable':'offline','Street map is unavailable. Your route and station guidance remain available.');
+    });
+    candidate.addTo(map);
+  }
+  retry();
+  return {retry,remove(){disposed=true;if(layer)map.removeLayer(layer);layer=null;},get layer(){return layer;}};
+}
+
 // Coordinates come from the imported network. Straight links are explicitly schematic.
 export function drawNetworkOverview(map,network) {
   const layer=L.layerGroup().addTo(map),stops=new Map(network.stops.map(s=>[s.id,s])),seen=new Set();
