@@ -1,0 +1,14 @@
+{
+  "retrievedAt":"2026-09-18",
+  "corridor":"Tampines to Bugis; alternative through Paya Lebar CC9 and Promenade DT15",
+  "railGeometry":{"source":"OpenStreetMap","license":"ODbL 1.0","attribution":"© OpenStreetMap contributors","licenseUrl":"https://www.openstreetmap.org/copyright","relations":["https://www.openstreetmap.org/relation/2312796","https://www.openstreetmap.org/relation/7981667","https://www.openstreetmap.org/relation/7981642"],"validation":"Directional track-way joins checked; 16 segments, 19 directional stop positions. Raw inputs and extraction audit in engineering return."},
+  "transfers":[{"station":"Paya Lebar EW8/CC9","topologyVerified":true,"source":"https://journey.smrt.com.sg/journey/station_info/paya-lebar/","walkMinutesAssumed":4},{"station":"Promenade CC4/DT15","topologyVerified":true,"source":"https://www.sbstransit.com.sg/Service/TrainInformation?TrainLine=DTL&Station=PMN","walkMinutesAssumed":4}],
+  "walkingLimit":"Interchange topology verified by operator sources. Map strokes are indicative connections between line anchors, not surveyed indoor pedestrian geometry. Follow signs; no step-free guarantee or measured walking distance claim.",
+  "timing":{"entryMinutes":2,"ewWaitMinutes":3,"ewTampinesPayaLebarRideMinutes":14,"ewPayaLebarBugisRideMinutes":10,"ccTransferMinutes":4,"ccWaitMinutes":3,"ccRideMinutes":12,"dtTransferMinutes":4,"dtWaitMinutes":3,"dtRideMinutes":2,"exitMinutes":2,"note":"Scenario assumptions, not timetable or live predictions. Only the 2-minute Promenade–Bugis ride corroborated by operator chart.","dtReference":"https://www.sbstransit.com.sg/Uploads/Rail/DTL%20Travel%20Time_280225.jpg"},
+  "circleDirection":{"direction":"Clockwise via Dakota to Promenade","source":"https://www.lta.gov.sg/cclwayfinding/education/spur"},
+  "events":"Authored fixtures; never official service notices. Planned westbound closure or unplanned 22-minute delay Paya Lebar–Aljunied between 08:00 and 10:00 on selected replay date.",
+  "liveAdapter":{"documentation":"https://datamall.lta.gov.sg/content/dam/datamall/datasets/LTA_DataMall_API_User_Guide.pdf","endpoint":"TrainServiceAlerts","requires":"server-only LTA_ACCOUNT_KEY","status":"No credential supplied; unavailable by default. Notice-only adapter does not inject unvalidated live delays into replay routing."},
+  "boarding":"Unavailable: no approaching-train carriage observation, validated orientation or door mapping supplied.",
+  "tilePolicy":"https://operations.osmfoundation.org/policies/tiles/",
+  "offline":"Only same-origin app shell, route geometry and saved guidance cached. No OSM raster prefetch or service-worker tile cache."
+}
