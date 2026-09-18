@@ -1,0 +1,100 @@
+{
+  "recordedAt": "2026-09-18T16:44:35.938983+00:00",
+  "sourceCommit": "72786954b89279b4217c6060cc887b41a253dc1a",
+  "status": "PASS",
+  "environment": "Windows, Node 24.16.0, Edge 153.0.4234.32; desktop mobile/touch emulation; local loopback",
+  "applicationSha256": "279031d5b91b9c35e15e1c202bd59ac20f120ea1b1156fdf5c348489291bc749",
+  "workerSha256": "e343583b4a2d86bc4d1d12712e786aac72830d00d5d876486349a97c409c4a30",
+  "workerUnchangedThroughoutSweep": true,
+  "unitAndImportTests": {
+    "javascript": 259,
+    "python": 40,
+    "syntax": "PASS",
+    "build": "PASS"
+  },
+  "browserChecks": {
+    "replay": 30,
+    "rail": 29,
+    "multimodal": 27,
+    "phase4": 39,
+    "upgrades": 18,
+    "privacy": 8,
+    "locationOffline": 11,
+    "unifiedR2": 35
+  },
+  "standalone": {
+    "facilities": "PASS",
+    "sharingHttpRestart": "PASS"
+  },
+  "runs": [
+    {
+      "suite": "replay",
+      "exitCode": 0,
+      "started": "2026-09-18T16:43:22.2772206Z",
+      "ended": "2026-09-18T16:43:46.9184102Z",
+      "log": "test-results/r2-final-baseline-lf/replay.log"
+    },
+    {
+      "suite": "rail",
+      "exitCode": 0,
+      "started": "2026-09-18T16:43:46.9500044Z",
+      "ended": "2026-09-18T16:43:50.4193191Z",
+      "log": "test-results/r2-final-baseline-lf/rail.log"
+    },
+    {
+      "suite": "multimodal",
+      "exitCode": 0,
+      "started": "2026-09-18T16:43:50.4253998Z",
+      "ended": "2026-09-18T16:43:54.7275331Z",
+      "log": "test-results/r2-final-baseline-lf/multimodal.log"
+    },
+    {
+      "suite": "phase4",
+      "exitCode": 0,
+      "started": "2026-09-18T16:43:54.7312028Z",
+      "ended": "2026-09-18T16:44:00.5120150Z",
+      "log": "test-results/r2-final-baseline-lf/phase4.log"
+    },
+    {
+      "suite": "upgrades",
+      "exitCode": 0,
+      "started": "2026-09-18T16:44:00.5159323Z",
+      "ended": "2026-09-18T16:44:05.0309418Z",
+      "log": "test-results/r2-final-baseline-lf/upgrades.log"
+    },
+    {
+      "suite": "privacy",
+      "exitCode": 0,
+      "started": "2026-09-18T16:44:05.0344832Z",
+      "ended": "2026-09-18T16:44:08.7384008Z",
+      "log": "test-results/r2-final-baseline-lf/privacy.log"
+    },
+    {
+      "suite": "facilities",
+      "exitCode": 0,
+      "started": "2026-09-18T16:44:08.7421715Z",
+      "ended": "2026-09-18T16:44:10.2221635Z",
+      "log": "test-results/r2-final-baseline-lf/facilities.log"
+    },
+    {
+      "suite": "sharing-http",
+      "exitCode": 0,
+      "started": "2026-09-18T16:44:10.2308261Z",
+      "ended": "2026-09-18T16:44:10.8654695Z",
+      "log": "test-results/r2-final-baseline-lf/sharing-http.log"
+    },
+    {
+      "suite": "location-offline",
+      "exitCode": 0,
+      "started": "2026-09-18T16:44:10.8695947Z",
+      "ended": "2026-09-18T16:44:13.4874730Z",
+      "log": "test-results/r2-final-baseline-lf/location-offline.log"
+    }
+  ],
+  "limitations": [
+    "No physical-device or tester-comprehension evidence",
+    "No external Web Push, deployed D1 or live credentialed LTA verification",
+    "No real verified accessible door-to-door corridor or toilet-path coverage",
+    "Optional replay/rail screenshots disabled during canonical-byte repeat; all behavior assertions retained"
+  ]
+}
