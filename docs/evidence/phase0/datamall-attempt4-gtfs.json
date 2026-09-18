@@ -1,0 +1,221 @@
+{
+  "auditVersion": 3,
+  "startedAt": "2026-09-18T12:36:21.292618+00:00",
+  "mode": "authenticated-live-smoke",
+  "scope": "gtfs-only",
+  "rawPayloadsRetained": false,
+  "signedUrlsRetained": false,
+  "requests": [
+    {
+      "endpoint": "GTFSScheduleTrain",
+      "retrievedAt": "2026-09-18T12:36:21.292675+00:00",
+      "httpStatus": 200,
+      "bytes": 1943,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:36:21 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "timestamp": {
+          "min": "2026-09-18T20:36:21+08:00",
+          "max": "2026-09-18T20:36:21+08:00",
+          "count": 1
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Download link present; contents require separate validation",
+      "status": "ACCESSIBLE",
+      "download": {
+        "httpStatus": 200,
+        "bytes": 2348183,
+        "contentType": "application/octet-stream",
+        "httpDate": "Fri, 18 Sep 2026 12:36:22 GMT",
+        "lastModified": "Fri, 18 Sep 2026 08:00:30 GMT",
+        "sha256": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7"
+      },
+      "schedule": {
+        "files": [
+          "agency.txt",
+          "calendar.txt",
+          "calendar_dates.txt",
+          "feed_info.txt",
+          "routes.txt",
+          "stop_times.txt",
+          "stops.txt",
+          "trips.txt"
+        ],
+        "timezones": [
+          "Asia/Singapore"
+        ],
+        "routeCount": 19,
+        "tripCount": 17576,
+        "stopCount": 1211,
+        "routeNames": [
+          "BP",
+          "CC",
+          "CG",
+          "DT",
+          "EW",
+          "NE",
+          "NS",
+          "PG",
+          "SK",
+          "TE"
+        ],
+        "calendarRows": 12,
+        "calendarDateRows": 2,
+        "calendarStart": "20260101",
+        "calendarEnd": "20261231",
+        "exceptionStart": "20260920",
+        "exceptionEnd": "20260927",
+        "evaluatedSingaporeDate": "20260918",
+        "activeServiceCount": 3,
+        "activeTripCount": 6032,
+        "namedStationMatches": {
+          "Tampines": 11,
+          "Paya Lebar": 5,
+          "Bugis": 5,
+          "Promenade": 5
+        },
+        "stopTimes": {
+          "rows": 333262,
+          "orphanTrips": 0,
+          "orphanStops": 0,
+          "timesBeyond24Hours": 7065
+        },
+        "limits": "Name matching is not a verified corridor/transfer mapping; counts do not prove a routable trip."
+      },
+      "downloadStatus": "PARSED"
+    },
+    {
+      "endpoint": "GTFSRealTimeTrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:36:23.409387+00:00",
+      "httpStatus": 200,
+      "bytes": 1944,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:36:23 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "timestamp": {
+          "min": "2026-09-18T20:36:18+08:00",
+          "max": "2026-09-18T20:36:18+08:00",
+          "count": 1
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Download link present; contents require separate validation",
+      "status": "ACCESSIBLE",
+      "download": {
+        "httpStatus": 200,
+        "bytes": 781,
+        "contentType": "application/octet-stream",
+        "httpDate": "Fri, 18 Sep 2026 12:36:24 GMT",
+        "lastModified": "Fri, 18 Sep 2026 12:36:22 GMT",
+        "sha256": "915307fc305639c357b0fdd1f8ae6594131f869ab546e6b3473bd4fbae9c37cf"
+      },
+      "realtime": {
+        "protobufInitialized": true,
+        "gtfsRealtimeVersion": "2.0",
+        "incrementality": 0,
+        "headerTimestampUnix": 1789734964,
+        "headerAgeSeconds": 20,
+        "entityCount": 2,
+        "tripUpdateCount": 0,
+        "alertCount": 2,
+        "vehicleCount": 0,
+        "tripIdsMatchedToSchedule": 0,
+        "tripUpdatesWithTimestamp": 0,
+        "stopTimeUpdateCount": 0,
+        "explicitStopIdsMatched": 0,
+        "scheduleRelationships": [],
+        "limits": "A bounded snapshot; empty or missing updates do not establish on-time or network-wide service."
+      },
+      "downloadStatus": "PARSED"
+    },
+    {
+      "endpoint": "GTFSRealtimeTrainTripUpdates",
+      "retrievedAt": "2026-09-18T12:36:24.736815+00:00",
+      "httpStatus": 200,
+      "bytes": 1953,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:36:24 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "timestamp": {
+          "min": "2026-09-18T20:36:17+08:00",
+          "max": "2026-09-18T20:36:17+08:00",
+          "count": 1
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Download link present; contents require separate validation",
+      "status": "ACCESSIBLE",
+      "download": {
+        "httpStatus": 200,
+        "bytes": 15,
+        "contentType": "application/octet-stream",
+        "httpDate": "Fri, 18 Sep 2026 12:36:26 GMT",
+        "lastModified": "Fri, 18 Sep 2026 12:36:22 GMT",
+        "sha256": "f2632b4201c6433ac3c3bed8ae787aa4f1cd9c0b3db254c8b9b36d1c8c4b6944"
+      },
+      "realtime": {
+        "protobufInitialized": true,
+        "gtfsRealtimeVersion": "2.0",
+        "incrementality": 0,
+        "headerTimestampUnix": 1789734963,
+        "headerAgeSeconds": 22,
+        "entityCount": 0,
+        "tripUpdateCount": 0,
+        "alertCount": 0,
+        "vehicleCount": 0,
+        "tripIdsMatchedToSchedule": 0,
+        "tripUpdatesWithTimestamp": 0,
+        "stopTimeUpdateCount": 0,
+        "explicitStopIdsMatched": 0,
+        "scheduleRelationships": [],
+        "limits": "A bounded snapshot; empty or missing updates do not establish on-time or network-wide service."
+      },
+      "downloadStatus": "PARSED"
+    }
+  ],
+  "limits": "Small samples, not an exhaustive directory or continuous service validation.",
+  "finishedAt": "2026-09-18T12:36:25.883072+00:00"
+}

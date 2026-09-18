@@ -67,9 +67,21 @@ The [replacement-key attempt 3](evidence/phase0/datamall-attempt3.json), recorde
 
 All three GTFS endpoints returned a one-row `value` array containing lowercase `timestamp` and `link` string fields.
 Audit version 2 incorrectly recognised only `Link`, so its `UNAVAILABLE_NO_LINK` labels describe an audit defect,
-not provider unavailability. No ZIP/protobuf was fetched. Version 3 accepts both forms and captures bounded timestamp strings;
-13 synthetic tests pass, but fresh download access, schedule validity and realtime contents remain NOT TESTED.
-The sanitised report cannot reconstruct the original URLs or their timestamp values, and was preserved without relabelling it.
+not provider unavailability. No ZIP/protobuf was fetched in that run. Version 3 accepts both forms and captures bounded timestamp
+strings; its 13 synthetic tests passed. Attempt 3 cannot reconstruct the original URLs/timestamps and remains unchanged.
+
+The [GTFS-only attempt 4](evidence/phase0/datamall-attempt4-gtfs.json) now verifies all three metadata requests and downloads
+with HTTP 200 and successful basic parsing. The schedule reports Asia/Singapore, 19 route records, 17,576 trips and 1,211 stop
+records; 333,262 stop-time rows have zero orphan trip/stop references. Calendar bounds aggregate to 1 January–31 December 2026;
+3 active service IDs and 6,032 referencing trips were counted for 18 September only. This is not full-year/all-line validation.
+There are 7,065 stop-time rows with at least one time at or after 24:00; service-day handling remains to be validated in a router.
+Station substring counts are discovery hints, not exact platform/direction/transfer mappings or routable journeys.
+
+The alert protobuf contains two alerts (header age reported as 20 seconds). Trip updates contains zero entities (header age
+22 seconds). Download/protobuf initialization PASS; alert validity/relevance and nonempty update/cancellation/schedule matching
+remain NOT TESTED. Zero trip matches when no trip updates exist does not validate compatibility and does not indicate punctuality.
+Metadata timestamps, file Last-Modified and header freshness are separate from individual entity validity and usable schedule dates.
+The new report is preserved with JSON contents unchanged and LF line endings; no raw blob, signed link or credential was retained.
 
 Observed non-GTFS limits: EWL/CCL/DTL crowd intervals had ended 957.924–960.193 seconds before retrieval;
 same-day forecasts had 48 distinct start timestamps spanning 00:00–23:30 +08, consistent with documented half-hour
@@ -78,6 +90,12 @@ bus services returned 500 + 301 records without a uniqueness/overlap check; arri
 (11 services, 26 populated slots, both monitored and scheduled values). These do not establish network/corridor completeness.
 Train notices included three message timestamps ranging from April to September with no timezone offset;
 retained metadata cannot decide their ongoing relevance. Full details and next-phase gates are in [MILESTONES.md](MILESTONES.md).
+
+Phase 1 retains its original notices/station-crowding scope on the current corridor; timetable/network routing belongs to Phase 2.
+Data access is sufficient to begin Phase 1 implementation when requested, not to claim the integrated app passes acceptance.
+Its [required crowding behavior](MILESTONES.md#required-expired-crowding-behavior-for-phase-1) makes source interval validity
+authoritative: expired bands become unavailable-current, optionally retained as explicitly historical; fetching them again never
+refreshes observation time. Unknown/NA is not quiet, and forecasts remain separate. This behavior is specified, not yet implemented.
 
 The reusable runner requests one notice snapshot, three GTFS metadata responses and at most three downloads,
 current/forecast crowding for three corridor lines, two pages of each bus directory, and arrivals at one returned stop.
@@ -142,8 +160,9 @@ python scripts/test-audit-datamall.py
 python scripts/audit-datamall.py --prompt
 ```
 
-For the remaining GTFS validation only, use the corrected version 3 runner. This makes three metadata requests and
-at most three downloads, retaining the existing full audit output separately:
+To reproduce the completed GTFS access/basic-parse smoke test when needed, use the corrected version 3 runner. This makes
+three metadata requests and at most three downloads. The following was the attempt-4 command; use a new output filename for a
+future run to preserve earlier local evidence. No repeat run or key entry is needed merely to review the saved reports:
 
 ```powershell
 python scripts/audit-datamall.py --prompt --gtfs-only --output test-results/phase0/datamall-gtfs-smoke.json
