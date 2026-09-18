@@ -82,7 +82,7 @@ test('R2 upgrade preserves ambiguous station bookmarks referenced by timestamped
  assert.deepEqual(visiblePersonalState(store.read().state).places.map(p=>p.id),ids);assert.equal(storage.getItem(PERSONAL_KEY),original);
  assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),ids);assert.equal(storage.getItem(PERSONAL_KEY),original);
  store.deleteTemplate(old.templates[0].id);const after=store.read().state;
- assert.deepEqual(after.places,old.places);assert.equal(after.templates.length,0);
+ assert.deepEqual(after.places.map(({savedVia,...p})=>p),old.places);assert.ok(after.places.every(p=>p.savedVia==='user'));assert.equal(after.templates.length,0);
  assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),ids);
 });
 
@@ -112,4 +112,17 @@ test('older identified migration endpoints do not become visible when the import
  storage.setItem(PERSONAL_KEY,JSON.stringify(old));assert.equal(visiblePersonalState(store.read().state).places.length,0);
  store.deleteTemplate('old-import');const after=createPersonalStore(storage).read().state;
  assert.equal(visiblePersonalState(after).places.length,0);assert.deepEqual(after.places.map(({savedVia,...p})=>p),places);assert.ok(after.places.every(p=>p.savedVia==='route-endpoint'));
+});
+
+test('deleting a user route preserves ambiguous endpoints still referenced by an imported route',()=>{
+ const storage=memory(),store=createPersonalStore(storage),places=[{...endpoint('home'),label:'Home'},endpoint('work',1.31)];
+ const imported={id:'old-import',label:'Imported rail route',originId:'home',destinationId:'work',preferences:{},savedAt:'2026-09-18T12:00:00Z'};
+ const deliberate={...imported,id:'user-route',label:'My regular journey',savedVia:'user'};
+ const old={schemaVersion:2,places,templates:[imported,deliberate],migrations:['route-input:commute-copilot-rail-guidance-v1']};
+ storage.setItem(PERSONAL_KEY,JSON.stringify(old));const original=storage.getItem(PERSONAL_KEY);
+ assert.deepEqual(visiblePersonalState(store.read().state).places.map(p=>p.id),['home','work']);assert.equal(storage.getItem(PERSONAL_KEY),original);
+ store.deleteTemplate('user-route');const after=createPersonalStore(storage).read().state;
+ assert.deepEqual(visiblePersonalState(after).places.map(p=>p.id),['home','work']);assert.deepEqual(after.templates,[imported]);
+ assert.ok(after.places.every(p=>p.savedVia==='user'));assert.deepEqual(after.places.map(({savedVia,...p})=>p),places);
+ store.deleteTemplate(imported.id);assert.deepEqual(visiblePersonalState(createPersonalStore(storage).read().state).places.map(p=>p.id),['home','work']);
 });

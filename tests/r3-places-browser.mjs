@@ -19,6 +19,7 @@ try{
  await page.goto(base);await page.locator('[data-view="saved"]').click();await page.locator('#place-add').waitFor();
  check('automatic legacy stations and imported journeys are hidden',!(await page.locator('#view-saved').innerText()).includes('legacy station')&&!(await page.locator('#view-saved').innerText()).includes('Imported rail route'));
  check('deliberately saved route remains visible',await page.locator('.saved-route-card').count()===1&&(await page.locator('.saved-route-card').innerText()).includes('My regular journey'));
+ check('ambiguous older places reused by a deliberate route remain visible',JSON.stringify(await page.locator('.personal-list li strong').allTextContents())===JSON.stringify(['Paya Lebar','Bugis']));
  check('reading saved data leaves original bytes intact',await page.evaluate(()=>localStorage.getItem('commute-copilot-personal-v2'))===original&&await page.evaluate(()=>localStorage.getItem('commute-copilot-rail-guidance-v1'))===originalSnapshot);
  check('add a place has no coordinate inputs',await page.locator('#place-add [name=lat],#place-add [name=lng]').count()===0);
  await page.locator('#place-add [name=label]').fill('My hospital');await page.locator('#place-add [name=address]').fill('10 Hospital Road');await page.waitForTimeout(100);
@@ -31,9 +32,9 @@ try{
  await page.locator('#place-add [name=address]').fill('10 Hospital Road');await page.locator('#search-address').click();await page.locator('[data-address]').first().click();await page.locator('#save-place').click();
  const saved=(await state()).places.find(p=>p.label==='My hospital');
  check('selected address is persisted under a local ID without station snapping',saved&&saved.id!=='photon:osm:N:123'&&saved.sourceId==='photon:osm:N:123'&&saved.routingId===null&&saved.lat===1.3&&saved.lng===103.82&&saved.coverage==='unknown');
- check('only explicitly added places appear',await page.locator('.personal-list li strong').count()===1&&(await page.locator('.personal-list').innerText()).includes('My hospital'));
+ check('ambiguous older places and the newly added address appear',JSON.stringify(await page.locator('.personal-list li strong').allTextContents())===JSON.stringify(['Paya Lebar','Bugis','My hospital']));
  check('saving a place preserves imported records for export',(await state()).templates.some(t=>t.id==='imported-rail')&&await page.evaluate(()=>localStorage.getItem('commute-copilot-rail-guidance-v1'))===originalSnapshot);
- await page.reload();await page.locator('[data-view="saved"]').click();await page.locator('.personal-list li strong').waitFor();check('the saved address survives reload',await page.locator('.personal-list').innerText().then(text=>text.includes('10 Hospital Road')));
+ await page.reload();await page.locator('[data-view="saved"]').click();await page.locator('.personal-list li strong').first().waitFor();check('the saved address survives reload',await page.locator('.personal-list').innerText().then(text=>text.includes('10 Hospital Road')));
  mode='hold';await page.locator('#place-add [name=address]').fill('Old request');await page.locator('#search-address').click();await page.waitForFunction(()=>document.querySelector('#address-status').textContent.includes('Searching'));
  for(let n=0;!pending&&n<50;n++)await page.waitForTimeout(10);assert.ok(pending);
  await page.locator('#place-add [name=address]').fill('New request');await pending.fulfill({status:200,contentType:'application/json',body:JSON.stringify(answer)}).catch(()=>{});await page.waitForTimeout(100);
@@ -42,6 +43,10 @@ try{
  check('no-match search offers a retry and leaves Save disabled',await page.locator('#save-place').isDisabled()&&await page.locator('#address-status').innerText().then(text=>text.includes('Try a building name')));
  await page.waitForTimeout(1500);mode='offline';await page.locator('#place-add [name=address]').fill('Offline address');await page.locator('#search-address').click();await page.waitForFunction(()=>document.querySelector('#address-status').textContent.includes('could not connect'));
  check('offline search reports failure without creating a place',await page.locator('#save-place').isDisabled()&&(await state()).places.filter(p=>p.savedVia==='user').length===1);
+ await page.locator('#saved-routes [data-delete="my-route"]').click();
+ check('deleting a user route preserves shared older bookmarks and the imported route',JSON.stringify(await page.locator('.personal-list li strong').allTextContents())===JSON.stringify(['Paya Lebar','Bugis','My hospital'])&&(await state()).places.filter(p=>['import-origin','import-destination'].includes(p.id)).every(p=>p.savedVia==='user')&&(await state()).templates.some(t=>t.id==='imported-rail'));
+ await page.reload();await page.locator('[data-view="saved"]').click();await page.locator('.personal-list li strong').first().waitFor();
+ check('shared older bookmarks survive route deletion and reload',JSON.stringify(await page.locator('.personal-list li strong').allTextContents())===JSON.stringify(['Paya Lebar','Bugis','My hospital'])&&await page.evaluate(()=>localStorage.getItem('commute-copilot-rail-guidance-v1'))===originalSnapshot);
  check('address flow has no uncaught browser errors',errors.length===0);
  await mkdir(output,{recursive:true});await page.screenshot({path:output+'/places-mobile.png',fullPage:true});await writeFile(output+'/results.json',JSON.stringify({results,errors},null,2));
 }finally{await browser.close();}
