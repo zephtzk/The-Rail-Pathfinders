@@ -2,13 +2,14 @@ import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4177',out='docs/evidence/phase4';await mkdir(out,{recursive:true});
+const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4177',out=process.env.CAPTURE_DIR??'docs/evidence/phase4';await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
 const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'}),page=await context.newPage();
 const results=[],errors=[];let apiRequests=0;page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(new URL(r.url()).pathname.startsWith('/api/'))apiRequests++;});
 const check=(name,value)=>{assert.ok(value,name);results.push({name,status:'PASS'});console.log('PASS '+name);};
 const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-active-journey-v1')));
 async function preview(origin,destination,mode='mixed') {const f=page.locator('#pilot-form');await f.locator('[name=originId]').fill(origin);await f.locator('[name=destinationId]').fill(destination);await f.locator('[name=deadlineTime]').fill('');await f.locator('[name=mode]').selectOption(mode);await page.getByRole('button',{name:'Find pilot journeys'}).click();await page.locator('.route-hero').waitFor();}
+async function confirm(kind,step,time,walk){const f=page.locator('#progress-form');await f.locator('[name=kind]').selectOption(kind);await f.locator('[name=legIndex]').selectOption(String(step-1));await f.locator('[name=time]').fill(time);await f.locator('[name=walk]').fill(String(walk));await f.getByRole('button',{name:'Confirm progress'}).click();}
 try{
  const start=performance.now();await page.goto(base+'/multimodal.html');await page.locator('#accept-search').waitFor();const coldMs=performance.now()-start;
  const cdp=await context.newCDPSession(page),heap=await cdp.send('Runtime.getHeapUsage');await cdp.detach();
@@ -16,11 +17,15 @@ try{
  check('complete changed application cold startup <=3000ms',coldMs<=3000);check('complete changed application heap <=150MiB',heap.usedSize<=150*1024*1024);check('initial request budget: zero automatic live requests',apiRequests===0);
  check('compressed routing payload <=3MiB',resources.filter(r=>r.name.startsWith('/data/')).reduce((n,r)=>n+r.encodedBodySize,0)<=3*1024*1024);
  await page.locator('#accept-search').click();const first=await saved();check('new acceptance saved not-departed progress',first.progress.kind==='not-departed');
+ const firstNext=await page.locator('#accepted-next').innerText();
  await preview('DT14','NS22');check('new search leaves accepted guidance unchanged',(await saved()).route.id===first.route.id);
+ await page.reload();await page.locator('#progress-form').waitFor();check('reload after an unaccepted search preserves accepted next step',(await saved()).route.id===first.route.id&&(await page.locator('#accepted-next').innerText())===firstNext);
+ await preview('DT14','NS22');
  await page.locator('#accept-search').click();let active=await saved();
  await page.getByText('Synthetic rerouting demonstrations',{exact:true}).click();await page.locator('#demo-cancel').click();
  check('synthetic scoped cancellation offers traveller choice',await page.locator('#accept-change').count()===1&&(await page.locator('#comparison').innerText()).includes('SYNTHETIC'));
  await page.locator('#decline-change').click();check('decline retains guidance',(await saved()).route.id===active.route.id);
+ await page.reload();await page.locator('#progress-form').waitFor();check('decline survives reload',(await saved()).decisions.at(-1)?.decision==='declined'&&(await saved()).route.id===active.route.id);
  await page.locator('#reassess').click();check('duplicate recommendation suppressed',await page.locator('#accept-change').count()===0&&(await page.locator('#comparison').innerText()).includes('suppressed'));
  await page.getByText('Synthetic rerouting demonstrations',{exact:true}).click();await page.locator('#demo-cancel').click();check('identical effect with newer retrieval remains suppressed',await page.locator('#accept-change').count()===0);await page.locator('#accept-search').click();await page.getByText('Synthetic rerouting demonstrations',{exact:true}).click();await page.locator('#demo-cancel').click();await page.locator('#accept-change').click();active=await saved();check('alternative accepts explicitly for a new journey',active.decisions.at(-1).decision==='accepted');
  const accepted=active.route.id;await page.reload();await page.locator('#progress-form').waitFor();check('accepted alternative survives reload',(await saved()).route.id===accepted&&(await page.locator('#accepted-next').innerText()).includes('Last accepted next step'));
@@ -44,14 +49,24 @@ try{
  await page.evaluate(()=>document.documentElement.style.fontSize='200%');check('200 percent text retains narrow layout',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  check('accessible status announcements exist',await page.locator('#journey-message[role=status][aria-live=polite]').count()===1);
  await page.screenshot({path:out+'/progress-mobile-large-text.png',fullPage:true});
+ await page.evaluate(()=>document.documentElement.style.fontSize='');
+ await preview('DT14','NS22');await page.locator('#accept-search').click();
+ await confirm('waiting',2,'10:03:00',120);check('waiting preserves cumulative access walking',(await saved()).progress.walkedSeconds===120&&(await page.locator('#accepted-next').innerText()).includes('wait'));
+ await confirm('onboard',3,'10:04:00',120);check('onboard retains planned ride until confirmed alighting',(await page.locator('#comparison').innerText()).includes('Confirm alighting'));
+ await confirm('transferring',4,'10:06:00',120);check('transfer start charges full remaining transfer and exit',(await page.locator('#comparison').innerText()).includes('remaining walking 7 min'));
+ await confirm('waiting',5,'10:12:00',420);check('post-transfer walking remains cumulative',(await saved()).progress.walkedSeconds===420&&(await page.locator('#comparison').innerText()).includes('remaining walking 2 min'));
+ await preview('DT14','NS22');await page.locator('#accept-search').click();await confirm('waiting',3,'10:05:00',120);check('missed connection offers a feasible next action',(await page.locator('#comparison').innerText()).includes('connection was missed')&&await page.locator('#accept-change').count()===1);
+ await preview('DT14','NS22');await page.locator('#pilot-form [name=deadlineTime]').fill('10:30');await page.getByRole('button',{name:'Find pilot journeys'}).click();await page.locator('#accept-search').click();await confirm('waiting',3,'10:31:00',120);check('late alternatives retain deadline without on-time acceptance',(await saved()).route.deadlineSeconds===37800&&(await page.locator('#comparison').innerText()).includes('all-late')&&await page.locator('#accept-change').count()===0);
+ await preview('DT14','NS22');await page.locator('#accept-search').click();await confirm('waiting',3,'10:05:00',1200);check('exhausted walking produces no feasible route without relaxing limit',(await page.locator('#comparison').innerText()).includes('no-feasible')&&(await saved()).progress.walkedSeconds===1200&&await page.locator('#accept-change').count()===0);
  check('no browser exceptions',errors.length===0);
  const isolated=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'}),fallback=await isolated.newPage();
  const retained=await saved();await isolated.addInitScript(value=>localStorage.setItem('commute-copilot-active-journey-v1',JSON.stringify(value)),retained);
  await isolated.route('**/data/bus-network.json',r=>r.abort('failed'));await fallback.goto(base+'/multimodal.html');await fallback.locator('#accepted-next').waitFor();
- check('partial routing asset failure retains accepted guidance independently of legacy save',(await fallback.locator('#progress-summary').innerText()).includes('unknown'));
+ check('partial routing asset failure retains accepted guidance independently of legacy save',(await fallback.locator('#progress-summary').innerText()).includes(retained.progress.kind));
  await fallback.locator('#reassess').click();check('partial data disables recalculation without erasing instructions',(await fallback.locator('#comparison').innerText()).includes('Saved guidance remains'));
  await isolated.close();
  const applicationBuild=JSON.parse(await readFile('dist/client/data/application-build.json'));
+ const servedBuild=await (await context.request.get(base+'/data/application-build.json')).json();assert.deepEqual(servedBuild,applicationBuild);check('browser server matches candidate application build',true);
  const workerSha256=createHash('sha256').update(await readFile('dist/server/index.js')).digest('hex');
  await writeFile(out+'/browser.json',JSON.stringify({recordedAt:new Date().toISOString(),evidenceClass:'Desktop Chromium/Edge emulation; loopback; actual browser offline networking; synthetic disruptions; no physical-device or WAN inference',browser:browser.version(),applicationBuild,workerSha256,coldMs,heap,apiRequests,resources,results,errors},null,2));
 }catch(e){await page.screenshot({path:out+'/failure.png',fullPage:true});throw e;}finally{await browser.close();}

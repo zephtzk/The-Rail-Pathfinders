@@ -1,17 +1,21 @@
 # Commute Copilot — The Rail Pathfinders
 
-Current delivery: **Phase 4 local release candidate**. Confirmed progress and resilient accepted guidance are available in `/multimodal.html`; real routing effects remain disabled. See [acceptance report](docs/PHASE4_REPORT.md) and [operating / rollback instructions](docs/PHASE4_OPERATIONS.md). Deployment is blocked by the explicit no-push instruction and Sites source-push requirement; the existing private site remains version 2.
+Current delivery: **Phase 4 user-testing candidate, local only**. Start with the [readiness report](docs/PHASE4_READINESS.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
 
+| Entry page | Use in this round |
+| --- | --- |
+| `/multimodal.html` | Main Phase 4 test: accept a journey, confirm progress, compare synthetic changes and reload offline. |
+| `/` | General station-to-station scheduled rail planner, 186 imported station records. |
+| `/replay.html` | Original fictional corridor replay and optional Phase 1 advisory panel; separate from the scheduled planner. |
+| `/data/application-build.json` | Compare the application SHA-256 with the candidate report before recording a test. |
 
-A Singapore **station-to-station scheduled rail planner**, using a general routing engine and a pinned, reproducible LTA GTFS import. Choose any pair of **186 imported station records**, with calendars, directed trips and reviewed interchange connections. Access, waiting, riding, transfers and exit all count.
+The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) still serves older **version 2**, with **owner-only access**. It does not contain this candidate. Sign in as the authorized owner for the current Site; external testers need a separately approved access arrangement after publication. Local testing needs no account. A GitHub push alone will not update the hosted app. This readiness pass does not push, deploy or change access.
 
-The **[Phase 3 bus & walking pilot](docs/PHASE3_REPORT.md)** is at `/multimodal.html`: complete services **2, 23 and 28**, 261 bus stops, estimated weekday timing and four map-supported bus/rail paths at Paya Lebar and Bugis. Wider scheduled rail stays at `/`. Address search, fare and step-free routing are not supported. The original corridor replay and Phase 1 live information remain separate at `/replay.html`.
+Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
 
-Bus estimates support ordinary weekdays **18 September–2 October 2026, 09:30–16:30**. Published maximum off-peak headway is the wait assumption; distance at 18 km/h plus 30 seconds per stop is the uncalibrated ride model. An estimated deadline is not guaranteed. Current arrivals are optional advisory information and never alter future-date or downstream timings. See [bus data](docs/BUS_DATA.md), [walking evidence](docs/WALKING_COVERAGE.md), and [combined coverage](docs/PHASE3_COVERAGE.md).
+Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. No address search, fare, step-free assurance, broader bus coverage or intermediate onboard alighting is supported. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
 
-Phase 3 is committed locally only. No push, PR, hosting or audience change is part of this delivery.
-
-See the [Phase 2 report](docs/PHASE2_REPORT.md), [coverage summary](docs/RAIL_COVERAGE.md) and [milestone ledger](docs/MILESTONES.md). The [existing private hosted preview](https://commute-copilot-nebula.simhongmen.chatgpt.site) remains an older release. **Phase 2 is not deployed.**
+See [coverage](docs/PHASE3_COVERAGE.md), [historical Phase 4 acceptance](docs/PHASE4_REPORT.md), [operations](docs/PHASE4_OPERATIONS.md) and the [milestone ledger](docs/MILESTONES.md). Physical Android Chrome and iPhone Safari checks remain **NOT TESTED**; desktop emulation does not close them.
 
 ## Run and verify
 
@@ -40,6 +44,16 @@ python scripts/verify-walking.py
 npm run test:browser
 node tests/live-browser.mjs
 ```
+
+For the complete bounded readiness run (build, all existing unit/import checks, walking verification, Worker/comparison budgets and six browser suites):
+
+```powershell
+$env:BROWSER_EXECUTABLE='C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
+$env:READINESS_REQUIRE_CLEAN='1'
+npm run verify:readiness
+```
+
+Run the clean-candidate check after committing all intended source changes. The runner starts its own no-secret loopback server on port 4181, stops it afterward and writes the exact commit, application/Worker hashes and logs to ignored `test-results/readiness-candidate/`. Set `READINESS_PORT` if occupied or `READINESS_OUTPUT` to retain another run. It does not call live providers or modify hosted state.
 
 Playwright requires installed Chromium or an existing Edge/Chrome via `BROWSER_EXECUTABLE`. Set `TEST_BASE_URL` to the root for rail tests and `/replay.html` for the two existing suites. `CAPTURE_DIR` selects browser evidence output. These tests are desktop emulation, not physical-phone evidence.
 
@@ -79,6 +93,6 @@ For optional Phase 1 live information, build then run `python scripts/run-live-l
 
 ## Deployment and licence
 
-No hosted release or audience change is part of Phase 2. Preserve the existing Sites identity in `.openai/hosting.json` and its private audience. Local implementation, Git publication and hosted release are distinct.
+Publication actions remain proposed in the [readiness report](docs/PHASE4_READINESS.md). Preserve the existing Sites identity in `.openai/hosting.json`. Approve the GitHub branch push, then the separate Sites source publication and hosted verification; approve tester access explicitly before invitations. Perform owner phone smoke tests first.
 
-Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology; map images are not redistributed. Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.
+Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps; redistribution permission is not recorded. See [third-party notices](THIRD_PARTY_NOTICES.md) and the publication-review caveat in the readiness report. Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.

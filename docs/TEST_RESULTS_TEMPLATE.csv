@@ -1,0 +1,1 @@
+tester,timestamp_timezone,device_model,os_version,browser_version,url_access_arrangement,candidate_commit,application_sha256,worker_sha256,case,steps,expected_result,actual_result,status,next_action_understood_yes_no,tester_words,evidence_or_issue

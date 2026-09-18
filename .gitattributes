@@ -1,3 +1,8 @@
+# Canonical runtime bytes keep local and checkout builds reproducible.
+src/** text eol=lf
+server/** text eol=lf
+public/** text=auto eol=lf
+scripts/build.mjs text eol=lf
 # Import provenance hashes exact bytes. Preserve these inputs/outputs on every OS.
 # -text disables newline conversion; it does not disable readable text diffs.
 data/rail/** -text

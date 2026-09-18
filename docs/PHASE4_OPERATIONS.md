@@ -1,5 +1,6 @@
 # Phase 4 operating and rollback procedure
 
+For the current candidate, repeatable tester script and exact publication destinations, use [PHASE4_READINESS.md](PHASE4_READINESS.md) and [DEVICE_CHECKLIST.md](../DEVICE_CHECKLIST.md). The original acceptance record and rollback target below remain historical.
 Use only `The-Rail-Pathfinders`, branch `codex/phase-4-live-rerouting`. The parent is `38275dcac4d60153f8702eec9dda2582f6ee9969`. Neither the sibling `app/` nor older `main` is the delivery checkout.
 
 ## Run and try

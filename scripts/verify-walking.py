@@ -4,6 +4,7 @@ This cannot replace the map review, a field survey, or current facilities checks
 from pathlib import Path
 import hashlib
 import json
+import os
 import math
 import xml.etree.ElementTree as ET
 
@@ -99,7 +100,7 @@ assert len(checks) == 4 and len({l['id'] for l in ledger['links']}) == 4
 report = {'status': 'PASS', 'ledgerVersion': ledger['version'], 'checkKind': 'Pinned-source integrity, source-way continuity and independent distance/time arithmetic; not field verification',
           'ledgerSha256': hashlib.sha256((ROOT / 'data/bus/walking-links.json').read_bytes()).hexdigest(),
           'checks': checks, 'notTested': ['Physical path survey', 'Current closures', 'Indoor access route', 'Step-free accessibility and lift operation']}
-out = ROOT / 'docs/evidence/phase3/walking-validation.json'
+out = Path(os.environ['CAPTURE_DIR']) / 'walking-validation.json' if os.environ.get('CAPTURE_DIR') else ROOT / 'docs/evidence/phase3/walking-validation.json'
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
 print(json.dumps(report, indent=2))

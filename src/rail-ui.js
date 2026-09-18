@@ -18,9 +18,6 @@ const clock = seconds => {
 const textValue = value => typeof value === 'string' ? value : value?.description ?? value?.message ?? JSON.stringify(value);
 const sourceName = () => manifest?.source?.publisher ?? 'Imported rail timetable';
 const version = () => manifest?.source?.version ?? manifest?.buildId ?? 'Recorded in import manifest';
-const sourceUrl = () => {
-  try { const url = new URL(manifest?.source?.sourceUrl); return url.protocol === 'https:' ? url.href : null; } catch { return null; }
-};
 
 function makeLookup() {
   const stations = [...network.stations].sort((a,b) => a.name.localeCompare(b.name));
@@ -152,7 +149,7 @@ function renderCoverage() {
     <p class="coverage-description">Choose any station in the list. Coverage dates describe the imported calendars; a particular service may run on fewer dates. A station’s inclusion does not guarantee a train for every date or time.</p>
     <div class="coverage-lines">${visibleLines.map(route => linePill(route.id)).join('')}</div>
     ${unsupportedConnections.length ? `<p class="notice">Unvalidated tap-out transfers are unavailable at ${unsupportedConnections.map(item => `${escape(item.station)} (${escape(item.codes.join(' / '))})`).join(', ')}. You may select these stations as an endpoint; the engine cannot change between the listed lines there.</p>` : ''}
-    <dl class="source-facts"><div><dt>Source</dt><dd>${sourceUrl() ? `<a href="${escape(sourceUrl())}" target="_blank" rel="noopener noreferrer">${escape(sourceName())}</a>` : escape(sourceName())}</dd></div><div><dt>Dataset</dt><dd>${escape(source.dataset ?? 'GTFS Schedule (Train)')}</dd></div><div><dt>Snapshot version</dt><dd>${escape(version())}</dd></div><div><dt>Retrieved</dt><dd>${escape(source.retrievedAt ?? 'See source manifest')}</dd></div><div><dt>Import build</dt><dd><code>${escape(manifest?.buildId ?? 'Unavailable')}</code></dd></div><div><dt>Source licence</dt><dd><a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener noreferrer">${escape(source.license ?? 'Singapore Open Data Licence v1.0')}</a></dd></div></dl>
+    <dl class="source-facts"><div><dt>Source</dt><dd>${escape(sourceName())}</dd></div><div><dt>Dataset</dt><dd>${escape(source.dataset ?? 'GTFS Schedule (Train)')}</dd></div><div><dt>Snapshot version</dt><dd>${escape(version())}</dd></div><div><dt>Retrieved</dt><dd>${escape(source.retrievedAt ?? 'See source manifest')}</dd></div><div><dt>Import build</dt><dd><code>${escape(manifest?.buildId ?? 'Unavailable')}</code></dd></div><div><dt>Source licence</dt><dd><a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener noreferrer">${escape(source.license ?? 'Singapore Open Data Licence v1.0')}</a></dd></div></dl>
     <details class="coverage-details"><summary>Service dates, excluded coverage and import details</summary>
       ${calendarDetails ? `<div class="table-scroll"><table><caption>Service-specific date coverage; exceptions are checked by the routing engine.</caption><thead><tr><th scope="col">Service</th><th scope="col">Calendar dates</th><th scope="col">Trips</th></tr></thead><tbody>${calendarDetails}</tbody></table></div>` : ''}
       ${limitations.length ? `<ul>${limitations.map(item => `<li>${escape(textValue(item))}</li>`).join('')}</ul>` : ''}

@@ -15,7 +15,7 @@ await cp('node_modules/leaflet/LICENSE','dist/client/vendor/leaflet-LICENSE.txt'
 await cp('.openai/hosting.json','dist/.openai/hosting.json');
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8'};
 const assets={};
-async function collect(dir,prefix=''){for(const ent of await readdir(dir,{withFileTypes:true})){const rel=`${prefix}/${ent.name}`,file=path.join(dir,ent.name);if(ent.isDirectory())await collect(file,rel);else assets[rel]={body:await readFile(file,'utf8'),type:types[path.extname(file)]??'text/plain'};}}
+async function collect(dir,prefix=''){for(const ent of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0)){const rel=`${prefix}/${ent.name}`,file=path.join(dir,ent.name);if(ent.isDirectory())await collect(file,rel);else assets[rel]={body:await readFile(file,'utf8'),type:types[path.extname(file)]??'text/plain'};}}
 await collect('dist/client');
 delete assets['/data/application-build.json']; // Previous build identity must not hash itself.
 const busAdapter=await readFile('server/bus-adapter.js','utf8');
@@ -31,7 +31,9 @@ await writeFile('dist/client/sw.js',assets['/sw.js'].body);
 // This reduces the actual first-load transfer, rather than reporting a hypothetical gzip size.
 const busNetwork=JSON.parse(assets['/data/bus-network.json'].body);
 for(const name of ['/data/rail-network.json','/data/bus-network.json','/data/walking-links.json']){
- const asset=assets[name];assets[name]={type:asset.type,gzip:gzipSync(asset.body,{level:9,mtime:0}).toString('base64')};
+ const asset=assets[name],compressed=gzipSync(asset.body,{level:9,mtime:0});
+ compressed[9]=255; // Canonical gzip OS marker; Windows and Linux embed identical headers.
+ assets[name]={type:asset.type,gzip:compressed.toString('base64')};
 }
 const live=await readFile('src/live-data.js','utf8');
 const adapter=live+'\n'+serverAdapter.replace(/^import .*from '\.\.\/src\/live-data\.js';\r?\n/m,'')+'\n'+busAdapter+`\nconst pilotBusAdapter=createBusAdapter({patterns:${JSON.stringify(busNetwork.patterns)},allowedStopCodes:${JSON.stringify(busNetwork.stops.map(s=>s.id))}});`;

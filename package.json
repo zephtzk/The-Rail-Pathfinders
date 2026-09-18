@@ -21,7 +21,8 @@
     "test:multimodal-browser": "node tests/multimodal-browser.mjs",
     "benchmark:multimodal": "node scripts/benchmark-multimodal.mjs",
     "test:phase4-browser": "node tests/phase4-browser.mjs",
-    "verify:phase4": "node scripts/verify-phase4.mjs"
+    "verify:phase4": "node scripts/verify-phase4.mjs",
+    "verify:readiness": "node scripts/verify-readiness.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4"

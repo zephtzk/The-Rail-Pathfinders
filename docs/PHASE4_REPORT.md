@@ -1,5 +1,6 @@
 # Phase 4 — confirmed progress, resilient guidance and release verification
 
+Current user-testing candidate and publication review: [PHASE4_READINESS.md](PHASE4_READINESS.md). This report retains the original Phase 4 evidence and hashes.
 18 September 2026. **Local engineering acceptance PASS within the explicit scope below. Real live-routing validation NOT TESTED. Private deployment BLOCKED; release readiness NOT VERIFIED.** Real feed access/decoding is separately PASS. This is a locally committed release candidate, not a verified live release. No Phase 5 or EXTOL work began.
 
 Branch: `codex/phase-4-live-rerouting`, created from the clean verified `38275dcac4d60153f8702eec9dda2582f6ee9969`. The Phase 3 history is preserved. Local commits only; no push, PR, merge, deployment, audience change or new project/service. The final handoff identifies the delivery commit; run `git rev-parse HEAD` in this checkout to resolve the exact report-bearing commit. Application/Worker hashes below identify the tested executable bytes independently of report-only commits.
