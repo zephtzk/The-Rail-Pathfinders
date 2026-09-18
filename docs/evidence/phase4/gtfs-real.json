@@ -1,0 +1,206 @@
+{
+  "recordedAt": "2026-09-18T14:17:51.118948+00:00",
+  "evidenceClass": "real-provider bounded sample",
+  "maxRequests": 4,
+  "scheduleSha256": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7",
+  "scheduleFeedVersions": [
+    "0.1"
+  ],
+  "feeds": [
+    {
+      "endpoint": "GTFSRealTimeTrainServiceAlerts",
+      "status": "PASS",
+      "envelope": {
+        "httpStatus": 200,
+        "bytes": 1930,
+        "contentType": "application/json;charset=UTF-8",
+        "httpDate": "Fri, 18 Sep 2026 14:17:51 GMT",
+        "lastModified": null
+      },
+      "download": {
+        "httpStatus": 200,
+        "bytes": 781,
+        "contentType": "application/octet-stream",
+        "httpDate": "Fri, 18 Sep 2026 14:17:51 GMT",
+        "lastModified": "Fri, 18 Sep 2026 14:17:42 GMT"
+      },
+      "retrievedAt": "2026-09-18T14:17:51.383202+00:00",
+      "header": {
+        "timestamp": {
+          "schemaSupported": true,
+          "present": true,
+          "value": 1789741024
+        },
+        "feed_version": {
+          "schemaSupported": true,
+          "present": false,
+          "value": null
+        },
+        "incrementality": {
+          "schemaSupported": true,
+          "present": true,
+          "value": 0
+        }
+      },
+      "entities": 2,
+      "alertCount": 2,
+      "tripUpdateCount": 0,
+      "nonemptyTripMapping": "NOT TESTED",
+      "tripSamples": [],
+      "alertSamples": [
+        {
+          "effect": {
+            "schemaSupported": true,
+            "present": true,
+            "value": 6
+          },
+          "active": {
+            "schemaSupported": true,
+            "count": 1,
+            "samples": [
+              {
+                "start": {
+                  "schemaSupported": true,
+                  "present": true,
+                  "value": 1776535264
+                },
+                "end": {
+                  "schemaSupported": true,
+                  "present": true,
+                  "value": 1792260000
+                }
+              }
+            ]
+          },
+          "communication": {
+            "schemaSupported": true,
+            "count": 0,
+            "samples": []
+          },
+          "impact": {
+            "schemaSupported": true,
+            "count": 0,
+            "samples": []
+          },
+          "selectors": [
+            {
+              "route_id": {
+                "schemaSupported": true,
+                "present": true,
+                "value": "SK"
+              },
+              "direction_id": {
+                "schemaSupported": true,
+                "present": false,
+                "value": null
+              },
+              "stop_id": {
+                "schemaSupported": true,
+                "present": false,
+                "value": null
+              },
+              "trip": null
+            }
+          ]
+        },
+        {
+          "effect": {
+            "schemaSupported": true,
+            "present": true,
+            "value": 6
+          },
+          "active": {
+            "schemaSupported": true,
+            "count": 1,
+            "samples": [
+              {
+                "start": {
+                  "schemaSupported": true,
+                  "present": true,
+                  "value": 1789732836
+                },
+                "end": {
+                  "schemaSupported": true,
+                  "present": true,
+                  "value": 1790528400
+                }
+              }
+            ]
+          },
+          "communication": {
+            "schemaSupported": true,
+            "count": 0,
+            "samples": []
+          },
+          "impact": {
+            "schemaSupported": true,
+            "count": 0,
+            "samples": []
+          },
+          "selectors": [
+            {
+              "route_id": {
+                "schemaSupported": true,
+                "present": true,
+                "value": "BP"
+              },
+              "direction_id": {
+                "schemaSupported": true,
+                "present": false,
+                "value": null
+              },
+              "stop_id": {
+                "schemaSupported": true,
+                "present": false,
+                "value": null
+              },
+              "trip": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "GTFSRealtimeTrainTripUpdates",
+      "status": "PASS",
+      "envelope": {
+        "httpStatus": 200,
+        "bytes": 1963,
+        "contentType": "application/json;charset=UTF-8",
+        "httpDate": "Fri, 18 Sep 2026 14:17:51 GMT",
+        "lastModified": null
+      },
+      "download": {
+        "httpStatus": 200,
+        "bytes": 15,
+        "contentType": "application/octet-stream",
+        "httpDate": "Fri, 18 Sep 2026 14:17:51 GMT",
+        "lastModified": "Fri, 18 Sep 2026 14:17:42 GMT"
+      },
+      "retrievedAt": "2026-09-18T14:17:51.518126+00:00",
+      "header": {
+        "timestamp": {
+          "schemaSupported": true,
+          "present": true,
+          "value": 1789741024
+        },
+        "feed_version": {
+          "schemaSupported": true,
+          "present": false,
+          "value": null
+        },
+        "incrementality": {
+          "schemaSupported": true,
+          "present": true,
+          "value": 0
+        }
+      },
+      "entities": 0,
+      "alertCount": 0,
+      "tripUpdateCount": 0,
+      "nonemptyTripMapping": "NOT TESTED",
+      "tripSamples": [],
+      "alertSamples": []
+    }
+  ]
+}

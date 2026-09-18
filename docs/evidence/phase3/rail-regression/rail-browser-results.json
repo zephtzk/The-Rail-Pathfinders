@@ -1,0 +1,126 @@
+{
+  "timestamp": "2026-09-18T13:59:55.299Z",
+  "browser": "153.0.4234.32",
+  "platform": "win32",
+  "emulationOnly": true,
+  "serviceWorkers": "blocked; cache integration requires a separate check",
+  "results": [
+    {
+      "name": "default imported timetable journey renders",
+      "passed": true
+    },
+    {
+      "name": "station choices cover the imported network",
+      "passed": true
+    },
+    {
+      "name": "source coverage and unsupported interchange boundaries are visible",
+      "passed": true
+    },
+    {
+      "name": "schematic explicitly avoids proving walking paths",
+      "passed": true
+    },
+    {
+      "name": "390px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "outside-corridor route renders multiple train legs",
+      "passed": true
+    },
+    {
+      "name": "timing breakdown exposes all journey components",
+      "passed": true
+    },
+    {
+      "name": "changed details mark previous guidance as stale",
+      "passed": true
+    },
+    {
+      "name": "outside-corridor reverse route renders",
+      "passed": true
+    },
+    {
+      "name": "quieter fallback is explicitly disclosed",
+      "passed": true
+    },
+    {
+      "name": "saved guidance uses separate rail snapshot storage",
+      "passed": true
+    },
+    {
+      "name": "full timetable reload preserves the saved chosen journey",
+      "passed": true
+    },
+    {
+      "name": "changed source snapshot explicitly triggers recalculation notice",
+      "passed": true
+    },
+    {
+      "name": "failed persistence never claims a successful save",
+      "passed": true
+    },
+    {
+      "name": "impossible deadline never presents a feasible selected journey",
+      "passed": true
+    },
+    {
+      "name": "unsupported service date receives explanation",
+      "passed": true
+    },
+    {
+      "name": "unsupported station receives useful coverage explanation",
+      "passed": true
+    },
+    {
+      "name": "walking limit is enforced",
+      "passed": true
+    },
+    {
+      "name": "original corridor remains searchable in new engine",
+      "passed": true
+    },
+    {
+      "name": "after-midnight arrival visibly carries a next-day marker",
+      "passed": true
+    },
+    {
+      "name": "previous service-day provenance is available for midnight train",
+      "passed": true
+    },
+    {
+      "name": "320px layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "200 percent text enlargement has no page overflow",
+      "passed": true
+    },
+    {
+      "name": "saved guidance survives timetable load failure",
+      "passed": true
+    },
+    {
+      "name": "new planning is disabled without imported routing data",
+      "passed": true
+    },
+    {
+      "name": "malformed saved guidance fails to honest empty state",
+      "passed": true
+    },
+    {
+      "name": "malformed nested station snapshot fails closed without crashing",
+      "passed": true
+    },
+    {
+      "name": "saved route with an unknown platform is rejected",
+      "passed": true
+    },
+    {
+      "name": "no unhandled browser exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

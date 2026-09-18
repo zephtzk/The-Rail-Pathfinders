@@ -1,0 +1,81 @@
+{
+  "recordedAt": "2026-09-18T15:08:21.384Z",
+  "status": "PASS",
+  "evidenceClass": "local deterministic acceptance and desktop browser emulation; no hosted or physical-phone claims",
+  "sourceCommit": "32d97e39172827cd31916f62aa39603c2cb3e5b3",
+  "sourceTree": "c17a52273b77a6631df4abb7498048f1feff22ea",
+  "branch": "codex/phase-4-live-rerouting",
+  "node": "v24.16.0",
+  "zlib": "1.3.1-e00f703",
+  "cleanCandidate": true,
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "c24517f7ea8f2d4b797d7ab7b88083a327ab6e1bc59f3c9c82de312be725def9",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "8980fe6564cffe5679f6dd747e8c0f9f68372c2b3803094888b9f50ae2c6ccff",
+  "commands": [
+    {
+      "name": "check",
+      "exitCode": 0,
+      "elapsedMs": 5786,
+      "status": "PASS"
+    },
+    {
+      "name": "reproducible-build",
+      "exitCode": 0,
+      "elapsedMs": 2054,
+      "status": "PASS"
+    },
+    {
+      "name": "walking",
+      "exitCode": 0,
+      "elapsedMs": 408,
+      "status": "PASS"
+    },
+    {
+      "name": "worker-performance",
+      "exitCode": 0,
+      "elapsedMs": 7292,
+      "status": "PASS"
+    },
+    {
+      "name": "phase4",
+      "exitCode": 0,
+      "elapsedMs": 5580,
+      "status": "PASS"
+    },
+    {
+      "name": "rail",
+      "exitCode": 0,
+      "elapsedMs": 8018,
+      "status": "PASS"
+    },
+    {
+      "name": "rail-offline",
+      "exitCode": 0,
+      "elapsedMs": 3211,
+      "status": "PASS"
+    },
+    {
+      "name": "pilot",
+      "exitCode": 0,
+      "elapsedMs": 4175,
+      "status": "PASS"
+    },
+    {
+      "name": "replay",
+      "exitCode": 0,
+      "elapsedMs": 47251,
+      "status": "PASS"
+    },
+    {
+      "name": "live",
+      "exitCode": 0,
+      "elapsedMs": 8424,
+      "status": "PASS"
+    }
+  ]
+}

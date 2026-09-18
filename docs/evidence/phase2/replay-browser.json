@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-09-18T13:34:05.332Z",
+  "browser": "153.0.4234.32",
+  "platform": "win32",
+  "emulationOnly": true,
+  "results": [
+    {
+      "name": "normal arrival and next action",
+      "passed": true
+    },
+    {
+      "name": "390px no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "planned closure changes state and departure advice",
+      "passed": true
+    },
+    {
+      "name": "closed route cannot be accepted",
+      "passed": true
+    },
+    {
+      "name": "alternative on time",
+      "passed": true
+    },
+    {
+      "name": "disruption arrival is 09:03",
+      "passed": true
+    },
+    {
+      "name": "replanning at confirmed stop",
+      "passed": true
+    },
+    {
+      "name": "route acceptance updates status",
+      "passed": true
+    },
+    {
+      "name": "OSM attribution visible",
+      "passed": true
+    },
+    {
+      "name": "actual geometry drawn",
+      "passed": true
+    },
+    {
+      "name": "persisted geometry and steps",
+      "passed": true
+    },
+    {
+      "name": "real offline reload preserves route",
+      "passed": true
+    },
+    {
+      "name": "offline saved arrival intact",
+      "passed": true
+    },
+    {
+      "name": "offline editing disabled",
+      "passed": true
+    },
+    {
+      "name": "offline guidance visible",
+      "passed": true
+    },
+    {
+      "name": "reconnect preserves selected route",
+      "passed": true
+    },
+    {
+      "name": "walking constraint rejects alternative",
+      "passed": true
+    },
+    {
+      "name": "invalid deadline stays in form with error",
+      "passed": true
+    },
+    {
+      "name": "out-of-window scenario does not show a false affected state",
+      "passed": true
+    },
+    {
+      "name": "irrelevant closure has no departure-change advice",
+      "passed": true
+    },
+    {
+      "name": "Paya Lebar origin uses direct Circle access",
+      "passed": true
+    },
+    {
+      "name": "eight-minute walk limit accepts Paya Lebar alternative",
+      "passed": true
+    },
+    {
+      "name": "failed save never claims route saved",
+      "passed": true
+    },
+    {
+      "name": "320px no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "200 percent text zoom no page overflow",
+      "passed": true
+    },
+    {
+      "name": "200 percent dock text fits its button",
+      "passed": true
+    },
+    {
+      "name": "short viewport form action reachable",
+      "passed": true
+    },
+    {
+      "name": "active-page events surface automatically",
+      "passed": true
+    },
+    {
+      "name": "offline without saved data is honest empty state",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

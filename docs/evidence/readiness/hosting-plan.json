@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-09-18T14:50:43.787Z",
+  "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "version": 2,
+  "role": "owner",
+  "audience": "custom",
+  "allowedUserCount": 1,
+  "groups": 0,
+  "externalVisitors": 0,
+  "accessRevision": 1,
+  "externalVisitorInvitesEnabled": true,
+  "environmentRevision": 0,
+  "configuredKeys": [],
+  "sourceBinding": {
+    "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "provider": "cloudflare_artifact",
+    "remoteUrl": "https://git.chatgpt-team.site/87da70e4-fc14-4ba8-8070-27f1291fe023/appgprj_6aad0ab90e5881919eca01b79f19aa24.git",
+    "repository": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "branch": "main",
+    "publishOnPushAccepted": false,
+    "publishOnPushExpiresAt": null,
+    "credentialHandling": "Ephemeral token discarded without output, persistence, authentication or push.",
+    "recordedAt": "2026-09-18T14:49:38.823Z"
+  },
+  "rollback": {
+    "versionId": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_4f9eae0b43848191bd9dea16d542d2be",
+    "sourceCommit": "f8546eef7e950ffb3e50f98a6867b4e73f3dedf2",
+    "archiveHash": "sha256:9dd87bee6fc8709a183b92a7bf960212bbd149bdca6dce3309f4f30be8dc638a",
+    "deploymentId": "appgdep_6aad11c6077881919115c818eff5f41a"
+  },
+  "actions": "Metadata inspection only; no push, version save, deployment, access change or Phase 5 work."
+}

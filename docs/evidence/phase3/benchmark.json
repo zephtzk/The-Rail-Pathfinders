@@ -1,0 +1,213 @@
+{
+  "recordedAt": "2026-09-18T13:59:50.519Z",
+  "evidenceClass": "Node desktop; no physical-device inference",
+  "runtime": "v24.16.0",
+  "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+  "targetsSetBeforeMeasurement": {
+    "warmP95Ms": 1000,
+    "coldBrowserMs": 3000,
+    "compressedCombinedBytes": 3145728,
+    "browserHeapBytes": 157286400
+  },
+  "data": [
+    {
+      "name": "rail-network",
+      "bytes": 13426545,
+      "gzipBytes": 1947956,
+      "sha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934"
+    },
+    {
+      "name": "bus-network",
+      "bytes": 106971,
+      "gzipBytes": 19330,
+      "sha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac"
+    },
+    {
+      "name": "walking-links",
+      "bytes": 28175,
+      "gzipBytes": 4980,
+      "sha256": "262856a9824a27088ec6f42b5877d74fa0572bc9dfbf40e75195ec20ccc12620"
+    }
+  ],
+  "compressedCombinedBytes": 1972266,
+  "coldParseIndexFirstQueryMs": 231.93170000000003,
+  "firstStatus": "ok",
+  "warmP95Ms": 66.46280000000007,
+  "samples": [
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 67.9964,
+      "status": "ok",
+      "arrivalSeconds": 41570
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 49.460699999999974,
+      "status": "ok",
+      "arrivalSeconds": 41510
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:75059",
+      "ms": 51.35910000000001,
+      "status": "ok",
+      "arrivalSeconds": 37170
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:81119",
+      "ms": 47.245600000000024,
+      "status": "ok",
+      "arrivalSeconds": 40300
+    },
+    {
+      "originId": "bus:81111",
+      "destinationId": "bus:75009",
+      "ms": 66.46280000000007,
+      "status": "ok",
+      "arrivalSeconds": 40240
+    },
+    {
+      "originId": "bus:99009",
+      "destinationId": "NS22",
+      "ms": 41.103000000000065,
+      "status": "ok",
+      "arrivalSeconds": 44340
+    },
+    {
+      "originId": "NS22",
+      "destinationId": "bus:99009",
+      "ms": 43.40479999999991,
+      "status": "ok",
+      "arrivalSeconds": 44110
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 56.27750000000003,
+      "status": "ok",
+      "arrivalSeconds": 41240
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 46.764999999999986,
+      "status": "ok",
+      "arrivalSeconds": 41570
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 34.45960000000002,
+      "status": "ok",
+      "arrivalSeconds": 41510
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:75059",
+      "ms": 42.19079999999997,
+      "status": "ok",
+      "arrivalSeconds": 37170
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:81119",
+      "ms": 45.63880000000006,
+      "status": "ok",
+      "arrivalSeconds": 40300
+    },
+    {
+      "originId": "bus:81111",
+      "destinationId": "bus:75009",
+      "ms": 33.535600000000045,
+      "status": "ok",
+      "arrivalSeconds": 40240
+    },
+    {
+      "originId": "bus:99009",
+      "destinationId": "NS22",
+      "ms": 37.53530000000001,
+      "status": "ok",
+      "arrivalSeconds": 44340
+    },
+    {
+      "originId": "NS22",
+      "destinationId": "bus:99009",
+      "ms": 40.63070000000005,
+      "status": "ok",
+      "arrivalSeconds": 44110
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 39.12069999999994,
+      "status": "ok",
+      "arrivalSeconds": 41240
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "DT14",
+      "ms": 48.81949999999995,
+      "status": "ok",
+      "arrivalSeconds": 41570
+    },
+    {
+      "originId": "DT14",
+      "destinationId": "bus:75009",
+      "ms": 41.338199999999915,
+      "status": "ok",
+      "arrivalSeconds": 41510
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:75059",
+      "ms": 46.71590000000015,
+      "status": "ok",
+      "arrivalSeconds": 37170
+    },
+    {
+      "originId": "bus:75009",
+      "destinationId": "bus:81119",
+      "ms": 50.25610000000006,
+      "status": "ok",
+      "arrivalSeconds": 40300
+    },
+    {
+      "originId": "bus:81111",
+      "destinationId": "bus:75009",
+      "ms": 38.24270000000001,
+      "status": "ok",
+      "arrivalSeconds": 40240
+    },
+    {
+      "originId": "bus:99009",
+      "destinationId": "NS22",
+      "ms": 39.113200000000006,
+      "status": "ok",
+      "arrivalSeconds": 44340
+    },
+    {
+      "originId": "NS22",
+      "destinationId": "bus:99009",
+      "ms": 36.32310000000007,
+      "status": "ok",
+      "arrivalSeconds": 44110
+    },
+    {
+      "originId": "NS9",
+      "destinationId": "CG2",
+      "ms": 39.951300000000174,
+      "status": "ok",
+      "arrivalSeconds": 41240
+    }
+  ],
+  "processMemory": {
+    "rss": 629186560,
+    "heapTotal": 544550912,
+    "heapUsed": 422161640,
+    "external": 23654212,
+    "arrayBuffers": 21524946
+  }
+}

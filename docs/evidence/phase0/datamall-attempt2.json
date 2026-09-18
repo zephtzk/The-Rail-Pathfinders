@@ -1,0 +1,98 @@
+{
+  "auditVersion": 2,
+  "startedAt": "2026-09-18T12:13:21.135436+00:00",
+  "mode": "authenticated-live-smoke",
+  "rawPayloadsRetained": false,
+  "signedUrlsRetained": false,
+  "requests": [
+    {
+      "endpoint": "TrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:13:21.135436+00:00",
+      "status": "UNAVAILABLE",
+      "httpStatus": 401,
+      "reason": "HTTP request rejected; response body and URL omitted"
+    },
+    {
+      "endpoint": "GTFSScheduleTrain",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "GTFSRealTimeTrainServiceAlerts",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "GTFSRealtimeTrainTripUpdates",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=EWL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=CCL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=DTL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=EWL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=CCL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=DTL",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusStops?$skip=0",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusStops?$skip=500",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusRoutes?$skip=0",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusRoutes?$skip=500",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusServices?$skip=0",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "BusServices?$skip=500",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    },
+    {
+      "endpoint": "v3/BusArrival",
+      "status": "BLOCKED",
+      "reason": "Stopped after authentication rejection; this feed not attempted"
+    }
+  ],
+  "limits": "Small samples, not an exhaustive directory or continuous service validation.",
+  "finishedAt": "2026-09-18T12:13:22.261185+00:00"
+}

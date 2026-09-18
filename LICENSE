@@ -20,5 +20,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-OpenStreetMap-derived data in public/data/corridor.json is separately licensed
-under the Open Database License (ODbL) 1.0, not this MIT licence.
+Third-party data and materials are not relicensed under the MIT licence above:
+
+- LTA rail GTFS, bus directory snapshots and DataMall-derived data in data/,
+  public/data/ and evidence retain the Singapore Open Data Licence v1.0.
+  Source: Land Transport Authority (LTA), Singapore.
+  https://data.gov.sg/open-data-licence
+- OpenStreetMap-derived corridor and walking data, including archived .osm
+  extracts, are copyright OpenStreetMap contributors and licensed under the
+  Open Database License (ODbL) 1.0. https://www.openstreetmap.org/copyright
+- The two SMRT locality-map JPEGs in data/bus/walking-evidence/ retain
+  their original owners' rights. They are archived provenance evidence,
+  not MIT-licensed artwork or application basemaps. See THIRD_PARTY_NOTICES.md.
+- Leaflet is BSD-2-Clause; its licence is copied into the built vendor assets.

@@ -1,0 +1,102 @@
+{
+  "timestamp": "2026-09-18T14:25:51.263Z",
+  "mode": "synthetic-contract-browser",
+  "emulationOnly": true,
+  "actualNetworkOfflineReload": true,
+  "browser": "153.0.4234.32",
+  "results": [
+    {
+      "name": "19 exact line-specific station reports rendered",
+      "status": "PASS"
+    },
+    {
+      "name": "live panel and replay arrival visibly distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "normal status includes minor delays, not a corridor all-clear",
+      "status": "PASS"
+    },
+    {
+      "name": "relevant segment retained, irrelevant segment counted but omitted",
+      "status": "PASS"
+    },
+    {
+      "name": "message provenance and unsafe text escaped",
+      "status": "PASS"
+    },
+    {
+      "name": "saved source interval and retrieval are separate from replay timestamp",
+      "status": "PASS"
+    },
+    {
+      "name": "live panel fits mobile viewport",
+      "status": "PASS"
+    },
+    {
+      "name": "interval expires without a successful new observation",
+      "status": "PASS"
+    },
+    {
+      "name": "refetching expired interval does not renew freshness",
+      "status": "PASS"
+    },
+    {
+      "name": "future interval is unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "future report cannot become observed merely as clock advances",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source timestamp stays unknown",
+      "status": "PASS"
+    },
+    {
+      "name": "live states do not change replay disruption reroute",
+      "status": "PASS"
+    },
+    {
+      "name": "actual offline reload preserves live-source metadata and expired state",
+      "status": "PASS"
+    },
+    {
+      "name": "actual offline reload preserves selected guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "offline UI never claims a current live observation",
+      "status": "PASS"
+    },
+    {
+      "name": "reconnection preserves chosen replay route",
+      "status": "PASS"
+    },
+    {
+      "name": "client network failure preserves last known provenance",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed application response preserves useful guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "partial feed failure has an explicit source error",
+      "status": "PASS"
+    },
+    {
+      "name": "live refresh does not mutate full saved replay routes",
+      "status": "PASS"
+    },
+    {
+      "name": "live information remains within viewport at 200 percent text",
+      "status": "PASS"
+    },
+    {
+      "name": "no live-UI JavaScript errors",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

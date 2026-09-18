@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "fareVersion": "ptc-2025-12-27.review-2026-09-18",
+  "effectiveFrom": "2025-12-27",
+  "effectiveUntil": null,
+  "reviewedAt": "2026-09-18",
+  "ratesSource": "https://www.ptc.gov.sg/fares/public-transport-fares-and-passes/",
+  "openDataSource": "https://data.gov.sg/datasets/d_2ca29f673b89e0cfddbb7c74516fa4d3/view",
+  "effectiveDateSource": "https://www.simplygo.com.sg/travel-fares/adult-fares",
+  "transferRulesSource": "https://www.simplygo.com.sg/transfer-fare-rules/",
+  "distanceSource": "https://www.lta.gov.sg/content/ltagov/en/map/fare-calculator.html",
+  "distanceEvidence": [
+    {"from": "Paya Lebar (EW8 / CC9)", "to": "Bugis (EW12 / DT14)", "fareType": "Adult", "mode": "MRT/LRT", "officialDistanceMetres": 4800, "displayedCents": 149},
+    {"from": "Tampines (EW2 / DT32)", "to": "Bugis (EW12 / DT14)", "fareType": "Adult", "mode": "MRT/LRT", "officialDistanceMetres": 14100, "displayedCents": 202}
+  ],
+  "evidenceMethod": "Two manual public fare-calculator form queries, read from rendered result tables on 18 September 2026. No endpoint scraping, credentials or unofficial rail distance calculation. These are factual query results, not copied page artwork or a bulk database import.",
+  "distanceScope": "Only the two queried directions; continuous paid-area rail journey. No reverse pair or intermediate-station distance is inferred. Bus-only journeys use exact stop-occurrence Distance differences from the existing permitted LTA DataMall snapshot for basic services 2, 23 and 28.",
+  "busSourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "assumptions": ["Standard basic-service card fares", "Adult or eligible senior/PWD/student concession card", "Pre-07:45 rail, unknown payment/pass products and mixed journeys without reviewed distances require manual amounts", "No automatic disruption discount", "No free toilet gate re-entry", "Future planned fares use the displayed version and may change"],
+  "reuse": "Small manually transcribed factual fare results and numerical fare bands, with source attribution. No third-party branded layouts, artwork or private account records are redistributed. PTC's published MRT/LRT fare dataset is also available through data.gov.sg under its displayed data licence."
+}

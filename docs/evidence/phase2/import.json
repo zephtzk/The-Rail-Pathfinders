@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-18T13:31:15.411936+00:00",
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  },
+  "command": [
+    "python",
+    "scripts/import-rail.py",
+    "--source",
+    "data/rail/sources/lta-train-2026-09-18.zip",
+    "--metadata",
+    "data/rail/sources/lta-train-2026-09-18.json",
+    "--rules",
+    "data/rail/validation.json",
+    "--output",
+    "public/data/rail-network.json",
+    "--manifest",
+    "public/data/rail-manifest.json"
+  ],
+  "runs": [
+    {
+      "run": 1,
+      "seconds": 4.532589,
+      "outputHashes": {
+        "public/data/rail-network.json": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+        "public/data/rail-manifest.json": "54602a8ff23c29f99e9ba310952a2654a623b1a29255c92a5f099a3fad978115"
+      }
+    },
+    {
+      "run": 2,
+      "seconds": 4.564601,
+      "outputHashes": {
+        "public/data/rail-network.json": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+        "public/data/rail-manifest.json": "54602a8ff23c29f99e9ba310952a2654a623b1a29255c92a5f099a3fad978115"
+      }
+    }
+  ],
+  "deterministic": true,
+  "buildId": "6880404c3da027e811f28de1d043f0c500b2b5b978073c8da29a5d4ffbd07bf2",
+  "importer": {
+    "sha256": "82de82a996cee562b3c41f81babf760d7a97e03b41cfee1ed502e14bbcb8c2a9",
+    "version": "2.0.0"
+  },
+  "sourceArchiveSha256": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7",
+  "metadataSha256": "a45a281b39071ae78001da24e2cd0d5c29a0c98f941667741c722c111e16f29d",
+  "rulesSha256": "1037dcdf589bb9afada8573f7e8613c8ae78ddd6f143128458300429916ba816",
+  "coverage": {
+    "activeServiceDateCount": 105,
+    "endDate": "2026-12-31",
+    "maxStopTimeSeconds": 93908,
+    "startDate": "2026-09-18",
+    "timeZone": "Asia/Singapore"
+  },
+  "counts": {
+    "excluded": {
+      "routes": 0,
+      "stopTimes": 31,
+      "stops": 591,
+      "trips": 1
+    },
+    "included": {
+      "routes": 19,
+      "services": 11,
+      "stations": 186,
+      "stopTimes": 333231,
+      "stops": 434,
+      "transfers": 812,
+      "trips": 17575
+    },
+    "raw": {
+      "agency.txt": 3,
+      "calendar.txt": 12,
+      "calendar_dates.txt": 2,
+      "feed_info.txt": 1,
+      "frequencies.txt": 0,
+      "routes.txt": 19,
+      "stop_times.txt": 333262,
+      "stops.txt": 1211,
+      "transfers.txt": 0,
+      "trips.txt": 17576
+    }
+  },
+  "excludedTrips": [
+    {
+      "id": "CCL_Clockwise_Loop_WD_1",
+      "reason": "Source zero-second ride CC10_B to CC9_B at 07:06:40; whole trip quarantined without invented timing.",
+      "routeId": "CCL_LOOP",
+      "serviceId": "SERVICE_WD",
+      "stopTimeCount": 31
+    }
+  ],
+  "sizes": {
+    "networkBytes": 13426545,
+    "networkGzipBytes": 1953246,
+    "networkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s tests -p test_import_rail.py -q",
+    "passed": 27,
+    "failed": 0
+  },
+  "notes": [
+    "Wall-clock measurements include process startup, archive reading, validation, deterministic serialization, gzip sizing and writing both outputs.",
+    "Two consecutive runs use the pinned local archive; no network request or generated source timestamp changes the import.",
+    "Routing latency and browser loading targets are assessed separately from offline import performance."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-09-18T14:21:40.694Z",
+  "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "audience": "custom",
+  "ownerRole": "owner",
+  "allowedUserCount": 1,
+  "groups": 0,
+  "externalVisitors": 0,
+  "accessRevision": 1,
+  "currentLiveUrl": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "latestVersion": 2,
+  "environmentRevision": 0,
+  "configuredKeys": [],
+  "rollback": {
+    "id": "appgdep_6aad11c6077881919115c818eff5f41a",
+    "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "title": "Commute Copilot",
+    "version_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_4f9eae0b43848191bd9dea16d542d2be",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+    "screenshot_asset_pointer": "sediment://file_00000000aca081f59a2c59539be15fe6",
+    "provider_deployment_id": "site---6aad0ab90e5881919eca01b79f19aa24",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-09-18T10:27:28.040383+00:00"
+  },
+  "deploymentDecision": "BLOCKED: Sites requires pushed source; user explicitly prohibited Git push. No source credential obtained, no push/save/deploy attempted.",
+  "runtimeSecretCapability": "Sites environment tool supports is_secret:true; LTA_ACCOUNT_KEY absent. Candidate backend behavior hosted: NOT TESTED."
+}

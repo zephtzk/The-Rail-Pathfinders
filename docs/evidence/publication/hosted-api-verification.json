@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "sourceCommit": "32d97e39172827cd31916f62aa39603c2cb3e5b3",
+  "authentication": "existing owner API token, not generated or rotated for this test; unauthorized request separately checked",
+  "checks": [
+    {
+      "name": "unauthenticated application data is gated",
+      "status": "PASS",
+      "httpStatus": 403
+    },
+    {
+      "name": "hosted application identity equals verified source",
+      "status": "PASS",
+      "applicationBuild": {
+        "schemaVersion": 1,
+        "applicationSha256": "c24517f7ea8f2d4b797d7ab7b88083a327ab6e1bc59f3c9c82de312be725def9",
+        "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+        "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+        "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+      }
+    },
+    {
+      "name": "rail-network hosted bytes and gzip",
+      "status": "PASS",
+      "contentEncoding": "gzip",
+      "encodedBytes": 1951597
+    },
+    {
+      "name": "bus-network hosted bytes and gzip",
+      "status": "PASS",
+      "contentEncoding": "gzip",
+      "encodedBytes": 19481
+    },
+    {
+      "name": "walking-links hosted bytes and gzip",
+      "status": "PASS",
+      "contentEncoding": "gzip",
+      "encodedBytes": 5152
+    },
+    {
+      "name": "/api/notices reports missing secret without caching",
+      "status": "PASS"
+    },
+    {
+      "name": "/api/status reports missing secret without caching",
+      "status": "PASS"
+    },
+    {
+      "name": "bus advisory reports missing secret",
+      "status": "PASS"
+    },
+    {
+      "name": "hosted service worker cache matches candidate",
+      "status": "PASS"
+    }
+  ]
+}

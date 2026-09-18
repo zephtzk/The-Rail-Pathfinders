@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-09-18T13:13:41.962549+00:00",
+  "kind": "verification-summary-of-observed-final-runs",
+  "parentCommit": "6722f3fb8fb4921fdab89cf424dc1ef53efc5850",
+  "deliveryBranch": "codex/phase-1-live-corridor",
+  "runtime": {
+    "os": "Windows",
+    "node": "24.16.0",
+    "npm": "11.13.0",
+    "browser": "Edge 153.0.4234.32"
+  },
+  "check": {
+    "command": "npm run check",
+    "status": "PASS",
+    "tests": 48,
+    "failed": 0,
+    "existingTests": 30,
+    "newTests": 18,
+    "evidenceClass": "automated synthetic",
+    "syntaxCheck": "PASS",
+    "build": "PASS",
+    "assetCount": 16,
+    "workerSha256": "b28f010f4c4076d06b232978a9bf40d58bfd986c9579d212a6222ba5671d990f",
+    "buildNote": "Build rerun after normalising five edited text files to LF for Git; no executable logic changed after the final browser passes."
+  },
+  "browser": {
+    "status": "PASS",
+    "existingChecks": 30,
+    "newChecks": 23,
+    "evidenceClass": "desktop browser emulation",
+    "actualBrowserOfflineReloadAndReconnect": true,
+    "physicalDevices": "NOT TESTED",
+    "records": [
+      "browser-results.json",
+      "live-browser-results.json"
+    ]
+  },
+  "liveApplication": {
+    "status": "PASS for feed access and 19 crowd station mappings",
+    "record": "live-adapter.json",
+    "freshCrowdInterval": "NOT TESTED",
+    "nonemptyAffectedSegments": "NOT TESTED",
+    "realDisruptionRecoveryVariants": "NOT TESTED",
+    "deliberateLiveRateLimitOrFailureInjection": "NOT TESTED"
+  },
+  "helperLimit": {
+    "sitesGenericBuildWrapper": "FAIL: Windows npm wrapper resolved missing npm-prefix.js/npm-cli.js under project node_modules",
+    "fallback": "Repository npm.cmd run check succeeded; generic helper failure is not represented as a product build failure."
+  },
+  "hosting": {
+    "deployed": false,
+    "audienceChanged": false,
+    "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "versionUnchanged": 2,
+    "sourceUnchanged": "f8546eef7e950ffb3e50f98a6867b4e73f3dedf2"
+  },
+  "secretHandling": {
+    "maskedLocalEntry": true,
+    "credentialFileCreated": false,
+    "credentialIncludedInEvidence": false,
+    "runtimeScope": "loopback local server process; no hosted configuration"
+  },
+  "limits": "Synthetic cases do not prove live provider variants or physical-device behavior. Current local clock matters. Snapshot access is not a freshness or availability SLA."
+}

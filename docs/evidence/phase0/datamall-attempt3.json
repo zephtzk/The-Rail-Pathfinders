@@ -1,0 +1,675 @@
+{
+  "auditVersion": 2,
+  "startedAt": "2026-09-18T12:25:53.415232+00:00",
+  "mode": "authenticated-live-smoke",
+  "rawPayloadsRetained": false,
+  "signedUrlsRetained": false,
+  "requests": [
+    {
+      "endpoint": "TrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:25:53.415295+00:00",
+      "httpStatus": 200,
+      "bytes": 1046,
+      "contentType": "application/json;charset=utf-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:53 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "Status": "int",
+          "AffectedSegments": {
+            "type": "array",
+            "count": 0,
+            "firstItem": null
+          },
+          "Message": {
+            "type": "array",
+            "count": 3,
+            "firstItem": {
+              "Content": "str",
+              "CreatedDate": "str"
+            }
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "CreatedDate": {
+          "min": "2026-04-18 11:50:27",
+          "max": "2026-09-18 20:06:30",
+          "count": 3
+        }
+      },
+      "records": 0,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Status envelope matches current adapter",
+      "status": "ACCESSIBLE",
+      "existingAdapterAcceptsStatusShape": true
+    },
+    {
+      "endpoint": "GTFSScheduleTrain",
+      "retrievedAt": "2026-09-18T12:25:54.606101+00:00",
+      "httpStatus": 200,
+      "bytes": 1931,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:54 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "NOT TESTED",
+      "contractReason": "No download link in this response",
+      "status": "UNVERIFIED",
+      "downloadStatus": "UNAVAILABLE_NO_LINK"
+    },
+    {
+      "endpoint": "GTFSRealTimeTrainServiceAlerts",
+      "retrievedAt": "2026-09-18T12:25:55.742479+00:00",
+      "httpStatus": 200,
+      "bytes": 1948,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:56 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "NOT TESTED",
+      "contractReason": "No download link in this response",
+      "status": "UNVERIFIED",
+      "downloadStatus": "UNAVAILABLE_NO_LINK"
+    },
+    {
+      "endpoint": "GTFSRealtimeTrainTripUpdates",
+      "retrievedAt": "2026-09-18T12:25:56.838700+00:00",
+      "httpStatus": 200,
+      "bytes": 1951,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:57 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "timestamp": "str",
+            "link": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "NOT TESTED",
+      "contractReason": "No download link in this response",
+      "status": "UNVERIFIED",
+      "downloadStatus": "UNAVAILABLE_NO_LINK"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=EWL",
+      "retrievedAt": "2026-09-18T12:25:57.923673+00:00",
+      "httpStatus": 200,
+      "bytes": 3854,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:58 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 33,
+          "firstItem": {
+            "Station": "str",
+            "StartTime": "str",
+            "EndTime": "str",
+            "CrowdLevel": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "StartTime": {
+          "min": "2026-09-18T20:00:00+08:00",
+          "max": "2026-09-18T20:00:00+08:00",
+          "count": 1
+        },
+        "EndTime": {
+          "min": "2026-09-18T20:10:00+08:00",
+          "max": "2026-09-18T20:10:00+08:00",
+          "count": 1
+        }
+      },
+      "records": 33,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=CCL",
+      "retrievedAt": "2026-09-18T12:25:59.050080+00:00",
+      "httpStatus": 200,
+      "bytes": 3968,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:25:59 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 34,
+          "firstItem": {
+            "Station": "str",
+            "StartTime": "str",
+            "EndTime": "str",
+            "CrowdLevel": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "StartTime": {
+          "min": "2026-09-18T20:00:00+08:00",
+          "max": "2026-09-18T20:00:00+08:00",
+          "count": 1
+        },
+        "EndTime": {
+          "min": "2026-09-18T20:10:00+08:00",
+          "max": "2026-09-18T20:10:00+08:00",
+          "count": 1
+        }
+      },
+      "records": 34,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "PCDRealTime?TrainLine=DTL",
+      "retrievedAt": "2026-09-18T12:26:00.192770+00:00",
+      "httpStatus": 200,
+      "bytes": 4310,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:00 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 37,
+          "firstItem": {
+            "Station": "str",
+            "StartTime": "str",
+            "EndTime": "str",
+            "CrowdLevel": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "StartTime": {
+          "min": "2026-09-18T20:00:00+08:00",
+          "max": "2026-09-18T20:00:00+08:00",
+          "count": 1
+        },
+        "EndTime": {
+          "min": "2026-09-18T20:10:00+08:00",
+          "max": "2026-09-18T20:10:00+08:00",
+          "count": 1
+        }
+      },
+      "records": 37,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=EWL",
+      "retrievedAt": "2026-09-18T12:26:01.313672+00:00",
+      "httpStatus": 200,
+      "bytes": 88308,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:01 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "Date": "str",
+            "Stations": {
+              "type": "array",
+              "count": 33,
+              "firstItem": {
+                "Station": "str",
+                "Interval": {
+                  "type": "array",
+                  "count": 48,
+                  "firstItem": "dict"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "Date": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T00:00:00+08:00",
+          "count": 1
+        },
+        "Start": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T23:30:00+08:00",
+          "count": 48
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=CCL",
+      "retrievedAt": "2026-09-18T12:26:02.420317+00:00",
+      "httpStatus": 200,
+      "bytes": 90980,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:02 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "Date": "str",
+            "Stations": {
+              "type": "array",
+              "count": 34,
+              "firstItem": {
+                "Station": "str",
+                "Interval": {
+                  "type": "array",
+                  "count": 48,
+                  "firstItem": "dict"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "Date": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T00:00:00+08:00",
+          "count": 1
+        },
+        "Start": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T23:30:00+08:00",
+          "count": 48
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "PCDForecast?TrainLine=DTL",
+      "retrievedAt": "2026-09-18T12:26:03.603459+00:00",
+      "httpStatus": 200,
+      "bytes": 98996,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:03 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 1,
+          "firstItem": {
+            "Date": "str",
+            "Stations": {
+              "type": "array",
+              "count": 37,
+              "firstItem": {
+                "Station": "str",
+                "Interval": {
+                  "type": "array",
+                  "count": 48,
+                  "firstItem": "dict"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "Date": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T00:00:00+08:00",
+          "count": 1
+        },
+        "Start": {
+          "min": "2026-09-18T00:00:00+08:00",
+          "max": "2026-09-18T23:30:00+08:00",
+          "count": 48
+        }
+      },
+      "records": 1,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "BusStops?$skip=0",
+      "retrievedAt": "2026-09-18T12:26:04.811045+00:00",
+      "httpStatus": 200,
+      "bytes": 69368,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:05 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 500,
+          "firstItem": {
+            "BusStopCode": "str",
+            "RoadName": "str",
+            "Description": "str",
+            "Latitude": "float",
+            "Longitude": "float"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 500,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE",
+      "stopIdentifierTypes": [
+        "str"
+      ]
+    },
+    {
+      "endpoint": "BusStops?$skip=500",
+      "retrievedAt": "2026-09-18T12:26:05.914845+00:00",
+      "httpStatus": 200,
+      "bytes": 69782,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:06 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 500,
+          "firstItem": {
+            "BusStopCode": "str",
+            "RoadName": "str",
+            "Description": "str",
+            "Latitude": "float",
+            "Longitude": "float"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 500,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE",
+      "stopIdentifierTypes": [
+        "str"
+      ]
+    },
+    {
+      "endpoint": "BusRoutes?$skip=0",
+      "retrievedAt": "2026-09-18T12:26:06.980766+00:00",
+      "httpStatus": 200,
+      "bytes": 116420,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:07 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 500,
+          "firstItem": {
+            "ServiceNo": "str",
+            "Operator": "str",
+            "Direction": "int",
+            "StopSequence": "int",
+            "BusStopCode": "str",
+            "Distance": "int",
+            "WD_FirstBus": "str",
+            "WD_LastBus": "str",
+            "SAT_FirstBus": "str",
+            "SAT_LastBus": "str",
+            "SUN_FirstBus": "str",
+            "SUN_LastBus": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 500,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "BusRoutes?$skip=500",
+      "retrievedAt": "2026-09-18T12:26:08.174740+00:00",
+      "httpStatus": 200,
+      "bytes": 116260,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:08 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 500,
+          "firstItem": {
+            "ServiceNo": "str",
+            "Operator": "str",
+            "Direction": "int",
+            "StopSequence": "int",
+            "BusStopCode": "str",
+            "Distance": "float",
+            "WD_FirstBus": "str",
+            "WD_LastBus": "str",
+            "SAT_FirstBus": "str",
+            "SAT_LastBus": "str",
+            "SUN_FirstBus": "str",
+            "SUN_LastBus": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 500,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "BusServices?$skip=0",
+      "retrievedAt": "2026-09-18T12:26:09.373950+00:00",
+      "httpStatus": 200,
+      "bytes": 114923,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:09 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 500,
+          "firstItem": {
+            "ServiceNo": "str",
+            "Operator": "str",
+            "Direction": "int",
+            "Category": "str",
+            "OriginCode": "str",
+            "DestinationCode": "str",
+            "AM_Peak_Freq": "str",
+            "AM_Offpeak_Freq": "str",
+            "PM_Peak_Freq": "str",
+            "PM_Offpeak_Freq": "str",
+            "LoopDesc": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 500,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "BusServices?$skip=500",
+      "retrievedAt": "2026-09-18T12:26:10.478746+00:00",
+      "httpStatus": 200,
+      "bytes": 69371,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:10 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "value": {
+          "type": "array",
+          "count": 301,
+          "firstItem": {
+            "ServiceNo": "str",
+            "Operator": "str",
+            "Direction": "int",
+            "Category": "str",
+            "OriginCode": "str",
+            "DestinationCode": "str",
+            "AM_Peak_Freq": "str",
+            "AM_Offpeak_Freq": "str",
+            "PM_Peak_Freq": "str",
+            "PM_Offpeak_Freq": "str",
+            "LoopDesc": "str"
+          }
+        }
+      },
+      "sourceTimeSamples": {},
+      "records": 301,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE"
+    },
+    {
+      "endpoint": "v3/BusArrival?BusStopCode=01012",
+      "retrievedAt": "2026-09-18T12:26:11.585748+00:00",
+      "httpStatus": 200,
+      "bytes": 7783,
+      "contentType": "application/json;charset=UTF-8",
+      "httpDate": "Fri, 18 Sep 2026 12:26:11 GMT",
+      "lastModified": null,
+      "shape": {
+        "odata.metadata": "str",
+        "BusStopCode": "str",
+        "Services": {
+          "type": "array",
+          "count": 11,
+          "firstItem": {
+            "ServiceNo": "str",
+            "Operator": "str",
+            "NextBus": {
+              "OriginCode": "str",
+              "DestinationCode": "str",
+              "EstimatedArrival": "str",
+              "Monitored": "int",
+              "Latitude": "str",
+              "Longitude": "str",
+              "VisitNumber": "str",
+              "Load": "str",
+              "Feature": "str",
+              "Type": "str"
+            },
+            "NextBus2": {
+              "OriginCode": "str",
+              "DestinationCode": "str",
+              "EstimatedArrival": "str",
+              "Monitored": "int",
+              "Latitude": "str",
+              "Longitude": "str",
+              "VisitNumber": "str",
+              "Load": "str",
+              "Feature": "str",
+              "Type": "str"
+            },
+            "NextBus3": {
+              "OriginCode": "str",
+              "DestinationCode": "str",
+              "EstimatedArrival": "str",
+              "Monitored": "int",
+              "Latitude": "str",
+              "Longitude": "str",
+              "VisitNumber": "str",
+              "Load": "str",
+              "Feature": "str",
+              "Type": "str"
+            }
+          }
+        }
+      },
+      "sourceTimeSamples": {
+        "EstimatedArrival": {
+          "min": "2026-09-18T20:25:21+08:00",
+          "max": "2026-09-18T21:06:45+08:00",
+          "count": 25
+        }
+      },
+      "records": 0,
+      "httpReachable": true,
+      "contractStatus": "PASS",
+      "contractReason": "Required keys present in up to five records; full semantics unverified",
+      "status": "ACCESSIBLE",
+      "serviceCount": 11,
+      "populatedArrivalSlots": 26,
+      "monitoredValues": [
+        "0",
+        "1"
+      ]
+    }
+  ],
+  "limits": "Small samples, not an exhaustive directory or continuous service validation.",
+  "finishedAt": "2026-09-18T12:26:12.669720+00:00"
+}

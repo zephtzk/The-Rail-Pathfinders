@@ -1,0 +1,212 @@
+{
+  "recordedAt": "2026-09-18T14:25:09.293Z",
+  "evidenceClass": "Desktop Chromium/Edge emulation; loopback; actual browser offline networking; synthetic disruptions; no physical-device or WAN inference",
+  "browser": "153.0.4234.32",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "e49211ee0f2947fa1290d079d0fe431bbdcdc02024eee34d865bea056eb25357",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "99c48a7adeb7e2fb934db150511f62cab56a48b1e42e01476a9fbb40adfa8af4",
+  "coldMs": 480.9851000000001,
+  "heap": {
+    "usedSize": 34220744,
+    "totalSize": 104398848,
+    "embedderHeapUsedSize": 2421760,
+    "backingStorageSize": 98488
+  },
+  "apiRequests": 1,
+  "resources": [
+    {
+      "name": "/src/rail.css",
+      "encodedBodySize": 14821,
+      "decodedBodySize": 14821
+    },
+    {
+      "name": "/src/multimodal-ui.js",
+      "encodedBodySize": 20597,
+      "decodedBodySize": 20597
+    },
+    {
+      "name": "/src/journey-ui.js",
+      "encodedBodySize": 13314,
+      "decodedBodySize": 13314
+    },
+    {
+      "name": "/src/multimodal-engine.js",
+      "encodedBodySize": 6666,
+      "decodedBodySize": 6666
+    },
+    {
+      "name": "/src/pilot-validation.js",
+      "encodedBodySize": 9421,
+      "decodedBodySize": 9421
+    },
+    {
+      "name": "/src/feed-health.js",
+      "encodedBodySize": 1396,
+      "decodedBodySize": 1396
+    },
+    {
+      "name": "/src/journey-state.js",
+      "encodedBodySize": 16378,
+      "decodedBodySize": 16378
+    },
+    {
+      "name": "/src/rail-engine.js",
+      "encodedBodySize": 28255,
+      "decodedBodySize": 28255
+    },
+    {
+      "name": "/data/rail-network.json",
+      "encodedBodySize": 1947956,
+      "decodedBodySize": 13426545
+    },
+    {
+      "name": "/data/bus-network.json",
+      "encodedBodySize": 19330,
+      "decodedBodySize": 106971
+    },
+    {
+      "name": "/data/walking-links.json",
+      "encodedBodySize": 5122,
+      "decodedBodySize": 29351
+    },
+    {
+      "name": "/data/bus-manifest.json",
+      "encodedBodySize": 2549,
+      "decodedBodySize": 2549
+    },
+    {
+      "name": "/data/rail-manifest.json",
+      "encodedBodySize": 96010,
+      "decodedBodySize": 96010
+    },
+    {
+      "name": "/icon.svg",
+      "encodedBodySize": 282,
+      "decodedBodySize": 282
+    }
+  ],
+  "results": [
+    {
+      "name": "complete changed application cold startup <=3000ms",
+      "status": "PASS"
+    },
+    {
+      "name": "complete changed application heap <=150MiB",
+      "status": "PASS"
+    },
+    {
+      "name": "initial request budget: zero automatic live requests",
+      "status": "PASS"
+    },
+    {
+      "name": "compressed routing payload <=3MiB",
+      "status": "PASS"
+    },
+    {
+      "name": "new acceptance saved not-departed progress",
+      "status": "PASS"
+    },
+    {
+      "name": "new search leaves accepted guidance unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic scoped cancellation offers traveller choice",
+      "status": "PASS"
+    },
+    {
+      "name": "decline retains guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate recommendation suppressed",
+      "status": "PASS"
+    },
+    {
+      "name": "identical effect with newer retrieval remains suppressed",
+      "status": "PASS"
+    },
+    {
+      "name": "alternative accepts explicitly for a new journey",
+      "status": "PASS"
+    },
+    {
+      "name": "accepted alternative survives reload",
+      "status": "PASS"
+    },
+    {
+      "name": "onboard needs feasible alighting confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard focus moves to confirmed status",
+      "status": "PASS"
+    },
+    {
+      "name": "real browser network loss and offline reload preserve accepted progress",
+      "status": "PASS"
+    },
+    {
+      "name": "offline provenance labels no current disruption claim",
+      "status": "PASS"
+    },
+    {
+      "name": "new supported offline bus search works",
+      "status": "PASS"
+    },
+    {
+      "name": "new supported offline mixed search works",
+      "status": "PASS"
+    },
+    {
+      "name": "offline previews preserve active guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "reconnection refreshes source without resetting guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "repeated transitions coalesce into one bounded live request",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown progress retains usable next step",
+      "status": "PASS"
+    },
+    {
+      "name": "no overflow at 390px",
+      "status": "PASS"
+    },
+    {
+      "name": "no overflow at 320px",
+      "status": "PASS"
+    },
+    {
+      "name": "200 percent text retains narrow layout",
+      "status": "PASS"
+    },
+    {
+      "name": "accessible status announcements exist",
+      "status": "PASS"
+    },
+    {
+      "name": "no browser exceptions",
+      "status": "PASS"
+    },
+    {
+      "name": "partial routing asset failure retains accepted guidance independently of legacy save",
+      "status": "PASS"
+    },
+    {
+      "name": "partial data disables recalculation without erasing instructions",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

@@ -1,108 +1,105 @@
-# The-Rail-Pathfinders — Commute Copilot
+# Commute Copilot — The Rail Pathfinders
 
-Source repository: [The-Rail-Pathfinders](https://github.com/zephtzk/The-Rail-Pathfinders).
+**Six-upgrade review candidate:** start with [completion, limits and setup](docs/UPGRADE_DELIVERY.md), the [two-device rehearsal](docs/UPGRADE_DEMO.md), [facility/toilet coverage](docs/FACILITY_COVERAGE.md), [sharing and database setup](docs/SHARING.md), and [fares](docs/FARES.md). The companion is integrated below all existing planners. Review a selected journey, then start it or create a recipient link.
 
-A mobile browser MVP for NEBULA X PS2: decide when to leave, understand a disruption and choose a feasible route to Bugis. No login or installation is needed for the app. **Journey times, crowding and transport events are labelled deterministic replay, not live travel advice.**
+The browser workflows, local durable sharing and tests are implemented. A real verified step-free door-to-door corridor and real verified toilet entrance paths remain blocked by missing checked source data. Deployed D1/push delivery and physical phones are unverified. The existing production site and audience are unchanged.
 
-Hosted preview: [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Hosting access is currently owner-private; approval to make it public is pending. The app itself has no account system. Public judge access must be enabled before submission.
+The following Phase 4 publication information describes the **previous hosted release**, not a deployment of this branch.
 
-## Run
 
-Requires Node.js 22 or newer and npm. Validated with Node 24.16.0 and npm 11.13.0 on Windows.
+Previous hosted delivery: **Phase 4 user-testing build, published for owner testing**. Start with the [publication report](docs/PHASE4_PUBLICATION.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
+
+| Entry page | Use in this round |
+| --- | --- |
+| `/multimodal.html` | Main Phase 4 test: accept a journey, confirm progress, compare synthetic changes and reload offline. |
+| `/` | General station-to-station scheduled rail planner, 186 imported station records. |
+| `/replay.html` | Original fictional corridor replay and optional Phase 1 advisory panel; separate from the scheduled planner. |
+| `/data/application-build.json` | Compare the application SHA-256 with the candidate report before recording a test. |
+
+The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) serves **version 3**, source `32d97e39172827cd31916f62aa39603c2cb3e5b3`, with **owner-only access**. Sign in as the authorized owner; external testers need a separately approved access arrangement after owner phone smoke tests. Local testing needs no account. GitHub and Sites were published separately; a future GitHub push alone will not update the hosted app. The publication report records the verified build and distinguishes later documentation updates from the deployed source.
+
+Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
+
+Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. No address search, step-free assurance, broader bus coverage or intermediate onboard alighting was supported in that release. This branch adds the bounded fare and companion features described above. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
+
+See [coverage](docs/PHASE3_COVERAGE.md), [historical Phase 4 acceptance](docs/PHASE4_REPORT.md), [operations](docs/PHASE4_OPERATIONS.md) and the [milestone ledger](docs/MILESTONES.md). Physical Android Chrome and iPhone Safari checks remain **NOT TESTED**; desktop emulation does not close them.
+
+## Run and verify
+
+Requires Node.js 22.13+ (Node 24 tested) and Python 3.10+. The importer uses only Python's standard library.
 
 ```sh
 npm ci
-npm test
-npm run build
+npm run check
 npm run dev
 ```
 
-Open `http://localhost:4173`. `npm run dev` serves the built release and reloads its Worker after a rebuild. Run `npm run build` after source changes. Service workers require localhost or HTTPS; ordinary LAN HTTP is insufficient for phone offline testing. Use the published HTTPS prototype on phones.
+Open `http://localhost:4173`. The development server serves built output; rebuild after edits. Use the process `PORT` environment variable if that port is occupied. No DataMall key is needed to use or repeat the included import.
 
 ```sh
-# Optional automated browser checks
-npx playwright install chromium
-node tests/browser.mjs
+npm run import:rail
+npm run test:import
+npm test
+npm run benchmark:rail
+npm run test:rail-browser
+npm run test:multimodal-browser
+npm run import:bus
+npm run test:bus-import
+npm run benchmark:multimodal
+node tests/rail-offline-browser.mjs
+python scripts/verify-walking.py
+npm run test:browser
+node tests/live-browser.mjs
 ```
 
-The browser test defaults to `http://localhost:4173`. Optional environment variables: `TEST_BASE_URL`, `CAPTURE_DIR`, `BROWSER_EXECUTABLE` (for an existing Edge/Chrome executable). Browser captures are emulation, not physical-phone evidence.
+For the complete bounded readiness run (build, all existing unit/import checks, walking verification, Worker/comparison budgets and six browser suites):
 
-## Supported journey
-
-- Origin: Tampines EW2 or Paya Lebar EW8/CC9. Destination: Bugis EW12/DT14. Singapore time; same-day departure and deadline.
-- Direct: East West Line westbound toward Tuas Link.
-- Alternative: East West to Paya Lebar where needed, Circle clockwise via Dakota to Promenade, then Downtown toward Bukit Panjang to Bugis.
-- Replanning is from a user-confirmed Paya Lebar position on the replay clock. No GPS tracking, arbitrary address routing, bus routing, fares, live timetable routing or step-free guarantee.
-
-The actual OSM rail geometry includes 16 directed segments and 19 line-specific station positions. Paya Lebar and Promenade interchange **topology** is verified by operator/LTA sources. Dashed transfer connectors are illustrative links between platform anchors, not surveyed indoor walking paths. Follow station signs; all walking allowances are scenario assumptions. See `public/data/sources.json`.
-
-## Reproducible demonstration
-
-Default: 19 September 2026, depart Tampines 08:10, deadline 09:00, walking limit 12 minutes, fastest preference.
-
-1. **Reset demo**. Normal arrival is 08:41, with 19 minutes of buffer. Inspect the next move, journey strip, steps and Map.
-2. **Demo controls → Planned track works**. A fictional 08:00–10:00 westbound closure Paya Lebar→Aljunied makes the direct route unavailable. The alternative takes 49 minutes; leave by 08:11 for 09:00.
-3. **Demo controls → Disruption during travel**. The clock advances to 08:29 at Paya Lebar. A fictional 22-minute delay yields a 09:03 direct arrival. **Compare options** shows a 30-minute remaining alternative arriving 08:59.
-4. **Use this route**. The app confirms Route updated and saves it. View the alternative geometry.
-5. **Save for offline**. Wait for Offline app ready. Disable the browser/device network and reload. The selected journey, steps, geometry and schematic remain; no offline OSM basemap is promised.
-6. Reconnect: the selected route stays selected. **Reset demo** clears only this app’s saved journey and resets fixtures.
-
-**Run automatic event replay** surfaces a planned change after five seconds and a mid-journey disruption after fourteen seconds while the page is open. Manual scenario buttons make rehearsal immediate. Irrelevant time-window/direction events and repeat alert IDs are suppressed. Closed-tab push is omitted.
-
-## Decision model
-
-Access, waiting, rides, interchange walking and exit time all count. Events match directed edges and half-open time intervals. Each event’s delay is applied once, even across split ride legs. Edge timing within a ride is evenly apportioned for the fixture; this is not a timetable claim.
-
-1. Exclude closed routes, unverified transfer connections and routes above the total walking allowance (including completed access walking).
-2. Prefer routes that meet the deadline. If none do, choose the earliest feasible arrival and disclose lateness.
-3. Fastest weights speed 0.8 and comfort 0.2; lower crowding uses 0.5/0.5 within the user’s extra-time allowance. Speed is `clamp(1 - (duration - fastestDuration)/30, 0, 1)`; comfort is `1 - crowdingLoad`, with unknown crowding scoring zero. Higher is better on both scales.
-4. Retain a selected on-time route rather than switch for less than three minutes of fastest-mode benefit. Preference changes need not change the recommendation.
-
-Default arithmetic (all minutes): direct `2 access + 3 wait + 14 EW + 10 EW + 2 exit = 31`; alternative from Tampines `2 + 3 + 14 + 4 transfer + 3 wait + 12 CC + 4 transfer + 3 wait + 2 DT + 2 exit = 49`. At Paya Lebar 08:29, staying is `10 ride + 22 delay + 2 exit = 34`, arriving 09:03; alternative is `4 + 3 + 12 + 4 + 3 + 2 + 2 = 30`, arriving 08:59. The four-minute difference is fixture arithmetic, not measured real-world savings.
-
-A Paya Lebar **origin** enters Circle directly: `2 access + 3 wait + 12 CC + 4 transfer + 3 wait + 2 DT + 2 exit = 28`, one transfer, eight minutes walking. Arriving on EW from Tampines still requires the Paya Lebar transfer.
-
-## Architecture and data contract
-
-- Browser: vanilla ES modules, semantic HTML/CSS, Leaflet **1.9.4**. No UI framework or LLM dependency.
-- Engine: pure functions in `src/engine.js`; static corridor contract and fixtures in `src/data.js`.
-- State: journey inputs; selected route ID; replay scene; confirmed current stop/time; routes with timed legs and source metadata; geometry; alert keys. Journey state and connection/source state are independent.
-- Persistence: versioned, validated localStorage snapshot, verified after write. Service worker caches the same-origin shell and GeoJSON. Each build hashes its cache version. Standard OSM raster tiles are never prefetched or intercepted by the service worker.
-- Server: Cloudflare-compatible ESM Worker with `fetch(request, env, ctx)`. Build embeds a small asset table, avoiding framework/runtime dependencies. `GET /api/status` protects the optional LTA key, times out upstream requests, validates responses and returns honest unavailable/partial status. `GET /api/health` is public health metadata.
-- Build: `scripts/build.mjs` emits `dist/server/index.js`, public assets and Sites metadata. Node’s test runner covers domain, data, adapter and persistence; Playwright **1.62.1** covers browser flow.
-
-## Configuration and live-data limits
-
-Copy `.env.example` to `.env` if running with your own server configuration. The local server reads process environment; to load a file with current Node, run `node --env-file=.env scripts/serve.mjs` after building.
-
-`LTA_ACCOUNT_KEY` is optional and **server-only**. Configure it as a runtime secret at the hosting provider. Never put it in browser code or a public-prefixed environment variable. No key is included in this release.
-
-Without the key, the live service source explicitly reports unavailable. With a key, the adapter exposes official TrainServiceAlerts notices separately; route estimates and crowding remain replay. The adapter does not invent expiry, travel delays or recoveries from unvalidated text. Integrating current LTA train GTFS and disruption trip updates is future work, not a claim that those feeds do not exist.
-
-Boarding guidance is **unavailable** in the product. The validation function and tests reject stale, incomplete, wrong-train/direction/formation observations and unverified orientation/door maps. Station crowding is not carriage occupancy. No door numbers or seating guarantee are presented.
-
-## Deployment
-
-The checked-in `.openai/hosting.json` identifies this Sites project; do not create a replacement for edits. Build, push the exact source revision to the configured Sites source repository using a temporary per-command credential, package `dist`, save that version and deploy it. Use the Sites connector/skills for this lifecycle. No source credentials belong in files or remotes.
-
-For an independently owned Cloudflare Workers account, the included `wrangler.jsonc` supports:
-
-```sh
-npm ci
-npm run build
-npx wrangler@4 deploy
-# Optional server-only DataMall key:
-npx wrangler@4 secret put LTA_ACCOUNT_KEY
+```powershell
+$env:BROWSER_EXECUTABLE='C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
+$env:READINESS_REQUIRE_CLEAN='1'
+npm run verify:readiness
 ```
 
-Wrangler deployment requires your authenticated Cloudflare account and is an alternative, not a claim of a second deployed instance.
+Run the clean-candidate check after committing all intended source changes. The runner starts its own no-secret loopback server on port 4181, stops it afterward and writes the exact commit, application/Worker hashes and logs to ignored `test-results/readiness-candidate/`. Set `READINESS_PORT` if occupied or `READINESS_OUTPUT` to retain another run. It does not call live providers or modify hosted state.
 
-## Verification and remaining device checks
+Playwright requires installed Chromium or an existing Edge/Chrome via `BROWSER_EXECUTABLE`. Set `TEST_BASE_URL` to the root for rail tests and `/replay.html` for the two existing suites. `CAPTURE_DIR` selects browser evidence output. These tests are desktop emulation, not physical-phone evidence.
 
-Automated tests cover normal/stay, planned closure, mid-trip disruption, wrong direction, exact time boundaries, all-late/no-feasible cases, walking limits, preference ranking, deduplication, corrupt storage, source failure, boarding validity and actual offline reload. Physical iPhone Safari and Android Chrome have **not** been tested in this environment. Before submission, check the hosted URL, keyboard visibility, browser-bar changes, 200% text, bright-light readability, real airplane-mode reload and reconnect on both phones.
+## What is supported
 
-Engineering evidence and labelled captures are delivered in `engineering_return.zip`. The pitch video, polished write-up and organiser submission assembly belong to the separate submission workflow.
+Query dates are **18 September–31 December 2026**, plus genuine after-midnight carryover from the final service day. Individual calendars and exceptions determine actual availability. The source contains **19 rail service patterns, 17,575 accepted trips and 333,231 stop times**. One impossible zero-second ride caused its whole trip to be quarantined, with the reason recorded.
 
-## Attribution and licence
+The model has **27 reviewed standard interchange groups**. Tap-out connections at Newton, Tampines and Bukit Panjang are excluded, while those stations remain selectable endpoints. Access and exit each assume 2 minutes. Interchange walking assumes 4–8 minutes; changing trains at the identical platform assumes 1 minute without extra walking. These are planning allowances, not measured paths or accessibility guarantees. The rail schematic connects scheduled stop coordinates; it cannot establish a walking link.
 
-Application code: MIT (see LICENSE). Rail geography: © OpenStreetMap contributors, [ODbL 1.0](https://www.openstreetmap.org/copyright). OSM-derived GeoJSON retains its source metadata and licence. Leaflet is BSD-2-Clause; its licence is included in the built vendor assets. Operator maps and the private participant/reference documents are not redistributed in the app or public repository. [OSM tile policy](https://operations.osmfoundation.org/policies/tiles/) prohibits bulk/offline raster prefetch.
+Calendars follow the source literally. `SERVICE_PH` is an identifier, not holiday logic. Public-holiday substitutions absent from the supplied exceptions remain unverified.
+
+Try **Yew Tee ↔ Punggol Coast**, 19 September, 08:10 departure, 11:00 deadline, 30-minute walking limit. The fastest routes use two transfers each way. **South View ↔ Punggol Coast** exercises three transfers. A BP journey on 20 September demonstrates a supplied cancellation exception. Unsupported dates, unknown stations, walking violations and impossible deadlines receive explanations.
+
+Preferences are fastest arrival, fewer transfers and less walking within an extra-time allowance and deadline. Quieter explicitly falls back to fastest because comparable journey crowding is unavailable. The default search horizon is six hours; a later explicit deadline can extend it up to 48 hours. After-midnight deadlines require the next day's date.
+
+## Versioned import and architecture
+
+`data/rail/sources/` holds the licensed immutable source ZIP and sanitised acquisition metadata. `scripts/create-rail-rules.py` materialises individually reviewed platform groups into `data/rail/validation.json`. Parent membership, names and proximity never infer transfers. `scripts/import-rail.py` validates the archive and emits `public/data/rail-network.json` and `rail-manifest.json`. Source, metadata, rules, importer and compiled artifact hashes are checked before every build.
+
+For a new snapshot, run `python scripts/download-rail.py --gui`, entering the DataMall key only in its masked local window. Without `--gui`, use a real terminal for hidden entry. One bounded download saves the archive and sanitised metadata, never credentials or signed URLs. Review the new archive, update pinned paths/rules, and validate before promoting it. Downloading new data does not automatically extend validated coverage. The included snapshot was acquired through the existing secure local session without extracting or persisting its key.
+
+- `src/rail-engine.js`: pure multi-criteria connection scan, stable source IDs, trip direction, dwell, boarding restrictions, calendars, carryover and explicit interchange rules.
+- `src/rail-ui.js` and `rail.css`: station choices, coverage, schedule provenance, timing explanation, preferences, schematic and saved guidance.
+- `src/engine.js`, `data.js`, `app.js`: preserved corridor replay. Phase 1 live notices and station crowding remain advisory there.
+- `public/sw.js`: caches the same-origin shell and pinned rail data, retaining original provenance; never caches API responses or OSM tiles.
+- `scripts/build.mjs`: static assets plus a Cloudflare-compatible Worker, serving compressed rail data with an identity fallback. `scripts/serve.mjs` runs it locally.
+
+The source has no shapes or transfers table. Explicit interchange rules are a separate versioned input. Independent reference-network tests and an event-state oracle validate routing; imported-data tests check an exact raw-source trip and multi-transfer journeys.
+
+## Original corridor and live panel
+
+At `/replay.html`, **Reset demo** restores Tampines 08:10 → Bugis 08:41, the historical **31-minute replay assumption**. Planned works uses a 49-minute alternative; the Paya Lebar disruption compares 09:03 with 08:59. These fictional scenarios remain tested and never alter the timetable planner.
+
+The pinned Saturday timetable instead has 2 minutes access + 5m20s wait + 31 minutes riding on `EWL_Main_WB_WE_31` + 2 minutes exit = **08:50:20**. The difference is intentional and traceable to the distinct data sources.
+
+For optional Phase 1 live information, build then run `python scripts/run-live-local.py --gui`. Enter the DataMall API key only in the masked field; it remains server-side in process memory. Station crowding is not carriage occupancy. The Phase 1 ledger retains its unobserved live-variant limits. EXTOL uses a separate SDK credential and is outside this phase.
+
+## Deployment and licence
+
+The authorized GitHub push and Sites version 3 deployment are recorded in the [publication report](docs/PHASE4_PUBLICATION.md). The existing Sites identity and owner-only audience are preserved. Owner phone smoke tests and explicitly approved tester access remain before invitations.
+
+Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps. The owner's confirmation of written redistribution permission is recorded in [publication authorization](docs/PUBLICATION_AUTHORIZATION.md); the permission document was not independently reviewed. See [third-party notices](THIRD_PARTY_NOTICES.md). Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.

@@ -1,0 +1,163 @@
+{
+  "recordedAt": "2026-09-18T14:25:25.026Z",
+  "browser": "153.0.4234.32",
+  "evidenceClass": "Desktop Edge emulation, loopback, real browser networking disabled; live feed synthetic; no physical phone test",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "e49211ee0f2947fa1290d079d0fe431bbdcdc02024eee34d865bea056eb25357",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "7dae33ac2f4435a7a765eccc6f83fa4b188929fc7db1271eddf2515e50ad5bac",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "99c48a7adeb7e2fb934db150511f62cab56a48b1e42e01476a9fbb40adfa8af4",
+  "coldMs": 634.0112000000001,
+  "heap": {
+    "usedSize": 62528428,
+    "totalSize": 109912064,
+    "embedderHeapUsedSize": 4093200,
+    "backingStorageSize": 98537
+  },
+  "resources": [
+    {
+      "name": "http://127.0.0.1:4177/data/rail-network.json",
+      "encodedBodySize": 1947956,
+      "decodedBodySize": 13426545,
+      "durationMs": 154.69999998807907
+    },
+    {
+      "name": "http://127.0.0.1:4177/data/bus-network.json",
+      "encodedBodySize": 19330,
+      "decodedBodySize": 106971,
+      "durationMs": 128.90000000596046
+    },
+    {
+      "name": "http://127.0.0.1:4177/data/walking-links.json",
+      "encodedBodySize": 5122,
+      "decodedBodySize": 29351,
+      "durationMs": 128.5
+    },
+    {
+      "name": "http://127.0.0.1:4177/data/rail-manifest.json",
+      "encodedBodySize": 96010,
+      "decodedBodySize": 96010,
+      "durationMs": 130.30000001192093
+    },
+    {
+      "name": "http://127.0.0.1:4177/data/bus-manifest.json",
+      "encodedBodySize": 2549,
+      "decodedBodySize": 2549,
+      "durationMs": 130.09999999403954
+    }
+  ],
+  "results": [
+    {
+      "name": "cold local combined browser result meets predeclared 3-second target",
+      "status": "PASS"
+    },
+    {
+      "name": "first-result browser heap meets predeclared150MiB target",
+      "status": "PASS"
+    },
+    {
+      "name": "combined compressed transfer meets predeclared3MiB target",
+      "status": "PASS"
+    },
+    {
+      "name": "default pilot contains both estimated bus and scheduled rail",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic current arrivals preserve selected journey timing",
+      "status": "PASS"
+    },
+    {
+      "name": "live panel distinguishes provider observation absence and separate itinerary date",
+      "status": "PASS"
+    },
+    {
+      "name": "bounded live refresh remains disabled during minimum interval",
+      "status": "PASS"
+    },
+    {
+      "name": "direct bus has independently checked12min wait+7m30s ride=10:19:30",
+      "status": "PASS"
+    },
+    {
+      "name": "bus-to-rail uses recorded pedestrian link and complete arithmetic",
+      "status": "PASS"
+    },
+    {
+      "name": "rail-to-bus uses opposite-direction stop81111",
+      "status": "PASS"
+    },
+    {
+      "name": "same physical stop bus transfer is feasible and counted",
+      "status": "PASS"
+    },
+    {
+      "name": "total walking budget enforced in browser",
+      "status": "PASS"
+    },
+    {
+      "name": "impossible estimated deadline is not recommended",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported weekend bus date explicitly excluded",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic EWL closure fallback labelled and excludes EWL",
+      "status": "PASS"
+    },
+    {
+      "name": "full pilot data and manifests cached",
+      "status": "PASS"
+    },
+    {
+      "name": "actual offline reload restores bus guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "actual new offline bus-only search changes destination and retains arithmetic",
+      "status": "PASS"
+    },
+    {
+      "name": "actual new offline mixed search succeeds with coherent arithmetic",
+      "status": "PASS"
+    },
+    {
+      "name": "offline arrivals never labelled current",
+      "status": "PASS"
+    },
+    {
+      "name": "reconnection preserves selected guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "online reload restores the new saved selection",
+      "status": "PASS"
+    },
+    {
+      "name": "no horizontal page overflow at390px",
+      "status": "PASS"
+    },
+    {
+      "name": "no horizontal page overflow at320px",
+      "status": "PASS"
+    },
+    {
+      "name": "no horizontal overflow at200percent text",
+      "status": "PASS"
+    },
+    {
+      "name": "only one explicitly requested synthetic arrival fetch",
+      "status": "PASS"
+    },
+    {
+      "name": "no browser exceptions",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

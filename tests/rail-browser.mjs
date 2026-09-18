@@ -1,0 +1,132 @@
+import {chromium} from 'playwright';
+import {mkdir,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+
+const base = process.env.TEST_BASE_URL ?? 'http://localhost:4173';
+const output = process.env.CAPTURE_DIR ?? 'test-results';
+await mkdir(output,{recursive:true});
+const browser = await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE ? {executablePath:process.env.BROWSER_EXECUTABLE} : {})});
+const context = await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block'});
+const page = await context.newPage(), errors = [], results = [];
+page.on('pageerror',error => errors.push(error.stack ?? error.message));
+const check = (name,passed) => { assert.ok(passed,name); results.push({name,passed:true}); console.log(`PASS ${name}`); };
+const form = () => page.locator('#rail-form');
+const find = () => page.getByRole('button',{name:'Find rail journeys'}).click();
+const capture = async name => {
+  if(process.env.SKIP_CAPTURES) return;
+  await page.waitForFunction(() => !document.querySelector('#rail-toast')?.classList.contains('show'));
+  await page.screenshot({path:`${output}/rail-${name}.png`,fullPage:false});
+};
+try {
+  await page.goto(base);
+  await page.locator('.route-hero').waitFor({timeout:60000});
+  check('default imported timetable journey renders',await page.locator('.route-hero').innerText().then(text => text.includes('Tampines') && text.includes('Buona Vista')));
+  check('station choices cover the imported network',await page.locator('#rail-stations option').count() >= 150);
+  check('source coverage and unsupported interchange boundaries are visible',await page.locator('#coverage').innerText().then(text => text.includes('Land Transport Authority') && text.includes('Newton') && text.includes('Tampines') && text.includes('Bukit Panjang')));
+  check('schematic explicitly avoids proving walking paths',await page.locator('.route-diagram figcaption').innerText().then(text => text.includes('not track geometry or a walking map')));
+  check('390px layout has no horizontal overflow',await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  await capture('mobile-planner');
+
+  await page.getByLabel('From station').fill('Woodlands');
+  await page.getByLabel('To station').fill('Changi Airport');
+  await form().locator('[name=date]').fill('2026-09-19');
+  await form().locator('[name=deadlineTime]').fill('');
+  await find();
+  check('outside-corridor route renders multiple train legs',await page.locator('.journey-step h4').allTextContents().then(texts => texts.filter(text => text.startsWith('Take ')).length >= 3));
+  check('timing breakdown exposes all journey components',await page.locator('.arithmetic').innerText().then(text => ['Access','Waiting','Riding','Transfers','Exit','Total'].every(part => text.includes(part))));
+  await page.locator('.route-hero').scrollIntoViewIfNeeded(); await capture('multitransfer');
+  await page.getByRole('button',{name:'Swap origin and destination'}).click();
+  check('changed details mark previous guidance as stale',await page.locator('#stale-results').isVisible());
+  await find();
+  check('outside-corridor reverse route renders',await page.locator('.route-hero h2').innerText().then(text => text.startsWith('Changi Airport') && text.includes('Woodlands')));
+
+  await form().locator('[name=preference]').selectOption('quieter');
+  await find();
+  check('quieter fallback is explicitly disclosed',await page.locator('#journey').innerText().then(text => text.includes('Quieter preference is unavailable')));
+  await page.getByRole('button',{name:'Save this guidance'}).click();
+  check('saved guidance uses separate rail snapshot storage',await page.evaluate(() => JSON.parse(localStorage.getItem('commute-copilot-rail-guidance-v1'))?.schemaVersion === 1));
+  await page.reload();
+  await page.locator('.route-hero').waitFor();
+  check('full timetable reload preserves the saved chosen journey',await page.locator('.route-hero h2').innerText().then(text => text.startsWith('Changi Airport') && text.includes('Woodlands')) && await page.locator('#journey').innerText().then(text => text.includes('Saved timetable guidance')));
+  await page.evaluate(() => { const saved = JSON.parse(localStorage.getItem('commute-copilot-rail-guidance-v1')); saved.manifest.buildId = 'older-source-build'; localStorage.setItem('commute-copilot-rail-guidance-v1',JSON.stringify(saved)); });
+  await page.reload();
+  await page.locator('.route-hero').waitFor();
+  check('changed source snapshot explicitly triggers recalculation notice',await page.getByText('The imported timetable has changed since you saved your journey.',{exact:false}).isVisible());
+  await page.getByRole('button',{name:'Save this guidance'}).click();
+  await page.evaluate(() => localStorage.setItem('rail-test-backup',localStorage.getItem('commute-copilot-rail-guidance-v1')));
+  await page.evaluate(() => { window.originalSetItem = Storage.prototype.setItem; Storage.prototype.setItem = () => { throw new DOMException('Quota exceeded','QuotaExceededError'); }; });
+  await page.getByRole('button',{name:'Save this guidance'}).click();
+  check('failed persistence never claims a successful save',await page.locator('#rail-toast').innerText().then(text => text.includes('Could not save')));
+  await page.evaluate(() => { Storage.prototype.setItem = window.originalSetItem; });
+
+  await form().locator('[name=deadlineDate]').fill('2026-09-19');
+  await form().locator('[name=deadlineTime]').fill('08:01');
+  await find();
+  check('impossible deadline never presents a feasible selected journey',await page.locator('.route-hero').count() === 0 && await page.locator('.empty-state').innerText().then(text => /deadline|arrival|arrive/i.test(text)));
+  await form().locator('[name=deadlineTime]').fill('');
+  await form().locator('[name=date]').fill('2027-01-01');
+  await find();
+  check('unsupported service date receives explanation',await page.locator('.empty-state').innerText().then(text => /coverage|supported|date/i.test(text)));
+  await page.getByLabel('From station').fill('Unimported station');
+  await find();
+  check('unsupported station receives useful coverage explanation',await page.locator('.empty-state').innerText().then(text => text.includes('outside imported coverage')));
+
+  await page.getByLabel('From station').fill('Tampines');
+  await page.getByLabel('To station').fill('Bugis');
+  await form().locator('[name=date]').fill('2026-09-19');
+  await form().locator('[name=walkingLimitMinutes]').selectOption('0');
+  await find();
+  check('walking limit is enforced',await page.locator('.empty-state').innerText().then(text => /walk/i.test(text)));
+  await form().locator('[name=walkingLimitMinutes]').selectOption('15');
+  await find();
+  check('original corridor remains searchable in new engine',await page.locator('.route-hero h2').innerText().then(text => text.includes('Tampines') && text.includes('Bugis')));
+
+  await page.getByLabel('From station').fill('Bugis');
+  await page.getByLabel('To station').fill('Tampines');
+  await form().locator('[name=departureTime]').fill('23:55');
+  await form().locator('[name=deadlineDate]').fill('2026-09-20');
+  await form().locator('[name=deadlineTime]').fill('01:00');
+  await find();
+  check('after-midnight arrival visibly carries a next-day marker',await page.locator('.hero-arrival').innerText().then(text => text.includes('+1 day')));
+  await page.getByLabel('From station').fill('Buona Vista');
+  await page.getByLabel('To station').fill('Tuas Link');
+  await form().locator('[name=departureTime]').fill('00:01');
+  await form().locator('[name=deadlineDate]').fill('2026-09-19');
+  await find();
+  check('previous service-day provenance is available for midnight train',await page.locator('.service-id').allTextContents().then(texts => texts.some(text => text.includes('Service day 2026-09-18'))));
+
+  await page.setViewportSize({width:320,height:740});
+  check('320px layout has no horizontal overflow',await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  await capture('small-mobile');
+  await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+  check('200 percent text enlargement has no page overflow',await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+  await page.setViewportSize({width:1365,height:950});
+  await page.evaluate(() => scrollTo(0,0));
+  await capture('desktop');
+
+  await page.route('**/data/rail-network.json',route => route.abort());
+  await page.reload();
+  await page.locator('.route-hero').waitFor();
+  check('saved guidance survives timetable load failure',await page.locator('#journey').innerText().then(text => text.includes('Saved timetable guidance')));
+  check('new planning is disabled without imported routing data',await page.getByRole('button',{name:'Find rail journeys'}).isDisabled());
+  await page.evaluate(() => localStorage.setItem('commute-copilot-rail-guidance-v1','{"schemaVersion":1}'));
+  await page.reload();
+  await page.getByRole('heading',{name:'Rail data unavailable'}).waitFor();
+  check('malformed saved guidance fails to honest empty state',await page.locator('#load-state').innerText().then(text => text.includes('no usable saved journey')));
+  await page.evaluate(() => { const saved = JSON.parse(localStorage.getItem('rail-test-backup')); saved.network.stations[0] = null; localStorage.setItem('commute-copilot-rail-guidance-v1',JSON.stringify(saved)); });
+  await page.reload();
+  await page.getByRole('heading',{name:'Rail data unavailable'}).waitFor();
+  check('malformed nested station snapshot fails closed without crashing',await page.locator('#load-state').innerText().then(text => text.includes('no usable saved journey')));
+  await page.evaluate(() => { const saved = JSON.parse(localStorage.getItem('rail-test-backup')); saved.route.legs.find(leg => leg.type === 'ride').toStopId = 'unverified-platform'; localStorage.setItem('commute-copilot-rail-guidance-v1',JSON.stringify(saved)); });
+  await page.reload();
+  await page.getByRole('heading',{name:'Rail data unavailable'}).waitFor();
+  check('saved route with an unknown platform is rejected',await page.locator('#load-state').innerText().then(text => text.includes('no usable saved journey')));
+  check('no unhandled browser exceptions',errors.length === 0);
+  await writeFile(`${output}/rail-browser-results.json`,JSON.stringify({timestamp:new Date().toISOString(),browser:browser.version(),platform:process.platform,emulationOnly:true,serviceWorkers:'blocked; cache integration requires a separate check',results,errors},null,2));
+  console.log(`PASS ${results.length} rail browser checks; ${browser.version()}; emulation only.`);
+} catch(error) {
+  await page.screenshot({path:`${output}/rail-browser-failure.png`,fullPage:true});
+  await writeFile(`${output}/rail-browser-failure.json`,JSON.stringify({error:error.stack,results,errors},null,2));
+  throw error;
+} finally { await browser.close(); }
