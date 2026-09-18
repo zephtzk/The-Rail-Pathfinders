@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "accepted boarding stop shows three exact matched predictions",
+    "live estimates and operator schedules are distinct",
+    "destination, direction and local last-checked time are visible",
+    "refresh is bounded and no automatic request happens",
+    "aged predictions become visibly stale",
+    "offline guidance never presents saved predictions as live",
+    "arrival checks never change canonical progress",
+    "no runtime errors"
+  ],
+  "errors": [],
+  "fixture": "Synthetic matched predictions; real secure runtime returned valid empty feeds separately"
+}

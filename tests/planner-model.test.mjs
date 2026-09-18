@@ -46,6 +46,9 @@ test('missing date, bus-window and network coverage are explicit prototype limit
  assert.equal(date.kind,'coverage');assert.match(date.message,/2026-09-18 and 2026-10-02/);
  const bus=plannerFeedback({status:'unsupported-bus-window'},{},{busCoverage:{validFrom:'2026-09-18',validThrough:'2026-10-02',earliestSeconds:34200,latestSeconds:59400}});
  assert.equal(bus.kind,'coverage');assert.match(bus.message,/09:30–16:30/);assert.match(bus.message,/not a statement that buses are not running/);
+ const broad=plannerFeedback({status:'unsupported-bus-window'},{},{busCoverage:{calendarMode:'service-day',validFrom:'2026-09-18',validThrough:'2026-10-02'}});
+ assert.match(broad.message,/Saturday and Sunday/);assert.match(broad.message,/previous-day/);assert.doesNotMatch(broad.message,/09:30/);
+ assert.match(plannerFeedback({status:'search-limit'}).message,/No partial result/);
  const disconnected=plannerFeedback({status:'disconnected'});assert.equal(disconnected.kind,'coverage');assert.match(disconnected.message,/operator journey planner/);
  const noService=plannerFeedback({status:'no-service',errors:[{code:'no-origin-service'}]});assert.equal(noService.kind,'search');assert.match(noService.message,/Try an earlier departure/);
 });

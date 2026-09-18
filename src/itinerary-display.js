@@ -35,6 +35,7 @@ export function publicInstruction(value) {
 
 function endpoint(step, end, name) {
   const source = sourceOf(step), key = end === 'from' ? 'fromStopId' : 'toStopId';
+  if(source[end+'Label'])return publicStationLabel(source[end+'Label']);
   const id = step?.[key] ?? source[key] ?? source.stops?.[end === 'from' ? 0 : source.stops.length - 1];
   if (id && name) {
     const resolved = name(id);

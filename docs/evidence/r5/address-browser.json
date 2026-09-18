@@ -1,0 +1,25 @@
+{
+  "kind": "synthetic-browser-integration",
+  "checks": [
+    "address searches are explicit and contain only the entered public query",
+    "provider result remains a preview until explicit review and Start",
+    "request contains coordinate endpoints and authoritative preferences",
+    "standalone provider timeline shows public service and stop names",
+    "provider map has a visible geometry/evidence notice",
+    "address route saves with endpoint records without inventing local station connections",
+    "confirmation preserves unknown fare/accessibility and planned provider source",
+    "accepted address journey has canonical provider geometry and no local context",
+    "provider-aware reroute limitation is visible while accepted guidance remains",
+    "manual boarding confirmation retains original canonical index",
+    "staff automatic message follows accepted external service and destination",
+    "recipient can review the same provider instructions before accepting",
+    "shared acceptance preserves route geometry/preferences and leaves consent off",
+    "provider failure cannot replace accepted route or explicit progress",
+    "reload restores provider route and confirmed progress",
+    "actual offline reload keeps accepted public instruction and progress",
+    "browser reports no application exceptions"
+  ],
+  "errors": [],
+  "physicalDevice": false,
+  "liveProvider": false
+}

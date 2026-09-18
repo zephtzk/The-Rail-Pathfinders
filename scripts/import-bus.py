@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 import re
 
-VERSION = '3.0.0'
+VERSION = '5.0.0'
 ENDPOINTS = ('BusStops', 'BusRoutes', 'BusServices')
 DAYS = ('WD', 'SAT', 'SUN')
 FREQUENCIES = ('AM_Peak_Freq', 'AM_Offpeak_Freq', 'PM_Peak_Freq', 'PM_Offpeak_Freq')
@@ -89,8 +89,9 @@ def read_source(source):
 
 def compile_records(data, metadata, rules):
     require(metadata['version'] == rules['sourceVersion'], 'Unreviewed source version')
-    selected = set(rules['serviceNumbers'])
-    require(selected and len(selected) == len(rules['serviceNumbers']), 'Duplicate/empty coverage services')
+    broad = rules.get('selectionMode') == 'audited-frequency-patterns'
+    selected = set(rules.get('serviceNumbers', []))
+    require(broad or (selected and len(selected) == len(rules['serviceNumbers'])), 'Duplicate/empty coverage services')
     stops, services, route_groups = {}, {}, defaultdict(list)
     duplicate_counts = {}
     for endpoint, fields in [('BusStops', ('BusStopCode',)), ('BusServices', ('ServiceNo','Operator','Direction')), ('BusRoutes', ('ServiceNo','Operator','Direction','StopSequence'))]:
@@ -110,8 +111,38 @@ def compile_records(data, metadata, rules):
                       'missingServiceRecords':sum(pattern_key(row) not in services for row in data['BusRoutes']),
                       'servicesWithoutRoutes':sum(key not in route_groups for key in services),
                       'servicesWithoutRoutesIdentifiers':[':'.join(map(str,key)) for key in sorted(services) if key not in route_groups]}
-    selected_keys = set(key for key in services if key[0] in selected) | set(key for key in route_groups if key[0] in selected)
-    require({key[0] for key in selected_keys} == selected, 'Selected service absent')
+    reviewed_patterns = []
+    if broad:
+        # Audit every exact service/operator/direction. A gap may be legitimate
+        # provider numbering, but this snapshot alone cannot prove completeness.
+        # Keep the exception; never compact or join its sequence silently.
+        selected_keys = set()
+        for key in sorted(set(services) | set(route_groups)):
+            service, rows = services.get(key), sorted(route_groups.get(key, []), key=lambda r:r['StopSequence'])
+            reasons = []
+            if not service or not rows:
+                reasons.append('metadata-without-route' if not rows else 'route-without-metadata')
+            else:
+                if [r['StopSequence'] for r in rows] != list(range(1,len(rows)+1)): reasons.append('sequence-needs-service-review')
+                if rows[0]['BusStopCode'] != service['OriginCode'] or rows[-1]['BusStopCode'] != service['DestinationCode']: reasons.append('termini-conflict')
+                if bool(service['LoopDesc']) != (service['OriginCode'] == service['DestinationCode']): reasons.append('loop-description-needs-review')
+                if bool(service['LoopDesc']) and key[2] != 1: reasons.append('loop-direction-needs-review')
+                if rows[0]['Distance'] != 0: reasons.append('nonzero-start-distance-needs-review')
+                if any(b['Distance'] < a['Distance'] for a,b in zip(rows,rows[1:])): reasons.append('decreasing-distance')
+                try:
+                    headways = {field:frequency(service[field]) for field in FREQUENCIES}
+                    if not any(headways.values()): reasons.append('no-published-headway-fixed-trips-unresolved')
+                    elif not headways['AM_Offpeak_Freq']: reasons.append('peak-only-or-limited-service-needs-trip-rules')
+                except ValueError:
+                    reasons.append('invalid-or-unsupported-headway')
+                if any(r['BusStopCode'] not in stops for r in rows): reasons.append('missing-stop')
+            reviewed_patterns.append({'id':':'.join(map(str,key)), 'status':'excluded' if reasons else 'included', 'reasons':reasons,
+                                      'occurrences':len(rows), 'category':service.get('Category') if service else None})
+            if not reasons: selected_keys.add(key)
+        require(selected_keys, 'No audited frequency patterns')
+    else:
+        selected_keys = set(key for key in services if key[0] in selected) | set(key for key in route_groups if key[0] in selected)
+        require({key[0] for key in selected_keys} == selected, 'Selected service absent')
     patterns, used_stops, rollover_count = [], set(), 0
     for key in sorted(selected_keys):
         require(key in services and key in route_groups, 'Selected service/route orphan')
@@ -125,7 +156,7 @@ def compile_records(data, metadata, rules):
         require(loop == (origin == destination), 'Loop/termini semantics conflict')
         require(not loop or key[2] == 1, 'Unexpected loop direction; preserve variants separately')
         headways = {field:frequency(service[field]) for field in FREQUENCIES}
-        require(headways[rules['assumptions']['waitField']] is not None, 'Pilot headway missing')
+        require(headways[rules['assumptions'].get('waitField','AM_Offpeak_Freq')] is not None, 'Pilot headway missing')
         occurrences, visits, previous_distance = [], Counter(), -1
         for row in rows:
             code = stop_code(row['BusStopCode'])
@@ -141,26 +172,46 @@ def compile_records(data, metadata, rules):
                 if rollover:
                     rollover_days.append(day)
                     rollover_count += 1
-            require(times['WD'] and times['WD'][0] <= rules['coverage']['earliestSeconds'] and times['WD'][1] >= rules['coverage']['latestSeconds'], 'Stop does not support full reviewed daytime window')
+            if not broad:
+                require(times['WD'] and times['WD'][0] <= rules['coverage']['earliestSeconds'] and times['WD'][1] >= rules['coverage']['latestSeconds'], 'Stop does not support full reviewed daytime window')
             occurrences.append({'stopId':code,'sequence':row['StopSequence'],'visitNumber':visits[code],'distanceKm':distance,'firstLast':times,'firstLastRaw':raw_times,'rolloverDays':rollover_days})
             used_stops.add(code)
         require(rows[0]['Distance'] == 0, 'Route start distance is not zero')
+        minimum_span = rules['assumptions'].get('minimumUnreviewedServiceSpanSeconds', 0) if broad else 0
+        day_exclusions = {day:'limited-service-day-needs-trip-rule-review' for day,span in occurrences[0]['firstLast'].items()
+                          if span and span[1]-span[0] < minimum_span}
+        available_days = [day for day,span in occurrences[0]['firstLast'].items() if span and day not in day_exclusions]
         patterns.append({'id':':'.join(map(str,key)),'serviceNo':key[0],'operator':key[1],'direction':key[2],
                          'originCode':origin,'destinationCode':destination,'loop':loop,'loopDescription':service['LoopDesc'],
-                         'headways':headways,'timingKind':'frequency-estimate','stops':occurrences})
+                         'headways':headways,'timingKind':'frequency-estimate','timingSupported':bool(available_days),
+                         'supportedDayTypes':available_days,'dayTimingExclusions':day_exclusions,'stops':occurrences})
     counts = {'BusStops':len(used_stops),'BusRoutes':sum(len(p['stops']) for p in patterns),'BusServices':len(patterns)}
-    bay_codes = rules['assumptions'].get('unverifiedBayStopCodes', [])
+    assumptions = dict(rules['assumptions'])
+    if broad:
+        # Any route endpoint may aggregate boarding/alighting bays. Excluding
+        # all endpoints is intentionally conservative and needs no name guess.
+        assumptions['unverifiedBayStopCodes'] = sorted({s[term] for s in services.values() for term in ('OriginCode','DestinationCode') if s[term] in used_stops})
+    bay_codes = assumptions.get('unverifiedBayStopCodes', [])
     require(len(bay_codes) == len(set(bay_codes)) and all(stop_code(code) in used_stops for code in bay_codes), 'Invalid unverified-bay exclusion')
     network = {'schemaVersion':1,'importerVersion':VERSION,'timezone':'Asia/Singapore','sourceVersion':metadata['version'],
-               'retrievedAt':metadata['retrievedAt'],'coverage':rules['coverage'],'assumptions':rules['assumptions'],
+               'retrievedAt':metadata['retrievedAt'],'coverage':rules['coverage'],'assumptions':assumptions,
                'stops':[stops[code] for code in sorted(used_stops)],'patterns':patterns}
+    routable = [p for p in patterns if p['timingSupported']]
+    network['availability'] = {'routablePatternCount':len(routable),'routableServiceNumberCount':len({p['serviceNo'] for p in routable}),
+                               'routableStopCount':len({s['stopId'] for p in routable for s in p['stops']}),
+                               'registryPatternCount':len(patterns),'registryStopCount':len(used_stops)}
     audit = {'rawCounts':{e:len(data[e]) for e in ENDPOINTS},'acceptedCounts':counts,
              'excludedCounts':{e:len(data[e])-counts[e] for e in ENDPOINTS},
-             'exclusionReasons':{'BusStops':'Not referenced by complete selected pilot patterns','BusRoutes':'Service outside reviewed pilot; exact service suffix variants remain separate','BusServices':'Service outside reviewed pilot; no implicit variant or direction merging'},
+             'exclusionReasons':{'BusStops':'Not referenced by included complete patterns','BusRoutes':'See exact pattern audit; no implicit suffix or direction merging','BusServices':'See exact pattern audit; unresolved service rules stay excluded'},
              'duplicateKeys':duplicate_counts,'globalOrphans':global_orphans,'selectedOrphans':0,
              'selectedSequenceGaps':0,'selectedTruncatedPatterns':0,'rolloverDayRecords':rollover_count,
              'repeatedStopOccurrences':sum(sum(v-1 for v in Counter(s['stopId'] for s in p['stops']).values()) for p in patterns),
-             'loopPatterns':sum(p['loop'] for p in patterns),'patterns':[{'id':p['id'],'occurrences':len(p['stops']),'origin':p['originCode'],'destination':p['destinationCode']} for p in patterns]}
+             'loopPatterns':sum(p['loop'] for p in patterns),'patterns':[{'id':p['id'],'occurrences':len(p['stops']),'origin':p['originCode'],'destination':p['destinationCode']} for p in patterns],
+             'reviewedPatterns':reviewed_patterns,'exceptionCounts':dict(sorted(Counter(reason for p in reviewed_patterns for reason in p['reasons']).items()))}
+    audit['availability'] = network['availability']
+    audit['fullyTimingExcludedPatternIds'] = [p['id'] for p in patterns if not p['timingSupported']]
+    audit['limitedSpanDayExceptions'] = [{'id':p['id'],'day':day,'originSpanSeconds':p['stops'][0]['firstLast'][day],
+                                         'reason':reason} for p in patterns for day,reason in p['dayTimingExclusions'].items()]
     return network, audit
 
 def build(source, rules_path, output, manifest_path):

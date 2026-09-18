@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {mkdir,writeFile} from 'node:fs/promises';
-import {choosePlannerTime} from './planner-browser-helpers.mjs';
+import {choosePlannerTime,choosePlannerDate} from './planner-browser-helpers.mjs';
 const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4194',out=process.env.CAPTURE_DIR??'test-results/r4-flow';
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
@@ -14,7 +14,7 @@ async function capture(path){await page.locator('#app-message.is-visible').waitF
 const active=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 const view=async name=>page.locator(`.app-nav [data-view=${name}]`).click();
 async function endpoint(role,value){await page.locator('#'+role).fill(value);await page.locator('#'+role).press('ArrowDown');await page.locator('#'+role).press('Enter');}
-async function plan(){await view('plan');await endpoint('origin','CC26');await endpoint('destination','EW9');await page.locator('[data-time=depart-later]').click();await page.locator('[name=date]').fill('2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
+async function plan(){await view('plan');await endpoint('origin','CC26');await endpoint('destination','EW9');await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
  await view('preferences');await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('#preferences-form button').click();

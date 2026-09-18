@@ -1,0 +1,133 @@
+{
+  "recordedAt": "2026-09-18T19:37:09.083270+00:00",
+  "branch": "codex/features-r5",
+  "baseCommit": "73bba30de14faddc08ec8f15b862655f888cbbd8",
+  "application": {
+    "schemaVersion": 1,
+    "applicationSha256": "2f42ee73a0eb1df5e6ff839df813c8ec96537ba6bba70a29519b39297fc5d035",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "11b67ea3e4607cb2e2bd34805bd24ba6da31a0c9f4cb4a80e243654b1d34510a",
+  "plannerWorkerSha256": "c12c63ba6536ee3ee0f08ff13286f947c66e57ff51d2a0c0b4a4ff8e0cc4986f",
+  "serviceWorkerSha256": "5bc414427f0e8356240aa9d368adbbeebd14ee2e9fc851171202b1e512bb2f3b",
+  "runtime": {
+    "node": "v24.16.0",
+    "os": "Windows",
+    "browser": "desktop Microsoft Edge using Playwright 1.62.1",
+    "mobileEvidence": "viewport, touch and enlarged-root-text emulation; no physical phone"
+  },
+  "checks": {
+    "fullCheck": {
+      "status": "passed",
+      "javascript": 359,
+      "python": 42,
+      "buildAssets": 89
+    },
+    "r5Browser": {
+      "status": "passed",
+      "checks": 101,
+      "suites": [
+        {
+          "name": "r5Product",
+          "checks": 21,
+          "status": "passed",
+          "evidence": "product-browser.json"
+        },
+        {
+          "name": "r5Arrivals",
+          "checks": 8,
+          "status": "passed",
+          "evidence": "arrivals-browser.json"
+        },
+        {
+          "name": "r5IntegratedGuidance",
+          "checks": 31,
+          "status": "passed",
+          "evidence": "guidance/integrated-results.json"
+        },
+        {
+          "name": "r5Address",
+          "checks": 17,
+          "status": "passed",
+          "evidence": "address-browser.json"
+        },
+        {
+          "name": "r5Guidance",
+          "checks": 16,
+          "status": "passed",
+          "evidence": "guidance/results.json"
+        },
+        {
+          "name": "r5Worker",
+          "checks": 8,
+          "status": "passed",
+          "evidence": "bus-browser.json"
+        }
+      ]
+    },
+    "legacyCalendarAndPlanner": {
+      "status": "passed",
+      "checks": 139,
+      "breakdown": {
+        "calendarAndPreferences": 37,
+        "rail": 29,
+        "railOffline": 15,
+        "replay": 30,
+        "multimodal": 28
+      }
+    },
+    "retained": [
+      {
+        "name": "spending",
+        "checks": 21,
+        "status": "passed",
+        "scope": "retained suite run earlier in this R5 integration; no subsequent related semantic changes"
+      },
+      {
+        "name": "sharingPrivacy",
+        "checks": 8,
+        "status": "passed",
+        "scope": "retained suite run earlier in this R5 integration; no subsequent related semantic changes"
+      },
+      {
+        "name": "locationOffline",
+        "checks": 11,
+        "status": "passed",
+        "scope": "retained suite run earlier in this R5 integration; no subsequent related semantic changes"
+      }
+    ],
+    "sharingHttp": {
+      "status": "passed",
+      "scope": "two isolated clients with persistent restart/consent/revocation"
+    }
+  },
+  "normalization": "Final build normalizes only runtime CRLF to repository-mandated LF after semantic tests; no code behavior changed. Build hashes refer to these canonical bytes.",
+  "busAvailability": {
+    "registryPatternCount": 416,
+    "registryStopCount": 4840,
+    "routablePatternCount": 391,
+    "routableServiceNumberCount": 297,
+    "routableStopCount": 4826
+  },
+  "benchmark": {
+    "status": "target-unmet",
+    "evidence": "bus-benchmark.json",
+    "coldMs": 224.575,
+    "warmP95Ms": 508.26890000000003,
+    "gzipBytes": 2611239,
+    "sampledPeakHeapBytes": 455373504,
+    "heapTargetBytes": 157286400,
+    "retainedHeapAfterExplicitGc": 82339088
+  },
+  "boundaries": {
+    "verifiedRealIndoorPilot": false,
+    "physicalPhoneValidation": false,
+    "productionDeployment": false,
+    "audienceExpansion": false,
+    "liveOneMap": "one authenticated public-location search/route smoke succeeded",
+    "liveLtaArrivals": "two HTTP200 valid empty feeds; matched vehicle UI is separately synthetic"
+  },
+  "review": "Independent routing review resolved early-alight retry, all-source terminal gates and worker cancellation race; data/source/credential claims reviewed."
+}

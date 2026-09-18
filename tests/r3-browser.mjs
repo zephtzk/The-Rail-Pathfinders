@@ -1,4 +1,4 @@
-import {choosePlannerTime} from './planner-browser-helpers.mjs';
+import {choosePlannerTime,choosePlannerDate} from './planner-browser-helpers.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -17,11 +17,11 @@ const check=(label,ok)=>{assert.ok(ok,label);results.push(label);console.log('PA
 const active=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-personal-v2')));
 async function endpoint(role,query){await page.locator('#'+role).fill(query);await page.locator('#'+role).press('ArrowDown');await page.locator('#'+role).press('Enter');}
-async function plan(){await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin','EW2');await endpoint('destination','EW12');await page.locator('[data-time=depart-later]').click();await page.locator('[name=date]').fill('2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
+async function plan(){await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin','EW2');await endpoint('destination','EW12');await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try {
   const response=await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
   check('app responses preserve a valid origin referrer',response.headers()['referrer-policy']==='strict-origin-when-cross-origin');
-  check('six reachable pages share one map',await page.locator('.app-nav button').count()===6&&await page.locator('.leaflet-container').count()===1);
+  check('seven reachable pages share one map',await page.locator('.app-nav button').count()===7&&await page.locator('.leaflet-container').count()===1);
   await page.locator('#retry-street-map').waitFor();
   check('blocked tiles leave a usable schematic and a deliberate retry',await page.locator('.leaflet-tile').count()===0&&await page.locator('.leaflet-overlay-pane path').count()>0&&tileRequests.length>0);
   check('tile request sends origin only',tileRequests.some(h=>h.referer===base+'/'));
@@ -39,7 +39,7 @@ try {
   check('saving a route does not start a trip or add station bookmarks',(await active())===null&&await page.locator('.personal-list [data-place]').count()===0);
   check('add a place does not ask for coordinates',await page.locator('#place-add input[name=lat], #place-add input[name=lng]').count()===0);
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/saved-mobile.png'});
-  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await page.locator('[name=date]').fill('2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
   const first=await active();check('reopened route retains preferences in the canonical journey',first.plan.preferences.travelStyle==='arjun');
   check('technical trip detail is collapsed by default',!await page.locator('#trip-details').evaluate(el=>el.open));
   check('connection helper explains its purpose',!await page.locator('#rerouting-host').innerText().then(t=>t.includes('Check connections from a confirmed point')));

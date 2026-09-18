@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "automatic staff message follows the accepted current instruction",
+    "explicit alternative asks staff to check lift access",
+    "simple toggle leaves canonical accepted journey untouched",
+    "WIP remains visible in simple mode",
+    "progress refresh resets alternate to current instruction",
+    "train ride has no blanket indoor WIP notice",
+    "paused staff default does not instruct travel",
+    "station tab opens coverage with linked operator evidence",
+    "Home focuses and selects Map",
+    "ArrowRight selects Station guide",
+    "touch swipe on labelled strip selects Station guide",
+    "map touch gestures do not change pages",
+    "malicious labels are literal text without executable elements",
+    "320px at 200 percent text has no horizontal document overflow",
+    "simple setting survives a new store instance",
+    "no browser exceptions"
+  ],
+  "errors": [],
+  "environment": "Desktop Edge mobile/touch emulation; no physical station/device survey"
+}

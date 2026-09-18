@@ -1,3 +1,9 @@
+# R5 current bus data contract
+
+R5 expands the same pinned acquisition to a **416-pattern / 4,840-stop registry**, of which **391 patterns across 297 exact services at 4,826 stops have at least one timing-eligible day**, with weekday/Saturday/Sunday operating spans, period-specific estimates and previous-service-day carryover. Source validity remains **18 September–2 October 2026**. It does not establish all-service coverage or a full timetable. See [R5 coverage, exceptions and timing rules](R5_BUS_COVERAGE.md) for the current implementation, complete audit and performance evidence.
+
+The following Phase 3 record is retained as historical baseline evidence; its three-service/daytime limits describe R4, not current shipped R5 coverage.
+
 # Phase 3 bus data and timing contract
 
 The shipped planner accepts **three complete services: 2, 23 and 28**. Their five direction-specific patterns contain 291 stop occurrences at 261 physical stops. All selected routes continue to their actual termini; their geographic extent is larger than the initial Tampines–Paya Lebar–Bugis transfer pilot. Downloaded island-wide records do not establish island-wide journey support.

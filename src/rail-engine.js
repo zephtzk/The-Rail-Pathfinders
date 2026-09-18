@@ -93,7 +93,7 @@ export function createRailRouter(network) {
   const exitDefault = network.assumptions?.exitSeconds ?? 120;
   requireSeconds(accessDefault, 'access allowance');
   requireSeconds(exitDefault, 'exit allowance');
-  let maxTripSeconds = 0;
+  let maxTripSeconds = frequency?.maxServiceSeconds ?? 0;
   for (const stop of stops.values()) {
     if (!stations.has(stop.stationId)) throw new Error(`Unknown station ${stop.stationId} for stop ${stop.id}.`);
     stationStops.get(stop.stationId).push(stop.id);
@@ -140,8 +140,11 @@ export function createRailRouter(network) {
 
   function dayConnections(day) {
     const date = dayString(day);
-    if (cachedDays.has(date)) return cachedDays.get(date);
     const activeServices = new Set([...services.values()].filter((service) => activeOn(service, day, date)).map((service) => service.id));
+    // Dates with exactly the same active source services have the same local
+    // connections. The query attaches civil service dates separately below.
+    const calendarKey = JSON.stringify([...activeServices].sort());
+    if (cachedDays.has(calendarKey)) return cachedDays.get(calendarKey);
     const connections = [];
     for (const trip of trips.values()) {
       if (!activeServices.has(trip.serviceId)) continue;
@@ -151,8 +154,8 @@ export function createRailRouter(network) {
       }
     }
     connections.sort((a, b) => a.departure - b.departure || a.arrival - b.arrival || a.trip.id.localeCompare(b.trip.id) || a.index - b.index);
-    if (cachedDays.size >= 8) cachedDays.delete(cachedDays.keys().next().value);
-    cachedDays.set(date, connections);
+    if (cachedDays.size >= 4) cachedDays.delete(cachedDays.keys().next().value);
+    cachedDays.set(calendarKey, connections);
     return connections;
   }
 
@@ -168,11 +171,12 @@ export function createRailRouter(network) {
   function route(input = {}) {
     const started = performance.now();
     const errors = [];
-    const diagnostics = { algorithm: 'Pareto connection scan', connectionsScanned: 0, labelsCreated: 0, serviceDates: [], elapsedMs: 0 };
+    const diagnostics = { algorithm: 'Pareto connection scan', connectionsScanned: 0, frequencyExpansions: 0, labelsCreated: 0, serviceDates: [], elapsedMs: 0 };
     const result = (status, message, code = status, journeys = []) => {
       diagnostics.elapsedMs = performance.now() - started;
       return { status, errors: message ? [{ code, message }] : [], routes: journeys, recommended: status === 'ok' ? journeys[0] || null : null, coverage, diagnostics };
     };
+    if (input.signal?.aborted) return result('cancelled','The route search was cancelled.');
     const originId = input.originId ?? input.origin;
     const destinationId = input.destinationId ?? input.destination;
     if (!stations.has(originId) || !stations.has(destinationId)) return result('unsupported-station', 'Choose both stations from the imported, validated rail coverage. Unlisted stations and address-to-address journeys are not supported.');
@@ -219,6 +223,7 @@ export function createRailRouter(network) {
     const newest = Math.min(lastCovered, day + Math.floor(horizon / DAY));
     for (let serviceDay = oldest; serviceDay <= newest; serviceDay++) {
       const offset = (serviceDay - day) * DAY;
+      if (departure - offset > maxTripSeconds) continue;
       const scheduled = dayConnections(serviceDay);
       let used = false;
       for (let i = lowerBound(scheduled, departure - offset); i < scheduled.length; i++) {
@@ -239,6 +244,16 @@ export function createRailRouter(network) {
     const targetSet = new Set(destinationStops);
     const candidates = [];
     let boardingsAtOrigin = 0;
+    let stopped = null;
+    // Bound work, never truncate the Pareto frontier and pretend it is optimal.
+    // The worker can also be terminated to interrupt synchronous CPU work.
+    const maxSearchWork = Math.min(2000000,Math.max(1,Number(input.maxSearchWork) || 2000000));
+    const searchCutoff = () => candidates.length ? Math.min(horizon,...candidates.map(c=>c.time+detourMinutes*60)) : horizon;
+    const interrupted = () => {
+      if (input.signal?.aborted) stopped = 'cancelled';
+      else if (diagnostics.frequencyExpansions + diagnostics.connectionsScanned > maxSearchWork) stopped = 'search-limit';
+      return stopped !== null;
+    };
 
     function considerDestination(label) {
       // Rail endpoints retain their station-level allowance. Do not enter and
@@ -250,31 +265,57 @@ export function createRailRouter(network) {
     function relaxTransfers(startLabel, initiallyReady = false) {
       const queue = [{label:startLabel,canBoard:initiallyReady}];
       for (let i = 0; i < queue.length; i++) {
+        if (interrupted()) return;
         const {label,canBoard} = queue[i];
+        if (label.time + exit > searchCutoff()) continue;
+        // Later arrivals can dominate entries still waiting in this closure's
+        // queue. They must not continue spawning redundant downstream labels.
+        if (label !== startLabel && !(canBoard ? ready : arrived).get(label.stop).includes(label)) continue;
         for (const edge of transferEdges.get(label.stop)) {
           if (edge.external && label.boardings === 0 && !seed?.hasBoarded && !originId.startsWith('bus:')) continue;
           // Two exterior paths cannot create an unreviewed walk through a station.
           if (edge.external && label.externalSinceRide) continue;
           const time = label.time + edge.seconds, walk = label.walk + edge.walkSeconds;
-          if (time + exit > horizon || walk + exit > maxWalk) continue;
+          if (time + exit > searchCutoff() || walk + exit > maxWalk) continue;
           const next = { ...label, externalSinceRide:label.externalSinceRide || edge.external, stop: edge.toStopId, time, walk, chain: append(label.chain, { type: 'transfer', fromStopId: edge.fromStopId, toStopId: edge.toStopId, startSeconds: label.time, endSeconds: time, durationSeconds: edge.seconds, walkingSeconds: edge.walkSeconds, allowanceSeconds: edge.seconds - edge.walkSeconds, provenance: edge.provenance, pathId:edge.pathId, assumed: edge.assumed === true }) };
           if (insert(ready.get(next.stop), next)) { diagnostics.labelsCreated++; queue.push({label:next,canBoard:true}); considerDestination(next); }
         }
         if (!canBoard || !frequency) continue;
         for (const {pattern,index} of busOccurrences.get(label.stop) ?? []) {
-          const departureEstimate = frequency.boarding(pattern,index,label.time,date);
-          if (departureEstimate === null || departureEstimate > horizon || departureEstimate < label.time) continue;
+          const busBoarding = frequency.boarding(pattern,index,label.time,date);
+          const departureEstimate = typeof busBoarding === 'number' ? busBoarding : busBoarding?.seconds ?? null;
+          if (departureEstimate === null || departureEstimate > searchCutoff() || departureEstimate < label.time) continue;
           if (label.boardings === 0) boardingsAtOrigin++;
           const boarding = pattern.stops[index];
           const waitChain = departureEstimate > label.time ? append(label.chain,{type:'wait',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:label.stop,startSeconds:label.time,endSeconds:departureEstimate,durationSeconds:departureEstimate-label.time}) : label.chain;
           for (let j = index + 1; j < pattern.stops.length; j++) {
+            diagnostics.frequencyExpansions++;
+            if ((diagnostics.frequencyExpansions & 127) === 0 && interrupted()) return;
             const alight = pattern.stops[j];
-            const duration = frequency.riding(pattern,index,j), time = departureEstimate + duration;
-            if (!Number.isFinite(duration) || duration <= 0 || time + exit > horizon || !frequency.canAlight(pattern,j,time,date)) continue;
-            const next = {stop:alight.stopId,time,walk:label.walk,boardings:label.boardings+1,externalSinceRide:false,
-              chain:append(waitChain,{type:'ride',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:alight.stopId,startSeconds:departureEstimate,endSeconds:time,durationSeconds:duration,
-                tripId:`estimate:${pattern.id}:${index}:${departureEstimate}`,routeId:pattern.id,serviceId:pattern.serviceNo,serviceNo:pattern.serviceNo,operator:pattern.operator,serviceDate:date,directionId:pattern.direction,
-                patternId:pattern.id,fromSequence:boarding.sequence,toSequence:alight.sequence,visitNumber:boarding.visitNumber,headsign:pattern.destinationCode,stopIds:pattern.stops.slice(index,j+1).map(s=>s.stopId)})};
+            const duration = frequency.riding(pattern,index,j);
+            let rideBoarding = busBoarding, rideDeparture = departureEstimate, time = rideDeparture + duration;
+            if (time + exit > searchCutoff()) break; // monotonic route distance and dwell
+            if (!Number.isFinite(duration) || duration <= 0) continue;
+            if (!frequency.canAlight(pattern,j,time,date,rideBoarding)) {
+              // A known first bus may reach this stop before its independent
+              // first-arrival bound under our distance model. Earlier callers
+              // can wait for a later supported band; do not discard that path.
+              rideBoarding = frequency.boardingForAlight?.(pattern,index,j,label.time,date,duration);
+              if (!rideBoarding) continue;
+              rideDeparture = rideBoarding.seconds;
+              time = rideDeparture+duration;
+              if (time+exit > searchCutoff() || !frequency.canAlight(pattern,j,time,date,rideBoarding)) continue;
+            }
+            const next = {stop:alight.stopId,time,walk:label.walk,boardings:label.boardings+1,externalSinceRide:false};
+            // Most full-network alighting expansions lose to an existing label.
+            // Check their cheap objective tuple before allocating a chain and
+            // copying every intermediate stop into a rejected ride leg.
+            if (arrived.get(next.stop).some(other=>dominates(other,next))) continue;
+            const rideWaitChain = rideDeparture === departureEstimate ? waitChain : append(label.chain,{type:'wait',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:label.stop,startSeconds:label.time,endSeconds:rideDeparture,durationSeconds:rideDeparture-label.time});
+            next.chain=append(rideWaitChain,{type:'ride',mode:'bus',timing:'frequency-estimated',fromStopId:label.stop,toStopId:alight.stopId,startSeconds:rideDeparture,endSeconds:time,durationSeconds:duration,
+                tripId:`estimate:${pattern.id}:${index}:${rideDeparture}`,routeId:pattern.id,serviceId:pattern.serviceNo,serviceNo:pattern.serviceNo,operator:pattern.operator,serviceDate:rideBoarding?.serviceDate ?? date,directionId:pattern.direction,
+                boardingBasis:rideBoarding?.basis ?? 'published-headway-estimate',headwayField:rideBoarding?.headwayField ?? 'AM_Offpeak_Freq',
+                patternId:pattern.id,fromSequence:boarding.sequence,toSequence:alight.sequence,visitNumber:boarding.visitNumber,headsign:pattern.destinationCode,stopIds:pattern.stops.slice(index,j+1).map(s=>s.stopId)});
             considerDestination(next);
             if (insert(arrived.get(next.stop),next)) { diagnostics.labelsCreated++; queue.push({label:next,canBoard:false}); }
           }
@@ -289,6 +330,8 @@ export function createRailRouter(network) {
       relaxTransfers(initial, !seed || seed.canBoard);
     }
     for (const connection of connections) {
+      if (interrupted()) break;
+      if (connection.departure > searchCutoff()) break;
       diagnostics.connectionsScanned++;
       const { trip } = connection;
       const continuing = (aboard.get(connection.occurrence) || []).filter((label) => label.segment === connection.index - 1);
@@ -312,6 +355,7 @@ export function createRailRouter(network) {
         if (insert(arrived.get(label.stop), label)) { diagnostics.labelsCreated++; relaxTransfers(label); }
       }
     }
+    if (stopped) return result(stopped,stopped === 'cancelled' ? 'The route search was cancelled.' : 'This search exceeded the bounded planning work limit. Try a shorter journey or departure window; no partial route was accepted.');
     diagnostics.boardingsFromOrigin = boardingsAtOrigin;
     if (!candidates.length) {
       if (!boardingsAtOrigin) return result('no-service', 'No train can be boarded from this origin after its station access allowance in the searched window. Check the service date, departure time, or last train.', 'no-origin-service');

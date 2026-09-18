@@ -108,10 +108,40 @@ class BusImportTests(unittest.TestCase):
             result=bus.build(source,ROOT/'data/bus/validation.json',output,manifest)
             self.assertEqual(output.read_bytes(),(ROOT/'public/data/bus-network.json').read_bytes())
             self.assertEqual(manifest.read_bytes(),(ROOT/'public/data/bus-manifest.json').read_bytes())
-            self.assertEqual(result['audit']['acceptedCounts'],{'BusStops':261,'BusRoutes':291,'BusServices':5})
+            self.assertEqual(result['audit']['acceptedCounts'],{'BusStops':4840,'BusRoutes':16253,'BusServices':416})
             compiled=json.loads(output.read_bytes())
-            self.assertEqual(compiled['assumptions']['unverifiedBayStopCodes'],['75009','52009','99009','10499'])
+            self.assertTrue({'75009','52009','99009','10499'}.issubset(compiled['assumptions']['unverifiedBayStopCodes']))
             self.assertIn('different alighting and boarding bays',compiled['assumptions']['unverifiedBayReason'])
+            audited=result['audit']['reviewedPatterns']
+            self.assertEqual(len(audited),801)
+            self.assertEqual(sum(p['status']=='included' for p in audited),416)
+            self.assertEqual(result['audit']['availability']['routablePatternCount'],391)
+            self.assertEqual(len(result['audit']['limitedSpanDayExceptions']),37)
+            self.assertEqual(len(result['audit']['fullyTimingExcludedPatternIds']),25)
+            self.assertIn('95129',compiled['assumptions']['unverifiedBayStopCodes'])
+            self.assertTrue(all(p['reasons'] for p in audited if p['status']=='excluded'))
+            self.assertIn('decreasing-distance',next(p for p in audited if p['id']=='857:TTS:1')['reasons'])
+            self.assertIn('no-published-headway-fixed-trips-unresolved',next(p for p in audited if p['id']=='684:SMRT:1')['reasons'])
+
+    def test_broad_audit_keeps_unsupported_patterns_explicit_without_reindexing(self):
+        data,metadata,rules=fixture()
+        rules['selectionMode']='audited-frequency-patterns'
+        second=copy.deepcopy(data['BusServices'][0]);second['ServiceNo']='2B';data['BusServices'].append(second)
+        rows=copy.deepcopy(data['BusRoutes'])
+        for row in rows:row['ServiceNo']='2B'
+        rows[1]['StopSequence']=4
+        data['BusRoutes'].extend(rows)
+        network,audit=bus.compile_records(data,metadata,rules)
+        self.assertEqual([p['serviceNo'] for p in network['patterns']],['2A'])
+        self.assertIn('sequence-needs-service-review',audit['reviewedPatterns'][1]['reasons'])
+
+    def test_broad_import_preserves_missing_day_and_period_instead_of_inventing_service(self):
+        data,metadata,rules=fixture();rules['selectionMode']='audited-frequency-patterns'
+        data['BusServices'][0]['PM_Peak_Freq']='-'
+        for row in data['BusRoutes']:row.update(SUN_FirstBus='-',SUN_LastBus='-')
+        network,_=bus.compile_records(data,metadata,rules)
+        self.assertIsNone(network['patterns'][0]['headways']['PM_Peak_Freq'])
+        self.assertIsNone(network['patterns'][0]['stops'][0]['firstLast']['SUN'])
 
     def test_pagination_tampering_and_unpinned_version_fail(self):
         data,_,_=fixture()

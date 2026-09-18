@@ -1,0 +1,30 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
+import os from 'node:os';
+import {createMultimodalRouter} from '../src/multimodal-engine.js';
+import {indexBusPatterns,normalizeBusArrivals} from '../server/bus-adapter.js';
+const targets={warmP95Ms:1000,coldParseIndexFirstQueryMs:3000,compressedCombinedBytes:3*1024*1024,heapUsedBytes:150*1024*1024};
+const names=['rail-network','bus-network','walking-links'];
+const bytes=await Promise.all(names.map(n=>readFile(`public/data/${n}.json`)));
+const start=performance.now(),[rail,bus,walking]=bytes.map(b=>JSON.parse(b));
+const router=createMultimodalRouter(rail,bus,walking);
+const pairs=[['bus:75009','bus:75059'],['bus:99009','bus:28009'],['bus:28009','bus:59009'],['bus:59009','bus:77009'],['bus:75009','DT14'],['DT14','bus:75009'],['bus:99009','NS22'],['NS9','CG2']];
+const base={date:'2026-09-18',departureTime:'10:00',walkingLimitMinutes:30,preference:'fastest',maxExtraMinutes:15};
+const first=router.route({...base,originId:pairs[0][0],destinationId:pairs[0][1]}),cold=performance.now()-start;
+const samples=[];
+for(let round=0;round<3;round++)for(const[originId,destinationId]of pairs){const before=performance.now(),r=router.route({...base,originId,destinationId});samples.push({originId,destinationId,ms:performance.now()-before,status:r.status,arrivalSeconds:r.recommended?.arrivalSeconds,frequencyExpansions:r.diagnostics?.frequencyExpansions,labelsCreated:r.diagnostics?.labelsCreated,heapUsedAfterQuery:process.memoryUsage().heapUsed});}
+const times=samples.map(s=>s.ms).sort((a,b)=>a-b),indexStart=performance.now(),index=indexBusPatterns(bus.patterns),indexMs=performance.now()-indexStart;
+const p=bus.patterns.find(p=>p.id==='2:GAS:1'),stop=p.stops[1],vehicle={OriginCode:p.originCode,DestinationCode:p.destinationCode,VisitNumber:stop.visitNumber,EstimatedArrival:'2026-09-19T10:01:00+08:00',Monitored:1};
+const payload={BusStopCode:stop.stopId,Services:[{ServiceNo:p.serviceNo,Operator:p.operator,NextBus:vehicle,NextBus2:vehicle,NextBus3:vehicle}]},matchStart=performance.now();
+for(let i=0;i<1000;i++)normalizeBusArrivals(payload,stop.stopId,index);
+const matchMs=performance.now()-matchStart;
+const data=names.map((name,i)=>({name,bytes:bytes[i].length,gzipBytes:gzipSync(bytes[i],{level:9}).length,sha256:createHash('sha256').update(bytes[i]).digest('hex')}));
+const result={recordedAt:new Date().toISOString(),evidenceClass:'Node desktop CPU/payload measurement; no physical-phone, browser responsiveness or provider-latency claim',runtime:process.version,cpu:os.cpus()[0].model,targetsSetBeforeMeasurement:targets,sourceVersion:bus.sourceVersion,patterns:bus.patterns.length,physicalStops:bus.stops.length,data,compressedCombinedBytes:data.reduce((sum,d)=>sum+d.gzipBytes,0),coldParseIndexFirstQueryMs:cold,firstStatus:first.status,warmP95Ms:times[Math.ceil(times.length*.95)-1],arrivalIndex:{entries:index.size,buildMs:indexMs,thousandThreePredictionMatchesMs:matchMs},processMemory:process.memoryUsage(),sampledPeakHeapUsed:Math.max(...samples.map(s=>s.heapUsedAfterQuery)),samples};
+if(global.gc){global.gc();result.retainedHeapAfterExplicitGc=process.memoryUsage().heapUsed;}
+result.runtimeFlags=process.execArgv;
+result.availability=bus.availability;
+result.pass=result.warmP95Ms<targets.warmP95Ms&&cold<targets.coldParseIndexFirstQueryMs&&result.compressedCombinedBytes<targets.compressedCombinedBytes&&result.sampledPeakHeapUsed<targets.heapUsedBytes&&samples.every(s=>s.status==='ok');
+await mkdir('docs/evidence/r5',{recursive:true});await writeFile('docs/evidence/r5/bus-benchmark.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({pass:result.pass,coldMs:cold,warmP95Ms:result.warmP95Ms,compressedBytes:result.compressedCombinedBytes,heapUsed:result.processMemory.heapUsed,arrivalIndex:result.arrivalIndex}));
+if(!result.pass)process.exitCode=1;

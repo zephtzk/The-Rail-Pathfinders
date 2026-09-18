@@ -1,3 +1,4 @@
+import {validExternalGeometry} from './external-geometry.js';
 const OSM_TILES='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATTRIBUTION='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
@@ -63,4 +64,17 @@ export function drawNetworkOverview(map,network) {
   for(const trip of network.trips){if(seen.has(trip.routeId))continue;seen.add(trip.routeId);const points=trip.stopTimes.map(([id])=>stops.get(id)).filter(s=>Number.isFinite(s?.lat)&&Number.isFinite(s?.lon)).map(s=>[s.lat,s.lon]);const route=network.routes.find(r=>r.id===trip.routeId),color=/^[a-f\d]{6}$/i.test(route?.color??'')?'#'+route.color:'#7e9cab';L.polyline(points,{color,weight:3,opacity:.32,dashArray:'4 6',interactive:false}).addTo(layer);}
   for(const station of network.stations){if(!Number.isFinite(station.lat)||!Number.isFinite(station.lon))continue;L.circleMarker([station.lat,station.lon],{radius:3,weight:1.5,color:'#819da6',fillColor:'#fffefa',fillOpacity:.95}).bindTooltip(`${station.name} (${station.id})`,{direction:'top'}).addTo(layer);}
   return layer;
+}
+
+// Callers own fitting/focus and replace the returned layer when the accepted
+// route changes. No endpoint snapping, tile fetch, or automatic map motion.
+export function drawExternalRoute(map,route,{leaflet=globalThis.L}={}){
+  if(route?.provider!=='onemap'||!validExternalGeometry(route))return null;
+  const layer=leaflet.layerGroup().addTo(map),points=[];
+  for(const segment of route.geometry){
+    const step=route.steps[segment.stepIndex],walking=step.type==='walk';
+    leaflet.polyline(segment.points,{color:walking?'#566577':'#1558a6',weight:walking?5:7,opacity:.9,dashArray:segment.kind==='schematic'?'5 7':walking?'8 5':null,interactive:false}).addTo(layer);
+    points.push(...segment.points);
+  }
+  return {layer,points,schematic:route.geometry.some(g=>g.kind==='schematic'),attribution:'OneMap / Singapore Land Authority · approximate geographic route; indoor transitions unverified'};
 }

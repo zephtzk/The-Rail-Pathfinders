@@ -15,8 +15,20 @@ const busTimestamp = value => {
   return civil.getUTCFullYear() === year && civil.getUTCMonth() === month-1 && civil.getUTCDate() === day && hour < 24 && minute < 60 && second < 60;
 };
 
+const patternMatchKey = (service,operator,origin,destination,stop,visit) => JSON.stringify([service,operator,origin,destination,stop,visit]);
+export function indexBusPatterns(patterns = []) {
+  const index = new Map();
+  for (const pattern of patterns) for (const stop of pattern.stops) {
+    const key = patternMatchKey(pattern.serviceNo,pattern.operator,pattern.originCode,pattern.destinationCode,stop.stopId,stop.visitNumber);
+    if (!index.has(key)) index.set(key,[]);
+    index.get(key).push({patternId:pattern.id,direction:pattern.direction,sequence:stop.sequence});
+  }
+  return index;
+}
+
 export function normalizeBusArrivals(payload, stopCode, patterns = []) {
   if (!payload || payload.BusStopCode !== stopCode || !Array.isArray(payload.Services) || payload.Services.length > 100) throw Error('malformed');
+  const index = patterns instanceof Map ? patterns : indexBusPatterns(patterns);
   let invalidRecords = 0, emptySlots = 0;
   const predictions = [];
   for (const service of payload.Services) {
@@ -25,15 +37,14 @@ export function normalizeBusArrivals(payload, stopCode, patterns = []) {
       const raw = service[slot];
       if (raw && raw.EstimatedArrival === '') { emptySlots++; continue; }
       if (!raw || !busCode(raw.OriginCode) || !busCode(raw.DestinationCode) || !busTimestamp(raw.EstimatedArrival) || ![0, 1].includes(raw.Monitored) || !/^[1-9]\d?$/.test(String(raw.VisitNumber))) { invalidRecords++; continue; }
-      const matches = patterns.flatMap(pattern => pattern.serviceNo === service.ServiceNo && pattern.operator === service.Operator && pattern.originCode === raw.OriginCode && pattern.destinationCode === raw.DestinationCode
-        ? pattern.stops.filter(stop => stop.stopId === stopCode && stop.visitNumber === Number(raw.VisitNumber)).map(stop => ({patternId: pattern.id, direction: pattern.direction, sequence: stop.sequence})) : []);
+      const matches = index.get(patternMatchKey(service.ServiceNo,service.Operator,raw.OriginCode,raw.DestinationCode,stopCode,Number(raw.VisitNumber))) ?? [];
       predictions.push({serviceNo:service.ServiceNo,operator:service.Operator,slot,stopCode,originCode:raw.OriginCode,destinationCode:raw.DestinationCode,visitNumber:Number(raw.VisitNumber),
         predictedArrival:raw.EstimatedArrival,predictionBasis:raw.Monitored === 1 ? 'vehicle-location-estimate' : 'operator-schedule',
         matchStatus:matches.length === 1 ? 'matched' : matches.length ? 'ambiguous' : 'unmatched',match:matches.length === 1 ? matches[0] : null});
     }
   }
   return {status:invalidRecords ? 'partial' : predictions.length ? 'available' : 'empty',stopCode,predictions,invalidRecords,emptySlots,providerTimestamp:null,
-    limitation:'The provider supplies predicted arrivals but no observation/generation timestamp. Empty data does not establish that service has stopped. Predictions never change this pilot itinerary.'};
+    limitation:'The provider supplies predicted arrivals but no observation/generation timestamp. Empty data does not establish that service has stopped. Predictions never change an accepted itinerary.'};
 }
 
 export function busPredictionState(prediction, feed, now = Date.now(), online = true) {
@@ -45,7 +56,7 @@ export function busPredictionState(prediction, feed, now = Date.now(), online = 
 }
 
 export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs = 6000, patterns = [], allowedStopCodes = []} = {}) {
-  const allowed = new Set(allowedStopCodes), cache = new Map();
+  const allowed = new Set(allowedStopCodes), cache = new Map(), patternIndex = indexBusPatterns(patterns);
   let credential = null, generation = 0, active = 0, globalBackoffUntil = 0;
   return async function arrivals(stopCode, env = {}) {
     const now = clock(), key = typeof env.LTA_ACCOUNT_KEY === 'string' ? env.LTA_ACCOUNT_KEY.trim() : '';
@@ -58,6 +69,11 @@ export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs =
     if (old && now < old.nextAt) return structuredClone(old.result);
     if (now < globalBackoffUntil) return {...unavailable('backoff'),nextRefreshAt:isoBus(globalBackoffUntil)};
     if (active >= 2) return {...unavailable('busy'),nextRefreshAt:isoBus(now + 30000)};
+    if (!cache.has(stopCode) && cache.size >= 40) {
+      const evict = [...cache].find(([,entry]) => !entry.pending);
+      if (evict) cache.delete(evict[0]);
+      else return {...unavailable('busy'),nextRefreshAt:isoBus(now + 30000)};
+    }
     const epoch = generation;
     const pending = (async () => {
       active++;
@@ -83,7 +99,7 @@ export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs =
           try { while (true) { const {value,done} = await reader.read(); if (done) break; size += value.length; if (size > 262144) { await reader.cancel(); throw Error('malformed'); } chunks.push(value); } } finally { reader.releaseLock(); }
           const bytes = new Uint8Array(size); let offset = 0; for (const chunk of chunks) { bytes.set(chunk,offset); offset += chunk.length; }
           let payload; try { payload = JSON.parse(new TextDecoder().decode(bytes)); } catch { throw Error('malformed'); }
-          const normalized = normalizeBusArrivals(payload,stopCode,patterns);
+          const normalized = normalizeBusArrivals(payload,stopCode,patternIndex);
           result = {schemaVersion:1,...normalized,retrievedAt:isoBus(clock()),providerHttpDate:Number.isFinite(Date.parse(response.headers.get('date'))) ? new Date(response.headers.get('date')).toISOString() : null,error:null};
           nextAt = clock()+30000;
         }
@@ -94,7 +110,6 @@ export function createBusAdapter({fetcher = fetch, clock = Date.now, timeoutMs =
       result.sourceValidity=null;
       result.cacheScope='per-process/isolate; not a distributed cache';
       if (epoch === generation) {
-        if (cache.size >= 40) { const evict = [...cache].find(([,entry]) => !entry.pending); if (evict) cache.delete(evict[0]); }
         cache.set(stopCode,{result,nextAt,lastGood:result.status==='unavailable'?old?.lastGood:result,failures:result.status==='unavailable'?(old?.failures??0)+1:0});
       }
       return result;

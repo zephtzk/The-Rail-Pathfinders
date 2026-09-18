@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-09-18T19:36:01.554Z",
+  "evidenceClass": "Desktop Edge mobile/touch emulation; actual clicks/keyboard and worker termination; not a physical phone or live provider test",
+  "checks": [
+    "editing an endpoint cancels pending full-network search without freezing controls",
+    "cancelled search cannot repopulate old route results",
+    "cancellation leaves accepted trip unchanged",
+    "fresh full-network search completes after cancellation",
+    "fresh results preserve accepted trip until explicit review and acceptance",
+    "UI continues scheduling frames through cancel and worker restart",
+    "mobile layout remains within viewport",
+    "no browser errors"
+  ],
+  "errors": [],
+  "metrics": {
+    "elapsedMs": 1675.3793999999998,
+    "newWorkerSearchMs": 975.1493,
+    "animationFrames": 113,
+    "maxFrameGapMs": 346.5,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  }
+}

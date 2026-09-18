@@ -1,3 +1,4 @@
+import {choosePlannerDate} from './planner-browser-helpers.mjs';
 import {chromium} from 'playwright';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -29,7 +30,7 @@ try {
 
   await page.getByLabel('From station').fill('Woodlands');
   await page.getByLabel('To station').fill('Changi Airport');
-  await form().locator('[name=date]').fill('2026-09-19');
+  await choosePlannerDate(page,'date','2026-09-19');
   await form().locator('[name=deadlineTime]').fill('');
   await find();
   check('outside-corridor route renders multiple train legs',await page.locator('.journey-step h4').allTextContents().then(texts => texts.filter(text => text.startsWith('Take ')).length >= 3));
@@ -59,12 +60,12 @@ try {
   check('failed persistence never claims a successful save',await page.locator('#rail-toast').innerText().then(text => text.includes('Could not save')));
   await page.evaluate(() => { Storage.prototype.setItem = window.originalSetItem; });
 
-  await form().locator('[name=deadlineDate]').fill('2026-09-19');
+  await choosePlannerDate(page,'deadlineDate','2026-09-19');
   await form().locator('[name=deadlineTime]').fill('08:01');
   await find();
   check('impossible deadline never presents a feasible selected journey',await page.locator('.route-hero').count() === 0 && await page.locator('.empty-state').innerText().then(text => /deadline|arrival|arrive/i.test(text)));
   await form().locator('[name=deadlineTime]').fill('');
-  await form().locator('[name=date]').fill('2027-01-01');
+  await choosePlannerDate(page,'date','2027-01-01');
   await find();
   check('unsupported service date receives explanation',await page.locator('.empty-state').innerText().then(text => /coverage|supported|date/i.test(text)));
   await page.getByLabel('From station').fill('Unimported station');
@@ -73,7 +74,7 @@ try {
 
   await page.getByLabel('From station').fill('Tampines');
   await page.getByLabel('To station').fill('Bugis');
-  await form().locator('[name=date]').fill('2026-09-19');
+  await choosePlannerDate(page,'date','2026-09-19');
   await form().locator('[name=walkingLimitMinutes]').selectOption('0');
   await find();
   check('walking limit is enforced',await page.locator('.empty-state').innerText().then(text => /walk/i.test(text)));
@@ -84,14 +85,14 @@ try {
   await page.getByLabel('From station').fill('Bugis');
   await page.getByLabel('To station').fill('Tampines');
   await form().locator('[name=departureTime]').fill('23:55');
-  await form().locator('[name=deadlineDate]').fill('2026-09-20');
+  await choosePlannerDate(page,'deadlineDate','2026-09-20');
   await form().locator('[name=deadlineTime]').fill('01:00');
   await find();
   check('after-midnight arrival visibly carries a next-day marker',await page.locator('.hero-arrival').innerText().then(text => text.includes('+1 day')));
   await page.getByLabel('From station').fill('Buona Vista');
   await page.getByLabel('To station').fill('Tuas Link');
   await form().locator('[name=departureTime]').fill('00:01');
-  await form().locator('[name=deadlineDate]').fill('2026-09-19');
+  await choosePlannerDate(page,'deadlineDate','2026-09-19');
   await find();
   check('previous service-day provenance is available for midnight train',await page.locator('.service-id').allTextContents().then(texts => texts.some(text => text.includes('Service day 2026-09-18'))));
 

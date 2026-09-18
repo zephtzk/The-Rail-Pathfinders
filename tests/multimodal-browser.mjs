@@ -1,3 +1,4 @@
+import {choosePlannerDate} from './planner-browser-helpers.mjs';
 import {chromium} from 'playwright';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -15,7 +16,7 @@ async function captureRoute(){await page.locator('#save-pilot').click();return (
 async function search(origin,destination,mode='mixed',extra={}){
   const f=page.locator('#pilot-form');
   await f.locator('[name=originId]').fill(origin);await f.locator('[name=destinationId]').fill(destination);
-  await f.locator('[name=date]').fill(extra.date??'2026-09-18');await f.locator('[name=departureTime]').fill('10:00');
+  await choosePlannerDate(page,'date',extra.date??'2026-09-18');await f.locator('[name=departureTime]').fill('10:00');
   await f.locator('[name=deadlineTime]').fill(extra.deadlineTime??'');await f.locator('[name=walkingLimitMinutes]').selectOption(extra.walk??'20');
   await f.locator('[name=mode]').selectOption(mode);await f.locator('[name=fixture]').selectOption(extra.fixture??'none');
   await page.getByRole('button',{name:'Find pilot journeys'}).click();
@@ -42,7 +43,8 @@ try{
   await search('bus:75009','bus:81119','bus-only');const transfer=await captureRoute();check('same physical stop bus transfer is feasible and counted',transfer.transfers===1&&transfer.transferSeconds===60&&arithmetic(transfer));
   await search('bus:75009','DT14','mixed',{walk:'0'});check('total walking budget enforced in browser',await page.locator('.route-hero').count()===0);
   await search('bus:75009','DT14','mixed',{deadlineTime:'10:05'});check('impossible estimated deadline is not recommended',await page.locator('.route-hero').count()===0&&(await page.locator('#pilot-status').innerText()).includes('deadline'));
-  await search('bus:75009','DT14','mixed',{date:'2026-09-19'});check('unsupported weekend bus date explicitly excluded',(await page.locator('#pilot-status').innerText()).includes('Weekends'));
+  await search('bus:75009','DT14','mixed',{date:'2026-09-19'});check('Saturday bus estimate uses its own supported operating span',await page.locator('.route-hero').count()===1);
+  await search('bus:75009','DT14','mixed',{date:'2026-10-03'});check('unsupported bus source date remains explicit',(await page.locator('#pilot-status').innerText()).includes('Bus source coverage'));
   await search('DT14','bus:75009','mixed',{fixture:'ewl'});const fallback=await captureRoute();check('synthetic EWL closure fallback labelled and excludes EWL',!fallback.legs.some(l=>l.routeId==='EWL')&&(await page.locator('#pilot-journey').innerText()).includes('SYNTHETIC DISRUPTION FIXTURE'));
   await search('bus:75009','bus:75059','bus-only');await captureRoute();
   await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);

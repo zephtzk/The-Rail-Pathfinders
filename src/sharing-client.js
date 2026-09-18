@@ -89,7 +89,13 @@ export class SharingClient {
     await this.refreshIfNeeded();const s=this.session;const result=await this.api(`/${s.id}/access`,{method:'DELETE',body:{eventId:crypto.randomUUID(),expectedRevision:s.revision}});this.remember(result,s);return result;
   });}
   delete(){this.epoch++;this.lastSent=null;return this.enqueue(async()=>{
-    await this.refreshIfNeeded();await this.api('/'+this.session.id,{method:'DELETE',body:{eventId:crypto.randomUUID(),expectedRevision:this.session.revision}});this.session=null;this.persist();
+    // A creator also holds a viewer token for ordinary reads. Deletion needs
+    // their editor capability (or the traveller's), and a freshly read revision
+    // because the other person may have accepted since the last local read.
+    const session=this.session,token=session?.travellerToken??session?.editorToken;
+    if(!token)throw Error('Only the traveller or the person who created this share can delete its data.');
+    const current=await this.api('/'+session.id,{token});
+    await this.api('/'+session.id,{method:'DELETE',token,body:{eventId:crypto.randomUUID(),expectedRevision:current.revision}});this.session=null;this.needsRefresh=false;this.persist();
   });}
   propose(plan){return this.enqueue(async()=>{await this.refreshIfNeeded();const s=this.session;const result=await this.api(`/${s.id}/plan`,{method:'PATCH',token:s.editorToken,body:{eventId:crypto.randomUUID(),expectedRevision:s.revision,plan}});this.remember(result,s);return result;});}
   links(){const s=this.session;if(!s)return {};const base=location.origin+'/';return {invite:s.inviteToken?`${base}#invite=${s.id}.${s.inviteToken}`:null,viewer:s.viewerToken?`${base}#caregiver=${s.id}.${s.viewerToken}`:null};}
