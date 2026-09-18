@@ -14,3 +14,7 @@ Publication update: the owner confirmed written redistribution permission for th
 The walking acquisition ledger is `data/bus/walking-evidence/acquisition.json`; path sources and hashes are in `data/bus/walking-links.json`. Attribution is not permission to relicense the operator maps. This readiness pass preserves history and records the unresolved evidence-rights item for publication review.
 
 Research documentation retains public provenance references. Product pages use plain-text LTA credit and the data.gov.sg licence link; the recorded account-specific direct DataMall hyperlink question remains a separate follow-up.
+
+## QR Code Generator
+
+`qrcode-generator` 2.0.4 by Kazuhiko Arase (MIT) creates sharing QR codes entirely in the browser. Source: https://github.com/kazuhikoarase/qrcode-generator. The installed distribution retains its copyright and MIT permission notice; the build ships that distribution. No trip link is sent to a QR service.

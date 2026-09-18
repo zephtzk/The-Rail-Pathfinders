@@ -1,0 +1,13 @@
+# Commute Copilot: mobility-first browser companion
+
+The primary traveller needs clear, conservative station guidance and may receive a prepared trip from a caregiver. The app remains a browser application: installation is optional, and a manual checkpoint works without geolocation. The ongoing card prioritises arrival estimate, current action and next action.
+
+The new shared model distinguishes a reusable plan, an active instance and explicit completion. Existing rail/bus routers still calculate route candidates; accepted revisions feed the companion, station guidance, caregiver view and final expenditure record. Saved places stay local. A durable SQLite/D1 service pairs the recipient explicitly and enforces separate progress/location permissions. Geographic updates are last-known, foreground-only observations with accuracy and time, not an underground position tracker.
+
+Station and toilet directions use the same constrained pedestrian graph. Stairs and escalators are excluded for step-free profiles; a failed shared lift cannot become its own fallback. Detours preserve the destination, check both outward and return paths, expose gate consequences, and require explicit arrival/resume confirmations. The floor diagrams are original schematics rather than copied operator artwork.
+
+The real source corpus does **not** establish a complete accessible indoor corridor or a verified toilet entrance path. Accordingly, real layouts and one OSM toilet candidate remain incomplete and no real verified accessible route is offered. The integrated incident rehearsal uses an explicitly fictional graph with no geographic coordinates. This is a substantive PS2 door-to-door/accessibility gap. A field or authoritative-source review of every entrance, gate, lift, floor connection and toilet attribute is needed before enabling real directions.
+
+Fare estimates use reviewed official data and bounded journey support. The ledger cannot establish payment: user-confirmed charges replace estimates without double counting. Native Dynamic Island is outside this implementation; Web Push requires optional deployment credentials and platform support, and external delivery is unverified.
+
+The [delivery table](docs/UPGRADE_DELIVERY.md) identifies each feature's tested implementation and unresolved dependencies. The [source/coverage ledger](docs/FACILITY_COVERAGE.md), [fare calculation notes](docs/FARES.md), [sharing design](docs/SHARING.md), [rehearsal script](docs/UPGRADE_DEMO.md) and [device checklist](DEVICE_CHECKLIST.md) give reproducible evidence and testing steps. Headless browser emulation is not physical-phone or real-station validation. No production deployment or audience change is included in this branch.
