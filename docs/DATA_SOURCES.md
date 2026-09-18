@@ -61,7 +61,23 @@ The initial authenticated attempt is in [datamall-attempt1.json](evidence/phase0
 It received HTTP 401 for 16 requests. No successful feed body or signed download was obtained.
 Bus arrivals was not requested because a stop identifier could not be obtained from the directory.
 This is evidence of rejected authentication, not proof that the feeds do not exist or that an account lacks every entitlement.
-Consult the milestone report for any subsequent attempt.
+The [replacement-key attempt 3](evidence/phase0/datamall-attempt3.json), recorded 18 September 2026 at
+20:25:53–20:26:12 Singapore time, received HTTP 200 for all 17 API requests. Authentication is now verified for this sample;
+14 non-GTFS representative structure checks passed. This is a user-run live audit, not fixture evidence or a new agent-run probe.
+
+All three GTFS endpoints returned a one-row `value` array containing lowercase `timestamp` and `link` string fields.
+Audit version 2 incorrectly recognised only `Link`, so its `UNAVAILABLE_NO_LINK` labels describe an audit defect,
+not provider unavailability. No ZIP/protobuf was fetched. Version 3 accepts both forms and captures bounded timestamp strings;
+13 synthetic tests pass, but fresh download access, schedule validity and realtime contents remain NOT TESTED.
+The sanitised report cannot reconstruct the original URLs or their timestamp values, and was preserved without relabelling it.
+
+Observed non-GTFS limits: EWL/CCL/DTL crowd intervals had ended 957.924–960.193 seconds before retrieval;
+same-day forecasts had 48 distinct start timestamps spanning 00:00–23:30 +08, consistent with documented half-hour
+forecasts but without proof of every interval's spacing; bus stops/routes were two full 500-row sample pages each;
+bus services returned 500 + 301 records without a uniqueness/overlap check; arrivals were sampled at only `01012`
+(11 services, 26 populated slots, both monitored and scheduled values). These do not establish network/corridor completeness.
+Train notices included three message timestamps ranging from April to September with no timezone offset;
+retained metadata cannot decide their ongoing relevance. Full details and next-phase gates are in [MILESTONES.md](MILESTONES.md).
 
 The reusable runner requests one notice snapshot, three GTFS metadata responses and at most three downloads,
 current/forecast crowding for three corridor lines, two pages of each bus directory, and arrivals at one returned stop.
@@ -80,14 +96,15 @@ Metadata access, download success, parsing, freshness and usable coverage remain
 
 The user-supplied account email requires confidential credentials, reasonable request frequency, compliance with the
 licence/terms, and no direct hyperlinking of products/services to DataMall. Its screenshot contains a credential and is
-excluded from this repository and evidence. Replace the exposed key through DataMall before further use.
+excluded from this repository and evidence. The user confirms a replacement key and the new audit authenticates successfully;
+revocation of the old exposed key was not independently checked. Ensure it is revoked through DataMall if replacement did not do so.
 No request has been made to modify account terms or send messages to LTA.
 
 The [API terms](https://datamall.lta.gov.sg/content/datamall/en/api-terms-of-service.html) allow commercial/noncommercial API use,
 state a changeable 10-million-calls/day threshold, require confidential credentials and permit additional API-specific
 conditions. That threshold is not a throughput guarantee. Availability and accuracy are not guaranteed.
 No universal per-second quota or blanket cache-retention deadline was established in this review.
-Account-specific restrictions and activation remain to be confirmed by the account holder.
+The replacement-key sample demonstrates accepted API authentication; account-specific restrictions still apply.
 
 The [Singapore Open Data Licence](https://datamall.lta.gov.sg/content/datamall/en/SingaporeOpenDataLicence.html)
 requires source attribution and a licence link, permits reuse of covered datasets, excludes personal data and certain
@@ -124,6 +141,16 @@ python -m pip install --target test-results/audit-deps -r scripts/audit-requirem
 python scripts/test-audit-datamall.py
 python scripts/audit-datamall.py --prompt
 ```
+
+For the remaining GTFS validation only, use the corrected version 3 runner. This makes three metadata requests and
+at most three downloads, retaining the existing full audit output separately:
+
+```powershell
+python scripts/audit-datamall.py --prompt --gtfs-only --output test-results/phase0/datamall-gtfs-smoke.json
+```
+
+The DataMall API key is required at that masked prompt; EXTOL credentials are not needed. Do not interpret successful
+synthetic parser tests or HTTP 200 metadata as a passed live download/calendar/coverage check.
 
 The prompt hides input and stores the key only in the audit process. No `.env` or persistent credential is created.
 An existing process-only `LTA_ACCOUNT_KEY` may be used without `--prompt` in a controlled runner; do not type a literal

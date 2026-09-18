@@ -28,7 +28,7 @@ BASE = 'https://datamall2.mytransport.sg/ltaodataservice/'
 LIMIT = 32 * 1024 * 1024
 UTC = dt.timezone.utc
 SGT = dt.timezone(dt.timedelta(hours=8))
-TIME_FIELDS = {'CreatedDate', 'StartTime', 'EndTime', 'Date', 'Start', 'EstimatedArrival'}
+TIME_FIELDS = {'CreatedDate', 'StartTime', 'EndTime', 'Date', 'Start', 'EstimatedArrival', 'timestamp'}
 
 
 def now():
@@ -118,8 +118,11 @@ def contract_check(path, payload):
 
 def download_link(payload):
     if isinstance(payload, dict):
-        if isinstance(payload.get('Link'), str):
-            return payload['Link']
+        # The live metadata envelope uses lowercase `link`; retain the guide's
+        # capitalized form too. Values still pass safe_download before use.
+        for field in ('link', 'Link'):
+            if isinstance(payload.get(field), str) and payload[field].strip():
+                return payload[field]
         for v in payload.values():
             link = download_link(v)
             if link:
@@ -225,8 +228,9 @@ def realtime_summary(data, trip_ids, stop_ids):
             'limits': 'A bounded snapshot; empty or missing updates do not establish on-time or network-wide service.'}
 
 
-def run(key):
-    report = {'auditVersion': 2, 'startedAt': now(), 'mode': 'authenticated-live-smoke' if key else 'blocked-no-credential',
+def run(key, gtfs_only=False):
+    report = {'auditVersion': 3, 'startedAt': now(), 'mode': 'authenticated-live-smoke' if key else 'blocked-no-credential',
+              'scope': 'gtfs-only' if gtfs_only else 'all',
               'rawPayloadsRetained': False, 'signedUrlsRetained': False, 'requests': [],
               'limits': 'Small samples, not an exhaustive directory or continuous service validation.'}
     if not key:
@@ -238,6 +242,8 @@ def run(key):
     paths += [f'{endpoint}?TrainLine={line}' for endpoint in ('PCDRealTime', 'PCDForecast') for line in ('EWL', 'CCL', 'DTL')]
     paths += [f'{endpoint}?$skip={skip}' for endpoint in ('BusStops', 'BusRoutes', 'BusServices') for skip in (0, 500)]
     paths += ['v3/BusArrival']
+    if gtfs_only:
+        paths = [path for path in paths if path.startswith('GTFS')]
     auth_failed = False
     for path in paths:
         if auth_failed:
@@ -307,13 +313,14 @@ def run(key):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prompt', action='store_true')
+    parser.add_argument('--gtfs-only', action='store_true', help='Probe only the three GTFS metadata endpoints and their downloads')
     parser.add_argument('--output', default='test-results/phase0/datamall-smoke.json')
     args = parser.parse_args()
     if args.prompt and not sys.stdin.isatty():
         parser.error('Masked entry requires a real local terminal; refusing non-terminal input')
     key = getpass.getpass('DataMall API Access Key (hidden; use replacement of exposed key): ') if args.prompt else os.environ.get('LTA_ACCOUNT_KEY', '')
     try:
-        report = run(key.strip())
+        report = run(key.strip(), gtfs_only=args.gtfs_only)
         output = ROOT / args.output
         output.parent.mkdir(parents=True, exist_ok=True)
         text = json.dumps(report, indent=2)
