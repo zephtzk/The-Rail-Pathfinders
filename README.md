@@ -1,6 +1,13 @@
 # Commute Copilot — The Rail Pathfinders
 
-Current delivery: **Phase 4 user-testing build, published for owner testing**. Start with the [publication report](docs/PHASE4_PUBLICATION.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
+**Six-upgrade review candidate:** start with [completion, limits and setup](docs/UPGRADE_DELIVERY.md), the [two-device rehearsal](docs/UPGRADE_DEMO.md), [facility/toilet coverage](docs/FACILITY_COVERAGE.md), [sharing and database setup](docs/SHARING.md), and [fares](docs/FARES.md). The companion is integrated below all existing planners. Review a selected journey, then start it or create a recipient link.
+
+The browser workflows, local durable sharing and tests are implemented. A real verified step-free door-to-door corridor and real verified toilet entrance paths remain blocked by missing checked source data. Deployed D1/push delivery and physical phones are unverified. The existing production site and audience are unchanged.
+
+The following Phase 4 publication information describes the **previous hosted release**, not a deployment of this branch.
+
+
+Previous hosted delivery: **Phase 4 user-testing build, published for owner testing**. Start with the [publication report](docs/PHASE4_PUBLICATION.md) and [repeatable device checklist](DEVICE_CHECKLIST.md). This round evaluates scheduled planning, journey acceptance, confirmed progress, offline guidance and explicitly labelled synthetic rerouting. Real-provider routing effects remain disabled and unfinished.
 
 | Entry page | Use in this round |
 | --- | --- |
@@ -13,13 +20,13 @@ The [existing Site](https://commute-copilot-nebula.simhongmen.chatgpt.site) serv
 
 Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
 
-Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. No address search, fare, step-free assurance, broader bus coverage or intermediate onboard alighting is supported. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
+Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. No address search, step-free assurance, broader bus coverage or intermediate onboard alighting was supported in that release. This branch adds the bounded fare and companion features described above. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
 
 See [coverage](docs/PHASE3_COVERAGE.md), [historical Phase 4 acceptance](docs/PHASE4_REPORT.md), [operations](docs/PHASE4_OPERATIONS.md) and the [milestone ledger](docs/MILESTONES.md). Physical Android Chrome and iPhone Safari checks remain **NOT TESTED**; desktop emulation does not close them.
 
 ## Run and verify
 
-Requires Node.js 22+ and Python 3.10+. The importer uses only Python's standard library.
+Requires Node.js 22.13+ (Node 24 tested) and Python 3.10+. The importer uses only Python's standard library.
 
 ```sh
 npm ci

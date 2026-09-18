@@ -1,0 +1,14 @@
+// Example only. No deployment or audience change is performed by this file.
+// Fill the ID from `wrangler d1 create`, then use --config with this file.
+{
+  "name": "commute-copilot",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-09-18",
+  "d1_databases": [{
+    "binding": "SHARING_DB",
+    "database_name": "commute-copilot-sharing",
+    "database_id": "REPLACE_WITH_CREATED_D1_ID",
+    "migrations_dir": "migrations"
+  }],
+  "triggers": {"crons": ["*/15 * * * *"]}
+}

@@ -1,3 +1,5 @@
+import {fareEstimateHTML} from './fare-ui.js';
+import {mountCompanion} from './copilot-ui.js';
 import {createRailRouter} from './rail-engine.js';
 
 // Presentation owns form state and rendering. The routing engine owns every timing decision.
@@ -182,7 +184,8 @@ function renderResult({saved = false,savedAt} = {}) {
       <div class="hero-metrics"><span>${route.transfers} transfer${route.transfers === 1 ? '' : 's'}</span><span>${minutes(route.walkingSeconds)} walking</span><span>${minutes(route.waitSeconds)} waiting</span></div>
     </article>
     ${submittedInput.preference === 'quieter' ? '<p class="notice">Quieter preference is unavailable: these results use fastest arrival. No crowding prediction has been applied.</p>' : ''}
-    <div class="route-summary"><div class="route-lines">${rides.map(leg => linePill(leg.routeId)).join('<span aria-hidden="true">→</span>')}</div><button id="save-rail" class="secondary" type="button">Save this guidance</button></div>
+    <p><a href="#companion-plan">Start this journey · caregiver preparation · station &amp; toilet guidance ↓</a></p><div class="route-summary"><div class="route-lines">${rides.map(leg => linePill(leg.routeId)).join('<span aria-hidden="true">→</span>')}</div><button id="save-rail" class="secondary" type="button">Save this guidance</button></div>
+    ${fareEstimateHTML({route:{legacyRoute:route,legacyInput:submittedInput},plan:{departureDate:submittedInput.date}})}
     ${routeDiagram(route)}
     <section class="panel instructions" aria-labelledby="directions-title"><div class="panel-heading"><h3 id="directions-title">Your journey, step by step</h3><span class="tag">Scheduled</span></div><ol class="journey-steps">${route.legs.map(leg => renderLeg(leg)).join('')}</ol></section>
     <section class="panel arithmetic"><h3>Where the time goes</h3><dl>${[['Access',route.accessSeconds],['Waiting',route.waitSeconds],['Riding',route.rideSeconds],['Transfers',route.transferSeconds],['Exit',route.exitSeconds]].map(([label,value]) => `<div><dt>${label}</dt><dd>${minutes(value)}</dd></div>`).join('')}<div class="arithmetic-total"><dt>Total</dt><dd>${minutes(route.totalSeconds)}</dd></div></dl><p class="help">Transfer time includes ${minutes(route.transferWalkSeconds)} of walking. Walking total is part of the journey total, not additional time.</p>
@@ -332,6 +335,7 @@ async function start() {
     }
     console.warn('Rail timetable unavailable:',error.message);
   }
+  mountCompanion({getSelected:()=>dirty?null:({route:selectedRoute,input:submittedInput}),name:id=>lookup?.labels.get(id)??stopLabel(id),getPlaces:()=>network?.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{const f=document.querySelector('#rail-form');if(!f)return;f.elements.origin.value=stationLabel(p.origin.stationId??p.origin.id);f.elements.destination.value=stationLabel(p.destination.stationId??p.destination.id);f.elements.date.value=p.departureDate;f.elements.departureTime.value=p.departureTime;f.elements.deadlineTime.value='';if(p.preferences?.walkingLimitMinutes!=null)f.elements.walkingLimitMinutes.value=String(p.preferences.walkingLimitMinutes);f.dispatchEvent(new Event('input'));f.scrollIntoView();},onEndpoint:(endpoint,place)=>{const f=document.querySelector('#rail-form');if(f){f.elements[endpoint].value=stationLabel(place.stationId??place.id);f.dispatchEvent(new Event('input'));}}});
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
 
