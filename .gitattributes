@@ -3,3 +3,5 @@
 data/rail/** -text
 public/data/rail-*.json -text
 scripts/import-rail.py -text
+# This pinned rules snapshot was generated with CRLF; CR is its line ending.
+data/rail/validation.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
