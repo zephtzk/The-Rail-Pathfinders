@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-09-19",
+  "sources": [
+    {
+      "file": "lta-mrt-exits.geojson",
+      "url": "https://data.gov.sg/datasets/d_b39d3a0871985372d7e1637193335da5/view",
+      "bytes": 213057,
+      "sha256": "a7eaa90f30991dc0ac4aa970d704123ce3ec9e60c82b42c32a32e74be7dc0327",
+      "signedUrlRetained": false
+    },
+    {
+      "file": "nparks-central-nature-reserve.geojson",
+      "url": "https://data.gov.sg/datasets/d_19a87bbb86b2c14601a1745076812438/view",
+      "bytes": 146032,
+      "sha256": "5d98040d9a83db7ff6b5ca345da1402345e451a5c992d6efc5ef2234f4bbe4c2",
+      "signedUrlRetained": false
+    },
+    {
+      "file": "sbs-station-facts.json",
+      "url": "https://www.sbstransit.com.sg/Service/TrainInformation",
+      "bytes": 27979,
+      "sha256": "2ac7fec729e6ca9a91ec2476674a6ed6f1c37822de263aa5dfa048b949ea081c",
+      "signedUrlRetained": false
+    }
+  ],
+  "railSource": {
+    "file": "../rail/sources/lta-train-2026-09-18.zip",
+    "sha256": "b0fb41aea9696e864b0c5accfd05a06748566da392b6fac0392190c232d6b7a7",
+    "metadata": "../rail/sources/lta-train-2026-09-18.json"
+  }
+}
