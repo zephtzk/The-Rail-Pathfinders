@@ -1,7 +1,7 @@
 # FR4 delivery
 
 - Empty From/To searches show only My location and explicitly saved places. Whitespace is empty; typing restores station, bus-stop and address matches.
-- Current-trip End, Pause/Resume and Cancel actions have matching icons and centered, wrapping alignment.
+- Current-trip End, Pause/Resume and Cancel actions have matching icons and centered single-row alignment.
 - Show to staff includes a Custom message option, a 500-character editor and a large literal-text preview. Drafts stay in page memory and clear when the trip context changes or the page reloads.
 - New recipient links use a read-only plan-view capability. The recipient sees only the provider's shared planned trip and Refresh trip, with no acceptance, journey controls, other tabs, location collection or writes. Viewer credentials cannot edit/delete or read another share. The recipient session is isolated in sessionStorage from local journeys. The provider can explicitly update the shared plan or delete the link. Existing legacy handoff capabilities retain their previous consent rules.
 - Bus/train map toggles have a small grey Map View caption.
@@ -18,3 +18,16 @@ The public site retains its existing identity, audience and persistent sharing d
 - My location already supplies the device coordinates correctly. Address and GPS routing require a valid server-side `ONEMAP_TOKEN`; configuration and live routing verification are deployment tasks. The credential must never enter tracked files, client assets, or logs.
 
 Follow-up validation: `npm run check` passes. The built app passes 19 provider-control browser checks and 14 recipient/API checks, including clipboard denial, legacy invitation handling, refresh, cancellation, viewer write denial, reload and storage isolation. Notification tests confirm no permission prompt, subscription, queued event or delivery, and cleanup of old subscriptions without deleting shares.
+
+## Trip and incident follow-up
+
+Implemented in three parallel work chats: trip cleanup, incident routing, and map/app zoom.
+
+- End, Pause/Resume and Cancel remain in one row, including narrow screens.
+- App zoom gestures and shortcuts are guarded; map pinch/wheel/buttons and app text-size settings remain available. Browser menus and OS magnification remain outside web-app control.
+- Saved unresolved closure/cancellation incidents affect all planner and flexible-departure searches, honoring service, direction, segment and incident time window. Incident log changes refresh suggestions and resolving incidents restores eligible routes. Delay scenarios remain explicitly advisory.
+- Address-provider routes request station or bus-stop endpoints while synthetic closures are active because external routing cannot enforce those exclusions.
+- Choose saved incident is full width, centered alongside the centered Open incident log action.
+- Removed duplicate Location settings from Update my current step, and Route checks/manual correction and Service notices from Current trip. Alternate-route proposals and acceptance remain available.
+
+Validation: full npm run check passes, including JavaScript/data tests and production build. Focused tests cover multiple closures, alternatives and resolution; real Leaflet zoom behavior; and trip controls at 320/390/1440px with zero runtime errors.

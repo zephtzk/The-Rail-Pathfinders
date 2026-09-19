@@ -58,3 +58,9 @@ export function demoRouteAffected(route, rules, network, fromIndex=0) {
     return ids.some((id,i)=>i+1<ids.length&&demoConnectionClosed(rules,leg.patternId,id,ids[i+1],leg.startSeconds,leg.endSeconds));
   });
 }
+
+// Every unresolved saved scenario participates in planning; resolving it restores service.
+export function compileSavedDemoClosures(incidents, network, date) {
+  const effects = incidents.filter(incident => incident.status === 'active').map(incident => ({incident, ...compileDemoClosures(incident, network, date)}));
+  return {rules: effects.flatMap(effect => effect.rules), effects};
+}

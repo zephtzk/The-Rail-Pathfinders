@@ -1,0 +1,4 @@
+/* Keep scrolling and text enlargement available, with map-only gesture zoom. */
+html, body { touch-action: pan-x pan-y; }
+.leaflet-container { touch-action: none; }
+input, select, textarea { font-size: max(1rem, 16px); }

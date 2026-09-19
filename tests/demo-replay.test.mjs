@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRailRouter} from '../src/rail-engine.js';
 import {acceptJourney,confirmProgress} from '../src/journey-state.js';
-import {compileDemoClosures,demoConnectionClosed,demoRouteAffected} from '../src/demo-closures.js';
+import {compileDemoClosures,compileSavedDemoClosures,demoConnectionClosed,demoRouteAffected} from '../src/demo-closures.js';
 import {replayJourney} from '../src/demo-replay.js';
 
 const sec=time=>{const [h,m]=time.split(':').map(Number);return h*3600+m*60;};
@@ -113,4 +113,17 @@ test('unsupported boundaries and service-wide direction are rejected without gue
   for(const change of [{from:'unknown'},{from:'b',to:'b'},{scope:'service',direction:'forward'},{startsAt:'invalid'},{service:'unknown'}]){
     const effect=compileDemoClosures({...incident,...change},n,input.date);assert.equal(effect.status,'unsupported');assert.deepEqual(effect.rules,[]);
   }
+});
+
+
+test('saved unresolved closures change planner recommendation and resolution restores it',()=>{
+  const f=fixture(),effects=compileSavedDemoClosures([incident],f.n,input.date);
+  const changed=f.router.route({...input,demoClosures:effects.rules});
+  assert.deepEqual(changed.recommended.legs.filter(l=>l.type==='ride').map(l=>l.tripId),['alternative']);
+  assert.equal(demoRouteAffected(changed.recommended,effects.rules,f.n),false);
+  const resolved=compileSavedDemoClosures([{...incident,status:'resolved'}],f.n,input.date);
+  assert.equal(resolved.rules.length,0);
+  assert.equal(f.router.route({...input,demoClosures:resolved.rules}).recommended.arrivalSeconds,sec('08:37'));
+  const blocked=compileSavedDemoClosures([incident,{...incident,id:'second',service:'bypass',scope:'service',direction:'both',startsAt:at('08:00'),endsAt:at('10:00')}],f.n,input.date);
+  assert.equal(f.router.route({...input,demoClosures:blocked.rules}).routes.length,0);
 });

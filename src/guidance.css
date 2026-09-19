@@ -23,3 +23,9 @@
 .simple-guidance .staff-page .staff-current-instruction-tick{flex-basis:56px;width:56px;min-width:56px;height:56px;min-height:56px}
 .simple-guidance .staff-page .staff-request-picker select{min-height:56px}
 @media(forced-colors:active){.staff-page .staff-current-instruction-tick{color:ButtonText;background:ButtonFace;border-color:ButtonText}}
+
+/* Keep the three journey controls in one row at every viewport and text size. */
+.commute-app #companion-active .trip-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;align-items:stretch;gap:6px}
+.commute-app #companion-active .trip-actions>button{min-width:0;width:100%;margin:0;padding:10px 4px;gap:4px;white-space:normal;overflow-wrap:anywhere;min-height:48px}
+.commute-app #companion-active .trip-actions>button .icon{flex-shrink:0}
+@media(max-width:360px){.commute-app #companion-active .trip-actions>button{flex-direction:column}}
