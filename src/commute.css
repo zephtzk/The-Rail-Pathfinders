@@ -208,12 +208,21 @@
 .commute-app .route-pin > span { display: grid; place-items: center; width: 33px; height: 33px; border: 3px solid white; border-radius: 13px 13px 13px 3px; background: #5494b8; color: white; font: 750 15px/1 "Segoe UI", sans-serif; box-shadow: 0 3px 8px #294f6633; }
 .commute-app .destination-pin > span { background: #9685bc; }
 .commute-app .leaflet-container { font-family: inherit; }
-.commute-app .leaflet-control-zoom { border: 1px solid #dce5e8 !important; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); }
-.commute-app .leaflet-control-zoom a { width: 42px; height: 42px; line-height: 42px; color: #3c5869; border-color: #e5e9e9; }
+/* Beat Leaflet's later touch rules while retaining the zoom group's shared edge. */
+.commute-app .leaflet-control-zoom.leaflet-bar { border: 1px solid #dce5e8; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); }
+.commute-app .leaflet-control-zoom a { color: #3c5869; border-color: #e5e9e9; }
+.commute-app .leaflet-control-zoom.leaflet-bar > a { width: 44px; height: 44px; line-height: 44px; }
+.commute-app .leaflet-control-zoom.leaflet-bar > a:first-child { border-radius: 14px 14px 0 0; }
+.commute-app .leaflet-control-zoom.leaflet-bar > a:last-child { border-radius: 0 0 14px 14px; }
+.commute-app .leaflet-control-zoom a:focus-visible { outline-offset: -4px; }
 .commute-app .leaflet-control-attribution { font-size: 9px; background: #ffffffd9; }
 .commute-app .app-map .leaflet-top { top: 100px; }
 .commute-app .app-map .leaflet-left { left: 490px; }
 .commute-app .leaflet-popup-content-wrapper { border-radius: 16px; color: var(--ink); box-shadow: var(--shadow); }
+.commute-app .app-map .leaflet-popup-content button { min-height: 44px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.commute-app .app-map .leaflet-popup-content button:hover:not(:disabled) { background: var(--blue-soft); }
+.commute-app .app-map .leaflet-popup-close-button { border-radius: 12px; }
+.commute-app .guidance-page-strip button { border-radius: 12px; }
 .commute-app .companion-marker { border: 3px solid white; border-radius: 12px; color: white; background: #448eb4; box-shadow: 0 2px 8px #264d6633; }
 .commute-app details { font-size: .8rem; }
 .commute-app summary { cursor: pointer; min-height: 44px; display: list-item; align-content: center; font-weight: 600; color: #45677c; padding: 9px 0; }
@@ -369,6 +378,10 @@
   .commute-app .copilot nav a { flex: 1; text-align: center; }
   .commute-app .copilot #companion-map { height: 195px; }
 }
+/* Leave a gap below the 44px zoom targets only while the zoom group is shown. */
+@media (max-width: 680px) and (min-height: 541px) {
+  .commute-app .app-shell .map-recenter { top: 198px; }
+}
 /* A keyboard or short landscape viewport leaves a smaller map and a usable scroller. */
 @media (max-width: 680px) and (max-height: 540px) {
   .commute-app { --mobile-map-height: clamp(120px, 25dvh, 150px); }
@@ -423,7 +436,7 @@
 .commute-app .companion-panel .danger, .commute-app #journey-cancel, .commute-app #confirm-journey-cancel { color: #943e3e; border-color: #ddb6af; background: #fff5f1; }
 .commute-app .cancel-confirmation { border: 1px solid #ddb6af; background: #fff5f1; border-radius: 14px; padding: 15px; margin-block: 12px; }
 .commute-app .current-route-summary > button { margin-top: 15px; }
-.commute-app .map-retry { display: block; border: 0; padding: 5px 0; background: none; color: #186789; font: inherit; text-decoration: underline; min-height: 32px; }
+.commute-app .map-retry { display: block; border: 0; border-radius: 12px; padding: 5px 0; background: none; color: #186789; font: inherit; text-decoration: underline; min-height: 44px; }
 @media (max-width: 680px) {
   .commute-app .app-nav { padding-inline: max(4px, env(safe-area-inset-left)); gap: 1px; }
   .commute-app .app-nav button { font-size: .61rem; min-height: 63px; padding-inline: 1px; border-radius: 12px; }
