@@ -24,11 +24,9 @@ const view=name=>page.locator(`.app-nav [data-view=${name}]`).click();
 let recipientContext,offlineContext;
 try{
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
-  await page.locator('.address-search-disclosure > summary').click();
   for(const role of ['origin','destination']){
-    if(role==='destination')await page.waitForTimeout(1600);
-    await page.locator('#address-role').selectOption(role);await page.locator('#address-query').fill(role+' public test address');
-    await page.locator('#address-search').click();await page.locator('[data-address-index="0"]').click();
+    await page.locator(`#${role}`).fill(role+' public test address');
+    await page.locator(`#${role}-address-search`).click();await page.locator(`#${role}-suggestions [data-address-index="0"]`).click();
   }
   check('address searches are explicit and contain only the entered public query',searches.length===2&&searches.every(s=>Object.keys(s).join()==='query'));
   await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();

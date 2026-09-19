@@ -75,13 +75,10 @@ try{
     const path=`${out}/${name}.png`;await page.screenshot({path});captures.push(path);
   }
   await page.goto(base);await ready();
-  await page.locator('.address-search-disclosure > summary').click();
   for(const role of ['origin','destination']){
-    if(role==='destination')await page.waitForTimeout(1600);
-    await page.locator('#address-role').selectOption(role);
-    await page.locator('#address-query').fill(`${role} synthetic map test`);
-    await page.locator('#address-search').click();
-    await page.locator('[data-address-index="0"]').click();
+    await page.locator(`#${role}`).fill(`${role} synthetic map test`);
+    await page.locator(`#${role}-address-search`).click();
+    await page.locator(`#${role}-suggestions [data-address-index="0"]`).click();
   }
   await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
   check('finding the mixed route leaves accepted guidance empty',await active()===null);

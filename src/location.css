@@ -1,5 +1,6 @@
 .app-location-status{margin:.35rem 0;padding:.3rem .6rem;background:#eef3fa;border:1px solid #c8d7eb;border-radius:.75rem;color:#244362;font-size:.8rem;line-height:1.5;overflow-wrap:anywhere}
-.app-location-status[data-usable=true]{border-color:#9fc6c0;background:#f0f8f6;color:#164a42}
+.app-location-status[hidden]{display:none}
+.app-location-status button{min-height:44px;white-space:normal}
 /* These views already describe their own location or accepted-step state. */
 .commute-app:is([data-view=current],[data-view=facilities],[data-view=preferences],[data-view=staff]) #app-location-status{display:none}
 .location-settings{padding:1rem;margin-bottom:1rem;border:1px solid #c8d7eb;border-radius:.85rem;background:#f8faff}
