@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e",
+  "unitTests": 555,
+  "pythonDataTests": 44,
+  "fullCheck": "passed",
+  "browserChecks": {
+    "savedIncidents": "multiple closure aggregation, alternate route, persistence/reload, resolution restoration, active trip preservation and explicit closure-free trip activation passed",
+    "tripCleanup": "320, 390 and 1440px single row; step update, pause/resume and cancellation passed; no runtime errors",
+    "zoom": "real Leaflet Ctrl-wheel and button zoom, fixed app gestures and 200 percent text enlargement passed",
+    "existingDemoControls": "33 checks passed"
+  },
+  "physicalDeviceTesting": false
+}
