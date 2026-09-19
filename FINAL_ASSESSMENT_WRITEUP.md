@@ -2,7 +2,7 @@
 
 **Cheah Kika | Jin Donghua | Zeph Tang Zhenkai | Zhang Yizhuo**
 
-NEBULA X | Problem Statement 2 | FR4 | 19 September 2026
+NEBULA X | Problem Statement 2 | Final assessment writeup | 19 September 2026
 
 ## Commute Copilot
 
@@ -36,12 +36,12 @@ The demonstration treats saved closures/cancellations as valid only for their st
 
 ### What a judge can reproduce
 
-**Automated checks: 555 JavaScript and 44 Python test cases.** These are the runner totals from the recorded FR4 `npm run check` execution, not percentages or counts of users/journeys. The Python total is **27 rail-import + 16 bus-import + 1 walking-metadata**. All passed; the same command also built the app. The [recorded results](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/docs/evidence/fr4-addendum/verification.json) and [exact test commands](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/package.json) are pinned to the source snapshot.
+**Automated checks: 555 JavaScript and 44 Python test cases.** These are the runner totals from the recorded `npm run check` execution, not percentages or counts of users/journeys. The Python total is **27 rail-import + 16 bus-import + 1 walking-metadata**. All passed; the same command also built the app. The [recorded results](https://github.com/zephtzk/The-Rail-Pathfinders/blob/5b37bc350b28915e15be6c56730deb8a33d71cb2/docs/assessment-evidence/verification.json) and [exact test commands](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/package.json) are pinned to the source snapshot.
 
 To check those totals: download the [pinned source](https://github.com/zephtzk/The-Rail-Pathfinders/archive/d787c8d6501b3027d21cefd734e46cd726f5c65c.zip), follow its README prerequisites, then run `npm ci` and `npm run check`. Compare the Node summary and the separate Python summaries; browser checks are additional and are not included in these totals.
 
-**Route-change demonstration:** use Paya Lebar (EW8) to Bugis (EW12), 21 September 2026, 10:00 SGT. These are chosen test inputs. Record the baseline, save a whole-line EW closure covering that day, and search again. Verify the suggested route avoids EW and can be explicitly started. Reload and repeat the same search to verify that the saved closure still changes the suggestion. Resolve the incident and verify the baseline becomes eligible again. The appended guide gives the clicks; [the browser test](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/tests/fr4-incident-planner-browser.mjs) checks the route IDs and accepted state. This proves fixture behaviour, not performance against live disruption outcomes.
+**Route-change demonstration:** use Paya Lebar (EW8) to Bugis (EW12), 21 September 2026, 10:00 SGT. These are chosen test inputs. Record the baseline, save a whole-line EW closure covering that day, and search again. Verify the suggested route avoids EW and can be explicitly started. Reload and repeat the same search to verify that the saved closure still changes the suggestion. Resolve the incident and verify the baseline becomes eligible again. The appended guide gives the clicks; [the browser test](https://github.com/zephtzk/The-Rail-Pathfinders/blob/5b37bc350b28915e15be6c56730deb8a33d71cb2/docs/assessment-evidence/incident-planner-browser.mjs.txt) checks the route IDs and accepted state. This proves fixture behaviour, not performance against live disruption outcomes.
 
 **Try the app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site) | **Source:** [The Rail Pathfinders](https://github.com/zephtzk/The-Rail-Pathfinders)
 
-The illustrated user guide follows the two-page PDF writeup. FR4 application source: `f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e`; reproducible source snapshot: `d787c8d6501b3027d21cefd734e46cd726f5c65c` (19 September 2026).
+The illustrated user guide follows the two-page PDF writeup. Application source: `f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e`; reproducible source snapshot: `d787c8d6501b3027d21cefd734e46cd726f5c65c` (19 September 2026).

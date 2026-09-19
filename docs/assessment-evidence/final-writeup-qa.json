@@ -1,0 +1,17 @@
+{
+  "file": "FINAL_ASSESSMENT_WRITEUP.pdf",
+  "sha256": "e0fc1cac690905b38c9b81da3ac26313b52e900700de3e9fd388aebe03db02f1",
+  "pages": 16,
+  "writeupPages": 2,
+  "guidePages": 14,
+  "releaseLabelOccurrences": 0,
+  "checked": [
+    "All page text",
+    "All footers",
+    "PDF metadata",
+    "PDF outline",
+    "Link destinations",
+    "Markdown text and links",
+    "Visual inspection of all 16 rendered pages"
+  ]
+}

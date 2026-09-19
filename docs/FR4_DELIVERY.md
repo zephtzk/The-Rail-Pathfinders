@@ -38,7 +38,7 @@ The full check passed 555 JavaScript tests and 44 Python data tests. Additional 
 
 ## Submission documents
 
-The [updated submission PDF](The_Rail_Pathfinders_Submission.pdf) has exactly two writeup pages followed by the complete 14-page [illustrated user guide](Commute_Copilot_Judges_User_Guide.pdf). It names The Rail Pathfinders, Cheah Kika, Jin Donghua, Zeph Tang Zhenkai and Zhang Yizhuo, with the app otter logo at the top right. [Editable writeup](The_Rail_Pathfinders_Submission_Writeup.md).
+The [updated submission PDF](../FINAL_ASSESSMENT_WRITEUP.pdf) has exactly two writeup pages followed by the complete 14-page [illustrated user guide](Commute_Copilot_Judges_User_Guide.pdf). It names The Rail Pathfinders, Cheah Kika, Jin Donghua, Zeph Tang Zhenkai and Zhang Yizhuo, with the app otter logo at the top right. [Editable writeup](../FINAL_ASSESSMENT_WRITEUP.md).
 
 The organisers/maintainers appendix was replaced with a reproducible demo: save an East West Line closure, return to Plan, check the changed route, explicitly start the alternative, and resolve/reset the incident. The guide uses refreshed FR4 screens and correct sharing controls. All 16 combined PDF pages were rendered and visually checked; the appended guide preserves every source page's text and drawing content. [PDF verification](evidence/fr4-addendum/submission-qa.json).
 

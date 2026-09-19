@@ -1,5 +1,7 @@
 # Commute Copilot - The Rail Pathfinders
 
+**For judges - final assessment write-up:** [FINAL_ASSESSMENT_WRITEUP.pdf](FINAL_ASSESSMENT_WRITEUP.pdf) (2-page write-up + 14-page illustrated user guide). [Text version](FINAL_ASSESSMENT_WRITEUP.md).
+
 A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a journey, compare options, follow one accepted trip, and get understandable help along the way.
 
 **Open the app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site)
@@ -8,7 +10,7 @@ A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a j
 
 **For judges:** follow the walkthrough below, open the [illustrated user guide (PDF)](docs/Commute_Copilot_Judges_User_Guide.pdf), or use the [source-code guide](docs/SOURCE_GUIDE.md) to inspect the implementation. No GitHub account or API key is needed to browse the code or run the core static-data demonstration. The ZIP includes source, pinned data, tests and setup instructions.
 
-**Release and verification:** [FR4 changes](docs/FR4_DELIVERY.md), following [FR3 review changes](docs/FR3_REVIEW_DELIVERY.md). The [R5 release record](docs/JUDGES_RELEASE.md) is historical. GitHub's `main` branch is the submission source; later documentation commits can differ from the deployed application commit. The source-code guide explains how to inspect an exact revision.
+**Release and verification:** [Implementation and verification record](docs/FR4_DELIVERY.md), following [FR3 review changes](docs/FR3_REVIEW_DELIVERY.md). The [R5 release record](docs/JUDGES_RELEASE.md) is historical. GitHub's `main` branch is the submission source; later documentation commits can differ from the deployed application commit. The source-code guide explains how to inspect an exact revision.
 
 The current app includes focused address search, My location, direct trip actions, an 80–200% text-size setting, custom Show to staff messages and read-only caregiver links with persistent storage. Journey notifications are disabled. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
