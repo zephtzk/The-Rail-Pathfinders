@@ -28,7 +28,7 @@ try{
  await page.locator('#start-companion').click();const initial=await active();
  check('selected preferences and canonical leg mapping reach active journey',initial.plan.preferences.fareCategory==='senior'&&initial.route.steps.length===initial.routingContext.route.legs.length);
  check('start clears obsolete confirmation controls',await page.locator('#start-companion').count()===0&&!await page.locator('#review-companion').isVisible()&&!await page.locator('#review-route').isVisible());
- await page.locator('#trip-position > summary').click();
+ await page.getByRole('button',{name:'Update my current step',exact:true}).click();
  const options=await page.locator('#checkpoint-step option').evaluateAll(nodes=>nodes.map(n=>({value:Number(n.value),label:n.textContent})));
  check('checkpoint display is grouped without raw indices or platform IDs',options.length<initial.route.steps.length&&options.every(o=>!/^\d+\.|CCL_|_(?:A|B)\b|\b(?:access|wait|exit):/.test(o.label)));
  const transferIndex=initial.route.steps.findIndex(s=>s.type==='transfer');

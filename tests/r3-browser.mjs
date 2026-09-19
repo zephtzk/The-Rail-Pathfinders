@@ -45,7 +45,7 @@ try {
   const first=await active();check('reopened route retains preferences in the canonical journey',first.plan.preferences.travelStyle==='arjun');
   check('technical trip detail is collapsed by default',!await page.locator('#trip-details').evaluate(el=>el.open));
   check('connection helper explains its purpose',!await page.locator('#rerouting-host').innerText().then(t=>t.includes('Check connections from a confirmed point')));
-  await page.locator('#manual-correction').click();check('position correction opens the relevant form',await page.locator('#checkpoint-step').isVisible());
+  await page.getByRole('button',{name:'Update my current step',exact:true}).click();check('position correction opens the relevant form',await page.locator('#checkpoint-step').isVisible());
   for(const tab of ['caregiver','spending','saved','preferences','current'])await page.locator(`.app-nav [data-view=${tab}]`).click();
   check('page navigation retains one trip identity and controller',(await active()).id===first.id&&await page.locator('#companion').count()===1);
   await page.locator('#journey-cancel').click();check('cancel requires a clear in-app choice',(await active()).status==='started'&&await page.locator('#confirm-journey-cancel').isVisible());

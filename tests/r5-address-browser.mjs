@@ -47,7 +47,7 @@ try{
   const initial=await active();check('accepted address journey has canonical provider geometry and no local context',initial.route.provider==='onemap'&&initial.route.steps.length===4&&initial.route.geometry.length===3&&!initial.routingContext&&initial.plan.preferences.walkingLimitMinutes===30);
   await page.locator('#rerouting-host .reroute-tools > summary').click();
   check('provider-aware reroute limitation is visible while accepted guidance remains',await page.locator('#rerouting-host').innerText().then(t=>t.includes('Fresh address-route recalculation')));
-  await page.locator('#trip-position > summary').click();await page.locator('#checkpoint-step').selectOption('2');await page.locator('#confirm-step').click();
+  await page.getByRole('button',{name:'Update my current step',exact:true}).click();await page.locator('#checkpoint-step').selectOption('2');await page.locator('#confirm-step').click();
   check('manual boarding confirmation retains original canonical index', (await active()).progress.stepIndex===2&&(await active()).progress.kind==='onboard');
   await view('staff');check('staff automatic message follows accepted external service and destination',await page.locator('.staff-card-message').innerText().then(t=>t.includes('Bus 23A')&&t.includes('Example bus stop B')));
   await page.screenshot({path:out+'/staff-external-mobile.png'});
