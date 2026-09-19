@@ -134,6 +134,15 @@
 .commute-app .style-card strong { display: block; font-size: .82rem; line-height: 1.3; }
 .commute-app .style-card small, .commute-app .style-card p { display: block; font-size: .73rem; font-weight: 450; color: var(--muted); line-height: 1.55; margin-top: 4px; }
 .commute-app .style-card.is-selected, .commute-app .style-card[aria-pressed="true"] { border: 2px solid #81bcd6; padding: 13px; background: #f2faff; }
+.commute-app #preferences-content .travel-style-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0 4px; min-height: 0; border-width: 2px; padding: 6px; }
+.commute-app .travel-style-card .style-preset { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 48px; padding: 6px; border: 0; border-radius: 10px; background: transparent; text-align: left; }
+.commute-app .travel-style-card .style-preset strong { flex: 1; }
+.commute-app .travel-style-card .style-avatar { display: grid; place-items: center; flex: 0 0 38px; }
+.commute-app .travel-style-card .style-disclosure { display: grid; place-items: center; width: 44px; min-height: 48px; padding: 0; border: 0; border-left: 1px solid var(--border); border-radius: 8px; background: transparent; }
+.commute-app .travel-style-card .style-disclosure[aria-expanded="true"] > .icon { transform: rotate(180deg); }
+.commute-app .travel-style-card .style-preset:hover, .commute-app .travel-style-card .style-disclosure:hover { background: var(--blue-soft); }
+.commute-app .travel-style-card .style-description { grid-column: 1 / -1; margin: 6px 8px 8px; }
+@media (forced-colors: active) { .commute-app .travel-style-card.is-selected { outline: 2px solid Highlight; } }
 .commute-app .preference-summary { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 10px; width: 100%; padding: 12px 13px; text-align: left; border: 0; background: #f2f6f3; border-radius: 15px; font-size: .77rem; color: #526d62; margin: 14px 0; }
 .commute-app .preference-summary .icon { color: #649084; }
 .commute-app .preference-summary > span { display: inline-flex; align-items: center; gap: 8px; font-weight: 650; }
