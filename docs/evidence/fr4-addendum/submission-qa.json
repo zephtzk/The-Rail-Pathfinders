@@ -5,12 +5,18 @@
   "guidePages": 14,
   "guidePreserved": true,
   "guideSha256": "b8d97979a9b530098b582d3600a25f30d6672a50bf35f062c1688f20b450bcd8",
-  "outputSha256": "40bb9c471a133345d698bccb6416e5260b1a422018f7579a872b69a32892d093",
+  "outputSha256": "1782f829cc5940c63488dbc0df0b027c2b1463615dc67e946c6b725d0ba1db5f",
   "releaseSource": "f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e",
   "publicVersion": 13,
-  "visualReview": "All16pages rendered; two intro pages inspected at110dpi, complete16page contact sheet and final2demo pages inspected at95dpi; clean logo; no clipped or overlapping content. Guide fullsize page review also passed by guide author.",
-  "requiredNamesVerified": true,
-  "appLinkPresent": true,
-  "repositoryLinkPresent": true,
-  "sizeBytes": 4689905
+  "primaryPersona": "Mdm Lim",
+  "requirements": [
+    "persona",
+    "architecture",
+    "assumptions",
+    "known limitations",
+    "numerical derivation and reproducible sources"
+  ],
+  "writeupPagesVisuallyReviewed": true,
+  "evidenceLinks": 7,
+  "rawGuidePageContentPreserved": true
 }
