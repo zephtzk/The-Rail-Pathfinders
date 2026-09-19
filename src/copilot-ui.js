@@ -18,7 +18,7 @@ import {mountLocationSettings,drawLocationMarker} from './location-ui.js';
 import {estimateLocationProgress,requiresIndoorConfirmation} from './location-progress.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const time=s=>`${String(Math.floor(s/3600)%24).padStart(2,'0')}:${String(Math.floor(s%3600/60)).padStart(2,'0')}${s>=86400?' (+1 day)':''}`;
-export function mountCompanion({getSelected=()=>null,getPlaces=()=>[],onSelectPlan=()=>{},onEndpoint=()=>{},name=id=>id,getMap=()=>null,getFareOptions=()=>({}),getRoutingContext=()=>null,getLocationContext=()=>({}),mode='real',host:mountHost=null,sectionHosts={},showHeader=true,showDock=true}={}){
+export function mountCompanion({getSelected=()=>null,getPlaces=()=>[],onSelectPlan=()=>{},onEndpoint=()=>{},name=id=>id,getMap=()=>null,getFareOptions=()=>({}),getRoutingContext=()=>null,getLocationContext=()=>({}),getPresentation=null,mode='real',host:mountHost=null,sectionHosts={},showHeader=true,showDock=true}={}){
   if(document.querySelector('#companion'))return;
   for(const href of ['/src/copilot.css','/src/itinerary-display.css','/src/guidance.css','/src/location.css']){const style=document.createElement('link');style.rel='stylesheet';style.href=href;document.head.append(style);}
   const host=document.createElement('section');host.id='companion';host.className='copilot';host.setAttribute('aria-label','Journey companion');if(mountHost)mountHost.append(host);else document.querySelector('#app').after(host);
@@ -140,12 +140,12 @@ export function mountCompanion({getSelected=()=>null,getPlaces=()=>[],onSelectPl
     const target=$('current-summary')??$('companion-active');
     const sheet=target.closest('.panel-scroll');
     target.tabIndex=-1;target.focus({preventScroll:true});
-    const behavior=reducedGuidanceMotion(readPresentationPreferences(deviceStorage),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})?'instant':'smooth';
-    if(sheet)sheet.scrollTo({top:0,behavior});else target.scrollIntoView({block:'start',behavior});
+    const behavior=reducedGuidanceMotion((getPresentation?.()??readPresentationPreferences(deviceStorage)),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})?'instant':'smooth';
+    if(sheet&&getComputedStyle(sheet).overflowY!=='visible')sheet.scrollTo({top:0,behavior});else target.scrollIntoView({block:'start',behavior});
   }
   $('review-selected').onclick=run(()=>{prepared=selectedPlan();renderPreview();});
   function renderActive(){
-    const simple=readPresentationPreferences(deviceStorage).simpleGuidance,card=journeyCard(active,{online:navigator.onLine,visible:!document.hidden,name});document.body.classList.toggle('simple-guidance',simple);dock.hidden=!card||!showDock;document.body.classList.toggle('has-companion-trip',!!card&&showDock);
+    const simple=(getPresentation?.()??readPresentationPreferences(deviceStorage)).simpleGuidance,card=journeyCard(active,{online:navigator.onLine,visible:!document.hidden,name});document.body.classList.toggle('simple-guidance',simple);dock.hidden=!card||!showDock;document.body.classList.toggle('has-companion-trip',!!card&&showDock);
     if(card&&locationState.usable)card.warnings=card.warnings.filter(w=>!w.startsWith('Position unknown'));
     if(!card){$('companion-active').innerHTML='<h3>No current trip</h3><p>Plan a route, review its directions, then choose Start Journey.</p>';return;}
     const ended=['completed','cancelled'].includes(active.status);if(showHeader&&!prepared){$('review-selected').hidden=!ended;$('confirmation-heading').hidden=!ended;}
@@ -258,7 +258,7 @@ export function mountCompanion({getSelected=()=>null,getPlaces=()=>[],onSelectPl
     for(const point of [active?.plan.origin,active?.plan.destination])if(point)add(point.lat,point.lng,point.label??point.id);
     for(const point of toiletMarkers??[])add(point.lat??point.position?.lat??point.coordinates?.[1],point.lng??point.position?.lng??point.lon??point.coordinates?.[0],point.label??point.name??point.id,point.onSelect);
     const devicePoint=drawLocationMarker(mapLayers,locationState);if(devicePoint)points.push(devicePoint);
-    if(points.length)map.fitBounds(points,{padding:[25,25],maxZoom:17,animate:!reducedGuidanceMotion(readPresentationPreferences(deviceStorage),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})});
+    if(points.length)map.fitBounds(points,{padding:[25,25],maxZoom:17,animate:!reducedGuidanceMotion((getPresentation?.()??readPresentationPreferences(deviceStorage)),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})});
   }
   initMap().catch(()=>{$('companion-map-note').textContent='Map unavailable. Text journey and facility instructions remain usable.';});
   window.addEventListener('hashchange',()=>{if(sharing.useFragment())refreshShare().then(()=>revealSection('sharing')).catch(e=>message('Shared trip unavailable: '+e.message));});

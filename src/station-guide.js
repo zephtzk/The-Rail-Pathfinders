@@ -9,18 +9,28 @@ export function stationGuidanceHTML(execution,{stationId=null}={}){
 let pageId=0;
 /** Horizontal page gestures stay on the tab strip; map, guide and trip content
  * retain their own scrolling and gestures. Taps and keyboard tabs remain equivalent. */
-export function mountMapStationPages({host,controlsHost=host,mapPanel,stationPanel,getExecution=()=>null,onShowMap=()=>{},onPageChange=()=>{}}){
+export function mountMapStationPages({host,controlsHost=host,mapPanel,stationPanel,flowHost=null,getExecution=()=>null,onShowMap=()=>{},onPageChange=()=>{}}){
   const id=`guidance-pages-${++pageId}`,strip=document.createElement('div');strip.className='guidance-page-strip';strip.setAttribute('aria-label','Swipe here to change between map and station guide');
   strip.innerHTML=`<div role="tablist" aria-label="Journey map pages"><button type="button" role="tab" id="${id}-map-tab" aria-controls="${id}-map" data-map-page="map">Map</button><button type="button" role="tab" id="${id}-station-tab" aria-controls="${id}-station" data-map-page="station">Station guide</button></div>`;
   controlsHost.prepend(strip);mapPanel.id ||= `${id}-map`;stationPanel.id ||= `${id}-station`;
   for(const [key,panel] of [['map',mapPanel],['station',stationPanel]]){panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',`${id}-${key}-tab`);strip.querySelector(`[data-map-page="${key}"]`).setAttribute('aria-controls',panel.id);}
   let page='map',start=null,suppressClick=false;
-  function show(next,{focus=false}={}){page=next==='station'?'station':'map';mapPanel.hidden=page!=='map';stationPanel.hidden=page!=='station';for(const button of strip.querySelectorAll('[role="tab"]')){const selected=button.dataset.mapPage===page;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;if(selected&&focus)button.focus();}if(page==='station')stationPanel.innerHTML=stationGuidanceHTML(getExecution());else onShowMap();onPageChange(page);}
+  const shortScreen=matchMedia('(max-width:680px) and (max-height:540px)');
+  function fitPage(){
+    // A short landscape screen cannot fit the guide between its top bar and
+    // collapsed sheet. Share the sheet's scroller so facts and tabs stay usable.
+    const inline=!!flowHost&&shortScreen.matches&&page==='station';
+    const parent=inline?flowHost:host;if(stationPanel.parentElement!==parent)parent.append(stationPanel);
+    flowHost?.classList.toggle('inline-station-guide',inline);
+    onPageChange(page,{inline});
+  }
+  shortScreen.addEventListener('change',fitPage);
+  function show(next,{focus=false}={}){page=next==='station'?'station':'map';mapPanel.hidden=page!=='map';stationPanel.hidden=page!=='station';for(const button of strip.querySelectorAll('[role="tab"]')){const selected=button.dataset.mapPage===page;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;if(selected&&focus)button.focus();}if(page==='station')stationPanel.innerHTML=stationGuidanceHTML(getExecution());else onShowMap();fitPage();}
   for(const button of strip.querySelectorAll('[role="tab"]')){button.onclick=()=>show(button.dataset.mapPage);button.onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();show(e.key==='Home'?'map':e.key==='End'?'station':page==='map'?'station':'map',{focus:true});}};}
   const down=e=>{suppressClick=false;if(e.isPrimary!==false&&e.pointerType!=='mouse')start={x:e.clientX,y:e.clientY,id:e.pointerId};};
   const move=e=>{if(!start||start.id!==e.pointerId)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.abs(dx)>=12&&Math.abs(dx)>Math.abs(dy)*1.8){strip.setPointerCapture(e.pointerId);e.preventDefault();}};
   const up=e=>{if(!start||start.id!==e.pointerId)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;start=null;if(strip.hasPointerCapture(e.pointerId))strip.releasePointerCapture(e.pointerId);if(Math.abs(dx)>=50&&Math.abs(dx)>Math.abs(dy)*1.8){suppressClick=true;show(dx<0?'station':'map');}};
   const cancel=()=>{start=null;},click=e=>{if(suppressClick&&e.detail!==0){suppressClick=false;e.preventDefault();e.stopPropagation();}};
   strip.addEventListener('pointerdown',down);strip.addEventListener('pointermove',move);strip.addEventListener('pointerup',up);strip.addEventListener('pointercancel',cancel);strip.addEventListener('click',click,true);
-  show('map');return {show,refresh(){if(page==='station')stationPanel.innerHTML=stationGuidanceHTML(getExecution());},getPage:()=>page,destroy(){strip.removeEventListener('pointerdown',down);strip.removeEventListener('pointermove',move);strip.removeEventListener('pointerup',up);strip.removeEventListener('pointercancel',cancel);strip.removeEventListener('click',click,true);strip.remove();mapPanel.hidden=false;stationPanel.hidden=true;}};
+  show('map');return {show,refresh(){if(page==='station')stationPanel.innerHTML=stationGuidanceHTML(getExecution());},getPage:()=>page,destroy(){shortScreen.removeEventListener('change',fitPage);host.append(stationPanel);flowHost?.classList.remove('inline-station-guide');strip.removeEventListener('pointerdown',down);strip.removeEventListener('pointermove',move);strip.removeEventListener('pointerup',up);strip.removeEventListener('pointercancel',cancel);strip.removeEventListener('click',click,true);strip.remove();mapPanel.hidden=false;stationPanel.hidden=true;}};
 }

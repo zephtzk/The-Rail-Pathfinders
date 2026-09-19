@@ -70,8 +70,8 @@
 .commute-app .app-nav-journey [data-view=current][aria-current=page]:hover{background:#123e7c}
 .commute-app .app-nav-journey [data-view=current][aria-current=page] .icon{--icon-fill:#174f9e}
 .commute-app .app-nav button:focus-visible{outline:3px solid #7250a0;outline-offset:2px}
-.commute-app:is(.large-text,[data-large-text=true]) .app-nav-journey [data-view=current]{font-size:1rem}
-.commute-app:is(.large-text,[data-large-text=true]) .app-nav-tools button{flex-basis:4.5rem}
+.commute-app:not([data-text-size]):is(.large-text,[data-large-text=true]) .app-nav-journey [data-view=current]{font-size:1rem}
+.commute-app:not([data-text-size]):is(.large-text,[data-large-text=true]) .app-nav-tools button{flex-basis:4.5rem}
 /* At 200% text, favor the full labels over decorative journey icons. Allow room
    for whole utility words and extra rows, without horizontal access. */
 @container main-navigation (max-width:15rem){

@@ -1,0 +1,92 @@
+{
+  "item": 9,
+  "rangePercent": [
+    80,
+    200
+  ],
+  "stepPercent": 10,
+  "defaultPercent": 100,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      640,
+      360
+    ],
+    [
+      1440,
+      960
+    ]
+  ],
+  "matrixPercent": [
+    80,
+    100,
+    140,
+    200
+  ],
+  "views": [
+    "plan",
+    "current",
+    "saved",
+    "facilities",
+    "caregiver",
+    "spending",
+    "preferences",
+    "staff"
+  ],
+  "journeyStates": [
+    "planned",
+    "active"
+  ],
+  "totalBrowserChecks": 2079,
+  "renderedLayouts": 284,
+  "runs": [
+    {
+      "name": "matrix",
+      "passed": 2011,
+      "failures": [],
+      "errors": [],
+      "renderedLayouts": 276,
+      "environment": "Installed Microsoft Edge, headless Playwright mobile/touch emulation, four CSS viewport sizes. Full matrix uses keyboard-operated native range controls. Supplemental 200% root-text override is explicitly browser-text emulation. Rail plan uses EW8 to EW12 on 2026-09-21 10:00 SGT; long-address provider data are labelled synthetic. Street tiles blocked. No physical-device, live-provider, OS text scaling or actual browser settings claim."
+    },
+    {
+      "name": "station-guide",
+      "passed": 16,
+      "failures": [],
+      "errors": [],
+      "renderedLayouts": 0,
+      "environment": "Installed Microsoft Edge, headless Playwright with CSS viewport and mobile/touch emulation. Full matrix uses keyboard-operated native range controls. Supplemental 200% root-text override is explicitly browser-text emulation. The separate browser-font-preference scenario uses an actual fresh Edge profile with a 32px default font and no injected font CSS. Rail plan uses EW8 to EW12 on 2026-09-21 10:00 SGT; long-address provider data are labelled synthetic. Street tiles blocked. No physical-device, live-provider or OS text scaling claim."
+    },
+    {
+      "name": "browser-font",
+      "passed": 52,
+      "failures": [],
+      "errors": [],
+      "renderedLayouts": 8,
+      "environment": "Installed Microsoft Edge, headless Playwright with CSS viewport and mobile/touch emulation. Full matrix uses keyboard-operated native range controls. Supplemental 200% root-text override is explicitly browser-text emulation. The separate browser-font-preference scenario uses an actual fresh Edge profile with a 32px default font and no injected font CSS. Rail plan uses EW8 to EW12 on 2026-09-21 10:00 SGT; long-address provider data are labelled synthetic. Street tiles blocked. No physical-device, live-provider or OS text scaling claim."
+    }
+  ],
+  "unitTests": 548,
+  "existingFr3BrowserChecks": 146,
+  "buildAssets": 122,
+  "selectedScreenshots": [
+    "active-preferences-390-100.png",
+    "active-preferences-320-200.png",
+    "active-current-320-200.png",
+    "active-current-landscape-200.png",
+    "active-plan-desktop-100.png",
+    "long-address-active-320-200.png",
+    "location-320-200.png",
+    "station-guide-landscape-200.png",
+    "actual-browser-font-settings-320-100.png"
+  ],
+  "visuallyInspected": true,
+  "publicationGate": "docs/evidence/fr3-review/stage1-publication.json",
+  "stationGuideUtilityRotationRegression": true
+}

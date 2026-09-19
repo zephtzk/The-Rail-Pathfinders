@@ -30,9 +30,9 @@ test('one accepted resolver keeps exact canonical phase and excludes route previ
 test('staff context prefers public endpoint identity over a saved private nickname',()=>{const s=state();s.plan.destination.label='Private saved nickname';assert.equal(resolveCurrentExecution(s,{name}).destination,'Promenade (CC4)');assert.doesNotMatch(staffCardForExecution(resolveCurrentExecution(s,{name})).context,/Private/);});
 test('missing, invalid and unavailable presentation preferences default to simple without writing storage',()=>{
   const store=storage(),settings=createPresentationPreferences(store);
-  for(const raw of [null,'','{broken','null','false','[]','{}',JSON.stringify({schemaVersion:2,simpleGuidance:false}),JSON.stringify({schemaVersion:1}),JSON.stringify({schemaVersion:1,simpleGuidance:'false'})]){
+  for(const raw of [null,'','{broken','null','false','[]','{}',JSON.stringify({schemaVersion:3,simpleGuidance:false}),JSON.stringify({schemaVersion:1}),JSON.stringify({schemaVersion:1,simpleGuidance:'false'})]){
     if(raw===null)store.removeItem(PRESENTATION_KEY);else store.setItem(PRESENTATION_KEY,raw);
-    assert.deepEqual(settings.read(),{schemaVersion:1,simpleGuidance:true},String(raw));
+    assert.deepEqual(settings.read(),{schemaVersion:2,simpleGuidance:true,textSizePercent:100},String(raw));
     assert.equal(store.getItem(PRESENTATION_KEY),raw,'reading must not overwrite stored data');
   }
   assert.equal(createPresentationPreferences().read().simpleGuidance,true);
@@ -48,12 +48,12 @@ test('both explicit presentation choices persist independently and never replace
   const saved=store.getItem(PRESENTATION_KEY);assert.equal(settings.setSimple('false').ok,false);assert.equal(store.getItem(PRESENTATION_KEY),saved);
   assert.equal(reducedGuidanceMotion(settings.read()),false);assert.equal(reducedGuidanceMotion(settings.read(),{systemReducedMotion:true}),true);assert.equal(reducedGuidanceMotion({simpleGuidance:true}),true);
 });
-test('failed presentation writes retain an explicit choice or the simple fallback',()=>{
+test('failed presentation writes apply the selected guidance choice for the page session',()=>{
   const store=storage();store.setItem(PRESENTATION_KEY,JSON.stringify({schemaVersion:1,simpleGuidance:false}));
   const blocked=createPresentationPreferences({...store,setItem(){throw Error();}}).setSimple(true);
-  assert.equal(blocked.ok,false);assert.equal(blocked.preferences.simpleGuidance,false);
+  assert.equal(blocked.ok,false);assert.equal(blocked.preferences.simpleGuidance,true);
   const unavailable=createPresentationPreferences({getItem(){throw Error();},setItem(){throw Error();}}).setSimple(false);
-  assert.equal(unavailable.ok,false);assert.equal(unavailable.preferences.simpleGuidance,true);
+  assert.equal(unavailable.ok,false);assert.equal(unavailable.preferences.simpleGuidance,false);
 });
 test('outbound, reached and return detours use confirmed accepted phase in all cards',()=>{
   const now=1000,ranked=rankToilets(FIXTURE_LAYOUT,{from:'platform',allowFixtures:true,statuses:fixtureStatuses('none',now),now,arrivalBaseMs:now}),preview=previewToiletDetour(FIXTURE_LAYOUT,ranked[0],{now});

@@ -19,8 +19,10 @@ The integrated build passes **536 JavaScript tests, 44 Python data tests and 426
 
 [Combined verification](evidence/fr3-review/verification.json) · [Plan](evidence/fr3-review/plan-mobile.png) · [Current trip](evidence/fr3-review/current-mobile.png) · [Location selector](evidence/fr3-review/location-320.png).
 
-[Location delivery](FR3_LOCATION_DELIVERY.md) and [guidance delivery](FR3_GUIDANCE_DELIVERY.md) record detailed behavior and limits. Controlled Edge geolocation/provider fixtures do not establish physical-phone GPS accuracy or live provider availability. Existing public-runtime OneMap/LTA and hosted-sharing configuration limits remain as documented in the previous release.
+[Location delivery](FR3_LOCATION_DELIVERY.md) and [guidance delivery](FR3_GUIDANCE_DELIVERY.md) record detailed behavior and limits. Controlled Edge geolocation/provider fixtures do not establish physical-phone GPS accuracy or live provider availability. Existing public-runtime OneMap/LTA limits remain as documented in the previous release. Hosted sharing was still unconfigured at the first publication; the second release corrects that missing database binding.
 
 ## Staged publication
 
-The first release must be successfully published before work on the Settings text-size slider begins. Its exact publication receipt will be recorded here. The later extension will receive a separate task, all-tab size checks and publication record.
+Items 1–8 were published successfully as public version 8 on 19 September 2026 at 05:57 UTC (13:57 SGT), from source d0a61c2835da0365a53f66c8304831150af67099 and merged PR #12. [Publication receipt](evidence/fr3-review/stage1-publication.json). Only after this successful publication was the Settings text-size extension started in its own task.
+
+The second release adds [the 80–200% Settings slider and all-tab reflow](FR3_TEXT_SIZE_DELIVERY.md) and corrects [the reported recipient-link storage configuration](FR3_SHARING_FIX.md). Its integrated checks pass 549 JavaScript tests, 44 Python data tests and all 146 FR3 browser checks; the text-size task records another 2,079 focused checks across 284 rendered layouts. An independent maximum-size check also passes all eight tabs at 320×568 and 568×320, including focus/scroll reachability and every navigation target. Publication and deployed-sharing evidence are recorded separately after deployment.

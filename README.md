@@ -8,7 +8,7 @@ A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a j
 
 **Release and verification:** [FR3 review changes](docs/FR3_REVIEW_DELIVERY.md). The [illustrated judges' guide and earlier release record](docs/JUDGES_RELEASE.md) document the earlier R5 interface.
 
-The FR3 review update adds My location in both address fields, compact status controls, direct trip actions, cleaner tabs and dismissible guidance. The delivery record tracks staged publication and the later text-size extension. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
+The FR3 review update adds My location in both address fields, compact status controls, direct trip actions, cleaner tabs and dismissible guidance. Settings includes an 80–200% text-size slider, added after the first FR3 build was published. The second release also configures persistent storage for recipient links. The delivery record tracks both stages. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
 ## Three-minute walkthrough
 

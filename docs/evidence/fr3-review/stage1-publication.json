@@ -1,0 +1,24 @@
+{
+  "phase": "FR3 review items 1–8",
+  "version": 8,
+  "sourceCommit": "d0a61c2835da0365a53f66c8304831150af67099",
+  "id": "appgdep_6aae2434b1348191a4e62e89b4b6468f",
+  "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "title": "Commute Copilot",
+  "version_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_040ad4ec845c8191846ca42e70c19910",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aad0ab90e5881919eca01b79f19aa24",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-09-19T05:57:34.467308+00:00",
+  "pullRequest": "https://github.com/zephtzk/The-Rail-Pathfinders/pull/12",
+  "validation": {
+    "javascriptTests": 536,
+    "pythonTests": 44,
+    "browserChecks": 426
+  },
+  "gate": "Publication succeeded before text-size implementation task was created."
+}

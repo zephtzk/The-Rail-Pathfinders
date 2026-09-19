@@ -18,6 +18,8 @@ for(const file of await readdir('server'))if(file.endsWith('.js'))await cp('serv
 await mkdir('dist/migrations',{recursive:true});
 await cp('migrations','dist/migrations',{recursive:true});
 await cp('.openai/hosting.json','dist/.openai/hosting.json');
+// Sites provisions the logical D1 binding and applies the packaged Drizzle journal.
+await cp('drizzle','dist/.openai/drizzle',{recursive:true});
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8'};
 const assets={};
 async function collect(dir,prefix=''){for(const ent of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0)){const rel=`${prefix}/${ent.name}`,file=path.join(dir,ent.name);if(ent.isDirectory())await collect(file,rel);else assets[rel]={body:await readFile(file,'utf8'),type:types[path.extname(file)]??'text/plain'};}}
