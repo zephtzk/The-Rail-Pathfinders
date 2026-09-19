@@ -1,6 +1,6 @@
 # Caregiver sharing and Web Push
 
-The sharing API is a persistent backend, not browser-to-browser localStorage. The local server uses SQLite WAL (`node:sqlite`, Node 22.13+ or Node 24). The deployed provider uses a Cloudflare D1 binding named `SHARING_DB`. The same API, authorization, revision and consent logic runs in both environments. The existing `.openai/hosting.json` project identity and audience are preserved; this change does **not** assert that its current hosted runtime has a database binding.
+The sharing API is a persistent backend, not browser-to-browser localStorage. The local server uses SQLite WAL (`node:sqlite`, Node 22.13+ or Node 24). The deployed provider uses a Cloudflare D1 binding named `SHARING_DB`. The same API, authorization, revision and consent logic runs in both environments. FR3 adds this binding to the existing Sites project's hosting manifest, preserving its identity and audience. See the FR3 sharing publication record for deployed verification.
 
 ## Local setup
 
@@ -14,7 +14,15 @@ The server creates ignored `.local-data/sharing.sqlite`. Restarting it retains s
 
 Set `HOST=0.0.0.0` only for an intended local network demonstration. A second browser can review and accept the recipient link at the server's reachable address. Browser geolocation and push normally need HTTPS, with localhost exceptions; a LAN HTTP test verifies sharing and manual check-ins, not mobile geolocation or external push. Use an HTTPS development tunnel under your control for that device test.
 
-## Cloudflare deployment prerequisite
+## Sites deployment
+
+The existing `.openai/hosting.json` declares `"d1":"SHARING_DB"`. Sites provisions that logical binding; a runtime environment variable containing a database name is not a D1 binding. The canonical Sites schema is `db/schema.js`. Generate future additive migrations with `node node_modules/drizzle-kit/bin.cjs generate --name NAME`; commit the SQL, snapshot and journal under `drizzle/` together. The build copies that directory to `dist/.openai/drizzle/` alongside the hosting manifest so Sites applies migrations before running the Worker. Do not reset or drop the database during deployment.
+
+The initial Sites migration creates the same `sharing_state` columns and JSON/revision checks as `migrations/0001_sharing.sql`, which remains available for independently managed Cloudflare deployments. `tests/sharing-deployment.test.mjs` executes the Sites journal in SQLite, passes the configured binding through the actual API and checks a fresh handler can read a created invitation. After deployment, inspect the binding/table and run `TEST_BASE_URL=HTTPS_ORIGIN node tests/sharing-live.mjs` plus the focused link browser test. They use one synthetic share each and remove it afterwards.
+
+Sites' current deployment tooling provisions D1 but no recurring maintenance trigger has been confirmed for this site. Every sharing API request runs expiry cleanup, and expired credentials are always rejected. Background cleanup at a fixed deadline and Web Push retry delivery during inactivity are not guaranteed until a scheduled trigger is configured and verified. This does not prevent recipient-link creation, review or consent-based foreground sharing.
+
+## Independently managed Cloudflare deployment
 
 Create a D1 database, apply the migration, and configure the binding in the runtime actually receiving API requests:
 
@@ -39,7 +47,7 @@ Add the returned real ID to the deployment configuration, retaining the existing
 
 The built Worker exposes a scheduled handler calling `runSharingMaintenance(env)`. The cron drains retries and deletes expired records even when no browser is open. The local server runs the same work once per minute. Monitor scheduled-handler failures. A stopped server cannot execute cleanup; starting the local server performs maintenance before accepting requests.
 
-The binding/migration, working scheduled trigger, HTTPS origin, and an audience allowing both intended users are required for a deployed demonstration. An owner-private Sites audience blocks the second user before the app runs. A trip link cannot bypass it. No audience setting is changed by this implementation. If the existing host cannot bind D1 and a scheduled handler, deploy this same Worker to a supported Cloudflare environment as a separately authorized hosting decision; do not claim the existing site has working production sharing. Unconfigured API calls return 503 explicitly.
+The binding/migration, HTTPS origin, and an audience allowing both intended users are required for recipient links. Scheduled maintenance is additionally required for time-bounded deletion during inactivity and background push retries. An owner-private Sites audience blocks the second user before the app runs. A trip link cannot bypass it. No audience setting is changed by this implementation. Unconfigured API calls return 503 explicitly.
 
 This is a bounded pilot provider: at most 20 retained shares, five subscriptions per role/share, 24 KiB per proposed/accepted plan, and 128 recent idempotency receipts. A D1 JSON document with an atomic conditional revision update contains the pilot state; it deliberately avoids partially committing consent versus a queued delivery. Scale-up requires partitioning with transactional coordination rather than removing these bounds. The SQL migration is `migrations/0001_sharing.sql`.
 
@@ -93,7 +101,7 @@ Durable limits are ten creations/hour/IP, 120 accesses/minute/credential/IP and 
 
 ## Retention and deletion
 
-Only the latest location and latest authorized checkpoint/ETA are retained; there is no movement or toilet-use trail. Permission removal clears unauthorized data immediately. Completion removes location immediately. Shared plans, role hashes and state are removed 23 hours after completion or expiry; the 15-minute cron leaves margin inside the 24-hour target. Related subscriptions and outbox records are removed together. Expired credentials are rejected regardless of whether cleanup has run. Rate buckets expire after their interval. Idempotency receipts retain only event IDs and payload hashes, not previous coordinates. Local saved places and fare records have separate user-controlled deletion.
+Only the latest location and latest authorized checkpoint/ETA are retained; there is no movement or toilet-use trail. Permission removal clears unauthorized data immediately. Completion removes location immediately. Shared plans, role hashes and state become eligible for deletion 23 hours after completion or expiry. Cleanup runs on sharing API requests and on configured maintenance invocations; a verified 15-minute cron would leave margin inside the 24-hour target. The current Sites deployment has no confirmed cron, so deletion within 24 hours during inactivity is not guaranteed. Related subscriptions and outbox records are removed together. Expired credentials are rejected regardless of whether cleanup has run. Explicit deletion removes the share immediately. Rate buckets expire after their interval. Idempotency receipts retain only event IDs and payload hashes, not previous coordinates. Local saved places and fare records have separate user-controlled deletion.
 
 ## Web Push configuration and verification
 
