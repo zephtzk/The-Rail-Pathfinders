@@ -31,3 +31,13 @@ Implemented in three parallel work chats: trip cleanup, incident routing, and ma
 - Removed duplicate Location settings from Update my current step, and Route checks/manual correction and Service notices from Current trip. Alternate-route proposals and acceptance remain available.
 
 Validation: full npm run check passes, including JavaScript/data tests and production build. Focused tests cover multiple closures, alternatives and resolution; real Leaflet zoom behavior; and trip controls at 320/390/1440px with zero runtime errors.
+
+Published to the existing public site on 19 September 2026 at 15:17:57 SGT (version 13), after explicit publication approval. Source: `f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e`. [Publication receipt](evidence/fr4-addendum/publication.json).
+
+The full check passed 555 JavaScript tests and 44 Python data tests. Additional browser verification confirms that saving a closure preserves an already accepted trip; Cancel trip, Yes, cancel trip, Plan another journey, Find my route and Start journey then activate the closure-free route with the same destination. All 33 existing demo-control browser checks pass. Browser emulation is not physical-device validation.
+
+## Submission documents
+
+The [updated submission PDF](The_Rail_Pathfinders_Submission.pdf) has exactly two writeup pages followed by the complete 14-page [illustrated user guide](Commute_Copilot_Judges_User_Guide.pdf). It names The Rail Pathfinders, Cheah Kika, Jin Donghua, Zeph Tang Zhenkai and Zhang Yizhuo, with the app otter logo at the top right. [Editable writeup](The_Rail_Pathfinders_Submission_Writeup.md).
+
+The organisers/maintainers appendix was replaced with a reproducible demo: save an East West Line closure, return to Plan, check the changed route, explicitly start the alternative, and resolve/reset the incident. The guide uses refreshed FR4 screens and correct sharing controls. All 16 combined PDF pages were rendered and visually checked; the appended guide preserves every source page's text and drawing content. [PDF verification](evidence/fr4-addendum/submission-qa.json).
