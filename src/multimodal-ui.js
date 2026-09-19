@@ -4,6 +4,8 @@ import {mountJourney} from './journey-ui.js';
 import {createMultimodalRouter} from './multimodal-engine.js';
 import {validateSavedPilot,validatePilotArrivals,pilotPredictionState} from './pilot-validation.js';
 import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
+import {mountDatePickers} from './date-picker.js';
+let datePickers;
 
 const app = document.querySelector('#app'), SAVE = 'commute-copilot-pilot-guidance-v1';
 const escape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -18,13 +20,14 @@ function connection() { arrivalEpoch++; if(!navigator.onLine && feed)feed={...fe
 function shell() {
   app.innerHTML=`<header class="rail-header"><a class="rail-brand" href="/"><img src="/icon.svg" width="36" height="36" alt=""><span>Commute <strong>Copilot</strong></span></a><a href="/">Scheduled rail planner ↗</a></header>
   <div class="schedule-banner"><strong>Bus & walking pilot</strong><span>Estimated buses · scheduled rail · map-supported exterior paths</span><span id="pilot-connection"></span></div>
-  <main id="main"><div class="rail-heading"><div><p class="eyebrow">TAMPINES · PAYA LEBAR · BUGIS</p><h1>A few more connections.</h1><p>Plan between supported stops and stations. Know what each time assumes.</p></div><a href="#pilot-coverage">Pilot coverage ↓</a></div>
+  <main id="main"><div class="rail-heading"><div><p class="eyebrow">REVIEWED SINGAPORE BUS PATTERNS</p><h1>More stops. Clear limits.</h1><p>Plan between supported stops and stations. Know what each time assumes.</p></div><a href="#pilot-coverage">Pilot coverage ↓</a></div>
   <p id="pilot-status" class="notice" role="status">Loading rail, bus and walking data…</p><div class="planner-layout"><section id="pilot-planner" class="panel planner-panel"></section><section id="pilot-journey" class="journey-panel" aria-live="polite" tabindex="-1"></section></div>
   <section id="active-journey" class="panel coverage-panel"></section><section id="pilot-live" class="panel coverage-panel"></section><section id="pilot-coverage" class="panel coverage-panel"></section>
   <footer><p><a href="/">Scheduled rail planner</a> · <a href="/replay.html">Original corridor replay & Phase 1 live information</a></p><p>All times Asia/Singapore. Accessibility and indoor facilities remain unverified.</p></footer></main>`;
   connection();
 }
 function form(initial) {
+  datePickers?.destroy();
   planningPreferences=legacyPlannerInput(initial,planningPreferences);
   const fields = [['originId','From stop or station'],['destinationId','To stop or station']];
   document.querySelector('#pilot-planner').innerHTML=`<div class="panel-heading"><h2>Plan your journey</h2><span class="tag">Pilot</span></div><form id="pilot-form"><fieldset><legend class="sr-only">Pilot journey details</legend>
@@ -36,10 +39,12 @@ function form(initial) {
   <label>Extra time for preferences<select name="maxExtraMinutes">${[...new Set([0,5,10,15,30,60,Number(initial.maxExtraMinutes)])].sort((a,b)=>a-b).map(n=>`<option value="${n}" ${n===Number(initial.maxExtraMinutes)?'selected':''}>${n} minutes</option>`).join('')}</select></label>
   <label>Modes<select name="mode"><option value="mixed">Bus + rail</option><option value="bus-only" ${initial.mode==='bus-only'?'selected':''}>Bus only</option></select></label>
   <label>Demonstration<select name="fixture"><option value="none">Normal pilot</option><option value="ewl" ${initial.fixture==='ewl'?'selected':''}>Synthetic fixture: EWL unavailable</option></select></label>
-  <p class="field-note">Bus estimates: weekdays ${escape(bus.coverage.validFrom)}–${escape(bus.coverage.validThrough)}, 09:30–16:30. Boarding and alighting must both fit. Clear the deadline for an unconstrained search.</p><button class="primary" type="submit">Find pilot journeys →</button></fieldset></form>`;
+  <p class="field-note">Bus source dates: ${escape(bus.coverage.validFrom)}–${escape(bus.coverage.validThrough)}. Weekday, Saturday and Sunday stop hours are checked separately, including overnight carryover. Missing periods and unreviewed services remain unavailable. Clear the deadline for an unconstrained search.</p><button class="primary" type="submit">Find pilot journeys →</button></fieldset></form>`;
   const f=document.querySelector('#pilot-form'); let previous=f.elements.date.value;
-  f.elements.date.addEventListener('change',()=>{if(f.elements.deadlineDate.value===previous)f.elements.deadlineDate.value=f.elements.date.value;previous=f.elements.date.value;});
-  f.addEventListener('input',()=>{dirty=true;companion?.clearPrepared();document.querySelector('#pilot-status').textContent='Journey details changed. Search again before saving.';});
+  f.elements.date.addEventListener('change',()=>{if(f.elements.deadlineDate.value===previous)f.elements.deadlineDate.value=f.elements.date.value;previous=f.elements.date.value;datePickers?.refresh();});
+  const changed=()=>{dirty=true;companion?.clearPrepared();document.querySelector('#pilot-status').textContent='Journey details changed. Search again before saving.';};
+  f.addEventListener('input',changed);f.addEventListener('change',changed);
+  datePickers=mountDatePickers(f);
   f.addEventListener('submit',event=>{event.preventDefault();const data=Object.fromEntries(new FormData(f));for(const key of ['originId','destinationId'])data[key]=[...lookup].find(([id,label])=>label.toLowerCase()===data[key].trim().toLowerCase()||id===data[key])?.[0]??data[key]; search(data);});
 }
 let routerKey='';
@@ -85,7 +90,7 @@ function renderLive() {
 }
 function coverage() {
   const enabled=walking.links.filter(l=>l.enabled);
-  document.querySelector('#pilot-coverage').innerHTML=`<h2>Coverage and evidence</h2><p><strong>${bus.stops.length} pilot bus stops · ${bus.patterns.length} full directional patterns · services ${[...new Set(bus.patterns.map(p=>p.serviceNo))].join(', ')}</strong>. Wider validated rail remains available. Imported island-wide records do not imply island-wide multimodal support.</p><p>Bus estimates cover ordinary weekdays ${escape(bus.coverage.validFrom)}–${escape(bus.coverage.validThrough)}, 09:30–16:30. No bus schedule departures are manufactured. Weekend, holiday, peak, last-service and overnight bus routing are excluded.</p><p>Waiting uses the published off-peak maximum headway as an assumption. Riding uses distance at 18 km/h plus 30 seconds per traversed stop. These are uncalibrated planning estimates and can miss connections. Crowding comparisons are unavailable.</p><p>Data build: <code>${escape(build)}</code>. Bus retrieval: ${escape(manifest.source?.retrievedAt??manifest.retrievedAt??'see manifest')}.</p>
+  document.querySelector('#pilot-coverage').innerHTML=`<h2>Coverage and evidence</h2><p><strong>${bus.availability?.routableStopCount??0} bus stops · ${bus.availability?.routablePatternCount??0} routable directional patterns · ${bus.availability?.routableServiceNumberCount??0} exact service numbers</strong>. Wider validated rail remains available. The compiled source registry includes ${bus.patterns.length} patterns; patterns without usable day and frequency timing are held out. Imported island-wide records do not imply island-wide multimodal support.</p><p>Bus estimates use source dates ${escape(bus.coverage.validFrom)}–${escape(bus.coverage.validThrough)}. WD/SAT/SUN first and last arrivals constrain each service day, including previous-day carryover after midnight. Missing frequency bands, unreviewed holidays, fixed-trip and ambiguous route records remain excluded. The manifest lists every included and excluded pattern.</p><p>Waiting uses the applicable published maximum headway as an assumption. Before 06:30 only a published first arrival is usable; no early frequency is inferred. Weekend frequency is an uncalibrated use of generic published bands. Riding uses distance at 18 km/h plus 30 seconds per traversed stop. These are uncalibrated planning estimates and can miss connections. Crowding comparisons are unavailable.</p><p>Data build: <code>${escape(build)}</code>. Bus retrieval: ${escape(manifest.source?.retrievedAt??manifest.retrievedAt??'see manifest')}.</p>
   <p>Rail and bus data: Land Transport Authority (LTA), Singapore · <a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener">Singapore Open Data Licence v1.0</a>. Walking map data: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors, ODbL</a>. Operator locality maps retain their original rights. No official endorsement is implied.</p>
   <p><a href="/data/bus-manifest.json">Bus import manifest</a> · <a href="/data/bus-network.json">Pilot bus data</a> · <a href="/data/walking-links.json">Pedestrian evidence ledger</a> · <a href="/data/rail-manifest.json">Rail provenance</a></p>
   <h3>Enabled pedestrian paths</h3>${enabled.map(l=>`<article id="path-${escape(l.id)}"><h4>${escape(l.id)} · stop ${escape(l.busStopId)} ↔ ${escape(l.entrance)}</h4><p>${escape(l.description??l.pathDescription??'Review the path ledger for the mapped route and limitations.')}</p><p>${l.externalDistanceMeters} m exterior distance assumption · ${l.externalSeconds}s exterior walking + ${l.railAllowanceSeconds}s indoor allowance. ${escape(l.directionality)}. Map-supported, not field surveyed. Accessibility unknown.</p><p>${(l.sourceUrls??[]).map((url,i)=>`<a href="${escape(url)}" target="_blank" rel="noopener">Path source ${i+1}</a>`).join(' · ')}</p></article>`).join('')}<p>No opposite-side street crossing, address access or proximity-based link is inferred. Newton, Tampines and Bukit Panjang tap-out rail connections remain omitted. Two exterior paths cannot create an unreviewed shortcut through a station.</p>`;

@@ -1,0 +1,211 @@
+{
+  "recordedAt": "2026-09-19T01:41:40.311882+00:00",
+  "application": {
+    "schemaVersion": 1,
+    "applicationSha256": "b59331654f1b68e4c59e54ade012afd3cbff52e6c9e1ea055211076ce68ac62d",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "workerSha256": "62af6ca15c7715f38f7c1b3b0f80023474562df6b7c9108cdbd023e9ced1cf7b",
+  "fullCheck": {
+    "javascript": 367,
+    "python": 42,
+    "assets": 91,
+    "status": "passed"
+  },
+  "r5Browser": {
+    "count": 140,
+    "suites": {
+      "product": {
+        "count": 21,
+        "checks": [
+          "calendar replaces native date field with formatted Singapore date",
+          "calendar Escape discards draft and returns focus",
+          "keyboard month navigation applies the chosen civil date",
+          "flexible choices omit an earlier departure already in the past",
+          "explicit flexibility selection recalculates without accepting a trip",
+          "pinned commute is before full form and custom labels remain inert",
+          "shortcut recalculates Leave now without starting",
+          "reverse commute is explicit and exchanges the endpoints",
+          "budget is optional by default",
+          "budget includes recorded estimates with exact dates, overrun and pending labels",
+          "accessible progress reports true percentage above 100",
+          "all personal history stays accessible including older and pending trips",
+          "confirmed fare replaces estimate exactly once in budget",
+          "refund updates same-period budget",
+          "switching calendar budget preserves every record",
+          "budget and ledger survive reload",
+          "budget fits narrow enlarged text",
+          "turning off budget retains all history",
+          "enlarged calendar has no horizontal overflow",
+          "unreadable ledger never claims zero spending or full remaining budget",
+          "no browser runtime errors"
+        ],
+        "errors": []
+      },
+      "arrivals": {
+        "count": 8,
+        "checks": [
+          "accepted boarding stop shows three exact matched predictions",
+          "live estimates and operator schedules are distinct",
+          "destination, direction and local last-checked time are visible",
+          "refresh is bounded and no automatic request happens",
+          "aged predictions become visibly stale",
+          "offline guidance never presents saved predictions as live",
+          "arrival checks never change canonical progress",
+          "no runtime errors"
+        ],
+        "errors": []
+      },
+      "address": {
+        "count": 17,
+        "checks": [
+          "address searches are explicit and contain only the entered public query",
+          "provider result remains a preview until explicit review and Start",
+          "request contains coordinate endpoints and authoritative preferences",
+          "standalone provider timeline shows public service and stop names",
+          "provider map has a visible geometry/evidence notice",
+          "address route saves with endpoint records without inventing local station connections",
+          "confirmation preserves unknown fare/accessibility and planned provider source",
+          "accepted address journey has canonical provider geometry and no local context",
+          "provider-aware reroute limitation is visible while accepted guidance remains",
+          "manual boarding confirmation retains original canonical index",
+          "staff automatic message follows accepted external service and destination",
+          "recipient can review the same provider instructions before accepting",
+          "shared acceptance preserves route geometry/preferences and leaves consent off",
+          "provider failure cannot replace accepted route or explicit progress",
+          "reload restores provider route and confirmed progress",
+          "actual offline reload keeps accepted public instruction and progress",
+          "browser reports no application exceptions"
+        ],
+        "errors": []
+      },
+      "bus": {
+        "count": 8,
+        "checks": [
+          "editing an endpoint cancels pending full-network search without freezing controls",
+          "cancelled search cannot repopulate old route results",
+          "cancellation leaves accepted trip unchanged",
+          "fresh full-network search completes after cancellation",
+          "fresh results preserve accepted trip until explicit review and acceptance",
+          "UI continues scheduling frames through cancel and worker restart",
+          "mobile layout remains within viewport",
+          "no browser errors"
+        ],
+        "errors": []
+      },
+      "integratedGuidance": {
+        "count": 31,
+        "checks": [
+          "distinct staff page explains no accepted trip and no dispatch",
+          "simple guidance toggle persists independently",
+          "restored simple mode shows one current instruction and WIP",
+          "next appropriate primary action is checkpoint, finish is disclosed",
+          "staff default matches accepted instruction",
+          "staff explicit alternate remains separate from accepted journey",
+          "automatic control restores current message",
+          "actual checkpoint retains exact canonical ride index",
+          "ride does not get blanket indoor WIP",
+          "paused default stops travel instructions",
+          "primary resume explicitly restores active trip",
+          "normal mode returns Next without changing trip",
+          "accepted replacement while staff is open resets alternate message",
+          "completed default has no further travel instruction",
+          "blocked main path takes precedence",
+          "facility review takes precedence",
+          "blocked detour does not offer outbound instruction",
+          "simple toggle preserves accepted outbound detour",
+          "staff default follows accepted toilet outbound step",
+          "manual reached action advances only toilet phase",
+          "manual resume enters return detour without advancing canonical index",
+          "staff default follows return phase",
+          "both mode toggles preserve returning detour",
+          "station shortcut selects and focuses accessible tab",
+          "map station page keyboard controls work",
+          "integrated touch across docked tabs selects station guide",
+          "large text station guide does not horizontally overflow",
+          "large-text station panel stays above docked controls with usable scroll area",
+          "large-text primary button remains reachable",
+          "cancelled staff message clears travel instruction",
+          "guidance flows report no browser exceptions"
+        ],
+        "errors": []
+      },
+      "guidanceComponent": {
+        "count": 16,
+        "checks": [
+          "automatic staff message follows the accepted current instruction",
+          "explicit alternative asks staff to check lift access",
+          "simple toggle leaves canonical accepted journey untouched",
+          "WIP remains visible in simple mode",
+          "progress refresh resets alternate to current instruction",
+          "train ride has no blanket indoor WIP notice",
+          "paused staff default does not instruct travel",
+          "station tab opens coverage with linked operator evidence",
+          "Home focuses and selects Map",
+          "ArrowRight selects Station guide",
+          "touch swipe across tabs selects Station guide",
+          "map touch gestures do not change pages",
+          "malicious labels are literal text without executable elements",
+          "320px at 200 percent text has no horizontal document overflow",
+          "simple setting survives a new store instance",
+          "no browser exceptions"
+        ],
+        "errors": []
+      },
+      "journeyPanel": {
+        "count": 39,
+        "checks": [
+          "mobile sheet starts at normal height with a 44px handle",
+          "map tabs dock to the panel in a compact single row",
+          "tap expands sheet below the header",
+          "docked tabs stay visible while covered map controls become inert",
+          "ArrowDown restores normal position",
+          "compact sheet hides and inerts content",
+          "compact handle stays above navigation",
+          "ArrowUp reopens compact sheet to normal",
+          "touch swipe up expands without a second click toggle",
+          "touch swipe down returns expanded sheet to normal",
+          "touch swipe down collapses normal sheet",
+          "short deliberate upward swipe reopens compact sheet",
+          "cancelled touch restores initial height",
+          "short accidental movement neither resizes nor taps",
+          "horizontal handle gesture does not resize or tap",
+          "mouse drag captures release outside the moving handle",
+          "Space opens compact sheet",
+          "Enter collapses expanded sheet",
+          "Escape restores normal sheet",
+          "content scrolls without moving the sheet",
+          "map touch leaves sheet position unchanged",
+          "navigation reopens content and removes handle from tool pages",
+          "returning to Plan restores normal sheet",
+          "active trip peek cannot cover compact handle",
+          "planner inputs retain normal interaction",
+          "Station guide compacts journey sheet and keeps docked controls visible",
+          "journey sheet resizes while Station guide is selected",
+          "Station guide scrolls without dragging the journey sheet",
+          "returning to Map retains compact sheet position",
+          "navigation from guide restores current journey and focus",
+          "320px large-text expanded sheet preserves scroll area",
+          "320px large-text compact handle stays usable above navigation",
+          "reduced-motion sheet adds no CSS transition",
+          "desktop keeps its regular sidebar and visible content",
+          "desktop map tabs stay attached to sidebar",
+          "return to mobile starts at normal height",
+          "sheet gestures and view changes preserve the accepted journey",
+          "main map contains no toilet-location markers",
+          "sheet verification reports no browser exceptions"
+        ],
+        "errors": []
+      }
+    }
+  },
+  "mapRecovery": {
+    "checks": 5,
+    "status": "passed"
+  },
+  "facilityFlow": "passed",
+  "environment": "Windows desktop Edge; isolated mobile/touch, mouse, keyboard, desktop and 320px/200% text emulation; no physical-phone test",
+  "manualPreview": "Inspected localhost:4195: docked compact tabs, idle caption removed, no toilet pins. Actual up/down drag verified before docking; final docking gestures covered by isolated browser checks."
+}

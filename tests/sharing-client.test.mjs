@@ -20,6 +20,18 @@ test('default browser fetch is invoked with its Window/global receiver',async()=
   }finally{globalThis.fetch=original;}
 });
 
+test('share creator deletes using editor capability and fresh revision after recipient acceptance',async t=>{
+  const {caregiver,traveller,store,share}=await setup(t);await traveller.accept();
+  assert.equal(caregiver.session.revision,1,'The creator has not refreshed the recipient change');
+  assert.ok(caregiver.session.viewerToken&&caregiver.session.editorToken);
+  await caregiver.delete();assert.equal(caregiver.session,null);assert.equal((await store.read()).value.shares[share.id],undefined);
+});
+
+test('viewer-only session cannot delete shared data or discard its local access record',async t=>{
+  const {fetcher,share,store}=await setup(t),memory=storage();memory.setItem('commute-copilot-pairing-v2',JSON.stringify({id:share.id,role:'caregiver',viewerToken:share.viewerToken}));
+  const viewer=new SharingClient(memory,{fetcher});await assert.rejects(viewer.delete(),/Only the traveller/);assert.equal(viewer.session.id,share.id);assert.ok((await store.read()).value.shares[share.id]);
+});
+
 test('consuming an invitation removes the secret fragment and retains the compatibility entry query',()=>{
   const previousLocation=Object.getOwnPropertyDescriptor(globalThis,'location'),previousHistory=Object.getOwnPropertyDescriptor(globalThis,'history');let replaced;
   try {

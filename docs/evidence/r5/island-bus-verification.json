@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-09-19T02:12:26.327113+00:00",
+  "build": {
+    "schemaVersion": 1,
+    "applicationSha256": "a3fd6d26fb40264b40b73c35dd70addbf263f415ca1e74a93e0f83dab96d8b2a",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "availability": {
+    "registryPatternCount": 798,
+    "registryServiceNumberCount": 602,
+    "registryStopCount": 5208,
+    "routablePatternCount": 776,
+    "routableServiceNumberCount": 583,
+    "routableStopCount": 5206
+  },
+  "checks": {
+    "npmRunCheck": "PASS",
+    "javascriptTests": 385,
+    "pythonTests": 44,
+    "islandBrowserChecks": 14,
+    "workerBrowserChecks": 8,
+    "sourceReproduction": "PASS",
+    "gitDiffCheck": "PASS"
+  },
+  "benchmark": {
+    "pass": true,
+    "coldMs": 197.46030000000002,
+    "warmP95Ms": 105.43869999999993,
+    "combinedGzipBytes": 2617492
+  },
+  "memory": {
+    "pass": true,
+    "sampledHeapMiB": 142.26322174072266,
+    "targetMiB": 150
+  },
+  "limits": [
+    "Source snapshot18Sep2026; reviewed date window ends2Oct2026",
+    "22directions without headways retained without continuous timing estimates",
+    "Bus857 closing distance reset withheld; earlier segments retained",
+    "Desktop Edge/mobile viewport only; no physical-phone verification",
+    "No production deployment or fresh live-provider request in this change"
+  ]
+}

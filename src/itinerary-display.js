@@ -1,4 +1,5 @@
 import {icon} from './icons.js';
+import {railBadgeStyle} from './rail-service-style.js';
 
 // Presentation only. Canonical steps/legs, checkpoint indices and stop IDs are never
 // changed here: rerouting and detours still consume the original accepted route.
@@ -35,6 +36,7 @@ export function publicInstruction(value) {
 
 function endpoint(step, end, name) {
   const source = sourceOf(step), key = end === 'from' ? 'fromStopId' : 'toStopId';
+  if(source[end+'Label'])return publicStationLabel(source[end+'Label']);
   const id = step?.[key] ?? source[key] ?? source.stops?.[end === 'from' ? 0 : source.stops.length - 1];
   if (id && name) {
     const resolved = name(id);
@@ -69,6 +71,7 @@ function transferLabel(step, {name, steps, index}) {
   const from = endpoint(step, 'from', name), to = endpoint(step, 'to', name);
   const before = adjacentRide(steps, index, -1), after = adjacentRide(steps, index, 1);
   const change = before && after ? `${service(before)} → ${service(after)}` : after ? `to ${service(after)}` : 'connections';
+  if (sourceOf(step).estimatedBay) return `Change ${change} at ${from} · allow about ${Math.ceil(secondsOf(step)/60)} min and confirm the boarding bay`;
   // A same-station transfer remains a transfer, even between identical public
   // station labels, platforms or two buses at one physical stop.
   return sameNamedPlace(from, to) ? `Change ${change} at ${from}` : `Walk from ${from} to ${to}${after ? ` · change to ${service(after)}` : ''}`;
@@ -142,6 +145,7 @@ export function itineraryDisplay(route, {name} = {}) {
       fromStopId:step.fromStopId ?? source.fromStopId ?? null, toStopId:step.toStopId ?? source.toStopId ?? null,
       from, to, title:label, badge, icon:type === 'ride' ? source.mode === 'bus' ? 'bus' : 'train' : type === 'transfer' ? 'transfer' : type === 'wait' ? 'clock' : type === 'walk' ? 'walk' : 'pin',
       lineTone:type === 'ride' ? toneFor(service(step)) : '',
+      serviceStyle:type === 'ride' && source.mode !== 'bus' && !source.serviceNo ? railBadgeStyle(source.routeId ?? source.line) : '',
       timing:source.timing ?? null, ...times, phases:[phase],
     });
   });
@@ -200,8 +204,8 @@ export function renderItineraryTimeline(route, {name, currentStepIndex = null} =
     const timing = `${clock(group.startSeconds)}${finite(group.endSeconds) ? `–${clock(group.endSeconds)}` : ''}`;
     const details = group.phases.length > 1 || group.phases.some(phase => phase.assumed);
     return `<li class="timeline-leg timeline-${esc(group.kind)}${current ? ' is-current' : ''}" data-step-indices="${group.canonicalIndices.join(',')}"${current ? ' aria-current="step"' : ''}>
-      <span class="timeline-marker" aria-hidden="true">${icon(group.icon,20)}</span>
-      <div class="timeline-content">${group.badge ? `<span class="transit-badge line-${group.lineTone}">${esc(group.badge)}</span>` : ''}
+      <span class="timeline-marker${group.serviceStyle ? ' rail-service-fill' : ''}"${group.serviceStyle ? ` style="${group.serviceStyle}"` : ''} aria-hidden="true">${icon(group.icon,20)}</span>
+      <div class="timeline-content">${group.badge ? `<span class="transit-badge line-${group.lineTone}${group.serviceStyle ? ' rail-service-fill' : ''}"${group.serviceStyle ? ` style="${group.serviceStyle}"` : ''}>${esc(group.badge)}</span>` : ''}
       <p class="timeline-title">${esc(group.kind === 'ride' ? `${group.from} → ${group.to}` : group.title)}</p>
       <p class="timeline-time">${esc(timing)}${timing ? ' · ' : ''}${esc(duration(group.durationSeconds))}${group.timing === 'frequency-estimated' ? ' · estimated' : ''}</p>
       ${details ? `<details class="timeline-phases"><summary>${group.phases.length > 1 ? 'Walking & waiting time' : 'Timing details'}</summary><ul>${group.phases.map(phase => `<li><span>${esc(phase.label)}</span><span>${esc(duration(phase.durationSeconds))}${phase.assumed ? ' · allowance' : ''}</span></li>`).join('')}</ul></details>` : ''}

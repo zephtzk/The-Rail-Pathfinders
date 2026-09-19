@@ -1,5 +1,7 @@
 # Station and toilet coverage
 
+R5 update, 19 September 2026: source-linked SBS Transit location facts for Bugis, Tampines and Promenade are now available in the Station guide. They remain separate from this routing graph and do not enable a verified corridor or upgrade A/B exterior traces to lift access. Relevant instructions show indoor work-in-progress notices. See [R5 station guidance and remaining pilot dependency](R5_STATION_GUIDANCE.md).
+
 Reviewed for this implementation on 18 September 2026. The graph engine and integrated workflows are implemented; **there is no verified real indoor accessible corridor or verified real toilet entrance route in the shipped dataset**. This is a data dependency, not a completed physical-routing claim. The UI blocks unverified directions and offers station assistance. A real door-to-door accessible demonstration remains blocked by the evidence listed below.
 
 ## Data actually retained

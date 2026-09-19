@@ -6,13 +6,14 @@ import {saveJourney,restoreJourney,STORAGE_KEY,sourceState} from './storage.js';
 import {liveSnapshot} from './live-data.js';
 import {renderLive} from './live-ui.js';
 import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
+import {mountDatePickers} from './date-picker.js';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icons={arrow:'↗',walk:'↗',wait:'◷',ride:'▰'};
 const stored=restoreJourney(localStorage);
 let state={input:{...DEFAULT_INPUT},selected:'direct',scene:'normal',current:'origin',rerouted:false,seen:[],...stored};
 state.input=legacyPlannerInput(state.input,legacyPlannerSettings());
-let companion,lastPlanningKey=null;
+let companion,lastPlanningKey=null,datePickers;
 let online=navigator.onLine,coldOffline=!navigator.onLine&&!stored,previewOffline=false,tab='journey',modal=null,map=null,layers=null,geometry=stored?.geometry??null,planResult=null,saveEnabled=!!stored,swReady=false,feed=liveSnapshot(stored?.liveFeed),liveRequestFailed=false,refreshing=false,mapFailure=false,timers=[],lastChecked=stored?.lastChecked??new Date().toISOString();
 let lastLiveMarkup=null;
 const connected=()=>online&&!previewOffline;
@@ -94,12 +95,14 @@ function drawMap(){
   if(bounds.length)map.fitBounds(bounds,{padding:[30,45],maxZoom:14,animate:false});
   const drawnMap=map;setTimeout(()=>{if(map===drawnMap)drawnMap.invalidateSize({animate:false});},80);
 }
-function closeModal(){modal=null;$('#dialog')?.remove();document.body.classList.remove('dialog-open');$('#demo-open')?.focus();}
+function closeModal(){datePickers?.destroy();datePickers=null;modal=null;$('#dialog')?.remove();document.body.classList.remove('dialog-open');$('#demo-open')?.focus();}
 function showModal(type){
-  modal=type;$('#dialog')?.remove();document.body.classList.add('dialog-open');const overlay=document.createElement('div');overlay.id='dialog';overlay.className='dialog-backdrop';
+  datePickers?.destroy();datePickers=null;modal=type;$('#dialog')?.remove();document.body.classList.add('dialog-open');const overlay=document.createElement('div');overlay.id='dialog';overlay.className='dialog-backdrop';
   overlay.innerHTML=`<section role="dialog" aria-modal="true" aria-labelledby="dialog-title" class="dialog"><div class="dialog-header"><div><span class="eyebrow">${type==='edit'?'YOUR COMMUTE':'LABELLED REPLAY'}</span><h2 id="dialog-title">${type==='edit'?'Plan your journey':'Try a journey scenario'}</h2></div><button class="icon-button" id="close-modal" aria-label="Close dialog">×</button></div>${type==='edit'?editForm():demoControls()}</section>`;
   document.body.append(overlay);$('#close-modal').onclick=closeModal;overlay.onclick=e=>{if(e.target===overlay)closeModal();};overlay.onkeydown=e=>{if(e.key==='Escape')closeModal();if(e.key==='Tab'){const f=[...overlay.querySelectorAll('button,input,select,[href]')].filter(el=>!el.disabled);const a=f[0],z=f.at(-1);if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}};$('#close-modal').focus();
   $('#trip-form')?.addEventListener('input',()=>companion?.clearPrepared());
+  $('#trip-form')?.addEventListener('change',()=>companion?.clearPrepared());
+  if($('#trip-form'))datePickers=mountDatePickers($('#trip-form'));
   $('#trip-form')?.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));const input=legacyPlannerInput({...data,walkingLimit:Number(data.walkingLimit),detourLimit:Number(data.detourLimit)},state.input);const result=plan(input);if(result.errors.length){$('#form-error').textContent=result.errors.join(' ');return;}state={...state,input,current:'origin',confirmedMinutes:null,selected:'direct',rerouted:false,seen:[]};closeModal();calculate();if(saveEnabled)persist();render();toast('Trip updated. Replay events follow the selected travel date.');});
   document.querySelectorAll('[data-scene]').forEach(b=>b.onclick=()=>{closeModal();setScene(b.dataset.scene);});
   $('#offline-demo')?.addEventListener('click',()=>{closeModal();if(!previewOffline)persist();previewOffline=!previewOffline;render();toast(previewOffline?'Offline preview. For real offline testing, enable airplane mode after saving.':'Reconnected. Refreshing data availability.');if(!previewOffline)refresh();});

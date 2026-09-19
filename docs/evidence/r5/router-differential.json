@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-18T20:02:01.079Z",
+  "evidenceClass": "Differential public-result equality against the previous committed router, not an independent correctness oracle or performance measurement",
+  "baselineCommit": "70ae3a80d8c2bf1d9287f10f407e0ba31a96a9fe",
+  "data": {
+    "rail-network": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "bus-network": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886",
+    "walking-links": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "caseSha256": "5edb58504475cafa5717d852f49c9314e3533d5e1f55a8d15a5e083da8058809",
+  "harnessSha256": "16710b339aca4db870fe714e3e2e466f709ce816603d988a92ad6b7cd9f99170",
+  "baselineSourceSha256": {
+    "multimodal-engine.js": "42abc5c74b856c9d79dcb94f90537eee0c25ba40c65f40cea06ea8f59034761a",
+    "rail-engine.js": "1d2d03ba58f07db68a929cddf19508cd2fcfc7c77b59a57d843632790a04223a"
+  },
+  "currentSourceSha256": {
+    "multimodal-engine.js": "4a807fd89d3bde704c0abfe3d8ef30ef692e4b8a0baa098e5262da22337323c4",
+    "rail-engine.js": "349ecbf61ed66ccb8980b64a3ed1cb1752c8835e021cb64f93c0c495eb69ae91",
+    "search-arena.js": "57fa89fd4e583cd5e7d18a71413f83c024ffdfa8f55003c97f5ddf54bc02db8b"
+  },
+  "strippedFields": [
+    "diagnostics"
+  ],
+  "baselineSnapshotSha256": "494b1327e4326452ede92f054bc08dbdc148e77a0aea549b709334a385060627",
+  "currentSnapshotSha256": "a4360fe88885fb127cfaf31ec65498f080ce147d45973a3fb89dc2044b2612b5",
+  "cases": 147,
+  "matched": 147,
+  "groups": {
+    "main": 126,
+    "busOnly": 8,
+    "closedRail": 2,
+    "earlyRetry": 2,
+    "calendar": 6,
+    "downstreamFloor": 1,
+    "finalCarryover": 2
+  },
+  "baselineStatuses": {
+    "ok": 103,
+    "deadline": 18,
+    "no-feasible": 18,
+    "invalid-input": 1,
+    "unsupported-bus-window": 2,
+    "search-limit": 1,
+    "cancelled": 1,
+    "no-service": 3
+  },
+  "pass": true,
+  "mismatches": []
+}

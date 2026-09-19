@@ -1,7 +1,7 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
-import {choosePlannerTime} from './planner-browser-helpers.mjs';
+import {choosePlannerTime,choosePlannerDate} from './planner-browser-helpers.mjs';
 const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4194',out=process.env.CAPTURE_DIR??'test-results/r4-planner';
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
@@ -14,7 +14,7 @@ const timeButton=field=>page.locator(`[data-time-input="${field}"]`);
 const wheel=name=>page.getByRole('listbox',{name,exact:true});
 async function endpoint(role,query){await page.locator('#'+role).fill(query);await page.locator('#'+role).press('ArrowDown');await page.locator('#'+role).press('Enter');}
 async function search(){await page.locator('#find-routes').click();await page.locator('#find-routes:not([disabled])').waitFor();}
-async function later(date='2026-09-21',time='10:00'){await page.locator('[data-time="depart-later"]').click();await page.locator('[name=date]').fill(date);await choosePlannerTime(page,'departureTime',time);}
+async function later(date='2026-09-21',time='10:00'){await page.locator('[data-time="depart-later"]').click();await choosePlannerDate(page,'date',date);await choosePlannerTime(page,'departureTime',time);}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
  await page.locator('#origin').fill('BP1');
@@ -23,9 +23,12 @@ try{
  check('interchange suggestion preserves distinct public codes',await page.locator('#origin-option-0 small').innerText().then(text=>text.includes('CC22')&&text.includes('EW21')&&!text.includes('_')));
  await page.locator('#origin').fill('70251');
  const bus=await page.locator('#origin-option-0').innerText();
- check('bus stop code appears once with accurate terminal direction',bus.split('70251').length===2&&bus.includes('Bus 28 · Tampines Int → Toa Payoh Int')&&!/bus:|direction 1/.test(bus));
+ check('bus stop suggestion keeps its code once and compact service numbers',bus.split('70251').length===2&&(await page.locator('#origin-option-0 small').innerText()).split(', ').includes('28')&&!/bus:|direction 1|→/.test(bus));
+ await page.locator('#origin-option-0').click();await page.locator('#origin-stop-details summary').click();
+ check('selected bus stop details retain the accurate terminal direction',(await page.locator('#origin-stop-details').innerText()).includes('Bus 28 · Tampines Int → Toa Payoh Int'));
  await page.locator('#origin').fill('75009');
- check('service 23 shows its real loop via Rochor Canal Road',await page.locator('#origin-option-0').innerText().then(text=>text.includes('Bus 23 · loop from Tampines Int via Rochor Canal Rd')));
+ await page.locator('#origin-option-0').click();await page.locator('#origin-stop-details summary').click();
+ check('selected service 23 details show its real loop via Rochor Canal Road',await page.locator('#origin-stop-details').innerText().then(text=>text.includes('Bus 23 · loop from Tampines Int via Rochor Canal Rd')));
  await endpoint('origin','EW2');await endpoint('destination','EW12');await later();
  check('one time button replaces native editor and separate scroll action',await page.locator('#plan-form input[type=time]').count()===0&&await page.getByText('Scroll to choose',{exact:true}).count()===0&&await timeButton('departureTime').isVisible());
  check('selected Singapore civil time is visible despite another browser timezone',await timeButton('departureTime').innerText()==='10:00'&&await page.locator('[name=date]').inputValue()==='2026-09-21');
@@ -55,19 +58,20 @@ try{
  check('scrolling updates the applied minute',await page.locator('[name=departureTime]').inputValue()==='23:17');
  await later();await search();await page.locator('.route-card').first().waitFor();
  check('picker-selected timing produces real route options',await page.locator('.route-card').count()>0);
- await page.locator('[data-time="arrive-by"]').click();await page.locator('[name=deadlineDate]').fill('2026-09-22');await choosePlannerTime(page,'deadlineTime','00:20');await search();await page.locator('.route-card').first().waitFor();
+ await page.locator('[data-time="arrive-by"]').click();await choosePlannerDate(page,'deadlineDate','2026-09-22');await choosePlannerTime(page,'deadlineTime','00:20');await search();await page.locator('.route-card').first().waitFor();
  await page.locator('#save-route').click();await page.locator('#save-route-form [name=label]').fill('R4 civil deadline');await page.locator('#save-route-form button').click();
  await page.locator('.app-nav [data-view=saved]').click();await page.locator('.saved-route-card').filter({hasText:'R4 civil deadline'}).locator('[data-open]').click();
  check('saved deadline and displayed picker remain synchronized on reopen',await page.locator('[name=deadlineDate]').inputValue()==='2026-09-22'&&await timeButton('deadlineTime').innerText()==='00:20'&&await page.locator('[name=deadlineTime]').inputValue()==='00:20');
  check('fresh saved departure timing refreshes visible button',await timeButton('departureTime').innerText()===await page.locator('[name=departureTime]').inputValue());
  await later('2025-01-01');await search();
  check('unsupported timetable date has a distinct coverage banner and action',await page.locator('#planner-status').getAttribute('class').then(value=>value.includes('wip-banner'))&&await page.locator('#planner-status').innerText().then(text=>text.includes('timetable dates')&&text.includes('Choose a date')));
- await endpoint('origin','70251');await endpoint('destination','70259');await later('2026-09-20');await search();
- check('weekend bus restriction is a data limit with a supported time window',await page.locator('#planner-status').innerText().then(text=>text.includes('Work in progress — bus coverage')&&text.includes('09:30–16:30')&&text.includes('not a statement that buses are not running')));
+ // Use a date beyond every retained service's genuine after-midnight carryover.
+ await endpoint('origin','70251');await endpoint('destination','70259');await later('2026-10-05');await search();
+ check('bus source-date restriction is a data limit with explicit day-specific coverage',await page.locator('#planner-status').innerText().then(text=>text.includes('Work in progress — bus coverage')&&text.includes('Saturday and Sunday')&&text.includes('not a statement that buses are not running')));
  await page.locator('#app-message').waitFor({state:'hidden'});await page.locator('#planner-status').scrollIntoViewIfNeeded();await page.screenshot({path:out+'/bus-coverage-mobile.png',animations:'disabled'});
  await page.locator('.app-nav [data-view=preferences]').click();await page.locator('#preferences-form [name=walkingLimitMinutes]').fill('0');await page.locator('#preferences-form button.primary').click();await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin','EW2');await endpoint('destination','EW12');await later();await search();
  check('known walking constraint identifies the actionable setting',await page.locator('#planner-status').innerText().then(text=>text.includes('walking allowance is too short')&&text.includes('Settings')&&!text.includes('Work in progress')));
- await page.locator('.app-nav [data-view=preferences]').click();await page.locator('#preferences-form [name=walkingLimitMinutes]').fill('30');await page.locator('#preferences-form button.primary').click();await page.locator('.app-nav [data-view=plan]').click();await page.locator('[data-time="arrive-by"]').click();await page.locator('[name=deadlineDate]').fill('2026-09-21');await choosePlannerTime(page,'deadlineTime','10:01');await search();
+ await page.locator('.app-nav [data-view=preferences]').click();await page.locator('#preferences-form [name=walkingLimitMinutes]').fill('30');await page.locator('#preferences-form button.primary').click();await page.locator('.app-nav [data-view=plan]').click();await page.locator('[data-time="arrive-by"]').click();await choosePlannerDate(page,'deadlineDate','2026-09-21');await choosePlannerTime(page,'deadlineTime','10:01');await search();
  check('available routes outside arrival deadline explain the actual constraint',await page.locator('#planner-status').innerText().then(text=>text.includes('after your deadline')&&text.includes('leaving earlier')));
  await later();await timeButton('departureTime').click();await page.screenshot({path:out+'/time-picker-mobile.png',animations:'disabled'});await page.keyboard.press('Escape');
  await page.setViewportSize({width:320,height:740});await page.addStyleTag({content:'html{font-size:200%}'});await timeButton('departureTime').click();

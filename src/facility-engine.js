@@ -98,7 +98,7 @@ export function findFacilityPath(layout,{from,to,profile={stepFree:true},statuse
 export function pathInstructions(layout,path){
   if(!path?.feasible)return [path?.reason??'No prepared directions'];
   const name=id=>layout.nodes.find(n=>n.id===id)?.label??id;
-  return path.edges.map(e=>`${e.kind==='lift'?'Take':e.kind==='gate'?'Pass through':'Continue via'} ${e.facilityId??e.kind} from ${name(e.from)} to ${name(e.to)}${e.kind==='gate'?' · fare-gate crossing; re-entry charges must be checked':''}.`);
+  return path.edges.map(e=>`${e.kind==='lift'?'Take':e.kind==='gate'?'Pass through':'Continue via'} ${layout.facilities?.find(f=>f.id===e.facilityId)?.label??e.kind} from ${name(e.from)} to ${name(e.to)}${e.kind==='gate'?' · fare-gate crossing; re-entry charges must be checked':''}.`);
 }
 
 export function compareFacilityPaths(layout,options,previousStatuses,nextStatuses){

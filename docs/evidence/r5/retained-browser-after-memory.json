@@ -1,0 +1,330 @@
+{
+  "recordedAt": "2026-09-18T20:03:24.167Z",
+  "evidenceClass": "Desktop Edge browser regression on localhost4196 after final memory optimisation; rail and bus offline checks use real disabled browser networking; live bus fixture synthetic; no physical-device claim or independent performance measurement",
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "68a498155862e8d7799e9e4908762938563155d5c91eef18c84ff63390ab198c",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "totalChecks": 72,
+  "pass": true,
+  "suites": [
+    {
+      "name": "rail",
+      "source": "test-results/r5-final-rail/rail-browser-results.json",
+      "browser": "153.0.4234.32",
+      "checks": 29,
+      "errors": [],
+      "results": [
+        {
+          "name": "default imported timetable journey renders",
+          "passed": true
+        },
+        {
+          "name": "station choices cover the imported network",
+          "passed": true
+        },
+        {
+          "name": "source coverage and unsupported interchange boundaries are visible",
+          "passed": true
+        },
+        {
+          "name": "schematic explicitly avoids proving walking paths",
+          "passed": true
+        },
+        {
+          "name": "390px layout has no horizontal overflow",
+          "passed": true
+        },
+        {
+          "name": "outside-corridor route renders multiple train legs",
+          "passed": true
+        },
+        {
+          "name": "timing breakdown exposes all journey components",
+          "passed": true
+        },
+        {
+          "name": "changed details mark previous guidance as stale",
+          "passed": true
+        },
+        {
+          "name": "outside-corridor reverse route renders",
+          "passed": true
+        },
+        {
+          "name": "quieter fallback is explicitly disclosed",
+          "passed": true
+        },
+        {
+          "name": "saved guidance uses separate rail snapshot storage",
+          "passed": true
+        },
+        {
+          "name": "full timetable reload preserves the saved chosen journey",
+          "passed": true
+        },
+        {
+          "name": "changed source snapshot explicitly triggers recalculation notice",
+          "passed": true
+        },
+        {
+          "name": "failed persistence never claims a successful save",
+          "passed": true
+        },
+        {
+          "name": "impossible deadline never presents a feasible selected journey",
+          "passed": true
+        },
+        {
+          "name": "unsupported service date receives explanation",
+          "passed": true
+        },
+        {
+          "name": "unsupported station receives useful coverage explanation",
+          "passed": true
+        },
+        {
+          "name": "walking limit is enforced",
+          "passed": true
+        },
+        {
+          "name": "original corridor remains searchable in new engine",
+          "passed": true
+        },
+        {
+          "name": "after-midnight arrival visibly carries a next-day marker",
+          "passed": true
+        },
+        {
+          "name": "previous service-day provenance is available for midnight train",
+          "passed": true
+        },
+        {
+          "name": "320px layout has no horizontal overflow",
+          "passed": true
+        },
+        {
+          "name": "200 percent text enlargement has no page overflow",
+          "passed": true
+        },
+        {
+          "name": "saved guidance survives timetable load failure",
+          "passed": true
+        },
+        {
+          "name": "new planning is disabled without imported routing data",
+          "passed": true
+        },
+        {
+          "name": "malformed saved guidance fails to honest empty state",
+          "passed": true
+        },
+        {
+          "name": "malformed nested station snapshot fails closed without crashing",
+          "passed": true
+        },
+        {
+          "name": "saved route with an unknown platform is rejected",
+          "passed": true
+        },
+        {
+          "name": "no unhandled browser exceptions",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "rail-offline",
+      "source": "test-results/r5-final-rail-offline/rail-offline-results.json",
+      "browser": "153.0.4234.32",
+      "checks": 15,
+      "errors": [],
+      "results": [
+        {
+          "name": "served rail assets match recorded tested build and data hashes",
+          "passed": true
+        },
+        {
+          "name": "service worker cached the routing network and manifest",
+          "passed": true
+        },
+        {
+          "name": "real offline reload preserves chosen scheduled journey",
+          "passed": true
+        },
+        {
+          "name": "offline view is explicitly labelled cached guidance",
+          "passed": true
+        },
+        {
+          "name": "offline restoration keeps selected journey identity",
+          "passed": true
+        },
+        {
+          "name": "offline reload obtains complete network and manifest from service worker",
+          "passed": true
+        },
+        {
+          "name": "new offline form submission renders the changed origin and destination",
+          "passed": true
+        },
+        {
+          "name": "new offline search replaces the previous saved journey identity",
+          "passed": true
+        },
+        {
+          "name": "new offline journey arithmetic independently matches source-backed exact timing",
+          "passed": true
+        },
+        {
+          "name": "offline UI exposes the independently checked arrival and total",
+          "passed": true
+        },
+        {
+          "name": "browser remains offline before reload and throughout new calculation",
+          "passed": true
+        },
+        {
+          "name": "reconnection preserves the new selected guidance and saved snapshot",
+          "passed": true
+        },
+        {
+          "name": "online reload restores the journey selected and saved while offline",
+          "passed": true
+        },
+        {
+          "name": "rail planner never requests the live adapter",
+          "passed": true
+        },
+        {
+          "name": "no offline browser exceptions",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "multimodal",
+      "source": "test-results/r5-final-multimodal/multimodal-browser.json",
+      "browser": "153.0.4234.32",
+      "checks": 28,
+      "errors": [],
+      "results": [
+        {
+          "name": "cold local combined browser result meets predeclared 3-second target",
+          "status": "PASS"
+        },
+        {
+          "name": "first-result browser heap meets predeclared150MiB target",
+          "status": "PASS"
+        },
+        {
+          "name": "combined compressed transfer meets predeclared3MiB target",
+          "status": "PASS"
+        },
+        {
+          "name": "default pilot contains both estimated bus and scheduled rail",
+          "status": "PASS"
+        },
+        {
+          "name": "synthetic current arrivals preserve selected journey timing",
+          "status": "PASS"
+        },
+        {
+          "name": "live panel distinguishes provider observation absence and separate itinerary date",
+          "status": "PASS"
+        },
+        {
+          "name": "bounded live refresh remains disabled during minimum interval",
+          "status": "PASS"
+        },
+        {
+          "name": "direct bus has independently checked12min wait+7m30s ride=10:19:30",
+          "status": "PASS"
+        },
+        {
+          "name": "bus-to-rail uses recorded pedestrian link and complete arithmetic",
+          "status": "PASS"
+        },
+        {
+          "name": "rail-to-bus uses opposite-direction stop81111",
+          "status": "PASS"
+        },
+        {
+          "name": "same physical stop bus transfer is feasible and counted",
+          "status": "PASS"
+        },
+        {
+          "name": "total walking budget enforced in browser",
+          "status": "PASS"
+        },
+        {
+          "name": "impossible estimated deadline is not recommended",
+          "status": "PASS"
+        },
+        {
+          "name": "Saturday bus estimate uses its own supported operating span",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported bus source date remains explicit",
+          "status": "PASS"
+        },
+        {
+          "name": "synthetic EWL closure fallback labelled and excludes EWL",
+          "status": "PASS"
+        },
+        {
+          "name": "full pilot data and manifests cached",
+          "status": "PASS"
+        },
+        {
+          "name": "actual offline reload restores bus guidance",
+          "status": "PASS"
+        },
+        {
+          "name": "actual new offline bus-only search changes destination and retains arithmetic",
+          "status": "PASS"
+        },
+        {
+          "name": "actual new offline mixed search succeeds with coherent arithmetic",
+          "status": "PASS"
+        },
+        {
+          "name": "offline arrivals never labelled current",
+          "status": "PASS"
+        },
+        {
+          "name": "reconnection preserves selected guidance",
+          "status": "PASS"
+        },
+        {
+          "name": "online reload restores the new saved selection",
+          "status": "PASS"
+        },
+        {
+          "name": "no horizontal page overflow at390px",
+          "status": "PASS"
+        },
+        {
+          "name": "no horizontal page overflow at320px",
+          "status": "PASS"
+        },
+        {
+          "name": "no horizontal overflow at200percent text",
+          "status": "PASS"
+        },
+        {
+          "name": "only one explicitly requested synthetic arrival fetch",
+          "status": "PASS"
+        },
+        {
+          "name": "no browser exceptions",
+          "status": "PASS"
+        }
+      ]
+    }
+  ]
+}

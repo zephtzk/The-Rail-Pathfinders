@@ -1,6 +1,8 @@
 // One accepted state for guidance, sharing, facilities, detours and completion.
 import {normalizePreferences,validatePreferences} from './preferences.js';
 import {validateJourney} from './journey-state.js';
+import {resolveCurrentExecution} from './current-execution.js';
+import {validExternalGeometry} from './external-geometry.js';
 export const JOURNEY_KEY='commute-copilot-journey-v2';
 export const SCHEMA_VERSION=2;
 const copy=value=>structuredClone(value);
@@ -23,7 +25,7 @@ function validPlace(p){
   return true;
 }
 function validSteps(steps,requireIds=true){return Array.isArray(steps)&&steps.length>0&&steps.length<=1000&&steps.every(s=>record(s)&&(!requireIds||text(s.id,1000))&&(s.id==null||text(s.id,1000))&&text(s.text,4000)&&finite(s.durationSeconds))&&(!requireIds||new Set(steps.map(s=>s.id)).size===steps.length);}
-function validRoute(r){return record(r)&&text(r.id,2000)&&validSteps(r.steps)&&finite(r.arrivalSeconds)&&finite(r.departureSeconds)&&r.arrivalSeconds>=r.departureSeconds&&finite(r.walkingSeconds)&&['unknown','verified','fixture','unverified'].includes(r.accessibility??'unknown')&&optionalText(r.provenance,8000)&&['facilityPathSeconds','facilityPathWalkingSeconds'].every(k=>r[k]==null||finite(r[k]));}
+function validRoute(r){return record(r)&&text(r.id,2000)&&validSteps(r.steps)&&finite(r.arrivalSeconds)&&finite(r.departureSeconds)&&r.arrivalSeconds>=r.departureSeconds&&finite(r.walkingSeconds)&&['unknown','verified','fixture','unverified'].includes(r.accessibility??'unknown')&&optionalText(r.provenance,8000)&&validExternalGeometry(r)&&['facilityPathSeconds','facilityPathWalkingSeconds'].every(k=>r[k]==null||finite(r[k]));}
 function validPath(path){
   if(path==null)return true;
   if(!record(path)||path.feasible!==true||!Array.isArray(path.nodes)||!path.nodes.length||path.nodes.length>1000||path.nodes.some(n=>!text(n,1000))||!Array.isArray(path.edges)||path.edges.length!==path.nodes.length-1||!finite(path.seconds)||!finite(path.walkingSeconds)||path.walkingSeconds>path.seconds)return false;
@@ -137,18 +139,10 @@ export function stopAction(state,action,now=Date.now()) {
   else if(action==='cancel'){if(d.status==='accepted'){next.route.arrivalSeconds=d.baseArrivalSeconds;next.route.walkingSeconds=d.baseWalkingSeconds;}else next.route.provenance+='; cancelled after reaching stop, onward ETA requires recheck';d.status='cancelled';}
   else throw Error('Unknown stop action');next.stops.find(s=>s.id===d.id).status=d.status;return next;
 }
-export function journeyCard(state,{online=true,visible=true,now=Date.now()}={}) {
-  if(!state)return null;const step=state.route.steps[state.progress.stepIndex],next=state.route.steps[state.progress.stepIndex+1];const d=state.detour;
-  let current=step?.text??'Confirm your current step',upcoming=next?.text??`Arrive at ${state.plan.destination.label}`;
-  if(d?.status==='accepted'){const index=d.stepIndex??0;current=d.steps[index]?.text??`Go to ${d.toiletId}`;upcoming=d.steps[index+1]?.text??'Confirm Reached toilet';if(d.outbound&&index>=d.outbound.edges.length){current='Confirm Reached toilet when you are at its entrance';upcoming='Resume the journey when you are ready';}}
-  if(d?.status==='reached'){current='Toilet stop · resume when ready';upcoming=`Continue to ${state.plan.destination.label}`;}
-  if(d?.status==='returning'){const returning=d.steps.filter(s=>s.id?.startsWith('toilet-return-')),index=d.returnStepIndex??0;current=returning[index]?.text??'Return to your confirmed onward checkpoint';upcoming=returning[index+1]?.text??'Confirm the onward platform or exit before continuing';}
-  if(d?.blocked){current='Stop path unavailable · review an alternative';upcoming='Ask station staff if no supported path remains';}
-  if(state.facilityBlocked){current='Station path unavailable · ask station staff';upcoming='Review supported connections before continuing';}
-  else if(state.facilityReview){current='Facility change · review revised directions';upcoming='Accept a supported alternative before continuing';}
-  if(state.status==='paused')current='Journey paused';if(terminal(state.status)){current=state.status==='completed'?'Arrival confirmed':'Journey cancelled';upcoming=state.status==='completed'?'Journey finished · no further travel steps':'Choose a new journey when ready';}
+export function journeyCard(state,{online=true,visible=true,now=Date.now(),name}={}) {
+  if(!state)return null;const execution=resolveCurrentExecution(state,{name});
   const warnings=[];if(!online)warnings.push('Offline · saved guidance; no fresh reports or uploads');if(!visible)warnings.push('Location collection paused while hidden');if(!state.progress.confirmedAt)warnings.push('Position unknown · confirm a checkpoint');else if(now-state.progress.confirmedAt>300000)warnings.push('Last confirmed position is over 5 minutes old');if(state.location&&now-state.location.timestamp>120000)warnings.push('Approximate location stale');
-  return {status:state.status,current,next:upcoming,arrivalSeconds:state.route.arrivalSeconds,warnings,revision:state.revision,estimated:true};
+  return {...execution,status:state.status,arrivalSeconds:state.route.arrivalSeconds,warnings,revision:state.revision,estimated:true};
 }
 export function saveActive(storage,state){try{if(!validateActive(state))return false;const raw=JSON.stringify(state);storage.setItem(JOURNEY_KEY,raw);if(storage.getItem(JOURNEY_KEY)!==raw)throw Error();return true;}catch{return false;}}
 export function restoreActive(storage){try{return validateActive(JSON.parse(storage.getItem(JOURNEY_KEY)));}catch{return null;}}

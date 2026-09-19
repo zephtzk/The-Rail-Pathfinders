@@ -52,3 +52,27 @@ export function createAddressSearch({fetcher=globalThis.fetch,endpoint=ADDRESS_S
   }
   return {search,cancel};
 }
+
+// Optional official provider. No silent fallback: switching services discloses
+// the query to a different provider and must remain a deliberate UI choice.
+export function createOneMapAddressSearch({fetcher=globalThis.fetch,clock=Date.now,minIntervalMs=1500,timeoutMs=12000}={}){
+  let generation=0,controller=null,lastRequest=-Infinity;const cache=new Map();
+  const cancel=()=>{generation++;controller?.abort();controller=null;};
+  async function search(value){
+    cancel();const version=generation,query=text(value,161);
+    if(query.length<2||query.length>160)throw Error('Enter an address or place name between 2 and 160 characters.');
+    const key=query.toLocaleLowerCase();if(cache.has(key))return structuredClone(cache.get(key));
+    if(clock()-lastRequest<minIntervalMs)throw Error('Please wait a moment before searching again.');
+    const requestController=new AbortController();controller=requestController;lastRequest=clock();const timer=setTimeout(()=>requestController.abort(),timeoutMs);
+    try{
+      const response=await fetcher('/api/address/search',{method:'POST',body:JSON.stringify({query}),headers:{'Content-Type':'application/json',Accept:'application/json'},signal:requestController.signal,cache:'no-store',credentials:'same-origin',referrerPolicy:'no-referrer'});
+      const payload=await response.json();if(version!==generation)return null;
+      if(!response.ok||payload.status!=='ok')throw Error(text(payload.message,500)||'OneMap address search is unavailable.');
+      if(payload.provider!=='onemap'||!Array.isArray(payload.results)||payload.results.length>6)throw Error('OneMap search returned an unreadable response.');
+      const results=payload.results.filter(p=>typeof p?.id==='string'&&p.id.startsWith('onemap:')&&typeof p.address==='string'&&p.address.length<=240&&Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&p.lat>=ADDRESS_SEARCH_BOUNDS[1]&&p.lat<=ADDRESS_SEARCH_BOUNDS[3]&&p.lng>=ADDRESS_SEARCH_BOUNDS[0]&&p.lng<=ADDRESS_SEARCH_BOUNDS[2]).map(p=>({id:p.id,sourceId:p.id,label:text(p.label,80),address:p.address,lat:p.lat,lng:p.lng,routingId:null,stationId:null,entranceId:null,coverage:'unknown',accessibility:'unknown'}));
+      cache.set(key,results);if(cache.size>30)cache.delete(cache.keys().next().value);return structuredClone(results);
+    }catch(error){if(version!==generation)return null;if(requestController.signal.aborted)throw Error('Address search took too long. Try again when connected.');if(error instanceof TypeError)throw Error('OneMap address search could not connect.');throw error;}
+    finally{clearTimeout(timer);if(version===generation)controller=null;}
+  }
+  return {search,cancel};
+}

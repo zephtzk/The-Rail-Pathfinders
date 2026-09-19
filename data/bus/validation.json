@@ -1,31 +1,88 @@
 {
   "schemaVersion": 1,
   "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
-  "serviceNumbers": ["2", "23", "28"],
   "coverage": {
-    "name": "Tampines–Paya Lebar–Bugis bus pilot",
+    "name": "Island-wide Singapore public bus estimates",
     "validFrom": "2026-09-18",
     "validThrough": "2026-10-02",
-    "weekdays": [1, 2, 3, 4, 5],
-    "earliestSeconds": 34200,
-    "latestSeconds": 59400,
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "earliestSeconds": 0,
+    "latestSeconds": 172800,
     "excludedDates": [],
     "holidaySource": "https://www.mom.gov.sg/newsroom/press-releases/2025/0616-public-holidays-for-2026",
-    "holidayReview": "The bounded weekday pilot contains no public holidays in MOM's 2026 published list. Weekend and overnight planning excluded."
+    "holidayReview": "No public holidays occur in this source-validity window. Holidays require a separately reviewed operator day mapping; no automatic Sunday fallback.",
+    "calendarMode": "service-day",
+    "holidays": [
+      "2026-01-01",
+      "2026-02-17",
+      "2026-02-18",
+      "2026-03-21",
+      "2026-04-03",
+      "2026-05-01",
+      "2026-05-27",
+      "2026-05-31",
+      "2026-06-01",
+      "2026-08-09",
+      "2026-08-10",
+      "2026-11-08",
+      "2026-11-09",
+      "2026-12-25"
+    ],
+    "holidayDayType": null,
+    "holidayCalendar": {
+      "validFrom": "2026-01-01",
+      "validThrough": "2026-12-31",
+      "source": "https://www.mom.gov.sg/newsroom/press-releases/2025/0616-public-holidays-for-2026",
+      "reviewedAt": "2026-09-19"
+    }
   },
   "assumptions": {
-    "unverifiedBayStopCodes": ["75009", "52009", "99009", "10499"],
-    "unverifiedBayReason": "Tampines Int, Toa Payoh Int, Changi Village Ter and Kampong Bahru Ter may use different alighting and boarding bays under one DataMall stop identifier. No internal bay path has been verified. Bus-to-bus transfers at these identifiers are disabled; journey starts/ends remain allowed.",
+    "unverifiedBayReason": "Service endpoint codes may have different alighting and boarding bays. Same-code transfers use an explicit estimated five-minute walking allowance; confirm the bay on site. No internal path or accessibility is established.",
     "timingKind": "frequency-estimate",
-    "waitField": "AM_Offpeak_Freq",
     "waitStrategy": "maximum-published-headway",
     "waitBasis": "Use the upper bound of the published dispatch interval as an estimated wait at boarding stops. Headways can vary downstream; this is not a guaranteed wait or an exact departure.",
     "rideSpeedKph": 18,
     "dwellSecondsPerStop": 30,
     "rideBasis": "Distance differences from DataMall at an assumed 18 km/h, plus 30 seconds for each downstream stop. An explicit uncalibrated planning model, not measured or scheduled running times.",
-    "headwayDayScope": "Guide supplies time bands but no operating-day applicability for frequency fields. Pilot assumes the published off-peak range is representative on ordinary weekdays only; weekend/holiday estimates excluded.",
-    "firstLastBasis": "HHMM first/last arrivals constrain stop service spans, not departures between them. Preserve source values; 2400 is midnight. A last value earlier than first is marked as rollover and normalized to the following day for audit, but overnight journeys remain unsupported.",
+    "headwayDayScope": "The guide publishes generic dispatch bands, without separate weekday/weekend frequency arrays. WD/SAT/SUN first/last spans gate each operating day. Applying published bands on those days is an explicit uncalibrated estimate, never a timetable or guaranteed maximum wait.",
+    "firstLastBasis": "First/last clock spans are service-day constraints; last before first rolls into the following civil day. Previous service day is checked after midnight. A first arrival is a known bound, never expanded into exact intermediate departures.",
     "deadlineGuarantee": false,
-    "accessibility": "unknown"
-  }
+    "accessibility": "unknown",
+    "headwayBands": [
+      {
+        "field": "AM_Peak_Freq",
+        "startSeconds": 23400,
+        "endSeconds": 30660
+      },
+      {
+        "field": "AM_Offpeak_Freq",
+        "startSeconds": 30660,
+        "endSeconds": 61200
+      },
+      {
+        "field": "PM_Peak_Freq",
+        "startSeconds": 61200,
+        "endSeconds": 68460
+      },
+      {
+        "field": "PM_Offpeak_Freq",
+        "startSeconds": 68460,
+        "endSeconds": 172800
+      }
+    ],
+    "earlyHoursBasis": "Before 06:30 on a new service day the guide provides no headway band. Only an explicitly published first arrival can be considered; no continuous early-morning frequency is inferred.",
+    "limitedSpanPolicy": "Use each published weekday/Saturday/Sunday stop span with its available headway bands, including short and peak-only spans. Missing bands are not filled; routes without usable headways remain discoverable without continuous departure estimates.",
+    "allowEstimatedBayTransfers": true,
+    "bayTransferSeconds": 300,
+    "sourceOrderBasis": "Preserve source sequence numbers and traverse the listed stops in ascending order, including gaps and nonzero distance origins. Distance differences determine ride estimates. Loop descriptions never add an unlisted closing edge. A decreasing distance starts a separate segment, with no estimated ride across the reset."
+  },
+  "selectionMode": "audited-frequency-patterns"
 }

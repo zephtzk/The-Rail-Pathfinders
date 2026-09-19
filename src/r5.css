@@ -1,0 +1,53 @@
+@import './guidance.css';
+/* Application palette inspired by Singapore transport; these are app colours,
+   not claimed official brand specifications. Official line badges stay intact. */
+.commute-app{--ink:#172b48;--muted:#526278;--accent:#174f9e;--accent-strong:#123e7c;--blue-soft:#edf3fc;--mint:#edf4f0;--lavender:#f2eff9;--cream:#fff7de;--surface:#fff;--border:#cfd7e2;background:#edf0f4}
+.commute-app .app-panel,.commute-app .app-nav,.commute-app .brand-copy{background:#fffffff5}
+.commute-app .primary{color:#fff;background:var(--accent);box-shadow:0 2px 0 #103c79}.commute-app .primary:hover{background:#123e7c;box-shadow:0 2px 0 #0c2a53}.commute-app .primary:disabled{background:#d4dce6;color:#4c5b70;box-shadow:none}
+.commute-app .brand-mark{background:#174f9e;color:#fff;border-bottom:4px solid #c83244}.commute-app .eyebrow{color:#9a2433}.commute-app .endpoint-field:last-of-type .field-icon{color:#aa2739}
+.commute-app .app-nav [aria-current=page]{background:#e8effa;color:#153f7f;box-shadow:inset 0 -3px #174f9e}.commute-app .app-nav{grid-template-columns:repeat(var(--nav-columns,7),minmax(0,1fr))}
+.commute-app .route-card.is-selected,.commute-app .style-card.is-selected{border-color:#174f9e;background:#edf3fc}.commute-app .current-route-summary{border-color:#b9cce5;background:#edf3fc}.commute-app .current-route-summary p{color:#3e5878}
+.commute-app .wip-banner,.commute-app .indoor-guidance-notice{background:#fff7dc;border-color:#967119;color:#513c0c}.commute-app .notice{border-left:4px solid #8c6714;background:#fff7dc;color:#513c0c}.commute-app .route-feedback{background:#fff0ef;border-color:#bc4050;color:#6e2330}
+.commute-app button:focus-visible,.commute-app input:focus-visible,.commute-app select:focus-visible,.commute-app summary:focus-visible,.commute-app a:focus-visible{outline:3px solid #7250a0;outline-offset:3px}
+.commute-app .time-wheel{background:#f0f3f7}.commute-app .time-wheel [aria-selected=true]{background:#174f9e;color:#fff}
+.commute-app .commute-card-list{display:grid;gap:.65rem}.commute-app .commute-shortcut{border:1px solid var(--border);border-left:4px solid #174f9e;border-radius:14px;padding:.9rem;background:#f5f8fd}.commute-app .commute-shortcut p{font-size:.8rem;margin:.3rem 0}.commute-app .commute-shortcut .button-row{margin-top:.5rem}
+.commute-app .flexible-departure,.commute-app .address-search-disclosure{margin:.8rem 0;border:1px solid var(--border);border-radius:14px;padding:.7rem 1rem}.commute-app .flexible-departure summary,.commute-app .address-search-disclosure summary{padding:.35rem 0;min-height:40px;cursor:pointer;color:#174f9e;font-weight:650}.commute-app .flex-option{padding:1rem 0;border-top:1px solid var(--border)}.commute-app .address-result{margin:.4rem 0;width:100%;justify-content:flex-start;text-align:left}
+.commute-app .commute-budget{border:1px solid #b8c9df;background:#edf3fc;border-radius:16px;padding:1rem;margin:1rem 0}.commute-app .commute-budget h3{margin:0}.commute-app .budget-amount strong{font-size:1.5rem}.commute-app .commute-budget progress{display:block;width:100%;height:18px;accent-color:#174f9e;border-radius:9px;overflow:hidden}.commute-app .commute-budget progress::-webkit-progress-bar{background:#d5dfed}.commute-app .commute-budget progress::-webkit-progress-value{background:#174f9e}.commute-app .presentation-setting{margin:1rem 0 1.5rem;padding:1rem;border:1px solid var(--border);border-radius:16px;background:#edf3fc}.commute-app .presentation-setting h2{font-size:1.1rem}
+.commute-app .bus-arrivals{margin:1rem 0;padding:1rem;border:1px solid var(--border);border-radius:16px;background:#fff}.commute-app .arrival-predictions{padding-left:1.2rem}.commute-app .arrival-predictions li{margin:.75rem 0}.commute-app .arrival-predictions span{display:block;font-size:.85rem}
+.commute-app .map-pages{position:fixed;inset:0;z-index:-1;pointer-events:none}.commute-app .map-pages .app-map{pointer-events:auto}.commute-app .journey-sheet-dock{flex-shrink:0}.commute-app .guidance-page-strip{position:relative;padding:4px 8px;border:0;border-bottom:1px solid var(--border);border-radius:0;box-shadow:none}.commute-app .guidance-page-strip [role=tablist]{flex-wrap:nowrap;gap:4px}.commute-app .guidance-page-strip button{flex:1 1 0;min-height:44px;padding:4px 6px;font-size:.8rem;line-height:1.2}.commute-app .map-station-page{pointer-events:auto;position:absolute;inset:94px 24px 28px 510px;overflow:auto;overscroll-behavior:contain;background:#f5f7fa;border:1px solid var(--border);border-radius:20px;z-index:550}.commute-app .app-map .leaflet-top{top:94px}
+.commute-app:has(#map-station-page:not([hidden])) .map-caption,.commute-app:has(#map-station-page:not([hidden])) .map-recenter{display:none}
+.commute-app.simple-guidance .trip-peek{display:none}.commute-app.simple-guidance .current-route-summary .journey-metrics>strong{display:none}.commute-app.simple-guidance .app-toast{max-height:25vh;overflow:auto}
+@media(max-width:959px) and (min-width:681px){.commute-app .map-station-page{left:465px;right:15px}}
+@media(max-width:680px){.commute-app{--mobile-map-height:clamp(245px,33dvh,330px)}.commute-app .map-pages{height:var(--mobile-map-height);bottom:auto}.commute-app .map-station-page{inset:var(--journey-surface-top,76px) 10px 6px;border-radius:12px}.commute-app .station-guide-content{padding:.75rem}.commute-app .app-map .leaflet-top{top:88px}.commute-app .map-caption{font-size:.6rem}.commute-app[data-view=spending],.commute-app[data-view=preferences],.commute-app[data-view=caregiver],.commute-app[data-view=saved],.commute-app[data-view=staff]{--mobile-map-height:76px}.commute-app:is([data-view=spending],[data-view=preferences],[data-view=caregiver],[data-view=saved],[data-view=staff]) :is(.map-pages,.map-caption,.map-recenter,.journey-sheet-dock){display:none}.commute-app .app-nav button{min-height:54px;font-size:.68rem}.commute-app .app-nav{border-radius:16px 16px 0 0}.commute-app .date-picker-button{font-size:.85rem}}
+@media(prefers-reduced-motion:reduce){.commute-app *,.commute-app *::before,.commute-app *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.commute-app .app-nav span{line-height:1.2}.commute-app .app-nav button{padding-inline:3px}
+.commute-app.simple-guidance .current-actions{display:none}
+.commute-app .copilot button.primary{color:#fff}
+.commute-app .endpoint-card:has(.has-bus-stop)>.endpoint-swap{top:16px}.commute-app .endpoint-card:has(.has-bus-stop)>.endpoint-field:first-child :is(label,input){padding-right:48px}.commute-app .endpoint-field.has-bus-stop{align-items:flex-start}.commute-app .endpoint-field.has-bus-stop>.field-icon{margin-top:14px}.commute-app .selected-stop-details{margin-top:4px;min-width:0}.commute-app .bus-service-numbers{margin:0;font-size:.75rem;line-height:1.5;color:var(--muted)}.commute-app .bus-stop-details{margin-top:4px}.commute-app .bus-stop-details summary{min-height:44px;padding:9px 0;font-size:.78rem;color:var(--accent)}.commute-app .bus-stop-details .bus-stop-address{font-size:.78rem;line-height:1.5}.commute-app .bus-stop-details h3{font-size:.85rem;margin:12px 0 6px}.commute-app .bus-stop-details ul{list-style:none;padding:0;margin:0}.commute-app .bus-stop-details li{padding:9px 0;border-top:1px solid var(--border);font-size:.78rem;line-height:1.5;overflow-wrap:anywhere}.commute-app .bus-stop-details small{display:block;color:var(--muted);font-size:.72rem}.commute-app .bus-stop-details .field-note{font-size:.7rem}
+@media(max-width:680px){.commute-app .map-caption{top:88px;bottom:auto;max-height:calc(var(--mobile-map-height) - 100px);max-width:calc(100% - 88px)}.commute-app .map-recenter{top:165px;bottom:auto}}
+@media(max-width:680px){.commute-app .map-caption{transform:none}}
+
+/* Only the handle resizes the mobile journey sheet; the content keeps native scrolling. */
+.commute-app .sheet-help{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:680px){
+  .commute-app .sheet-handle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:100%;height:auto;min-height:44px;margin:0;padding:8px 16px 6px;border:0;border-radius:0;background:var(--surface);color:var(--muted);font-size:.7rem;line-height:1.25;touch-action:none;user-select:none;cursor:ns-resize}
+  .commute-app .sheet-handle::before{content:'';width:35px;height:4px;border-radius:4px;background:#8b9bb0;flex-shrink:0}
+  .commute-app .sheet-handle:focus-visible{outline:3px solid var(--accent);outline-offset:-4px}
+  .commute-app .app-shell[data-journey-sheet]{--mobile-map-height:var(--journey-sheet-top)!important}
+  .commute-app .app-shell:is([data-journey-sheet=expanded],[data-journey-sheet=dragging]) :is(.map-caption,.map-recenter,.leaflet-control-zoom,.map-layer-control){visibility:hidden}
+  .commute-app .app-shell:is([data-journey-sheet=compact],[data-journey-sheet=dragging]) .trip-peek{display:none}
+  .commute-app .app-shell[data-journey-sheet=dragging] .app-panel{user-select:none}
+}
+
+.commute-app .map-layer-control{display:flex;gap:6px;padding:6px;background:#fffefa;border:1px solid #d7e0e8;border-radius:16px;box-shadow:0 3px 12px #17324d20;margin-bottom:20px}
+.commute-app .map-layer-toggle{display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:0;border:1px solid #0054a6;border-radius:11px;background:transparent;color:#0054a6;box-shadow:none;cursor:pointer}
+.commute-app .map-layer-toggle[aria-pressed=true]{background:#0054a6;color:#fff;border-color:#003f7c;box-shadow:inset 0 2px 4px #001f4660;transform:translateY(1px)}
+.commute-app .map-layer-toggle:focus-visible{outline:3px solid #d89400;outline-offset:3px}
+.commute-app .map-layer-status{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(min-width:681px) and (max-width:899px){
+  .commute-app .app-map .leaflet-bottom.leaflet-left{left:438px;right:auto}
+}
+@media(max-width:680px){
+  .commute-app .app-map .leaflet-bottom.leaflet-left{left:5px;right:auto}
+  .commute-app .map-layer-control{margin-bottom:12px}
+}

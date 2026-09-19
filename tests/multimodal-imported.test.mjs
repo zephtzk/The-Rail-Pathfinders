@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createMultimodalRouter} from '../src/multimodal-engine.js';
+import {historicalBusPilot} from './helpers/bus-pilot.mjs';
 const read = path=>JSON.parse(readFileSync(path));
-const rail=read('public/data/rail-network.json'),bus=read('public/data/bus-network.json'),walking=read('data/bus/walking-links.json');
+const rail=read('public/data/rail-network.json'),bus=historicalBusPilot(read('public/data/bus-network.json')),walking=read('data/bus/walking-links.json');
 const query={date:'2026-09-18',departureTime:'10:00',walkingLimitMinutes:20,preference:'fastest',maxExtraMinutes:15};
 function arithmetic(route) {
   assert.equal(route.totalSeconds,route.accessSeconds+route.waitSeconds+route.rideSeconds+route.transferSeconds+route.exitSeconds);

@@ -8,7 +8,7 @@ const error=(message,status=400,extra={})=>Object.assign(new Error(message),{sta
 const response=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, private','Pragma':'no-cache','Vary':'Authorization','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff'}});
 const record=value=>value&&typeof value==='object'&&!Array.isArray(value);
 function boundedObject(value,maxBytes=24576) {
-  if(!record(value)||JSON.stringify(value).length>maxBytes)throw error('Invalid or oversized object');
+  if(!record(value)||new TextEncoder().encode(JSON.stringify(value)).byteLength>maxBytes)throw error('Invalid or oversized object');
   let count=0;
   function visit(v,depth=0) {
     if(++count>2500||depth>14)throw error('Object is too complex');
@@ -19,7 +19,21 @@ function boundedObject(value,maxBytes=24576) {
   }
   visit(value);return structuredClone(value);
 }
-function validatePlan(value){const plan=boundedObject(value);if(plan.schemaVersion!==2||!record(plan.origin)||!record(plan.destination))throw error('A version 2 plan with origin and destination is required');return plan;}
+function validatePlan(value){
+  const plan=boundedObject(value);if(plan.schemaVersion!==2||!record(plan.origin)||!record(plan.destination))throw error('A version 2 plan with origin and destination is required');
+  // External geometry is optional for legacy plans. New provider overlays must
+  // stay bounded and attached to real canonical phases before being persisted.
+  if(plan.route?.provider!=null||plan.route?.geometry!=null){
+    const route=plan.route,indices=new Set();let count=0;
+    if(route.provider!=='onemap'||!Number.isFinite(route.providerRetrievedAt)||route.providerRetrievedAt<0||!Array.isArray(route.steps)||!route.steps.length||!Array.isArray(route.geometry)||route.geometry.length>24)throw error('Invalid external route');
+    for(const segment of route.geometry){
+      if(!record(segment)||!Number.isInteger(segment.stepIndex)||segment.stepIndex<0||segment.stepIndex>=route.steps.length||indices.has(segment.stepIndex)||!['provider','schematic'].includes(segment.kind)||!Array.isArray(segment.points)||segment.points.length<2)throw error('Invalid external route geometry');
+      indices.add(segment.stepIndex);count+=segment.points.length;
+      if(count>192||segment.points.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<1.144||p[0]>1.494||p[1]<103.535||p[1]>104.502))throw error('Invalid external route geometry');
+    }
+  }
+  return plan;
+}
 function consentValue(value){if(!record(value)||typeof value.progress!=='boolean'||typeof value.location!=='boolean')throw error('Choose progress and location consent separately');return {progress:value.progress,location:value.location};}
 async function readBody(request) {
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw error('Use application/json',415);

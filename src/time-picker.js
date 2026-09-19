@@ -1,9 +1,11 @@
 import {icon} from './icons.js';
+import {mountDatePickers} from './date-picker.js';
 
 let pickerCount = 0;
 
 // Keep HH:MM civil values in the form; one accessible control owns each time.
 export function mountTimePickers(form) {
+  const dates=mountDatePickers(form);
   const id = `time-picker-${++pickerCount}`;
   const dialog = document.createElement('dialog');
   dialog.id = id;
@@ -48,6 +50,7 @@ export function mountTimePickers(form) {
   });
 
   function refresh() {
+    dates.refresh();
     for (const {input, button, label} of controls) {
       const value = validTime(input.value) ? input.value : 'Choose time';
       button.querySelector('.time-value').textContent = value;

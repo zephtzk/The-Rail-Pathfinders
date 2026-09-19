@@ -1,0 +1,27 @@
+{
+  "checks": [
+    "calendar replaces native date field with formatted Singapore date",
+    "calendar Escape discards draft and returns focus",
+    "keyboard month navigation applies the chosen civil date",
+    "flexible choices omit an earlier departure already in the past",
+    "explicit flexibility selection recalculates without accepting a trip",
+    "pinned commute is before full form and custom labels remain inert",
+    "shortcut recalculates Leave now without starting",
+    "reverse commute is explicit and exchanges the endpoints",
+    "budget is optional by default",
+    "budget includes recorded estimates with exact dates, overrun and pending labels",
+    "accessible progress reports true percentage above 100",
+    "all personal history stays accessible including older and pending trips",
+    "confirmed fare replaces estimate exactly once in budget",
+    "refund updates same-period budget",
+    "switching calendar budget preserves every record",
+    "budget and ledger survive reload",
+    "budget fits narrow enlarged text",
+    "turning off budget retains all history",
+    "enlarged calendar has no horizontal overflow",
+    "unreadable ledger never claims zero spending or full remaining budget",
+    "no browser runtime errors"
+  ],
+  "errors": [],
+  "environment": "Edge desktop, mobile/touch and enlarged-text emulation; no physical device claim"
+}

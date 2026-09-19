@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {createMultimodalRouter} from '../src/multimodal-engine.js';
+import {historicalBusPilot} from './helpers/bus-pilot.mjs';
 
 const read = name => JSON.parse(readFileSync(`public/data/${name}.json`));
 const sha = file => createHash('sha256').update(readFileSync(file)).digest('hex');
@@ -57,7 +58,7 @@ function dijkstra(edges,unverifiedBays,origin,target,departureSeconds) {
 }
 
 test('36 actual bus-only stop pairs match an independent exact-arithmetic Dijkstra oracle',async()=>{
-  const rail=read('rail-network'),bus=read('bus-network'),walking=read('walking-links'),manifest=read('bus-manifest');
+  const rail=read('rail-network'),bus=historicalBusPilot(read('bus-network')),walking=read('walking-links'),manifest=read('bus-manifest');
   const router=createMultimodalRouter(rail,bus,walking,{busOnly:true});
   const edges=referenceGraph(bus),banned=new Set(bus.assumptions.unverifiedBayStopCodes);
   const terminalChecks=[...banned].map(code=>({code,selfTransferPresent:router.network.transfers.some(edge=>edge.fromStopId===`bus:${code}`&&edge.toStopId===`bus:${code}`)}));

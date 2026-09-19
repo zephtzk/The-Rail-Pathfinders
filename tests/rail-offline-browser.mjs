@@ -1,3 +1,4 @@
+import {choosePlannerDate} from './planner-browser-helpers.mjs';
 import {chromium} from 'playwright';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -37,13 +38,13 @@ try {
     assert.equal(sha256(await response.body()),build.files[`dist/client${path}`],`served ${path} matches recorded build`);
   }
   check('served rail assets match recorded tested build and data hashes',true);
-  await page.goto(base);
+  await page.goto(base+'/?legacy=1');
   await page.locator('.route-hero').waitFor({timeout:60000});
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.waitForFunction(() => Boolean(navigator.serviceWorker.controller),{timeout:60000});
   await page.getByLabel('From station').fill('Woodlands');
   await page.getByLabel('To station').fill('Changi Airport');
-  await page.locator('[name=date]').fill('2026-09-19');
+  await choosePlannerDate(page,'date','2026-09-19');
   await page.locator('[name=deadlineTime]').fill('');
   await page.getByRole('button',{name:'Find rail journeys'}).click();
   await page.getByRole('button',{name:'Save this guidance'}).click();
@@ -66,7 +67,7 @@ try {
   await page.getByLabel('From station').fill('Tampines');
   await page.getByLabel('To station').fill('Bugis');
   await page.locator('[name=departureTime]').fill('08:10');
-  await page.locator('[name=deadlineDate]').fill('2026-09-19');
+  await choosePlannerDate(page,'deadlineDate','2026-09-19');
   await page.locator('[name=deadlineTime]').fill('09:00');
   await page.getByRole('button',{name:'Find rail journeys'}).click();
   offlineStates.push({stage:'after new search',online:await page.evaluate(() => navigator.onLine)});

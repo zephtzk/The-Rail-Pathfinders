@@ -108,10 +108,67 @@ class BusImportTests(unittest.TestCase):
             result=bus.build(source,ROOT/'data/bus/validation.json',output,manifest)
             self.assertEqual(output.read_bytes(),(ROOT/'public/data/bus-network.json').read_bytes())
             self.assertEqual(manifest.read_bytes(),(ROOT/'public/data/bus-manifest.json').read_bytes())
-            self.assertEqual(result['audit']['acceptedCounts'],{'BusStops':261,'BusRoutes':291,'BusServices':5})
+            self.assertEqual(result['audit']['acceptedCounts'],{'BusStops':5208,'BusRoutes':26823,'BusServices':798})
             compiled=json.loads(output.read_bytes())
-            self.assertEqual(compiled['assumptions']['unverifiedBayStopCodes'],['75009','52009','99009','10499'])
+            self.assertTrue({'75009','52009','99009','10499'}.issubset(compiled['assumptions']['unverifiedBayStopCodes']))
             self.assertIn('different alighting and boarding bays',compiled['assumptions']['unverifiedBayReason'])
+            audited=result['audit']['reviewedPatterns']
+            self.assertEqual(len(audited),801)
+            self.assertEqual(sum(p['status']=='included' for p in audited),798)
+            self.assertEqual(result['audit']['availability']['routablePatternCount'],776)
+            self.assertEqual(len(result['audit']['limitedSpanDayExceptions']),0)
+            self.assertEqual(len(result['audit']['fullyTimingExcludedPatternIds']),22)
+            self.assertIn('95129',compiled['assumptions']['unverifiedBayStopCodes'])
+            self.assertTrue(all(p['reasons'] for p in audited if p['status']=='excluded'))
+            self.assertIn('distance-reset-segment-withheld',next(p for p in audited if p['id']=='857:TTS:1')['notes'])
+            self.assertIn('no-published-headway-fixed-trips-unresolved',next(p for p in audited if p['id']=='684:SMRT:1')['notes'])
+
+    def test_broad_audit_keeps_unsupported_patterns_explicit_without_reindexing(self):
+        data,metadata,rules=fixture()
+        rules['selectionMode']='audited-frequency-patterns'
+        second=copy.deepcopy(data['BusServices'][0]);second['ServiceNo']='2B';data['BusServices'].append(second)
+        rows=copy.deepcopy(data['BusRoutes'])
+        for row in rows:row['ServiceNo']='2B'
+        rows[1]['StopSequence']=4
+        data['BusRoutes'].extend(rows)
+        network,audit=bus.compile_records(data,metadata,rules)
+        self.assertEqual([p['serviceNo'] for p in network['patterns']],['2A','2B'])
+        self.assertEqual([r['sequence'] for r in network['patterns'][1]['stops']],[1,3,4])
+        self.assertIn('source-sequence-preserved',audit['reviewedPatterns'][1]['notes'])
+
+    def test_broad_import_preserves_missing_day_and_period_instead_of_inventing_service(self):
+        data,metadata,rules=fixture();rules['selectionMode']='audited-frequency-patterns'
+        data['BusServices'][0]['PM_Peak_Freq']='-'
+        for row in data['BusRoutes']:row.update(SUN_FirstBus='-',SUN_LastBus='-')
+        network,_=bus.compile_records(data,metadata,rules)
+        self.assertIsNone(network['patterns'][0]['headways']['PM_Peak_Freq'])
+        self.assertIsNone(network['patterns'][0]['stops'][0]['firstLast']['SUN'])
+
+    def test_full_directory_survives_missing_frequency_and_short_service_span(self):
+        data,metadata,rules=fixture();rules['selectionMode']='audited-frequency-patterns'
+        for field in bus.FREQUENCIES:data['BusServices'][0][field]='-'
+        network,_=bus.compile_records(data,metadata,rules)
+        self.assertEqual(len(network['stops']),3)
+        self.assertFalse(network['patterns'][0]['timingSupported'])
+        data['BusServices'][0]['AM_Peak_Freq']='5-10'
+        data['BusServices'][0]['AM_Offpeak_Freq']='00-00'
+        for row in data['BusRoutes']:row.update(WD_FirstBus='0700',WD_LastBus='0800')
+        network,_=bus.compile_records(data,metadata,rules)
+        self.assertTrue(network['patterns'][0]['timingSupported'])
+        self.assertIn('WD',network['patterns'][0]['supportedDayTypes'])
+        self.assertEqual(network['patterns'][0]['invalidHeadwayFields'],['AM_Offpeak_Freq'])
+
+    def test_distance_reset_is_a_segment_boundary_without_changed_source_values(self):
+        data,metadata,rules=fixture();rules['selectionMode']='audited-frequency-patterns'
+        data['BusRoutes'][0]['Distance']=2
+        data['BusRoutes'][1]['Distance']=3
+        data['BusRoutes'][2]['Distance']=0
+        data['BusServices'][0]['LoopDesc']=''
+        network,_=bus.compile_records(data,metadata,rules)
+        rows=network['patterns'][0]['stops']
+        self.assertEqual([r['distanceKm'] for r in rows],[2,3,0])
+        self.assertEqual([r['distanceSegment'] for r in rows],[0,0,1])
+        self.assertTrue(network['patterns'][0]['timingSupported'])
 
     def test_pagination_tampering_and_unpinned_version_fail(self):
         data,_,_=fixture()

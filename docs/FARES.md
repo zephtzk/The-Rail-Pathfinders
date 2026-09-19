@@ -1,5 +1,7 @@
 # Saved places, fare estimates and expenditure
 
+R5 adds an optional weekly/monthly commute budget using the ledger's existing **recorded total**: confirmed charges plus recorded estimates and their adjustments. Estimates remain explicit until replaced by confirmed charges; unpriced trips make remaining budget incomplete. Geometry clamps at 100% while the text reports the full overrun. Singapore Monday-start weeks/months and original-trip refund attribution are unchanged. All history remains accessible and changing/disabling the budget only changes a separate local setting. Departure-scheme hints never modify recorded spending. Broader R5 routing does not broaden the fare-distance allowlist below.
+
 ## Fare coverage and evidence
 
 `src/fare-data.js` pins fare version `ptc-2025-12-27.review-2026-09-18`. Rates are effective from **27 December 2025**, checked on **18 September 2026**. Dates before this version are unavailable. No superseding effective date was present in the reviewed sources; future estimates retain this version and can change when a new schedule is published.

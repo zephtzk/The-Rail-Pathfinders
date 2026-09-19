@@ -5,6 +5,7 @@ const paths = {
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/>',
   route: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6h7a4 4 0 0 1 0 8h-7a4 4 0 0 0 0 8h3"/>',
   trip: '<rect x="5" y="3" width="14" height="16" rx="5"/><path d="M5 11h14M9 19l-2 3m8-3 2 3M10 6h4"/><circle cx="8.5" cy="15" r=".7" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15" r=".7" fill="currentColor" stroke="none"/>',
+  bus: '<rect x="4" y="2" width="16" height="18" rx="3"/><rect x="6" y="6" width="12" height="6" rx="1"/><path d="M9 4h6M4 7H2v5m18-5h2v5M6 20v2h3v-2m6 0v2h3v-2"/><circle cx="7.5" cy="16" r="1" fill="currentColor" stroke="none"/><circle cx="16.5" cy="16" r="1" fill="currentColor" stroke="none"/>',
   saved: '<path d="M7 3.5h10A1.5 1.5 0 0 1 18.5 5v15L12 16l-6.5 4V5A1.5 1.5 0 0 1 7 3.5Z"/><path d="M9 8h6"/>',
   preferences: '<path d="M4 7h7m6 0h3M4 17h3m6 0h7"/><circle cx="14" cy="7" r="3"/><circle cx="10" cy="17" r="3"/>',
   location: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="var(--icon-fill,none)"/><path d="M12 2v3m10 7h-3m-7 10v-3M2 12h3"/>',
@@ -51,7 +52,7 @@ const paths = {
   text: '<path d="M3 20 8 5l5 15M5 14h6m5 6 3-10 3 10m-5-4h4"/>',
   refresh: '<path d="M20 10a8 8 0 0 0-14-5L3 8m0-5v5h5m-4 6a8 8 0 0 0 14 5l3-3m0 5v-5h-5"/>',
 };
-const aliases = { train: 'trip', bus: 'trip', settings: 'preferences', bookmark: 'saved', navigation: 'compass', 'wifi-off': 'offline', wifi: 'online', comfortable: 'calm', destination: 'pin', edit: 'preferences', arrow: 'arrow-right' };
+const aliases = { train: 'trip', settings: 'preferences', bookmark: 'saved', navigation: 'compass', 'wifi-off': 'offline', wifi: 'online', comfortable: 'calm', destination: 'pin', edit: 'preferences', arrow: 'arrow-right' };
 
 export function icon(name, size = 24) {
   const resolved = aliases[name] ?? name;

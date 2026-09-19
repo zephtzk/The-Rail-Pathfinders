@@ -2,12 +2,16 @@ import {fareEstimateHTML} from './fare-ui.js';
 import {mountCompanion} from './copilot-ui.js';
 import {createRailRouter} from './rail-engine.js';
 import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
+import {mountDatePickers} from './date-picker.js';
+import {icon} from './icons.js';
+import {railBadgeStyle} from './rail-service-style.js';
 
 // Presentation owns form state and rendering. The routing engine owns every timing decision.
 const SAVE_KEY = 'commute-copilot-rail-guidance-v1';
 const app = document.querySelector('#app');
 let network, manifest, router, result, selectedRoute, submittedInput, lookup, companion, dirty = false;
 let planningPreferences = legacyPlannerSettings();
+let datePickers;
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const minutes = seconds => {
   if (!Number.isFinite(seconds)) return '—';
@@ -46,7 +50,7 @@ const routeColor = id => {
   const color = lookup.routes.get(id)?.color ?? '23786a';
   return /^#?[a-f\d]{6}$/i.test(color) ? `#${color.replace('#','')}` : '#23786a';
 };
-const linePill = id => `<span class="line-pill"><i style="background:${routeColor(id)}" aria-hidden="true"></i>${escape(routeLabel(id))}</span>`;
+const linePill = id => `<span class="line-pill rail-service-fill" style="${railBadgeStyle(id,network?.routes)}">${icon('train',16)}${escape(routeLabel(id))}</span>`;
 
 function shell() {
   app.innerHTML = `<header class="rail-header"><a class="rail-brand" href="/"><img src="/icon.svg" width="36" height="36" alt=""><span>Commute <strong>Copilot</strong></span></a><a class="replay-link" href="/replay.html">Original corridor replay <span aria-hidden="true">↗</span></a></header>
@@ -92,20 +96,25 @@ function formMarkup(input, disabled = false) {
 }
 
 function bindForm() {
+  datePickers?.destroy();
   const form = document.querySelector('#rail-form');
   let previousDate = form.elements.date.value;
   form.elements.date.addEventListener('change', () => {
     if (form.elements.deadlineDate.value === previousDate) form.elements.deadlineDate.value = form.elements.date.value;
     previousDate = form.elements.date.value;
+    datePickers?.refresh();
   });
   form.addEventListener('submit', event => { event.preventDefault(); search({focus:true}); });
-  form.addEventListener('input', () => {
+  const changed = () => {
     dirty = true;
     companion?.clearPrepared();
     const note = document.querySelector('#stale-results');
     if (note) note.hidden = false;
     document.querySelector('#preference-note').hidden = form.elements.preference.value !== 'quieter';
-  });
+  };
+  form.addEventListener('input', changed);
+  form.addEventListener('change', changed);
+  datePickers = mountDatePickers(form);
   document.querySelector('#swap-stations').addEventListener('click', () => {
     [form.elements.origin.value,form.elements.destination.value] = [form.elements.destination.value,form.elements.origin.value];
     form.dispatchEvent(new Event('input'));
@@ -333,6 +342,8 @@ async function start() {
       network = saved.network; manifest = saved.manifest; submittedInput = saved.input; selectedRoute = saved.route;
       result = {status:'saved',routes:[selectedRoute]}; makeLookup();
       document.querySelector('#planner').innerHTML = formMarkup(submittedInput,true);
+      datePickers?.destroy();
+      datePickers = mountDatePickers(document.querySelector('#rail-form'));
       renderCoverage(); renderResult({saved:true,savedAt:saved.savedAt});
     } else {
       document.querySelector('#planner').innerHTML = '<h2 id="planner-title">Rail data unavailable</h2><p class="help">Coverage is not yet loaded, so station choices and routes cannot be verified.</p><button id="reload-data" class="primary" type="button">Reload timetable</button>';
@@ -341,7 +352,7 @@ async function start() {
     }
     console.warn('Rail timetable unavailable:',error.message);
   }
-  companion=mountCompanion({getSelected:()=>dirty?null:({route:selectedRoute,input:submittedInput}),name:id=>lookup?.labels.get(id)??stopLabel(id),getPlaces:()=>network?.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{const f=document.querySelector('#rail-form');if(!f)return;planningPreferences=legacyPlannerInput({},p.preferences);f.elements.origin.value=stationLabel(p.origin.stationId??p.origin.id);f.elements.destination.value=stationLabel(p.destination.stationId??p.destination.id);f.elements.date.value=p.departureDate;f.elements.departureTime.value=p.departureTime;f.elements.deadlineTime.value='';for(const key of ['walkingLimitMinutes','preference','maxExtraMinutes'])if(p.preferences?.[key]!=null){const field=f.elements[key],value=String(p.preferences[key]);if(![...field.options].some(option=>option.value===value))field.add(new Option(value,value));field.value=value;}f.dispatchEvent(new Event('input'));f.scrollIntoView();},onEndpoint:(endpoint,place)=>{const f=document.querySelector('#rail-form');if(f){f.elements[endpoint].value=stationLabel(place.stationId??place.id);f.dispatchEvent(new Event('input'));}}});
+  companion=mountCompanion({getSelected:()=>dirty?null:({route:selectedRoute,input:submittedInput}),name:id=>lookup?.labels.get(id)??stopLabel(id),getPlaces:()=>network?.stations.map(s=>({id:s.id,label:s.name,lat:s.lat,lng:s.lon??s.lng,sourceId:'lta:'+s.id,stationId:s.id,coverage:'supported',accessibility:'unknown'}))??[],onSelectPlan:p=>{const f=document.querySelector('#rail-form');if(!f)return;planningPreferences=legacyPlannerInput({},p.preferences);f.elements.origin.value=stationLabel(p.origin.stationId??p.origin.id);f.elements.destination.value=stationLabel(p.destination.stationId??p.destination.id);f.elements.date.value=p.departureDate;f.elements.date.dispatchEvent(new Event('change',{bubbles:true}));f.elements.departureTime.value=p.departureTime;f.elements.deadlineTime.value='';for(const key of ['walkingLimitMinutes','preference','maxExtraMinutes'])if(p.preferences?.[key]!=null){const field=f.elements[key],value=String(p.preferences[key]);if(![...field.options].some(option=>option.value===value))field.add(new Option(value,value));field.value=value;}f.dispatchEvent(new Event('input'));f.scrollIntoView();},onEndpoint:(endpoint,place)=>{const f=document.querySelector('#rail-form');if(f){f.elements[endpoint].value=stationLabel(place.stationId??place.id);f.dispatchEvent(new Event('input'));}}});
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
 

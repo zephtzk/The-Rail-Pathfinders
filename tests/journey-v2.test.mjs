@@ -70,7 +70,7 @@ test('detour card advances only at confirmed connected checkpoints and shows the
   const now=1000,result=rankToilets(FIXTURE_LAYOUT,{from:'platform',allowFixtures:true,statuses:fixtureStatuses('none',now),now,arrivalBaseMs:Date.parse('2026-09-18T08:00:00Z')})[0],full=previewToiletDetour(FIXTURE_LAYOUT,result,{now});
   let state=acceptDetour(startJourney(plan(),100),full,now);
   assert.equal(journeyCard(state).current,full.steps[0].text);assert.equal(journeyCard(state).next,full.steps[1].text);
-  state=confirmCheckpoint(state,{nodeId:'a-bottom',stationId:'fixture-interchange'},1100);assert.equal(state.detour.stepIndex,1);assert.match(journeyCard(state).current,/fixture-lift-a/);
+  state=confirmCheckpoint(state,{nodeId:'a-bottom',stationId:'fixture-interchange'},1100);assert.equal(state.detour.stepIndex,1);assert.match(journeyCard(state).current,/Lift A/);assert.doesNotMatch(journeyCard(state).current,/fixture-lift-a/);
   state=confirmCheckpoint(state,{nodeId:'toilet-a',stationId:'fixture-interchange'},1200);assert.equal(state.detour.status,'accepted');assert.match(journeyCard(state).current,/Confirm Reached toilet/);
   state=stopAction(state,'reached',1300);state=stopAction(state,'resume',1400);assert.equal(state.detour.status,'returning');
   const returning=full.steps.filter(s=>s.id.startsWith('toilet-return-'));assert.equal(journeyCard(state).next,returning[1].text);

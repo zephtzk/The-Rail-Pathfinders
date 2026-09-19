@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-09-18T19:26:33.986Z",
+  "kind": "authenticated-provider-public-location-smoke",
+  "transport": "local same-origin server; server-held OneMap token",
+  "deployment": false,
+  "physicalDevice": false,
+  "requests": [
+    {
+      "endpoint": "/api/address/search",
+      "input": {
+        "query": "Bugis Junction"
+      },
+      "httpStatus": 200,
+      "result": "ok",
+      "retrievedAt": 1789759594080,
+      "responseSha256": "9b61958fd174faf413e0949e028484d41e969e76eeb0bbb1d058d41b0885d766"
+    },
+    {
+      "endpoint": "/api/address/search",
+      "input": {
+        "query": "Tampines Mall"
+      },
+      "httpStatus": 200,
+      "result": "ok",
+      "retrievedAt": 1789759594130,
+      "responseSha256": "e284aed40600f7bb0633def96b3f0d702dd3e924f32114b807ea489a9f21fc0d"
+    },
+    {
+      "endpoint": "/api/address/route",
+      "input": {
+        "origin": {
+          "lat": 1.299112874758746,
+          "lng": 103.8554111737572
+        },
+        "destination": {
+          "lat": 1.352527372785196,
+          "lng": 103.9446987510717
+        },
+        "date": "2026-09-19",
+        "departureTime": "10:00",
+        "preferences": {
+          "walkingLimitMinutes": 30,
+          "stepFree": false
+        }
+      },
+      "httpStatus": 200,
+      "result": "ok",
+      "retrievedAt": 1789759594199,
+      "responseSha256": "9f5edaa31096042028522a88c07981d38617421fb924f3c3128b787707267656"
+    }
+  ],
+  "result": "ok",
+  "message": "OneMap planned options. Review the whole journey before accepting. Indoor guidance and accessibility remain unverified.",
+  "publicLocations": {
+    "origin": "200 VICTORIA STREET BUGIS JUNCTION SINGAPORE 188021",
+    "destination": "4 TAMPINES CENTRAL 5 TAMPINES MALL SINGAPORE 529510"
+  },
+  "plans": [
+    {
+      "valid": true,
+      "bytes": 4864,
+      "phases": [
+        {
+          "type": "walk",
+          "service": "",
+          "from": "200 VICTORIA STREET BUGIS JUNCTION SINGAPORE 188021",
+          "to": "BUGIS MRT STATION"
+        },
+        {
+          "type": "ride",
+          "service": "EW",
+          "from": "BUGIS MRT STATION",
+          "to": "TAMPINES MRT STATION"
+        },
+        {
+          "type": "walk",
+          "service": "",
+          "from": "TAMPINES MRT STATION",
+          "to": "4 TAMPINES CENTRAL 5 TAMPINES MALL SINGAPORE 529510"
+        }
+      ],
+      "walkingSeconds": 431,
+      "departureSeconds": 36134,
+      "arrivalSeconds": 38015,
+      "geometryPoints": 104,
+      "schematicSegments": 0,
+      "accessibility": "unknown",
+      "fareStatus": "unavailable",
+      "hasLocalRoutingContext": false,
+      "offlineRestoration": true
+    }
+  ]
+}

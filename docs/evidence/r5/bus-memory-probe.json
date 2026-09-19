@@ -1,0 +1,2159 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-19T02:11:45.230Z",
+  "recordedAt": "2026-09-19T02:11:46.912Z",
+  "evidenceClass": "Instrumented Node desktop memory sampling inside route search; not an exact peak, browser, physical-phone or provider-latency measurement",
+  "environment": {
+    "node": "v24.16.0",
+    "v8": "13.6.233.17-node.49",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285H",
+    "logicalCpus": 16,
+    "totalSystemMemoryBytes": 33677848576,
+    "runtimeFlags": [
+      "--expose-gc"
+    ]
+  },
+  "scriptSha256": "c6f462a12691d16bd3122866d86cd6859906ec7c598f37069d016e73c84585a3",
+  "source": {
+    "rail-engine.js": {
+      "sha256": "fee8b8351c779b671a15966f826cd0fad6a6bf8f1b3444da3664c8d9c21c559e",
+      "bytes": 36574
+    },
+    "multimodal-engine.js": {
+      "sha256": "4a2360e379759665a9119956e710adb54634a432a26fff267cf0e2716a9c0715",
+      "bytes": 16043
+    },
+    "search-arena.js": {
+      "sha256": "6b7d0e26b7418bfaf4b6c7e89fbba9f4e8f83223be20af9d7840cefc7b59db0a",
+      "bytes": 5773
+    }
+  },
+  "instrumentedSources": {
+    "rail-engine.js": {
+      "sha256": "6fc57dab7ec0d01ff8b7c9c9c87de344715a80a20eabba0bcdfd95e8ae403f25",
+      "bytes": 36847
+    },
+    "multimodal-engine.js": {
+      "sha256": "4a2360e379759665a9119956e710adb54634a432a26fff267cf0e2716a9c0715",
+      "bytes": 16043
+    },
+    "search-arena.js": {
+      "sha256": "6b7d0e26b7418bfaf4b6c7e89fbba9f4e8f83223be20af9d7840cefc7b59db0a",
+      "bytes": 5773
+    }
+  },
+  "data": [
+    {
+      "name": "rail-network",
+      "bytes": 13426545,
+      "sha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934"
+    },
+    {
+      "name": "bus-network",
+      "bytes": 5194461,
+      "sha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1"
+    },
+    {
+      "name": "walking-links",
+      "bytes": 29351,
+      "sha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+    }
+  ],
+  "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
+  "availability": {
+    "registryPatternCount": 798,
+    "registryServiceNumberCount": 602,
+    "registryStopCount": 5208,
+    "routablePatternCount": 776,
+    "routableServiceNumberCount": 583,
+    "routableStopCount": 5206
+  },
+  "ignoredEngineCopy": "test-results/r5-memory/profile-lAlbRa",
+  "instrumentation": {
+    "productionFilesModified": false,
+    "reversibleSourceCheck": true,
+    "probeFrequency": {
+      "frequencyExpansions": 1024,
+      "railConnections": 128,
+      "beforeAndAfterEachQuery": true
+    },
+    "explicitGcDuringQueries": false,
+    "explicitGcCallsAfterQueries": 1,
+    "retainedAtGc": "Router, parsed source networks, module copies and bounded summaries; full returned route objects are released.",
+    "limitations": [
+      "The true peak between probes may be higher.",
+      "Instrumentation and summaries add allocation and runtime overhead; elapsed times are not a clean performance benchmark.",
+      "Per-metric maxima may occur at different probes.",
+      "external already includes array-buffer memory; do not add arrayBuffers to heapPlusExternal.",
+      "Initialization stages are separate observations, not a continuously sampled startup peak."
+    ]
+  },
+  "targetsSetBeforeMeasurement": {
+    "sampledHeapUsedBytes": 157286400
+  },
+  "querySet": {
+    "base": {
+      "date": "2026-09-18",
+      "departureTime": "10:00",
+      "walkingLimitMinutes": 30,
+      "maxExtraMinutes": 15,
+      "preference": "fastest"
+    },
+    "pairs": [
+      [
+        "bus:75009",
+        "bus:75059"
+      ],
+      [
+        "bus:99009",
+        "bus:28009"
+      ],
+      [
+        "bus:28009",
+        "bus:59009"
+      ],
+      [
+        "bus:59009",
+        "bus:77009"
+      ],
+      [
+        "bus:75009",
+        "DT14"
+      ],
+      [
+        "DT14",
+        "bus:75009"
+      ],
+      [
+        "bus:99009",
+        "NS22"
+      ],
+      [
+        "NS9",
+        "CG2"
+      ]
+    ],
+    "rounds": 3,
+    "total": 24
+  },
+  "startupMemory": {
+    "rss": 49172480,
+    "heapTotal": 7020544,
+    "heapUsed": 5483376,
+    "external": 2089016,
+    "arrayBuffers": 53025
+  },
+  "afterDataMemory": {
+    "rss": 153149440,
+    "heapTotal": 100487168,
+    "heapUsed": 51534288,
+    "external": 39313070,
+    "arrayBuffers": 18656054
+  },
+  "initialMemory": {
+    "rss": 181526528,
+    "heapTotal": 198967296,
+    "heapUsed": 94114640,
+    "external": 4670354,
+    "arrayBuffers": 2634344
+  },
+  "probes": 10017,
+  "byKind": {
+    "beforeQuery": 24,
+    "frequencyExpansions": 7593,
+    "railConnections": 2376,
+    "afterQuery": 24
+  },
+  "sampledMaximum": {
+    "rss": 274591744,
+    "heapTotal": 217423872,
+    "heapUsed": 149173800,
+    "external": 5569388,
+    "arrayBuffers": 3470460,
+    "heapPlusExternal": 154612116
+  },
+  "heapHighWaterSample": {
+    "rss": 272642048,
+    "heapTotal": 217423872,
+    "heapUsed": 149173800,
+    "external": 5438316,
+    "arrayBuffers": 3339388,
+    "kind": "railConnections",
+    "counter": 5376,
+    "queryIndex": 24
+  },
+  "beforeExplicitGc": {
+    "rss": 270258176,
+    "heapTotal": 215162880,
+    "heapUsed": 83414832,
+    "external": 5438316,
+    "arrayBuffers": 3339388
+  },
+  "retainedMemoryAfterGc": {
+    "rss": 269463552,
+    "heapTotal": 213217280,
+    "heapUsed": 75448656,
+    "external": 5438316,
+    "arrayBuffers": 3339388
+  },
+  "queries": [
+    {
+      "queryIndex": 1,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "bus:75059"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 37110,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 69.27719999999997,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 28
+      },
+      "ms": 70.46400000000003,
+      "beforeMemory": {
+        "rss": 181526528,
+        "heapTotal": 198967296,
+        "heapUsed": 94118944,
+        "external": 4670354,
+        "arrayBuffers": 2634344
+      },
+      "afterMemory": {
+        "rss": 187871232,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340
+      },
+      "probes": 32,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 0,
+        "railConnections": 30,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 190054400,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340,
+        "heapPlusExternal": 106390092
+      },
+      "heapHighWaterSample": {
+        "rss": 187871232,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 1
+      },
+      "routeObjectives": [
+        [
+          37110,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 2,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "bus:28009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 48130,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 134.40880000000004,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 134.7953,
+      "beforeMemory": {
+        "rss": 187883520,
+        "heapTotal": 201285632,
+        "heapUsed": 101218000,
+        "external": 5180268,
+        "arrayBuffers": 3081340
+      },
+      "afterMemory": {
+        "rss": 221057024,
+        "heapTotal": 201080832,
+        "heapUsed": 76451080,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "probes": 576,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 224038912,
+        "heapTotal": 203571200,
+        "heapUsed": 134104688,
+        "external": 5434220,
+        "arrayBuffers": 3335292,
+        "heapPlusExternal": 139538908
+      },
+      "heapHighWaterSample": {
+        "rss": 224038912,
+        "heapTotal": 203571200,
+        "heapUsed": 134104688,
+        "external": 5434220,
+        "arrayBuffers": 3335292,
+        "kind": "railConnections",
+        "counter": 19200,
+        "queryIndex": 2
+      },
+      "routeObjectives": [
+        [
+          48130,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 3,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:28009",
+        "destinationId": "bus:59009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 43950,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 63.028999999999996,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 17
+      },
+      "ms": 63.3698,
+      "beforeMemory": {
+        "rss": 221065216,
+        "heapTotal": 201080832,
+        "heapUsed": 76453280,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "afterMemory": {
+        "rss": 219938816,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "probes": 332,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 229388288,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 97320892
+      },
+      "heapHighWaterSample": {
+        "rss": 219938816,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 3
+      },
+      "routeObjectives": [
+        [
+          43950,
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 4,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:59009",
+        "destinationId": "bus:77009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 42220,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 11184,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 27.50740000000002,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 24
+      },
+      "ms": 27.80800000000005,
+      "beforeMemory": {
+        "rss": 219971584,
+        "heapTotal": 201080832,
+        "heapUsed": 91888960,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "afterMemory": {
+        "rss": 225206272,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "probes": 175,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 86,
+        "railConnections": 87,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 226885632,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 106974172
+      },
+      "heapHighWaterSample": {
+        "rss": 225206272,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 4
+      },
+      "routeObjectives": [
+        [
+          42220,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 5,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "DT14"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41570,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 10301,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 147.77640000000008,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 29
+      },
+      "ms": 148.42290000000003,
+      "beforeMemory": {
+        "rss": 225210368,
+        "heapTotal": 201080832,
+        "heapUsed": 101542240,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "afterMemory": {
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "probes": 934,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 852,
+        "railConnections": 80,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 118455908
+      },
+      "heapHighWaterSample": {
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 5
+      },
+      "routeObjectives": [
+        [
+          41570,
+          2,
+          570
+        ],
+        [
+          42170,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 6,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "DT14",
+        "destinationId": "bus:75009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41270,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 36.720699999999965,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 91
+      },
+      "ms": 37.162199999999984,
+      "beforeMemory": {
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113024056,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "afterMemory": {
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "probes": 156,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 130016428
+      },
+      "heapHighWaterSample": {
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 6
+      },
+      "routeObjectives": [
+        [
+          41270,
+          2,
+          570
+        ],
+        [
+          41970,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 7,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "NS22"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 44340,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 14064,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 120.22720000000004,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 120.80259999999998,
+      "beforeMemory": {
+        "rss": 252506112,
+        "heapTotal": 204042240,
+        "heapUsed": 124584576,
+        "external": 5434220,
+        "arrayBuffers": 3208316
+      },
+      "afterMemory": {
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460
+      },
+      "probes": 976,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 865,
+        "railConnections": 109,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "heapPlusExternal": 141221964
+      },
+      "heapHighWaterSample": {
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 7
+      },
+      "routeObjectives": [
+        [
+          44340,
+          2,
+          630
+        ]
+      ]
+    },
+    {
+      "queryIndex": 8,
+      "round": 1,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "NS9",
+        "destinationId": "CG2"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41240,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9860,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 7.328100000000063,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 10.110900000000015,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
+      },
+      "ms": 18.062099999999987,
+      "beforeMemory": {
+        "rss": 260530176,
+        "heapTotal": 206036992,
+        "heapUsed": 135654648,
+        "external": 5569388,
+        "arrayBuffers": 3470460
+      },
+      "afterMemory": {
+        "rss": 273735680,
+        "heapTotal": 213852160,
+        "heapUsed": 90223712,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 158,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 274591744,
+        "heapTotal": 213852160,
+        "heapUsed": 138158896,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "heapPlusExternal": 143728284
+      },
+      "heapHighWaterSample": {
+        "rss": 263290880,
+        "heapTotal": 206036992,
+        "heapUsed": 138158896,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "kind": "railConnections",
+        "counter": 5376,
+        "queryIndex": 8
+      },
+      "routeObjectives": [
+        [
+          41240,
+          3,
+          1080
+        ]
+      ]
+    },
+    {
+      "queryIndex": 9,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "bus:75059"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 37110,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 2.2848999999999933,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 28
+      },
+      "ms": 2.5673000000000457,
+      "beforeMemory": {
+        "rss": 273735680,
+        "heapTotal": 213852160,
+        "heapUsed": 90225736,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 32,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 0,
+        "railConnections": 30,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 273747968,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 97620740
+      },
+      "heapHighWaterSample": {
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 9
+      },
+      "routeObjectives": [
+        [
+          37110,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 10,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "bus:28009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 48130,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 67.23299999999995,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 67.43560000000002,
+      "beforeMemory": {
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92053360,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 576,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270917632,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 110917164
+      },
+      "heapHighWaterSample": {
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 10
+      },
+      "routeObjectives": [
+        [
+          48130,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 11,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:28009",
+        "destinationId": "bus:59009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 43950,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 39.06869999999992,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 17
+      },
+      "ms": 39.36299999999994,
+      "beforeMemory": {
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105349552,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 332,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 269803520,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 118367292
+      },
+      "heapHighWaterSample": {
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 11
+      },
+      "routeObjectives": [
+        [
+          43950,
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 12,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:59009",
+        "destinationId": "bus:77009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 42220,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 11184,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 21.672199999999975,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 24
+      },
+      "ms": 21.878399999999942,
+      "beforeMemory": {
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112799680,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 175,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 86,
+        "railConnections": 87,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 124052508
+      },
+      "heapHighWaterSample": {
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 12
+      },
+      "routeObjectives": [
+        [
+          42220,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 13,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "DT14"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41570,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 10301,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 118.37410000000011,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 29
+      },
+      "ms": 118.60309999999993,
+      "beforeMemory": {
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118484896,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 934,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 852,
+        "railConnections": 80,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 131239004
+      },
+      "heapHighWaterSample": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 13
+      },
+      "routeObjectives": [
+        [
+          41570,
+          2,
+          570
+        ],
+        [
+          42170,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 14,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "DT14",
+        "destinationId": "bus:75009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41270,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 25.51369999999997,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 91
+      },
+      "ms": 25.751999999999953,
+      "beforeMemory": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125671488,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 156,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 139245564
+      },
+      "heapHighWaterSample": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 14
+      },
+      "routeObjectives": [
+        [
+          41270,
+          2,
+          570
+        ],
+        [
+          41970,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 15,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "NS22"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 44340,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 14064,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 109.65409999999997,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 109.86739999999986,
+      "beforeMemory": {
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133678048,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "probes": 976,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 865,
+        "railConnections": 109,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 148417788
+      },
+      "heapHighWaterSample": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 15
+      },
+      "routeObjectives": [
+        [
+          44340,
+          2,
+          630
+        ]
+      ]
+    },
+    {
+      "queryIndex": 16,
+      "round": 2,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "NS9",
+        "destinationId": "CG2"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41240,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9860,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 7.799399999999878,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 6.913700000000063,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
+      },
+      "ms": 15.079700000000003,
+      "beforeMemory": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142850360,
+        "external": 5569388,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270163968,
+        "heapTotal": 215162880,
+        "heapUsed": 87387736,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 158,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 148128352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 153697740
+      },
+      "heapHighWaterSample": {
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 148128352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "railConnections",
+        "counter": 8960,
+        "queryIndex": 16
+      },
+      "routeObjectives": [
+        [
+          41240,
+          3,
+          1080
+        ]
+      ]
+    },
+    {
+      "queryIndex": 17,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "bus:75059"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 37110,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 2.236599999999953,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 28
+      },
+      "ms": 2.4273000000000593,
+      "beforeMemory": {
+        "rss": 270163968,
+        "heapTotal": 215162880,
+        "heapUsed": 87389528,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 32,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 0,
+        "railConnections": 30,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 94647308
+      },
+      "heapHighWaterSample": {
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 17
+      },
+      "routeObjectives": [
+        [
+          37110,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 18,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "bus:28009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 48130,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 73.79369999999994,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 73.9344000000001,
+      "beforeMemory": {
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89210768,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 576,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 107818364
+      },
+      "heapHighWaterSample": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 18
+      },
+      "routeObjectives": [
+        [
+          48130,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 19,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:28009",
+        "destinationId": "bus:59009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 43950,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 39.91090000000008,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 17
+      },
+      "ms": 40.132699999999886,
+      "beforeMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102382184,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 332,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 115352436
+      },
+      "heapHighWaterSample": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 19
+      },
+      "routeObjectives": [
+        [
+          43950,
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 20,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:59009",
+        "destinationId": "bus:77009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 42220,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 11184,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 21.28670000000011,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 24
+      },
+      "ms": 21.510700000000043,
+      "beforeMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109915896,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 175,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 86,
+        "railConnections": 87,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 121036412
+      },
+      "heapHighWaterSample": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 20
+      },
+      "routeObjectives": [
+        [
+          42220,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "queryIndex": 21,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:75009",
+        "destinationId": "DT14"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41570,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 10301,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 131.07000000000016,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 29
+      },
+      "ms": 131.29520000000002,
+      "beforeMemory": {
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115599872,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 934,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 852,
+        "railConnections": 80,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 128214076
+      },
+      "heapHighWaterSample": {
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 21
+      },
+      "routeObjectives": [
+        [
+          41570,
+          2,
+          570
+        ],
+        [
+          42170,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 22,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "DT14",
+        "destinationId": "bus:75009"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41270,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 30.85739999999987,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 91
+      },
+      "ms": 31.115600000000086,
+      "beforeMemory": {
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122777632,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 156,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 136228132
+      },
+      "heapHighWaterSample": {
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 22
+      },
+      "routeObjectives": [
+        [
+          41270,
+          2,
+          570
+        ],
+        [
+          41970,
+          1,
+          570
+        ]
+      ]
+    },
+    {
+      "queryIndex": 23,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "bus:99009",
+        "destinationId": "NS22"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 44340,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 14064,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 115.8605,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 5
+      },
+      "ms": 116.07929999999988,
+      "beforeMemory": {
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130791688,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 976,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 865,
+        "railConnections": 109,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 145385748
+      },
+      "heapHighWaterSample": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
+        "queryIndex": 23
+      },
+      "routeObjectives": [
+        [
+          44340,
+          2,
+          630
+        ]
+      ]
+    },
+    {
+      "queryIndex": 24,
+      "round": 3,
+      "input": {
+        "date": "2026-09-18",
+        "departureTime": "10:00",
+        "walkingLimitMinutes": 30,
+        "maxExtraMinutes": 15,
+        "preference": "fastest",
+        "originId": "NS9",
+        "destinationId": "CG2"
+      },
+      "status": "ok",
+      "validResult": true,
+      "probeCountsMatch": true,
+      "error": null,
+      "arrivalSeconds": 41240,
+      "diagnostics": {
+        "algorithm": "Pareto connection scan",
+        "connectionsScanned": 9860,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
+        "serviceDates": [
+          "2026-09-18"
+        ],
+        "elapsedMs": 8.366700000000037,
+        "searchEndSeconds": 57600,
+        "carryoverOnly": false,
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 4.578099999999949,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
+      },
+      "ms": 13.318899999999985,
+      "beforeMemory": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139949208,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "afterMemory": {
+        "rss": 270249984,
+        "heapTotal": 215162880,
+        "heapUsed": 83413584,
+        "external": 5438316,
+        "arrayBuffers": 3339388
+      },
+      "probes": 158,
+      "byKind": {
+        "beforeQuery": 1,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
+        "afterQuery": 1
+      },
+      "sampledMaximum": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 149173800,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 154612116
+      },
+      "heapHighWaterSample": {
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 149173800,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "railConnections",
+        "counter": 5376,
+        "queryIndex": 24
+      },
+      "routeObjectives": [
+        [
+          41240,
+          3,
+          1080
+        ]
+      ]
+    }
+  ],
+  "sourceUnchanged": {
+    "rail-engine.js": true,
+    "multimodal-engine.js": true,
+    "search-arena.js": true
+  },
+  "dataUnchanged": {
+    "rail-network": true,
+    "bus-network": true,
+    "walking-links": true
+  },
+  "measurementValid": true,
+  "allQueriesOk": true,
+  "heapTargetMet": true,
+  "pass": true
+}

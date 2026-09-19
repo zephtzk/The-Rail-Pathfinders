@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-09-18T19:20:16.771Z",
+  "evidenceClass": "Real upstream via already-authorized localhost runtime; two bounded manual requests; no credentials read or recorded",
+  "results": [
+    {
+      "stop": "75009",
+      "httpStatus": 200,
+      "status": "empty",
+      "error": null,
+      "retrievedAt": "2026-09-18T19:20:16.725Z",
+      "checkedAt": null,
+      "providerHttpDate": "2026-09-18T19:20:16.000Z",
+      "predictionCount": 0,
+      "matchedPredictions": [],
+      "limitation": "The provider supplies predicted arrivals but no observation/generation timestamp. Empty data does not establish that service has stopped. Predictions never change an accepted itinerary."
+    },
+    {
+      "stop": "70251",
+      "httpStatus": 200,
+      "status": "empty",
+      "error": null,
+      "retrievedAt": "2026-09-18T19:20:16.770Z",
+      "checkedAt": null,
+      "providerHttpDate": "2026-09-18T19:20:16.000Z",
+      "predictionCount": 0,
+      "matchedPredictions": [],
+      "limitation": "The provider supplies predicted arrivals but no observation/generation timestamp. Empty data does not establish that service has stopped. Predictions never change an accepted itinerary."
+    }
+  ]
+}
