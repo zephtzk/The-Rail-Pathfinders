@@ -146,7 +146,9 @@ try{
   await updateButton().click();
   check('reopened replacement picker exposes only choices from the newly accepted route',await page.locator('#checkpoint-step').inputValue()==='0'&&JSON.stringify(await page.locator('#checkpoint-step option').evaluateAll(nodes=>nodes.map(node=>node.value)))===JSON.stringify(['0']));
 
-  await seed('route',{index:1});await page.locator('#trip-location > summary').click();await page.locator('#locate-once').click();await updateButton().click();await page.locator('#checkpoint-step').selectOption('2');
+  await seed('route',{index:1});
+  check('current-step refresh uses the single app-load location session without another enable prompt',await page.evaluate(()=>window.__fr1SyntheticGeoWatches.length===1)&&!await page.locator('#locate-once').isVisible());
+  await updateButton().click();await page.locator('#checkpoint-step').selectOption('2');
   const beforeLocationProgress=JSON.stringify((await active()).progress);
   for(const id of ['checkpoint-step','confirm-step']){
     await page.locator('#'+id).focus();

@@ -21,8 +21,8 @@
 .nearby-facilities .nf-center span{display:block;font-size:.8rem}
 .nearby-facilities .nf-stale{color:#704a0a;font-weight:600;margin-top:.4rem}
 .nearby-facilities .nf-toolbar{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0}
-.nearby-facilities .segmented{flex:1;margin:0;padding:3px;min-width:130px}
-.nearby-facilities .segmented button{padding:.6rem .5rem;min-height:44px}
+.nearby-facilities .segmented{flex:1 1 12rem;flex-wrap:wrap;margin:0;padding:3px;min-width:min(100%,12rem)}
+.nearby-facilities .segmented button{flex:1 0 auto;padding:.6rem .5rem;min-height:44px;white-space:nowrap}
 .nearby-facilities .nf-feed{font-size:.8rem;padding:.7rem .8rem;border-radius:10px;background:#fff7de;color:#594218;border:1px solid #e5d5ab}
 .nearby-facilities .nf-count{font-size:.8rem;color:#526278;margin:.8rem 0}
 .nearby-facilities .nf-card{border:1px solid #cfd7e2;border-radius:15px;padding:1rem;margin:.7rem 0;background:white}
@@ -50,5 +50,5 @@
 .nearby-facilities .nf-map-pin span{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid white;border-radius:50% 50% 50% 4px;transform:rotate(-12deg);font-weight:800;font-size:15px;background:#174f9e;color:white;box-shadow:0 2px 5px #172b4850}
 .nearby-facilities .nf-pin-lift span{background:#603a8e}
 .nearby-facilities .nf-pin-selected span{outline:3px solid #e7ad27;outline-offset:2px}
-@media(max-width:680px){.commute-app[data-view=facilities] .app-panel{width:100%;margin:0}.commute-app[data-view=facilities] .panel-scroll{padding-top:18px}.nearby-facilities .nf-map{height:300px}.nearby-facilities .nf-toolbar{gap:.4rem}.nearby-facilities .nf-toolbar .segmented:first-child{flex:1.4}}
+@media(max-width:680px){.commute-app[data-view=facilities] .app-panel{width:100%;margin:0}.commute-app[data-view=facilities] .panel-scroll{padding-top:18px}.nearby-facilities .nf-map{height:300px}.nearby-facilities .nf-toolbar{gap:.4rem}.nearby-facilities .nf-toolbar .segmented:first-child{flex:1.4 1 12rem}}
 @media(prefers-reduced-motion:reduce){.nearby-facilities *{scroll-behavior:auto}}

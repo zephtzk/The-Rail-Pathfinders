@@ -6,8 +6,8 @@ import {chromium} from 'playwright';
 import {mkdir, writeFile} from 'node:fs/promises';
 import {makePlan, startJourney} from '../src/journey-v2.js';
 
-const base = process.env.TEST_BASE_URL ?? 'http://127.0.0.1:4202';
-const out = 'test-results/fr1-facilities';
+const base = process.env.TEST_BASE_URL ?? 'http://127.0.0.1:4233';
+const out = 'test-results/pre-fr2-facilities';
 await mkdir(out, {recursive: true});
 const browser = await chromium.launch({headless: true, executablePath: process.env.BROWSER_EXECUTABLE ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
 const checks = [], errors = [], screenshots = [];
@@ -37,10 +37,11 @@ async function installLocationHarness(context, journey = null) {
       sessionStorage.setItem('fr1-facilities-seeded', 'yes');
     }
     window.facilityGeoCalls = [];
+    window.facilityGeoCleared = [];
     Object.defineProperty(navigator, 'geolocation', {configurable: true, value: {
-      getCurrentPosition(success, failure, options) {window.facilityGeoCalls.push({success, failure, options});},
-      watchPosition() {throw Error('Unexpected location watch in facilities browser test');},
-      clearWatch() {}
+      getCurrentPosition() {throw Error('Facilities must reuse the shared watch');},
+      watchPosition(success, failure, options) {window.facilityGeoCalls.push({success, failure, options});return window.facilityGeoCalls.length;},
+      clearWatch(id) {window.facilityGeoCleared.push(id);}
     }});
   }, journey);
 }
@@ -59,15 +60,15 @@ try {
   const page = await pageFor(realContext), before = await storage(page);
   await nav(page, 'facilities'); await settled(page);
   check('Facilities is reachable through the main navigation', await page.locator('#view-facilities').isVisible());
-  check('Opening Facilities does not ask for device location', await page.evaluate(() => window.facilityGeoCalls.length) === 0);
-  check('The initial state clearly states the fixed 1 km radius and explicit location action', /Within 1 km/.test(await page.locator('.nf-intro').innerText()) && /only when you tap Locate me/.test(await page.locator('#nearby-location-message').innerText()));
+  check('Opening Facilities reuses the single location watch started on app load', await page.evaluate(() => window.facilityGeoCalls.length) === 1);
+  check('The initial state states the fixed 1 km radius and shared location wait without a redundant locate prompt', /Within 1 km/.test(await page.locator('.nf-intro').innerText()) && /Waiting for your device location/.test(await page.locator('#nearby-location-message').innerText()) && await page.locator('#nearby-locate').count() === 0);
   check('Actual unconfigured maintenance service is presented honestly', /Live lift maintenance is not connected/.test(await page.locator('#nearby-feed').innerText()));
   await manualBugis(page);
   check('Manual area selection moves keyboard focus out of the collapsed search', await page.evaluate(() => document.activeElement.id === 'nearby-center'));
   const allIds = await cards(page).evaluateAll(nodes => nodes.map(node => node.dataset.facilityId));
   const distances = await page.locator('#nearby-results .nf-kind').allTextContents();
   const metres = distances.map(text => {const match = text.match(/·\s*([\d.]+)\s*(m|km)/); assert.ok(match, `Visible distance: ${text}`); return Number(match[1]) * (match[2] === 'km' ? 1000 : 1);});
-  check('Manual Bugis has real listed facilities without requesting geolocation', allIds.length > 0 && await page.evaluate(() => window.facilityGeoCalls.length) === 0);
+  check('Manual Bugis has real listed facilities without another geolocation request', allIds.length > 0 && await page.evaluate(() => window.facilityGeoCalls.length) === 1);
   check('Cards display ascending distances limited to the fixed radius', metres.every((value, index) => value <= 1000 && (!index || value >= metres[index - 1])));
   check('Manual centre and straight-line distance limitations are explicit', /manual search area/.test(await page.locator('#nearby-center').innerText()) && /straight-line/.test(await page.locator('.nf-intro').innerText()));
   check('Real discovery cards never show station fixtures or invented open/operating claims', !/fixture|training/i.test(await page.locator('#nearby-results').innerText()) && !/Reported open|Reported operating|Reported maintenance/.test(await page.locator('#nearby-results').innerText()));
@@ -125,6 +126,8 @@ try {
   await page.setViewportSize({width: 320, height: 900});
   await page.addStyleTag({content: 'html{font-size:200%}'});
   check('Narrow enlarged-text Facilities has no horizontal overflow', await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  check('Enlarged facility controls fit each complete label without clipping', await page.locator('.nf-toolbar button').evaluateAll(buttons => buttons.every(button => button.scrollWidth <= button.clientWidth)));
+  await page.locator('.nf-toolbar').scrollIntoViewIfNeeded();
   await screenshot(page, 'real-bugis-large-text');
   await realContext.close();
 
@@ -141,33 +144,57 @@ try {
   // used for the real-directory screenshot walkthrough above.
   const trip = startJourney(makePlan({origin: {id: 'fr1-test-origin', label: 'Controlled test origin'}, destination: {id: 'fr1-test-destination', label: 'Controlled test destination'}, date: '2026-09-19', departureTime: '10:00', mode: 'replay', route: {id: 'fr1-controlled-trip', steps: [{id: 'fr1-step', text: 'Controlled test instruction', durationSeconds: 120}], departureSeconds: 36000, arrivalSeconds: 36120, walkingSeconds: 120, accessibility: 'fixture', provenance: 'Synthetic browser test fixture; not a real journey'}}));
   const controlled = await browser.newContext({viewport: {width: 390, height: 900}, isMobile: true, hasTouch: true, serviceWorkers: 'block'});
+  await controlled.route('https://tile.openstreetmap.org/**', route => route.fulfill({status: 403, body: 'Controlled shared-location blocked-tile scenario'}));
   await installLocationHarness(controlled, trip);
   const testPage = await pageFor(controlled, '2026-09-19T02:00:00Z');
   const tripBefore = await storage(testPage);
   await nav(testPage, 'facilities'); await settled(testPage);
-  await testPage.locator('#nearby-locate').click();
-  check('Only the explicit Locate action starts a bounded fresh device request', await testPage.evaluate(() => window.facilityGeoCalls.length === 1 && window.facilityGeoCalls[0].options.maximumAge === 0 && window.facilityGeoCalls[0].options.timeout === 12000));
-  check('Locating has an explicit loading state', await testPage.locator('#nearby-locate').isDisabled() && /Waiting for your device/.test(await testPage.locator('#nearby-location-message').innerText()));
-  await testPage.evaluate(() => window.facilityGeoCalls[0].failure({code: 1}));
-  check('Permission denial exposes usable manual fallback', /permission was denied/.test(await testPage.locator('#nearby-location-message').innerText()) && await testPage.locator('#nearby-manual').evaluate(el => el.open));
+  check('App load starts one bounded fresh location watch before Facilities opens', await testPage.evaluate(() => window.facilityGeoCalls.length === 1 && window.facilityGeoCalls[0].options.maximumAge === 0 && window.facilityGeoCalls[0].options.timeout === 12000));
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.3004, longitude: 103.8557, accuracy: 180}, timestamp: Date.now()}));
+  check('Low accuracy is labelled and does not establish a current search area', !await testPage.locator('#nearby-center').isVisible() && /low accuracy/i.test(await testPage.locator('#nearby-location-message').innerText()));
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.3004, longitude: 103.8557, accuracy: 15}, timestamp: Date.now()}));
+  check('A fresh accurate shared fix automatically populates nearby facilities', await cards(testPage).count() > 0 && /Your approximate device area/.test(await testPage.locator('#nearby-center').innerText()) && await testPage.locator('#nearby-locate').count() === 0);
+  await testPage.locator('[data-nf-kind=toilet]').click();
+  const focusedFacility = await cards(testPage).first().getAttribute('data-facility-id');
+  await cards(testPage).first().locator('summary').click();
+  await cards(testPage).first().locator('summary').focus();
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.30041, longitude: 103.85571, accuracy: 15}, timestamp: Date.now()}));
+  check('Passive fixes preserve facility filters, expanded details and keyboard focus', await testPage.locator('[data-nf-kind=toilet]').getAttribute('aria-pressed') === 'true' && await testPage.evaluate(id => document.activeElement?.closest('[data-facility-id]')?.dataset.facilityId === id && document.activeElement?.closest('details')?.open, focusedFacility));
+  const focusedSource = await cards(testPage).first().locator('details a').first().getAttribute('href');
+  await cards(testPage).first().locator('details a').first().focus();
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.300415, longitude: 103.855715, accuracy: 15}, timestamp: Date.now()}));
+  check('A focused facility source link and its open disclosure survive a shared GPS callback', await testPage.evaluate(({id,href}) => document.activeElement?.tagName === 'A' && document.activeElement.getAttribute('href') === href && document.activeElement.closest('[data-facility-id]')?.dataset.facilityId === id && document.activeElement.closest('details')?.open, {id:focusedFacility,href:focusedSource}));
+  await testPage.locator('[data-nf-kind=all]').click();
+  await cards(testPage).first().locator('[data-nf-map]').click();
+  const sharedMapFacility = await testPage.locator('#nearby-selected .nf-card').getAttribute('data-facility-id');
+  await testPage.locator('#nearby-map .nf-map-pin').first().focus();
+  const focusedMarker = await testPage.locator('#nearby-map .nf-map-pin').first().getAttribute('data-facility-id');
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.30042, longitude: 103.85572, accuracy: 15}, timestamp: Date.now()}));
+  check('Shared fixes preserve the chosen map facility and marker keyboard focus', await testPage.locator('#nearby-selected .nf-card').getAttribute('data-facility-id') === sharedMapFacility && await testPage.evaluate(id => document.activeElement?.dataset.facilityId === id, focusedMarker));
+  await testPage.waitForFunction(() => document.querySelector('#nearby-map-note')?.textContent.includes('Street map unavailable'));
+  await screenshot(testPage, 'controlled-shared-location-map-mobile');
+  await testPage.locator('#nearby-selected [data-nf-list]').click();
+  await testPage.locator('#nearby-manual > summary').click();
+  await testPage.locator('#nearby-query').fill('Bug');
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.30042, longitude: 103.85572, accuracy: 15}, timestamp: Date.now()}));
+  check('A live position update preserves an in-progress manual search', await testPage.locator('#nearby-query').inputValue() === 'Bug' && await testPage.evaluate(() => document.activeElement.id === 'nearby-query') && await testPage.locator('#nearby-suggestions').isVisible());
   await manualBugis(testPage);
-  await testPage.locator('#nearby-locate').click();
-  await manualBugis(testPage);
-  await testPage.evaluate(() => window.facilityGeoCalls[1].success({coords: {latitude: 0, longitude: 0, accuracy: 10}, timestamp: Date.now()}));
-  check('A delayed location response cannot replace a newly selected manual area', (await testPage.locator('#nearby-center strong').innerText()) === 'Bugis' && /manual search area/.test(await testPage.locator('#nearby-center').innerText()));
-  await testPage.locator('#nearby-locate').click();
-  await testPage.evaluate(() => window.facilityGeoCalls[2].failure({code: 2}));
-  check('Unavailable location retains the previous manual search and fallback', /could not be found.*previous search area/.test(await testPage.locator('#nearby-location-message').innerText()) && await cards(testPage).count() > 0);
-  await testPage.locator('#nearby-locate').click();
-  await testPage.evaluate(() => window.facilityGeoCalls[3].success({coords: {latitude: 1.3, longitude: 103.85, accuracy: 15}, timestamp: Date.now() - 6 * 60000}));
-  check('Already stale device positions are rejected without moving the search', /old location/.test(await testPage.locator('#nearby-location-message').innerText()) && (await testPage.locator('#nearby-center strong').innerText()) === 'Bugis');
-  await testPage.locator('#nearby-locate').click();
-  await testPage.evaluate(() => window.facilityGeoCalls[4].success({coords: {latitude: 0, longitude: 0, accuracy: 10}, timestamp: Date.now()}));
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 0, longitude: 0, accuracy: 10}, timestamp: Date.now()}));
+  check('A later shared fix cannot replace a manually selected area', (await testPage.locator('#nearby-center strong').innerText()) === 'Bugis' && /manual search area/.test(await testPage.locator('#nearby-center').innerText()));
+  await testPage.locator('#nearby-manual > summary').click();
+  await testPage.locator('#nearby-device-area').click();
   check('An empty controlled location shows partial-coverage guidance instead of asserting no nearby facilities exist', await cards(testPage).count() === 0 && /partial coverage.*does not mean there are no facilities nearby/.test(await testPage.locator('#nearby-results').innerText()));
   await screenshot(testPage, 'controlled-empty-area-mobile');
   await testPage.clock.setFixedTime(new Date('2026-09-19T02:06:00Z'));
   await nav(testPage, 'plan'); await nav(testPage, 'facilities');
-  check('A device search that ages in the tab is marked stale with Locate again action', /Location is over 5 minutes old/.test(await testPage.locator('#nearby-center').innerText()) && /Locate again/.test(await testPage.locator('#nearby-locate').innerText()));
+  check('A device search that ages across tabs is labelled as a previous area rather than current position', /Last device search area.*no longer a usable current location estimate/s.test(await testPage.locator('#nearby-center').innerText()) && await testPage.locator('#nearby-locate').count() === 0);
+  check('Switching app tabs does not duplicate or stop the shared foreground watch', await testPage.evaluate(() => window.facilityGeoCalls.length === 1 && window.facilityGeoCleared.length === 0));
+  await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.3004, longitude: 103.8557, accuracy: 15}, timestamp: Date.now()}));
+  check('A new usable shared fix restores the current area automatically', await cards(testPage).count() > 0 && /Your approximate device area/.test(await testPage.locator('#nearby-center strong').innerText()));
+  await screenshot(testPage, 'controlled-shared-location-mobile');
+  await testPage.evaluate(() => window.facilityGeoCalls[0].failure({code: 1}));
+  await nav(testPage, 'plan'); await nav(testPage, 'facilities');
+  check('Permission denial offers manual selection and Settings recovery without retrying across tabs', /permission denied/i.test(await testPage.locator('#nearby-location-message').innerText()) && await testPage.locator('#nearby-manual > summary').isVisible() && await testPage.evaluate(() => window.facilityGeoCalls.length === 1));
   await manualBugis(testPage);
 
   let pendingRefresh, refreshReached;
@@ -188,8 +215,10 @@ try {
   await controlled.route('**/api/facilities', route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({schemaVersion: 1, status: 'available', fetchedAt: '2026-09-19T01:00:00Z', stale: true, records: []})}));
   await testPage.locator('#nearby-refresh').click(); await settled(testPage);
   check('Stale controlled maintenance responses are dated and never imply operation', /Stale lift-maintenance reports:.*SGT.*No report does not mean a lift is operating/.test(await testPage.locator('#nearby-feed').innerText()) && !/Reported open|Reported operating/.test(await testPage.locator('#nearby-results').innerText()));
-  assert.deepEqual(await storage(testPage), tripBefore, 'Facilities must preserve the complete accepted journey and all localStorage');
-  check('Controlled location/status scenarios preserve the accepted journey and all localStorage', true);
+  const originalTrip = JSON.parse(tripBefore['commute-copilot-journey-v2']), finalTrip = JSON.parse((await storage(testPage))['commute-copilot-journey-v2']);
+  for(const key of ['id','plan','route','status','progress','stops','detour','proposal','sharing'])assert.deepEqual(finalTrip[key], originalTrip[key], `Facilities preserves accepted journey ${key}`);
+  for(const key of ['progress','location','paused','revoked'])assert.equal(finalTrip.permissions[key], originalTrip.permissions[key], `Location assistance does not grant caregiver ${key} permission`);
+  check('Shared location and Facilities browsing preserve accepted guidance and caregiver consent', true);
   check('All real and controlled browser scenarios have no JavaScript runtime errors', errors.length === 0);
   await controlled.close();
 } finally {

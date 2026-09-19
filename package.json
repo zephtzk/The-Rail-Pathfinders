@@ -30,6 +30,7 @@
     "test:r3-browser": "node tests/r3-browser.mjs",
     "test:r2-browser": "node tests/r2-browser.mjs",
     "test:location-offline-browser": "node tests/location-offline-browser.mjs",
+    "test:pre-fr2-location-browser": "node tests/pre-fr2-location-browser.mjs && node tests/nearby-facilities-browser.mjs && node tests/location-privacy-browser.mjs && node tests/location-offline-browser.mjs && node tests/location-legacy-controls-browser.mjs",
     "test:r4-browser": "node tests/r4-flow-browser.mjs && node tests/r4-planner-browser.mjs && node tests/r4-spending-browser.mjs && node tests/r4-legacy-browser.mjs",
     "test:r5-browser": "node tests/r5-product-browser.mjs && node tests/r5-arrivals-browser.mjs && node tests/r5-guidance-browser.mjs && node tests/r5-address-browser.mjs && node tests/guidance-r5-browser.mjs && node tests/r5-bus-browser.mjs && node tests/r5-journey-sheet-browser.mjs && node tests/r5-bus-stop-browser.mjs",
     "benchmark:r5-bus": "node --expose-gc scripts/benchmark-r5-bus.mjs",

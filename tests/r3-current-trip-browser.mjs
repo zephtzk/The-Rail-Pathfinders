@@ -1,17 +1,9 @@
 // After npm run build. These checks exercise user actions in the unified UI.
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-import {spawn} from 'node:child_process';
-import {once} from 'node:events';
-import {createServer} from 'node:net';
-import {mkdtemp,rm} from 'node:fs/promises';
-import os from 'node:os';
-import path from 'node:path';
 import {makePlan,startJourney} from '../src/journey-v2.js';
 import {acceptJourney} from '../src/journey-state.js';
-const reserved=createServer();reserved.listen(0,'127.0.0.1');await once(reserved,'listening');const port=reserved.address().port;await new Promise(resolve=>reserved.close(resolve));
-const directory=await mkdtemp(path.join(os.tmpdir(),'commute-r3-current-'));
-const base=`http://127.0.0.1:${port}`,server=spawn(process.execPath,['scripts/serve.mjs'],{cwd:process.cwd(),windowsHide:true,env:{...process.env,PORT:String(port),HOST:'127.0.0.1',SHARING_SQLITE_PATH:path.join(directory,'sharing.sqlite')},stdio:'ignore'});
+const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4233';
 const plan=makePlan({origin:{id:'r3-start',label:'Test entrance'},destination:{id:'r3-end',label:'Test destination'},date:'2026-09-18',departureTime:'10:00',mode:'real',preferences:{walkingLimitMinutes:30},route:{id:'r3-current-route',steps:[{id:'one',text:'Confirm the entrance',durationSeconds:60},{id:'two',text:'Confirm the destination',durationSeconds:60}],departureSeconds:36000,arrivalSeconds:36120,walkingSeconds:120,accessibility:'unknown',provenance:'Synthetic current-trip browser test'}});
 const read=page=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 let browser;const contexts=[],errors=[];
@@ -19,11 +11,11 @@ async function client(seed,session=null){
   const context=await browser.newContext({serviceWorkers:'block',viewport:{width:390,height:844}});contexts.push(context);
   await context.route('https://tile.openstreetmap.org/**',route=>route.abort());
   // Seed a deliberate full-guidance choice for direct location/cancel/finish controls, only once.
-  await context.addInitScript(({active,session})=>{if(!sessionStorage.getItem('r3-seeded')){localStorage.setItem('commute-copilot-presentation-v1',JSON.stringify({schemaVersion:1,simpleGuidance:false}));localStorage.setItem('commute-copilot-journey-v2',JSON.stringify(active));if(session)localStorage.setItem('commute-copilot-pairing-v2',JSON.stringify(session));sessionStorage.setItem('r3-seeded','yes');}window.geoCalls=[];window.geoCleared=[];Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(success,failure){window.geoCalls.push({success,failure});return window.geoCalls.length;},clearWatch:id=>window.geoCleared.push(id)}});},{active:seed,session});
+  await context.addInitScript(({active,session})=>{if(!sessionStorage.getItem('r3-seeded')){localStorage.setItem('commute-copilot-presentation-v1',JSON.stringify({schemaVersion:1,simpleGuidance:false}));localStorage.setItem('commute-copilot-journey-v2',JSON.stringify(active));if(session)localStorage.setItem('commute-copilot-pairing-v2',JSON.stringify(session));sessionStorage.setItem('r3-seeded','yes');}window.geoCalls=[];window.geoCleared=[];Object.defineProperty(navigator,'permissions',{configurable:true,value:{query:async()=>({state:'prompt'})}});Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(success,failure){window.geoCalls.push({success,failure});return window.geoCalls.length;},clearWatch:id=>window.geoCleared.push(id)}});},{active:seed,session});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=current]').click();return {context,page};
 }
 try{
-  for(let attempt=0;attempt<100;attempt++){try{if((await fetch(base+'/api/push/config')).ok)break;}catch{}await new Promise(resolve=>setTimeout(resolve,100));}
+  assert.equal((await fetch(base+'/api/push/config')).ok,true,'build and start the assigned preview before this test');
   const build=await fetch(base+'/data/application-build.json').then(r=>r.json());
   const seed=startJourney(plan);seed.routingContext=acceptJourney({id:'r3-current-context',deadlineSeconds:null,departureSeconds:36000,arrivalSeconds:36120,legs:[{type:'access',fromStopId:'r3-start',toStopId:'r3-middle',durationSeconds:60,startSeconds:36000,endSeconds:36060,walkingSeconds:60},{type:'exit',fromStopId:'r3-middle',toStopId:'r3-end',durationSeconds:60,startSeconds:36060,endSeconds:36120,walkingSeconds:60}]},{walkingLimitMinutes:30,date:'2026-09-18',departureTime:'10:00'},build.applicationSha256);
   browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
@@ -37,7 +29,7 @@ try{
   await page.locator('#station-tools > summary').click();
   console.log('PASS current summary stays concise while route details and station tools remain available');
   await page.locator('.reroute-tools > summary').click();
-  assert.match(await page.locator('.reroute-tools').innerText(),/Update my position & check route/);
+  assert.match(await page.locator('.reroute-tools').innerText(),/Manual timing & route correction/);
   await page.locator('#r2-progress [name=kind]').selectOption('unknown');
   await page.locator('#r2-progress [name=walk]').fill('0.25');
   await page.locator('#r2-progress button').click();
@@ -45,7 +37,7 @@ try{
   const confirmed=await read(page);await page.locator('#r2-progress [name=walk]').fill('0');await page.locator('#r2-progress button').click();
   assert.equal((await read(page)).revision,confirmed.revision);
   console.log('PASS plain-language route check converts walking minutes without bypassing progress safeguards');
-  await page.locator('#trip-location > summary').click();await page.locator('#locate-once').click();
+  await page.waitForFunction(()=>window.geoCalls.length===1);assert.equal(await page.locator('#locate-once').isVisible(),false);
   await page.evaluate(()=>window.geoCalls[0].success({coords:{latitude:1.31,longitude:103.81,accuracy:30},timestamp:Date.now()}));
   await page.locator('#journey-cancel').click();assert.equal(await page.locator('#cancel-trip-confirmation').isVisible(),true);assert.equal((await read(page)).status,'started');
   await page.locator('#keep-current-trip').click();assert.equal((await read(page)).status,'started');assert.equal(await page.evaluate(()=>window.geoCleared.length),0);
@@ -71,7 +63,7 @@ try{
   const sharedSeed=structuredClone(seed);sharedSeed.permissions={...sharedSeed.permissions,progress:true,location:true};sharedSeed.sharing={shareId:created.id,planId:plan.id};
   const paired=await client(sharedSeed,{id:created.id,role:'traveller',travellerToken:accepted.travellerToken,revision:accepted.revision,sharingEpoch:accepted.sharingEpoch,serverConsent:accepted.consent,sharingPaused:accepted.sharingPaused,accessRevoked:accepted.accessRevoked});
   const remote=(traveller=false)=>fetch(base+`/api/shares/${created.id}`,{headers:{Authorization:`Bearer ${traveller?accepted.travellerToken:created.viewerToken}`}}).then(r=>r.json());
-  await paired.page.locator('#trip-location > summary').click();await paired.page.locator('#locate-once').click();
+  await paired.page.waitForFunction(()=>window.geoCalls.length===1);assert.equal(await paired.page.locator('#locate-once').isVisible(),false);
   await paired.page.evaluate(()=>window.geoCalls[0].success({coords:{latitude:1.31,longitude:103.81,accuracy:30},timestamp:Date.now()}));
   for(let i=0;i<40&&!(await remote()).location;i++)await new Promise(resolve=>setTimeout(resolve,100));assert.ok((await remote()).location);
   if(offlineCancellation)await paired.context.setOffline(true);await paired.page.locator('#journey-cancel').click();assert.match(await paired.page.locator('#cancel-trip-confirmation').innerText(),/does not remove their access/);await paired.page.locator('#confirm-journey-cancel').click();
@@ -86,4 +78,4 @@ try{
   console.log(offlineCancellation?'PASS offline cancellation persists pending caregiver privacy change and reconnect confirms the cancelled server state without revoking access':'PASS online cancellation clears shared location and records cancelled state after privacy changes');
   }
   assert.deepEqual(errors,[]);console.log('PASS no browser runtime errors');
-}finally{for(const context of contexts)await context.close();await browser?.close();if(server.exitCode===null){const ended=once(server,'exit');server.kill();await ended;}await rm(directory,{recursive:true,force:true});}
+}finally{for(const context of contexts)await context.close();await browser?.close();}

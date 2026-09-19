@@ -2,10 +2,11 @@ import {choosePlannerTime,choosePlannerDate} from './planner-browser-helpers.mjs
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
-const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4192',out=process.env.CAPTURE_DIR??'test-results/r2';
+const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4233',out=process.env.CAPTURE_DIR??'test-results/r2';
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
 const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[],results=[];
+await context.addInitScript(()=>{window.geoWatches=0;Object.defineProperty(navigator,'permissions',{configurable:true,value:{query:async()=>({state:'prompt'})}});Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(){return ++window.geoWatches;},clearWatch(){}}});});
 page.on('pageerror',e=>errors.push(e.message));
 const check=(label,ok)=>{assert.ok(ok,label);results.push(label);console.log('PASS '+label);};
 const active=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
@@ -32,9 +33,10 @@ try{
  await page.locator('.app-nav [data-view=preferences]').click();await page.locator('[data-preset=arjun]').click();await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=preferences]').click();check('travel style persists on reload',await page.locator('[data-preset=arjun]').getAttribute('aria-pressed')==='true');
  await plan();await page.locator('.route-card').first().scrollIntoViewIfNeeded();check('route sheet scrolls without covering fixed map',await page.evaluate(()=>window.scrollY===0));await page.screenshot({path:out+'/compare-mobile.png'});
  check('selected route waits for explicit Start without a second review or consent gate',await active()===null&&await page.locator('#review-route').innerText().then(t=>t.trim()==='Start journey')&&await page.locator('#start-companion,#enable-local-assistance').count()===0);
+ check('direct Start reuses the one startup location session',await page.evaluate(()=>window.geoWatches)===1);
  await page.locator('#review-route').click();await page.locator('#view-current').waitFor({state:'visible'});const first=await active();
  check('Start Journey creates canonical trip with preferences',first?.status==='started'&&first.plan.preferences.travelStyle==='arjun'&&!!first.routingContext);
- check('caregiver and local collection start independently off',!first.permissions.progress&&!first.permissions.location);
+ check('caregiver sharing remains off while app-level location assistance is enabled',!first.permissions.progress&&!first.permissions.location&&await page.evaluate(()=>window.geoWatches)===1);
  await page.screenshot({path:out+'/current-mobile.png'});
  for(const tab of ['saved','preferences','plan','current'])await page.locator(`.app-nav [data-view=${tab}]`).click();check('navigation preserves one journey, controller and map',(await active()).id===first.id&&await page.locator('#companion').count()===1&&await page.locator('.leaflet-container').count()===1);
  await page.locator('.app-nav [data-view=plan]').click();check('current action remains reachable when leaving trip',await page.locator('#trip-peek').isVisible());
