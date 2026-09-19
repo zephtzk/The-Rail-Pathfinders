@@ -13,3 +13,13 @@
 .commute-app #trip-position.current-step-picker>label{display:block;margin:0 0 .5rem;font-weight:650}
 .commute-app #trip-position.current-step-picker #checkpoint-help{margin:.6rem 0 0;font-size:.8rem;line-height:1.5;overflow-wrap:anywhere}
 @media(forced-colors:active){.copilot #confirm-step.checkpoint-confirm{color:ButtonText;background:ButtonFace;border-color:ButtonText}}
+/* Match the current-step tick while retaining the staff card's reset action. */
+.staff-page .staff-request-label{margin:0 0 .5rem}
+.staff-page .staff-request-picker{display:flex;align-items:center;gap:.5rem;min-width:0}
+.staff-page .staff-request-picker select{flex:1;min-width:0;width:0;max-width:100%;min-height:48px;margin:0;font:inherit;font-size:1rem}
+.staff-page .staff-current-instruction-tick{display:inline-flex;align-items:center;justify-content:center;flex:0 0 48px;width:48px;min-width:48px;height:48px;min-height:48px;margin:0;padding:0;border:1px solid #174f9e;border-radius:.65rem;background:#edf3fc;color:#174f9e}
+.staff-page .staff-current-instruction-tick .icon{width:20px;height:20px}
+.staff-page .staff-current-instruction-tick:focus-visible{outline:3px solid #62438e;outline-offset:3px}
+.simple-guidance .staff-page .staff-current-instruction-tick{flex-basis:56px;width:56px;min-width:56px;height:56px;min-height:56px}
+.simple-guidance .staff-page .staff-request-picker select{min-height:56px}
+@media(forced-colors:active){.staff-page .staff-current-instruction-tick{color:ButtonText;background:ButtonFace;border-color:ButtonText}}
