@@ -8,46 +8,40 @@ NEBULA X | Problem Statement 2 | FR4 | 19 September 2026
 
 *A little help along the way.*
 
-### The solution
+### Persona: Mdm Lim, the occasional traveller
 
-Commute Copilot is a phone-friendly Singapore public-transport companion that helps commuters plan a journey, understand their next step and respond to service changes. It opens in a browser without an app account or mandatory installation. The current prototype compares rail and bus options using included transport data, with route preferences and clearly labelled estimates.
+Our primary design target is Mdm Lim from the [competition persona brief](https://github.com/aochinwen/NebulaX-Hackathon-ProblemStatement/blob/main/PS2/PS2_README.md#22-the-commuter): an occasional traveller who walks slowly, avoids stairs and needs to plan an unfamiliar journey in advance. This is a design choice, not a finding from a user study.
 
-Users select stations or bus stops, choose when to travel, compare arrival, transfers, walking and estimated fares, then explicitly start a route. Fixed-schedule and flexible-departure choices support different needs. Current trip keeps the accepted journey and next instruction visible; travellers confirm progress manually and can pause, resume, end or cancel. Saved routes and pinned commutes make repeat planning easier.
+We prioritise adjustable large text, Simple guidance, clear current and next steps, advance route review and a Show to staff message. Walking preferences and a read-only trip link support planning and assistance. The traveller stays in control of route changes. Our tested Paya Lebar-to-Bugis journey demonstrates these interactions; it does not validate Mdm Lim's hospital journey or prove that its paths are accessible.
 
-### What makes the approach distinctive
+### Architecture: how a route becomes guidance
 
-**Relevant disruption, explained response.** Saved unresolved demo closures and cancellations affect the planner only where service, direction, segment and time overlap. Affected connections are excluded; eligible alternatives are suggested. Resolving the incident restores eligible routes. Users decide which route to start.
+**Browser:** HTML/CSS and JavaScript collect endpoints, time and preferences. A cancellable Web Worker runs the rail/bus routing engine over packaged schedules, bus patterns and walking links. Matching demo exclusions are applied before route ranking. Leaflet displays the route using attributed OpenStreetMap-derived geometry.
 
-**Guidance that reduces effort.** A journey strip, map and current-step instructions work together. Simple guidance and an 80-200% text-size setting support readability. Show to staff turns the next action or a custom request into a large message; selected station facts provide useful context.
+**State and services:** an accepted-journey state machine separates suggestions from active guidance. LocalStorage retains preferences, saved routes and progress until removed; a service worker caches the app and prepared guidance. A Cloudflare-compatible Worker serves the app and sharing API. Read-only trip links use persistent D1 storage. Optional server adapters call OneMap and LTA with credentials kept off the client. Deterministic rules perform the routing; no LLM is required.
 
-**Continuity and traveller control.** Accepted instructions can be prepared for offline use. Local saved routes and spending records support everyday travel. A recipient link shows a read-only planned trip; its owner can refresh the shared plan or cancel access.
+### Assumptions we make explicit
 
-**The core demonstration:** Plan a route → save a matching demo closure → return to Plan → compare and start an unaffected alternative → resolve the incident and check again.
+The user supplies the correct endpoints, journey date and any deadline, and confirms actual progress. We interpret travel times in Singapore time and use service calendars within the packaged data's coverage. Walking allowances and preference presets are editable design defaults, not measured personal walking speeds.
 
-## Implementation, evidence and scope
+The demonstration treats saved closures/cancellations as valid only for their stated service, direction, segment and time window. Simulated incidents are labelled. Missing live data means unknown or unavailable; it is not evidence of normal service. Offline guidance requires a successful readiness check while online.
 
-### Technology stack
+### Known limitations
 
-The app uses vanilla JavaScript ES modules, HTML/CSS and Leaflet 1.9.4, with attributed OpenStreetMap-derived route geometry. Included rail schedules and bus service patterns feed the routing engines. LocalStorage retains local journeys and preferences; a service worker caches the app shell and prepared route data without prefetching street-map tiles. Node.js builds a Cloudflare-compatible Worker. Hosted trip sharing uses persistent database storage. No LLM is required for planning or guidance.
+**Routing and data:** schedules are dated; bus ride/wait times and fares are estimates. Demo closures can change routes, but official notices remain advisory and delay scenarios do not produce validated revised arrivals. We have not established prediction accuracy, real-world time savings or superiority to another journey planner.
 
-Optional server-side adapters support LTA DataMall notices/arrivals and OneMap address routing while keeping credentials out of browser assets. Automated verification uses Node.js domain tests, Python data tests and Playwright browser checks.
+**Incomplete integrations and accessibility:** the submitted hosted configuration lacks OneMap and LTA arrival credentials, so address/GPS routing and live arrivals are unavailable. The demonstration uses station or bus-stop endpoints. Continuous step-free indoor paths, endpoint walks and current lift availability are unverified; advance lift warnings are not demonstrated. The accessibility preset blocks starting an unverified route. These remain gaps against Mdm Lim's needs; the demonstration does not certify an accessible journey. Crowding, shelter and cycling are also unverified.
 
-### What the current release demonstrates
+**Use and privacy:** desktop automation and mobile emulation do not replace physical-phone or commuter trials. Coordinates cannot confirm a floor, boarding or arrival. Offline maps/live feeds are not guaranteed; journey notifications are off. Sharing sends planned endpoints and route geometry, not ongoing device-location tracking; access can be cancelled or expires, while inactive-server cleanup is not guaranteed at an exact time.
 
-FR4 connects every active saved demo closure to ordinary route and flexible-departure searches. A saved East West Line closure changes the tested Paya Lebar (EW8) to Bugis (EW12) suggestion, persists after reload and restores the baseline route after resolution. The walkthrough also checks explicitly starting the unaffected alternative. Multiple closures are combined rather than relying only on the incident selected for replay.
+### What a judge can reproduce
 
-The interface keeps End, Pause/Resume and Cancel in one row, removes duplicate current-trip sections and centres the demo controls. App zoom gestures are guarded while the map keeps its zoom controls and text remains adjustable. The release passed **555 JavaScript tests, 44 Python data tests and the production build**, plus focused browser checks for incidents, route activation, sharing, narrow layouts and map zoom. These are automated desktop-browser checks, including mobile emulation; physical-phone validation remains outstanding.
+**Automated checks: 555 JavaScript and 44 Python test cases.** These are the runner totals from the recorded FR4 `npm run check` execution, not percentages or counts of users/journeys. The Python total is **27 rail-import + 16 bus-import + 1 walking-metadata**. All passed; the same command also built the app. The [recorded results](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/docs/evidence/fr4-addendum/verification.json) and [exact test commands](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/package.json) are pinned to the source snapshot.
 
-### Clear prototype boundaries
+To check those totals: download the [pinned source](https://github.com/zephtzk/The-Rail-Pathfinders/archive/d787c8d6501b3027d21cefd734e46cd726f5c65c.zip), follow its README prerequisites, then run `npm ci` and `npm run check`. Compare the Node summary and the separate Python summaries; browser checks are additional and are not included in these totals.
 
-**Data and disruption evidence.** Planning uses dated static data and estimated bus ride/wait times and fares. Demo incidents are synthetic; official service notices stay separately identified and advisory. Delay scenarios do not establish validated revised arrival times.
+**Route-change demonstration:** use Paya Lebar (EW8) to Bugis (EW12), 21 September 2026, 10:00 SGT. These are chosen test inputs. Record the baseline, save a whole-line EW closure covering that day, and search again. Verify the suggested route avoids EW and can be explicitly started. Reload and repeat the same search to verify that the saved closure still changes the suggestion. Resolve the incident and verify the baseline becomes eligible again. The appended guide gives the clicks; [the browser test](https://github.com/zephtzk/The-Rail-Pathfinders/blob/d787c8d6501b3027d21cefd734e46cd726f5c65c/tests/fr4-incident-planner-browser.mjs) checks the route IDs and accepted state. This proves fixture behaviour, not performance against live disruption outcomes.
 
-**Online integrations.** This hosted release has no configured OneMap token or LTA live-arrival credentials. Address/GPS routing and live arrivals must report unavailable. During synthetic closures, demonstrations use station or bus-stop endpoints.
+**Try the app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site) | **Source:** [The Rail Pathfinders](https://github.com/zephtzk/The-Rail-Pathfinders)
 
-**Guidance, offline and privacy.** Progress is manually confirmed. Station facts are not verified indoor or step-free navigation. Offline guidance requires readiness to be checked while online; live feeds and street-map tiles are not promised offline. Sharing is a read-only plan view, not live tracking; journey notifications are off.
-
-**Try the public app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site) | **Source:** [GitHub repository](https://github.com/zephtzk/The-Rail-Pathfinders)
-
-The illustrated user guide follows the two-page PDF writeup. Its final two pages explain the demo controls, returning to the main page, verifying disrupted services and starting the alternative route.
-
-Release reference: FR4, public version 13, source `f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e` (19 September 2026).
+The illustrated user guide follows the two-page PDF writeup. FR4 application source: `f5fb04b9d5bb7a8a6ea2f94b7b825cf45869082e`; reproducible source snapshot: `d787c8d6501b3027d21cefd734e46cd726f5c65c` (19 September 2026).
