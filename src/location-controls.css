@@ -1,0 +1,20 @@
+.location-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+.commute-app .app-topbar .brand-copy{overflow-wrap:anywhere}
+.commute-app .app-topbar:has(.location-popover:not([hidden])){z-index:1600}
+.commute-app .connectivity-status,.commute-app .location-toggle{width:44px;height:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:14px;background:#fffefaf5;border:1px solid #d9e6eb;color:#315d56;flex-shrink:0}
+.commute-app .connectivity-status[data-online=false]{color:#71514a}
+.network-signal-halo{stroke:#fff;stroke-width:5;stroke-linecap:round}
+.network-signal-cross{stroke:#713c30;stroke-width:2.5;stroke-linecap:round}
+.commute-app .location-toggle{position:relative;color:#526978}
+.commute-app .location-toggle[data-usable=true]{color:#175eaf;--icon-fill:#175eaf}
+.commute-app .location-toggle[aria-expanded=true]{box-shadow:0 0 0 3px #bed6ec}
+.location-off-mark{position:absolute;width:22px;height:2px;background:currentColor;transform:rotate(-45deg);box-shadow:0 1px 0 #fff}
+.commute-app .location-popover{position:absolute;top:calc(100% + 10px);right:0;width:min(340px,calc(100vw - 30px));max-height:calc(100dvh - 110px);overflow-y:auto;overscroll-behavior:contain;padding:18px;border:1px solid #c9d8e0;border-radius:18px;background:#fffefa;box-shadow:0 12px 35px #172c3d30;color:var(--ink);pointer-events:auto}
+.commute-app .location-popover[hidden]{display:none}
+.commute-app .location-popover h2{font-size:1rem;margin:0 0 10px}
+.commute-app .location-popover p{font-size:.85rem;line-height:1.5;margin:0 0 12px;overflow-wrap:anywhere}
+.commute-app .location-popover button{width:100%;min-height:44px;white-space:normal}
+.commute-app .suggestion-option.my-location-option{color:#174f9e;background:#eef5ff}
+.commute-app .suggestion-option.my-location-option .icon{color:inherit}
+.commute-app .suggestion-option.my-location-option:hover,.commute-app .suggestion-option.my-location-option[aria-selected=true]{background:#dcecff}
+@media(max-width:380px){.commute-app .topbar-actions{gap:3px}.commute-app .connectivity-status{width:28px;border:0;background:transparent}.commute-app .app-topbar{gap:5px}}
