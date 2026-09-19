@@ -1,0 +1,39 @@
+/* Percentages preserve the browser's default font size and normal zoom behavior. */
+:root[data-text-size]{font-size:var(--app-text-size,100%)}
+.commute-app[data-text-size]{font-size:1rem}
+.commute-app .text-size-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.commute-app .text-size-heading label{margin:0;font:inherit}
+.commute-app .text-size-heading output{font-size:1rem;font-weight:750;font-variant-numeric:tabular-nums}
+.commute-app .text-size-setting>p{font-size:.85rem;margin:.5rem 0}
+.commute-app #text-size-slider{display:block;width:100%;min-width:0;min-height:44px;height:44px;margin:4px 0;padding:0;accent-color:#174f9e;cursor:pointer;border:0;background:transparent}
+.commute-app .text-size-cues{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.75rem;color:var(--muted)}
+.commute-app #text-size-reset{margin-top:12px;max-width:100%}
+.commute-app #text-size-save-status:empty{display:none}
+.commute-app :is(h1,h2,h3,h4,label,strong,summary,output){overflow-wrap:anywhere}
+.commute-app :is(.view,.field-pair>*,.pair>*,.route-card-top>*,.journey-metrics>*,.brand-copy){min-width:0}
+.commute-app :is(button,select){max-width:100%}
+.commute-app .field-pair{grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr))}
+.commute-app .app-shell{grid-template-rows:max(94px,var(--app-header-bottom,94px)) minmax(0,1fr) auto}
+.commute-app .brand-copy{overflow-wrap:anywhere}
+.commute-app .app-topbar{align-items:flex-start}
+.commute-app .app-nav-tools button{min-width:0;flex-basis:3.5rem;overflow-wrap:anywhere}
+.commute-app .app-nav span{overflow-wrap:anywhere}
+.commute-app .time-options button{min-height:44px}
+.commute-app .leaflet-container{font-size:.75rem}
+.commute-app .map-service-badge{font-size:.6875rem}
+.commute-app .route-pin>span{font-size:.9375rem;width:max(33px,1.7em);height:max(33px,1.7em)}
+.commute-app .leaflet-control-attribution{font-size:.5625rem;white-space:normal;overflow-wrap:anywhere}
+.commute-app .nearby-facilities .nf-map .leaflet-control-attribution{font-size:.625rem}
+.commute-app .nearby-facilities .nf-map-pin span{font-size:.9375rem;width:max(32px,1.7em);height:max(32px,1.7em)}
+@media(max-width:680px){
+  .commute-app .app-shell{grid-template-rows:max(var(--mobile-map-height),var(--app-header-bottom,76px)) minmax(0,1fr) auto}
+}
+/* In landscape the map tabs scroll with the journey instead of consuming most
+   of its reading area. The grabber and all map tabs remain available at the top. */
+@media(max-width:680px) and (max-height:540px){
+  .commute-app .app-panel{display:block;overflow-y:auto;overscroll-behavior:contain;scroll-padding-block:12px}
+  .commute-app .panel-scroll{overflow:visible;min-height:0}
+  .commute-app .brand-copy>span{display:none}
+  .commute-app .inline-station-guide>.panel-scroll{display:none}
+  .commute-app .inline-station-guide>.map-station-page{position:static;overflow:visible;border:0;border-radius:0}
+}

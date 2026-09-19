@@ -402,12 +402,12 @@
   .commute-app .time-options button { font-size: .7rem; }
   .commute-app .field-pair { grid-template-columns: 1fr; gap: 10px; }
 }
-:root:has(> body.commute-app.large-text), :root:has(> body.commute-app[data-large-text="true"]) { font-size: 19px; }
-.commute-app.large-text, .commute-app[data-large-text="true"] { font-size: 19px; }
-.commute-app.large-text .app-nav button, .commute-app[data-large-text="true"] .app-nav button { font-size: .8rem; }
-.commute-app.large-text .field-note, .commute-app.large-text .help, .commute-app[data-large-text="true"] .field-note, .commute-app[data-large-text="true"] .help { font-size: .9rem; }
-.commute-app.large-text .style-grid, .commute-app[data-large-text="true"] .style-grid { grid-template-columns: 1fr; }
-.commute-app.large-text .style-card, .commute-app[data-large-text="true"] .style-card { min-height: 80px; }
+:root:has(> body.commute-app.large-text:not([data-text-size])), :root:has(> body.commute-app[data-large-text="true"]:not([data-text-size])) { font-size: 19px; }
+.commute-app.large-text:not([data-text-size]), .commute-app[data-large-text="true"]:not([data-text-size]) { font-size: 19px; }
+.commute-app.large-text:not([data-text-size]) .app-nav button, .commute-app[data-large-text="true"]:not([data-text-size]) .app-nav button { font-size: .8rem; }
+.commute-app.large-text:not([data-text-size]) .field-note, .commute-app.large-text:not([data-text-size]) .help, .commute-app[data-large-text="true"]:not([data-text-size]) .field-note, .commute-app[data-large-text="true"]:not([data-text-size]) .help { font-size: .9rem; }
+.commute-app.large-text:not([data-text-size]) .style-grid, .commute-app[data-large-text="true"]:not([data-text-size]) .style-grid { grid-template-columns: 1fr; }
+.commute-app.large-text:not([data-text-size]) .style-card, .commute-app[data-large-text="true"]:not([data-text-size]) .style-card { min-height: 80px; }
 @media (prefers-reduced-motion: reduce) {
   .commute-app *, .commute-app *::before, .commute-app *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
