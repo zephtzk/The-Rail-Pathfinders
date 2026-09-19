@@ -244,7 +244,7 @@
 .commute-app .companion-panel ol, .commute-app .companion-panel ul { padding-left: 22px; font-size: .8rem; }
 .commute-app .companion-panel li { padding: 4px 0; }
 .commute-app .copilot button, .commute-app .companion-panel button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; margin: 4px 4px 4px 0; padding: 10px 13px; border: 1px solid #d5e0e5; border-radius: 12px; color: #385d73; background: #f7fafb; font: 650 .78rem/1.4 "Aptos", "Segoe UI", sans-serif; }
-.commute-app .copilot button.primary, .commute-app .companion-panel button.primary { background: var(--accent); border-color: transparent; color: #193d52; box-shadow: none; }
+.commute-app .copilot button.primary, .commute-app .companion-panel button.primary { background: var(--accent); border-color: transparent; color: #fff; box-shadow: none; }
 .commute-app .copilot label, .commute-app .companion-panel label { margin: 12px 0; font-size: .76rem; }
 .commute-app .copilot input:not([type="checkbox"]), .commute-app .copilot select { border: 1px solid #d5e0e5; border-radius: 12px; padding: 10px 11px; min-height: 47px; }
 .commute-app .copilot .pair { gap: 12px; }

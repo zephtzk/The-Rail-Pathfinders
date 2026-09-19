@@ -27,7 +27,10 @@ export function mountJourneySheet({shell,panel,dock,handle,content,mapPanel,nav,
       delete shell.dataset.journeySheet;
       const normal=panel.getBoundingClientRect().top,shellBox=shell.getBoundingClientRect();
       const expanded=Math.max(76,header.getBoundingClientRect().bottom+10);
-      const compact=Math.max(expanded,shellBox.bottom-nav.getBoundingClientRect().height-handle.getBoundingClientRect().height-dock.getBoundingClientRect().height);
+      // The header can place its controls alongside each other or wrap at larger text sizes.
+      const sheetHeader=handle.closest('.journey-sheet-header');
+      const headerHeight=sheetHeader?.getBoundingClientRect().height??handle.getBoundingClientRect().height+dock.getBoundingClientRect().height;
+      const compact=Math.max(expanded,shellBox.bottom-nav.getBoundingClientRect().height-headerHeight);
       shell.style.setProperty('--journey-surface-top',`${expanded}px`);
       limits={expanded:Math.min(expanded,compact),normal:clamp(normal,expanded,Math.max(expanded,compact-120)),compact};
     }else state='normal';
@@ -78,7 +81,7 @@ export function mountJourneySheet({shell,panel,dock,handle,content,mapPanel,nav,
   function additionalPointer(event){if(gesture&&event.pointerId!==gesture.id)cancel();}
   const listeners={pointerdown:down,pointermove:move,pointerup:up,pointercancel:cancel,lostpointercapture:cancel,click,keydown};
   for(const [name,listener] of Object.entries(listeners))handle.addEventListener(name,listener);
-  const observer=new ResizeObserver(scheduleLayout);for(const element of [shell,nav,header,handle,dock])observer.observe(element);
+  const observer=new ResizeObserver(scheduleLayout);for(const element of new Set([shell,nav,header,handle,dock,handle.closest('.journey-sheet-header')].filter(Boolean)))observer.observe(element);
   mobile.addEventListener('change',reset);window.addEventListener('resize',scheduleLayout);window.addEventListener('blur',cancel);window.addEventListener('pointerdown',additionalPointer);
   layout();
   return {reset,revealSurface(){if(enabled)setState('compact');},getState:()=>state,destroy(){clearGesture();observer.disconnect();cancelAnimationFrame(frame);mobile.removeEventListener('change',reset);window.removeEventListener('resize',scheduleLayout);window.removeEventListener('blur',cancel);window.removeEventListener('pointerdown',additionalPointer);for(const [name,listener] of Object.entries(listeners))handle.removeEventListener(name,listener);enabled=false;state='normal';render();delete panel.dataset.sheetState;shell.style.removeProperty('--journey-surface-top');}};
