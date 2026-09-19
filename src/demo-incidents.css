@@ -53,3 +53,6 @@
 .demo-log-page .demo-page-back{display:inline-block;color:#174f9e;min-height:44px;padding:8px 0;margin-bottom:12px}
 .demo-log-page .demo-page-title{font-size:1rem;color:#435c6e;margin:0 0 20px;font-weight:650}
 @media(max-width:480px){.demo-incident-dialog{padding:18px;max-height:calc(100dvh - 16px)}.demo-fields{grid-template-columns:1fr;gap:0}.demo-actions>*{flex:1 1 100%}.demo-log-list article{padding:14px}.demo-log-page main{padding:18px;margin:0;border:0;border-radius:0}.demo-scenarios button{padding:13px}.demo-incidents h2{font-size:1.3rem}}
+
+.demo-incidents #demo-choose-saved{display:block;width:100%;text-align:center;margin-left:auto;margin-right:auto}
+.demo-incidents .demo-log-link{text-align:center;width:100%}

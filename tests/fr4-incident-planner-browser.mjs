@@ -1,0 +1,52 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block',timezoneId:'Asia/Singapore'});
+const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto(process.env.TEST_BASE_URL??'http://127.0.0.1:4264');await page.locator('#find-routes:not([disabled])').waitFor();
+ for(const [role,value] of [['origin','EW8'],['destination','EW12']]){await page.locator('#'+role).fill(value);await page.locator('#'+role+'-suggestions [data-index="0"]').click();}
+ await page.locator('[data-time="depart-later"]').click();
+ await page.evaluate(()=>{const f=document.querySelector('#plan-form');f.elements.date.value='2026-09-21';f.elements.departureTime.value='10:00';f.elements.date.dispatchEvent(new Event('change',{bubbles:true}));});
+ await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
+ const original=await page.locator('.route-card.is-selected .route-lines').innerText();
+ await page.locator('#review-route').click();await page.locator('#view-current:not([hidden])').waitFor();
+ const initialTrip=await page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
+ assert.equal(initialTrip.status,'started');
+ assert.ok(initialTrip.routingContext.route.legs.some(leg=>leg.type==='ride'&&leg.routeId?.startsWith('EWL')));
+ console.log('PASS baseline Start journey opens Current trip with original EW route');
+ const id=await page.evaluate(async()=>{const m=await import('/src/demo-incidents.js');return m.saveIncident({...m.createIncidentDraft('planned',{date:'2026-09-21'}),scope:'service',from:'',to:'',service:'EW'}).id;});
+ await page.waitForFunction(()=>document.querySelector('#planner-status').textContent.includes('Demo incidents active')&&!document.querySelector('#find-routes').disabled);
+ assert.ok(await page.locator('.route-card').count());
+ assert.notEqual(await page.locator('.route-card.is-selected .route-lines').innerText(),original);
+ assert.equal(await page.locator('.route-card .line-pill').filter({hasText:/^EW$/}).count(),0);
+ const unchangedTrip=await page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
+ assert.equal(unchangedTrip.id,initialTrip.id);
+ assert.deepEqual(unchangedTrip.route,initialTrip.route,'An incident must not silently replace accepted guidance');
+ await page.locator('#journey-cancel').click();await page.locator('#confirm-journey-cancel').click();
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')).status),'cancelled');
+ await page.locator('#plan-after-trip').click();await page.locator('#find-routes').click();await page.locator('#review-route:not([disabled])').waitFor();
+ await page.locator('#review-route').click();await page.locator('#view-current:not([hidden])').waitFor();
+ const rerouted=await page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
+ assert.equal(rerouted.status,'started');assert.notEqual(rerouted.id,initialTrip.id);
+ assert.equal(rerouted.plan.destination.id,initialTrip.plan.destination.id);
+ assert.ok(rerouted.routingContext.route.legs.some(leg=>leg.type==='ride'));
+ assert.ok(rerouted.routingContext.route.legs.every(leg=>leg.type!=='ride'||!leg.routeId?.startsWith('EWL')));
+ assert.deepEqual(rerouted.route,rerouted.plan.route,'Current trip follows the accepted closure-free plan');
+ console.log('PASS closure preserves active trip; Cancel trip, Plan another journey, Find my route, Start journey activates closure-free alternative');
+ await page.locator('#journey-cancel').click();await page.locator('#confirm-journey-cancel').click();
+ await page.locator('#plan-after-trip').click();
+ await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();
+ await page.locator('#open-demo').click();
+ assert.equal(await page.locator('#demo-choose-saved').evaluate(el=>Math.round(el.getBoundingClientRect().width)),await page.locator('.demo-replay-choice').evaluate(el=>Math.round(el.getBoundingClientRect().width)));
+ assert.equal(await page.locator('.demo-log-link').evaluate(el=>getComputedStyle(el).textAlign),'center');
+ await page.locator('.demo-close').click();
+ for(const [role,value] of [['origin','EW8'],['destination','EW12']]){await page.locator('#'+role).fill(value);await page.locator('#'+role+'-suggestions [data-index="0"]').click();}
+ await page.locator('[data-time="depart-later"]').click();await page.evaluate(()=>{const f=document.querySelector('#plan-form');f.elements.date.value='2026-09-21';f.elements.departureTime.value='10:00';f.elements.date.dispatchEvent(new Event('change',{bubbles:true}));});
+ await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
+ assert.notEqual(await page.locator('.route-card.is-selected .route-lines').innerText(),original);
+ await page.evaluate(async id=>(await import('/src/demo-incidents.js')).resolveIncident(id),id);
+ await page.waitForFunction(()=>!document.querySelector('#find-routes').disabled&&!!document.querySelector('#review-route'));
+ assert.equal(await page.locator('.route-card.is-selected .route-lines').innerText(),original);
+ assert.deepEqual(errors,[]);console.log('PASS saved closure changes planner, persists across reload, resolution restores route, demo controls full-width and centered');
+}finally{await browser.close();}

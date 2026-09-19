@@ -16,3 +16,5 @@ scripts/import-bus.py -text
 docs/evidence/phase3/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # This pinned rules snapshot was generated with CRLF; CR is its line ending.
 data/rail/validation.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Keep submission PDFs byte-identical to their verified rendering.
+*.pdf binary

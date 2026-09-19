@@ -1,0 +1,14 @@
+{
+  "id": "appgdep_6aae370a22908191bbaef200a3241b27",
+  "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "title": "Commute Copilot",
+  "version_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_464e787cec188191ab245575596a78c3",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aad0ab90e5881919eca01b79f19aa24",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-09-19T07:17:57.671908+00:00"
+}
