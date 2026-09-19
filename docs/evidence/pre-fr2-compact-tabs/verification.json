@@ -1,0 +1,24 @@
+{
+  "applicationSha256": "f0e5fb2589a319994759cbd32b30f26e7ee032f7610ff5d75663776dded6900f",
+  "baselineCommit": "0a3bfa1264dec93b2f7a5b58f8650c68224f84e9",
+  "branch": "codex/pre-fr2-compact-tabs",
+  "preview": "http://localhost:4231/",
+  "checks": {
+    "compactNavigation": 156,
+    "existingNavigation": 81,
+    "journeySheet": 39,
+    "busStopAndTripPreview": 19,
+    "realRouteIntegration": 18
+  },
+  "totalFinalBrowserChecks": 313,
+  "build": "99 assets; passed",
+  "visualReview": "Normal mobile, desktop, 200% text, landscape, focus and safe-area screenshots inspected",
+  "limitations": [
+    "Desktop Edge emulation, not physical phones",
+    "Blocked street tiles, no live-provider success claim",
+    "Current comparison uses a labelled route fixture; integration uses a packaged route",
+    "Very short landscape and enlarged text still constrain default reading area"
+  ],
+  "publication": "Local only; no push, PR or deployment",
+  "FR2TesterSessions": "Not run"
+}
