@@ -1,0 +1,55 @@
+.demo-incidents{font:1rem/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:#172f42;overflow-wrap:anywhere;box-sizing:border-box}
+.demo-incidents *{box-sizing:border-box}
+.demo-incidents [hidden]{display:none!important}
+.demo-incident-dialog{width:min(660px,calc(100% - 24px));max-height:calc(100dvh - 32px);margin:auto;padding:24px;border:1px solid #aabecb;border-radius:20px;background:#fff;box-shadow:0 20px 70px #102f4b40;overflow-y:auto;overscroll-behavior:contain}
+.demo-incident-dialog::backdrop{background:#102b46a6}
+.demo-incidents h2{margin:10px 0 0;font-size:1.5rem;line-height:1.25;letter-spacing:-.025em}
+.demo-incidents h3{font-size:1.15rem;margin:8px 0;line-height:1.35}
+.demo-incidents p{margin:10px 0}
+.demo-incidents h2:focus{outline:none}
+.demo-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+.demo-badge{display:inline-block;border:1px solid #b38027;color:#66420c;background:#fff4d7;padding:3px 9px;border-radius:7px;font-size:.8rem;font-weight:700}
+.demo-incidents button,.demo-incidents input,.demo-incidents select,.demo-incidents textarea{font:inherit}
+.demo-incidents button{min-height:46px;white-space:normal;cursor:pointer}
+.demo-incidents button:focus-visible,.demo-incidents a:focus-visible,.demo-incidents input:focus-visible,.demo-incidents select:focus-visible,.demo-incidents textarea:focus-visible{outline:3px solid #176db4;outline-offset:3px}
+.demo-incidents .demo-close{flex-shrink:0;min-width:46px;padding:2px 10px;color:#173c58;border:1px solid #c1cfdb;background:#f1f6fa;border-radius:10px;font-size:1.6rem;line-height:1}
+.demo-incidents .demo-primary,.demo-incidents .demo-secondary{padding:11px 16px;border-radius:10px;font-weight:650;line-height:1.4}
+.demo-incidents .demo-primary{border:1px solid #174f9e;background:#174f9e;color:#fff}
+.demo-incidents .demo-primary:hover{background:#123b78}
+.demo-incidents .demo-secondary{border:1px solid #afc2d2;background:#fff;color:#173c58}
+.demo-incidents .demo-secondary:hover{background:#edf4fb}
+.demo-scenarios{display:grid;gap:12px}
+.demo-scenarios button{display:flex;align-items:center;gap:14px;width:100%;padding:16px;text-align:left;border:1px solid #c3d1dc;border-radius:12px;background:#f7fafc;color:#173c58}
+.demo-scenarios button>span:first-child{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;background:#e7eef7;border-radius:50%;font-size:1.2rem}
+.demo-scenarios strong,.demo-scenarios small{display:block;line-height:1.45}
+.demo-scenarios small{font-size:.85rem;color:#486070;margin-top:3px}
+.demo-replay-choice{border-top:1px solid #d4dfe7;padding-top:12px;margin-top:22px}
+.demo-replay-choice .demo-primary{width:100%}
+.demo-log-link{display:block;padding:14px 0;min-height:48px;font-weight:650;color:#174f9e;text-decoration:underline;text-underline-offset:3px}
+.demo-incidents label{display:block;font-weight:650;margin:14px 0}
+.demo-incidents input,.demo-incidents select,.demo-incidents textarea{display:block;width:100%;min-width:0;min-height:46px;border:1px solid #9cb0c0;border-radius:8px;padding:10px;margin-top:6px;background:#fff;color:#172f42}
+.demo-incidents textarea{resize:vertical;max-width:100%}
+.demo-incidents [aria-invalid=true]{border:2px solid #a32027}
+.demo-incidents fieldset{min-width:0;border:1px solid #c3d1dc;padding:8px 14px 12px;border-radius:10px;margin:14px 0}
+.demo-incidents legend{font-weight:700;padding:0 6px}
+.demo-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.demo-fields label{min-width:0;margin:6px 0}
+.demo-incidents .demo-help{font-size:.86rem;font-weight:400;color:#435c6e;line-height:1.6}
+.demo-incidents .demo-status{padding:12px;border:1px solid #92bdaf;background:#ecf8f2;color:#195641;border-radius:8px}
+.demo-incidents .demo-error{color:#981c29;font-weight:650}
+.demo-error:empty{display:none}
+.demo-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.demo-actions>*{max-width:100%}
+.demo-log-list{list-style:none;margin:24px 0;padding:0;display:grid;gap:16px}
+.demo-log-list article{border:1px solid #c3d1dc;border-radius:12px;padding:18px;background:#f8fafc}
+.demo-log-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem}
+.demo-incident-details{white-space:pre-wrap}
+.demo-clear-confirm{margin:24px 0;padding:14px;background:#fff4ec;border:1px solid #bf9375;border-radius:10px}
+.demo-log-empty{padding:24px 0}
+.demo-back{margin-top:18px}
+.demo-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.demo-log-page{margin:0;background:#edf3f8;color:#172f42;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+.demo-log-page main{max-width:800px;padding:28px;margin:20px auto;background:#fff;border:1px solid #c3d1dc;border-radius:18px}
+.demo-log-page .demo-page-back{display:inline-block;color:#174f9e;min-height:44px;padding:8px 0;margin-bottom:12px}
+.demo-log-page .demo-page-title{font-size:1rem;color:#435c6e;margin:0 0 20px;font-weight:650}
+@media(max-width:480px){.demo-incident-dialog{padding:18px;max-height:calc(100dvh - 16px)}.demo-fields{grid-template-columns:1fr;gap:0}.demo-actions>*{flex:1 1 100%}.demo-log-list article{padding:14px}.demo-log-page main{padding:18px;margin:0;border:0;border-radius:0}.demo-scenarios button{padding:13px}.demo-incidents h2{font-size:1.3rem}}
