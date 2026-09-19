@@ -1,0 +1,25 @@
+.services-panel{font-size:.9rem;line-height:1.5;margin-bottom:1.4rem;border-bottom:1px solid #d2dde4;padding-bottom:1.2rem}
+.services-panel .services-heading,.services-card-heading,.services-entry-actions{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.services-panel h3{margin:1rem 0 .4rem}
+.services-panel .services-note,.services-entry .services-note{font-size:.8rem;line-height:1.5;color:#4d5f6d;margin:.45rem 0}
+.services-panel .services-card{border:1px solid #cbd7df;border-radius:14px;padding:.8rem;margin:.65rem 0;background:#fffefa}
+.services-panel .services-card p{margin:.45rem 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.services-panel .services-card h4{margin:.5rem 0}
+.services-panel .services-tag{display:inline-block;background:#e9eef3;color:#304a5d;border-radius:7px;padding:.2rem .5rem;font-size:.74rem;font-weight:700}
+.services-panel .services-demo-card .services-tag{background:#eee8f8;color:#574078}
+.services-panel .services-empty{color:#4d5f6d;padding:.5rem 0}
+.services-panel :is(button.secondary,#services-reopen),.services-entry button.secondary{min-height:44px;margin:.25rem 0;padding:.55rem .8rem;white-space:normal}
+.services-panel #services-reopen{width:100%}
+.services-entry-host{margin:0 0 1rem;max-width:100%}
+.services-entry{background:#fff5df;border:1px solid #b79147;border-radius:15px;padding:.85rem 1rem;color:#44381f}
+.services-entry h2{font-size:1rem!important;letter-spacing:0!important;line-height:1.35}
+.services-entry p{font-size:.84rem;line-height:1.5;margin:.5rem 0!important;overflow-wrap:anywhere;white-space:pre-wrap}
+.services-entry-actions{justify-content:flex-start;margin-top:.5rem}
+.services-entry button{background:#fffefa;color:#44381f;border:1px solid #b79147}
+.demo-replay-result{border:2px solid #8463a1;border-radius:15px;background:#faf7ff;padding:1rem;margin:0 0 1rem;overflow-wrap:anywhere}
+.demo-replay-result .service-panel-heading{display:flex;align-items:flex-start;gap:.5rem;justify-content:space-between;flex-wrap:wrap}
+.demo-replay-result h2{font-size:1.1rem;line-height:1.4;margin:0}
+.demo-replay-result h3{font-size:1rem}
+.demo-replay-result p{font-size:.86rem;line-height:1.5}
+.demo-replay-result button{min-height:44px;white-space:normal}
+@media(max-width:400px){.services-entry{padding:.7rem}.services-entry-actions button{flex:1 1 100%}.services-panel .services-heading{align-items:flex-start}.services-panel .services-heading button{flex:1 1 100%}}
