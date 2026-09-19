@@ -1,0 +1,11 @@
+{
+  "route": "Choa Chu Kang (BP1) to Fajar (BP10)",
+  "checks": [
+    "390x844 map has no legend card; service labels remain",
+    "320x740 at 200% text: no horizontal document overflow",
+    "1440x960 map has no legend card",
+    "No application runtime errors"
+  ],
+  "mapTiles": "Synthetic neutral tiles",
+  "physicalPhone": false
+}

@@ -194,8 +194,8 @@
 .commute-app .mode-walk .map-route-swatch { height: 8px; border-radius: 0; background: radial-gradient(circle, var(--route-color, #5f6368) 2px, transparent 2.5px) 0 center / 8px 8px repeat-x; }
 .commute-app .mode-bus .map-route-swatch { background: var(--route-color, #1a73e8); }
 .commute-app .mode-bus .map-route-swatch::after { content: ''; position: absolute; inset: 2.5px 2px; border-radius: 2px; background: repeating-linear-gradient(90deg, #fff 0 4px, transparent 4px 8px); }
-.commute-app .map-route-note { font-size: inherit; }
-.commute-app .map-route-note summary { min-height: 28px; padding: 4px 0; color: #61707c; font-size: inherit; font-weight: 500; }
+.commute-app .map-route-note { margin-top: 18px; font-size: .8rem; }
+.commute-app .map-route-note summary { min-height: 44px; padding: 8px 0; color: #61707c; font-size: inherit; font-weight: 500; }
 .commute-app .map-route-note p { max-width: 36em; margin: 3px 0 2px; color: #536671; line-height: 1.5; overflow-wrap: anywhere; }
 .commute-app .map-status { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; min-width: 0; }
 .commute-app .map-status .map-retry { margin: 0; padding-block: 3px; }
