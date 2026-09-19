@@ -23,4 +23,4 @@ The integrated build passes **536 JavaScript tests, 44 Python data tests and 426
 
 ## Staged publication
 
-The first release must be successfully published before work on the Settings text-size slider begins. Its exact publication receipt will be recorded here. The later extension will receive a separate task, all-tab size checks and publication record.
+Items 1–8 were published successfully as public version 8 on 19 September 2026 at 05:57 UTC (13:57 SGT), from source d0a61c2835da0365a53f66c8304831150af67099 and merged PR #12. [Publication receipt](evidence/fr3-review/stage1-publication.json). Only after this successful publication was the Settings text-size extension started in its own task. The extension will receive all-tab size checks and a separate publication record.
