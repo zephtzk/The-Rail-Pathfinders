@@ -36,4 +36,8 @@ Visual references were checked against [LTA](https://www.lta.gov.sg/content/ltag
 
 ## Local previews
 
+The main journey map no longer includes toilet-location pins. Toilet records and their coverage limitations remain available in Station layout & toilets; route endpoints and the position accuracy overlay are managed by the main map as before.
+
+The mobile journey panel has normal, expanded and compact positions. Drag its handle vertically, tap it, or use the arrow/Home/End/Escape keys. The compact Map / Station guide selector is attached to the panel, without a second swipe-hint row. Selecting Station guide lowers the mobile panel to give the guide room; its selector and resize handle remain available. Native content scrolling, map gestures and accepted journey state remain separate from resizing. Desktop retains its sidebar layout. The idle map's “Network schematic · no indoor directions” label is removed; actual route legends, source attribution and map-failure recovery remain available when relevant.
+
 R5 credential-enabled local preview: `http://localhost:4195/`, started by the user's masked provider-entry window. Keep that window open to retain its process-only access; closing it stops that server. The independent test preview uses port 4196. R4 remains separate on its original port 4194. Credentials were not copied into source, browser assets, evidence or Git.

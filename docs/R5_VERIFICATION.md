@@ -4,7 +4,15 @@
 
 ## Candidate verification
 
-Final machine-readable identities and check totals are recorded in [verification.json](evidence/r5/verification.json). `npm run check` covers JavaScript unit/integration tests, Python rail/bus/walking import checks and the application/Worker build. Focused R5 browser suites use actual clicks, keyboard and touch-emulated gestures. The final check passed 367 JavaScript tests, 42 Python tests and the build; 101 R5 browser checks and 139 legacy calendar/planner checks passed. Their screenshots were visually inspected, including 320px with enlarged root text and desktop layout. The subsequent allocation review preserved runtime LF rules and reran the full check, strict differential comparison and affected browser suites.
+The original R5 candidate's identities and check totals are recorded in [verification.json](evidence/r5/verification.json). `npm run check` covers JavaScript unit/integration tests, Python rail/bus/walking import checks and the application/Worker build. Focused R5 browser suites use actual clicks, keyboard and touch-emulated gestures. That check passed 367 JavaScript tests, 42 Python tests and the build; 101 R5 browser checks and 139 legacy calendar/planner checks passed. Their screenshots were visually inspected, including 320px with enlarged root text and desktop layout. The subsequent allocation review preserved runtime LF rules and reran the full check, strict differential comparison and affected browser suites.
+
+## Map and journey-panel follow-up
+
+The user's follow-up removed toilet pins from the main map and identified that the vertical journey-panel handle was decorative. It now supports touch/mouse dragging, tapping and keyboard controls across normal, expanded and compact positions. The Map / Station guide tabs are attached to the panel in a single compact row, and the idle schematic caption is removed. Selecting Station guide lowers the mobile panel so the guide remains readable above it.
+
+Latest build identities and results are in [map-panel-followup.json](evidence/r5/map-panel-followup.json). The full check passes 367 JavaScript tests, 42 Python tests and a 91-asset build. All 140 R5 browser checks pass, including 39 new panel checks; five map recovery/caption checks also pass. Tests cover actual touch scroll movement, cancellation, short/horizontal gestures, mouse release outside the handle, tap/keyboard equivalents, docked tab switching, focus and navigation, compact content hidden from keyboard access, 320px/200% text, desktop restoration and exact preservation of accepted journey state. Mobile/large-text screenshots and the localhost preview were visually inspected. This is browser emulation, not a physical-phone result.
+
+Toilet records remain available in Station layout & toilets. Existing route endpoints, current-position accuracy, route legends, attribution and failure-retry controls remain separate from the removed idle caption and toilet pins. The retained facility browser flow also passed.
 
 | Verification area | Covered behavior |
 | --- | --- |

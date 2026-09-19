@@ -186,7 +186,25 @@ export function mountCompanion({getSelected=()=>null,getPlaces=()=>[],onSelectPl
   personal=mountPersonal({host:$('companion-places'),showJourneys:showHeader,storage:deviceStorage,getPlan:()=>prepared??active?.plan,places:getPlaces(),onSelectPlan:plan=>{clearPrepared();onSelectPlan(plan);message('Saved endpoints selected with a current date/time. Recalculate and review the route and facilities before starting.');},onEndpoint});
   spending=mountExpenditure({host:$('companion-fares'),storage:deviceStorage,getJourney:()=>active,getFareOptions});
   async function initMap(){const supplied=getMap();if(supplied&&!showHeader){map=supplied;externalMap=true;$('companion-map').hidden=true;$('companion-map-note').hidden=true;sections.map.hidden=true;mapLayers=L.layerGroup().addTo(map);drawMap();return;}if(!showHeader){sections.map.hidden=true;return;}if(!window.L){await new Promise((resolve,reject)=>{const css=document.createElement('link');css.rel='stylesheet';css.href='/vendor/leaflet.css';document.head.append(css);const script=document.createElement('script');script.src='/vendor/leaflet.js';script.onload=resolve;script.onerror=reject;document.head.append(script);});}map=L.map($('companion-map'),{scrollWheelZoom:false}).setView([1.315,103.87],12);addStreetMap(map,{onStatus:state=>{$('companion-map-note').textContent=state.status==='ready'?'Street map overview. Indoor diagrams have a separate coverage label.':state.message;}});mapLayers=L.layerGroup().addTo(map);drawMap();}
-  function drawMap(markers){if(markers)toiletMarkers=markers;if(!mapLayers)return;mapLayers.clearLayers();const points=[];const add=(lat,lng,label,onSelect)=>{if(!Number.isFinite(lat)||!Number.isFinite(lng))return;points.push([lat,lng]);const marker=L.marker([lat,lng],{title:label,alt:label,icon:L.divIcon({className:'companion-marker',html:'<span aria-hidden="true">●</span>',iconSize:[28,28],iconAnchor:[14,14]})}).bindPopup(document.createTextNode(label)).addTo(mapLayers);if(onSelect)marker.on('click',onSelect);};for(const point of externalMap?[]:[active?.plan.origin,active?.plan.destination])if(point)add(point.lat,point.lng,point.label??point.id);for(const point of toiletMarkers??[])add(point.lat??point.position?.lat??point.coordinates?.[1],point.lng??point.position?.lng??point.lon??point.coordinates?.[0],point.label??point.name??point.id,point.onSelect);if(active?.location&&!externalMap){const l=active.location;L.circle([l.latitude,l.longitude],{radius:l.accuracy,color:'#a57111'}).bindPopup('Approximate browser position; floor unknown').addTo(mapLayers);points.push([l.latitude,l.longitude]);}if(points.length&&!externalMap)map.fitBounds(points,{padding:[25,25],maxZoom:17,animate:!reducedGuidanceMotion(readPresentationPreferences(deviceStorage),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})});}
+  function drawMap(markers){
+    if(markers)toiletMarkers=markers;
+    if(!mapLayers)return;
+    mapLayers.clearLayers();
+    // The main map owns route and position layers. Facility pins belong only
+    // to the standalone companion map; their details remain in Station guidance.
+    if(externalMap)return;
+    const points=[];
+    const add=(lat,lng,label,onSelect)=>{
+      if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
+      points.push([lat,lng]);
+      const marker=L.marker([lat,lng],{title:label,alt:label,icon:L.divIcon({className:'companion-marker',html:'<span aria-hidden="true">●</span>',iconSize:[28,28],iconAnchor:[14,14]})}).bindPopup(document.createTextNode(label)).addTo(mapLayers);
+      if(onSelect)marker.on('click',onSelect);
+    };
+    for(const point of [active?.plan.origin,active?.plan.destination])if(point)add(point.lat,point.lng,point.label??point.id);
+    for(const point of toiletMarkers??[])add(point.lat??point.position?.lat??point.coordinates?.[1],point.lng??point.position?.lng??point.lon??point.coordinates?.[0],point.label??point.name??point.id,point.onSelect);
+    if(active?.location){const l=active.location;L.circle([l.latitude,l.longitude],{radius:l.accuracy,color:'#a57111'}).bindPopup('Approximate browser position; floor unknown').addTo(mapLayers);points.push([l.latitude,l.longitude]);}
+    if(points.length)map.fitBounds(points,{padding:[25,25],maxZoom:17,animate:!reducedGuidanceMotion(readPresentationPreferences(deviceStorage),{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches})});
+  }
   initMap().catch(()=>{$('companion-map-note').textContent='Map unavailable. Text journey and facility instructions remain usable.';});
   window.addEventListener('hashchange',()=>{if(sharing.useFragment())refreshShare().then(()=>revealSection('sharing')).catch(e=>message('Shared trip unavailable: '+e.message));});
   window.addEventListener('offline',()=>{renderActive();offline.verify();message('Offline. Location assistance can still receive a browser fix. Sharing and live reports cannot update; check offline availability below.');});window.addEventListener('online',()=>{renderActive();offline.verify();if(sharing.session)refreshShare().then(()=>syncPrivacy()).then(()=>active&&sharing.update(active)).catch(e=>message('Reconnect sharing: '+e.message));});

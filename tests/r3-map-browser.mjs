@@ -34,6 +34,9 @@ try{
   assert.equal(await page.locator('#retry-street-map').count(),0);
   assert.ok(tileRequests.length>rejectedRequests);
   console.log('PASS map recovers only after deliberate Retry street map action');
+  assert.equal(await page.locator('#map-caption').isVisible(),false);
+  assert.equal(await page.locator('#map-caption').innerText(),'');
+  console.log('PASS idle map has no schematic caption after recovery');
   assert.deepEqual(errors,[]);
   console.log('PASS no map lifecycle browser errors');
 }finally{await browser.close();}
