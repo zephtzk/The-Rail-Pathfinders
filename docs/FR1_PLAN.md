@@ -23,6 +23,8 @@ Each item has a separate task, Git branch and application worktree. The outer Ne
 | Rounded map and station buttons | `codex/fr1-rounded-controls` | `01a0b790-83f3-76a3-8313-1e1610a8da12` | 4205 |
 | Update current journey step | `codex/fr1-current-step` | `01a0b790-948b-78b1-8aac-ffb559abadf8` | 4206 |
 
+| Prominent centered Current trip tab | `codex/fr1-current-tab` | `01a0b792-0d47-78d0-bf8e-223f09891cb7` | 4208 |
+
 ## Acceptance criteria
 
 1. Settings travel-style descriptions are hidden while collapsed and available through accessible disclosure controls; title and selection remain clear.
@@ -31,6 +33,8 @@ Each item has a separate task, Git branch and application worktree. The outer Ne
 4. Both full and simple guidance use the exact button label **Finish journey**.
 5. Map and station controls use consistent rounded corners with visible focus and usable touch targets.
 6. Current trip offers **Update my current step**, revealing the canonical journey-position selector with a compact accessible tick beside it. Selection alone does not advance progress. Staff assistance remains accessible from its own page.
+
+7. Current trip is visually larger and centered in mobile navigation, with proportions informed by Tribecar where suitable. All destinations remain reachable, with usable touch targets, selected/focus states, narrow-screen and large-text layouts.
 
 ## Integration and review
 
