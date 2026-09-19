@@ -1,0 +1,33 @@
+{
+  "checks": [
+    "static instruction has an accessible native close button",
+    "close target is at least 44px and fits top right without covering the heading",
+    "keyboard focus has a visible outline",
+    "keyboard dismissal hides the card and moves focus to its view heading",
+    "dismissal persists under a versioned session key",
+    "static travel information stays dismissed after preferences rerender",
+    "app tab switches retain dismissal",
+    "active step-free route restriction stays visible without a close button",
+    "routing errors remain visible without generic dismissal",
+    "each card has an independent dismissal key",
+    "Space dismisses current-trip static indoor instruction accessibly",
+    "current-trip tab and state-refresh rerenders retain indoor dismissal",
+    "matching static indoor information stays dismissed on Station guide",
+    "indoor coverage remains available in the station coverage disclosure",
+    "static facility coverage remains dismissed after a station rerender",
+    "facility coverage remains in its source and assistance disclosure",
+    "fictional training warning stays visible and has no generic close",
+    "current-trip indoor dismissal survives reload",
+    "preferences dismissal survives reload",
+    "new browser session shows previously dismissed instructions again",
+    "320px enlarged-text card has no horizontal overflow or heading overlap",
+    "new session also restores static indoor guidance",
+    "blocked sessionStorage falls back safely across tab switches and rerenders",
+    "new card nodes restore memory dismissal without touching unmarked notices",
+    "same-node content rerender adds exactly one close button and retains dismissal",
+    "removing explicit instruction classification reveals a reused state card",
+    "instruction flows report no browser exceptions"
+  ],
+  "errors": [],
+  "environment": "Installed Edge; mobile/touch and 320px/200% text emulation. sessionStorage tested enabled and blocked."
+}
