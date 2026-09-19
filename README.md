@@ -4,11 +4,13 @@ A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a j
 
 **Open the app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site)
 
-**Start here:** [Judges' illustrated user guide (PDF)](docs/Commute_Copilot_Judges_User_Guide.pdf)
+**View the source:** [Public GitHub repository](https://github.com/zephtzk/The-Rail-Pathfinders) · [Browser application](https://github.com/zephtzk/The-Rail-Pathfinders/tree/main/src) · [Server integrations](https://github.com/zephtzk/The-Rail-Pathfinders/tree/main/server) · [Download source ZIP](https://github.com/zephtzk/The-Rail-Pathfinders/archive/refs/heads/main.zip)
 
-**Release and verification:** [FR4 changes](docs/FR4_DELIVERY.md), following [FR3 review changes](docs/FR3_REVIEW_DELIVERY.md). The [illustrated judges' guide and earlier release record](docs/JUDGES_RELEASE.md) document the earlier R5 interface.
+**For judges:** follow the walkthrough below, open the [illustrated user guide (PDF)](docs/Commute_Copilot_Judges_User_Guide.pdf), or use the [source-code guide](docs/SOURCE_GUIDE.md) to inspect the implementation. No GitHub account or API key is needed to browse the code or run the core static-data demonstration. The ZIP includes source, pinned data, tests and setup instructions.
 
-The FR3 review update adds My location in both address fields, compact status controls, direct trip actions, cleaner tabs and dismissible guidance. Settings includes an 80–200% text-size slider, added after the first FR3 build was published. The second release also configures persistent storage for recipient links. The delivery record tracks both stages. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
+**Release and verification:** [FR4 changes](docs/FR4_DELIVERY.md), following [FR3 review changes](docs/FR3_REVIEW_DELIVERY.md). The [R5 release record](docs/JUDGES_RELEASE.md) is historical. GitHub's `main` branch is the submission source; later documentation commits can differ from the deployed application commit. The source-code guide explains how to inspect an exact revision.
+
+The current app includes focused address search, My location, direct trip actions, an 80–200% text-size setting, custom Show to staff messages and read-only caregiver links with persistent storage. Journey notifications are disabled. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
 ## Three-minute walkthrough
 
@@ -34,8 +36,8 @@ For the guide's transfer example, choose **Fewer transfers** with a **15-minute 
 | Offline guidance | Prepare an accepted trip online and use **Check offline availability**. Only proceed when the app reports readiness. Live feeds/new address requests and street-map tiles are not promised offline. |
 | Station information | Operator facts for selected stations; indoor directions remain work in progress. No verified working-lift, platform-door or step-free guarantee. |
 | Services and demo incidents | Nearby facilities, service notices and persistent local demo incident logs. Simulated closures can be replayed against the selected route and current packaged data; official notices remain separately identified. |
-| Live bus arrivals and street-address itineraries | Implemented integrations, but not enabled on this hosted release: server-side LTA/OneMap credentials are not configured. The app reports unavailable states. |
-| Caregiver sharing and external push | Local durable sharing is implemented and tested. Hosted sharing has no D1 binding; background Web Push is not configured. Do not use these as required steps in the hosted judging demo. |
+| Live bus arrivals and street-address itineraries | Server-side LTA/OneMap integrations. Availability depends on the configured credentials and provider response; use the app's current status. The core station/bus-stop demonstration does not require these integrations. |
+| Caregiver sharing | Read-only recipient links with persistent hosted storage. Recipients can view the shared plan; the provider can refresh it or cancel sharing. Links share the selected journey and its endpoints; they do not grant trip controls or provide ongoing device-location tracking. Journey notifications are disabled. |
 
 The bus snapshot is dated **18 September 2026**, with a reviewed window of **18 September-2 October 2026**. Rail coverage is **18 September-31 December 2026**, subject to source calendars and exceptions. All displayed planning times use **Asia/Singapore**. Bus ride/wait times are estimates, not a complete timetable or a guarantee of arrival.
 
