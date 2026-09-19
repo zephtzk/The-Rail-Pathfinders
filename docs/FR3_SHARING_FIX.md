@@ -9,3 +9,7 @@ The existing Sites hosting manifest now requests the `SHARING_DB` D1 binding. A 
 The combined second FR3 build passes 549 JavaScript tests, 44 Python data tests and the 146 existing FR3 browser checks. The text-size task separately records 2,079 checks across 284 rendered layouts in [its delivery record](FR3_TEXT_SIZE_DELIVERY.md). Exact publication and live-sharing outcomes are recorded in `evidence/fr3-review/stage2-publication.json` after deployment.
 
 Recipient links and foreground sharing do not require Web Push credentials. Background push delivery remains unconfigured/unverified. Fixed-deadline cleanup during site inactivity also remains unverified because no scheduled trigger is confirmed for this Sites deployment; sharing API requests perform cleanup, expired credentials are rejected, and explicit deletion works immediately. See [sharing operations](SHARING.md).
+
+## Deployed result
+
+Sites version 9 published successfully at `2026-09-19T06:18:24.275902+00:00`. The live database overview reports binding `SHARING_DB` with table `sharing_state`. Both production smoke scripts passed: the API verified creation/review/consent/persistence/revocation/deletion, and the browser verified all 14 Create/Copy/recipient-review/acceptance/reload checks. Both synthetic shares were deleted. [Exact deployment receipt](evidence/fr3-review/stage2-publication.json).

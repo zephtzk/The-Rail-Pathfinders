@@ -1,0 +1,65 @@
+{
+  "phase": "FR3",
+  "stage": 2,
+  "sourceCommit": "adc5f87f0932a5c42c1212d20f5943c0e2c1ce1b",
+  "pullRequest": "https://github.com/zephtzk/The-Rail-Pathfinders/pull/13",
+  "version": {
+    "id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_765e05594dc481919681c8f7a3b7bda6",
+    "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "version_number": 9,
+    "source": {
+      "commit_sha": "adc5f87f0932a5c42c1212d20f5943c0e2c1ce1b"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000f2708211ae00df15f446821f",
+      "content_hash": "sha256:e8871d6e3b91fef5d1d7e76782fb555ecf11b69e52866a1abd7741a2d982d0f0",
+      "size_bytes": 30361600,
+      "file_count": 136
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6aae2919dbe08191b3a2d3bcfe0ea92e",
+    "project_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+    "title": "Commute Copilot",
+    "version_id": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_765e05594dc481919681c8f7a3b7bda6",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aad0ab90e5881919eca01b79f19aa24",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-09-19T06:18:24.275902+00:00"
+  },
+  "audience": "public, unchanged",
+  "database": {
+    "bindings": [
+      "SHARING_DB"
+    ],
+    "selectedBinding": "SHARING_DB",
+    "tables": [
+      "sharing_state"
+    ]
+  },
+  "verification": {
+    "javascriptTests": 549,
+    "pythonTests": 44,
+    "existingFr3BrowserChecks": 146,
+    "textSizeChecks": 2079,
+    "textSizeRenderedLayouts": 284,
+    "independentShortScreenCases": 16,
+    "localSharingRestart": "passed",
+    "liveSharingApi": "passed: one synthetic share; creation, review, idempotent acceptance, both consents off, explicit progress consent, new-request persistence, no location, revocation, deletion",
+    "liveRecipientBrowserChecks": 14,
+    "liveRecipientBrowser": "passed: actual Create and Copy recipient link buttons, isolated recipient review and explicit acceptance, fragment removed, consent off, no GPS/progress upload, reload persistence",
+    "liveSyntheticSharesDeleted": 2
+  },
+  "limits": [
+    "Installed Edge browser automation; no physical-device validation.",
+    "Web Push credentials/delivery remain unconfigured or unverified.",
+    "No confirmed Sites recurring maintenance trigger; API requests clean expired records, credentials expire independently, and explicit deletion works immediately."
+  ]
+}
