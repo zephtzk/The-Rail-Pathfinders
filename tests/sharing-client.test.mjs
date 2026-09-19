@@ -79,19 +79,15 @@ test('offline updates store no location queue; changed server permission epoch b
   const viewer=await fetcher('/api/shares/'+share.id,{headers:{Authorization:'Bearer '+share.viewerToken}});const view=await viewer.json();assert.equal(view.location,null);assert.equal(view.progress,null);
 });
 
-test('unsupported push leaves in-app flow available',async()=>{
-  const {enablePush}=await import('../src/sharing-client.js');
-  await assert.rejects(enablePush({}),/Web Push unavailable/);
-});
-
-test('denied notification permission does not prompt again or register a subscription',async()=>{
-  const {enablePush}=await import('../src/sharing-client.js');
+test('enabling notifications never prompts or subscribes in this build',async()=>{
+  const {enablePush}=await import('../src/sharing-client.js');let prompted=0,subscribed=0;
   const previousWindow=Object.getOwnPropertyDescriptor(globalThis,'window'),previousNotification=Object.getOwnPropertyDescriptor(globalThis,'Notification'),previousServiceWorker=Object.getOwnPropertyDescriptor(globalThis.navigator,'serviceWorker');
   try{
     Object.defineProperty(globalThis,'window',{value:{PushManager(){},Notification:{}},configurable:true});
-    Object.defineProperty(globalThis.navigator,'serviceWorker',{value:{},configurable:true});
-    Object.defineProperty(globalThis,'Notification',{value:{permission:'denied',requestPermission(){throw Error('Permission must not be prompted again');}},configurable:true});
-    await assert.rejects(enablePush({travellerToken:'configured-role-token'}),/Notifications are denied/);
+    Object.defineProperty(globalThis.navigator,'serviceWorker',{value:{ready:Promise.resolve({pushManager:{subscribe(){subscribed++;}}})},configurable:true});
+    Object.defineProperty(globalThis,'Notification',{value:{permission:'default',requestPermission(){prompted++;return Promise.resolve('granted');}},configurable:true});
+    await assert.rejects(enablePush({travellerToken:'configured-role-token'}),/notifications are disabled/);
+    assert.equal(prompted,0);assert.equal(subscribed,0);
   }finally{
     for(const [object,key,descriptor] of [[globalThis,'window',previousWindow],[globalThis,'Notification',previousNotification],[globalThis.navigator,'serviceWorker',previousServiceWorker]]){if(descriptor)Object.defineProperty(object,key,descriptor);else delete object[key];}
   }

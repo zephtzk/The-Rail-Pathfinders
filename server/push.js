@@ -13,10 +13,8 @@ async function hkdf(input,salt,info,size) {
   const key=await crypto.subtle.importKey('raw',input,'HKDF',false,['deriveBits']);
   return new Uint8Array(await crypto.subtle.deriveBits({name:'HKDF',hash:'SHA-256',salt,info},key,size*8));
 }
-export function pushConfiguration(env) {
-  const configured=Boolean(env.VAPID_PUBLIC_KEY&&env.VAPID_PRIVATE_JWK&&env.VAPID_SUBJECT);
-  return {configured:configured||typeof env.PUSH_TEST_TRANSPORT==='function',transport:typeof env.PUSH_TEST_TRANSPORT==='function'?'local-test':configured?'web-push':'unconfigured',publicKey:env.VAPID_PUBLIC_KEY??null,
-    missing:['VAPID_PUBLIC_KEY','VAPID_PRIVATE_JWK','VAPID_SUBJECT'].filter(key=>!env[key]),externalDelivery:'unverified',message:'Web Push is optional and delivery is not guaranteed. Local test transport does not contact a push service.'};
+export function pushConfiguration() {
+  return {configured:false,transport:'disabled',publicKey:null,missing:[],externalDelivery:'disabled',message:'Journey notifications are disabled in this build.'};
 }
 export function validateSubscription(value) {
   const url=new URL(value?.endpoint??'');
@@ -45,64 +43,12 @@ export async function encryptPush(subscription,payload) {
   const header=new Uint8Array(21);header.set(salt);new DataView(header.buffer).setUint32(16,4096);header[20]=asPublic.length;
   return joinBytes(header,asPublic,encrypted);
 }
-export async function sendWebPush(subscription,payload,env,fetcher=fetch,now=Date.now()) {
-  if(typeof env.PUSH_TEST_TRANSPORT==='function')return env.PUSH_TEST_TRANSPORT(subscription,payload);
-  if(!pushConfiguration(env).configured)throw new Error('Web Push credentials missing');
-  if(!/^(mailto:|https:\/\/)/.test(env.VAPID_SUBJECT))throw new Error('VAPID_SUBJECT must be mailto: or https:');
-  const privateKey=await crypto.subtle.importKey('jwk',JSON.parse(env.VAPID_PRIVATE_JWK),{name:'ECDSA',namedCurve:'P-256'},false,['sign']);
-  const header=base64url(utf8.encode(JSON.stringify({typ:'JWT',alg:'ES256'})));
-  const claims=base64url(utf8.encode(JSON.stringify({aud:new URL(subscription.endpoint).origin,exp:Math.floor(now/1000)+3600,sub:env.VAPID_SUBJECT})));
-  const signed=`${header}.${claims}`;
-  const signature=base64url(await crypto.subtle.sign({name:'ECDSA',hash:'SHA-256'},privateKey,utf8.encode(signed)));
-  const response=await fetcher(subscription.endpoint,{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{Authorization:`vapid t=${signed}.${signature}, k=${env.VAPID_PUBLIC_KEY}`,'Content-Encoding':'aes128gcm','Content-Type':'application/octet-stream',TTL:'300',Urgency:'normal',Topic:(await credentialHash(payload.eventId)).slice(0,32)},body:await encryptPush(subscription,payload)});
-  return {status:response.status};
-}
-export function queueSharingPush(state,share,target,eventId,now) {
-  for(const [id,subscription] of Object.entries(state.subscriptions)) {
-    if(subscription.shareId!==share.id||subscription.role!==target)continue;
-    if(target==='viewer'&&(!share.consent.progress||share.sharingPaused||share.accessRevoked))continue;
-    const key=`${id}:${eventId}`;
-    // A discreet notification means "review the latest state". Coalesce older
-    // pending messages for this device instead of retaining a journey history.
-    for(const [oldId,event] of Object.entries(state.outbox))if(oldId!==key&&event.subscriptionId===id&&event.leaseUntil<=now)delete state.outbox[oldId];
-    if(!state.outbox[key])state.outbox[key]={subscriptionId:id,shareId:share.id,role:target,eventId,createdAt:now,nextAt:now,attempts:0,leaseUntil:0};
-  }
-}
-export async function flushSharingPush(env,{now=Date.now(),fetcher=fetch}={}) {
-  const store=sharingStore(env);if(!store||!pushConfiguration(env).configured)return {delivered:0};
-  const lease=randomCredential();
-  const jobs=await mutateSharing(store,state=>{
-    const jobs=[];
-    const busy=new Set(Object.values(state.outbox).filter(event=>event.leaseUntil>now).map(event=>event.subscriptionId));
-    for(const [id,event] of Object.entries(state.outbox)) {
-      const share=state.shares[event.shareId],sub=state.subscriptions[event.subscriptionId];
-      if(!share||!sub||share.expiresAt<=now||event.createdAt<now-86400000||share.accessRevoked||(sub.subscription.expirationTime&&sub.subscription.expirationTime<=now)||(event.role==='viewer'&&(!share.consent.progress||share.sharingPaused))){delete state.outbox[id];continue;}
-      if(event.deliveredAt||event.failedAt||event.nextAt>now||event.leaseUntil>now||busy.has(event.subscriptionId)||jobs.length>=20)continue;
-      event.leaseUntil=now+60000;event.lease=lease;event.attempts++;
-      busy.add(event.subscriptionId);
-      jobs.push({id,event:{...event},subscription:sub.subscription});
-    }
-    return jobs;
-  });
-  let delivered=0;
-  for(const job of jobs) {
-    // Recheck revocation after claiming and before dispatch. An already in-flight
-    // generic notification cannot be recalled, and carries no private details.
-    const fresh=(await store.read()).value;
-    const share=fresh.shares[job.event.shareId],subscription=fresh.subscriptions[job.event.subscriptionId];
-    let status=0;
-    const eligible=share&&subscription&&share.expiresAt>now&&!share.accessRevoked&&(job.event.role!=='viewer'||(share.consent.progress&&!share.sharingPaused));
-    if(eligible)try{status=(await sendWebPush(job.subscription,{eventId:job.event.eventId,title:'Journey updated',body:'Open Commute Copilot to review your journey.',url:'/'},env,fetcher,now)).status;}catch{status=0;}
-    const deliveredThisJob=await mutateSharing(store,state=>{
-      const event=state.outbox[job.id];if(!event||event.lease!==lease)return;
-      if(!eligible){delete state.outbox[job.id];return;}
-      if([404,410].includes(status)){delete state.subscriptions[event.subscriptionId];delete state.outbox[job.id];return;}
-      event.leaseUntil=0;
-      if(status>=200&&status<300){delete state.outbox[job.id];return true;}
-      else if(event.attempts>=5)delete state.outbox[job.id];
-      else event.nextAt=now+Math.min(3600000,30000*2**event.attempts);
-    });
-    if(deliveredThisJob)delivered++;
-  }
-  return {delivered};
+// Delivery is disabled at the server boundary, regardless of credentials or
+// test transports. Pure encryption helpers above remain independently testable.
+export async function sendWebPush() { throw new Error('Journey notifications are disabled in this build.'); }
+export function queueSharingPush() {}
+export async function flushSharingPush(env) {
+  const store=sharingStore(env);
+  if(store)await mutateSharing(store,state=>{state.subscriptions={};state.outbox={};});
+  return {delivered:0,disabled:true};
 }

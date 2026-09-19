@@ -142,6 +142,7 @@ export async function handleSharingApi(request,env={},ctx={}) {
     }
     if(pushPath) {
       if((await store.read()).value.shares[id]?.purpose==='plan-view')throw error('Access expired or unavailable',404);
+      if(request.method==='POST')throw error('Journey notifications are disabled in this build.',503);
       if(!['POST','DELETE'].includes(request.method))throw error('Method not allowed',405);
       let subscription=null;
       if(request.method==='POST')try{subscription=validateSubscription(body.subscription);}catch(problem){throw error(problem.message);}

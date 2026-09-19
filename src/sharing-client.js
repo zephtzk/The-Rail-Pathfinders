@@ -100,16 +100,7 @@ export class SharingClient {
   propose(plan){return this.enqueue(async()=>{await this.refreshIfNeeded();const s=this.session;const result=await this.api(`/${s.id}/plan`,{method:'PATCH',token:s.editorToken,body:{eventId:crypto.randomUUID(),expectedRevision:s.revision,plan}});this.remember(result,s);return result;});}
   links(){const s=this.session;if(!s)return {};const base=location.origin+'/';return {invite:s.inviteToken?`${base}#invite=${s.id}.${s.inviteToken}`:null,viewer:s.viewerToken?`${base}#${s.purpose==='plan-view'?'view-trip':'caregiver'}=${s.id}.${s.viewerToken}`:null};}
 }
-export async function enablePush(session){
-  if(!('serviceWorker'in navigator)||!('PushManager'in window)||!('Notification'in window))throw Error('Web Push unavailable here. Journey updates remain in the app. On iPhone/iPad use an optional Home Screen installation.');
-  if(!session?.travellerToken&&!session?.viewerToken)throw Error('Accept a trip or open a caregiver view before enabling its notifications.');
-  if(Notification.permission==='denied')throw Error('Notifications are denied. Change the browser setting to enable them; in-app updates still work.');
-  const permission=await Notification.requestPermission();if(permission!=='granted')throw Error('Notifications were not enabled. In-app updates remain available.');
-  const config=await fetch('/api/push/config',{cache:'no-store'}).then(r=>r.json());if(!config.publicKey||!config.configured)throw Error('Push delivery is not configured: server VAPID public/private keys and subject are required.');
-  const raw=atob(config.publicKey.replaceAll('-','+').replaceAll('_','/'));const key=Uint8Array.from(raw,c=>c.charCodeAt(0));const registration=await navigator.serviceWorker.ready;
-  const subscription=await registration.pushManager.getSubscription()??await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key});
-  const response=await fetch('/api/push/subscriptions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${session.travellerToken??session.viewerToken}`},body:JSON.stringify({shareId:session.id,subscription:subscription.toJSON()}),cache:'no-store',referrerPolicy:'no-referrer'});if(!response.ok)throw Error('Could not register notification delivery.');return subscription;
-}
+export async function enablePush() { throw Error('Journey notifications are disabled in this build.'); }
 export async function disablePush(session){
   if(!('serviceWorker'in navigator))return;
   const reg=await navigator.serviceWorker.ready,subscription=await reg.pushManager.getSubscription();if(!subscription)return;

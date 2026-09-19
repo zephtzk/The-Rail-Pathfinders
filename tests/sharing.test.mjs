@@ -99,20 +99,21 @@ test('D1 compare-and-swap uses durable SQL conditional writes rather than an iso
   await mutateSharing(d1,state=>{state.rates['durable']={count:1,expiresAt:Date.now()+60000};});assert.equal((await store.read()).value.rates.durable.count,1);
 });
 
-test('server event delivers once via explicit local test transport; consent and gone subscriptions are enforced',async t=>{
-  const {env,store}=await fixture(t);const delivered=[];env.PUSH_TEST_TRANSPORT=async(_sub,payload)=>{delivered.push(payload);return {status:201};};
+test('notifications remain off and maintenance deletes old subscriptions and queued events',async t=>{
+  const {env,store}=await fixture(t);let delivered=0;
+  env.PUSH_TEST_TRANSPORT=async()=>{delivered++;return {status:201};};
+  env.VAPID_PUBLIC_KEY='configured';env.VAPID_PRIVATE_JWK='configured';env.VAPID_SUBJECT='mailto:test@example.com';
   const share=await create(env),accepted=await accept(env,share),sub=await subscription();
-  const registration=await api(env,'POST','/api/push/subscriptions',share.viewerToken,{shareId:share.id,subscription:sub});assert.equal(registration.status,200);
-  const body=progressBody(accepted,{acceptedPlan:{...plan,route:{id:'toilet-detour'}}});
-  const changed=await api(env,'PATCH',`/api/shares/${share.id}/progress`,accepted.travellerToken,body);assert.equal(changed.status,200);assert.equal(delivered.length,1);assert.equal(delivered[0].title,'Journey updated');assert.ok(!JSON.stringify(delivered).includes('toilet'));
-  await api(env,'PATCH',`/api/shares/${share.id}/progress`,accepted.travellerToken,body);await flushSharingPush(env);assert.equal(delivered.length,1);
-  env.PUSH_TEST_TRANSPORT=async()=>({status:410});
-  const finish=await api(env,'PATCH',`/api/shares/${share.id}/progress`,accepted.travellerToken,progressBody(changed.body,{eventId:'finish-0000001',status:'completed'}));assert.equal(finish.status,200);assert.equal(Object.keys((await store.read()).value.subscriptions).length,0);
+  assert.equal((await api(env,'POST','/api/push/subscriptions',share.viewerToken,{shareId:share.id,subscription:sub})).status,503);
+  await mutateSharing(store,state=>{state.subscriptions.old={shareId:share.id,role:'viewer',subscription:sub};state.outbox.old={shareId:share.id,subscriptionId:'old',role:'viewer',eventId:'old-event',createdAt:Date.now(),nextAt:0,attempts:0,leaseUntil:0};});
+  await runSharingMaintenance(env);
+  const state=(await store.read()).value;assert.deepEqual(state.subscriptions,{});assert.deepEqual(state.outbox,{});assert.ok(state.shares[share.id]);assert.equal(delivered,0);
+  const changed=await api(env,'PATCH',`/api/shares/${share.id}/progress`,accepted.travellerToken,progressBody(accepted));assert.equal(changed.status,200);assert.equal(delivered,0);
+  const config=await api(env,'GET','/api/push/config');assert.equal(config.body.configured,false);assert.equal(config.body.transport,'disabled');assert.equal(config.body.publicKey,null);assert.deepEqual(config.body.missing,[]);
 });
 
-test('private/internal push destinations and missing delivery credentials are rejected',async t=>{
+test('push registration is unavailable while existing subscriptions may be removed',async t=>{
   const {env}=await fixture(t),share=await create(env),accepted=await accept(env,share),sub=await subscription();
-  assert.equal((await api(env,'POST','/api/push/subscriptions',accepted.travellerToken,{shareId:share.id,subscription:{...sub,endpoint:'https://127.0.0.1/private'}})).status,400);
   assert.equal((await api(env,'POST','/api/push/subscriptions',accepted.travellerToken,{shareId:share.id,subscription:sub})).status,503);
-  const config=await api(env,'GET','/api/push/config');assert.equal(config.body.configured,false);assert.deepEqual(config.body.missing,['VAPID_PUBLIC_KEY','VAPID_PRIVATE_JWK','VAPID_SUBJECT']);
+  assert.equal((await api(env,'DELETE','/api/push/subscriptions',accepted.travellerToken,{shareId:share.id,endpoint:sub.endpoint})).status,200);
 });
