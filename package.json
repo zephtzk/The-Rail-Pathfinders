@@ -33,7 +33,8 @@
     "test:r4-browser": "node tests/r4-flow-browser.mjs && node tests/r4-planner-browser.mjs && node tests/r4-spending-browser.mjs && node tests/r4-legacy-browser.mjs",
     "test:r5-browser": "node tests/r5-product-browser.mjs && node tests/r5-arrivals-browser.mjs && node tests/r5-guidance-browser.mjs && node tests/r5-address-browser.mjs && node tests/guidance-r5-browser.mjs && node tests/r5-bus-browser.mjs && node tests/r5-journey-sheet-browser.mjs && node tests/r5-bus-stop-browser.mjs",
     "benchmark:r5-bus": "node --expose-gc scripts/benchmark-r5-bus.mjs",
-    "test:fr1-browser": "node tests/fr1-current-step-browser.mjs && node tests/nearby-facilities-browser.mjs && node tests/fr1-current-tab-browser.mjs && node tests/fr1-integration-browser.mjs"
+    "test:fr1-browser": "node tests/fr1-current-step-browser.mjs && node tests/nearby-facilities-browser.mjs && node tests/fr1-current-tab-browser.mjs && node tests/fr1-integration-browser.mjs",
+    "test:pre-fr2-browser": "node tests/pre-fr2-compact-tabs-browser.mjs && node tests/pre-fr2-staff-tick-browser.mjs && node tests/pre-fr2-start-journey-browser.mjs && node tests/pre-fr2-start-contrast-browser.mjs && node tests/pre-fr2-location-browser.mjs && node tests/location-privacy-browser.mjs && node tests/location-legacy-controls-browser.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",
