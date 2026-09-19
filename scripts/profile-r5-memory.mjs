@@ -125,7 +125,8 @@ async function main(){
       const afterMemory=globalThis.__r5MemoryProbe('afterQuery');
       const ms=performance.now()-started;
       const validResult=result?.status==='ok' && Array.isArray(result.routes) && result.routes.length>0 && result.recommended!==null && result.recommended!==undefined;
-      const probeCountsMatch=activeStats.byKind.beforeQuery===1 && activeStats.byKind.afterQuery===1 && activeStats.byKind.frequencyExpansions===Math.floor((result?.diagnostics?.frequencyExpansions??0)/1024) && activeStats.byKind.railConnections===Math.floor((result?.diagnostics?.connectionsScanned??0)/128);
+      const passes=[result?.diagnostics,result?.diagnostics?.railPrepass].filter(Boolean);
+      const probeCountsMatch=activeStats.byKind.beforeQuery===1 && activeStats.byKind.afterQuery===1 && activeStats.byKind.frequencyExpansions===passes.reduce((n,d)=>n+Math.floor((d.frequencyExpansions??0)/1024),0) && activeStats.byKind.railConnections===passes.reduce((n,d)=>n+Math.floor((d.connectionsScanned??0)/128),0);
       queries.push({queryIndex,round:round+1,input,status:result?.status??'exception',validResult,probeCountsMatch,error,arrivalSeconds:result?.recommended?.arrivalSeconds??null,diagnostics:result?.diagnostics??null,ms,beforeMemory,afterMemory,...activeStats,routeObjectives:(result?.routes??[]).map(route=>[route.arrivalSeconds,route.transfers,route.walkingSeconds])});
       activeStats=null;
       result=null;

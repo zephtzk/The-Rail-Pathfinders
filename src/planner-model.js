@@ -53,7 +53,7 @@ export function busStopDetails(bus, routingId) {
 }
 
 export function endpointCatalog(network, bus, personal = {places:[]}) {
-  const directions = new Map(), services = new Map();
+  const directions = new Map(), services = new Map(), timingStops = new Set();
   const names = new Map((bus.stops ?? []).map(stop => [stopCode(stop.id), stop.name]));
   for (const pattern of bus.patterns ?? []) {
     const label = directionLabel(pattern, names);
@@ -62,12 +62,13 @@ export function endpointCatalog(network, bus, personal = {places:[]}) {
       if (!directions.has(key)) {directions.set(key, new Set());services.set(key, new Set());}
       directions.get(key).add(label);
       services.get(key).add(String(pattern.serviceNo));
+      if(pattern.timingSupported!==false)timingStops.add(key);
     }
   }
   const base = network.stations.map(s => {
     const isBus=s.id.startsWith('bus:');
     const codes=isBus?[s.id.slice(4)]:[...new Set([s.id,...(s.stopIds??[])].map(id=>id.split('_')[0]))];
-    return {id:s.id,routingId:s.id,codes,label:s.name,lat:s.lat,lng:s.lon ?? s.lng,stationId:s.id,sourceId:`lta:${s.id}`,coverage:'supported',accessibility:'unknown',kind:isBus?'bus':'train',
+    return {id:s.id,routingId:s.id,codes,label:s.name,lat:s.lat,lng:s.lon ?? s.lng,stationId:s.id,sourceId:`lta:${s.id}`,coverage:isBus&&!timingStops.has(s.id)?'listed':'supported',accessibility:'unknown',kind:isBus?'bus':'train',
       detail:isBus?[...(services.get(s.id)??[])].sort(serviceOrder.compare).join(', '):`${codes.join(' / ')} · Rail station`,
       ...(isBus?{stopCode:codes[0],roadName:s.roadName ?? '',searchText:[...(directions.get(s.id)??[]),s.roadName].filter(Boolean).join(' · ')}:{}),
     };

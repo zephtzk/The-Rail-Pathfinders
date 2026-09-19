@@ -5,5 +5,5 @@ export function historicalBusPilot(network) {
   const used=new Set(patterns.flatMap(p=>p.stops.map(s=>s.stopId)));
   return {...network,patterns,stops:network.stops.filter(s=>used.has(s.id)),
     coverage:{...network.coverage,calendarMode:'legacy-pilot',weekdays:[1,2,3,4,5],earliestSeconds:34200,latestSeconds:59400},
-    assumptions:{...network.assumptions,unverifiedBayStopCodes:['75009','52009','99009','10499']}};
+    assumptions:{...network.assumptions,allowEstimatedBayTransfers:false,unverifiedBayStopCodes:['75009','52009','99009','10499']}};
 }

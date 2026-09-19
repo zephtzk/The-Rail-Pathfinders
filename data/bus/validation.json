@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
   "coverage": {
-    "name": "Audited Singapore public bus frequency estimates",
+    "name": "Island-wide Singapore public bus estimates",
     "validFrom": "2026-09-18",
     "validThrough": "2026-10-02",
     "weekdays": [
@@ -45,7 +45,7 @@
     }
   },
   "assumptions": {
-    "unverifiedBayReason": "Every retained source service origin and destination, including excluded service patterns, may use different alighting and boarding bays. Where such a code is included as a stop, same-stop bus transfers are disabled without a reviewed internal path; journey starts and ends remain allowed.",
+    "unverifiedBayReason": "Service endpoint codes may have different alighting and boarding bays. Same-code transfers use an explicit estimated five-minute walking allowance; confirm the bay on site. No internal path or accessibility is established.",
     "timingKind": "frequency-estimate",
     "waitStrategy": "maximum-published-headway",
     "waitBasis": "Use the upper bound of the published dispatch interval as an estimated wait at boarding stops. Headways can vary downstream; this is not a guaranteed wait or an exact departure.",
@@ -79,8 +79,10 @@
       }
     ],
     "earlyHoursBasis": "Before 06:30 on a new service day the guide provides no headway band. Only an explicitly published first arrival can be considered; no continuous early-morning frequency is inferred.",
-    "minimumUnreviewedServiceSpanSeconds": 21600,
-    "limitedSpanPolicy": "A service day with an origin first/last span shorter than six hours is withheld pending service-specific trip-rule review. This conservative threshold does not assert that every short span is a fixed-trip service. Generic AM-offpeak metadata alone cannot prove continuous operation; other independently available days remain eligible."
+    "limitedSpanPolicy": "Use each published weekday/Saturday/Sunday stop span with its available headway bands, including short and peak-only spans. Missing bands are not filled; routes without usable headways remain discoverable without continuous departure estimates.",
+    "allowEstimatedBayTransfers": true,
+    "bayTransferSeconds": 300,
+    "sourceOrderBasis": "Preserve source sequence numbers and traverse the listed stops in ascending order, including gaps and nonzero distance origins. Distance differences determine ride estimates. Loop descriptions never add an unlisted closing edge. A decreasing distance starts a separate segment, with no estimated ride across the reset."
   },
   "selectionMode": "audited-frequency-patterns"
 }

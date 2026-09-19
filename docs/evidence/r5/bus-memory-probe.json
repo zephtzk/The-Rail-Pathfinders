@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "startedAt": "2026-09-18T20:01:22.285Z",
-  "recordedAt": "2026-09-18T20:01:23.760Z",
+  "startedAt": "2026-09-19T02:11:45.230Z",
+  "recordedAt": "2026-09-19T02:11:46.912Z",
   "evidenceClass": "Instrumented Node desktop memory sampling inside route search; not an exact peak, browser, physical-phone or provider-latency measurement",
   "environment": {
     "node": "v24.16.0",
@@ -16,33 +16,33 @@
       "--expose-gc"
     ]
   },
-  "scriptSha256": "8056bb997abe8a650d078c5d128ba7bfaaa0dafeec7ab9c752558f884eb4db4f",
+  "scriptSha256": "c6f462a12691d16bd3122866d86cd6859906ec7c598f37069d016e73c84585a3",
   "source": {
     "rail-engine.js": {
-      "sha256": "349ecbf61ed66ccb8980b64a3ed1cb1752c8835e021cb64f93c0c495eb69ae91",
-      "bytes": 36284
+      "sha256": "fee8b8351c779b671a15966f826cd0fad6a6bf8f1b3444da3664c8d9c21c559e",
+      "bytes": 36574
     },
     "multimodal-engine.js": {
-      "sha256": "4a807fd89d3bde704c0abfe3d8ef30ef692e4b8a0baa098e5262da22337323c4",
-      "bytes": 13816
+      "sha256": "4a2360e379759665a9119956e710adb54634a432a26fff267cf0e2716a9c0715",
+      "bytes": 16043
     },
     "search-arena.js": {
-      "sha256": "57fa89fd4e583cd5e7d18a71413f83c024ffdfa8f55003c97f5ddf54bc02db8b",
-      "bytes": 5707
+      "sha256": "6b7d0e26b7418bfaf4b6c7e89fbba9f4e8f83223be20af9d7840cefc7b59db0a",
+      "bytes": 5773
     }
   },
   "instrumentedSources": {
     "rail-engine.js": {
-      "sha256": "98745977d8be4aaf6002ced74db68d6e4ef6f5b1cd77bcf73e29fccf88d08ecc",
-      "bytes": 36557
+      "sha256": "6fc57dab7ec0d01ff8b7c9c9c87de344715a80a20eabba0bcdfd95e8ae403f25",
+      "bytes": 36847
     },
     "multimodal-engine.js": {
-      "sha256": "4a807fd89d3bde704c0abfe3d8ef30ef692e4b8a0baa098e5262da22337323c4",
-      "bytes": 13816
+      "sha256": "4a2360e379759665a9119956e710adb54634a432a26fff267cf0e2716a9c0715",
+      "bytes": 16043
     },
     "search-arena.js": {
-      "sha256": "57fa89fd4e583cd5e7d18a71413f83c024ffdfa8f55003c97f5ddf54bc02db8b",
-      "bytes": 5707
+      "sha256": "6b7d0e26b7418bfaf4b6c7e89fbba9f4e8f83223be20af9d7840cefc7b59db0a",
+      "bytes": 5773
     }
   },
   "data": [
@@ -53,8 +53,8 @@
     },
     {
       "name": "bus-network",
-      "bytes": 4721033,
-      "sha256": "5a33daf7f84c3c09e397d2e21c6eb7314d8ba59b5357b9996b5ecef15d221886"
+      "bytes": 5194461,
+      "sha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1"
     },
     {
       "name": "walking-links",
@@ -64,13 +64,14 @@
   ],
   "sourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
   "availability": {
-    "registryPatternCount": 416,
-    "registryStopCount": 4840,
-    "routablePatternCount": 391,
-    "routableServiceNumberCount": 297,
-    "routableStopCount": 4826
+    "registryPatternCount": 798,
+    "registryServiceNumberCount": 602,
+    "registryStopCount": 5208,
+    "routablePatternCount": 776,
+    "routableServiceNumberCount": 583,
+    "routableStopCount": 5206
   },
-  "ignoredEngineCopy": "test-results/r5-memory/profile-i1HXlB",
+  "ignoredEngineCopy": "test-results/r5-memory/profile-lAlbRa",
   "instrumentation": {
     "productionFilesModified": false,
     "reversibleSourceCheck": true,
@@ -139,64 +140,64 @@
     "total": 24
   },
   "startupMemory": {
-    "rss": 55287808,
+    "rss": 49172480,
     "heapTotal": 7020544,
-    "heapUsed": 5483016,
-    "external": 2088806,
-    "arrayBuffers": 52815
+    "heapUsed": 5483376,
+    "external": 2089016,
+    "arrayBuffers": 53025
   },
   "afterDataMemory": {
-    "rss": 160108544,
-    "heapTotal": 102060032,
-    "heapUsed": 53121872,
-    "external": 38366148,
-    "arrayBuffers": 18182560
+    "rss": 153149440,
+    "heapTotal": 100487168,
+    "heapUsed": 51534288,
+    "external": 39313070,
+    "arrayBuffers": 18656054
   },
   "initialMemory": {
-    "rss": 224100352,
-    "heapTotal": 196083712,
-    "heapUsed": 84234528,
-    "external": 40965796,
-    "arrayBuffers": 20782208
+    "rss": 181526528,
+    "heapTotal": 198967296,
+    "heapUsed": 94114640,
+    "external": 4670354,
+    "arrayBuffers": 2634344
   },
-  "probes": 10347,
+  "probes": 10017,
   "byKind": {
     "beforeQuery": 24,
-    "frequencyExpansions": 8091,
-    "railConnections": 2208,
+    "frequencyExpansions": 7593,
+    "railConnections": 2376,
     "afterQuery": 24
   },
   "sampledMaximum": {
-    "rss": 291819520,
-    "heapTotal": 225071104,
-    "heapUsed": 157025968,
-    "external": 40965796,
-    "arrayBuffers": 20782208,
-    "heapPlusExternal": 162733650
+    "rss": 274591744,
+    "heapTotal": 217423872,
+    "heapUsed": 149173800,
+    "external": 5569388,
+    "arrayBuffers": 3470460,
+    "heapPlusExternal": 154612116
   },
   "heapHighWaterSample": {
-    "rss": 285642752,
-    "heapTotal": 225071104,
-    "heapUsed": 157025968,
-    "external": 5704490,
-    "arrayBuffers": 3605562,
+    "rss": 272642048,
+    "heapTotal": 217423872,
+    "heapUsed": 149173800,
+    "external": 5438316,
+    "arrayBuffers": 3339388,
     "kind": "railConnections",
-    "counter": 9728,
+    "counter": 5376,
     "queryIndex": 24
   },
   "beforeExplicitGc": {
-    "rss": 284463104,
-    "heapTotal": 223940608,
-    "heapUsed": 89072368,
-    "external": 5704490,
-    "arrayBuffers": 3605562
+    "rss": 270258176,
+    "heapTotal": 215162880,
+    "heapUsed": 83414832,
+    "external": 5438316,
+    "arrayBuffers": 3339388
   },
   "retainedMemoryAfterGc": {
-    "rss": 282636288,
-    "heapTotal": 221696000,
-    "heapUsed": 81921208,
-    "external": 5704490,
-    "arrayBuffers": 3601466
+    "rss": 269463552,
+    "heapTotal": 213217280,
+    "heapUsed": 75448656,
+    "external": 5438316,
+    "arrayBuffers": 3339388
   },
   "queries": [
     {
@@ -215,63 +216,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 37170,
+      "arrivalSeconds": 37110,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 4046,
-        "frequencyExpansions": 975,
-        "labelsCreated": 537,
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 56.710499999999996,
+        "elapsedMs": 69.27719999999997,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 28
       },
-      "ms": 58.5796,
+      "ms": 70.46400000000003,
       "beforeMemory": {
-        "rss": 224100352,
-        "heapTotal": 196083712,
-        "heapUsed": 84239144,
-        "external": 40965796,
-        "arrayBuffers": 20782208
+        "rss": 181526528,
+        "heapTotal": 198967296,
+        "heapUsed": 94118944,
+        "external": 4670354,
+        "arrayBuffers": 2634344
       },
       "afterMemory": {
-        "rss": 191594496,
-        "heapTotal": 202752000,
-        "heapUsed": 71421768,
-        "external": 23328132,
-        "arrayBuffers": 3081274
+        "rss": 187871232,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340
       },
-      "probes": 33,
+      "probes": 32,
       "byKind": {
         "beforeQuery": 1,
         "frequencyExpansions": 0,
-        "railConnections": 31,
+        "railConnections": 30,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 224100352,
-        "heapTotal": 202752000,
-        "heapUsed": 84239144,
-        "external": 40965796,
-        "arrayBuffers": 20782208,
-        "heapPlusExternal": 125204940
+        "rss": 190054400,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340,
+        "heapPlusExternal": 106390092
       },
       "heapHighWaterSample": {
-        "rss": 224100352,
-        "heapTotal": 196083712,
-        "heapUsed": 84239144,
-        "external": 40965796,
-        "arrayBuffers": 20782208,
-        "kind": "beforeQuery",
+        "rss": 187871232,
+        "heapTotal": 201285632,
+        "heapUsed": 101209824,
+        "external": 5180268,
+        "arrayBuffers": 3081340,
+        "kind": "afterQuery",
         "counter": null,
         "queryIndex": 1
       },
       "routeObjectives": [
         [
-          37170,
+          37110,
           0,
           0
         ]
@@ -293,63 +294,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 48530,
+      "arrivalSeconds": 48130,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 19763,
-        "frequencyExpansions": 223734,
-        "labelsCreated": 12352,
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 66.43809999999999,
+        "elapsedMs": 134.40880000000004,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 66.7184,
+      "ms": 134.7953,
       "beforeMemory": {
-        "rss": 191696896,
-        "heapTotal": 202752000,
-        "heapUsed": 71437448,
-        "external": 23328132,
-        "arrayBuffers": 3081274
+        "rss": 187883520,
+        "heapTotal": 201285632,
+        "heapUsed": 101218000,
+        "external": 5180268,
+        "arrayBuffers": 3081340
       },
       "afterMemory": {
-        "rss": 194535424,
-        "heapTotal": 204124160,
-        "heapUsed": 103568680,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 221057024,
+        "heapTotal": 201080832,
+        "heapUsed": 76451080,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
-      "probes": 374,
+      "probes": 576,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 218,
-        "railConnections": 154,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 205213696,
-        "heapTotal": 204124160,
-        "heapUsed": 103568680,
-        "external": 23328132,
-        "arrayBuffers": 3335226,
-        "heapPlusExternal": 109002834
+        "rss": 224038912,
+        "heapTotal": 203571200,
+        "heapUsed": 134104688,
+        "external": 5434220,
+        "arrayBuffers": 3335292,
+        "heapPlusExternal": 139538908
       },
       "heapHighWaterSample": {
-        "rss": 194535424,
-        "heapTotal": 204124160,
-        "heapUsed": 103568680,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
-        "kind": "afterQuery",
-        "counter": null,
+        "rss": 224038912,
+        "heapTotal": 203571200,
+        "heapUsed": 134104688,
+        "external": 5434220,
+        "arrayBuffers": 3335292,
+        "kind": "railConnections",
+        "counter": 19200,
         "queryIndex": 2
       },
       "routeObjectives": [
         [
-          48530,
+          48130,
           1,
           0
         ]
@@ -371,64 +372,64 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 45210,
+      "arrivalSeconds": 43950,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 15255,
-        "frequencyExpansions": 136990,
-        "labelsCreated": 9754,
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 40.1866,
+        "elapsedMs": 63.028999999999996,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 16
+        "boardingsFromOrigin": 17
       },
-      "ms": 40.536099999999976,
+      "ms": 63.3698,
       "beforeMemory": {
-        "rss": 194535424,
-        "heapTotal": 204124160,
-        "heapUsed": 103570888,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 221065216,
+        "heapTotal": 201080832,
+        "heapUsed": 76453280,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
       "afterMemory": {
-        "rss": 217047040,
-        "heapTotal": 204124160,
-        "heapUsed": 122513624,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 219938816,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
-      "probes": 254,
+      "probes": 332,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 133,
-        "railConnections": 119,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 217047040,
-        "heapTotal": 204124160,
-        "heapUsed": 122513624,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
-        "heapPlusExternal": 127947778
+        "rss": 229388288,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 97320892
       },
       "heapHighWaterSample": {
-        "rss": 217047040,
-        "heapTotal": 204124160,
-        "heapUsed": 122513624,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
+        "rss": 219938816,
+        "heapTotal": 201080832,
+        "heapUsed": 91886672,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 3
       },
       "routeObjectives": [
         [
-          45210,
-          1,
+          43950,
+          2,
           0
         ]
       ]
@@ -453,52 +454,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 11184,
-        "frequencyExpansions": 46730,
-        "labelsCreated": 4977,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 12.595399999999984,
+        "elapsedMs": 27.50740000000002,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 18
+        "boardingsFromOrigin": 24
       },
-      "ms": 12.871400000000051,
+      "ms": 27.80800000000005,
       "beforeMemory": {
-        "rss": 217096192,
-        "heapTotal": 204124160,
-        "heapUsed": 122515760,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 219971584,
+        "heapTotal": 201080832,
+        "heapUsed": 91888960,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
       "afterMemory": {
-        "rss": 223338496,
-        "heapTotal": 204124160,
-        "heapUsed": 131323256,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 225206272,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
-      "probes": 134,
+      "probes": 175,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 45,
+        "frequencyExpansions": 86,
         "railConnections": 87,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 223338496,
-        "heapTotal": 204124160,
-        "heapUsed": 131323256,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
-        "heapPlusExternal": 136757410
+        "rss": 226885632,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 106974172
       },
       "heapHighWaterSample": {
-        "rss": 223338496,
-        "heapTotal": 204124160,
-        "heapUsed": 131323256,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
+        "rss": 225206272,
+        "heapTotal": 201080832,
+        "heapUsed": 101539952,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 4
@@ -531,54 +532,54 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 10301,
-        "frequencyExpansions": 460290,
-        "labelsCreated": 18709,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 79.12049999999999,
+        "elapsedMs": 147.77640000000008,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 29
       },
-      "ms": 79.39609999999999,
+      "ms": 148.42290000000003,
       "beforeMemory": {
-        "rss": 223338496,
-        "heapTotal": 204124160,
-        "heapUsed": 131325368,
-        "external": 5434154,
-        "arrayBuffers": 3335226
+        "rss": 225210368,
+        "heapTotal": 201080832,
+        "heapUsed": 101542240,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
       "afterMemory": {
-        "rss": 227950592,
-        "heapTotal": 204251136,
-        "heapUsed": 80975824,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
-      "probes": 531,
+      "probes": 934,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 449,
+        "frequencyExpansions": 852,
         "railConnections": 80,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 233709568,
-        "heapTotal": 204763136,
-        "heapUsed": 136454416,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
-        "heapPlusExternal": 141888570
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 118455908
       },
       "heapHighWaterSample": {
-        "rss": 226480128,
-        "heapTotal": 204763136,
-        "heapUsed": 136454416,
-        "external": 5434154,
-        "arrayBuffers": 3335226,
-        "kind": "railConnections",
-        "counter": 2048,
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113021688,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "kind": "afterQuery",
+        "counter": null,
         "queryIndex": 5
       },
       "routeObjectives": [
@@ -610,63 +611,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 41510,
+      "arrivalSeconds": 41270,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 10216,
-        "frequencyExpansions": 44062,
-        "labelsCreated": 6460,
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 28.288200000000018,
+        "elapsedMs": 36.720699999999965,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 93
+        "boardingsFromOrigin": 91
       },
-      "ms": 28.474900000000048,
+      "ms": 37.162199999999984,
       "beforeMemory": {
-        "rss": 228016128,
-        "heapTotal": 204251136,
-        "heapUsed": 80977648,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 236007424,
+        "heapTotal": 203517952,
+        "heapUsed": 113024056,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
       "afterMemory": {
-        "rss": 238346240,
-        "heapTotal": 204775424,
-        "heapUsed": 92620056,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
-      "probes": 124,
+      "probes": 156,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 43,
-        "railConnections": 79,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 238432256,
-        "heapTotal": 204775424,
-        "heapUsed": 92620056,
-        "external": 5434154,
-        "arrayBuffers": 3212346,
-        "heapPlusExternal": 98054210
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
+        "heapPlusExternal": 130016428
       },
       "heapHighWaterSample": {
-        "rss": 238346240,
-        "heapTotal": 204775424,
-        "heapUsed": 92620056,
-        "external": 5434154,
-        "arrayBuffers": 3212346,
+        "rss": 252489728,
+        "heapTotal": 204042240,
+        "heapUsed": 124582208,
+        "external": 5434220,
+        "arrayBuffers": 3208316,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 6
       },
       "routeObjectives": [
         [
-          41510,
+          41270,
           2,
           570
         ],
@@ -697,52 +698,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 14064,
-        "frequencyExpansions": 402357,
-        "labelsCreated": 15874,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 54.17500000000001,
+        "elapsedMs": 120.22720000000004,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 54.38480000000004,
+      "ms": 120.80259999999998,
       "beforeMemory": {
-        "rss": 238370816,
-        "heapTotal": 204775424,
-        "heapUsed": 92622064,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 252506112,
+        "heapTotal": 204042240,
+        "heapUsed": 124584576,
+        "external": 5434220,
+        "arrayBuffers": 3208316
       },
       "afterMemory": {
-        "rss": 230178816,
-        "heapTotal": 204775424,
-        "heapUsed": 101721176,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460
       },
-      "probes": 503,
+      "probes": 976,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 392,
+        "frequencyExpansions": 865,
         "railConnections": 109,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 240472064,
-        "heapTotal": 204775424,
-        "heapUsed": 101721176,
-        "external": 5434154,
-        "arrayBuffers": 3212346,
-        "heapPlusExternal": 107155330
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "heapPlusExternal": 141221964
       },
       "heapHighWaterSample": {
-        "rss": 230178816,
-        "heapTotal": 204775424,
-        "heapUsed": 101721176,
-        "external": 5434154,
-        "arrayBuffers": 3212346,
+        "rss": 260489216,
+        "heapTotal": 206036992,
+        "heapUsed": 135652576,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 7
@@ -775,54 +776,67 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 9860,
-        "frequencyExpansions": 1451192,
-        "labelsCreated": 57423,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 181.9461,
+        "elapsedMs": 7.328100000000063,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 86
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 10.110900000000015,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
       },
-      "ms": 182.10839999999996,
+      "ms": 18.062099999999987,
       "beforeMemory": {
-        "rss": 230178816,
-        "heapTotal": 204775424,
-        "heapUsed": 101723280,
-        "external": 5434154,
-        "arrayBuffers": 3212346
+        "rss": 260530176,
+        "heapTotal": 206036992,
+        "heapUsed": 135654648,
+        "external": 5569388,
+        "arrayBuffers": 3470460
       },
       "afterMemory": {
-        "rss": 257097728,
-        "heapTotal": 217702400,
-        "heapUsed": 127378608,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 273735680,
+        "heapTotal": 213852160,
+        "heapUsed": 90223712,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 1496,
+      "probes": 158,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 1417,
-        "railConnections": 77,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 257097728,
-        "heapTotal": 217702400,
-        "heapUsed": 127378608,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "heapPlusExternal": 133476314
+        "rss": 274591744,
+        "heapTotal": 213852160,
+        "heapUsed": 138158896,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "heapPlusExternal": 143728284
       },
       "heapHighWaterSample": {
-        "rss": 257097728,
-        "heapTotal": 217702400,
-        "heapUsed": 127378608,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "kind": "afterQuery",
-        "counter": null,
+        "rss": 263290880,
+        "heapTotal": 206036992,
+        "heapUsed": 138158896,
+        "external": 5569388,
+        "arrayBuffers": 3470460,
+        "kind": "railConnections",
+        "counter": 5376,
         "queryIndex": 8
       },
       "routeObjectives": [
@@ -849,63 +863,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 37170,
+      "arrivalSeconds": 37110,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 4046,
-        "frequencyExpansions": 975,
-        "labelsCreated": 537,
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 3.0452999999999975,
+        "elapsedMs": 2.2848999999999933,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 28
       },
-      "ms": 3.4873000000000047,
+      "ms": 2.5673000000000457,
       "beforeMemory": {
-        "rss": 257097728,
-        "heapTotal": 217702400,
-        "heapUsed": 127380184,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 273735680,
+        "heapTotal": 213852160,
+        "heapUsed": 90225736,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 260063232,
-        "heapTotal": 217702400,
-        "heapUsed": 130059544,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 33,
+      "probes": 32,
       "byKind": {
         "beforeQuery": 1,
         "frequencyExpansions": 0,
-        "railConnections": 31,
+        "railConnections": 30,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 260063232,
-        "heapTotal": 217702400,
-        "heapUsed": 130059544,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "heapPlusExternal": 136157250
+        "rss": 273747968,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 97620740
       },
       "heapHighWaterSample": {
-        "rss": 260063232,
-        "heapTotal": 217702400,
-        "heapUsed": 130059544,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92051352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 9
       },
       "routeObjectives": [
         [
-          37170,
+          37110,
           0,
           0
         ]
@@ -927,63 +941,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 48530,
+      "arrivalSeconds": 48130,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 19763,
-        "frequencyExpansions": 223734,
-        "labelsCreated": 12352,
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 56.29020000000003,
+        "elapsedMs": 67.23299999999995,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 56.48109999999997,
+      "ms": 67.43560000000002,
       "beforeMemory": {
-        "rss": 260063232,
-        "heapTotal": 217702400,
-        "heapUsed": 130198112,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 270917632,
+        "heapTotal": 213852160,
+        "heapUsed": 92053360,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 277561344,
-        "heapTotal": 217964544,
-        "heapUsed": 147893544,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 374,
+      "probes": 576,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 218,
-        "railConnections": 154,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 277561344,
-        "heapTotal": 217964544,
-        "heapUsed": 147893544,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "heapPlusExternal": 153991250
+        "rss": 270917632,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 110917164
       },
       "heapHighWaterSample": {
-        "rss": 277561344,
-        "heapTotal": 217964544,
-        "heapUsed": 147893544,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105347776,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 10
       },
       "routeObjectives": [
         [
-          48530,
+          48130,
           1,
           0
         ]
@@ -1005,64 +1019,64 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 45210,
+      "arrivalSeconds": 43950,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 15255,
-        "frequencyExpansions": 136990,
-        "labelsCreated": 9754,
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 26.576299999999947,
+        "elapsedMs": 39.06869999999992,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 16
+        "boardingsFromOrigin": 17
       },
-      "ms": 26.801099999999906,
+      "ms": 39.36299999999994,
       "beforeMemory": {
-        "rss": 277561344,
-        "heapTotal": 217964544,
-        "heapUsed": 147895144,
-        "external": 6097706,
-        "arrayBuffers": 3998778
+        "rss": 269045760,
+        "heapTotal": 214228992,
+        "heapUsed": 105349552,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 287293440,
-        "heapTotal": 223416320,
-        "heapUsed": 97607576,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 254,
+      "probes": 332,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 133,
-        "railConnections": 119,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 291819520,
-        "heapTotal": 223416320,
-        "heapUsed": 149761464,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "heapPlusExternal": 155859170
+        "rss": 269803520,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 118367292
       },
       "heapHighWaterSample": {
-        "rss": 285904896,
-        "heapTotal": 217964544,
-        "heapUsed": 149761464,
-        "external": 6097706,
-        "arrayBuffers": 3998778,
-        "kind": "railConnections",
-        "counter": 1152,
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112797904,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
         "queryIndex": 11
       },
       "routeObjectives": [
         [
-          45210,
-          1,
+          43950,
+          2,
           0
         ]
       ]
@@ -1087,52 +1101,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 11184,
-        "frequencyExpansions": 46730,
-        "labelsCreated": 4977,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 11.235400000000027,
+        "elapsedMs": 21.672199999999975,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 18
+        "boardingsFromOrigin": 24
       },
-      "ms": 11.397299999999973,
+      "ms": 21.878399999999942,
       "beforeMemory": {
-        "rss": 287313920,
-        "heapTotal": 223416320,
-        "heapUsed": 97608808,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 268959744,
+        "heapTotal": 214228992,
+        "heapUsed": 112799680,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 283705344,
-        "heapTotal": 223678464,
-        "heapUsed": 105242312,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 134,
+      "probes": 175,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 45,
+        "frequencyExpansions": 86,
         "railConnections": 87,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 289157120,
-        "heapTotal": 223678464,
-        "heapUsed": 105242312,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 111340018
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 124052508
       },
       "heapHighWaterSample": {
-        "rss": 283705344,
-        "heapTotal": 223678464,
-        "heapUsed": 105242312,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118483120,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 12
@@ -1165,52 +1179,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 10301,
-        "frequencyExpansions": 460290,
-        "labelsCreated": 18709,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 47.8377999999999,
+        "elapsedMs": 118.37410000000011,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 29
       },
-      "ms": 47.992200000000025,
+      "ms": 118.60309999999993,
       "beforeMemory": {
-        "rss": 283705344,
-        "heapTotal": 223678464,
-        "heapUsed": 105243728,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 269004800,
+        "heapTotal": 214228992,
+        "heapUsed": 118484896,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 113579584,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 531,
+      "probes": 934,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 449,
+        "frequencyExpansions": 852,
         "railConnections": 80,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 113579584,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 119677290
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 131239004
       },
       "heapHighWaterSample": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 113579584,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125669616,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 13
@@ -1244,63 +1258,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 41510,
+      "arrivalSeconds": 41270,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 10216,
-        "frequencyExpansions": 44062,
-        "labelsCreated": 6460,
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 14.3433,
+        "elapsedMs": 25.51369999999997,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 93
+        "boardingsFromOrigin": 91
       },
-      "ms": 14.511799999999994,
+      "ms": 25.751999999999953,
       "beforeMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 113581096,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 125671488,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 123660784,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 124,
+      "probes": 156,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 43,
-        "railConnections": 79,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 123660784,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 129758490
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 139245564
       },
       "heapHighWaterSample": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 123660784,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133676176,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 14
       },
       "routeObjectives": [
         [
-          41510,
+          41270,
           2,
           570
         ],
@@ -1331,52 +1345,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 14064,
-        "frequencyExpansions": 402357,
-        "labelsCreated": 15874,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 44.898199999999974,
+        "elapsedMs": 109.65409999999997,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 45.05459999999994,
+      "ms": 109.86739999999986,
       "beforeMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 123662296,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270630912,
+        "heapTotal": 215171072,
+        "heapUsed": 133678048,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 134231848,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
-      "probes": 503,
+      "probes": 976,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 392,
+        "frequencyExpansions": 865,
         "railConnections": 109,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 134231848,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 140329554
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 148417788
       },
       "heapHighWaterSample": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 134231848,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142848400,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 15
@@ -1409,54 +1423,67 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 9860,
-        "frequencyExpansions": 1451192,
-        "labelsCreated": 57423,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 181.37180000000012,
+        "elapsedMs": 7.799399999999878,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 86
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 6.913700000000063,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
       },
-      "ms": 181.52699999999993,
+      "ms": 15.079700000000003,
       "beforeMemory": {
-        "rss": 284098560,
-        "heapTotal": 224055296,
-        "heapUsed": 134233264,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 142850360,
+        "external": 5569388,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 146936136,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270163968,
+        "heapTotal": 215162880,
+        "heapUsed": 87387736,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 1496,
+      "probes": 158,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 1417,
-        "railConnections": 77,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 146936136,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 153033842
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 148128352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 153697740
       },
       "heapHighWaterSample": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 146936136,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "kind": "afterQuery",
-        "counter": null,
+        "rss": 271679488,
+        "heapTotal": 216113152,
+        "heapUsed": 148128352,
+        "external": 5569388,
+        "arrayBuffers": 3339388,
+        "kind": "railConnections",
+        "counter": 8960,
         "queryIndex": 16
       },
       "routeObjectives": [
@@ -1483,63 +1510,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 37170,
+      "arrivalSeconds": 37110,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 4046,
-        "frequencyExpansions": 975,
-        "labelsCreated": 537,
+        "connectionsScanned": 3945,
+        "frequencyExpansions": 1022,
+        "labelsCreated": 570,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 2.1157000000000608,
+        "elapsedMs": 2.236599999999953,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 28
       },
-      "ms": 2.3046999999999116,
+      "ms": 2.4273000000000593,
       "beforeMemory": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 146937640,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270163968,
+        "heapTotal": 215162880,
+        "heapUsed": 87389528,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 149530440,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 33,
+      "probes": 32,
       "byKind": {
         "beforeQuery": 1,
         "frequencyExpansions": 0,
-        "railConnections": 31,
+        "railConnections": 30,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 149530440,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 155628146
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 94647308
       },
       "heapHighWaterSample": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 149530440,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89208992,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 17
       },
       "routeObjectives": [
         [
-          37170,
+          37110,
           0,
           0
         ]
@@ -1561,63 +1588,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 48530,
+      "arrivalSeconds": 48130,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 19763,
-        "frequencyExpansions": 223734,
-        "labelsCreated": 12352,
+        "connectionsScanned": 19231,
+        "frequencyExpansions": 434989,
+        "labelsCreated": 20103,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 38.63799999999992,
+        "elapsedMs": 73.79369999999994,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 38.79150000000004,
+      "ms": 73.9344000000001,
       "beforeMemory": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 149531856,
-        "external": 6097706,
-        "arrayBuffers": 3605562
+        "rss": 270168064,
+        "heapTotal": 215162880,
+        "heapUsed": 89210768,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 97838128,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 374,
+      "probes": 576,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 218,
-        "railConnections": 154,
+        "frequencyExpansions": 424,
+        "railConnections": 150,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 156635944,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 162733650
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 107818364
       },
       "heapHighWaterSample": {
-        "rss": 285192192,
-        "heapTotal": 224808960,
-        "heapUsed": 156635944,
-        "external": 6097706,
-        "arrayBuffers": 3605562,
-        "kind": "railConnections",
-        "counter": 9728,
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102380048,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "kind": "afterQuery",
+        "counter": null,
         "queryIndex": 18
       },
       "routeObjectives": [
         [
-          48530,
+          48130,
           1,
           0
         ]
@@ -1639,64 +1666,64 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 45210,
+      "arrivalSeconds": 43950,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 15255,
-        "frequencyExpansions": 136990,
-        "labelsCreated": 9754,
+        "connectionsScanned": 13540,
+        "frequencyExpansions": 231215,
+        "labelsCreated": 13679,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 24.142900000000054,
+        "elapsedMs": 39.91090000000008,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 16
+        "boardingsFromOrigin": 17
       },
-      "ms": 24.335199999999986,
+      "ms": 40.132699999999886,
       "beforeMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 97839720,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 102382184,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 108897696,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 254,
+      "probes": 332,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 133,
-        "railConnections": 119,
+        "frequencyExpansions": 225,
+        "railConnections": 105,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 108897696,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 114602186
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 115352436
       },
       "heapHighWaterSample": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 108897696,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109914120,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 19
       },
       "routeObjectives": [
         [
-          45210,
-          1,
+          43950,
+          2,
           0
         ]
       ]
@@ -1721,52 +1748,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 11184,
-        "frequencyExpansions": 46730,
-        "labelsCreated": 4977,
+        "frequencyExpansions": 88695,
+        "labelsCreated": 9408,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 10.478500000000167,
+        "elapsedMs": 21.28670000000011,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 18
+        "boardingsFromOrigin": 24
       },
-      "ms": 10.6558,
+      "ms": 21.510700000000043,
       "beforeMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 108899112,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 109915896,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 116253768,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 134,
+      "probes": 175,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 45,
+        "frequencyExpansions": 86,
         "railConnections": 87,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 116253768,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 121958258
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 121036412
       },
       "heapHighWaterSample": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 116253768,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115598096,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 20
@@ -1799,52 +1826,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 10301,
-        "frequencyExpansions": 460290,
-        "labelsCreated": 18709,
+        "frequencyExpansions": 873185,
+        "labelsCreated": 28535,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 52.287399999999934,
+        "elapsedMs": 131.07000000000016,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 25
+        "boardingsFromOrigin": 29
       },
-      "ms": 52.44230000000016,
+      "ms": 131.29520000000002,
       "beforeMemory": {
-        "rss": 284114944,
-        "heapTotal": 223940608,
-        "heapUsed": 116255184,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270561280,
+        "heapTotal": 215539712,
+        "heapUsed": 115599872,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 124589944,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 531,
+      "probes": 934,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 449,
+        "frequencyExpansions": 852,
         "railConnections": 80,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 124589944,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 130294434
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 128214076
       },
       "heapHighWaterSample": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 124589944,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122775760,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 21
@@ -1878,63 +1905,63 @@
       "validResult": true,
       "probeCountsMatch": true,
       "error": null,
-      "arrivalSeconds": 41510,
+      "arrivalSeconds": 41270,
       "diagnostics": {
         "algorithm": "Pareto connection scan",
-        "connectionsScanned": 10216,
-        "frequencyExpansions": 44062,
-        "labelsCreated": 6460,
+        "connectionsScanned": 9890,
+        "frequencyExpansions": 78974,
+        "labelsCreated": 9445,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 13.516700000000128,
+        "elapsedMs": 30.85739999999987,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 93
+        "boardingsFromOrigin": 91
       },
-      "ms": 13.67450000000008,
+      "ms": 31.115600000000086,
       "beforeMemory": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 124591456,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 271564800,
+        "heapTotal": 216481792,
+        "heapUsed": 122777632,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 134696344,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 124,
+      "probes": 156,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 43,
-        "railConnections": 79,
+        "frequencyExpansions": 77,
+        "railConnections": 77,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 134696344,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 140400834
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 136228132
       },
       "heapHighWaterSample": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 134696344,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130789816,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 22
       },
       "routeObjectives": [
         [
-          41510,
+          41270,
           2,
           570
         ],
@@ -1965,52 +1992,52 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 14064,
-        "frequencyExpansions": 402357,
-        "labelsCreated": 15874,
+        "frequencyExpansions": 886344,
+        "labelsCreated": 30082,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 53.11570000000006,
+        "elapsedMs": 115.8605,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 3
+        "boardingsFromOrigin": 5
       },
-      "ms": 53.27719999999999,
+      "ms": 116.07929999999988,
       "beforeMemory": {
-        "rss": 284508160,
-        "heapTotal": 224317440,
-        "heapUsed": 134697856,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 271638528,
+        "heapTotal": 216481792,
+        "heapUsed": 130791688,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284585984,
-        "heapTotal": 224317440,
-        "heapUsed": 145245288,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 503,
+      "probes": 976,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 392,
+        "frequencyExpansions": 865,
         "railConnections": 109,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 284585984,
-        "heapTotal": 224317440,
-        "heapUsed": 145245288,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 150949778
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 145385748
       },
       "heapHighWaterSample": {
-        "rss": 284585984,
-        "heapTotal": 224317440,
-        "heapUsed": 145245288,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139947432,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "afterQuery",
         "counter": null,
         "queryIndex": 23
@@ -2043,54 +2070,67 @@
       "diagnostics": {
         "algorithm": "Pareto connection scan",
         "connectionsScanned": 9860,
-        "frequencyExpansions": 1451192,
-        "labelsCreated": 57423,
+        "frequencyExpansions": 2507,
+        "labelsCreated": 1830,
         "serviceDates": [
           "2026-09-18"
         ],
-        "elapsedMs": 165.5634,
+        "elapsedMs": 8.366700000000037,
         "searchEndSeconds": 57600,
         "carryoverOnly": false,
-        "boardingsFromOrigin": 86
+        "boardingsFromOrigin": 86,
+        "railPrepass": {
+          "algorithm": "Pareto connection scan",
+          "connectionsScanned": 9860,
+          "frequencyExpansions": 0,
+          "labelsCreated": 1138,
+          "serviceDates": [
+            "2026-09-18"
+          ],
+          "elapsedMs": 4.578099999999949,
+          "searchEndSeconds": 57600,
+          "carryoverOnly": false,
+          "boardingsFromOrigin": 86
+        }
       },
-      "ms": 165.7324000000001,
+      "ms": 13.318899999999985,
       "beforeMemory": {
-        "rss": 284585984,
-        "heapTotal": 224317440,
-        "heapUsed": 145246704,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 139949208,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
       "afterMemory": {
-        "rss": 284463104,
-        "heapTotal": 223940608,
-        "heapUsed": 89071496,
-        "external": 5704490,
-        "arrayBuffers": 3605562
+        "rss": 270249984,
+        "heapTotal": 215162880,
+        "heapUsed": 83413584,
+        "external": 5438316,
+        "arrayBuffers": 3339388
       },
-      "probes": 1496,
+      "probes": 158,
       "byKind": {
         "beforeQuery": 1,
-        "frequencyExpansions": 1417,
-        "railConnections": 77,
+        "frequencyExpansions": 2,
+        "railConnections": 154,
         "afterQuery": 1
       },
       "sampledMaximum": {
-        "rss": 285642752,
-        "heapTotal": 225071104,
-        "heapUsed": 157025968,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
-        "heapPlusExternal": 162730458
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 149173800,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
+        "heapPlusExternal": 154612116
       },
       "heapHighWaterSample": {
-        "rss": 285642752,
-        "heapTotal": 225071104,
-        "heapUsed": 157025968,
-        "external": 5704490,
-        "arrayBuffers": 3605562,
+        "rss": 272642048,
+        "heapTotal": 217423872,
+        "heapUsed": 149173800,
+        "external": 5438316,
+        "arrayBuffers": 3339388,
         "kind": "railConnections",
-        "counter": 9728,
+        "counter": 5376,
         "queryIndex": 24
       },
       "routeObjectives": [

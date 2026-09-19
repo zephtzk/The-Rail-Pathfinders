@@ -22,7 +22,7 @@ test('arena compact ride and transfer factories overwrite optional values on reu
   const arena=createSearchArena(),pattern={id:'old'},trip={id:'old-trip'};
   const bus=arena.busRide(null,pattern,1,3,100,300,'2026-09-18','first','AM');
   const rail=arena.railRide(bus,trip,'A','B',300,400,'2026-09-18');
-  const transfer=arena.transfer(rail,{fromStopId:'B',toStopId:'C',seconds:90,walkSeconds:60,provenance:'reviewed',pathId:'path',assumed:true},400,490);
+  const transfer=arena.transfer(rail,{fromStopId:'B',toStopId:'C',seconds:90,walkSeconds:60,provenance:'reviewed',pathId:'path',assumed:true,estimatedBay:true},400,490);
   const oldBus=arena.leg(bus),oldRail=arena.leg(rail),oldTransfer=arena.leg(transfer);
   arena.release();
   assert.equal(oldBus.pattern,null);
@@ -32,7 +32,7 @@ test('arena compact ride and transfer factories overwrite optional values on reu
   assert.deepEqual(arena.leg(newBus),{type:'bus-ride',pattern:{id:'new'},fromIndex:0,toIndex:1,startSeconds:600,endSeconds:650,serviceDate:'2026-09-19',boardingBasis:'estimated',headwayField:null});
   const newTransfer=arena.transfer(newBus,{fromStopId:'X',toStopId:'Y',seconds:60,walkSeconds:0,provenance:'same stop'},650,710);
   assert.equal(arena.leg(newTransfer),oldTransfer);
-  assert.deepEqual(arena.leg(newTransfer),{type:'transfer',fromStopId:'X',toStopId:'Y',startSeconds:650,endSeconds:710,durationSeconds:60,walkingSeconds:0,allowanceSeconds:60,provenance:'same stop',pathId:undefined,assumed:false});
+  assert.deepEqual(arena.leg(newTransfer),{type:'transfer',fromStopId:'X',toStopId:'Y',startSeconds:650,endSeconds:710,durationSeconds:60,walkingSeconds:0,allowanceSeconds:60,provenance:'same stop',pathId:undefined,assumed:false,estimatedBay:false});
 });
 
 test('arena bus and rail waits have independent public shapes',()=>{

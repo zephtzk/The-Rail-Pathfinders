@@ -1,5 +1,7 @@
 # Commute Copilot — The Rail Pathfinders
 
+**Latest local bus coverage:** all 5,208 source stops, 798 route directions across 602 service numbers; routing estimates on 776 directions / 583 services / 5,206 stops. See [current island-wide audit](docs/R5_BUS_COVERAGE.md). Earlier R2 deployment and pilot descriptions below are historical and do not describe this checkout.
+
 **R2 is deployed:** open [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Start with the [R2 publication record](docs/R2_PUBLICATION.md), [completed features and screenshots](docs/R2_DELIVERY.md), and [verification and limits](docs/R2_VERIFICATION.md).
 
 The map-led flow is **Plan → compare → review → Start Journey → Current trip**, with **Saved routes** and **Preferences** available throughout. R2 adds original soft icons, clearer current/next actions, editable travel styles, typed endpoint suggestions, persisted civil-time choices, opt-in foreground location assistance and measured offline readiness. One accepted journey survives navigation and reloads.

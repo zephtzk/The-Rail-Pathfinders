@@ -109,6 +109,7 @@ export function createRailRouter(network) {
     for (let i = 0; i < pattern.stops.length - 1; i++) {
       const occurrence = pattern.stops[i];
       if (!stops.has(occurrence.stopId) || !stops.has(pattern.stops[i + 1].stopId)) throw Error('Unknown frequency stop');
+      if (occurrence.distanceSegment !== pattern.stops[i + 1].distanceSegment) continue;
       if (!busOccurrences.has(occurrence.stopId)) busOccurrences.set(occurrence.stopId, []);
       busOccurrences.get(occurrence.stopId).push({pattern,index:i});
       topology.get(occurrence.stopId).add(pattern.stops[i + 1].stopId);
@@ -221,7 +222,7 @@ export function createRailRouter(network) {
     }
   }
   const append = (previous,leg) => arena.chain(previous,leg);
-  function route(input = {}) {
+  function route(input = {}, {disableFrequency = false, arrivalBoundSeconds = Infinity} = {}) {
     clearFrontiers();
     arena.reset();
     const started = performance.now();
@@ -324,7 +325,7 @@ export function createRailRouter(network) {
     // Bound work, never truncate the Pareto frontier and pretend it is optimal.
     // The worker can also be terminated to interrupt synchronous CPU work.
     const maxSearchWork = Math.min(2000000,Math.max(1,Number(input.maxSearchWork) || 2000000));
-    let cutoff = horizon;
+    let cutoff = Math.min(horizon,Number.isFinite(arrivalBoundSeconds) && arrivalBoundSeconds >= departure ? arrivalBoundSeconds : Infinity);
     const searchCutoff = () => cutoff;
     const interrupted = () => {
       if (input.signal?.aborted) stopped = 'cancelled';
@@ -365,7 +366,7 @@ export function createRailRouter(network) {
           const next = arena.label(edge.toStopId,time,walk,label.boardings,label.externalSinceRide || edge.external,arena.transfer(label.chain,edge,label.time,time));
           if (insert(ready.get(next.stop), next)) { diagnostics.labelsCreated++; queue.push(next); boardingFlags.push(true); considerDestination(next); }
         }
-        if (!canBoard || !frequency) continue;
+        if (!canBoard || !frequency || disableFrequency) continue;
         const occurrences=busOccurrences.get(label.stop);
         if (!occurrences) continue;
         for (let occurrenceIndex=0;occurrenceIndex<occurrences.length;occurrenceIndex++) {

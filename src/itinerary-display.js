@@ -71,6 +71,7 @@ function transferLabel(step, {name, steps, index}) {
   const from = endpoint(step, 'from', name), to = endpoint(step, 'to', name);
   const before = adjacentRide(steps, index, -1), after = adjacentRide(steps, index, 1);
   const change = before && after ? `${service(before)} → ${service(after)}` : after ? `to ${service(after)}` : 'connections';
+  if (sourceOf(step).estimatedBay) return `Change ${change} at ${from} · allow about ${Math.ceil(secondsOf(step)/60)} min and confirm the boarding bay`;
   // A same-station transfer remains a transfer, even between identical public
   // station labels, platforms or two buses at one physical stop.
   return sameNamedPlace(from, to) ? `Change ${change} at ${from}` : `Walk from ${from} to ${to}${after ? ` · change to ${service(after)}` : ''}`;

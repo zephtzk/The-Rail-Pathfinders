@@ -19,10 +19,12 @@ function reference(bus,origin,destination){
     if(code!==origin&&blocked.has(code))continue;
     for(const[p,i]of index.get(code)??[]){
       const a=p.stops[i],span=a.firstLast.WD;if(!span||!p.headways.AM_Offpeak_Freq)continue;
-      const departure=Math.max(time+(code===origin?0:60),span[0])+p.headways.AM_Offpeak_Freq[1]*60;
+      const ready=time+(code===origin?0:60);
+      const departure=ready<=span[0] ? span[0] : ready+p.headways.AM_Offpeak_Freq[1]*60;
       if(departure>span[1]||departure>57600)continue;
       for(let j=i+1;j<p.stops.length;j++){
         const b=p.stops[j],end=b.firstLast.WD;if(!end)continue;
+        if(a.distanceSegment!==b.distanceSegment)break;
         const arrival=departure+(Math.round(b.distanceKm*10)-Math.round(a.distanceKm*10))*20+(j-i)*30;
         if(arrival>57600)break;if(arrival<end[0]||arrival>end[1])continue;
         if(arrival<(best.get(b.stopId)??Infinity)){best.set(b.stopId,arrival);push([arrival,b.stopId]);}

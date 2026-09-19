@@ -23,7 +23,7 @@ export function createSearchArena() {
   let predecessors = new Uint32Array(1024), legReferences = new Array(1024), chainCount = 0;
   const busLegs = pool(LEG_CAP, () => ({type:'bus-ride',pattern:null,fromIndex:0,toIndex:0,startSeconds:0,endSeconds:0,serviceDate:null,boardingBasis:null,headwayField:null}));
   const railLegs = pool(LEG_CAP, () => ({type:'rail-ride',trip:null,fromStopId:null,toStopId:null,startSeconds:0,endSeconds:0,serviceDate:null}));
-  const transferLegs = pool(LEG_CAP, () => ({type:'transfer',fromStopId:null,toStopId:null,startSeconds:0,endSeconds:0,durationSeconds:0,walkingSeconds:0,allowanceSeconds:0,provenance:null,pathId:undefined,assumed:false}));
+  const transferLegs = pool(LEG_CAP, () => ({type:'transfer',fromStopId:null,toStopId:null,startSeconds:0,endSeconds:0,durationSeconds:0,walkingSeconds:0,allowanceSeconds:0,provenance:null,pathId:undefined,assumed:false,estimatedBay:false}));
   const busWaits = pool(LEG_CAP, () => ({type:'wait',mode:'bus',timing:'frequency-estimated',fromStopId:null,toStopId:null,startSeconds:0,endSeconds:0,durationSeconds:0}));
   const railWaits = pool(LEG_CAP, () => ({type:'wait',fromStopId:null,toStopId:null,startSeconds:0,endSeconds:0,durationSeconds:0}));
   const storages = [labels,busLegs,railLegs,transferLegs,busWaits,railWaits];
@@ -108,6 +108,7 @@ export function createSearchArena() {
     leg.provenance=edge.provenance;
     leg.pathId=edge.pathId;
     leg.assumed=edge.assumed===true;
+    leg.estimatedBay=edge.estimatedBay===true;
     return chain(previous,leg);
   }
   function wait(previous,stop,start,end,isBus) {

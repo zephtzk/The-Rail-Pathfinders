@@ -66,7 +66,7 @@ export function createBusTiming(bus) {
   }
   return {calendar,dayType,supportedDate,windowStart,windowEnd,maxServiceSeconds,
     boarding(pattern,index,ready,date,alightIndex = null,rideSeconds = 0,output = null) {
-      if (!validDate(date) || !Number.isFinite(ready)) return null;
+      if (!validDate(date) || !Number.isFinite(ready) || pattern.timingSupported === false) return null;
       if (!calendar) {
         const span = spans(pattern,index,date);
         if (!span) return null;
@@ -85,7 +85,9 @@ export function createBusTiming(bus) {
         if (alightIndex !== null && !alightSpan) continue;
         if (localReady > last) continue;
         const bands = bus.assumptions.headwayBands ?? [];
-        if (first < (bands[0]?.startSeconds ?? 23400) && localReady <= first) {
+        // A published first arrival remains useful for short/peak services at
+        // any hour. It is a single bound, never a fabricated repeating trip.
+        if (localReady <= first) {
           const seconds = first+offsetSeconds;
           if (first <= last && (!alightSpan || (first+rideSeconds >= alightSpan[0] && first+rideSeconds <= alightSpan[1])) && (!found || seconds < bestSeconds)) {
             found = true;
@@ -147,7 +149,14 @@ export function createMultimodalRouter(rail, bus, walking, {busOnly = false, clo
   const busStops = bus.stops.map(stop => {const id=stopIds.get(stop.id);return {...stop,id,stationId:id,name:`${stop.id} · ${stop.name}`,mode:'bus',stopIds:[id],accessSeconds:0,exitSeconds:0};});
   const stations = busStops;
   const unverifiedBays = new Set((bus.assumptions?.unverifiedBayStopCodes ?? []).map(busId));
-  const transfers = busStops.filter(stop=>!unverifiedBays.has(stop.id)).map(stop => ({fromStopId:stop.id,toStopId:stop.id,seconds:60,walkSeconds:0,assumed:true,provenance:'Same roadside physical bus stop: assumed 60 seconds to change buses; no street crossing inferred.'}));
+  const estimatedBays = bus.assumptions?.allowEstimatedBayTransfers === true;
+  const baySeconds = bus.assumptions?.bayTransferSeconds ?? 300;
+  if (estimatedBays && (!Number.isFinite(baySeconds) || baySeconds <= 0)) throw Error('Invalid estimated bus-bay transfer allowance');
+  const transfers = busStops.filter(stop=>estimatedBays || !unverifiedBays.has(stop.id)).map(stop => {
+    const bay = unverifiedBays.has(stop.id);
+    return {fromStopId:stop.id,toStopId:stop.id,seconds:bay ? baySeconds : 60,walkSeconds:bay ? baySeconds : 0,assumed:true,estimatedBay:bay,
+      provenance:bay ? `Estimated ${baySeconds/60}-minute change between boarding/alighting bays at the same bus-stop code. Follow terminal signs and confirm the boarding bay; the internal path and accessibility are unverified.` : 'Same roadside physical bus stop: assumed 60 seconds to change buses; no street crossing inferred.'};
+  });
   for (const link of walking.links.filter(link => link.enabled)) {
     if (!originalStops.has(link.busStopId) || !link.sourceUrls?.length || !link.railPlatformIds?.length || !Number.isFinite(link.externalSeconds) || link.externalSeconds < 0 || link.railAllowanceSeconds !== 120) throw Error(`Invalid pedestrian link ${link.id}`);
     const seconds = link.externalSeconds + link.railAllowanceSeconds;
@@ -169,8 +178,12 @@ export function createMultimodalRouter(rail, bus, walking, {busOnly = false, clo
       `Bus riding assumes route distance at ${bus.assumptions?.rideSpeedKph ?? 18} km/h plus ${bus.assumptions?.dwellSecondsPerStop ?? 30} seconds per traversed stop; traffic and dwell are unmeasured.`,
       'Every bus boarding and alighting must stay inside reviewed service dates and same-service-day per-stop first/last bounds. First-bus rows are not used as one through-trip timetable.',
       bus.assumptions?.headwayDayScope ?? 'Published headways are planning assumptions.',
+      ...(estimatedBays ? [`Changes at a possible terminal use an estimated ${baySeconds/60}-minute walking allowance at the same stop code. Confirm the boarding bay on site; no indoor path or step-free access is established.`] : []),
       'External path plus one indoor station allowance is charged once per bus/rail transfer; station-level access/exit applies only at journey endpoints. Accessibility is unknown.'],
     riding(pattern,from,to) {
+      // A source distance reset has no usable through-distance. Keep both
+      // source segments in the registry, without manufacturing the missing leg.
+      if (pattern.stops[from].distanceSegment !== pattern.stops[to].distanceSegment) return Infinity;
       // DataMall distances are in kilometres. Integer metres avoid rounding an
       // exact model duration up a second because 19.1 - 9.5 is 9.600000000000001.
       const meters = Math.round(pattern.stops[to].distanceKm*1000) - Math.round(pattern.stops[from].distanceKm*1000);
@@ -186,7 +199,18 @@ export function createMultimodalRouter(rail, bus, walking, {busOnly = false, clo
     if ((input.originId?.startsWith('bus:') || input.destinationId?.startsWith('bus:') || busOnly) && (!supportedDate(input.date) || beyondCarryover || clockSeconds(input.departureTime) < windowStart || clockSeconds(input.departureTime) >= windowEnd)) {
       return {status:'unsupported-bus-window',routes:[],recommended:null,errors:[{message:timing.calendar ? `Bus source coverage is ${bus.coverage.validFrom}–${bus.coverage.validThrough}, with per-stop weekday/Saturday/Sunday operating spans and previous-day carryover. Unsupported holidays and missing frequency periods remain unavailable; this is not a complete timetable.` : `Bus estimates support ordinary weekdays ${bus.coverage.validFrom}–${bus.coverage.validThrough}, 09:30–16:30 only. Weekends, holidays, peak and overnight bus travel are not validated. The separate rail planner retains its wider dates.`}]};
     }
-    const result = router.route(input);
+    // Find a feasible all-rail incumbent first for rail endpoints. Its arrival
+    // plus the caller's detour budget is a safe upper bound for every useful
+    // mixed alternative. This avoids exploring hours of buses before the
+    // chronological rail scan reaches an already available destination.
+    let arrivalBoundSeconds = Infinity, railPrepass = null;
+    if (!busOnly && !input.progressSeed && input.maxSearchWork === undefined && input.originId && input.destinationId && !input.originId.startsWith('bus:') && !input.destinationId.startsWith('bus:')) {
+      const railResult = router.route(input,{disableFrequency:true});
+      railPrepass = railResult.diagnostics;
+      if (railResult.routes.length) arrivalBoundSeconds = Math.min(...railResult.routes.map(r=>r.arrivalSeconds)) + Number(input.maxExtraMinutes ?? input.detourLimit ?? 15)*60;
+    }
+    const result = router.route(input,{arrivalBoundSeconds});
+    if (railPrepass) result.diagnostics.railPrepass = railPrepass;
     if (closedRailRouteIds.length) for (const route of result.routes) route.assumptions.push(`SYNTHETIC DISRUPTION FIXTURE: rail routes ${closedRailRouteIds.join(', ')} removed for this search. Not a live closure; no mid-journey rerouting.`);
     if (result.errors?.length && input.originId?.startsWith('bus:')) for (const error of result.errors) error.message = error.message.replaceAll('rail journey','pilot journey').replaceAll('No train','No supported bus or train');
     return result;

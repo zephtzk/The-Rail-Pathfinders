@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-09-19T01:41:12.047Z",
+  "recordedAt": "2026-09-19T02:10:41.654Z",
   "evidenceClass": "Desktop Edge mobile/touch emulation; actual clicks/keyboard and worker termination; not a physical phone or live provider test",
   "checks": [
     "editing an endpoint cancels pending full-network search without freezing controls",
@@ -13,10 +13,10 @@
   ],
   "errors": [],
   "metrics": {
-    "elapsedMs": 915.2986000000001,
-    "newWorkerSearchMs": 310.52340000000004,
-    "animationFrames": 94,
-    "maxFrameGapMs": 74.90000000000009,
+    "elapsedMs": 1021.9425000000001,
+    "newWorkerSearchMs": 411.6934000000001,
+    "animationFrames": 108,
+    "maxFrameGapMs": 75,
     "viewport": {
       "width": 390,
       "height": 844

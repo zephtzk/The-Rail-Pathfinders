@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-09-19T02:11:42.543Z",
+  "evidenceClass": "Desktop Edge with mobile viewport; controlled map fallback and Canvas interaction; not physical-phone or live-provider evidence",
+  "checks": [
+    "coverage states all 5208 source stops",
+    "previously omitted stop is selectable",
+    "selected stop retains service directions",
+    "directory-only stop remains selectable",
+    "bus-stop map layer is enabled",
+    "map renders neighbourhood stops",
+    "map stop layer can be hidden",
+    "desktop stop control does not overlap recenter",
+    "mobile layout has no horizontal overflow",
+    "mobile stop control does not overlap recenter",
+    "Canvas stop popup selects a start",
+    "stop names are rendered as inert text",
+    "Canvas stop popup selects a destination",
+    "no application browser errors"
+  ],
+  "errors": []
+}
