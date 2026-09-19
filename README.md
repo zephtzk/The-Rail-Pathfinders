@@ -8,7 +8,7 @@ A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a j
 
 **Release and verification:** [FR3 review delivery](docs/FR3_DELIVERY.md). The [illustrated judges' guide and earlier release record](docs/JUDGES_RELEASE.md) document the earlier R5 interface.
 
-This branch contains the FR2 feedback changes prepared for Final Review 3: unified place search, compact panels, clearer caregiver controls, fare estimates, editable demo incidents and a Services tab. The delivery record identifies the published version once deployment is complete. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
+The public FR3 release (version 7, published 19 September 2026) contains the FR2 feedback changes: unified place search, compact panels, clearer caregiver controls, fare estimates, editable demo incidents and a Services tab. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
 ## Three-minute walkthrough
 

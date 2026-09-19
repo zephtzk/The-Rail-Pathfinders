@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "78d41adda32b871437fe5014ddca76ef8429320f",
+  "projectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "fileCount": 127,
+  "archiveBytes": 6493143,
+  "archiveSha256": "750bcc2de4f3e05bb1d2a0f7175a486f2c4e39c2d77660f4f0c0367e6e8b7263",
+  "applicationSha256": "7a9ae51cc647623699b67e1f78297396e3bfd924867f884e42c6fb48b42cf667",
+  "workerSha256": "29b4646410d36f1e28d96cf7d54887e92fdc044174b0375667680d6f7d1e91af",
+  "validation": "Every archive member matched validated dist output; no source tree, credentials, test outputs or local data included."
+}

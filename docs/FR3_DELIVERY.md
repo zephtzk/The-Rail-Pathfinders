@@ -1,6 +1,6 @@
 # Final Review 3 delivery
 
-FR2 feedback is implemented in five parallel work chats and combined on `codex/fr2-integration`. The already published FR2 baseline was reconciled with GitHub main in [PR #9](https://github.com/zephtzk/The-Rail-Pathfinders/pull/9). The combined implementation passes the final checks below. Publication is recorded separately after the production deployment succeeds.
+FR2 feedback is implemented in five parallel work chats and combined on `codex/fr2-integration`. The already published FR2 baseline was reconciled with GitHub main in [PR #9](https://github.com/zephtzk/The-Rail-Pathfinders/pull/9). The implementation was merged in [PR #10](https://github.com/zephtzk/The-Rail-Pathfinders/pull/10). **FR3 is live as public version 7:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Sites confirmed successful publication on 19 September 2026 at 04:38 UTC (12:38 SGT).
 
 ## Changes for review
 
@@ -42,3 +42,11 @@ Data coverage remains the retained rail/bus snapshot, not a guarantee of live co
 The integrated app passes **514 JavaScript tests, 44 Python import/metadata tests, 387 browser checks**, and a clean committed-export comparison of the Worker and application build identity. The final FR2 browser rerun includes the replay/input-focus correction. The eight core regression suites cover journey start, address/sharing/offline restore, prior guidance, sheet gestures, location/privacy, spending and route rendering.
 
 The release uses 116 bundled client assets. Browser evidence uses installed Edge with mobile/touch and enlarged-text emulation; provider responses are explicitly controlled where necessary. FR3 user acceptance and physical-phone testing are the next review stage.
+
+## Publication
+
+Published source: `78d41adda32b871437fe5014ddca76ef8429320f`. The archive contains 127 validated build-output files, with each member matched against the tested `dist` tree. Application SHA-256: `7a9ae51cc647623699b67e1f78297396e3bfd924867f884e42c6fb48b42cf667`. Existing public access and runtime configuration were preserved.
+
+[Publication receipt](evidence/fr3-integration/publication.json) · [Archive verification](evidence/fr3-integration/package-manifest.json). This documentation update does not alter the deployed application.
+
+Returning users should refresh, allow loading to finish, then refresh once more if old controls remain. Keep browser data to retain saved routes, preferences, incidents and spending. FR3 is ready for the user’s final review; the app has not been frozen.
