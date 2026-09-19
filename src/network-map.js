@@ -1,4 +1,5 @@
 import {validExternalGeometry} from './external-geometry.js';
+import {journeyMapSegments,drawRouteSegments} from './route-map.js';
 const OSM_TILES='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATTRIBUTION='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
@@ -68,13 +69,8 @@ export function drawNetworkOverview(map,network) {
 
 // Callers own fitting/focus and replace the returned layer when the accepted
 // route changes. No endpoint snapping, tile fetch, or automatic map motion.
-export function drawExternalRoute(map,route,{leaflet=globalThis.L}={}){
+export function drawExternalRoute(map,route,{leaflet=globalThis.L,network}={}){
   if(route?.provider!=='onemap'||!validExternalGeometry(route))return null;
-  const layer=leaflet.layerGroup().addTo(map),points=[];
-  for(const segment of route.geometry){
-    const step=route.steps[segment.stepIndex],walking=step.type==='walk';
-    leaflet.polyline(segment.points,{color:walking?'#566577':'#1558a6',weight:walking?5:7,opacity:.9,dashArray:segment.kind==='schematic'?'5 7':walking?'8 5':null,interactive:false}).addTo(layer);
-    points.push(...segment.points);
-  }
-  return {layer,points,schematic:route.geometry.some(g=>g.kind==='schematic'),attribution:'OneMap / Singapore Land Authority · approximate geographic route; indoor transitions unverified'};
+  const layer=leaflet.layerGroup().addTo(map),drawn=drawRouteSegments(layer,journeyMapSegments(route,{network}),{leaflet,markers:false});
+  return {layer,...drawn,attribution:'OneMap / Singapore Land Authority · approximate geographic route; indoor transitions unverified'};
 }

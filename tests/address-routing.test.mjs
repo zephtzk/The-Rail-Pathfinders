@@ -128,7 +128,11 @@ test('malicious provider labels render as inert text in standalone external itin
 
 test('external map helper uses accepted geometry only, labels absent paths schematic and does not move map',()=>{
   const route=normal().plans[0].route,drawn=[],map={},layer={addTo:target=>{assert.equal(target,map);return layer;}},leaflet={layerGroup:()=>layer,polyline:(points,options)=>({addTo:()=>drawn.push({points,options})})};
-  const result=drawExternalRoute(map,route,{leaflet});assert.equal(result.schematic,true);assert.equal(drawn.length,3);assert.ok(drawn.every(d=>d.options.dashArray==='5 7'));assert.equal(result.points.length,6);
+  const result=drawExternalRoute(map,route,{leaflet});assert.equal(result.schematic,true);assert.equal(result.points.length,6);
+  const lines=drawn.filter(d=>d.options.className?.startsWith('journey-route-line'));
+  assert.equal(lines.length,3);assert.deepEqual(lines.map(d=>d.points),route.geometry.map(g=>g.points));
+  assert.deepEqual(lines.map(d=>d.options.dashArray),['1 9',null,'1 9']);
+  assert.equal(drawn.filter(d=>d.options.className==='journey-bus-detail').length,1);
 });
 
 test('browser request sends only coordinates, date/time and preferences; cancellation ignores late response',async()=>{

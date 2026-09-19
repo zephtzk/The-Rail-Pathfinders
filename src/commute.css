@@ -176,8 +176,23 @@
 .commute-app .empty-state h2, .commute-app .empty-state h3 { font-size: 1.05rem; }
 .commute-app .empty-state p, .commute-app .empty-state > p:not(.eyebrow) { margin: 10px auto 0; max-width: 290px; font-size: .8rem; line-height: 1.65; color: var(--muted); }
 .commute-app .empty-state .primary, .commute-app .empty-state .secondary { margin-top: 18px; }
-.commute-app .map-caption { position: fixed; z-index: 500; right: 22px; bottom: 30px; max-width: 310px; padding: 10px 14px; font-size: .68rem; line-height: 1.5; color: #536671; background: #fffefaeF; border: 1px solid #e5ece8; border-radius: 13px; box-shadow: var(--shadow); }
+.commute-app .map-caption { position: fixed; z-index: 500; right: 22px; bottom: 30px; display: flex; flex-direction: column; align-items: stretch; gap: 6px; width: max-content; min-width: 0; max-width: min(380px, calc(100vw - 32px)); padding: 10px 14px; font-size: .68rem; line-height: 1.5; color: #536671; background: #fffffff5; border: 1px solid #e5ece8; border-radius: 13px; box-shadow: var(--shadow); }
 .commute-app .map-caption strong { display: block; font-size: .72rem; color: #3b5664; }
+.commute-app .map-route-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 14px; min-width: 0; }
+.commute-app .map-route-key { display: inline-flex; align-items: center; gap: 5px; color: #354554; font-size: .7rem; font-weight: 650; line-height: 1.4; white-space: nowrap; }
+.commute-app .map-route-key > .icon { width: 14px; height: 14px; color: var(--route-color, #5f6368); }
+.commute-app .map-route-swatch { position: relative; display: inline-block; flex: 0 0 28px; width: 28px; height: 7px; border-radius: 4px; background: var(--route-color, #5f6368); }
+.commute-app .mode-walk .map-route-swatch { height: 8px; border-radius: 0; background: radial-gradient(circle, var(--route-color, #5f6368) 2px, transparent 2.5px) 0 center / 8px 8px repeat-x; }
+.commute-app .mode-bus .map-route-swatch { background: var(--route-color, #1a73e8); }
+.commute-app .mode-bus .map-route-swatch::after { content: ''; position: absolute; inset: 2.5px 2px; border-radius: 2px; background: repeating-linear-gradient(90deg, #fff 0 4px, transparent 4px 8px); }
+.commute-app .map-route-note { font-size: inherit; }
+.commute-app .map-route-note summary { min-height: 28px; padding: 4px 0; color: #61707c; font-size: inherit; font-weight: 500; }
+.commute-app .map-route-note p { max-width: 36em; margin: 3px 0 2px; color: #536671; line-height: 1.5; overflow-wrap: anywhere; }
+.commute-app .map-status { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; min-width: 0; }
+.commute-app .map-status .map-retry { margin: 0; padding-block: 3px; }
+.commute-app .map-service-marker { background: transparent; border: 0; }
+.commute-app .map-service-badge { display: inline-flex; align-items: center; justify-content: center; gap: 4px; width: max-content; padding: 4px 6px; border: 2px solid var(--route-color, #5f6368); border-radius: 8px; background: #fff; color: #253443; box-shadow: 0 1px 5px #23334638; font: 750 11px/1.1 "Aptos", "Segoe UI", sans-serif; white-space: nowrap; transform: translate(-50%, -50%); }
+.commute-app .map-service-badge > .icon { width: 13px; height: 13px; color: var(--route-color, #5f6368); }
 .commute-app .map-controls { position: fixed; right: 24px; top: 105px; z-index: 700; display: flex; flex-direction: column; gap: 10px; }
 .commute-app .map-recenter { position: fixed; right: 24px; top: 209px; z-index: 700; }
 .commute-app .route-pin { background: transparent; }
@@ -321,6 +336,9 @@
   .commute-app .app-map .leaflet-bottom { bottom: 0; }
   .commute-app .map-caption { position: absolute; top: calc(var(--mobile-map-height) - 12px); transform: translateY(-100%); bottom: auto; left: 16px; right: auto; max-width: calc(100% - 90px); padding: 7px 10px; font-size: .58rem; line-height: 1.4; border-radius: 11px; }
   .commute-app .map-caption strong { font-size: .62rem; }
+  .commute-app .map-route-legend { gap: 5px 10px; }
+  .commute-app .map-route-key { gap: 4px; font-size: .65rem; }
+  .commute-app .map-route-swatch { flex-basis: 24px; width: 24px; }
   .commute-app .map-controls { right: 15px; top: 77px; }
   .commute-app .map-controls .icon-button { width: 40px; height: 40px; min-height: 40px; border-radius: 13px; }
   .commute-app .map-recenter { right: 16px; top: clamp(150px, calc(30dvh - 68px), 185px); width: 41px; height: 41px; min-height: 41px; border-radius: 13px; }

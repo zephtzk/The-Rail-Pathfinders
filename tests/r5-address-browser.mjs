@@ -36,6 +36,7 @@ try{
   check('request contains coordinate endpoints and authoritative preferences',requested.length===1&&Object.keys(requested[0].origin).sort().join()==='lat,lng'&&requested[0].preferences.walkingLimitMinutes===30);
   await page.locator('.review-details > summary').click();
   check('standalone provider timeline shows public service and stop names',await page.locator('#route-results').innerText().then(t=>t.includes('Bus 23A')&&t.includes('Example bus stop A')&&!t.includes('onemap:')));
+  await page.locator('#map-caption .map-route-note summary').click();
   check('provider map has a visible geometry/evidence notice',await page.locator('#map-caption').innerText().then(t=>t.includes('OneMap')&&t.includes('indoor')));
   await page.locator('#save-route').click();await page.locator('#save-route-form [name=label]').fill('Private commute title');await page.locator('#save-route-form button').click();
   check('address route saves with endpoint records without inventing local station connections',await page.evaluate(()=>{const p=JSON.parse(localStorage.getItem('commute-copilot-personal-v2'));return p?.templates?.some(t=>t.label==='Private commute title')&&p.places.every(p=>p.routingId===null);}));
