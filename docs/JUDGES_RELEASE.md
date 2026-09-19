@@ -1,6 +1,8 @@
 # Judges' release - 19 September 2026
 
-The current R5 app is available publicly at [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Open it in Safari on iPhone or Chrome on Android; no account or installation is required. The [illustrated PDF guide](Commute_Copilot_Judges_User_Guide.pdf) explains the judging walkthrough, phone setup and limitations. The [physical-phone checklist](../DEVICE_CHECKLIST.md) is ready for a human rehearsal.
+> Historical R5 release record. For the current submission, start with the [README](../README.md), [FR4 delivery record](FR4_DELIVERY.md) and [source-code guide](SOURCE_GUIDE.md). The version, interface and configuration observations below describe the earlier R5 deployment.
+
+The public app URL is [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Open it in Safari on iPhone or Chrome on Android; no account or installation is required. The [illustrated PDF guide](Commute_Copilot_Judges_User_Guide.pdf) provides a judging walkthrough, phone setup and limitations. The [physical-phone checklist](../DEVICE_CHECKLIST.md) is ready for a human rehearsal.
 
 ## Exact application snapshot
 
