@@ -172,7 +172,7 @@ export function createIncidentDraft(scenario, options = {}) {
     type: scenario === 'planned' ? 'closure' : 'delay',
     severity: scenario === 'planned' ? 'severe' : 'major',
     service: 'EW', scope: 'segment', from: 'EW8_A', to: 'EW9_A', direction: 'both',
-    startsAt: `${date}T08:00:00+08:00`, endsAt: `${date}T10:00:00+08:00`,
+    startsAt: `${date}T00:00:00+08:00`, endsAt: `${date}T23:59:00+08:00`,
     delayMinutes: scenario === 'planned' ? 0 : 22,
     details: scenario === 'planned'
       ? 'Demo: planned track works between Paya Lebar and Aljunied. This is an editable simulated incident, not a live service notice.'

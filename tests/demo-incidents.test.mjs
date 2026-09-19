@@ -17,8 +17,10 @@ const draft = (scenario = 'planned') => createIncidentDraft(scenario, {now});
 
 test('drafts use the Singapore day at UTC boundaries and keep the demo corridor explicit', () => {
   const planned = createIncidentDraft('planned', {now: Date.parse('2026-09-18T20:00:00Z')});
-  assert.equal(planned.startsAt, '2026-09-19T08:00:00+08:00');
-  assert.equal(planned.endsAt, '2026-09-19T10:00:00+08:00');
+  assert.equal(planned.startsAt, '2026-09-19T00:00:00+08:00');
+  assert.equal(planned.endsAt, '2026-09-19T23:59:00+08:00');
+  assert.ok(Date.parse(planned.startsAt) <= Date.parse('2026-09-19T12:00:00+08:00'));
+  assert.ok(Date.parse(planned.endsAt) > Date.parse('2026-09-19T12:00:00+08:00'));
   assert.equal(planned.type, 'closure');
   assert.equal(planned.severity, 'severe');
   assert.equal(planned.from, 'EW8_A');
@@ -28,7 +30,7 @@ test('drafts use the Singapore day at UTC boundaries and keep the demo corridor 
   assert.equal(disruption.type, 'delay');
   assert.equal(disruption.delayMinutes, 22);
   assert.equal(disruption.severity, 'major');
-  assert.equal(disruption.startsAt, '2027-01-02T08:00:00+08:00');
+  assert.equal(disruption.startsAt, '2027-01-02T00:00:00+08:00');
   assert.throws(() => createIncidentDraft('live', {now}), /scenario/);
   assert.throws(() => createIncidentDraft('planned', {date: '2026-02-30'}), /valid Singapore/);
 });
@@ -132,7 +134,7 @@ test('invalid form data fails without writes or change events', () => {
     {startsAt: '2026-02-30T08:00+08:00'}, {startsAt: '2026-09-19T24:00+08:00'},
     {startsAt: '2026-09-19T08:60+08:00'}, {startsAt: '2026-09-19T08:00:60+08:00'},
     {startsAt: '2026-09-19T08:00Z'}, {startsAt: '2026-09-19T08:00+09:00'},
-    {startsAt: '2026-09-19T08:00'}, {endsAt: '2026-09-19T08:00+08:00'},
+    {startsAt: '2026-09-19T08:00'}, {endsAt: draft().startsAt},
     {endsAt: '2026-09-18T10:00+08:00'}, {type: 'delay', delayMinutes: 0},
     {type: 'delay', delayMinutes: 181}, {type: 'delay', delayMinutes: 1.5}, {type: 'delay', delayMinutes: '22'},
   ];

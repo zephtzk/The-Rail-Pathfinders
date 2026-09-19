@@ -15,8 +15,8 @@ await mkdir('test-results/fr2-demo',{recursive:true});
 try{
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
   await page.locator('#open-demo').click();
-  check('Main demo has one visible scenario launcher',await page.locator('#view-demo button:visible').count()===1);
-  await page.locator('#demo-scenario-open').click();
+  check('Main demo opens scenario chooser immediately',await page.getByRole('dialog').count()===1);
+  check('Main demo has one scenario launcher',await page.locator('#demo-scenarios button').count()===1);
   const dialog=page.getByRole('dialog');
   check('Scenario dialog is labelled and focused',await dialog.getAttribute('aria-labelledby')==='demo-incident-title'&&await page.locator('#demo-incident-title').evaluate(el=>el===document.activeElement));
   check('Removed offline/stale controls and explanatory paragraph',await page.locator('#offline-demo,#stale-demo,#auto-demo').count()===0&&!await dialog.innerText().then(text=>text.includes('Automatic checks run')));
@@ -39,15 +39,15 @@ try{
   check('Saved incident carries explicit provenance',(await readLog())[0].demo===true&&(await readLog())[0].source==='demo');
   check('User-authored markup stays inert',!await page.evaluate(()=>window.demoInjection)&&await page.locator('.demo-log-list h3').innerText()==='<script>window.demoInjection=true</script> Planned works');
   await page.getByRole('button',{name:'Close demo dialog'}).click();
-  check('Closing returns focus to launcher',await page.locator('#demo-scenario-open').evaluate(el=>el===document.activeElement));
-  await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('#open-demo').click();await page.locator('#demo-scenario-open').click();
+  check('Closing returns focus to launcher',await page.locator('#open-demo').evaluate(el=>el===document.activeElement));
+  await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('#open-demo').click();
   await page.getByRole('button',{name:'Choose a saved incident',exact:true}).click();
   check('Saved incident remains selectable after reload',await page.locator('[data-demo-select]').count()===1);
   await page.locator('[data-demo-select]').click();
   await page.evaluate(()=>window.addEventListener('demo:run-replay',event=>window.demoReplayDetail=event.detail,{once:true}));
   await page.locator('#replay').click();
   check('Replay dispatch preserves selected saved incident',await page.evaluate(()=>window.demoReplayDetail?.incident?.title.includes('Planned works')));
-  await page.locator('#demo-scenario-open').click();await page.getByRole('button',{name:'Disruption during travel',exact:false}).click();
+  await page.locator('#open-demo').click();await page.getByRole('button',{name:'Disruption during travel',exact:false}).click();
   check('Travel disruption defaults to editable delay',await page.locator('[name=delayMinutes]').inputValue()==='22');
   await page.locator('[name=service]').fill('36');await page.locator('[name=from]').fill('bus:01012');await page.locator('[name=to]').fill('bus:01013');
   await page.locator('[name=delayMinutes]').fill('181');await page.getByRole('button',{name:'Save to incident log',exact:true}).click();
@@ -57,7 +57,7 @@ try{
   await page.getByRole('button',{name:'Close demo dialog'}).click();
   await page.goto(`${base}/demo-incidents.html`);
   check('Standalone incident log loads persisted records',await page.locator('.demo-log-list article').count()===2);
-  await page.locator('[data-demo-edit]').last().click();await page.locator('[name=scope]').selectOption('service');await page.locator('[name=type]').selectOption('cancellation');await page.getByRole('button',{name:'Save changes',exact:true}).click();
+  await page.locator('[data-demo-edit]').last().click();await page.locator('[name=direction]').selectOption('forward');await page.locator('[name=scope]').selectOption('service');check('Whole-service scope limits replay to both directions',await page.locator('[name=direction]').inputValue()==='both'&&await page.locator('[name=direction] option').count()===1);await page.locator('[name=type]').selectOption('cancellation');await page.getByRole('button',{name:'Save changes',exact:true}).click();
   check('Service-wide cancellation clears irrelevant fields',(await readLog())[1].from===''&&(await readLog())[1].delayMinutes===0&&(await readLog())[1].revision===2);
   await page.locator('[data-demo-resolve]').last().click();
   check('Resolve preserves history and increments revision',(await readLog())[1].status==='resolved'&&(await readLog())[1].revision===3);
