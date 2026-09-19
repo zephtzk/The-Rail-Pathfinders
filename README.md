@@ -6,18 +6,19 @@ A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a j
 
 **Start here:** [Judges' illustrated user guide (PDF)](docs/Commute_Copilot_Judges_User_Guide.pdf)
 
-**Release and verification:** [Judges' release record](docs/JUDGES_RELEASE.md)
+**Release and verification:** [FR3 review delivery](docs/FR3_DELIVERY.md). The [illustrated judges' guide and earlier release record](docs/JUDGES_RELEASE.md) document the earlier R5 interface.
 
-The public hosted release uses the R5 application, including wider bus coverage, bus-stop details, distinct walking/bus/train map paths, and service-coloured train instructions. It opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
+This branch contains the FR2 feedback changes prepared for Final Review 3: unified place search, compact panels, clearer caregiver controls, fare estimates, editable demo incidents and a Services tab. The delivery record identifies the published version once deployment is complete. The app opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
 ## Three-minute walkthrough
 
 1. Open **Plan**. Enter **Tampines (EW2)** and **Bugis (EW12)**, selecting each suggestion.
 2. Choose **Depart later**, **21 September 2026**, **10:00** (Singapore time), then **Find my route**. This fixed example uses the included dated dataset; it is not live travel advice.
-3. Compare arrival, transfers and walking. Select a route, tap **Continue**, review **Confirm your trip**, then **Start Journey**.
+3. Compare arrival, transfers and walking. Select a route and tap **Start journey**. Expand **Route details** first if you want to inspect its instructions, fare estimate and sources.
 4. Open **Current trip**. Confirm the step you want to demonstrate using **Update my current step** and **I am here**. The app does not infer boarding or arrival from time or GPS.
 5. Try **Settings > Simple guidance**, then **Show to staff**. Open **Station guide** to see station facts and their coverage limits.
-6. Try **Save route**, **Pin commute**, or **Spending > Set a budget**. Sample charges are manually entered examples, not payment transactions.
+6. Try **Save route**, **Pin commute**, or **Spending > Set a budget**. Fares are estimates until you enter the actual charge; the app does not connect to a payment account.
+7. Open **Demo controls** and try a journey scenario. Edit planned works or a travel disruption, save it to **Incident logs**, then run automatic event replay. Return to **Services** to inspect incidents and reopen information after dismissing a notice. All edited incidents remain explicitly simulated.
 
 For the guide's transfer example, choose **Fewer transfers** with a **15-minute extra-time allowance** in Settings, then plan **Haw Par Villa (CC26) to Aljunied (EW9)** on the same date/time. The example changes at Buona Vista; another preference may produce a different route. Leave **Require a verified step-free route** off for this demonstration: no complete real indoor accessible corridor has been verified.
 
@@ -28,10 +29,11 @@ For the guide's transfer example, choose **Fewer transfers** with a **15-minute 
 | Rail and bus-stop planning | Included static schedules/frequency estimates; no API key needed for the core demonstration. Select a suggestion to confirm an endpoint. |
 | Island-wide bus directory | All 5,208 stops in the retained source. 798 directional patterns and 602 exact service numbers are listed. Timed routing covers 776 patterns, 583 services and 5,206 stops on at least one eligible day. Availability still depends on the selected time/date. |
 | Route map | Dotted walking, patterned blue bus paths, service-coloured trains and clear labels. Geometry may be approximate. Same-terminal bay changes are labelled estimates, not verified indoor paths. |
-| Accepted journey | Explicit review/start, manual progress, pause/resume, simple guidance, staff assistance card, and local restore. |
+| Accepted journey | One-click start for a selected route, manual progress, pause/resume, simple guidance, staff assistance card, and local restore. |
 | Saved commutes and spending | Browser-local saved routes/places, fresh commute shortcuts, optional weekly/monthly budgets, charges/estimates/refunds and history. No card-account or payment connection. |
 | Offline guidance | Prepare an accepted trip online and use **Check offline availability**. Only proceed when the app reports readiness. Live feeds/new address requests and street-map tiles are not promised offline. |
 | Station information | Operator facts for selected stations; indoor directions remain work in progress. No verified working-lift, platform-door or step-free guarantee. |
+| Services and demo incidents | Nearby facilities, service notices and persistent local demo incident logs. Simulated closures can be replayed against the selected route and current packaged data; official notices remain separately identified. |
 | Live bus arrivals and street-address itineraries | Implemented integrations, but not enabled on this hosted release: server-side LTA/OneMap credentials are not configured. The app reports unavailable states. |
 | Caregiver sharing and external push | Local durable sharing is implemented and tested. Hosted sharing has no D1 binding; background Web Push is not configured. Do not use these as required steps in the hosted judging demo. |
 
