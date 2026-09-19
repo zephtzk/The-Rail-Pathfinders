@@ -1,5 +1,9 @@
 // Historical planners remain reachable for regression evidence; public entry points use one product.
-if(new URLSearchParams(location.search).get('legacy')==='1') {
+let sharedTripTab=false;try{sharedTripTab=sessionStorage.getItem('commute-copilot-readonly-trip-v1')==='true';}catch{}
+if(location.hash.startsWith('#view-trip=')||sharedTripTab){
+  document.querySelector('link[href="/src/rail.css"]')?.remove();
+  await import('./shared-trip-view.js');
+} else if(new URLSearchParams(location.search).get('legacy')==='1') {
   const multimodal=location.pathname.includes('multimodal');
   await import(multimodal?'./multimodal-ui.js':'./rail-ui.js');
 } else {

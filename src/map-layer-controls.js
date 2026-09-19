@@ -30,6 +30,7 @@ export function mountMapLayerControls(map,{onBusToggle,onTrainToggle,leaflet=glo
   bus.setAttribute('aria-describedby',status.id);
   addToggle('train','Train network',onTrainToggle);
   container.append(status);
+  const caption=document.createElement('small');caption.className='map-view-caption';caption.textContent='Map View';container.append(caption);
   leaflet.DomEvent.disableClickPropagation(container);
   leaflet.DomEvent.disableScrollPropagation(container);
   control.onAdd=()=>container;control.addTo(map);

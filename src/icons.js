@@ -1,5 +1,8 @@
 /** Original rounded, decorative UI icons. Give the containing control its accessible name. */
 const paths = {
+  stop: '<rect x="5" y="5" width="14" height="14" rx="2"/>',
+  pause: '<path d="M8 5v14M16 5v14" stroke-width="4"/>',
+  play: '<path d="m8 4 12 8-12 8Z"/>',
   wallet: '<rect x="3" y="5" width="18" height="15" rx="4"/><path d="M17 5V3H7a4 4 0 0 0-4 4m18 4h-5a3 3 0 0 0 0 6h5"/><circle cx="16" cy="14" r=".8" fill="currentColor" stroke="none"/>',
   plan: '<path d="M4 8.5 9 6l6 2.5L20 6v12l-5 2.5L9 18l-5 2.5z"/><path d="M9 6v12m6-9.5v12"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/>',

@@ -485,3 +485,12 @@
 .commute-app .app-nav button,.commute-app .app-nav span{overflow-wrap:normal;word-break:normal}
 .commute-app .trip-peek span{min-width:0}
 .commute-app .trip-peek strong,.commute-app .trip-peek small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* The supplied Nebula companion is shared by the header, launcher and loading state. */
+.commute-app .brand-mark{padding:0;overflow:hidden;background:#fbf7ef}
+.commute-app .brand-mark img{display:block;width:100%;height:100%;object-fit:cover}
+
+.commute-app .trip-actions{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;gap:8px}
+.commute-app .trip-actions>button{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.commute-app .map-layer-control{flex-wrap:wrap;width:108px}
+.commute-app .map-view-caption{display:block;flex:0 0 100%;text-align:center;color:#727984;font-size:.625rem;line-height:1.2;padding:0 3px 4px}

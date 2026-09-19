@@ -1,5 +1,7 @@
 # Caregiver sharing and Web Push
 
+FR4's public Caregiver create-link action uses `POST /api/shares` with `purpose:"plan-view"`. This explicitly shares one planned route with a read-only viewer; it returns editor/viewer capabilities and no invitation capability. Viewer responses contain only `sharedPlan` and basic share metadata, never progress or geographic location. Only the editor may update the plan or delete this share. The `#view-trip` page strips its fragment, stores its scoped viewer session in sessionStorage, and exposes only trip viewing/refresh. Existing legacy handoff flows described below retain their explicit acceptance and consent requirements.
+
 The sharing API is a persistent backend, not browser-to-browser localStorage. The local server uses SQLite WAL (`node:sqlite`, Node 22.13+ or Node 24). The deployed provider uses a Cloudflare D1 binding named `SHARING_DB`. The same API, authorization, revision and consent logic runs in both environments. FR3 adds this binding to the existing Sites project's hosting manifest, preserving its identity and audience. See the FR3 sharing publication record for deployed verification.
 
 ## Local setup

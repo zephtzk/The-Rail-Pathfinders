@@ -1,0 +1,7 @@
+.staff-page .staff-card-message{white-space:pre-wrap}
+.staff-custom-editor{margin-top:1rem;min-width:0}
+.staff-custom-editor label{display:block;font-weight:650;margin-bottom:.4rem}
+.staff-custom-editor textarea{display:block;box-sizing:border-box;width:100%;max-width:100%;min-height:7rem;padding:.75rem;border:1px solid #a9bad0;border-radius:.65rem;font:inherit;line-height:1.5;resize:vertical;overflow-wrap:anywhere;background:#fff;color:#112c4e}
+.staff-custom-editor textarea:focus-visible{outline:3px solid #174f9e;outline-offset:2px}
+.staff-custom-meta{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;font-size:.8rem;color:#44566e}
+.staff-custom-meta p{margin:.4rem 0}.staff-custom-meta output{margin:.4rem 0;font-variant-numeric:tabular-nums}

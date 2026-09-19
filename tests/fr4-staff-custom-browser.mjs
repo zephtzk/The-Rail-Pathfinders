@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE??'playwright');
+const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4254',out='test-results/fr4-staff-custom';
+await mkdir(out,{recursive:true});
+const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const errors=[],checks=[];const check=(label,value)=>{assert.ok(value,label);checks.push(label);};
+try{
+  const context=await browser.newContext({viewport:{width:320,height:844},serviceWorkers:'block',reducedMotion:'reduce'});
+  for(const file of ['staff-card.js','staff-custom.css'])await context.route(`**/src/${file}`,async route=>route.fulfill({contentType:file.endsWith('.css')?'text/css':'text/javascript',body:await readFile(new URL(`../src/${file}`,import.meta.url),'utf8')}));
+  await context.route('https://tile.openstreetmap.org/**',route=>route.abort());
+  const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
+  await page.locator('.app-nav [data-view=staff]').click();
+  await page.locator('#staff-request').selectOption('custom');
+  const editor=page.locator('#staff-custom-message'),message=page.locator('.staff-card-message');
+  check('Custom exposes and focuses its labelled editor',await editor.isVisible()&&await editor.evaluate(e=>document.activeElement===e&&e.labels.length===1));
+  const literal='<img src=x onerror=alert(1)> & "Hello"\nPlease help me find a seat.';
+  await editor.fill(literal);
+  check('Message appears literally without HTML injection',await message.textContent()===literal&&await message.locator('img').count()===0);
+  check('Editor retains focus while message updates',await editor.evaluate(e=>document.activeElement===e));
+  check('Counter and500character limit are present',await editor.getAttribute('maxlength')==='500'&&await page.locator('#staff-custom-count').textContent()===`${literal.length}/500`);
+  await page.locator('#staff-request').selectOption('lift');check('Existing preset still works',/check which lift/.test(await message.innerText())&&await editor.count()===0);
+  await page.locator('#staff-request').selectOption('custom');check('Draft survives preset switching in this page',await editor.inputValue()===literal);
+  await page.evaluate(()=>document.documentElement.style.fontSize='200%');await editor.scrollIntoViewIfNeeded();
+  check('320px enlarged editor wraps without horizontal page overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)&&await editor.evaluate(e=>e.clientWidth<=e.closest('.panel-scroll').clientWidth));
+  check('Custom message is not persisted',await page.evaluate(value=>![...Object.values(localStorage),...Object.values(sessionStorage)].some(text=>text.includes(value)),literal));
+  await page.screenshot({path:`${out}/editor-320-large.png`});await message.scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/message-320-large.png`});
+  await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=staff]').click();await page.locator('#staff-request').selectOption('custom');
+  check('Reload starts with an empty custom draft',await editor.inputValue()==='');check('No browser exceptions',errors.length===0);
+  console.log(`PASS ${checks.length} custom staff browser checks`);
+}finally{await writeFile(`${out}/results.json`,JSON.stringify({checks,errors,environment:'Desktop Edge320px and200%rootfont; patched module injected into local preview.'},null,2));await browser.close();}
