@@ -28,6 +28,8 @@ try {
   await page.locator('.app-nav [data-view=current]').click();check('no unsupported connection form before a trip',!await page.locator('#rerouting-host').isVisible());
   await page.locator('#station-tools > summary').click();check('station layout and toilet entry points remain together',await page.locator('#companion-facilities [data-action=layout]').isVisible()&&await page.locator('#companion-facilities [data-action=toilets]').isVisible());await page.locator('#station-tools > summary').click();
   await page.locator('.app-nav [data-view=preferences]').click();check('preference choices omit persona names',!/(Rachel|Arjun|Mdm Lim)/.test(await page.locator('#preferences-content').innerText()));
+  // Position-correction shortcuts and direct cancel/finish controls belong to full guidance.
+  await page.locator('#simple-guidance-toggle').uncheck();
   await page.locator('[data-preset=arjun]').click();
   await page.locator('.app-nav [data-view=caregiver]').click();check('caregiver controller lives on its own page',await page.locator('#view-caregiver #companion-sharing').isVisible()&&await page.locator('#view-current #companion-sharing').count()===0);
   await page.locator('.app-nav [data-view=spending]').click();check('spending controller lives on its own page',await page.locator('#view-spending #companion-fares').isVisible());

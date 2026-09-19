@@ -5,7 +5,8 @@ const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4186';
 const output=process.env.CAPTURE_DIR??'test-results/upgrades';
 const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
 const results=[],errors=[];const check=(name,value)=>{assert.ok(value,name);results.push({name,status:'PASS'});console.log('PASS '+name);};
-const contexts=[];async function client(){const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'allow'});contexts.push(c);const p=await c.newPage();p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push(e.message));await p.goto(base+'/?legacy=1');await p.locator('#saved-title').waitFor();return {c,p};}
+// These legacy flows exercise direct pause/finish controls with a persisted full-guidance choice.
+const contexts=[];async function client(){const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'allow'});contexts.push(c);await c.addInitScript(()=>{if(localStorage.getItem('commute-copilot-presentation-v1')===null)localStorage.setItem('commute-copilot-presentation-v1',JSON.stringify({schemaVersion:1,simpleGuidance:false}));});const p=await c.newPage();p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push(e.message));await p.goto(base+'/?legacy=1');await p.locator('#saved-title').waitFor();return {c,p};}
 const active=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
 try{
  const {p:caregiver}=await client();

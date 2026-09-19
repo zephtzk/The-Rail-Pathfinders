@@ -14,6 +14,8 @@ async function later(date='2026-09-21',time='10:00'){await page.locator('[data-t
 async function plan(from='EW2',to='EW12'){await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin',from);await endpoint('destination',to);await later();await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
+ // This suite exercises the full-guidance trip peek and direct journey actions.
+ await page.locator('.app-nav [data-view=preferences]').click();await page.locator('#simple-guidance-toggle').uncheck();await page.locator('.app-nav [data-view=plan]').click();
  check('one unified navigation and map',await page.locator('.app-nav button').count()===7&&await page.locator('.leaflet-container').count()===1);
  check('Leave now is default with no invented deadline',await page.locator('[name=timeMode]').inputValue()==='leave-now'&&await page.locator('[name=deadlineTime]').inputValue()==='');
  check('mobile viewport has no horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

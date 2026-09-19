@@ -31,6 +31,8 @@ try{
   const stopName=code=>bus.stops.find(stop=>codeOf(stop.id)===code)?.name;
   await page.clock.setFixedTime(new Date('2026-09-21T01:55:00Z'));
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
+  // The large-text geometry check deliberately includes the full-guidance current-trip peek.
+  await nav('preferences');await page.locator('#simple-guidance-toggle').uncheck();await nav('plan');
   check('unselected endpoints do not display bus stop details',await host('origin').isHidden()&&await host('destination').isHidden());
   await page.locator('#origin').fill('EW2');
   const trainGraphic=await page.locator('#origin-option-0 svg').innerHTML();

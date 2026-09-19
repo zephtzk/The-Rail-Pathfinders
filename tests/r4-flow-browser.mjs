@@ -17,7 +17,8 @@ async function endpoint(role,value){await page.locator('#'+role).fill(value);awa
 async function plan(){await view('plan');await endpoint('origin','CC26');await endpoint('destination','EW9');await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
- await view('preferences');await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('#preferences-form button').click();
+ // This flow uses direct pause/cancel controls; choose full guidance once and retain it on reload.
+ await view('preferences');await page.locator('#simple-guidance-toggle').uncheck();await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('#preferences-form button').click();
  await plan();await page.locator('#review-route').click();
  check('one confirmation section with no duplicate preference editors',await page.locator('#confirmation-heading').innerText()==='Confirm your trip'&&await page.locator('#need-step-free,#fare-category').count()===0&&!await page.locator('#review-selected').isVisible());
  const confirmation=await page.locator('#companion-preview').innerText();

@@ -18,7 +18,8 @@ let browser;const contexts=[],errors=[];
 async function client(seed,session=null){
   const context=await browser.newContext({serviceWorkers:'block',viewport:{width:390,height:844}});contexts.push(context);
   await context.route('https://tile.openstreetmap.org/**',route=>route.abort());
-  await context.addInitScript(({active,session})=>{if(!sessionStorage.getItem('r3-seeded')){localStorage.setItem('commute-copilot-journey-v2',JSON.stringify(active));if(session)localStorage.setItem('commute-copilot-pairing-v2',JSON.stringify(session));sessionStorage.setItem('r3-seeded','yes');}window.geoCalls=[];window.geoCleared=[];Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(success,failure){window.geoCalls.push({success,failure});return window.geoCalls.length;},clearWatch:id=>window.geoCleared.push(id)}});},{active:seed,session});
+  // Seed a deliberate full-guidance choice for direct location/cancel/finish controls, only once.
+  await context.addInitScript(({active,session})=>{if(!sessionStorage.getItem('r3-seeded')){localStorage.setItem('commute-copilot-presentation-v1',JSON.stringify({schemaVersion:1,simpleGuidance:false}));localStorage.setItem('commute-copilot-journey-v2',JSON.stringify(active));if(session)localStorage.setItem('commute-copilot-pairing-v2',JSON.stringify(session));sessionStorage.setItem('r3-seeded','yes');}window.geoCalls=[];window.geoCleared=[];Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(success,failure){window.geoCalls.push({success,failure});return window.geoCalls.length;},clearWatch:id=>window.geoCleared.push(id)}});},{active:seed,session});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=current]').click();return {context,page};
 }
 try{

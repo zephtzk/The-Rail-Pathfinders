@@ -22,6 +22,8 @@ try{
  }
  async function capture(name){await page.screenshot({path:`${out}/${name}.png`});}
  await page.goto(base);await ready();
+ // Keep the full-guidance trip peek present so its compact-sheet suppression is tested.
+ await nav('preferences');await page.locator('#simple-guidance-toggle').uncheck();await nav('plan');
  await page.evaluate(async()=>{
   const m=await import('/src/journey-v2.js');
   const p=m.makePlan({origin:{id:'DT14_A',label:'Bugis'},destination:{id:'DT15_A',label:'Promenade'},date:'2026-09-21',departureTime:'10:00',preferences:{stepFree:false},route:{id:'sheet-test',departureSeconds:36000,arrivalSeconds:36600,walkingSeconds:60,steps:[{id:'access',type:'access',text:'Follow station signs at Bugis',fromStopId:'DT14_A',toStopId:'DT14_A',durationSeconds:60},{id:'ride',type:'ride',text:'Ride to Promenade',fromStopId:'DT14_A',toStopId:'DT15_A',durationSeconds:540}]}});
