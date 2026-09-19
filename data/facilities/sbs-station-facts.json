@@ -1,0 +1,1098 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-19",
+  "notes": [
+    "Directory presence does not establish current operation.",
+    "Exit reference coordinates are not lift/toilet doorway coordinates."
+  ],
+  "stationFacts": [
+    {
+      "operatorCode": "BFT",
+      "stationName": "Bayfront",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BFT&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BTW",
+      "stationName": "Beauty World",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BTW&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BDN",
+      "stationName": "Bedok North",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BDN&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "C"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BDR",
+      "stationName": "Bedok Reservoir",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BDR&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BCL",
+      "stationName": "Bencoolen",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BCL&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BDM",
+      "stationName": "Bendemeer",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BDM&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BTN",
+      "stationName": "Botanic Gardens",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BTN&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": null,
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BGS",
+      "stationName": "Bugis",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BGS&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "D",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "E"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BKP",
+      "stationName": "Bukit Panjang",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BKP&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A1",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "opposite"
+      }
+    },
+    {
+      "operatorCode": "CSW",
+      "stationName": "Cashew",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=CSW&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "CNT",
+      "stationName": "Chinatown",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=CNT&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "C",
+        "F"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A",
+          "F"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "DTN",
+      "stationName": "Downtown",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=DTN&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "F"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "XPO",
+      "stationName": "Expo",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=XPO&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "FCN",
+      "stationName": "Fort Canning",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=FCN&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "GLB",
+      "stationName": "Geylang Bahru",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=GLB&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "HVW",
+      "stationName": "Hillview",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=HVW&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "HUM",
+      "stationName": "Hume",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=HUM&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "1"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "JLB",
+      "stationName": "Jalan Besar",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=JLB&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "KKB",
+      "stationName": "Kaki Bukit",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=KKB&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "KAP",
+      "stationName": "King Albert Park",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=KAP&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "LTI",
+      "stationName": "Little India",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=LTI&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "B",
+          "D"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "MPS",
+      "stationName": "MacPherson",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=MPS&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "MTR",
+      "stationName": "Mattar",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=MTR&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "NEW",
+      "stationName": "Newton",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=NEW&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "C"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "PMN",
+      "stationName": "Promenade",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=PMN&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "RCR",
+      "stationName": "Rochor",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=RCR&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "SAV",
+      "stationName": "Sixth Avenue",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=SAV&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "STV",
+      "stationName": "Stevens",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=STV&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "1"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "TAM",
+      "stationName": "Tampines",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=TAM&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "D",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "TPE",
+      "stationName": "Tampines East",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=TPE&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "TPW",
+      "stationName": "Tampines West",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=TPW&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "TKK",
+      "stationName": "Tan Kah Kee",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=TKK&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "TLA",
+      "stationName": "Telok Ayer",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=TLA&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "C"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "UBI",
+      "stationName": "Ubi",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=UBI&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "UPC",
+      "stationName": "Upper Changi",
+      "line": "DTL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=UPC&TrainLine=DTL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "BNK",
+      "stationName": "Boon Keng",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BNK&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "BGK",
+      "stationName": "Buangkok",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=BGK&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "CNT",
+      "stationName": "Chinatown",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=CNT&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "C",
+        "F"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A",
+          "F"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "CQY",
+      "stationName": "Clarke Quay",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=CQY&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "B",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": null,
+        "nearExits": [
+          "E"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "DBG",
+      "stationName": "Dhoby Ghaut",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=DBG&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "G"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "FRP",
+      "stationName": "Farrer Park",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=FRP&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "D"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "HBF",
+      "stationName": "HarbourFront",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=HBF&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": null,
+        "nearExits": [
+          "C"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "HGN",
+      "stationName": "Hougang",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=HGN&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": null,
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": null
+      }
+    },
+    {
+      "operatorCode": "KVN",
+      "stationName": "Kovan",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=KVN&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "LTI",
+      "stationName": "Little India",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=LTI&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "B",
+          "D"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "OTP",
+      "stationName": "Outram Park",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=OTP&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "1",
+        "3",
+        "6",
+        "7"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "PTP",
+      "stationName": "Potong Pasir",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=PTP&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "B",
+        "C"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "C"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "PGL",
+      "stationName": "Punggol",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=PGL&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A/B",
+        "C/D"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "PGC",
+      "stationName": "Punggol Coast",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=PGC&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "1",
+        "2"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [],
+        "landmark": "Passenger Service Centre",
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "SKG",
+      "stationName": "Sengkang",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=SKG&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "C",
+        "D"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Concourse",
+        "nearExits": [
+          "D"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "SER",
+      "stationName": "Serangoon",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=SER&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "A"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    },
+    {
+      "operatorCode": "WLH",
+      "stationName": "Woodleigh",
+      "line": "NEL",
+      "sourceUrl": "https://www.sbstransit.com.sg/Service/TrainInformation?Station=WLH&TrainLine=NEL",
+      "checkedAt": "2026-09-19",
+      "sourceTime": null,
+      "liftExitGroups": [
+        "A",
+        "B"
+      ],
+      "toilets": {
+        "listed": true,
+        "level": "Street",
+        "nearExits": [
+          "B"
+        ],
+        "landmark": null,
+        "relation": "near"
+      }
+    }
+  ],
+  "omittedLiftExits": [
+    {
+      "station": "Bukit Panjang",
+      "exit": "A1",
+      "reason": "No unambiguous matching MRT exit coordinate in retained LTA sources."
+    },
+    {
+      "station": "Bukit Panjang",
+      "exit": "C",
+      "reason": "No unambiguous matching MRT exit coordinate in retained LTA sources."
+    },
+    {
+      "station": "Dhoby Ghaut",
+      "exit": "G",
+      "reason": "No unambiguous matching MRT exit coordinate in retained LTA sources."
+    }
+  ]
+}

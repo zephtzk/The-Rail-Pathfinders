@@ -1,0 +1,54 @@
+/* Nearby discovery owns these styles; journey guidance and indoor fixtures are unchanged. */
+.commute-app[data-view=facilities]{--mobile-map-height:76px}
+.commute-app[data-view=facilities] :is(.map-pages,.map-caption,.map-recenter,.journey-sheet-dock){display:none}
+.commute-app[data-view=facilities] .app-panel{width:min(720px,calc(100% - 48px))}
+.commute-app .nearby-facilities{font-size:.9rem;line-height:1.5}
+.nearby-facilities .nf-intro{display:grid;gap:.7rem}
+.nearby-facilities .nf-radius{display:inline-flex;align-items:center;gap:.4rem;width:fit-content;border-radius:30px;padding:.35rem .8rem;background:#edf3fc;color:#174f9e;font-weight:750}
+.nearby-facilities .nf-actions{display:flex;gap:.6rem;margin:1rem 0 .5rem;flex-wrap:wrap}
+.nearby-facilities .nf-actions .primary{width:auto;margin:0;flex:1}
+.nearby-facilities .nf-actions .secondary{flex:1}
+.nearby-facilities .nf-note{color:#526278;font-size:.82rem;margin:.45rem 0}
+.nearby-facilities :is(.nf-manual,.nf-coverage){border:1px solid #cfd7e2;border-radius:14px;padding:.6rem .85rem;margin:.85rem 0}
+.nearby-facilities summary{cursor:pointer;min-height:36px;display:list-item;padding:.35rem 0;color:#174f9e;font-weight:650}
+.nearby-facilities label{display:block;font-size:.85rem;margin:.45rem 0}
+.nearby-facilities input{width:100%;border:1px solid #91a4bd;border-radius:10px;padding:.65rem;min-height:44px}
+.nearby-facilities .nf-suggestions{max-height:240px;overflow-y:auto;border:1px solid #cfd7e2;border-radius:10px;margin-top:.4rem}
+.nearby-facilities .nf-suggestions button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #dfe5ed;background:#fff;padding:.6rem;min-height:52px}
+.nearby-facilities .nf-suggestions button[aria-selected=true],.nearby-facilities .nf-suggestions button:hover{background:#edf3fc}
+.nearby-facilities .nf-suggestions small{display:block;color:#526278}
+.nearby-facilities .nf-center{border-left:3px solid #174f9e;background:#edf3fc;padding:.7rem .8rem;border-radius:0 10px 10px 0;margin:.7rem 0}
+.nearby-facilities .nf-center span{display:block;font-size:.8rem}
+.nearby-facilities .nf-stale{color:#704a0a;font-weight:600;margin-top:.4rem}
+.nearby-facilities .nf-toolbar{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0}
+.nearby-facilities .segmented{flex:1 1 12rem;flex-wrap:wrap;margin:0;padding:3px;min-width:min(100%,12rem)}
+.nearby-facilities .segmented button{flex:1 0 auto;padding:.6rem .5rem;min-height:44px;white-space:nowrap}
+.nearby-facilities .nf-feed{font-size:.8rem;padding:.7rem .8rem;border-radius:10px;background:#fff7de;color:#594218;border:1px solid #e5d5ab}
+.nearby-facilities .nf-count{font-size:.8rem;color:#526278;margin:.8rem 0}
+.nearby-facilities .nf-card{border:1px solid #cfd7e2;border-radius:15px;padding:1rem;margin:.7rem 0;background:white}
+.nearby-facilities .nf-card-heading{display:flex;align-items:flex-start;gap:.7rem}
+.nearby-facilities .nf-type{display:flex;justify-content:center;align-items:center;border-radius:12px;width:42px;height:42px;flex:0 0 auto;background:#e7f0fb;color:#174f9e}
+.nearby-facilities .nf-lift{background:#efeaf8;color:#603a8e;font-size:1.4rem;font-weight:700}
+.nearby-facilities .nf-kind{font-size:.76rem;color:#526278;font-weight:650;margin-bottom:.15rem}
+.commute-app .nearby-facilities .nf-card h2{font-size:1.05rem;line-height:1.35;letter-spacing:0}
+.nearby-facilities .nf-location{margin:.6rem 0;font-size:.85rem}
+.nearby-facilities .nf-status{display:inline-block;font-size:.75rem;font-weight:700;background:#edf0f4;color:#35475f;padding:.25rem .55rem;border-radius:7px}
+.nearby-facilities .nf-status-warning{background:#fff0c9;color:#644500}
+.nearby-facilities .nf-status-unavailable{background:#ffebe9;color:#932f29}
+.nearby-facilities .nf-status-available{background:#e6f2e8;color:#285d35}
+.nearby-facilities .nf-card-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:.5rem}
+.nearby-facilities .nf-card-actions .quiet{padding:.5rem 0;min-height:44px}
+.nearby-facilities .nf-card-actions details{font-size:.8rem;max-width:100%}
+.nearby-facilities .nf-card-actions details[open]{flex-basis:100%}
+.nearby-facilities .nf-card-actions details p,.nearby-facilities .nf-coverage p{margin:.5rem 0}
+.nearby-facilities .nf-empty{padding:1.2rem .7rem;text-align:center;background:#f5f8fc;border-radius:14px}
+.commute-app .nearby-facilities .nf-empty h2{font-size:1.15rem;margin-bottom:.6rem}
+.nearby-facilities .nf-empty button{margin:.8rem auto 0}
+.nearby-facilities .nf-map{height:320px;border-radius:14px;background:#eaf0e5;border:1px solid #cfd7e2;isolation:isolate}
+.nearby-facilities .nf-map-legend{font-size:.75rem;margin:.5rem 0;color:#35475f}
+.nearby-facilities .nf-map .leaflet-control-attribution{font-size:10px}
+.nearby-facilities .nf-map-pin span{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid white;border-radius:50% 50% 50% 4px;transform:rotate(-12deg);font-weight:800;font-size:15px;background:#174f9e;color:white;box-shadow:0 2px 5px #172b4850}
+.nearby-facilities .nf-pin-lift span{background:#603a8e}
+.nearby-facilities .nf-pin-selected span{outline:3px solid #e7ad27;outline-offset:2px}
+@media(max-width:680px){.commute-app[data-view=facilities] .app-panel{width:100%;margin:0}.commute-app[data-view=facilities] .panel-scroll{padding-top:18px}.nearby-facilities .nf-map{height:300px}.nearby-facilities .nf-toolbar{gap:.4rem}.nearby-facilities .nf-toolbar .segmented:first-child{flex:1.4 1 12rem}}
+@media(prefers-reduced-motion:reduce){.nearby-facilities *{scroll-behavior:auto}}

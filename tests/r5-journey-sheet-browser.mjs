@@ -22,6 +22,8 @@ try{
  }
  async function capture(name){await page.screenshot({path:`${out}/${name}.png`});}
  await page.goto(base);await ready();
+ // Keep the full-guidance trip peek present so its compact-sheet suppression is tested.
+ await nav('preferences');await page.locator('#simple-guidance-toggle').uncheck();await nav('plan');
  await page.evaluate(async()=>{
   const m=await import('/src/journey-v2.js');
   const p=m.makePlan({origin:{id:'DT14_A',label:'Bugis'},destination:{id:'DT15_A',label:'Promenade'},date:'2026-09-21',departureTime:'10:00',preferences:{stepFree:false},route:{id:'sheet-test',departureSeconds:36000,arrivalSeconds:36600,walkingSeconds:60,steps:[{id:'access',type:'access',text:'Follow station signs at Bugis',fromStopId:'DT14_A',toStopId:'DT14_A',durationSeconds:60},{id:'ride',type:'ride',text:'Ride to Promenade',fromStopId:'DT14_A',toStopId:'DT15_A',durationSeconds:540}]}});
@@ -61,7 +63,7 @@ try{
  await touchDrag(-70);check('journey sheet resizes while Station guide is selected',await state()==='normal'&&await page.getByRole('tab',{name:'Station guide',exact:true}).getAttribute('aria-selected')==='true');await handle.press('End');
  const guide=await page.locator('#map-station-page').boundingBox();await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:guide.x+20,y:guide.y+190}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:guide.x+20,y:guide.y+60}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});check('Station guide scrolls without dragging the journey sheet',await state()==='compact'&&await page.locator('#map-station-page').evaluate(e=>e.scrollTop>0));
  await page.getByRole('tab',{name:'Map',exact:true}).click();check('returning to Map retains compact sheet position',await state()==='compact'&&await page.locator('#commute-map').isVisible());await nav('current');check('navigation from guide restores current journey and focus',await panel.isVisible()&&await page.locator('#current-heading').evaluate(e=>e===document.activeElement)&&await state()==='normal');
- await page.setViewportSize({width:320,height:900});await page.evaluate(()=>document.documentElement.style.fontSize='200%');await page.waitForFunction(()=>getComputedStyle(document.querySelector('.app-nav')).gridTemplateColumns.split(' ').length===3);await handle.press('Home');
+ await page.setViewportSize({width:320,height:900});await page.evaluate(()=>document.documentElement.style.fontSize='200%');await page.waitForFunction(()=>Math.abs(parseFloat(document.body.style.getPropertyValue('--nav-height'))-document.querySelector('.app-nav').getBoundingClientRect().height)<1);await handle.press('Home');
  check('320px large-text expanded sheet preserves scroll area',await content.evaluate(e=>e.clientHeight>150)&&await page.evaluate(()=>document.documentElement.scrollWidth<=321));await capture('expanded-320-large');
  await handle.press('End');check('320px large-text compact handle stays usable above navigation',await handle.evaluate(e=>{const r=e.getBoundingClientRect(),n=document.querySelector('.app-nav').getBoundingClientRect();return r.height>=44&&r.bottom<=n.top+1&&r.top>=76;}));await capture('compact-320-large');
  await handle.press('Escape');check('reduced-motion sheet adds no CSS transition',await panel.evaluate(e=>getComputedStyle(e).transitionDuration.split(',').every(t=>parseFloat(t)===0)));

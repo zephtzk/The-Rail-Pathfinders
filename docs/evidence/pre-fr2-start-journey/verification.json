@@ -1,0 +1,587 @@
+{
+  "baseCommit": "0a3bfa1264dec93b2f7a5b58f8650c68224f84e9",
+  "applicationSha256": "966e2caf655528724f842852caeb208cb7c61a99ed83c3aafb28dedb8097e343",
+  "unitTests": 415,
+  "pythonTests": 44,
+  "buildAssets": 99,
+  "browserChecks": 387,
+  "suites": {
+    "direct-start safeguards": {
+      "passed": 27,
+      "errors": [],
+      "checks": [
+        "search leaves the route unaccepted and exposes one deliberate Start journey",
+        "packaged local route provides an alternative to the suggested itinerary",
+        "a detached action for a different option cannot accept the refreshed selection",
+        "fare, accessibility and route sources are available before Start",
+        "estimate and accessibility limitations accompany the Start action",
+        "Save route works before Start and does not accept a journey",
+        "one Start click accepts the explicitly selected non-default local itinerary",
+        "direct Start preserves civil timing, preferences and canonical step mapping",
+        "direct Start leaves sharing off and opens current guidance without a second confirmation",
+        "an active trip disables replacement and explains the conflict",
+        "the start handler itself rejects replacement even when disabled UI is bypassed",
+        "a paused trip also blocks replacement without changing accepted state",
+        "cancelling restores Start for the valid already selected next journey",
+        "two synchronous activations accept exactly one new journey",
+        "endpoint editing removes Start and rejects a retained obsolete handler",
+        "incomplete endpoints explain the problem without starting",
+        "changing the civil date invalidates the route and obsolete action",
+        "changing departure time invalidates the route and obsolete action",
+        "saving changed preferences invalidates the route and obsolete action",
+        "real unverified step-free options visibly block Start before acceptance",
+        "the start handler cannot bypass verified step-free requirements",
+        "an in-flight provider search cannot expose Start or accept automatically",
+        "a delayed successful provider response cannot restore an invalidated route",
+        "a fresh provider response still waits for explicit Start after stale rejection",
+        "direct provider Start preserves geometry, source timestamp and canonical instructions",
+        "provider Start emits once and keeps caregiver consent off",
+        "no browser runtime errors"
+      ]
+    },
+    "contrast and layout": {
+      "passed": 85,
+      "errors": [],
+      "checks": [
+        "full-desktop enabled text and icon contrast",
+        "full-desktop enabled readable target without clipping",
+        "full-desktop hover text and icon contrast",
+        "full-desktop hover readable target without clipping",
+        "full-desktop focus text and icon contrast",
+        "full-desktop focus readable target without clipping",
+        "full-desktop visible keyboard focus",
+        "full-desktop viewport has no horizontal overflow",
+        "full-desktop active text and icon contrast",
+        "full-desktop active readable target without clipping",
+        "full-desktop prepared Start has white text on blue",
+        "full-desktop existing trip disables another Start",
+        "full-desktop disabled text and icon contrast",
+        "full-desktop disabled readable target without clipping",
+        "full-mobile enabled text and icon contrast",
+        "full-mobile enabled readable target without clipping",
+        "full-mobile hover text and icon contrast",
+        "full-mobile hover readable target without clipping",
+        "full-mobile focus text and icon contrast",
+        "full-mobile focus readable target without clipping",
+        "full-mobile visible keyboard focus",
+        "full-mobile viewport has no horizontal overflow",
+        "full-mobile active text and icon contrast",
+        "full-mobile active readable target without clipping",
+        "full-mobile prepared Start has white text on blue",
+        "full-mobile existing trip disables another Start",
+        "full-mobile disabled text and icon contrast",
+        "full-mobile disabled readable target without clipping",
+        "full-large-text enabled text and icon contrast",
+        "full-large-text enabled readable target without clipping",
+        "full-large-text hover text and icon contrast",
+        "full-large-text hover readable target without clipping",
+        "full-large-text focus text and icon contrast",
+        "full-large-text focus readable target without clipping",
+        "full-large-text visible keyboard focus",
+        "full-large-text viewport has no horizontal overflow",
+        "full-large-text active text and icon contrast",
+        "full-large-text active readable target without clipping",
+        "full-large-text prepared Start has white text on blue",
+        "full-large-text existing trip disables another Start",
+        "full-large-text disabled text and icon contrast",
+        "full-large-text disabled readable target without clipping",
+        "simple-desktop enabled text and icon contrast",
+        "simple-desktop enabled readable target without clipping",
+        "simple-desktop hover text and icon contrast",
+        "simple-desktop hover readable target without clipping",
+        "simple-desktop focus text and icon contrast",
+        "simple-desktop focus readable target without clipping",
+        "simple-desktop visible keyboard focus",
+        "simple-desktop viewport has no horizontal overflow",
+        "simple-desktop active text and icon contrast",
+        "simple-desktop active readable target without clipping",
+        "simple-desktop prepared Start has white text on blue",
+        "simple-desktop existing trip disables another Start",
+        "simple-desktop disabled text and icon contrast",
+        "simple-desktop disabled readable target without clipping",
+        "simple-mobile enabled text and icon contrast",
+        "simple-mobile enabled readable target without clipping",
+        "simple-mobile hover text and icon contrast",
+        "simple-mobile hover readable target without clipping",
+        "simple-mobile focus text and icon contrast",
+        "simple-mobile focus readable target without clipping",
+        "simple-mobile visible keyboard focus",
+        "simple-mobile viewport has no horizontal overflow",
+        "simple-mobile active text and icon contrast",
+        "simple-mobile active readable target without clipping",
+        "simple-mobile prepared Start has white text on blue",
+        "simple-mobile existing trip disables another Start",
+        "simple-mobile disabled text and icon contrast",
+        "simple-mobile disabled readable target without clipping",
+        "simple-large-text enabled text and icon contrast",
+        "simple-large-text enabled readable target without clipping",
+        "simple-large-text hover text and icon contrast",
+        "simple-large-text hover readable target without clipping",
+        "simple-large-text focus text and icon contrast",
+        "simple-large-text focus readable target without clipping",
+        "simple-large-text visible keyboard focus",
+        "simple-large-text viewport has no horizontal overflow",
+        "simple-large-text active text and icon contrast",
+        "simple-large-text active readable target without clipping",
+        "simple-large-text prepared Start has white text on blue",
+        "simple-large-text existing trip disables another Start",
+        "simple-large-text disabled text and icon contrast",
+        "simple-large-text disabled readable target without clipping",
+        "no browser runtime errors"
+      ]
+    },
+    "R4 flow": {
+      "passed": 34,
+      "errors": [],
+      "checks": [
+        "selected route has one explicit Start journey action without duplicate preference editors",
+        "human timeline retains Circle-to-East West transfer",
+        "fare accessibility and sources remain available before starting",
+        "toilet and caregiver controls are outside the planner details",
+        "selected preferences and canonical leg mapping reach active journey",
+        "direct start opens current trip without an extra confirmation",
+        "checkpoint display is grouped without raw indices or platform IDs",
+        "real interchange remains selectable at original index",
+        "successful checkpoint focuses current guidance and scrolls the trip sheet",
+        "checkpoint preserves canonical route and explicit position",
+        "failed confirmation leaves checkpoint and scroll unchanged",
+        "paused guidance stays human-readable",
+        "station and toilet tools share one section",
+        "station limitation is distinct and real toilet directions stay gated",
+        "shared invitation uses same human timeline",
+        "accepted invitation retains preferences and sharing starts off",
+        "reload preserves confirmed canonical index and preferences",
+        "new selection cannot start while another trip is active",
+        "editing endpoints removes the stale Start action and details",
+        "ending current trip enables Start for the selected next trip",
+        "new start keeps canonical identity distinct",
+        "plan fits desktop",
+        "current fits desktop",
+        "saved fits desktop",
+        "caregiver fits desktop",
+        "spending fits desktop",
+        "preferences fits desktop",
+        "plan fits large-text",
+        "current fits large-text",
+        "saved fits large-text",
+        "caregiver fits large-text",
+        "spending fits large-text",
+        "preferences fits large-text",
+        "no browser runtime errors"
+      ]
+    },
+    "R4 legacy": {
+      "passed": 37,
+      "errors": [],
+      "checks": [
+        {
+          "name": "rail saved-route calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "rail saved calendar date reaches the fresh route",
+          "status": "PASS"
+        },
+        {
+          "name": "rail saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "rail prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "rail planner calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "rail matching arrival date follows departure and refreshes its label",
+          "status": "PASS"
+        },
+        {
+          "name": "rail applying a calendar date clears stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "rail editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "rail replanning keeps one calendar per surviving form",
+          "status": "PASS"
+        },
+        {
+          "name": "rail replan uses the edited civil date and retains native time controls",
+          "status": "PASS"
+        },
+        {
+          "name": "rail replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "rail unverified saved step-free requirement still blocks starting",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot saved-route calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot saved calendar date reaches the fresh route",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot planner calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot matching arrival date follows departure and refreshes its label",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot applying a calendar date clears stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot replanning keeps one calendar per surviving form",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot replan uses the edited civil date and retains native time controls",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "pilot unverified saved step-free requirement still blocks starting",
+          "status": "PASS"
+        },
+        {
+          "name": "replay saved-route calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "replay saved calendar date reaches the fresh route",
+          "status": "PASS"
+        },
+        {
+          "name": "replay saved route keeps senior fare and step-free requirement",
+          "status": "PASS"
+        },
+        {
+          "name": "replay prepared trip hides the obsolete review action",
+          "status": "PASS"
+        },
+        {
+          "name": "replay planner calendar cancellation preserves date and returns focus",
+          "status": "PASS"
+        },
+        {
+          "name": "replay cancelling calendar leaves the trip modal and prepared journey open",
+          "status": "PASS"
+        },
+        {
+          "name": "replay applying a calendar date clears stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "replay editing removes stale Start Journey",
+          "status": "PASS"
+        },
+        {
+          "name": "replay replanning keeps one calendar per surviving form",
+          "status": "PASS"
+        },
+        {
+          "name": "replay replan uses the edited civil date and retains native time controls",
+          "status": "PASS"
+        },
+        {
+          "name": "replay replanning preserves saved hidden preferences",
+          "status": "PASS"
+        },
+        {
+          "name": "replay accepted plan retains explicit walking edit and saved fare",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy preference and invalidation flows have no uncaught page errors",
+          "status": "PASS"
+        }
+      ]
+    },
+    "FR1 integration": {
+      "passed": 18,
+      "errors": [],
+      "checks": [
+        "clean browser uses simple guidance",
+        "all three style descriptions begin hidden",
+        "one description opens without selecting a travel style",
+        "actual packaged route starts with simple guidance and an Update action",
+        "choosing a later real step requires the tick",
+        "tick commits the selected canonical step only",
+        "finish wording is exact and staff shortcut was removed from current actions",
+        "route legend is collapsed in the panel instead of overlaying the map",
+        "Facilities shows real nearby lifts and toilets within the stated radius",
+        "unconfigured maintenance stays explicitly unknown",
+        "facility discovery preserves the accepted route and checkpoint",
+        "dedicated facility map is available without replacing journey progress",
+        "all eight destinations fit with Current trip larger and centered: mobile",
+        "all eight destinations fit with Current trip larger and centered: large-text",
+        "all eight destinations fit with Current trip larger and centered: desktop",
+        "Finish journey still completes the accepted trip",
+        "Staff page remains available after the new current action",
+        "combined walkthrough has no browser runtime errors"
+      ]
+    },
+    "R5 address": {
+      "passed": 17,
+      "errors": [],
+      "checks": [
+        "address searches are explicit and contain only the entered public query",
+        "provider result remains a preview until explicit Start journey",
+        "request contains coordinate endpoints and authoritative preferences",
+        "standalone provider timeline shows public service and stop names",
+        "provider map has a geometry/evidence notice in journey details",
+        "address route saves with endpoint records without inventing local station connections",
+        "planner details preserve unknown fare/accessibility and planned provider source",
+        "accepted address journey has canonical provider geometry and no local context",
+        "provider-aware reroute limitation is visible while accepted guidance remains",
+        "manual boarding confirmation retains original canonical index",
+        "staff automatic message follows accepted external service and destination",
+        "recipient can review the same provider instructions before accepting",
+        "shared acceptance preserves route geometry/preferences and leaves consent off",
+        "provider failure cannot replace accepted route or explicit progress",
+        "reload restores provider route and confirmed progress",
+        "actual offline reload keeps accepted public instruction and progress",
+        "browser reports no application exceptions"
+      ]
+    },
+    "R5 product": {
+      "passed": 22,
+      "errors": [],
+      "checks": [
+        "calendar replaces native date field with formatted Singapore date",
+        "calendar Escape discards draft and returns focus",
+        "keyboard month navigation applies the chosen civil date",
+        "route search requires an explicit Start before creating a journey",
+        "flexible choices omit an earlier departure already in the past",
+        "explicit flexibility selection recalculates without accepting a trip",
+        "pinned commute is before full form and custom labels remain inert",
+        "shortcut recalculates Leave now without starting",
+        "reverse commute is explicit and exchanges the endpoints without starting",
+        "budget is optional by default",
+        "budget includes recorded estimates with exact dates, overrun and pending labels",
+        "accessible progress reports true percentage above 100",
+        "all personal history stays accessible including older and pending trips",
+        "confirmed fare replaces estimate exactly once in budget",
+        "refund updates same-period budget",
+        "switching calendar budget preserves every record",
+        "budget and ledger survive reload",
+        "budget fits narrow enlarged text",
+        "turning off budget retains all history",
+        "enlarged calendar has no horizontal overflow",
+        "unreadable ledger never claims zero spending or full remaining budget",
+        "no browser runtime errors"
+      ]
+    },
+    "R5 bus": {
+      "passed": 8,
+      "errors": [],
+      "checks": [
+        "editing an endpoint cancels pending full-network search without freezing controls",
+        "cancelled search cannot repopulate old route results",
+        "cancellation leaves accepted trip unchanged",
+        "fresh full-network search completes after cancellation",
+        "fresh results preserve accepted trip and disable Start while it is active",
+        "UI continues scheduling frames through cancel and worker restart",
+        "mobile layout remains within viewport",
+        "no browser errors"
+      ]
+    },
+    "R5 bus stop": {
+      "passed": 19,
+      "errors": [],
+      "checks": [
+        "unselected endpoints do not display bus stop details",
+        "rail suggestions retain the train icon",
+        "bus suggestions use a distinct bus drawing",
+        "bus suggestion subtitle contains only unique naturally sorted bus numbers",
+        "keyboard selection shows compact numbers and collapsed details with a bus field icon",
+        "keyboard expansion exposes stop identity, every listed direction and operator",
+        "unsupported timing stays listed with its planner limitation",
+        "departure changes retain open details for the same selected stop",
+        "touch collapses the disclosure and all compact numbers remain uncovered",
+        "editing immediately removes stale stop details and resets the field icon",
+        "clearing an endpoint leaves no prior stop service description",
+        "new stop selections show their own numbers and reset to collapsed",
+        "swapping endpoints exchanges stop details without retaining the other stop open state",
+        "reopening a saved bus route after reload restores both compact stop disclosures",
+        "selecting, editing, swapping and reopening endpoints preserve the accepted journey",
+        "expanded stop directions fit at 320px and 200 percent text without horizontal overflow",
+        "large-text service direction and operator scroll fully above the current-trip peek",
+        "desktop layout exposes readable bus stop directions without overflow",
+        "no browser runtime errors or build changes during verification"
+      ]
+    },
+    "R2": {
+      "passed": 36,
+      "errors": [],
+      "checks": [
+        "one unified navigation and map",
+        "Leave now is default with no invented deadline",
+        "mobile viewport has no horizontal overflow",
+        "unknown address is unresolved",
+        "keyboard suggestion selects stable rail codes",
+        "selected bus stop details include terminal direction and code",
+        "scroll picker preserves the selected civil time",
+        "real imported route comparison renders",
+        "Save Route stores reusable pair without starting trip",
+        "reopen preserves mode with freshly calculated departure date",
+        "duplicate Save Route names recover with separate templates",
+        "travel style persists on reload",
+        "route sheet scrolls without covering fixed map",
+        "selected route waits for explicit Start without a second review or consent gate",
+        "Start Journey creates canonical trip with preferences",
+        "caregiver and local collection start independently off",
+        "navigation preserves one journey, controller and map",
+        "current action remains reachable when leaving trip",
+        "preference edit leaves accepted route untouched",
+        "planner supports endpoints beyond demo corridor",
+        "swap invalidates old preview",
+        "new arrival-deadline option cannot replace an active journey",
+        "saved arrival date and clock survive reopening",
+        "arrive-by is explicitly deadline filtering",
+        "pause preserves same journey",
+        "reload retains accepted journey",
+        "offline reload retains canonical journey",
+        "two reconnects do not duplicate journey or completion",
+        "explicit completion ends same journey once",
+        "fictional incidents use a separate labelled rehearsal",
+        "demo incident retains accepted route until reviewed",
+        "reviewed reroute retains one canonical journey and accepted revision",
+        "rail compatibility URL uses unified planner",
+        "multimodal compatibility URL uses unified planner",
+        "320px and large text remain within viewport",
+        "no browser runtime errors"
+      ]
+    },
+    "R3": {
+      "passed": 36,
+      "errors": [],
+      "checks": [
+        "app responses preserve a valid origin referrer",
+        "eight reachable pages retain the initial journey map",
+        "blocked tiles leave a usable schematic and a deliberate retry",
+        "tile request sends origin only",
+        "no unsupported connection form before a trip",
+        "station layout and toilet entry points remain together",
+        "preference choices omit persona names",
+        "caregiver controller lives on its own page",
+        "spending controller lives on its own page",
+        "home icon returns to Plan without a document reload",
+        "save confirms the chosen name and location",
+        "one saved route without duplicated manager",
+        "saving a route does not start a trip or add station bookmarks",
+        "add a place does not ask for coordinates",
+        "reopened route retains preferences in the canonical journey",
+        "technical trip detail is collapsed by default",
+        "connection helper explains its purpose",
+        "position correction opens the relevant form",
+        "page navigation retains one trip identity and controller",
+        "cancel requires a clear in-app choice",
+        "keep trip preserves active guidance",
+        "cancel ends same trip and clears geographic permissions",
+        "cancel is excluded from completed spending",
+        "cancel preserves reusable routes",
+        "ended trip hides obsolete active tools",
+        "cancelled state survives reload",
+        "a new trip can start after cancellation",
+        "completed fare action opens Spending",
+        "completed journey is recorded once",
+        "plan fits 320px at large text",
+        "current fits 320px at large text",
+        "saved fits 320px at large text",
+        "caregiver fits 320px at large text",
+        "spending fits 320px at large text",
+        "preferences fits 320px at large text",
+        "no runtime errors"
+      ]
+    },
+    "route map": {
+      "passed": 28,
+      "errors": [],
+      "checks": [
+        "finding the mixed route leaves accepted guidance empty",
+        "preview: waits do not shift the geometry-to-mode association",
+        "preview: walking is dotted gray with round caps",
+        "preview: trains are solid in East West and Downtown service colors",
+        "preview: buses retain a distinct blue line and white center pattern",
+        "preview: all route segments have casings and transfer stops are marked",
+        "preview: map badges and journey-panel key identify the services and travel modes",
+        "preview: route legend and details do not cover the map",
+        "mobile map stays clear with the route key collapsed in the journey panel",
+        "route key and source remain available in the journey panel",
+        "accepted route preserves all geometry with original step indices around waits",
+        "started: waits do not shift the geometry-to-mode association",
+        "started: walking is dotted gray with round caps",
+        "started: trains are solid in East West and Downtown service colors",
+        "started: buses retain a distinct blue line and white center pattern",
+        "started: all route segments have casings and transfer stops are marked",
+        "started: map badges and journey-panel key identify the services and travel modes",
+        "started: route legend and details do not cover the map",
+        "starting the journey preserves every preview map style",
+        "restored: waits do not shift the geometry-to-mode association",
+        "restored: walking is dotted gray with round caps",
+        "restored: trains are solid in East West and Downtown service colors",
+        "restored: buses retain a distinct blue line and white center pattern",
+        "restored: all route segments have casings and transfer stops are marked",
+        "restored: map badges and journey-panel key identify the services and travel modes",
+        "restored: route legend and details do not cover the map",
+        "reload restores the accepted geometry and the same map styles",
+        "browser reports no application exceptions or console errors"
+      ]
+    },
+    "service colours": {
+      "passed": 20,
+      "errors": [],
+      "checks": [
+        "mobile route summary: each train badge or marker meets 4.5:1 contrast",
+        "mobile route summary: train SVG strokes use the readable badge foreground",
+        "summary train fills use East West green and Circle yellow",
+        "bus summary keeps its distinct neutral style and bus icon",
+        "mobile route timeline: each train badge or marker meets 4.5:1 contrast",
+        "mobile route timeline: train SVG strokes use the readable badge foreground",
+        "walking and bus markers do not inherit rail fill",
+        "current trip instructions: each train badge or marker meets 4.5:1 contrast",
+        "current trip instructions: train SVG strokes use the readable badge foreground",
+        "restored instructions: each train badge or marker meets 4.5:1 contrast",
+        "restored instructions: train SVG strokes use the readable badge foreground",
+        "all imported service variants: each train badge or marker meets 4.5:1 contrast",
+        "all imported service variants: train SVG strokes use the readable badge foreground",
+        "every imported service has matching filled marker and label",
+        "current rail marker retains an explicit focus outline",
+        "all nine public lines are present for visual review",
+        "mobile all public lines: each train badge or marker meets 4.5:1 contrast",
+        "mobile all public lines: train SVG strokes use the readable badge foreground",
+        "mobile palette fits without horizontal scrolling",
+        "no browser application exceptions or console errors"
+      ]
+    }
+  },
+  "environment": "Installed Edge on Windows; mobile/touch and 320px/200% text emulation, controlled OneMap fixtures, blocked street-map tiles. No physical-device or live-provider claim."
+}

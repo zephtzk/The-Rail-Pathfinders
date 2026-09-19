@@ -78,9 +78,7 @@ try{
   await styles('#route-results .transit-timeline','mobile route timeline');
   check('walking and bus markers do not inherit rail fill',await page.locator('#route-results .timeline-leg').evaluateAll(nodes=>nodes.filter(node=>node.classList.contains('timeline-walk')||node.querySelector('.icon-bus')).every(node=>!node.querySelector('.timeline-marker.rail-service-fill'))));
   await page.locator('#route-results .timeline-ride').first().scrollIntoViewIfNeeded();await capture('route-instructions-mobile');
-  await page.locator('#review-route').click();await page.locator('#start-companion').waitFor();
-  await styles('#review-companion .transit-timeline','review instructions');
-  await page.locator('#start-companion').click();
+  await page.locator('#review-route').click();
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2'))?.status==='started');
   await page.locator('.app-nav [data-view=current]').click();
   await page.locator('#trip-details > summary').click();

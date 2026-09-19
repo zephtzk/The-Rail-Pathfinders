@@ -1,0 +1,13 @@
+PASS app startup requests one shared watch while waiting for a usable fix
+PASS offline badge requires installed cache and saved accepted trip, with saved time
+PASS local collection keeps caregiver permissions off and poor accuracy preserves manual correction
+PASS generic manual correction invalidates stale timetable comparison position
+PASS offline connectivity does not stop a usable local position
+PASS hidden collection stops; foreground return resumes the enabled session but rejects queued old fixes
+PASS pausing and resuming a trip preserves its shared foreground location session
+PASS denial stops collection and explicit retry, timeout and stale fixes retain manual control
+PASS actual offline reload retains the accepted trip and respects the explicit saved location stop
+PASS missing required cache asset withdraws offline claim
+PASS removing saved trip remains effective across progress changes and explicit saving restores it
+PASS repeated reconnect preserves one trip; explicit completion stops collection
+PASS private APIs remain uncached and browser has no runtime errors

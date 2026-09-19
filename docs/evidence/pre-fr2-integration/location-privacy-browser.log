@@ -1,0 +1,8 @@
+PASS two same-origin app documents collect through their own foreground watches with separately seeded sharing consent
+PASS Settings stop in another document clears every local watch, remembered coordinate and geographic-sharing permission; late callbacks stay invalid
+PASS native storage events propagate explicit disable once without pingpong and queue geographic-sharing removal
+PASS permission denial removes prior accepted-trip coordinates and late callbacks cannot restore them
+PASS timeout, stale callback and device unavailability remove remembered coordinates while a subsequent fresh fix can recover
+PASS Settings catches a failed sharing stop, keeps local collection disabled and clearly reports the pending server change
+PASS retry completes the controlled privacy request without restarting local collection or geographic sharing
+PASS all controlled privacy scenarios finish without uncaught browser exceptions

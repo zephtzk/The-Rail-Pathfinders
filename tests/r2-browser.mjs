@@ -2,10 +2,11 @@ import {choosePlannerTime,choosePlannerDate} from './planner-browser-helpers.mjs
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
-const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4192',out=process.env.CAPTURE_DIR??'test-results/r2';
+const base=process.env.TEST_BASE_URL??'http://127.0.0.1:4233',out=process.env.CAPTURE_DIR??'test-results/r2';
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_EXECUTABLE??'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
 const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[],results=[];
+await context.addInitScript(()=>{window.geoWatches=0;Object.defineProperty(navigator,'permissions',{configurable:true,value:{query:async()=>({state:'prompt'})}});Object.defineProperty(navigator,'geolocation',{configurable:true,value:{watchPosition(){return ++window.geoWatches;},clearWatch(){}}});});
 page.on('pageerror',e=>errors.push(e.message));
 const check=(label,ok)=>{assert.ok(ok,label);results.push(label);console.log('PASS '+label);};
 const active=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2')));
@@ -14,13 +15,15 @@ async function later(date='2026-09-21',time='10:00'){await page.locator('[data-t
 async function plan(from='EW2',to='EW12'){await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin',from);await endpoint('destination',to);await later();await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
- check('one unified navigation and map',await page.locator('.app-nav button').count()===7&&await page.locator('.leaflet-container').count()===1);
+ // This suite exercises the full-guidance trip peek and direct journey actions.
+ await page.locator('.app-nav [data-view=preferences]').click();await page.locator('#simple-guidance-toggle').uncheck();await page.locator('.app-nav [data-view=plan]').click();
+ check('one unified navigation and map',await page.locator('.app-nav button').count()===8&&await page.locator('.app-nav [data-view=facilities]').isVisible()&&await page.locator('.leaflet-container').count()===1);
  check('Leave now is default with no invented deadline',await page.locator('[name=timeMode]').inputValue()==='leave-now'&&await page.locator('[name=deadlineTime]').inputValue()==='');
  check('mobile viewport has no horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:out+'/plan-mobile.png'});
  await page.locator('#origin').fill('unknown private address');check('unknown address is unresolved',await page.locator('#origin-suggestions').innerText().then(t=>t.includes('No local match')));
  await endpoint('origin','EW2');await endpoint('destination','EW12');check('keyboard suggestion selects stable rail codes',await page.locator('#origin').inputValue().then(t=>t.includes('EW2')));
- await page.locator('#destination').fill('01012');check('bus suggestions include terminal direction and code',await page.locator('#destination-suggestions').innerText().then(t=>t.includes('01012')&&t.includes('Bus 2')&&t.includes('Changi Village Ter')&&t.includes('Kampong Bahru Ter')));
+ await endpoint('destination','01012');await page.locator('#destination-stop-details summary').click();check('selected bus stop details include terminal direction and code',await page.locator('#destination-stop-details').innerText().then(t=>t.includes('01012')&&t.includes('Bus 2')&&t.includes('Changi Village Ter')&&t.includes('Kampong Bahru Ter')));
  await endpoint('destination','EW12');await later();await page.getByRole('button',{name:/Choose departure time/}).click();await page.locator('.time-wheel').nth(0).getByRole('option',{name:'10',exact:true}).click();await page.locator('.time-wheel').nth(1).getByRole('option',{name:'30',exact:true}).click();await page.getByRole('button',{name:'Use this time',exact:true}).click();await page.waitForFunction(()=>document.querySelector('[name=departureTime]').value==='10:30');check('scroll picker preserves the selected civil time',await page.locator('[name=departureTime]').inputValue()==='10:30');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
  check('real imported route comparison renders',await page.locator('.route-card').count()>0);
  await page.locator('#save-route').click();await page.locator('#save-route-form').getByRole('button').click();await page.locator('.app-nav [data-view=saved]').click();
@@ -28,18 +31,20 @@ try{
  await page.locator('[data-open]').first().click();check('reopen preserves mode with freshly calculated departure date',await page.locator('[name=timeMode]').inputValue()==='depart-later'&&await page.locator('[name=date]').inputValue()!=='2026-09-21');
  await later();await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();await page.locator('#save-route').click();await page.locator('#save-route-form').getByRole('button').click();await page.locator('.app-nav [data-view=saved]').click();check('duplicate Save Route names recover with separate templates',await page.locator('.saved-route-card').count()===2);
  await page.locator('.app-nav [data-view=preferences]').click();await page.locator('[data-preset=arjun]').click();await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=preferences]').click();check('travel style persists on reload',await page.locator('[data-preset=arjun]').getAttribute('aria-pressed')==='true');
- await plan();await page.locator('.route-card').first().scrollIntoViewIfNeeded();check('route sheet scrolls without covering fixed map',await page.evaluate(()=>window.scrollY===0));await page.screenshot({path:out+'/compare-mobile.png'});await page.locator('#review-route').click();await page.locator('#start-companion').waitFor();
- check('review offers independent unchecked local consent',await page.locator('#enable-local-assistance').count()===1&&!await page.locator('#enable-local-assistance').isChecked());
- await page.locator('#start-companion').click();await page.locator('#view-current').waitFor({state:'visible'});const first=await active();
+ await plan();await page.locator('.route-card').first().scrollIntoViewIfNeeded();check('route sheet scrolls without covering fixed map',await page.evaluate(()=>window.scrollY===0));await page.screenshot({path:out+'/compare-mobile.png'});
+ check('selected route waits for explicit Start without a second review or consent gate',await active()===null&&await page.locator('#review-route').innerText().then(t=>t.trim()==='Start journey')&&await page.locator('#start-companion,#enable-local-assistance').count()===0);
+ check('direct Start reuses the one startup location session',await page.evaluate(()=>window.geoWatches)===1);
+ await page.locator('#review-route').click();await page.locator('#view-current').waitFor({state:'visible'});const first=await active();
  check('Start Journey creates canonical trip with preferences',first?.status==='started'&&first.plan.preferences.travelStyle==='arjun'&&!!first.routingContext);
- check('caregiver and local collection start independently off',!first.permissions.progress&&!first.permissions.location);
+ check('caregiver sharing remains off while app-level location assistance is enabled',!first.permissions.progress&&!first.permissions.location&&await page.evaluate(()=>window.geoWatches)===1);
  await page.screenshot({path:out+'/current-mobile.png'});
  for(const tab of ['saved','preferences','plan','current'])await page.locator(`.app-nav [data-view=${tab}]`).click();check('navigation preserves one journey, controller and map',(await active()).id===first.id&&await page.locator('#companion').count()===1&&await page.locator('.leaflet-container').count()===1);
  await page.locator('.app-nav [data-view=plan]').click();check('current action remains reachable when leaving trip',await page.locator('#trip-peek').isVisible());
  await page.locator('.app-nav [data-view=preferences]').click();await page.locator('[data-preset=rachel]').click();check('preference edit leaves accepted route untouched',(await active()).plan.preferences.travelStyle==='arjun'&&(await active()).route.id===first.route.id);
  await plan('NS9','CG2');check('planner supports endpoints beyond demo corridor',await page.locator('.route-card').count()>0&&(await active()).id===first.id);
  await page.locator('#swap').click();check('swap invalidates old preview',await page.locator('.route-card').count()===0);
- await page.locator('[data-time="arrive-by"]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await choosePlannerDate(page,'deadlineDate','2026-09-22');await choosePlannerTime(page,'deadlineTime','00:20');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();await page.locator('#review-route').click();
+ await page.locator('[data-time="arrive-by"]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await choosePlannerDate(page,'deadlineDate','2026-09-22');await choosePlannerTime(page,'deadlineTime','00:20');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
+ check('new arrival-deadline option cannot replace an active journey',await page.locator('#review-route').isDisabled()&&await page.locator('#route-start-note').innerText().then(t=>/Finish or cancel/i.test(t))&&(await active()).id===first.id);
  await page.locator('#save-route').click();await page.locator('#save-route-form [name=label]').fill('Night deadline');await page.locator('#save-route-form').getByRole('button').click();await page.locator('.app-nav [data-view=saved]').click();await page.locator('.saved-route-card').filter({hasText:'Night deadline'}).locator('[data-open]').click();check('saved arrival date and clock survive reopening',await page.locator('[name=deadlineDate]').inputValue()==='2026-09-22'&&await page.locator('[name=deadlineTime]').inputValue()==='00:20'&&await page.locator('[name=timeMode]').inputValue()==='arrive-by');
  check('arrive-by is explicitly deadline filtering',await page.locator('#time-note').innerText().then(t=>t.includes('does not find a latest departure')));
  await page.locator('.app-nav [data-view=current]').click();await page.locator('#journey-pause').click();check('pause preserves same journey',(await active()).status==='paused'&&(await active()).id===first.id);await page.locator('#journey-pause').click();

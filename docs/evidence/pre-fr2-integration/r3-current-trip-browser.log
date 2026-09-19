@@ -1,0 +1,8 @@
+PASS current summary stays concise while route details and station tools remain available
+PASS plain-language route check converts walking minutes without bypassing progress safeguards
+PASS cancellation is explicitly confirmed; keeping the trip preserves guidance and local collection
+PASS offline cancellation survives reload, blocks queued location fixes, and creates no completed-trip spending
+PASS completed-trip spending opens its own page and repeated visits cannot duplicate its record
+PASS offline cancellation persists pending caregiver privacy change and reconnect confirms the cancelled server state without revoking access
+PASS online cancellation clears shared location and records cancelled state after privacy changes
+PASS no browser runtime errors

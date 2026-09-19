@@ -17,17 +17,21 @@ async function endpoint(role,value){await page.locator('#'+role).fill(value);awa
 async function plan(){await view('plan');await endpoint('origin','CC26');await endpoint('destination','EW9');await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();}
 try{
  await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
- await view('preferences');await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('#preferences-form button').click();
- await plan();await page.locator('#review-route').click();
- check('one confirmation section with no duplicate preference editors',await page.locator('#confirmation-heading').innerText()==='Confirm your trip'&&await page.locator('#need-step-free,#fare-category').count()===0&&!await page.locator('#review-selected').isVisible());
- const confirmation=await page.locator('#companion-preview').innerText();
- check('human timeline retains Circle-to-East West transfer',confirmation.includes('Circle Line')&&confirmation.includes('East West Line')&&confirmation.includes('Buona Vista')&&!/CCL_LOOP|CC26_B|EW21_A|\d+\. access:/.test(confirmation));
- check('toilet and caregiver controls are outside confirmation',await page.locator('#companion-preview button').allTextContents().then(a=>!a.some(t=>/toilet|recipient/.test(t))));
- await page.locator('#companion-plan').scrollIntoViewIfNeeded();await capture(out+'/confirm-mobile.png');
- await page.locator('#start-companion').click();const initial=await active();
+ // This flow uses direct pause/cancel controls; choose full guidance once and retain it on reload.
+ await view('preferences');await page.locator('#simple-guidance-toggle').uncheck();await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('#preferences-form button').click();
+ await plan();
+ check('selected route has one explicit Start journey action without duplicate preference editors',await page.locator('#review-route').innerText().then(t=>t.trim()==='Start journey')&&await active()===null&&await page.locator('#need-step-free,#fare-category,#start-companion').count()===0&&!await page.locator('#review-selected').isVisible());
+ await page.locator('#route-results > .review-details > summary').click();
+ const instructions=await page.locator('#route-results .transit-timeline').innerText();
+ check('human timeline retains Circle-to-East West transfer',instructions.includes('Circle Line')&&instructions.includes('East West Line')&&instructions.includes('Buona Vista')&&!/CCL_LOOP|CC26_B|EW21_A|\d+\. access:/.test(instructions));
+ await page.locator('#route-plan-details > summary').click();
+ check('fare accessibility and sources remain available before starting',await page.locator('#route-plan-details').innerText().then(t=>/fare/i.test(t)&&/accessibility/i.test(t)&&/Preferences:/.test(t)));
+ check('toilet and caregiver controls are outside the planner details',await page.locator('#route-results button').allTextContents().then(a=>!a.some(t=>/toilet|recipient/i.test(t))));
+ await page.locator('#review-route').scrollIntoViewIfNeeded();await capture(out+'/start-mobile.png');
+ await page.locator('#review-route').click();const initial=await active();
  check('selected preferences and canonical leg mapping reach active journey',initial.plan.preferences.fareCategory==='senior'&&initial.route.steps.length===initial.routingContext.route.legs.length);
- check('start clears obsolete confirmation controls',await page.locator('#start-companion').count()===0&&!await page.locator('#review-companion').isVisible()&&!await page.locator('#review-route').isVisible());
- await page.locator('#trip-position > summary').click();
+ check('direct start opens current trip without an extra confirmation',initial.status==='started'&&await page.locator('#view-current').isVisible()&&await page.locator('#start-companion').count()===0&&!await page.locator('#review-companion').isVisible());
+ await page.getByRole('button',{name:'Update my current step',exact:true}).click();
  const options=await page.locator('#checkpoint-step option').evaluateAll(nodes=>nodes.map(n=>({value:Number(n.value),label:n.textContent})));
  check('checkpoint display is grouped without raw indices or platform IDs',options.length<initial.route.steps.length&&options.every(o=>!/^\d+\.|CCL_|_(?:A|B)\b|\b(?:access|wait|exit):/.test(o.label)));
  const transferIndex=initial.route.steps.findIndex(s=>s.type==='transfer');
@@ -55,10 +59,10 @@ try{
  check('accepted invitation retains preferences and sharing starts off',await recipient.evaluate(()=>{const a=JSON.parse(localStorage.getItem('commute-copilot-journey-v2'));return a.plan.preferences.fareCategory==='senior'&&!a.permissions.progress&&!a.permissions.location;}));await recipientContext.close();
  await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await view('current');
  check('reload preserves confirmed canonical index and preferences',(await active()).progress.stepIndex===transferIndex&&(await active()).plan.preferences.fareCategory==='senior');
- await plan();await page.locator('#review-route').click();check('new selection cannot start while another trip is active',await page.locator('#start-companion').count()===0&&await page.locator('#companion-preview').innerText().then(t=>t.includes('Finish or cancel')));
- await page.locator('#swap').click();check('editing endpoints removes obsolete confirmation',!await page.locator('#review-companion').isVisible()&&await page.locator('#companion-preview').innerText()==='');
- await plan();await page.locator('#review-route').click();await view('current');await page.locator('#journey-cancel').click();await page.locator('#confirm-journey-cancel').click();await view('plan');check('ending current trip restores Start for already prepared next trip',await page.locator('#start-companion').isVisible());
- await page.locator('#start-companion').click();check('new start keeps canonical identity distinct',(await active()).id!==initial.id&&(await active()).plan.preferences.fareCategory==='senior');
+ await plan();check('new selection cannot start while another trip is active',await page.locator('#review-route').isDisabled()&&await page.locator('#route-start-note').innerText().then(t=>/Finish or cancel/i.test(t))&&(await active()).id===initial.id);
+ await page.locator('#swap').click();check('editing endpoints removes the stale Start action and details',await page.locator('#review-route,#route-plan-details').count()===0&&!await page.locator('#review-companion').isVisible());
+ await plan();await view('current');await page.locator('#journey-cancel').click();await page.locator('#confirm-journey-cancel').click();await view('plan');check('ending current trip enables Start for the selected next trip',await page.locator('#review-route').isVisible()&&await page.locator('#review-route').isEnabled());
+ await page.locator('#review-route').click();check('new start keeps canonical identity distinct',(await active()).id!==initial.id&&(await active()).plan.preferences.fareCategory==='senior');
  for(const size of [{width:1440,height:1000,label:'desktop'},{width:320,height:900,label:'large-text'}]){
   await page.setViewportSize(size);await page.evaluate(large=>document.documentElement.style.fontSize=large?'200%':'',size.label==='large-text');
   for(const screen of ['plan','current','saved','caregiver','spending','preferences']){await view(screen);check(`${screen} fits ${size.label}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await capture(`${out}/${screen}-${size.label}.png`);}

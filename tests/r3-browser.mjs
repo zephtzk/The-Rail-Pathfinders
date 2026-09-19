@@ -21,13 +21,15 @@ async function plan(){await page.locator('.app-nav [data-view=plan]').click();aw
 try {
   const response=await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
   check('app responses preserve a valid origin referrer',response.headers()['referrer-policy']==='strict-origin-when-cross-origin');
-  check('seven reachable pages share one map',await page.locator('.app-nav button').count()===7&&await page.locator('.leaflet-container').count()===1);
+  check('eight reachable pages retain the initial journey map',await page.locator('.app-nav button').count()===8&&await page.locator('.app-nav [data-view=facilities]').isVisible()&&await page.locator('.leaflet-container').count()===1);
   await page.locator('#retry-street-map').waitFor();
   check('blocked tiles leave a usable schematic and a deliberate retry',await page.locator('.leaflet-tile').count()===0&&await page.locator('.leaflet-overlay-pane path').count()>0&&tileRequests.length>0);
   check('tile request sends origin only',tileRequests.some(h=>h.referer===base+'/'));
   await page.locator('.app-nav [data-view=current]').click();check('no unsupported connection form before a trip',!await page.locator('#rerouting-host').isVisible());
   await page.locator('#station-tools > summary').click();check('station layout and toilet entry points remain together',await page.locator('#companion-facilities [data-action=layout]').isVisible()&&await page.locator('#companion-facilities [data-action=toilets]').isVisible());await page.locator('#station-tools > summary').click();
   await page.locator('.app-nav [data-view=preferences]').click();check('preference choices omit persona names',!/(Rachel|Arjun|Mdm Lim)/.test(await page.locator('#preferences-content').innerText()));
+  // Position-correction shortcuts and direct cancel/finish controls belong to full guidance.
+  await page.locator('#simple-guidance-toggle').uncheck();
   await page.locator('[data-preset=arjun]').click();
   await page.locator('.app-nav [data-view=caregiver]').click();check('caregiver controller lives on its own page',await page.locator('#view-caregiver #companion-sharing').isVisible()&&await page.locator('#view-current #companion-sharing').count()===0);
   await page.locator('.app-nav [data-view=spending]').click();check('spending controller lives on its own page',await page.locator('#view-spending #companion-fares').isVisible());
@@ -39,11 +41,11 @@ try {
   check('saving a route does not start a trip or add station bookmarks',(await active())===null&&await page.locator('.personal-list [data-place]').count()===0);
   check('add a place does not ask for coordinates',await page.locator('#place-add input[name=lat], #place-add input[name=lng]').count()===0);
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/saved-mobile.png'});
-  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();
   const first=await active();check('reopened route retains preferences in the canonical journey',first.plan.preferences.travelStyle==='arjun');
   check('technical trip detail is collapsed by default',!await page.locator('#trip-details').evaluate(el=>el.open));
   check('connection helper explains its purpose',!await page.locator('#rerouting-host').innerText().then(t=>t.includes('Check connections from a confirmed point')));
-  await page.locator('#manual-correction').click();check('position correction opens the relevant form',await page.locator('#checkpoint-step').isVisible());
+  await page.getByRole('button',{name:'Update my current step',exact:true}).click();check('position correction opens the relevant form',await page.locator('#checkpoint-step').isVisible());
   for(const tab of ['caregiver','spending','saved','preferences','current'])await page.locator(`.app-nav [data-view=${tab}]`).click();
   check('page navigation retains one trip identity and controller',(await active()).id===first.id&&await page.locator('#companion').count()===1);
   await page.locator('#journey-cancel').click();check('cancel requires a clear in-app choice',(await active()).status==='started'&&await page.locator('#confirm-journey-cancel').isVisible());
@@ -55,7 +57,7 @@ try {
   check('ended trip hides obsolete active tools',await page.locator('#journey-cancel').count()===0&&!await page.locator('#rerouting-host').isVisible()&&!await page.locator('#trip-peek').isVisible());
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/cancelled-mobile.png'});
   await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=current]').click();check('cancelled state survives reload',(await active()).status==='cancelled');
-  await plan();await page.locator('#review-route').click();await page.locator('#start-companion').click();check('a new trip can start after cancellation',(await active()).id!==first.id);
+  await plan();await page.locator('#review-route').click();check('a new trip can start after cancellation',(await active()).id!==first.id);
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/current-mobile.png'});
   await page.locator('#journey-finish').click();await page.locator('#retry-fare').click();
   check('completed fare action opens Spending',await page.locator('#view-spending').isVisible());

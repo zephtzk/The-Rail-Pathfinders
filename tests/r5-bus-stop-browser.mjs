@@ -31,13 +31,15 @@ try{
   const stopName=code=>bus.stops.find(stop=>codeOf(stop.id)===code)?.name;
   await page.clock.setFixedTime(new Date('2026-09-21T01:55:00Z'));
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
+  // The large-text geometry check deliberately includes the full-guidance current-trip peek.
+  await nav('preferences');await page.locator('#simple-guidance-toggle').uncheck();await nav('plan');
   check('unselected endpoints do not display bus stop details',await host('origin').isHidden()&&await host('destination').isHidden());
   await page.locator('#origin').fill('EW2');
   const trainGraphic=await page.locator('#origin-option-0 svg').innerHTML();
   check('rail suggestions retain the train icon',await page.locator('#origin-option-0 .icon-trip').count()===1);
   await page.locator('#origin').press('ArrowDown');await page.locator('#origin').press('Enter');
   await select('destination','EW12');await later();await search();
-  await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('#review-route').click();
   const accepted=await acceptedTrip();assert.ok(accepted,'fixture journey was accepted');await nav('plan');
 
   await page.locator('#origin').fill('59009');
@@ -85,7 +87,7 @@ try{
   await disclosure('origin').locator('summary').tap();await page.locator('#journey-sheet-handle').press('Home');await disclosure('origin').locator('summary').scrollIntoViewIfNeeded();
   await capture('bus-stop-expanded-mobile');
   await page.setViewportSize({width:320,height:844});await page.addStyleTag({content:'html{font-size:200%}'});
-  await page.waitForFunction(()=>getComputedStyle(document.querySelector('.app-nav')).gridTemplateColumns.split(' ').length===3);await page.locator('#journey-sheet-handle').press('Home');
+  await page.waitForFunction(()=>Math.abs(parseFloat(document.body.style.getPropertyValue('--nav-height'))-document.querySelector('.app-nav').getBoundingClientRect().height)<1);await page.locator('#journey-sheet-handle').press('Home');
   check('expanded stop directions fit at 320px and 200 percent text without horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)&&await disclosure('origin').evaluate(element=>element.scrollWidth<=element.clientWidth)&&await page.locator('#journey-panel-content').evaluate(element=>element.clientHeight>100));
   await disclosure('origin').locator('summary').scrollIntoViewIfNeeded();await capture('bus-stop-large-text');
   await disclosure('origin').locator('li').first().evaluate(element=>element.scrollIntoView({block:'start',inline:'nearest'}));

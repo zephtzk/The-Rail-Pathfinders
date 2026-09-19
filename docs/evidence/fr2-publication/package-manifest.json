@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "08493a74c12254ed1a6cdc4acce32a51d3ca7452",
+  "applicationSha256": "f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424112a4bc54670",
+  "workerSha256": "cfa66148e820fce55ec1b9c43cf78c7225a0ebfb7096479bbd399ba0e9e70296",
+  "archiveSha256": "249852fd118efb5520be8b5874dbb5517d6a58b2821093cc70403d6d406930f2",
+  "archiveBytes": 6411709,
+  "fileCount": 113,
+  "archive": "C:\\Users\\simho\\OneDrive\\Documents\\ChatGPT\\Neblala\\results\\fr2-release\\commute-copilot-fr2.tar.gz",
+  "validation": "All archive files match current built output; clean source HEAD matches pushed Sites source main."
+}

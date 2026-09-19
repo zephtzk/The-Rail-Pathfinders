@@ -66,7 +66,8 @@ try{
     check(`${label}: trains are solid in East West and Downtown service colors`,value.lines[1].color==='#189E4A'&&!value.lines[1].dash&&value.lines[3].color==='#0354A6'&&!value.lines[3].dash);
     check(`${label}: buses retain a distinct blue line and white center pattern`,value.lines[2].color==='#1A73E8'&&!value.lines[2].dash&&value.busDetails.length===1&&value.busDetails[0].color==='#FFFFFF'&&value.busDetails[0].dash==='7 12');
     check(`${label}: all route segments have casings and transfer stops are marked`,value.halos===5&&value.stops===4);
-    check(`${label}: map badges and legend identify the services and travel modes`,['EW','Bus 23A','DT'].every(label=>value.badges.includes(label))&&['Walking','EW','Bus','DT'].every(label=>value.legend.includes(label)));
+    check(`${label}: map badges and journey-panel key identify the services and travel modes`,['EW','Bus 23A','DT'].every(label=>value.badges.includes(label))&&['Walking','EW','Bus','DT'].every(label=>value.legend.includes(label)));
+    check(`${label}: route legend and details do not cover the map`,!await page.locator('#map-caption').isVisible()&&await page.locator('#map-caption').innerText()===''&&await page.locator('#journey-panel-content #route-map-details').count()===1);
     return value;
   }
   async function capture(name){
@@ -86,11 +87,13 @@ try{
   check('finding the mixed route leaves accepted guidance empty',await active()===null);
   const preview=await styles('preview');
   await page.locator('#journey-sheet-handle').press('End');
-  check('mobile legend fits the viewport without horizontal overflow',await page.locator('.map-route-legend').evaluate(legend=>{const box=legend.getBoundingClientRect();return box.left>=0&&box.right<=innerWidth&&document.documentElement.scrollWidth<=innerWidth;}));
+  check('mobile map stays clear with the route key collapsed in the journey panel',!await page.locator('.map-route-legend').isVisible()&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await capture('mixed-route-preview-mobile');
   await page.locator('#journey-sheet-handle').press('Escape');
-  await page.locator('#review-route').click();await page.locator('#start-companion').waitFor();
-  await page.locator('#start-companion').click();
+  await page.locator('#route-map-details > summary').click();
+  check('route key and source remain available in the journey panel',await page.locator('#route-map-details').innerText().then(text=>text.includes('OneMap')&&text.includes('indoor'))&&await page.locator('.map-route-legend').isVisible());
+  await page.locator('#route-map-details > summary').click();
+  await page.locator('#review-route').click();
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2'))?.status==='started');
   const accepted=await active();
   check('accepted route preserves all geometry with original step indices around waits',accepted.route.steps.length===8&&accepted.route.steps.filter(step=>step.type==='wait').length===3&&accepted.route.geometry.map(segment=>segment.stepIndex).join(',')==='0,2,4,6,7');

@@ -1,0 +1,63 @@
+{
+  "checks": [
+    "desktop: zoom targets are 44px with rounded outside corners and straight join",
+    "desktop: zoom and recenter do not overlap",
+    "desktop: keyboard zoom focus remains visible inside the group",
+    "desktop: rounded layer toggle retains unselected state",
+    "desktop: layer toggle retains selected state",
+    "desktop: retry keeps a rounded 44px target",
+    "desktop: station tab keeps selection and keyboard focus",
+    "desktop: actual bus popup actions have rounded 44px targets",
+    "desktop: popup action retains keyboard focus",
+    "desktop: popup destination action still selects the real stop",
+    "desktop: map canvas is not rounded",
+    "desktop: zoom limit remains disabled and visually distinct",
+    "mobile: zoom targets are 44px with rounded outside corners and straight join",
+    "mobile: zoom and recenter do not overlap",
+    "mobile: keyboard zoom focus remains visible inside the group",
+    "mobile: rounded layer toggle retains unselected state",
+    "mobile: layer toggle retains selected state",
+    "mobile: retry keeps a rounded 44px target",
+    "mobile: station tab keeps selection and keyboard focus",
+    "mobile: actual bus popup actions have rounded 44px targets",
+    "mobile: popup action retains keyboard focus",
+    "mobile: popup destination action still selects the real stop",
+    "mobile: map canvas is not rounded",
+    "mobile: zoom limit remains disabled and visually distinct",
+    "no browser runtime exceptions"
+  ],
+  "errors": [],
+  "measurements": [
+    {
+      "mode": "desktop",
+      "zoom": [
+        {
+          "width": 44,
+          "height": 44,
+          "radius": "14px 14px 0px 0px"
+        },
+        {
+          "width": 44,
+          "height": 44,
+          "radius": "0px 0px 14px 14px"
+        }
+      ]
+    },
+    {
+      "mode": "mobile",
+      "zoom": [
+        {
+          "width": 44,
+          "height": 44,
+          "radius": "14px 14px 0px 0px"
+        },
+        {
+          "width": 44,
+          "height": 44,
+          "radius": "0px 0px 14px 14px"
+        }
+      ]
+    }
+  ],
+  "environment": "Headless Edge desktop and mobile touch emulation; real packaged bus stops; blocked map tiles for deliberate fallback; no physical device or live data claim"
+}

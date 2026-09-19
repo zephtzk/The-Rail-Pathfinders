@@ -1,5 +1,6 @@
 import {COVERAGE_REGISTRY,FIXTURE_LAYOUT,FACILITY_SCENARIOS,stationLayout,fixtureStatuses} from './facility-data.js';
 import {findFacilityPath,pathInstructions,mapMaintenanceNotices,compareFacilityPaths,facilityStatus} from './facility-engine.js';
+import {getAppLocation,locationDescription} from './location-assistance.js';
 import {rankToilets,previewToiletDetour,detourStillFeasible} from './toilet-engine.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const mins=s=>s==null?'unknown':`${Math.round(s/6)/10} min`;
@@ -11,6 +12,8 @@ export function mountFacilities({host,getJourney=()=>null,onAcceptDetour=()=>{},
   if(!host)throw Error('A station-layout host is required.');
   if(!document.querySelector('link[data-facility-css]')){const style=document.createElement('link');style.rel='stylesheet';style.href='/src/facility.css';style.dataset.facilityCss='true';document.head.append(style);}
   host.classList.add('facility-panel');
+  const locationService=getAppLocation();
+  const locationNote=()=>{const state=locationService.getState();return state.usable?locationDescription(state.position,state):'Indoor location needs a signposted checkpoint; use the station selector and ask staff when uncertain.';};
   let layout=stationLayout('bugis'),floor='B2',manual=null,scenario='none',view='layout',preview=null,message='',feed=null,pending=false,zoom=1,breakMinutes=5,walkingProfile=true,needSeated=false,needRails=false,lastComparison=null,lastRenderJourney=null;
   try{const saved=JSON.parse(localStorage.getItem(FEED_KEY));if(saved?.schemaVersion===1&&Array.isArray(saved.records))feed={...saved,status:'unavailable',stale:true,error:'saved_snapshot'};}catch{}
   function journey(){return getJourney();}
@@ -26,12 +29,11 @@ export function mountFacilities({host,getJourney=()=>null,onAcceptDetour=()=>{},
     const j=journey(),cp=checkpoint(),options=config(),status=states(),path=layout.nodes.length?findFacilityPath(layout,{...options,to:layout.defaultTo}):null,results=rankToilets(layout,options),stop=activeStop();
     const selectedPath=preview?.outbound??(stop?.status==='accepted'?stop.outbound:['returning','resumed'].includes(stop?.status)?stop.returnPath:path);
     const assessment=stop&&['accepted','reached','returning'].includes(stop.status)?assessStop(stop,options):null;
-    const approximate=j?.location;
     host.innerHTML=`<header class="facility-heading"><div><p class="facility-kicker">STATION GUIDANCE</p><h2>Station layout & toilets</h2></div></header>
     <p>Confirm a platform, gate or exit to prepare guidance. An approximate GPS position cannot identify an underground floor or a lift.</p>
     <div class="facility-controls"><label>Station<select data-field="station">${COVERAGE_REGISTRY.stations.map(s=>`<option value="${s.id}" ${s.id===layout.id?'selected':''}>${esc(s.name)} · incomplete coverage</option>`).join('')}<option value="fixture-interchange" ${layout.fixture?'selected':''}>Training interchange · fictional</option></select></label><label>Travel profile<select data-field="profile"><option value="step-free" ${walkingProfile?'selected':''}>Step-free; wheelchair toilet</option><option value="walking" ${!walkingProfile?'selected':''}>Stairs and escalators acceptable</option></select></label></div>
     <p class="facility-notice wip-banner ${layout.fixture?'fixture':''}"><strong>${layout.fixture?'TRAINING FIXTURE · not real station directions':'Work in progress — station coverage'}</strong> ${esc(layout.warning??COVERAGE_REGISTRY.limitation)}</p>
-    <p class="facility-position"><strong>${cp?'Last manually confirmed checkpoint: '+esc(cp.label??cp.nodeId):'Indoor position unknown'}</strong>${cp?.confirmedAt?' · '+esc(when(cp.confirmedAt)):''}. ${approximate?'Approximate browser position, ±'+Math.round(approximate.accuracy)+' m, '+esc(when(approximate.timestamp))+'. Floor remains unconfirmed.':'Location permission is optional; manual station selection remains available.'}</p>
+    <p class="facility-position"><strong>${cp?'Last manually confirmed checkpoint: '+esc(cp.label??cp.nodeId):'Indoor position unknown'}</strong>${cp?.confirmedAt?' · '+esc(when(cp.confirmedAt)):''}. <span data-facility-location>${esc(locationNote())}</span></p>
     <p class="facility-message" role="status" aria-live="polite">${esc(message)}</p>
     ${lastComparison?`<details class="facility-change" open><summary>Original and revised station paths</summary><p>${esc(lastComparison.message)} ${lastComparison.addedSeconds!=null?'Arrival change '+mins(lastComparison.addedSeconds)+'; walking change '+mins(lastComparison.addedWalkingSeconds)+'.':''} Fare: check gate re-entry against the current trip rules.</p><h4>Original path · before injected condition</h4><ol>${pathInstructions(layout,lastComparison.original).map(t=>`<li>${esc(t)}</li>`).join('')}</ol><h4>Revised supported path</h4><ol>${pathInstructions(layout,lastComparison.revised).map(t=>`<li>${esc(t)}</li>`).join('')}</ol><p>An accepted toilet route changes only after you review and accept another stop.</p></details>`:''}
     ${layout.fixture?`<details ${scenario!=='none'?'open':''}><summary>Labelled incident rehearsal</summary><p>These are authored test incidents, including escalator outages. No live escalator feed or future maintenance dates are available.</p><button data-action="start-fixture" class="secondary">Prepare training journey</button><label>Injected condition<select data-field="scenario">${FACILITY_SCENARIOS.map(s=>`<option value="${s.id}" ${scenario===s.id?'selected':''}>${esc(s.label)}</option>`).join('')}</select></label>${scenario==='ambiguous'?'<p>Unresolved training notice: lift ID missing; description matches no reviewed mapping. No arbitrary lift is selected.</p>':''}</details>`:''}
@@ -96,5 +98,6 @@ export function mountFacilities({host,getJourney=()=>null,onAcceptDetour=()=>{},
   const networkChange=()=>{preview=null;render();};window.addEventListener('online',networkChange);window.addEventListener('offline',networkChange);
   function syncJourney(){const j=journey();if(j?.id!==lastRenderJourney){lastRenderJourney=j?.id;walkingProfile=j?.plan?.preferences?.stepFree!==false;const id=j?.progress?.checkpoint?.stationId??j?.detour?.stationId??j?.plan?.origin?.stationId;if(id&&stationLayout(id))setLayout(id);}if(j?.facilityScenario&&FACILITY_SCENARIOS.some(s=>s.id===j.facilityScenario))scenario=j.facilityScenario;}
   syncJourney();render();
-  return {refresh(){syncJourney();render();},open(id,mode='layout'){if(id&&stationLayout(id))setLayout(id);view=mode;syncJourney();render();host.scrollIntoView({block:'start'});host.querySelector('h2')?.setAttribute('tabindex','-1');host.querySelector('h2')?.focus();},destroy(){window.removeEventListener('online',networkChange);window.removeEventListener('offline',networkChange);onMarkers([]);}};
+  const unsubscribeLocation=locationService.subscribe(()=>{const note=host.querySelector('[data-facility-location]');if(note)note.textContent=locationNote();});
+  return {refresh(){syncJourney();render();},open(id,mode='layout'){if(id&&stationLayout(id))setLayout(id);view=mode;syncJourney();render();host.scrollIntoView({block:'start'});host.querySelector('h2')?.setAttribute('tabindex','-1');host.querySelector('h2')?.focus();},destroy(){unsubscribeLocation();window.removeEventListener('online',networkChange);window.removeEventListener('offline',networkChange);onMarkers([]);}};
 }

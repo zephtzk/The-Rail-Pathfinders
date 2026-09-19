@@ -1,0 +1,37 @@
+PASS one unified navigation and map
+PASS Leave now is default with no invented deadline
+PASS mobile viewport has no horizontal overflow
+PASS unknown address is unresolved
+PASS keyboard suggestion selects stable rail codes
+PASS selected bus stop details include terminal direction and code
+PASS scroll picker preserves the selected civil time
+PASS real imported route comparison renders
+PASS Save Route stores reusable pair without starting trip
+PASS reopen preserves mode with freshly calculated departure date
+PASS duplicate Save Route names recover with separate templates
+PASS travel style persists on reload
+PASS route sheet scrolls without covering fixed map
+PASS selected route waits for explicit Start without a second review or consent gate
+PASS direct Start reuses the one startup location session
+PASS Start Journey creates canonical trip with preferences
+PASS caregiver sharing remains off while app-level location assistance is enabled
+PASS navigation preserves one journey, controller and map
+PASS current action remains reachable when leaving trip
+PASS preference edit leaves accepted route untouched
+PASS planner supports endpoints beyond demo corridor
+PASS swap invalidates old preview
+PASS new arrival-deadline option cannot replace an active journey
+PASS saved arrival date and clock survive reopening
+PASS arrive-by is explicitly deadline filtering
+PASS pause preserves same journey
+PASS reload retains accepted journey
+PASS offline reload retains canonical journey
+PASS two reconnects do not duplicate journey or completion
+PASS explicit completion ends same journey once
+PASS fictional incidents use a separate labelled rehearsal
+PASS demo incident retains accepted route until reviewed
+PASS reviewed reroute retains one canonical journey and accepted revision
+PASS rail compatibility URL uses unified planner
+PASS multimodal compatibility URL uses unified planner
+PASS 320px and large text remain within viewport
+PASS no browser runtime errors

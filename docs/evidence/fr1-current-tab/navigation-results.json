@@ -1,0 +1,1006 @@
+{
+  "checks": [
+    "application navigation: all destinations are direct buttons",
+    "application navigation desktop: Current trip centered and larger",
+    "application navigation desktop: every label and touch target visible without horizontal scrolling",
+    "application navigation desktop: tabs occupy separate areas with at least 6px spacing",
+    "application navigation desktop: one selected destination and focused heading",
+    "application navigation 390: Current trip centered and larger",
+    "application navigation 390: every label and touch target visible without horizontal scrolling",
+    "application navigation 390: tabs occupy separate areas with at least 6px spacing",
+    "application navigation 390: one selected destination and focused heading",
+    "application navigation 320: Current trip centered and larger",
+    "application navigation 320: every label and touch target visible without horizontal scrolling",
+    "application navigation 320: tabs occupy separate areas with at least 6px spacing",
+    "application navigation 320: one selected destination and focused heading",
+    "application navigation 320-large: Current trip centered and larger",
+    "application navigation 320-large: every label and touch target visible without horizontal scrolling",
+    "application navigation 320-large: tabs occupy separate areas with at least 6px spacing",
+    "application navigation 320-large: one selected destination and focused heading",
+    "application navigation 390-large: Current trip centered and larger",
+    "application navigation 390-large: every label and touch target visible without horizontal scrolling",
+    "application navigation 390-large: tabs occupy separate areas with at least 6px spacing",
+    "application navigation 390-large: one selected destination and focused heading",
+    "application navigation 390-setting: Current trip centered and larger",
+    "application navigation 390-setting: every label and touch target visible without horizontal scrolling",
+    "application navigation 390-setting: tabs occupy separate areas with at least 6px spacing",
+    "application navigation 390-setting: one selected destination and focused heading",
+    "application navigation landscape: Current trip centered and larger",
+    "application navigation landscape: every label and touch target visible without horizontal scrolling",
+    "application navigation landscape: tabs occupy separate areas with at least 6px spacing",
+    "application navigation landscape: one selected destination and focused heading",
+    "application navigation: plan navigation and selection work",
+    "application navigation: current navigation and selection work",
+    "application navigation: saved navigation and selection work",
+    "application navigation: caregiver navigation and selection work",
+    "application navigation: spending navigation and selection work",
+    "application navigation: preferences navigation and selection work",
+    "application navigation: staff navigation and selection work",
+    "application navigation: keyboard order reaches Current trip with a visible focus ring",
+    "application navigation: keyboard activation opens Current trip",
+    "application navigation: desktop toast clears the taller navigation",
+    "application navigation: bottom and asymmetric side safe areas are retained",
+    "eight-destination layout: all destinations are direct buttons",
+    "eight-destination layout desktop: Current trip centered and larger",
+    "eight-destination layout desktop: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout desktop: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout desktop: one selected destination and focused heading",
+    "eight-destination layout 390: Current trip centered and larger",
+    "eight-destination layout 390: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout 390: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout 390: one selected destination and focused heading",
+    "eight-destination layout 320: Current trip centered and larger",
+    "eight-destination layout 320: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout 320: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout 320: one selected destination and focused heading",
+    "eight-destination layout 320-large: Current trip centered and larger",
+    "eight-destination layout 320-large: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout 320-large: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout 320-large: one selected destination and focused heading",
+    "eight-destination layout 390-large: Current trip centered and larger",
+    "eight-destination layout 390-large: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout 390-large: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout 390-large: one selected destination and focused heading",
+    "eight-destination layout 390-setting: Current trip centered and larger",
+    "eight-destination layout 390-setting: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout 390-setting: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout 390-setting: one selected destination and focused heading",
+    "eight-destination layout landscape: Current trip centered and larger",
+    "eight-destination layout landscape: every label and touch target visible without horizontal scrolling",
+    "eight-destination layout landscape: tabs occupy separate areas with at least 6px spacing",
+    "eight-destination layout landscape: one selected destination and focused heading",
+    "eight-destination layout: plan navigation and selection work",
+    "eight-destination layout: current navigation and selection work",
+    "eight-destination layout: saved navigation and selection work",
+    "eight-destination layout: caregiver navigation and selection work",
+    "eight-destination layout: spending navigation and selection work",
+    "eight-destination layout: preferences navigation and selection work",
+    "eight-destination layout: staff navigation and selection work",
+    "eight-destination layout: keyboard order reaches Current trip with a visible focus ring",
+    "eight-destination layout: keyboard activation opens Current trip",
+    "eight-destination layout: desktop toast clears the taller navigation",
+    "eight-destination layout: bottom and asymmetric side safe areas are retained",
+    "no browser runtime errors"
+  ],
+  "errors": [],
+  "measurements": [
+    {
+      "case": "application navigation desktop",
+      "width": 1440,
+      "height": 960,
+      "navHeight": 165.4375,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3002667344087386,
+      "heightRatio": 1.2796632465140751,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 123.015625,
+          "height": 59.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 159.953125,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 123.03125,
+          "height": 59.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 101,
+          "height": 58.4375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 101,
+          "height": 58.4375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 101,
+          "height": 58.4375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 101,
+          "height": 58.4375,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation 390",
+      "width": 390,
+      "height": 844,
+      "navHeight": 162,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.3477417567193128,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 89,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 89,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 89,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 89,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation 320",
+      "width": 320,
+      "height": 844,
+      "navHeight": 224,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3000895255147717,
+      "heightRatio": 1.3477417567193128,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 87.265625,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 113.453125,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 87.28125,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 97.328125,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 97.34375,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 97.328125,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 304,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation 320-large",
+      "width": 320,
+      "height": 900,
+      "navHeight": 253.9375,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3000895255147717,
+      "heightRatio": 1.5563893180313397,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 87.265625,
+          "height": 70.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 113.453125,
+          "height": 110.1875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 87.28125,
+          "height": 99.59375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 149,
+          "height": 65.75,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 149,
+          "height": 65.75,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation 390-large",
+      "width": 390,
+      "height": 844,
+      "navHeight": 232.1875,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.5563893180313397,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 70.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 110.1875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 99.59375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 120.65625,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 120.671875,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 120.671875,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 374,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation 390-setting",
+      "width": 390,
+      "height": 844,
+      "navHeight": 188.265625,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.3247730220492866,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 79.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 89,
+          "height": 78.46875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 89,
+          "height": 78.46875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 89,
+          "height": 78.46875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 89,
+          "height": 78.46875,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "application navigation landscape",
+      "width": 640,
+      "height": 360,
+      "navHeight": 134,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.300059367314053,
+      "heightRatio": 1.3636363636363635,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 184.234375,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 239.515625,
+          "height": 60,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 184.25,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 151.5,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 151.5,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 151.5,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 151.5,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout desktop",
+      "width": 1440,
+      "height": 960,
+      "navHeight": 178.875,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3002667344087386,
+      "heightRatio": 1.2796632465140751,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 123.015625,
+          "height": 59.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 159.953125,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 123.03125,
+          "height": 59.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 79.59375,
+          "height": 71.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 79.609375,
+          "height": 71.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 79.59375,
+          "height": 71.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 79.609375,
+          "height": 71.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 79.59375,
+          "height": 71.875,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout 390",
+      "width": 390,
+      "height": 844,
+      "navHeight": 174.875,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.3477417567193128,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 70,
+          "height": 68.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 70,
+          "height": 68.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 70,
+          "height": 68.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 70,
+          "height": 68.875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 70,
+          "height": 68.875,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout 320",
+      "width": 320,
+      "height": 844,
+      "navHeight": 224,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3000895255147717,
+      "heightRatio": 1.3477417567193128,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 87.265625,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 113.453125,
+          "height": 76,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 87.28125,
+          "height": 56.390625,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 97.328125,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 97.34375,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 97.328125,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 149,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 149,
+          "height": 56,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout 320-large",
+      "width": 320,
+      "height": 900,
+      "navHeight": 282.1875,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.3000895255147717,
+      "heightRatio": 1.5563893180313397,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 87.265625,
+          "height": 70.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 113.453125,
+          "height": 110.1875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 87.28125,
+          "height": 99.59375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 149,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 304,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout 390-large",
+      "width": 390,
+      "height": 844,
+      "navHeight": 232.1875,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.5563893180313397,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 70.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 110.1875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 99.59375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 120.65625,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 120.671875,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 120.671875,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 184,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 184,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout 390-setting",
+      "width": 390,
+      "height": 844,
+      "navHeight": 236.265625,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.2998703730375918,
+      "heightRatio": 1.3247730220492866,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 108.484375,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 141.015625,
+          "height": 79.796875,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 108.5,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 89,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 89,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 89,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 89,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 374,
+          "height": 60.234375,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    },
+    {
+      "case": "eight-destination layout landscape",
+      "width": 640,
+      "height": 360,
+      "navHeight": 134,
+      "centerDelta": 0.0078125,
+      "widthRatio": 1.300059367314053,
+      "heightRatio": 1.3636363636363635,
+      "noOverflow": true,
+      "separated": true,
+      "buttons": [
+        {
+          "id": "plan",
+          "width": 184.234375,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "current",
+          "width": 239.515625,
+          "height": 60,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "saved",
+          "width": 184.25,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "facilities",
+          "width": 120,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "caregiver",
+          "width": 120,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "spending",
+          "width": 120,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "preferences",
+          "width": 120,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        },
+        {
+          "id": "staff",
+          "width": 120,
+          "height": 44,
+          "visible": true,
+          "labelFits": true
+        }
+      ]
+    }
+  ],
+  "environment": "Desktop Edge, touch/mobile emulation. Eighth destination is a navigation-only Facilities fixture; no Facilities content is included or tested. No physical-device claim."
+}

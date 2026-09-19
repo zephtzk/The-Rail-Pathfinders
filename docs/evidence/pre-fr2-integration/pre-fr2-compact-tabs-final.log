@@ -1,0 +1,156 @@
+PASS 390 plan: eight readable direct touch targets fit
+PASS 390 plan: Current trip remains centered and larger
+PASS 390 plan: every tab has a border and 6px separation
+PASS 390 plan: content starts unscrolled above the dock
+PASS 390 plan: smaller dock recovers real panel space
+PASS 390 plan: compact total dock height
+PASS 390 plan: default content visibility improves or already fits fully
+PASS 390 plan: key default content is fully readable
+PASS 390 current: eight readable direct touch targets fit
+PASS 390 current: Current trip remains centered and larger
+PASS 390 current: every tab has a border and 6px separation
+PASS 390 current: content starts unscrolled above the dock
+PASS 390 current: smaller dock recovers real panel space
+PASS 390 current: compact total dock height
+PASS 390 current: default content visibility improves or already fits fully
+PASS 390 current: key default content is fully readable
+PASS 390 facilities: eight readable direct touch targets fit
+PASS 390 facilities: Current trip remains centered and larger
+PASS 390 facilities: every tab has a border and 6px separation
+PASS 390 facilities: content starts unscrolled above the dock
+PASS 390 facilities: smaller dock recovers real panel space
+PASS 390 facilities: compact total dock height
+PASS 390 facilities: default content visibility improves or already fits fully
+PASS 390 facilities: key default content is fully readable
+PASS 320 plan: eight readable direct touch targets fit
+PASS 320 plan: Current trip remains centered and larger
+PASS 320 plan: every tab has a border and 6px separation
+PASS 320 plan: content starts unscrolled above the dock
+PASS 320 plan: smaller dock recovers real panel space
+PASS 320 plan: compact total dock height
+PASS 320 plan: default content visibility improves or already fits fully
+PASS 320 plan: key default content is fully readable
+PASS 320 current: eight readable direct touch targets fit
+PASS 320 current: Current trip remains centered and larger
+PASS 320 current: every tab has a border and 6px separation
+PASS 320 current: content starts unscrolled above the dock
+PASS 320 current: smaller dock recovers real panel space
+PASS 320 current: compact total dock height
+PASS 320 current: default content visibility improves or already fits fully
+PASS 320 current: key default content is fully readable
+PASS 320 facilities: eight readable direct touch targets fit
+PASS 320 facilities: Current trip remains centered and larger
+PASS 320 facilities: every tab has a border and 6px separation
+PASS 320 facilities: content starts unscrolled above the dock
+PASS 320 facilities: smaller dock recovers real panel space
+PASS 320 facilities: compact total dock height
+PASS 320 facilities: default content visibility improves or already fits fully
+PASS 320 facilities: key default content is fully readable
+PASS desktop plan: eight readable direct touch targets fit
+PASS desktop plan: Current trip remains centered and larger
+PASS desktop plan: every tab has a border and 6px separation
+PASS desktop plan: content starts unscrolled above the dock
+PASS desktop plan: smaller dock recovers real panel space
+PASS desktop plan: compact total dock height
+PASS desktop plan: default content visibility improves or already fits fully
+PASS desktop current: eight readable direct touch targets fit
+PASS desktop current: Current trip remains centered and larger
+PASS desktop current: every tab has a border and 6px separation
+PASS desktop current: content starts unscrolled above the dock
+PASS desktop current: smaller dock recovers real panel space
+PASS desktop current: compact total dock height
+PASS desktop current: default content visibility improves or already fits fully
+PASS desktop facilities: eight readable direct touch targets fit
+PASS desktop facilities: Current trip remains centered and larger
+PASS desktop facilities: every tab has a border and 6px separation
+PASS desktop facilities: content starts unscrolled above the dock
+PASS desktop facilities: smaller dock recovers real panel space
+PASS desktop facilities: compact total dock height
+PASS desktop facilities: default content visibility improves or already fits fully
+PASS 320-large plan: eight readable direct touch targets fit
+PASS 320-large plan: Current trip remains centered and larger
+PASS 320-large plan: every tab has a border and 6px separation
+PASS 320-large plan: content starts unscrolled above the dock
+PASS 320-large plan: smaller dock recovers real panel space
+PASS 320-large current: eight readable direct touch targets fit
+PASS 320-large current: Current trip remains centered and larger
+PASS 320-large current: every tab has a border and 6px separation
+PASS 320-large current: content starts unscrolled above the dock
+PASS 320-large current: smaller dock recovers real panel space
+PASS 320-large facilities: eight readable direct touch targets fit
+PASS 320-large facilities: Current trip remains centered and larger
+PASS 320-large facilities: every tab has a border and 6px separation
+PASS 320-large facilities: content starts unscrolled above the dock
+PASS 320-large facilities: smaller dock recovers real panel space
+PASS 390-large plan: eight readable direct touch targets fit
+PASS 390-large plan: Current trip remains centered and larger
+PASS 390-large plan: every tab has a border and 6px separation
+PASS 390-large plan: content starts unscrolled above the dock
+PASS 390-large plan: smaller dock recovers real panel space
+PASS 390-large current: eight readable direct touch targets fit
+PASS 390-large current: Current trip remains centered and larger
+PASS 390-large current: every tab has a border and 6px separation
+PASS 390-large current: content starts unscrolled above the dock
+PASS 390-large current: smaller dock recovers real panel space
+PASS 390-large facilities: eight readable direct touch targets fit
+PASS 390-large facilities: Current trip remains centered and larger
+PASS 390-large facilities: every tab has a border and 6px separation
+PASS 390-large facilities: content starts unscrolled above the dock
+PASS 390-large facilities: smaller dock recovers real panel space
+PASS large-setting plan: eight readable direct touch targets fit
+PASS large-setting plan: Current trip remains centered and larger
+PASS large-setting plan: every tab has a border and 6px separation
+PASS large-setting plan: content starts unscrolled above the dock
+PASS large-setting plan: smaller dock recovers real panel space
+PASS large-setting current: eight readable direct touch targets fit
+PASS large-setting current: Current trip remains centered and larger
+PASS large-setting current: every tab has a border and 6px separation
+PASS large-setting current: content starts unscrolled above the dock
+PASS large-setting current: smaller dock recovers real panel space
+PASS large-setting facilities: eight readable direct touch targets fit
+PASS large-setting facilities: Current trip remains centered and larger
+PASS large-setting facilities: every tab has a border and 6px separation
+PASS large-setting facilities: content starts unscrolled above the dock
+PASS large-setting facilities: smaller dock recovers real panel space
+PASS landscape plan: eight readable direct touch targets fit
+PASS landscape plan: Current trip remains centered and larger
+PASS landscape plan: every tab has a border and 6px separation
+PASS landscape plan: content starts unscrolled above the dock
+PASS landscape plan: smaller dock recovers real panel space
+PASS landscape plan: compact total dock height
+PASS landscape current: eight readable direct touch targets fit
+PASS landscape current: Current trip remains centered and larger
+PASS landscape current: every tab has a border and 6px separation
+PASS landscape current: content starts unscrolled above the dock
+PASS landscape current: smaller dock recovers real panel space
+PASS landscape current: compact total dock height
+PASS landscape facilities: eight readable direct touch targets fit
+PASS landscape facilities: Current trip remains centered and larger
+PASS landscape facilities: every tab has a border and 6px separation
+PASS landscape facilities: content starts unscrolled above the dock
+PASS landscape facilities: smaller dock recovers real panel space
+PASS landscape facilities: compact total dock height
+PASS landscape-large plan: eight readable direct touch targets fit
+PASS landscape-large plan: Current trip remains centered and larger
+PASS landscape-large plan: every tab has a border and 6px separation
+PASS landscape-large plan: content starts unscrolled above the dock
+PASS landscape-large plan: smaller dock recovers real panel space
+PASS landscape-large current: eight readable direct touch targets fit
+PASS landscape-large current: Current trip remains centered and larger
+PASS landscape-large current: every tab has a border and 6px separation
+PASS landscape-large current: content starts unscrolled above the dock
+PASS landscape-large current: smaller dock recovers real panel space
+PASS landscape-large facilities: eight readable direct touch targets fit
+PASS landscape-large facilities: Current trip remains centered and larger
+PASS landscape-large facilities: every tab has a border and 6px separation
+PASS landscape-large facilities: content starts unscrolled above the dock
+PASS landscape-large facilities: smaller dock recovers real panel space
+PASS plan: navigation activates one destination and focuses its heading
+PASS current: navigation activates one destination and focuses its heading
+PASS saved: navigation activates one destination and focuses its heading
+PASS facilities: navigation activates one destination and focuses its heading
+PASS caregiver: navigation activates one destination and focuses its heading
+PASS spending: navigation activates one destination and focuses its heading
+PASS preferences: navigation activates one destination and focuses its heading
+PASS staff: navigation activates one destination and focuses its heading
+PASS no browser runtime errors

@@ -1,0 +1,57 @@
+{
+  "build": {
+    "schemaVersion": 1,
+    "applicationSha256": "63f1f35511a1967ef4d85ba31bd0d414586f811aa6e46eb9ffb6db527477ceac",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "stage": "Refinement after FR1 and before FR2 tester sessions",
+  "suites": {
+    "location": {
+      "checks": 50,
+      "errors": []
+    },
+    "facilities": {
+      "checks": 46,
+      "errors": []
+    },
+    "privacy": {
+      "checks": 8,
+      "errors": []
+    },
+    "offline": {
+      "checks": 13,
+      "errors": []
+    },
+    "legacy": {
+      "checks": 12,
+      "errors": []
+    },
+    "currentStep": {
+      "checks": 80,
+      "errors": []
+    },
+    "fr1Integration": {
+      "checks": 18,
+      "errors": []
+    }
+  },
+  "limitations": [
+    "Desktop Edge with browser-controlled positions, mocked GPS and mobile/touch/320px/200% text emulation; no physical-phone or real-travel evidence.",
+    "No live provider location, routes, caregiver delivery or credentials were used to establish location correctness.",
+    "Screenshots include blocked street-map tiles; location overlays and manual recovery remain usable.",
+    "Historical R2 suite stops at obsolete inline bus-direction expectation after five checks; R5 uses the selected-stop disclosure.",
+    "Broad R5 run incomplete: address-route sharing invitation timed out; product, arrivals and guidance sections passed before it. Parent will run combined regressions."
+  ],
+  "unitChecks": {
+    "javascript": 454,
+    "python": 44,
+    "passed": true
+  },
+  "additionalBrowserChecks": {
+    "sharingPrivacy": 8,
+    "currentTrip": 8,
+    "indoorFacilities": "passed"
+  }
+}

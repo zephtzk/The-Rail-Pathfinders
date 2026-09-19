@@ -1,0 +1,114 @@
+{
+  "phase": "FR1 refinements before FR2",
+  "applicationSha256": "f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424112a4bc54670",
+  "preview": "http://localhost:4227/",
+  "javascriptTests": 454,
+  "pythonTests": 44,
+  "builtAssets": 102,
+  "browserChecks": 1046,
+  "previewSmokeChecks": 5,
+  "suites": [
+    {
+      "suite": "pre-fr2-compact-tabs-final",
+      "passed": 156,
+      "log": "pre-fr2-compact-tabs-final.log"
+    },
+    {
+      "suite": "pre-fr2-staff-tick",
+      "passed": 50,
+      "log": "pre-fr2-staff-tick.log"
+    },
+    {
+      "suite": "pre-fr2-start-journey-final",
+      "passed": 29,
+      "log": "pre-fr2-start-journey-final.log"
+    },
+    {
+      "suite": "pre-fr2-start-contrast",
+      "passed": 85,
+      "log": "pre-fr2-start-contrast.log"
+    },
+    {
+      "suite": "fr1-current-step",
+      "passed": 80,
+      "log": "fr1-current-step.log"
+    },
+    {
+      "suite": "fr1-current-tab",
+      "passed": 81,
+      "log": "fr1-current-tab.log"
+    },
+    {
+      "suite": "fr1-integration-final",
+      "passed": 18,
+      "log": "fr1-integration-final.log"
+    },
+    {
+      "suite": "r2",
+      "passed": 37,
+      "log": "r2.log"
+    },
+    {
+      "suite": "r3",
+      "passed": 36,
+      "log": "r3.log"
+    },
+    {
+      "suite": "route-map",
+      "passed": 28,
+      "log": "route-map.log"
+    },
+    {
+      "suite": "train-service-colours",
+      "passed": 20,
+      "log": "train-service-colours.log"
+    },
+    {
+      "suite": "r4-browser",
+      "passed": 117,
+      "log": "r4-browser.log"
+    },
+    {
+      "suite": "r5-browser",
+      "passed": 164,
+      "log": "r5-browser.log"
+    },
+    {
+      "suite": "pre-fr2-location-browser",
+      "passed": 50,
+      "log": "pre-fr2-location-browser.log"
+    },
+    {
+      "suite": "nearby-facilities-browser",
+      "passed": 46,
+      "log": "nearby-facilities-browser.log"
+    },
+    {
+      "suite": "location-privacy-browser",
+      "passed": 8,
+      "log": "location-privacy-browser.log"
+    },
+    {
+      "suite": "location-offline-browser",
+      "passed": 13,
+      "log": "location-offline-browser.log"
+    },
+    {
+      "suite": "location-legacy-controls-browser",
+      "passed": 12,
+      "log": "location-legacy-controls-browser.log"
+    },
+    {
+      "suite": "r3-current-trip-browser",
+      "passed": 8,
+      "log": "r3-current-trip-browser.log"
+    },
+    {
+      "suite": "sharing-privacy-browser",
+      "passed": 8,
+      "log": "sharing-privacy-browser.log"
+    }
+  ],
+  "validationScope": "Combined branch: full unit/import/build check; broad browser matrix followed by affected-suite reruns after final compact location copy and endpoint focus fix. Desktop Edge mobile/touch, 200% text and safe-area emulation; controlled geolocation/provider fixtures, real packaged timetable/directory. No physical-phone or FR2 tester session.",
+  "publication": "Local only. No push, PR or deployment."
+}

@@ -28,11 +28,32 @@ test('one accepted resolver keeps exact canonical phase and excludes route previ
   assert.equal(journeyCard(s,{name,now:99999999999}).current,e.current);assert.equal(e.primaryAction,'checkpoint');
 });
 test('staff context prefers public endpoint identity over a saved private nickname',()=>{const s=state();s.plan.destination.label='Private saved nickname';assert.equal(resolveCurrentExecution(s,{name}).destination,'Promenade (CC4)');assert.doesNotMatch(staffCardForExecution(resolveCurrentExecution(s,{name})).context,/Private/);});
-test('presentation setting persists independently and never replaces travel/accepted state',()=>{
+test('missing, invalid and unavailable presentation preferences default to simple without writing storage',()=>{
+  const store=storage(),settings=createPresentationPreferences(store);
+  for(const raw of [null,'','{broken','null','false','[]','{}',JSON.stringify({schemaVersion:2,simpleGuidance:false}),JSON.stringify({schemaVersion:1}),JSON.stringify({schemaVersion:1,simpleGuidance:'false'})]){
+    if(raw===null)store.removeItem(PRESENTATION_KEY);else store.setItem(PRESENTATION_KEY,raw);
+    assert.deepEqual(settings.read(),{schemaVersion:1,simpleGuidance:true},String(raw));
+    assert.equal(store.getItem(PRESENTATION_KEY),raw,'reading must not overwrite stored data');
+  }
+  assert.equal(createPresentationPreferences().read().simpleGuidance,true);
+  assert.equal(createPresentationPreferences({getItem(){throw Error();}}).read().simpleGuidance,true);
+});
+test('both explicit presentation choices persist independently and never replace travel/accepted state',()=>{
   const store=storage();store.setItem('commute-copilot-journey-v2',JSON.stringify(state()));store.setItem('preferences','unchanged');const before=store.getItem('commute-copilot-journey-v2');
-  const settings=createPresentationPreferences(store);assert.equal(settings.read().simpleGuidance,false);assert.equal(settings.setSimple(true).ok,true);assert.equal(createPresentationPreferences(store).read().simpleGuidance,true);assert.equal(store.getItem('preferences'),'unchanged');assert.equal(store.getItem('commute-copilot-journey-v2'),before);
-  assert.equal(settings.setSimple('false').ok,false);assert.equal(settings.setSimple(false).ok,true);assert.equal(reducedGuidanceMotion(settings.read(),{systemReducedMotion:true}),true);assert.equal(reducedGuidanceMotion({simpleGuidance:true}),true);
-  store.setItem(PRESENTATION_KEY,'{broken');assert.equal(settings.read().simpleGuidance,false);assert.equal(createPresentationPreferences({getItem(){throw Error()},setItem(){throw Error()}}).setSimple(true).ok,false);
+  const settings=createPresentationPreferences(store);assert.equal(settings.read().simpleGuidance,true);
+  for(const value of [false,true,false]){
+    assert.equal(settings.setSimple(value).ok,true);assert.equal(createPresentationPreferences(store).read().simpleGuidance,value);
+    assert.equal(store.getItem('preferences'),'unchanged');assert.equal(store.getItem('commute-copilot-journey-v2'),before);
+  }
+  const saved=store.getItem(PRESENTATION_KEY);assert.equal(settings.setSimple('false').ok,false);assert.equal(store.getItem(PRESENTATION_KEY),saved);
+  assert.equal(reducedGuidanceMotion(settings.read()),false);assert.equal(reducedGuidanceMotion(settings.read(),{systemReducedMotion:true}),true);assert.equal(reducedGuidanceMotion({simpleGuidance:true}),true);
+});
+test('failed presentation writes retain an explicit choice or the simple fallback',()=>{
+  const store=storage();store.setItem(PRESENTATION_KEY,JSON.stringify({schemaVersion:1,simpleGuidance:false}));
+  const blocked=createPresentationPreferences({...store,setItem(){throw Error();}}).setSimple(true);
+  assert.equal(blocked.ok,false);assert.equal(blocked.preferences.simpleGuidance,false);
+  const unavailable=createPresentationPreferences({getItem(){throw Error();},setItem(){throw Error();}}).setSimple(false);
+  assert.equal(unavailable.ok,false);assert.equal(unavailable.preferences.simpleGuidance,true);
 });
 test('outbound, reached and return detours use confirmed accepted phase in all cards',()=>{
   const now=1000,ranked=rankToilets(FIXTURE_LAYOUT,{from:'platform',allowFixtures:true,statuses:fixtureStatuses('none',now),now,arrivalBaseMs:now}),preview=previewToiletDetour(FIXTURE_LAYOUT,ranked[0],{now});

@@ -1,0 +1,36 @@
+PASS app responses preserve a valid origin referrer
+PASS eight reachable pages retain the initial journey map
+PASS blocked tiles leave a usable schematic and a deliberate retry
+PASS tile request sends origin only
+PASS no unsupported connection form before a trip
+PASS station layout and toilet entry points remain together
+PASS preference choices omit persona names
+PASS caregiver controller lives on its own page
+PASS spending controller lives on its own page
+PASS home icon returns to Plan without a document reload
+PASS save confirms the chosen name and location
+PASS one saved route without duplicated manager
+PASS saving a route does not start a trip or add station bookmarks
+PASS add a place does not ask for coordinates
+PASS reopened route retains preferences in the canonical journey
+PASS technical trip detail is collapsed by default
+PASS connection helper explains its purpose
+PASS position correction opens the relevant form
+PASS page navigation retains one trip identity and controller
+PASS cancel requires a clear in-app choice
+PASS keep trip preserves active guidance
+PASS cancel ends same trip and clears geographic permissions
+PASS cancel is excluded from completed spending
+PASS cancel preserves reusable routes
+PASS ended trip hides obsolete active tools
+PASS cancelled state survives reload
+PASS a new trip can start after cancellation
+PASS completed fare action opens Spending
+PASS completed journey is recorded once
+PASS plan fits 320px at large text
+PASS current fits 320px at large text
+PASS saved fits 320px at large text
+PASS caregiver fits 320px at large text
+PASS spending fits 320px at large text
+PASS preferences fits 320px at large text
+PASS no runtime errors

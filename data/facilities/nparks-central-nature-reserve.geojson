@@ -1,0 +1,6292 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "CNR_AMENITIES",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78003906023336, 1.370920644431507 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4244,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Sunbird Hut",
+				"INC_CRC" : "5ABC5DF577A5AB7A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78073399665547, 1.3685276732106249 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4245,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Munia Hut",
+				"INC_CRC" : "2F73845CE779F520",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77980314319068, 1.367886715320316 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4246,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Drongo Hut",
+				"INC_CRC" : "1305E0FE148997BF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77974444095423, 1.371630775080353 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4247,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "B9C2AB8849F04C4D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8176227459204, 1.4011379664699781 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4248,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "71A7E020BA00153F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80447461988476, 1.356907068200918 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4249,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Rules",
+				"INC_CRC" : "7D29C694CA275E06",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82013339148463, 1.3409445681393806 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4250,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "98EDCBC270F9007E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82180187964563, 1.340499046882384 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4251,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "26A8AA255B738ADE",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8145563978096, 1.3560001584802626 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4252,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C7E9416B025132E4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81838524714172, 1.3570045651384788 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4253,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CD357715058B417D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81674594675614, 1.3572077089835417 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4254,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1D9B1B46D019B237",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81646674669719, 1.3567520123170003 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4255,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6C299E9D2F07A8FE",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81459725646513, 1.356000436438685 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4256,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EFA6443436C4171B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81220873402508, 1.3568873556847403 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4257,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2905A6C3233D2596",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81229616246905, 1.357116471726346 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4258,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "09C5CE9C5D77ADA7",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81262194973405, 1.3568311720289663 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4259,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5DBA9267C8E2DC71",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81254855189015, 1.356552724854336 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4260,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C72E2D511A20798D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81244681293312, 1.3569473849469758 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4261,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C1EFD7514748644E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81258167587889, 1.36042935692656 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4262,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1AA82194A51BCB2B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80946476525303, 1.361418109180325 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4263,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "13A0A8D2975C1124",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80766323211962, 1.3577920836047173 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4264,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C0F62F052AF98729",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.807916615891, 1.3535798910794634 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4265,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "D9BECBAEC06DDD22",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80583882387639, 1.352592848681191 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4266,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2B417CEA017D83F3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80636830337629, 1.3514676192496013 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4267,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "22839AD3469040C6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8312477439953, 1.350336487748924 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4268,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "548934E08395DD13",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83281780637121, 1.3489874481607365 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4269,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9C32396F413FED91",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8326372133245, 1.3487193158143178 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4270,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C7567AB29A7C1D8D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83658432514618, 1.3457543150701063 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4271,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A8815AEFAE07718B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82966367082477, 1.341174330567824 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4272,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8ECF4AC6F7F6D84A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82067497186414, 1.3417252220532578 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4273,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EE5C2138A7A9CC3A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82008568215016, 1.340834646899326 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4274,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2B432FDF512E4109",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81742383100664, 1.3379518850618661 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4275,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "611247F11940EB1E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81724285967316, 1.338478310825311 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4276,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "064D49F7A8A206C0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.79712625686219, 1.3549186173267158 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4277,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "BB6B40A9F5467398",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80455682403473, 1.3569250343825388 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4278,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E7FF58C14B0E56F5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78046988269189, 1.371853803832731 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4279,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Pump Track",
+				"INC_CRC" : "9B93E3F4B1A7F762",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77968496416159, 1.3716891793671853 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4280,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Chestnut Point",
+				"INC_CRC" : "5922A9EECB8648BC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78018595216166, 1.3784419561546764 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4281,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Bike Park",
+				"INC_CRC" : "B6AF6210AB5A298D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77893676458635, 1.3533920088899536 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4282,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "64ABD3CAAB4CEE66",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77371557903155, 1.3559474514044405 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4283,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "20C181DE00874D81",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7741486892366, 1.3552727876306374 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4284,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A4933037335D026C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77375117145489, 1.3574421957834808 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4285,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "ABC67CF69ED6E68D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77499898381573, 1.3572212930075362 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4286,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8B030ECD1C6F3960",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77725378731851, 1.3620668490204775 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4287,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "21654996AD98C3AA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81767918582023, 1.4014152195341456 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4288,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark",
+				"INC_CRC" : "B55AEB280A9A6CDF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7758232350649, 1.3477900972490915 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4289,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A71B29ADDC98CBB4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77587605771579, 1.3476453007842502 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4290,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "846E82441220DA04",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77124018541382, 1.3615666471560564 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4291,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0D6CE3C35C570C44",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77961064460585, 1.3429682805526395 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4292,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7CCDF795AA6C534A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76984329674086, 1.357720684989569 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4293,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "88729828260A0BC9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77294411643726, 1.3643639359811495 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4294,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "141D3BE341DB6B71",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7794841843521, 1.3626366947102233 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4295,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "38E699F757AD521B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77777727623375, 1.371220855062268 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4296,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C97AE793E181511F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77586036955067, 1.3786911917640885 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4297,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "396C0EEAC6AA396A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77411712751402, 1.388734036175384 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4298,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "44BF110B0CC78BE1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77093187250577, 1.3563604806513005 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4299,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "10CA71374B5A7F97",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76968514476462, 1.3577545799784323 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4300,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B00415274B476849",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76912674238888, 1.3623688453196239 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4301,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "034313F63A078A65",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76964588903229, 1.3634808359456456 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4302,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F37731DBCF4D615A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77241618084986, 1.3637220946831008 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4303,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "464538540A8AE848",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77290726090162, 1.3642149646235304 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4304,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "56FE5B640177FEE2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7748602807313, 1.3645204123316914 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4305,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "FE691F842EB82010",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77647306126741, 1.3640882032830437 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4306,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "98E1DD1886262012",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77737469283262, 1.362585144614192 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4307,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "BF30B396892CFE59",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77724558275557, 1.3619781831818427 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4308,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F66B0DAFAB71A433",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77673200348463, 1.3482230856539856 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4309,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8D0C1661746DEC78",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77711979899011, 1.3485958916273053 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4310,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "D3CD7FEB816F1B84",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77729772039068, 1.3485645278898524 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4311,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "3A112ABD768FADF1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77807174797829, 1.3498023541565505 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4312,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7E854A35C8679A7E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77847423070158, 1.3498652401393911 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4313,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0E297D413B89F32F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77836318352101, 1.3503508042221393 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4314,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "42C75B7C836C7282",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77835988193218, 1.3504427833934889 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4315,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F884E3E4FF4EF36D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77940868737367, 1.3493294589417992 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4316,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "12FD3ABB3D6232FF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77890434212577, 1.3534538042545248 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4317,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "787B94877FFFAF69",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77980606427403, 1.3535449581154593 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4318,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5F745D01F09ECDBF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78248279884224, 1.3556283733017334 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4319,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C7BA1314564FDFF2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77806766962361, 1.3532112320799097 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4320,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "132A7F710AC1B9F3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77743699918726, 1.3532489982482152 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4321,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E70D39414A389F82",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77647080413192, 1.3519736840861352 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4322,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "371D9950CF37CF6A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77733789373832, 1.3535299031559747 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4323,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9EF24C83939BD602",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77506233667368, 1.3548366370092237 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4324,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2650C8BF0ABD5066",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77598760810413, 1.3552207389739186 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4325,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F9A8C043BC6FA91D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77415784141606, 1.3552233978293289 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4326,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C02935CDD4B823CA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7737590920888, 1.3574511455648886 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4327,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A5535B04648A66E8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77490462305025, 1.3573226228827655 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4328,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "948761B8EAF66F3A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77582959292775, 1.3559027241881174 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4329,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F27202616EB7477B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77616193953641, 1.3561003329164059 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4330,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "22308DA9109354CE",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77448095442746, 1.359831239303064 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4331,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "44348EDFF0FFBD00",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81827749113889, 1.3564262008520573 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4332,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "3 km",
+				"INC_CRC" : "A86E663185895FEA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77434479452863, 1.384888448802003 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4333,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8532D694FF1E8BAA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80776687873282, 1.4015038525858659 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4334,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A0DBFE0422E3DD19",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82072056166118, 1.3853167496848648 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4335,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8A399184C300D760",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82104608311485, 1.3850327186618923 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4336,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : "Swing",
+				"INC_CRC" : "294A1B81E7A54531",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77345264882176, 1.3635803184129585 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4337,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "09941576E8E7BDCC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77775409427187, 1.3597859490498723 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4338,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "23BEB4238EFAAD89",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82617736819867, 1.3590821104095756 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4339,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4128379BAF8B8191",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82695994100271, 1.3602348398442043 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4340,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6B4CEDCE0E41392E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8274582095315, 1.3599616190792536 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4341,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "48E62DEA64CD3992",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81882545070334, 1.3369693569416932 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4342,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A54B066CA5A812B2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82062504588401, 1.3852846523833764 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4343,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "3DCB6494661B558B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82114914029026, 1.3858361626367302 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4344,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark",
+				"INC_CRC" : "778D3BBC967D42BD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8203746208114, 1.3851178708957181 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4345,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "50C68578F16C6AC2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.820166476387, 1.3856173654326367 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4346,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "55A0AA6F5F3ED66B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82015886968573, 1.3853378861212093 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4347,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "52E06924D90C0D67",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82322108535335, 1.3827383616370315 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4348,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0C7F9A14B52C1F25",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82328765514211, 1.382585223222491 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4349,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4D84FFD8EFBB534B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80145565458477, 1.267263657098296 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4350,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7D6C5152116215BF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80166818531126, 1.2673613998621358 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4351,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C58A7B2866D54D57",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80196520071613, 1.2667828541415413 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4352,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "WWII Memorial Site Storyboard",
+				"INC_CRC" : "F79034B92B608B5A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80249730091846, 1.2668951049146386 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4353,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "83373CDFD590A8A3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80253754486819, 1.266248950234521 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4354,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0AD0F3C10A0AC1BA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80412932961237, 1.2639909522184478 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4355,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "509B11DE8954163B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80383696321121, 1.2637653740510797 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4356,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Port Cullis Plaza",
+				"INC_CRC" : "648B4B57C52EB86F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8040180315871, 1.2640282352098546 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4357,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EF733672573057F9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80342313931632, 1.263954726123252 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4358,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A48D86E5DB8D0BF2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80319458228166, 1.2645835627661004 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4359,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Pill Box Plaza",
+				"INC_CRC" : "3BDE37F1F1985764",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80501161076238, 1.2626947050186164 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4360,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Machine Gun Post",
+				"INC_CRC" : "EA150051273E6645",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80510949075276, 1.2639239171246008 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4361,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9A781B0E9165487D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80512376226561, 1.2639124363676313 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4362,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2FA4574E67AA07BB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80458784916273, 1.2642912481283117 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4363,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7F2B557F4FF931AA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80526932915913, 1.2638134235581002 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4364,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Tanjong Berlayer",
+				"INC_CRC" : "8D86483C7835FCE5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80672653612336, 1.2657023634631324 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4365,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "43552C01D79C9034",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80676792836587, 1.2656607404933746 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4366,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "875A409F05866678",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80422114862003, 1.266509099529377 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4367,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E35052074FA77328",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80156722278538, 1.2658616921131098 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4368,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : "Wonders of the Wind",
+				"INC_CRC" : "18C9BC77B3D8F3C8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80830668514835, 1.405371197215856 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4369,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C5A38BD503A69836",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81778414242957, 1.4010808542529034 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4370,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E8E84A5D1C9F5518",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8190592662356, 1.401698671462847 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4371,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "63E87C0C70852794",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81753990138903, 1.4004299384173524 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4372,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E4E29FB657AC556E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82146703071353, 1.4005288548445816 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4373,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "862C26D1CFADC1E8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82249400372446, 1.401132474006804 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4374,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "159ABB357B018B4F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76893530011368, 1.3625671979011893 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4375,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "62599FCDE2BBCB4C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76825734947047, 1.3632942500429244 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4376,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C657D3B9D682DE0B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76941508275776, 1.363387772567265 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4377,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2B8AD89F828E697A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82083957571712, 1.3850799651761418 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4378,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CD0B041690AD0290",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82091922294823, 1.385224684661548 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4379,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "57C398E441454C3A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82061611072037, 1.385064069780187 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4380,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EC7A784025FFE424",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82110622781461, 1.3849722459528557 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4381,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "385F5E2578AAF396",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82114027376159, 1.3848354737124784 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4382,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EA64C9DEE1891F3C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82075617148539, 1.3846064242885816 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4383,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "D57C8813070FA99B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81754174558564, 1.401323652654048 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4384,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "975949CBD0DC3546",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82122289229467, 1.3853931240655222 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4385,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "1A7ECB4FF1FE426E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80703059178406, 1.4011343583509093 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4386,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "ACC63E4D983CE7F8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77579061965284, 1.3646577734117553 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4387,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E16D8122C1529A38",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7794758495333, 1.3626640325402615 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4388,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "41417C7E1450A6ED",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77251191955929, 1.38602318685146 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4389,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CCB64A3C60792BA0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77668649643687, 1.3619663210482063 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4390,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4699C21695ADDE11",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77655556016427, 1.3485291056370652 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4391,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1C8EE2470D63C8DB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77637491051767, 1.3475639894498415 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4392,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7F5CD91CE527C6B2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77588962637756, 1.347667438128202 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4393,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F9ED85A780CB2AAF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80345235086698, 1.2655814004244883 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4394,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Cannon",
+				"INC_CRC" : "718B4523855999E1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82677726916695, 1.3603811456081185 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4395,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Windsor site office",
+				"INC_CRC" : "ED065D7138A06F85",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82703992643206, 1.3604254764437027 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4396,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "4D96CDABAD9F6BF0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82689359108149, 1.3611567486858314 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4397,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "SICC Shelter",
+				"INC_CRC" : "4506D99B142B62F0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77665772957121, 1.3483647715282148 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4398,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Bt Timah site office",
+				"INC_CRC" : "6A89B7A96468667B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76182189177551, 1.3477521151846772 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4399,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter A",
+				"INC_CRC" : "BED39BEE0293EC35",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7622774106592, 1.3481441684783892 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4400,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter B",
+				"INC_CRC" : "366162710C616C1C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76297405898696, 1.3477767666382676 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4401,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter C",
+				"INC_CRC" : "81147EB8DA462789",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76334555171756, 1.34930302421045 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4402,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter G",
+				"INC_CRC" : "D24837322D88DBBA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76382538945674, 1.3494548092864693 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4403,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter D",
+				"INC_CRC" : "3F316C6F6B201746",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76420481389407, 1.349349682451283 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4404,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter E",
+				"INC_CRC" : "7076B59946D6E3DF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76635410881143, 1.349683918951586 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4405,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter F",
+				"INC_CRC" : "A881FF2DCCD842B7",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76134919961856, 1.3472415453376607 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4406,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark",
+				"INC_CRC" : "822128D3278A7841",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76306642653158, 1.3494717631559592 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4407,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "91A8E0F045ECC093",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.75336348733696, 1.3562268338167487 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4408,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1EE0D72188A22BA9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.75393904376647, 1.355238606029715 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4409,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C3D8288012BC94B4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7759890917742, 1.3777974049406316 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4410,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 1",
+				"INC_CRC" : "63FD8360E4905EF9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77525319806509, 1.380514027877815 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4411,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 2",
+				"INC_CRC" : "3E1C1F96F336ED46",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80689058620513, 1.4008319338420923 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4412,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "723DF1F78DCDA010",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80758104327694, 1.4008153039961817 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4413,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A30C9105E6F59346",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80626246907272, 1.4007768798002607 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4414,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "02C9AE24DC0C0A5D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80661023872105, 1.4007351166721533 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4415,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : "Rocket Tower",
+				"INC_CRC" : "8B04FA7EFBC2ECA6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80732618681179, 1.4004671092835494 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4416,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark B",
+				"INC_CRC" : "1ECBAF16DEAEB782",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80735511598498, 1.400201326082146 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4417,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "69B2E0D459D4EC0C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80724196436138, 1.4002391055264767 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4418,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "05B93D4286AD03F2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76357018886902, 1.3493583714351662 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4419,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Fitness Corner",
+				"INC_CRC" : "05435D8C35C516FD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76384121090643, 1.3495967026082933 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4420,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Playground",
+				"INC_CRC" : "C2907238F659D467",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77549808569968, 1.348868879977303 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4421,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Playground",
+				"INC_CRC" : "07AB293FBB1D5840",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77579397288332, 1.3487689557192106 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4422,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Fitness Corner",
+				"INC_CRC" : "25502BEE062FE205",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81976601211888, 1.3999653182439715 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4423,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "BirdWatch area",
+				"INC_CRC" : "FCA3A1A02FD9F239",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81755360140156, 1.4012009630951257 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4424,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Pavilion",
+				"INC_CRC" : "0AF54B86B39FA270",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8201283515454, 1.400154534985649 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4425,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Birdwatch platform",
+				"INC_CRC" : "3268A83D584FBDD6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82016544042744, 1.4001688919745583 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4426,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B55FEEF126F5398E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81861625418225, 1.401150889089023 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4427,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "ABB06E260534F799",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81800000502012, 1.4011106852271709 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4428,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E648AF013392FA22",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81794294460603, 1.4011795982929445 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4429,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0AC3489065A6DA29",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8178373836501, 1.401182468948482 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4430,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C12AD5D1027A807D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80717218736267, 1.400268945137186 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4431,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EB8BFA807A610F1F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80706098743292, 1.4001470690855875 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4432,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "30141124E44EB60C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80823335207037, 1.3997731528315884 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4433,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark A",
+				"INC_CRC" : "0ABF39335EF330D6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8057502872271, 1.3997037627632865 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4434,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "88B6B2D1A1C6C995",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80515447505516, 1.3989940388419317 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4435,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "431632893E1C5649",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80423378710019, 1.3976668200771782 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4436,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "833B4380C8DC6C87",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80404868779996, 1.3976473712239348 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4437,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark C",
+				"INC_CRC" : "CB2DF32F7B719D57",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80307499727286, 1.3970975751586805 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4438,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "E623CA1A74D5063C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80789852326396, 1.4056216337588892 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4439,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0B640878F5B71775",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80793712957026, 1.4055798552815102 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4440,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "178013223F8677A3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80806915057144, 1.4054798838123288 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4441,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "183B3C045789C665",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8081200565178, 1.4054538142669923 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4442,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "16BA999F6380CC52",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80447404762877, 1.2683267230246003 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4443,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Lookout Deck",
+				"INC_CRC" : "CF8E8CFDD1D71F49",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80607645479039, 1.2666422305945464 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4444,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Lookout deck",
+				"INC_CRC" : "CB63B8B4D86BE8AF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80293517080095, 1.2721086154570613 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4445,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Pavilion",
+				"INC_CRC" : "69BEE63712C91C9D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80641543333101, 1.265453966451886 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4446,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 11",
+				"INC_CRC" : "3B606C11B121A1FD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80563244142083, 1.264059597429512 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4447,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet C",
+				"INC_CRC" : "584E3B04A7E48B28",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80604269760593, 1.264511090629403 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4448,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 10",
+				"INC_CRC" : "0E7DBF954B861AD4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80471788574411, 1.262807061892208 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4449,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 9",
+				"INC_CRC" : "1C0828892CE45497",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80427325703032, 1.2631367223697647 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4450,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 8",
+				"INC_CRC" : "1B949ED4FFE34E09",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80370215969452, 1.2637139195682447 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4451,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 7",
+				"INC_CRC" : "FBCC259CBA4405B6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80306763136419, 1.264346555267352 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4452,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 6",
+				"INC_CRC" : "47F168B833291075",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80222321219208, 1.2651713513510563 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4453,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 5",
+				"INC_CRC" : "15F6F74CAA00133D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80254499926953, 1.2653964507374793 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4454,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 12",
+				"INC_CRC" : "34D3A71C790EA49B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80170834340814, 1.2655130367591627 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4455,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 4",
+				"INC_CRC" : "90CAC4872CB4A85A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80133656550285, 1.2663239942664626 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4456,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 3",
+				"INC_CRC" : "BA62A5EC138FCE16",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80304368370861, 1.2666675795192037 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4457,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 1",
+				"INC_CRC" : "0619548474EB97DB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80357227672417, 1.2646727158289697 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4458,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet B",
+				"INC_CRC" : "BC45EFBB24A7C0AD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80453333700083, 1.2658391775359772 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4459,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark 1",
+				"INC_CRC" : "4FCAE3068CBC0ED1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80038437322021, 1.2659416267340113 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4460,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter A",
+				"INC_CRC" : "9C2AA1DD824EB896",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.79953872162383, 1.2658706394164874 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4461,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter B",
+				"INC_CRC" : "88534C02EC8E6B4B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80241129875174, 1.2671180452063682 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4462,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Labrador site office",
+				"INC_CRC" : "DF1CD11DAD1C8E15",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80013554842365, 1.2682981768572403 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4463,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Tamarind Hill Carpark",
+				"INC_CRC" : "101B35017B0D7E5F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80047218954628, 1.2679383036465792 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4464,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Tamarind Hill",
+				"INC_CRC" : "EA36F5A8897584AB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7765279007659, 1.364207131150088 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4465,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "1E4E63230D3930A1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77617877568547, 1.347426138952523 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4466,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6D28C75EA4BB7C86",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77615618543899, 1.34744359354871 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4467,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "8B90BE6379F6E1FF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77969666393791, 1.371792893888919 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4468,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "2410FA5FD85C3DFF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80091863168222, 1.2679150345757868 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4469,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark A",
+				"INC_CRC" : "2E15FA957B809306",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80444788520961, 1.2636002448257744 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4470,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark B",
+				"INC_CRC" : "95C323537FA82D80",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80476399287444, 1.2640535232895136 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4471,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark C",
+				"INC_CRC" : "A3EF0E8B3CA151F9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80464701790181, 1.2649116530836064 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4472,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark 2",
+				"INC_CRC" : "A05436516D2BB468",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80409488674862, 1.266427558748952 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4473,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : "Dragonfly Pond",
+				"INC_CRC" : "D21786819C94268A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80234103459887, 1.2672473016194852 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4474,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet A",
+				"INC_CRC" : "F7ECE9309A496869",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80513000807886, 1.2624015989179702 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4475,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Red Beacon",
+				"INC_CRC" : "3935D224F67B78BC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80495838597666, 1.2628004726291673 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4476,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Obelisk",
+				"INC_CRC" : "735976DDC38B4759",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80539507984994, 1.2630378442509855 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4477,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Dragon Teeth Gate",
+				"INC_CRC" : "F57E27BC56BF4C7B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8269685685937, 1.3600626262848836 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4478,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Pavilion",
+				"INC_CRC" : "D0F7240CA3401B25",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82728540716732, 1.3602830695337458 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4479,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Drop-off Point",
+				"INC_CRC" : "553BDE899AA09934",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82717659285737, 1.360151278952557 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4480,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "A50B6D2E6CC0848A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76682837225522, 1.3507579653757409 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4481,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "BBE1BF332A3646AB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76619651689742, 1.3493657557713328 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4482,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F48F20442AF86821",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76535319367427, 1.347752307380126 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4483,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9F3697E5C8E1A81F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76430015850472, 1.3494141473217351 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4484,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "89C7E9735847CF49",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76318562153321, 1.3492580184345524 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4485,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A2EF700F521EF97B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7633616143107, 1.3480166368511481 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4486,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "91C7B0C6D34264E4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76144738401644, 1.348147283007881 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4487,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1FCBC936EE27C2CD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76186699440626, 1.3471273974139142 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4488,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2AFD0565ED6377F7",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76100466541962, 1.3478419240633257 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4489,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F0D4ABDCE90A36C0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.75345833411956, 1.3568658764985895 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4490,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9DA36EDB4D45FB4F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.75332198687164, 1.3555781153111923 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4491,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "BD37DE02D6DE1601",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.75496242640311, 1.3544588629501404 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4492,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0EFE41E68C7C1DF5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80686495102933, 1.2656631742333397 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4493,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7A463CDC8761BAB5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80950221038272, 1.2651210304565368 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4494,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "06C3393DB06EF012",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80228663897175, 1.272160594196776 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4495,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "89604B34DFA7D4E8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80287520984278, 1.272024454550434 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4496,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "432B96C37C38C7B0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80228662881612, 1.2721833299294185 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4497,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E91A48D2375609E6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8023834933289, 1.2723569890510293 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4498,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "3FEA3B4D08836945",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80281394130841, 1.2720347816688373 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4499,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "81FCAFEF63D05E65",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80187483662186, 1.2688259055806015 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4500,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CE33ECFEDFDC2290",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8012202052204, 1.2673654992238967 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4501,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "AEF2BF7C240BB8D6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80605555760759, 1.3529036314165712 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4502,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "5 / 6 KM",
+				"INC_CRC" : "AA52BF72B8CC9494",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80990494332767, 1.3547330137324276 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4503,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "4.5 / 6.5 KM",
+				"INC_CRC" : "26F9EAC7EBAF6D01",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81185149010248, 1.3557027591508068 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4504,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "4 / 7 KM",
+				"INC_CRC" : "46A30AECB602C930",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81570180131511, 1.3556606217440401 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4505,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "3.5 / 7.5 KM",
+				"INC_CRC" : "A329AE84582E4279",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81852472490472, 1.353944614806776 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4506,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "2.5 / 8.5 KM",
+				"INC_CRC" : "6827844F736BC7A4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80787296554827, 1.3495137898886973 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4507,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "5.5 / 5.5 KM",
+				"INC_CRC" : "26D81A72CD2380AB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82217906599506, 1.3520088289395455 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4508,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "2 / 9 KM",
+				"INC_CRC" : "B6232BAEB9962679",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82775161280846, 1.3526471911755074 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4509,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "1.5 / 9.5 KM",
+				"INC_CRC" : "B2CB238FCF626C1E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83007673114803, 1.3516536823903846 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4510,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "1 / 10 KM",
+				"INC_CRC" : "A10985C0F3B3A76A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83326754867926, 1.3483659300796633 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4511,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "0.5 / 10.5 KM",
+				"INC_CRC" : "61BFAFF1134C7698",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83655216647006, 1.3457088156323425 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4512,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "0 / 11 KM",
+				"INC_CRC" : "DE5237F11FF13840",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83198510828082, 1.340938547953706 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4513,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "10 / 1 KM",
+				"INC_CRC" : "9761A0A43511EB48",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82951217836307, 1.3427648506402174 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4514,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "9.5 / 1.5 KM",
+				"INC_CRC" : "33D8791B2D8FB10C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82734643151895, 1.3426757338093367 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4515,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "9 / 2 KM",
+				"INC_CRC" : "C5C5939E28C12BA0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.817350949716, 1.3382452956957964 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4516,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "7.5 / 3.5 KM",
+				"INC_CRC" : "C75F77F34F65033D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81470275906389, 1.3405999191075781 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4517,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "7 / 4 KM",
+				"INC_CRC" : "7F9D4382CB0220CC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80124114914128, 1.3560938156469153 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4518,
+				"BUILD_TYPE" : 12,
+				"BUILD_NAME" : "6 KM",
+				"INC_CRC" : "2ECEEFF083AA4642",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80085350760216, 1.2689365862365791 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4519,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Villa Samadhi",
+				"INC_CRC" : "83B3ECABFB7C9D98",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82022990114508, 1.3858442490450669 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4520,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7D4BCD624E4144A0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82012827433888, 1.3852886767835961 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4521,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0CF2C78F454451A6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82085658616572, 1.3850027343766407 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4522,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EC2A7B8BE3FF8BDD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82077400118008, 1.384577505531165 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4523,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A0E57D4AD87D8428",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82256362083491, 1.3846254068041721 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4524,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F6EB1C1E3C1F1BB8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82309452972638, 1.3842752655945625 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4525,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "26FB1B2F642659B9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8225684596985, 1.383422491252573 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4526,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B0AC4B6DCD02B39D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82394185557784, 1.3837265769137104 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4527,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "908DA484720B24F0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8239634084603, 1.3819828326398176 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4528,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4A37BC80050BA318",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82314130517052, 1.382571162444998 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4529,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "24CE2DCDC7D45F7B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82292464345089, 1.3821546285422055 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4530,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "50DFB8DB5B29F976",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82234557753796, 1.3817522733901193 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4531,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "06B1A3C35357FEAD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82208027856323, 1.3815941865687855 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4532,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5EFE1BE30369B9FE",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82197706628482, 1.382579196926138 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4533,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "55254561860F341F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80474325451137, 1.2639107780969232 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4534,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7CC8AA3923601840",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82089864428745, 1.3858125348135215 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4535,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "10D21D53E977D158",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77317649536393, 1.384640351395089 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4536,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "346CB3CE82921AFD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76309232037804, 1.3493784579865806 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4537,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "iKiosk",
+				"INC_CRC" : "2556DC9A0045BF33",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77969893035358, 1.3715812058704209 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4538,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "76B50FEE03EFEB88",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77979617687025, 1.3717200568561314 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4539,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9C6EA9C3CA5E35C8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78007209511543, 1.3717815209079365 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4540,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E4B02A1DA154771D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78007887961886, 1.3718088364664898 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4541,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "40070C8E29358F8E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78024171730762, 1.3717860772687887 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4542,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "53A8B53485A2D13B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78013989166351, 1.3709137472956499 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4543,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4F46513FC131327F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77999655801088, 1.3709541836225958 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4544,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5BD19ED56E7BE2AF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78076501171445, 1.3684848296543863 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4545,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A8597B5D4D411593",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77976078161771, 1.367860765455543 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4546,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "37B82494ACADAA10",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77265913604884, 1.3865487398828336 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4547,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "8659305E09E089A6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77307268408421, 1.3866222002147055 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4548,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E403AE6A2BFFDFA6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77397624398975, 1.3864683285241028 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4549,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "97B78855A12C03D3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78053644061497, 1.37811650063803 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4550,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "D70B4027299A1299",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78074258489453, 1.377914643078243 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4551,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4E54707D4F170EB4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77931073621272, 1.378374406586505 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4552,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "BAC279AE9CDED45A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7773663539823, 1.3774996290915602 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4553,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "33F12DB02499F75B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77839704201315, 1.3780155213342116 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4554,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "25DDB6B9928610F2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77911580768941, 1.3753184455214063 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4555,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5E3399AB41A32696",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78073707750355, 1.3750044760411797 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4556,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "77B1EC43F76BF343",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77930528752677, 1.3729297572246084 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4557,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1E892A24AFD0009E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77826282851385, 1.378169385769054 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4558,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "FEE0E73519DC7DEA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80428188232888, 1.2639195262928613 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4559,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Bicycle Parking",
+				"INC_CRC" : "98BD6F605A8858FB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82296830014398, 1.3804200220525613 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4560,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5DEE6E5E726DEFA8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82248066384449, 1.3797793447557183 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4561,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1B75BBA5739CB71E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82078729688064, 1.3822827972998142 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4562,
+				"BUILD_TYPE" : 8,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0CA279ACD734B81C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77490169222605, 1.3492373324621936 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1090,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Lookout Point",
+				"INC_CRC" : "B7886E3364EE13C1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7759144845566, 1.3489173683312543 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1091,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Pulai Hut",
+				"INC_CRC" : "F7A3D4091BEE034B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77603952546103, 1.3484312159634653 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1092,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Gaharu Hut",
+				"INC_CRC" : "D6A71B9750391A4E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77560507470629, 1.3485677691188147 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1093,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Waringin Hut",
+				"INC_CRC" : "F4520D182698238C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81275817238449, 1.3569229679864765 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1094,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2FF2F0B793BAD3F6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81227748038471, 1.3569094788479092 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1095,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "59B6E86DFB011071",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81223262225217, 1.3567994381168194 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1096,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Terentang Hut",
+				"INC_CRC" : "F4A9BA052E1F3D73",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81201636536555, 1.3587523539728819 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1097,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "2C2C2AEBE3B2F9BA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80942068947637, 1.361343028419017 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1098,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Tempinis Hut",
+				"INC_CRC" : "095B542105463743",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80942007630688, 1.3612870138985933 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1099,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5E52267B9B454DF5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80879814065024, 1.3602712129998382 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1100,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Medang Hut",
+				"INC_CRC" : "56BBA5973AD9CBBB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80779396573179, 1.3579276609614126 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1101,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Macaranga Hut",
+				"INC_CRC" : "03BC6C81E79BD1A3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80781803899599, 1.353656609976088 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1102,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Petaling Hut",
+				"INC_CRC" : "3FD92734750647F4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8078277174642, 1.35365351624821 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1103,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "54F660FC7038AD78",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80461421869997, 1.3552737120225695 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1104,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Dillenia Hut",
+				"INC_CRC" : "25AD6898E5CFC51E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.79710166807897, 1.3550100545097343 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1105,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4E18AA3B8F32DDB1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80607987651265, 1.3516800177278827 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1106,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Jelutong Hut",
+				"INC_CRC" : "879F1C51C5E289DC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80632891965888, 1.351520056565911 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1107,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E984EAA40F37AD68",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80643319114527, 1.3513219693858787 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1108,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : "Jelutong Tower",
+				"INC_CRC" : "1FCAF550199EF213",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81736772331547, 1.3383526673839152 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1109,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "28C8A32374F59B9C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81751984054803, 1.3381773934939967 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1110,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9FA736A6B2642736",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82015860835183, 1.3410029223941267 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1111,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Jering Hut",
+				"INC_CRC" : "736F71F4786C5D7B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82363045513566, 1.3426427767168525 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1112,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Chemperai Hut",
+				"INC_CRC" : "89C738163A95C7A6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83079890850787, 1.3421159500001385 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1113,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "ACF904A91448FC12",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82958987962108, 1.3427343203204243 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1114,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "A8F977AB06111F23",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8366183562993, 1.345705354540732 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1115,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "92639EE4A8262CAF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82975588594584, 1.3489063150352945 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1116,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Petai Hut",
+				"INC_CRC" : "49C38CE6B7B24A70",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82784566252695, 1.3527715849074842 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1117,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Rambai Hut",
+				"INC_CRC" : "7D46420C0CFFC138",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81825345285456, 1.3542250628471675 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1118,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Terap Hut",
+				"INC_CRC" : "CAAFCBF90E0341EE",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81828392239184, 1.356972172888259 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1119,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "3CA0A145A95C22F9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81649375055244, 1.3568580166687572 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1120,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6551E8A7CA141352",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8268366388282, 1.3595403781240398 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1121,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C1536C5FFCA49BDC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77850043612425, 1.36507447032535 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1122,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "23328E4B9C0E2DBC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77651039420675, 1.3642735960532872 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1123,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5B6BFB3A8A4598E1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77736879153373, 1.3627974809824184 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1124,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "11E1F2506C8BE9E2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77727294663599, 1.360857828864383 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1125,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6D01FBE1E889B25F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77482383317663, 1.3645139063507399 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1126,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "10B0652D9871E9EF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76960738058001, 1.3634939346294845 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1127,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "5EE59D99ABBEB628",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.76843211962752, 1.3627346571070373 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1128,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "61A3B7CF9CE4BA6A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77081780372724, 1.3562735827929642 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1129,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B1D8F0756A76F810",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77150425313025, 1.3569538114821265 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1130,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "AFCF742ED9EC25A1",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77159920514518, 1.356892936669379 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1131,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Singapore Quarry Hut",
+				"INC_CRC" : "730DDFA57D393026",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7682771561096, 1.3630778119180236 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1132,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark A",
+				"INC_CRC" : "38B25B60DABC0515",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7762438646186, 1.3644255065572772 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1133,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Carpark B",
+				"INC_CRC" : "4C70EA2E0E590169",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81272877177463, 1.356975518536889 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4195,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "8EA07F24CE5A4F5B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81095731403077, 1.3611297362836237 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4196,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : "Canopy Bridge Tower",
+				"INC_CRC" : "B8030D7F14089063",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8055111425118, 1.2639501363127403 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4197,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Berlayer Shade",
+				"INC_CRC" : "50A8DF5D93B3D06A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7667530561505, 1.350870836948384 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4198,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "WWII Memorial Site Storyboard",
+				"INC_CRC" : "6DFAA38C64A7B466",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81222588974092, 1.360786199693356 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4199,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : "Canopy Bridge Tower",
+				"INC_CRC" : "352EB9CFC5A3ACEC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81256726694006, 1.3606886516113696 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4200,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Ranger Post",
+				"INC_CRC" : "D8ED0A383A9F973A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77644524218395, 1.3642167561385123 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1134,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "AD6B394AE0904888",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81965674413968, 1.3853895685734816 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1135,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "97C65A3817792D82",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81999529949492, 1.3852804580771922 ]
+			},
+			"properties" : {
+				"OBJECTID" : 1136,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "DE84BD3A1B217199",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81987166814415, 1.3855733366058585 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4161,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "C1DD8724096C88AD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77702992884838, 1.360838549364807 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4162,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "1763A48539824748",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77697542006624, 1.360138753092989 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4163,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Wallace Education Centre",
+				"INC_CRC" : "AE8BBD298B55759C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77666098523301, 1.359039154915825 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4164,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Dairy Farm Bunglow",
+				"INC_CRC" : "890502BFE2180826",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78608209459408, 1.3482265944845337 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4165,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "DBC4CD6653F19F8F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78225545968164, 1.346271313205315 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4166,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "1C546DEE767DE9B4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77991821331399, 1.342817136442944 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4167,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "EB84EF0D00985C47",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7761438121858, 1.3466753170423278 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4168,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CBCA2218D2F82410",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7762233919337, 1.347813330791943 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4169,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Visitor Centre Carpark",
+				"INC_CRC" : "ECFE52A601E81E29",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77661319732938, 1.3483047668373092 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4170,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Visitor Centre",
+				"INC_CRC" : "D7719DAF42BD9CB4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7763969663637, 1.354637903308593 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4171,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Summit Hut",
+				"INC_CRC" : "E5DBE84F80DC9D3F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77654907100877, 1.3544759832469873 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4172,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B1CCF435736C1234",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77633571229217, 1.354861876635597 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4173,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "198BE0F90EF9F64C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77713902950633, 1.3519441695444618 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4174,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "TAS VHF Station",
+				"INC_CRC" : "3ED62258C2661329",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7792929564647, 1.3494365846082381 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4175,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "South View Hut",
+				"INC_CRC" : "6023F0C29B395F49",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77931407127507, 1.3495003400316248 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4176,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "001B3643916DBF23",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77674794625977, 1.3482018931607749 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4177,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "8D02D6F6A8D58ABF",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77810338622075, 1.3502866002083145 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4178,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Kruing Hut",
+				"INC_CRC" : "059B9D57FC954ED4",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77817377269515, 1.350314937349687 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4179,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F841CE10B39D33C0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7796987469784, 1.3535043995254077 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4180,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Catchment Hut",
+				"INC_CRC" : "A2D2DCD4B496A65F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77974025990031, 1.3535786405950092 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4181,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0D95DB257C71E049",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78243719300603, 1.3557183258106624 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4182,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E2CC2F93743E302B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77641643313251, 1.3545877341784909 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4183,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "66D92DBBC76D7BB8",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77659353257889, 1.3619626163819143 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4184,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Dairy Farm Hut",
+				"INC_CRC" : "D4354423B969B04E",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77656537505733, 1.3620405366126953 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4185,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "05C87AD1AD705FD3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77439932850672, 1.3598382280319254 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4186,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "North View Hut",
+				"INC_CRC" : "C90CC066C89F4BE9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77437820958431, 1.3599090654314325 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4187,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4FCBF48579A723A7",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77739942437695, 1.3531909200262562 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4188,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Simpang Hut",
+				"INC_CRC" : "9D915F5FE3EFB07A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77741349981696, 1.3532546734915145 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4189,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "7C8B1DD728FC75ED",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77647738694446, 1.3520149865439406 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4190,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "B4BC2991AF6BA1EC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77609773571248, 1.3484864766945115 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4191,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "D520709296F17AE3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77485538578792, 1.3491967552444228 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4192,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "4C110DE5D83B0162",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82716455873256, 1.3596477152822217 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4193,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Venus Drive Carpark",
+				"INC_CRC" : "0BD58C864036D7A2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81261888348013, 1.3569777739814972 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4194,
+				"BUILD_TYPE" : 6,
+				"BUILD_NAME" : "Ranger Station",
+				"INC_CRC" : "4474B323A04EBB30",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82412735709805, 1.3723670694822983 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4201,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "61786B872B21E143",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82622058013376, 1.3759125290807002 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4202,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Casuarina Entrance",
+				"INC_CRC" : "FF8EE6518372BD14",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82625150110094, 1.3737151908515195 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4203,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Jacaranda Entrance",
+				"INC_CRC" : "7311D2AD4A25CC46",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82758323117002, 1.3703587893662426 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4204,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Lower Peirce Carpark",
+				"INC_CRC" : "D39A7E79AD1E4F07",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82427205931226, 1.3719195381501739 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4205,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "CFF5E54297ACC2E2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82516036634215, 1.3713082607627047 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4206,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Big Shelter",
+				"INC_CRC" : "D3A8C6C9365E6F8A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82777788705724, 1.3705990341989418 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4207,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "D6174F2092319FAC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81148660699239, 1.3741345748721412 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4208,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Rules",
+				"INC_CRC" : "8804CAE1B56FE9AD",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81137953043427, 1.3741383532222624 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4209,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Educational",
+				"INC_CRC" : "2CE325601B9A7775",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77374423980335, 1.3558677704200024 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4210,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Jungle Fall Hut",
+				"INC_CRC" : "163134C229187035",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77705965714414, 1.3482910300256734 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4211,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "514EF982CB1B8EBB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77743886670895, 1.3775125433104518 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4212,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Bangkit Shelter",
+				"INC_CRC" : "D581E4238F79F131",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77838308687355, 1.3781070679497158 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4213,
+				"BUILD_TYPE" : 3,
+				"BUILD_NAME" : "Observation Tower",
+				"INC_CRC" : "9A2C0E1E7EC252D3",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77937183509641, 1.3784363813198228 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4214,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Bike Park Shelter",
+				"INC_CRC" : "FC8C59AD67D171C0",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.7806715520609, 1.3779436869527248 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4215,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Piper Hut",
+				"INC_CRC" : "89287107E5AC85EB",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77918268725647, 1.3753294866186077 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4216,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Cyathea Hut",
+				"INC_CRC" : "C70932D9EC7A96C9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.78073472488725, 1.3749294499627764 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4217,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Costus Hut",
+				"INC_CRC" : "CA1F304D75FC69F6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81077255207902, 1.3747367598842841 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4218,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "439AD487E9F63C06",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8107347489616, 1.3744700363012279 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4219,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "9FAA80FC493BD5E6",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81089099006445, 1.3741710567934724 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4220,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "0BA1DCF19E48227F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81114610062475, 1.3740083559351037 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4221,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "AA9C77DDE67D928C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81180041941009, 1.3744736627614929 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4222,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "5E40CD1E9BCB797F",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81147209002296, 1.3744904791250294 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4223,
+				"BUILD_TYPE" : 5,
+				"BUILD_NAME" : "Upper Peirce Carpark",
+				"INC_CRC" : "2DD4D41D7A26C139",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.81096013014076, 1.3743256105721326 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4224,
+				"BUILD_TYPE" : 7,
+				"BUILD_NAME" : "Artwork",
+				"INC_CRC" : "8EC90DBEB0BD07C2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80240634236854, 1.3448969950852032 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4225,
+				"BUILD_TYPE" : 1,
+				"BUILD_NAME" : "Rules",
+				"INC_CRC" : "E02B14846506938C",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8270651435159, 1.3705998264603838 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4226,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "364D66718E7FDD4A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82627061793013, 1.3707490958892437 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4227,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "3D78FF6DE1DBA0C2",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.82554863395092, 1.3675287528058375 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4228,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "F98B3F3DC004FBD5",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8257541825653, 1.3709801014925607 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4229,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "6E7019E214A93003",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.83658128962162, 1.3456152753679178 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4230,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : " ",
+				"INC_CRC" : "E01D3FB886F08E4D",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77331740091033, 1.3612933859611585 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4231,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Dairy Farm Quarry Site",
+				"INC_CRC" : "B85172F3A95CB88A",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77552788076595, 1.3485031314769775 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4232,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Playground",
+				"INC_CRC" : "5F3A0A481352D954",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8026725484153, 1.2652674744461567 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4233,
+				"BUILD_TYPE" : 11,
+				"BUILD_NAME" : "Payground",
+				"INC_CRC" : "FE6D63A82D52AC29",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80354267308167, 1.2647243176457699 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4234,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Machine Gun Post",
+				"INC_CRC" : "43EC68141A6CA8F7",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77660885457679, 1.3485377878774447 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4235,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "AA06536F280FF9CA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77688684947643, 1.3484004612799017 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4236,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "WWII Memorial Site Storyboard",
+				"INC_CRC" : "FC8BCBBF505B1A14",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.8017080437481, 1.2668846815793418 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4237,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Shelter 2",
+				"INC_CRC" : "7B97C7BE18018E11",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.80321228367573, 1.265725982067429 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4238,
+				"BUILD_TYPE" : 9,
+				"BUILD_NAME" : "Cannon Platform",
+				"INC_CRC" : "53D303A634A5A1E9",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77234965365226, 1.3640770639253599 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4239,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "100 DF Shelter",
+				"INC_CRC" : "4BFE2740BA9AFDDA",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77937581426494, 1.3729436598041713 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4240,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Leea Hut",
+				"INC_CRC" : "F4C2C98E0CA2BFAC",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77326312948719, 1.386183527212863 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4241,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Pavilion",
+				"INC_CRC" : "CF1B1FB986ACC61B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77417943313033, 1.3847128335053185 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4242,
+				"BUILD_TYPE" : 2,
+				"BUILD_NAME" : "Respite Deck",
+				"INC_CRC" : "34CD62890C55515B",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 103.77330804953479, 1.3861742495878646 ]
+			},
+			"properties" : {
+				"OBJECTID" : 4243,
+				"BUILD_TYPE" : 4,
+				"BUILD_NAME" : "Toilet",
+				"INC_CRC" : "1CB6CBA16DC69060",
+				"FMEL_UPD_D" : "20250122140629"
+			}
+		}
+	]
+}

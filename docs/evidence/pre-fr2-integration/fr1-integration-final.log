@@ -1,0 +1,18 @@
+PASS clean browser uses simple guidance
+PASS all three style descriptions begin hidden
+PASS one description opens without selecting a travel style
+PASS actual packaged route starts with simple guidance and an Update action
+PASS choosing a later real step requires the tick
+PASS tick commits the selected canonical step only
+PASS finish wording is exact and staff shortcut was removed from current actions
+PASS route legend is collapsed in the panel instead of overlaying the map
+PASS Facilities shows real nearby lifts and toilets within the stated radius
+PASS unconfigured maintenance stays explicitly unknown
+PASS facility discovery preserves the accepted route and checkpoint
+PASS dedicated facility map is available without replacing journey progress
+PASS all eight destinations fit with Current trip larger and centered: mobile
+PASS all eight destinations fit with Current trip larger and centered: large-text
+PASS all eight destinations fit with Current trip larger and centered: desktop
+PASS Finish journey still completes the accepted trip
+PASS Staff page remains available after the new current action
+PASS combined walkthrough has no browser runtime errors

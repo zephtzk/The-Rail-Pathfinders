@@ -1,0 +1,20 @@
+{
+  "preview": "http://localhost:4227/",
+  "build": {
+    "schemaVersion": 1,
+    "applicationSha256": "f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424112a4bc54670",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "navHeight": 123,
+  "checks": [
+    "New preview serves final application hash",
+    "All eight destinations with compact 123px navigation",
+    "Browser-granted controlled startup location appears without starting journey",
+    "Facilities shares the startup location and shows nearby real directory entries without Locate button",
+    "No runtime errors"
+  ],
+  "errors": [],
+  "environment": "Isolated desktop Edge context, 390px mobile viewport, controlled geolocation 1.3009/103.8554 with10m accuracy, blocked street tiles; browser-local user data untouched"
+}

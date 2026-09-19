@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "clean browser uses simple guidance",
+    "all three style descriptions begin hidden",
+    "one description opens without selecting a travel style",
+    "actual packaged route starts with simple guidance and an Update action",
+    "choosing a later real step requires the tick",
+    "tick commits the selected canonical step only",
+    "finish wording is exact and staff shortcut was removed from current actions",
+    "route legend is collapsed in the panel instead of overlaying the map",
+    "Facilities shows real nearby lifts and toilets within the stated radius",
+    "unconfigured maintenance stays explicitly unknown",
+    "facility discovery preserves the accepted route and checkpoint",
+    "dedicated facility map is available without replacing journey progress",
+    "all eight destinations fit with Current trip larger and centered: mobile",
+    "all eight destinations fit with Current trip larger and centered: large-text",
+    "all eight destinations fit with Current trip larger and centered: desktop",
+    "Finish journey still completes the accepted trip",
+    "Staff page remains available after the new current action",
+    "combined walkthrough has no browser runtime errors"
+  ],
+  "errors": [],
+  "environment": "Desktop Edge mobile/touch and enlarged-text emulation; actual packaged CC26 to EW9 route on 21 September 2026, 10:00 SGT; blocked street tiles; unconfigured real local maintenance endpoint; no physical-phone verification"
+}

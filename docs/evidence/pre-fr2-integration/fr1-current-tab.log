@@ -1,0 +1,81 @@
+PASS application navigation: all destinations are direct buttons
+PASS application navigation desktop: Current trip centered and larger
+PASS application navigation desktop: every label and touch target visible without horizontal scrolling
+PASS application navigation desktop: tabs occupy separate areas with at least 6px spacing
+PASS application navigation desktop: one selected destination and focused heading
+PASS application navigation 390: Current trip centered and larger
+PASS application navigation 390: every label and touch target visible without horizontal scrolling
+PASS application navigation 390: tabs occupy separate areas with at least 6px spacing
+PASS application navigation 390: one selected destination and focused heading
+PASS application navigation 320: Current trip centered and larger
+PASS application navigation 320: every label and touch target visible without horizontal scrolling
+PASS application navigation 320: tabs occupy separate areas with at least 6px spacing
+PASS application navigation 320: one selected destination and focused heading
+PASS application navigation 320-large: Current trip centered and larger
+PASS application navigation 320-large: every label and touch target visible without horizontal scrolling
+PASS application navigation 320-large: tabs occupy separate areas with at least 6px spacing
+PASS application navigation 320-large: one selected destination and focused heading
+PASS application navigation 390-large: Current trip centered and larger
+PASS application navigation 390-large: every label and touch target visible without horizontal scrolling
+PASS application navigation 390-large: tabs occupy separate areas with at least 6px spacing
+PASS application navigation 390-large: one selected destination and focused heading
+PASS application navigation 390-setting: Current trip centered and larger
+PASS application navigation 390-setting: every label and touch target visible without horizontal scrolling
+PASS application navigation 390-setting: tabs occupy separate areas with at least 6px spacing
+PASS application navigation 390-setting: one selected destination and focused heading
+PASS application navigation landscape: Current trip centered and larger
+PASS application navigation landscape: every label and touch target visible without horizontal scrolling
+PASS application navigation landscape: tabs occupy separate areas with at least 6px spacing
+PASS application navigation landscape: one selected destination and focused heading
+PASS application navigation: plan navigation and selection work
+PASS application navigation: current navigation and selection work
+PASS application navigation: saved navigation and selection work
+PASS application navigation: caregiver navigation and selection work
+PASS application navigation: spending navigation and selection work
+PASS application navigation: preferences navigation and selection work
+PASS application navigation: staff navigation and selection work
+PASS application navigation: keyboard order reaches Current trip with a visible focus ring
+PASS application navigation: keyboard activation opens Current trip
+PASS application navigation: desktop toast clears the taller navigation
+PASS application navigation: bottom and asymmetric side safe areas are retained
+PASS eight-destination layout: all destinations are direct buttons
+PASS eight-destination layout desktop: Current trip centered and larger
+PASS eight-destination layout desktop: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout desktop: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout desktop: one selected destination and focused heading
+PASS eight-destination layout 390: Current trip centered and larger
+PASS eight-destination layout 390: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout 390: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout 390: one selected destination and focused heading
+PASS eight-destination layout 320: Current trip centered and larger
+PASS eight-destination layout 320: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout 320: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout 320: one selected destination and focused heading
+PASS eight-destination layout 320-large: Current trip centered and larger
+PASS eight-destination layout 320-large: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout 320-large: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout 320-large: one selected destination and focused heading
+PASS eight-destination layout 390-large: Current trip centered and larger
+PASS eight-destination layout 390-large: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout 390-large: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout 390-large: one selected destination and focused heading
+PASS eight-destination layout 390-setting: Current trip centered and larger
+PASS eight-destination layout 390-setting: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout 390-setting: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout 390-setting: one selected destination and focused heading
+PASS eight-destination layout landscape: Current trip centered and larger
+PASS eight-destination layout landscape: every label and touch target visible without horizontal scrolling
+PASS eight-destination layout landscape: tabs occupy separate areas with at least 6px spacing
+PASS eight-destination layout landscape: one selected destination and focused heading
+PASS eight-destination layout: plan navigation and selection work
+PASS eight-destination layout: current navigation and selection work
+PASS eight-destination layout: saved navigation and selection work
+PASS eight-destination layout: caregiver navigation and selection work
+PASS eight-destination layout: spending navigation and selection work
+PASS eight-destination layout: preferences navigation and selection work
+PASS eight-destination layout: staff navigation and selection work
+PASS eight-destination layout: keyboard order reaches Current trip with a visible focus ring
+PASS eight-destination layout: keyboard activation opens Current trip
+PASS eight-destination layout: desktop toast clears the taller navigation
+PASS eight-destination layout: bottom and asymmetric side safe areas are retained
+PASS no browser runtime errors

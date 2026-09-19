@@ -1,0 +1,29 @@
+PASS rapid endpoint refocus keeps suggestions open past the earlier blur timeout
+PASS a suggestion remains selectable after rapid refocus without starting a journey
+PASS search leaves the route unaccepted and exposes one deliberate Start journey
+PASS packaged local route provides an alternative to the suggested itinerary
+PASS a detached action for a different option cannot accept the refreshed selection
+PASS fare, accessibility and route sources are available before Start
+PASS estimate and accessibility limitations accompany the Start action
+PASS Save route works before Start and does not accept a journey
+PASS one Start click accepts the explicitly selected non-default local itinerary
+PASS direct Start preserves civil timing, preferences and canonical step mapping
+PASS direct Start leaves sharing off and opens current guidance without a second confirmation
+PASS an active trip disables replacement and explains the conflict
+PASS the start handler itself rejects replacement even when disabled UI is bypassed
+PASS a paused trip also blocks replacement without changing accepted state
+PASS cancelling restores Start for the valid already selected next journey
+PASS two synchronous activations accept exactly one new journey
+PASS endpoint editing removes Start and rejects a retained obsolete handler
+PASS incomplete endpoints explain the problem without starting
+PASS changing the civil date invalidates the route and obsolete action
+PASS changing departure time invalidates the route and obsolete action
+PASS saving changed preferences invalidates the route and obsolete action
+PASS real unverified step-free options visibly block Start before acceptance
+PASS the start handler cannot bypass verified step-free requirements
+PASS an in-flight provider search cannot expose Start or accept automatically
+PASS a delayed successful provider response cannot restore an invalidated route
+PASS a fresh provider response still waits for explicit Start after stale rejection
+PASS direct provider Start preserves geometry, source timestamp and canonical instructions
+PASS provider Start attaches fresh startup location with step zero, one action and caregiver consent off
+PASS no browser runtime errors

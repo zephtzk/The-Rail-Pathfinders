@@ -1,5 +1,5 @@
 export const PRESENTATION_KEY='commute-copilot-presentation-v1';
-const defaults=()=>({schemaVersion:1,simpleGuidance:false});
+const defaults=()=>({schemaVersion:1,simpleGuidance:true});
 export function readPresentationPreferences(storage){try{const value=JSON.parse(storage?.getItem(PRESENTATION_KEY));return value?.schemaVersion===1&&typeof value.simpleGuidance==='boolean'?{schemaVersion:1,simpleGuidance:value.simpleGuidance}:defaults();}catch{return defaults();}}
 export function createPresentationPreferences(storage){
   return {read:()=>readPresentationPreferences(storage),setSimple(value){
