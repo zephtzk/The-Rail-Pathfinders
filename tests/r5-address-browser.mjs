@@ -34,8 +34,7 @@ try{
   check('request contains coordinate endpoints and authoritative preferences',requested.length===1&&Object.keys(requested[0].origin).sort().join()==='lat,lng'&&requested[0].preferences.walkingLimitMinutes===30);
   await page.locator('.review-details > summary').click();
   check('standalone provider timeline shows public service and stop names',await page.locator('#route-results').innerText().then(t=>t.includes('Bus 23A')&&t.includes('Example bus stop A')&&!t.includes('onemap:')));
-  await page.locator('#route-map-details > summary').click();
-  check('provider map has a geometry/evidence notice in journey details',await page.locator('#route-map-details').innerText().then(t=>t.includes('OneMap')&&t.includes('indoor')));
+  check('provider map retains OneMap attribution and accuracy label with map details removed',await page.locator('#route-map-details,.map-route-legend').count()===0&&await page.locator('#commute-map .leaflet-control-attribution a[href="https://www.onemap.gov.sg/"]').innerText()==='OneMap / SLA'&&await page.locator('#commute-map').getAttribute('aria-label')==='Approximate journey map; indoor guidance unverified');
   await page.locator('#save-route').click();await page.locator('#save-route-form [name=label]').fill('Private commute title');await page.locator('#save-route-form button').click();
   check('address route saves with endpoint records without inventing local station connections',await page.evaluate(()=>{const p=JSON.parse(localStorage.getItem('commute-copilot-personal-v2'));return p?.templates?.some(t=>t.label==='Private commute title')&&p.places.every(p=>p.routingId===null);}));
   await page.locator('#route-plan-details > summary').click();

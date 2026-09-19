@@ -81,11 +81,11 @@ try{
   const denied=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block',reducedMotion:'reduce'});
   await denied.addInitScript(()=>localStorage.setItem('commute-copilot-location-v2','denied'));await denied.route('https://tile.openstreetmap.org/**',r=>r.abort());
   const deniedPage=await denied.newPage();deniedPage.on('pageerror',e=>errors.push(e.message));await deniedPage.goto(base);await deniedPage.locator('#find-routes:not([disabled])').waitFor();
-  check('denied location retains explanation and a direct settings recovery',/denied/.test(await deniedPage.locator('#app-location-status').innerText())&&await deniedPage.locator('#location-settings-link').isVisible());
-  await deniedPage.locator('#location-settings-link').click();check('recovery opens the existing retry control',await deniedPage.getByRole('button',{name:'Retry location assistance',exact:true}).isVisible());await denied.close();
+  await deniedPage.locator('#location-toggle').click();
+  check('denied location retains explanation and a direct retry in the popover',/denied/.test(await deniedPage.locator('#app-location-status').innerText())&&await deniedPage.getByRole('button',{name:'Retry location',exact:true}).isVisible());await denied.close();
   await station('origin','EW12');await page.waitForTimeout(1550);
   const queryCount=queries.length,routeCount=requests.length,selectedQuery=await page.locator('#origin').inputValue();holdNext=true;
-  await page.locator('#origin').press('ArrowDown');await page.locator('#origin').press('Enter');await waitHeld();
+  for(let i=0;i<12&&await page.locator('#origin').getAttribute('aria-activedescendant')!=='origin-address-search';i++)await page.locator('#origin').press('ArrowDown');await page.locator('#origin').press('Enter');await waitHeld();
   check('Enter activates a highlighted search option on an already selected endpoint',queries.length===queryCount+1&&queries.at(-1)===selectedQuery&&requests.length===routeCount&&await page.locator('#origin').getAttribute('aria-busy')==='true');
   await page.locator('#destination').focus();
   check('blur cancels pending lookup and clears its status without planning',await page.locator('#origin-search-status').textContent()===''&&!await page.locator('#origin-search-status').isVisible()&&await page.locator('#origin').getAttribute('aria-busy')===null&&requests.length===routeCount);

@@ -30,7 +30,7 @@ try{
    },view);
    measurements.push({case:size.name,...data});
    check(`${size.name} ${view}: heading focused, content fits width and stays above navigation`,data.headingFocused&&data.noOverflow&&data.aboveNav&&data.contentHeight>100);
-   if(['plan','current'].includes(view)&&size.width<=680&&!size.text)check(`${size.name} ${view}: integrated header saves at least 40px over former 97px stack`,data.headerHeight<=57);
+   if(['plan','current'].includes(view)&&size.width<=680&&!size.text)check(`${size.name} ${view}: compact grabber keeps the map controls above content`,data.headerHeight<=77);
    if(view==='caregiver')check(`${size.name}: requested caregiver paragraphs removed; address and acceptance disclosure retained`,await page.locator('#companion-sharing').evaluate(e=>!e.textContent.includes('Latest checkpoint and optional latest position')&&!e.textContent.includes('Ordinary Web Push')&&e.textContent.includes('Addresses included')&&e.textContent.includes('explicitly accept')));
    await page.screenshot({path:`${out}/${view}-${size.name}.png`,animations:'disabled'});
   }

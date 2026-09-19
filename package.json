@@ -36,7 +36,8 @@
     "benchmark:r5-bus": "node --expose-gc scripts/benchmark-r5-bus.mjs",
     "test:fr1-browser": "node tests/fr1-current-step-browser.mjs && node tests/nearby-facilities-browser.mjs && node tests/fr1-current-tab-browser.mjs && node tests/fr1-integration-browser.mjs",
     "test:pre-fr2-browser": "node tests/pre-fr2-compact-tabs-browser.mjs && node tests/pre-fr2-staff-tick-browser.mjs && node tests/pre-fr2-start-journey-browser.mjs && node tests/pre-fr2-start-contrast-browser.mjs && node tests/pre-fr2-location-browser.mjs && node tests/location-privacy-browser.mjs && node tests/location-legacy-controls-browser.mjs",
-    "test:fr2-browser": "node tests/fr2-search-browser.mjs && node tests/fr2-polish-browser.mjs && node tests/fr2-fares-browser.mjs && node tests/fr2-demo-browser.mjs && node tests/fr2-services-browser.mjs && node tests/services-ui-browser.mjs"
+    "test:fr2-browser": "node tests/fr2-search-browser.mjs && node tests/fr2-polish-browser.mjs && node tests/fr2-fares-browser.mjs && node tests/fr2-demo-browser.mjs && node tests/fr2-services-browser.mjs && node tests/services-ui-browser.mjs",
+    "test:fr3-browser": "node tests/fr3-location-browser.mjs && node tests/fr3-cleanup-browser.mjs && node tests/fr3-instruction-cards-browser.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",

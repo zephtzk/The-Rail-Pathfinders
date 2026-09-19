@@ -55,7 +55,6 @@ try{
     halos:map.querySelectorAll('.journey-route-halo').length,
     badges:[...map.querySelectorAll('.map-service-badge')].map(badge=>badge.textContent.trim()),
     stops:map.querySelectorAll('.journey-transfer-stop').length,
-    legend:[...document.querySelectorAll('.map-route-key')].map(key=>key.textContent.trim()),
   }));
   async function styles(label){
     await page.waitForFunction(()=>document.querySelectorAll('#commute-map .journey-route-line').length===5);
@@ -66,8 +65,9 @@ try{
     check(`${label}: trains are solid in East West and Downtown service colors`,value.lines[1].color==='#189E4A'&&!value.lines[1].dash&&value.lines[3].color==='#0354A6'&&!value.lines[3].dash);
     check(`${label}: buses retain a distinct blue line and white center pattern`,value.lines[2].color==='#1A73E8'&&!value.lines[2].dash&&value.busDetails.length===1&&value.busDetails[0].color==='#FFFFFF'&&value.busDetails[0].dash==='7 12');
     check(`${label}: all route segments have casings and transfer stops are marked`,value.halos===5&&value.stops===4);
-    check(`${label}: map badges and journey-panel key identify the services and travel modes`,['EW','Bus 23A','DT'].every(label=>value.badges.includes(label))&&['Walking','EW','Bus','DT'].every(label=>value.legend.includes(label)));
-    check(`${label}: route legend and details do not cover the map`,!await page.locator('#map-caption').isVisible()&&await page.locator('#map-caption').innerText()===''&&await page.locator('#journey-panel-content #route-map-details').count()===1);
+    check(`${label}: map badges identify all transit services`,['EW','Bus 23A','DT'].every(label=>value.badges.includes(label)));
+    check(`${label}: removed route legend and details stay absent`,!await page.locator('#map-caption').isVisible()&&await page.locator('#map-caption').innerText()===''&&await page.locator('#route-map-details,.map-route-legend,.map-route-key').count()===0);
+    check(`${label}: provider attribution and approximate indoor guidance label remain on the map`,await page.locator('#commute-map .leaflet-control-attribution a[href="https://www.onemap.gov.sg/"]').innerText()==='OneMap / SLA'&&await page.locator('#commute-map').getAttribute('aria-label')==='Approximate journey map; indoor guidance unverified');
     return value;
   }
   async function capture(name){
@@ -84,12 +84,9 @@ try{
   check('finding the mixed route leaves accepted guidance empty',await active()===null);
   const preview=await styles('preview');
   await page.locator('#journey-sheet-handle').press('End');
-  check('mobile map stays clear with the route key collapsed in the journey panel',!await page.locator('.map-route-legend').isVisible()&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  check('mobile map stays clear without the removed route key and has no horizontal overflow',await page.locator('.map-route-legend').count()===0&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await capture('mixed-route-preview-mobile');
   await page.locator('#journey-sheet-handle').press('Escape');
-  await page.locator('#route-map-details > summary').click();
-  check('route key and source remain available in the journey panel',await page.locator('#route-map-details').innerText().then(text=>text.includes('OneMap')&&text.includes('indoor'))&&await page.locator('.map-route-legend').isVisible());
-  await page.locator('#route-map-details > summary').click();
   await page.locator('#review-route').click();
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2'))?.status==='started');
   const accepted=await active();

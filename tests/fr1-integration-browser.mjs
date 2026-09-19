@@ -42,8 +42,8 @@ try{
   await page.getByRole('button',{name:'Confirm my current step',exact:true}).click();
   const confirmed=await active();
   check('tick commits the selected canonical step only',confirmed.progress.stepIndex===Number(choice)&&JSON.stringify(confirmed.route)===JSON.stringify(initial.route));
-  check('finish wording is exact and staff shortcut was removed from current actions',(await page.locator('#journey-finish').textContent()).trim()==='Finish journey'&&await page.locator('#guidance-staff').count()===0);
-  check('route legend is collapsed in the panel instead of overlaying the map',await page.locator('#map-caption .map-route-legend').count()===0&&await page.locator('#route-map-details').isVisible()&&!await page.locator('#route-map-details').evaluate(element=>element.open));
+  check('all three current actions have exact labels and are visible without a disclosure',JSON.stringify(await page.locator('.trip-actions button').allTextContents())===JSON.stringify(['End trip','Pause trip','Cancel trip'])&&(await Promise.all(['journey-finish','journey-pause','journey-cancel'].map(id=>page.locator('#'+id).isVisible()))).every(Boolean)&&await page.locator('#trip-more-actions').count()===0&&await page.locator('#guidance-staff').count()===0);
+  check('removed route-map section stays absent while the map retains its accuracy label',await page.locator('#route-map-details,.map-route-legend').count()===0&&await page.locator('#commute-map').getAttribute('aria-label')==='Approximate journey map; indoor guidance unverified');
   await page.locator('#journey-sheet-handle').press('Home');await page.getByRole('button',{name:'Update my current step',exact:true}).click();
   await capture('current-trip-mobile');
 
@@ -72,8 +72,8 @@ try{
     await capture(`combined-${size.name}`);
   }
   await page.evaluate(()=>document.documentElement.style.fontSize='');await page.setViewportSize({width:390,height:844});await nav('current');
-  await page.locator('#trip-more-actions > summary').click();await page.getByRole('button',{name:'Finish journey',exact:true}).click();
-  check('Finish journey still completes the accepted trip',(await active()).status==='completed');
+  await page.locator('#journey-finish').click();
+  check('End trip still completes the accepted trip',(await active()).status==='completed');
   await nav('staff');check('Staff page remains available after the new current action',await page.locator('#staff-content').isVisible());
   check('combined walkthrough has no browser runtime errors',errors.length===0);
 }catch(error){await capture('failure');throw error;}

@@ -1,0 +1,15 @@
+/* Specificity keeps the target usable inside both app and companion cards. */
+.instruction-card.instruction-card.instruction-card{position:relative;padding-right:66px;min-height:62px;box-sizing:border-box;overflow-wrap:anywhere}
+.instruction-card[data-instruction-dismissed="true"]{display:none!important}
+.instruction-card .instruction-card-close{
+  position:absolute;top:6px;right:6px;display:grid;place-items:center;
+  width:44px;height:44px;min-width:44px;min-height:44px;margin:0;padding:0;
+  border:1px solid #a08441;border-radius:10px;background:#fffaf0;color:#51421f;
+  font:1.5rem/1 system-ui,sans-serif;cursor:pointer;box-shadow:none;
+}
+.instruction-card .instruction-card-close:hover{background:#f4e7bd;color:#392c0b}
+.instruction-card .instruction-card-close:active{background:#e8d392}
+.instruction-card .instruction-card-close:focus-visible{outline:3px solid #174f9e;outline-offset:2px}
+/* A narrow screen gives enlarged text the full card width beneath the X. */
+@media(max-width:360px){.instruction-card.instruction-card.instruction-card{padding-top:62px;padding-right:1rem}}
+@media(forced-colors:active){.instruction-card .instruction-card-close{border-color:ButtonText;background:ButtonFace;color:ButtonText}}

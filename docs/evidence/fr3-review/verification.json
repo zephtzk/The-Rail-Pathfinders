@@ -1,0 +1,18 @@
+{
+  "phase": "FR3 review items 1-8",
+  "javascriptTests": 536,
+  "pythonTests": 44,
+  "browserChecks": 426,
+  "suites": {
+    "new FR3 location/cleanup/instruction": 146,
+    "address search": 23,
+    "all-tab layout/contrast": 69,
+    "current step": 91,
+    "journey sheet": 39,
+    "location behavior": 50,
+    "location privacy": 8
+  },
+  "buildAssets": 121,
+  "environment": "Installed Edge with controlled GPS/provider fixtures; 320px/390px/desktop and 200% text. Screenshots visually inspected. No physical-phone test claim.",
+  "notes": "24px full-width grabber retains swipe/tap/keyboard operation; map tabs and standard controls retain 44px targets."
+}
