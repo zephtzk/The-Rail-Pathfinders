@@ -3,6 +3,8 @@ import {mountCompanion} from './copilot-ui.js';
 import {createRailRouter} from './rail-engine.js';
 import {legacyPlannerInput,legacyPlannerSettings} from './legacy-planner-preferences.js';
 import {mountDatePickers} from './date-picker.js';
+import {icon} from './icons.js';
+import {railBadgeStyle} from './rail-service-style.js';
 
 // Presentation owns form state and rendering. The routing engine owns every timing decision.
 const SAVE_KEY = 'commute-copilot-rail-guidance-v1';
@@ -48,7 +50,7 @@ const routeColor = id => {
   const color = lookup.routes.get(id)?.color ?? '23786a';
   return /^#?[a-f\d]{6}$/i.test(color) ? `#${color.replace('#','')}` : '#23786a';
 };
-const linePill = id => `<span class="line-pill"><i style="background:${routeColor(id)}" aria-hidden="true"></i>${escape(routeLabel(id))}</span>`;
+const linePill = id => `<span class="line-pill rail-service-fill" style="${railBadgeStyle(id,network?.routes)}">${icon('train',16)}${escape(routeLabel(id))}</span>`;
 
 function shell() {
   app.innerHTML = `<header class="rail-header"><a class="rail-brand" href="/"><img src="/icon.svg" width="36" height="36" alt=""><span>Commute <strong>Copilot</strong></span></a><a class="replay-link" href="/replay.html">Original corridor replay <span aria-hidden="true">↗</span></a></header>

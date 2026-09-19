@@ -17,6 +17,11 @@
 .transit-badge.line-downtown {background:#e3edfa;border-color:#afc4e6;color:#2c528b;}
 .transit-badge.line-thomson {background:#f1e8e2;border-color:#d8bcac;color:#73513c;}
 .transit-badge.line-bus {background:#e8f4ef;border-color:#a8d0c1;color:#286550;}
+.transit-timeline .timeline-marker.rail-service-fill,
+.transit-timeline .transit-badge.rail-service-fill,
+.line-pill.rail-service-fill,
+.commute-app .line-pill.rail-service-fill {background:var(--service-fill,#5f6368);border-color:var(--service-fill,#5f6368);color:var(--service-ink,#fff);}
+.rail-service-fill > .icon {color:inherit;}
 .timeline-phases {margin-top:.55rem;font-size:.9em;}
 .transit-timeline .timeline-phases summary {font-weight:500;color:#49687b;cursor:pointer;}
 .timeline-phases ul {list-style:none;padding:0;margin:.5rem 0 0;}

@@ -1,31 +1,9 @@
 import {icon} from './icons.js';
+import {railLineStyle} from './rail-service-style.js';
+export {railLineStyle} from './rail-service-style.js';
 
-// Imported route colours take precedence. Aliases also cover saved / OneMap
-// journeys whose service is a public line name instead of a timetable route ID.
-const LINES=[
-  {code:'EW',name:'East West Line',color:'#189E4A',aliases:['EW','EWL','CG','CGL','East West Line','Changi Airport Branch']},
-  {code:'NS',name:'North South Line',color:'#D62821',aliases:['NS','NSL','North South Line']},
-  {code:'NE',name:'North East Line',color:'#844184',aliases:['NE','NEL','North East Line']},
-  {code:'CC',name:'Circle Line',color:'#F2AD27',aliases:['CC','CCL','CE','CEL','Circle Line']},
-  {code:'DT',name:'Downtown Line',color:'#0354A6',aliases:['DT','DTL','Downtown Line']},
-  {code:'TE',name:'Thomson-East Coast Line',color:'#9D5A25',aliases:['TE','TEL','Thomson East Coast Line']},
-  {code:'BP',name:'Bukit Panjang LRT',color:'#6E8270',aliases:['BP','BPLRT','Bukit Panjang LRT']},
-  {code:'SK',name:'Sengkang LRT',color:'#6E8270',aliases:['SK','SKLRT','SE','SW','Sengkang LRT']},
-  {code:'PG',name:'Punggol LRT',color:'#6E8270',aliases:['PG','PGLRT','PE','PW','Punggol LRT']},
-];
-const normal=value=>String(value??'').trim().toUpperCase().replace(/[-–—\s]+/g,' ');
-const hex=value=>typeof value==='string'&&/^#?[\da-f]{6}$/i.test(value)?'#'+value.replace(/^#/,''):null;
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const coordinate=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite);
-
-export function railLineStyle(routeId,routes=[]){
-  const value=normal(routeId),prefix=value.split('_')[0];
-  const line=LINES.find(line=>line.aliases.some(alias=>normal(alias)===value||normal(alias)===prefix));
-  const metadata=routes.find(route=>normal(route.id)===value)
-    ??routes.find(route=>[route.shortName,route.name].some(name=>normal(name)===value))
-    ??(line&&routes.find(route=>line.aliases.some(alias=>normal(alias)===normal(route.shortName))));
-  return {color:hex(metadata?.color)??line?.color??'#5F6368',label:line?.code??metadata?.shortName??String(routeId||'Train'),name:line?.name??metadata?.name??String(routeId||'Train')};
-}
 
 export function routeModeStyle(step,routes=[]){
   const source=step?.source??step??{},type=step?.type??source.type,mode=String(source.mode??step?.mode??'').toLowerCase();
