@@ -67,6 +67,23 @@ test('expired access, network failure, huge bodies and malformed responses never
   const handle=createAddressAdapter({clock:()=>NOW});assert.equal((await handle(request('search',{query:'x'.repeat(5000)}))).status,400);
 });
 
+test('HTTP 200 provider errors remain unavailable for search and routing without leaking diagnostics',async()=>{
+  for(const endpoint of ['search','route'])for(const error of ['Missing token: synthetic-secret','Expired token: synthetic-secret','Invalid token: synthetic-secret',{message:'synthetic-secret'}]){
+    const payload=endpoint==='search'?{results:[],error}:{...upstream(),error};
+    const handle=createAddressAdapter({clock:()=>NOW,fetcher:async()=>json(payload)});
+    const result=await body(await handle(request(endpoint,endpoint==='search'?{query:'public road'}:input()),{ONEMAP_TOKEN:'synthetic-secret'}));
+    assert.equal(result.status,503);assert.equal(result.value.status,'unavailable');
+    assert.equal('results' in result.value,false);assert.equal('itineraries' in result.value,false);
+    assert.doesNotMatch(JSON.stringify(result.value),/synthetic-secret|Missing token|Expired token|Invalid token/);
+  }
+});
+
+test('a genuine empty OneMap search remains a successful empty result',async()=>{
+  const handle=createAddressAdapter({clock:()=>NOW,fetcher:async()=>json({results:[]})});
+  const result=await body(await handle(request('search',{query:'public road'}),{ONEMAP_TOKEN:'test'}));
+  assert.equal(result.status,200);assert.equal(result.value.status,'ok');assert.deepEqual(result.value.results,[]);
+});
+
 test('contract normalization rejects overlapping, missing, unsupported or inconsistent transit legs',()=>{
   for(const mutate of [r=>r.plan.itineraries[0].legs[1].startTime=NOW,r=>delete r.plan.itineraries[0].legs[0].from,r=>r.plan.itineraries[0].legs[1].mode='FERRY',r=>r.plan.itineraries[0].legs[1].duration=1]){const raw=upstream();mutate(raw);assert.deepEqual(normalizeProviderItineraries(raw),[]);}
   assert.throws(()=>normalizeProviderItineraries({itineraries:[]}));

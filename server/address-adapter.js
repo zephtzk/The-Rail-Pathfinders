@@ -82,6 +82,10 @@ export function createAddressAdapter({fetcher=globalThis.fetch,clock=Date.now,ti
         return failure('unavailable','The address provider could not complete this request. Try again later.');
       }
       const payload=await boundedJSON(response,512*1024),retrievedAt=clock();
+      // OneMap can report authentication failures inside an HTTP 200 response,
+      // including an empty results array. Do not present these as no matches or
+      // forward the provider's diagnostic text (which may contain credentials).
+      if(payload?.error)return failure('unavailable','The address provider could not complete this request. Try again later.');
       if(url.pathname.endsWith('/search'))return reply({provider:'onemap',status:'ok',retrievedAt,results:normalizeOneMapSearch(payload)});
       const itineraries=normalizeProviderItineraries(payload);
       return itineraries.length?reply({provider:'onemap',status:'ok',retrievedAt,itineraries}):failure('unsupported-response','No complete supported itinerary was returned. Keep your saved guidance or try different details.',422);
