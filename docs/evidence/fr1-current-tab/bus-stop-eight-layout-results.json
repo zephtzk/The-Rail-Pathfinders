@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-09-19T03:00:05.786Z",
+  "base": "http://127.0.0.1:4208",
+  "applicationSha256": "55331f63180017a80cae8eba58caf5109caa0266a65cdf9f2f8c30db3cc4d2fe",
+  "checks": [
+    "unselected endpoints do not display bus stop details",
+    "rail suggestions retain the train icon",
+    "bus suggestions use a distinct bus drawing",
+    "bus suggestion subtitle contains only unique naturally sorted bus numbers",
+    "keyboard selection shows compact numbers and collapsed details with a bus field icon",
+    "keyboard expansion exposes stop identity, every listed direction and operator",
+    "unsupported timing stays listed with its planner limitation",
+    "departure changes retain open details for the same selected stop",
+    "touch collapses the disclosure and all compact numbers remain uncovered",
+    "editing immediately removes stale stop details and resets the field icon",
+    "clearing an endpoint leaves no prior stop service description",
+    "new stop selections show their own numbers and reset to collapsed",
+    "swapping endpoints exchanges stop details without retaining the other stop open state",
+    "reopening a saved bus route after reload restores both compact stop disclosures",
+    "selecting, editing, swapping and reopening endpoints preserve the accepted journey",
+    "expanded stop directions fit at 320px and 200 percent text without horizontal overflow",
+    "large-text service direction and operator scroll fully above the current-trip peek",
+    "desktop layout exposes readable bus stop directions without overflow",
+    "no browser runtime errors or build changes during verification"
+  ],
+  "errors": [],
+  "largeTextReachability": {
+    "textTop": 233.46875,
+    "textBottom": 450.28125,
+    "visibleTop": 231.34375,
+    "visibleBottom": 458.640625,
+    "panelHeight": 330.46875
+  },
+  "environment": "Desktop Edge; 390px touch/mobile and 320px 200 percent text emulation. Real keyboard, pointer, touch, search, save and reload interactions; not a physical device test."
+}

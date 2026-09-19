@@ -87,7 +87,7 @@ try{
   await disclosure('origin').locator('summary').tap();await page.locator('#journey-sheet-handle').press('Home');await disclosure('origin').locator('summary').scrollIntoViewIfNeeded();
   await capture('bus-stop-expanded-mobile');
   await page.setViewportSize({width:320,height:844});await page.addStyleTag({content:'html{font-size:200%}'});
-  await page.waitForFunction(()=>getComputedStyle(document.querySelector('.app-nav')).gridTemplateColumns.split(' ').length===3);await page.locator('#journey-sheet-handle').press('Home');
+  await page.waitForFunction(()=>Math.abs(parseFloat(document.body.style.getPropertyValue('--nav-height'))-document.querySelector('.app-nav').getBoundingClientRect().height)<1);await page.locator('#journey-sheet-handle').press('Home');
   check('expanded stop directions fit at 320px and 200 percent text without horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)&&await disclosure('origin').evaluate(element=>element.scrollWidth<=element.clientWidth)&&await page.locator('#journey-panel-content').evaluate(element=>element.clientHeight>100));
   await disclosure('origin').locator('summary').scrollIntoViewIfNeeded();await capture('bus-stop-large-text');
   await disclosure('origin').locator('li').first().evaluate(element=>element.scrollIntoView({block:'start',inline:'nearest'}));

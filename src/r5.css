@@ -51,3 +51,51 @@
   .commute-app .app-map .leaflet-bottom.leaflet-left{left:5px;right:auto}
   .commute-app .map-layer-control{margin-bottom:12px}
 }
+
+/* FR1: the journey row stays centered independently of the utility count.
+   Utilities remain direct destinations and wrap with the user's text size. */
+.commute-app .app-nav{display:flex;flex-direction:column;gap:6px;padding:8px;container:main-navigation / inline-size}
+.commute-app .app-nav-journey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr);align-items:center;gap:8px}
+.commute-app .app-nav-tools{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;border-top:1px solid var(--border);padding-top:6px}
+.commute-app .app-nav button{min-height:54px;padding:7px 5px;line-height:1.25;color:#44566e;font-size:.75rem}
+.commute-app .app-nav-journey button,.commute-app .app-nav-tools button{border:1px solid #d8e1ec;background:#f6f8fb}
+.commute-app .app-nav-tools button{flex:1 1 4rem;min-width:0;min-height:56px;font-size:.7rem}
+.commute-app .app-nav-journey [data-view=current]{min-height:76px;padding:10px 6px;border:2px solid #adc4e4;border-radius:18px;background:#f1f6fd;color:#153f7f;font-size:.875rem;font-weight:750;box-shadow:0 3px 8px #173e7312}
+.commute-app .app-nav-journey [data-view=current] .icon{width:28px;height:28px}
+.commute-app .app-nav button[aria-current=page]{color:#153f7f;background:#e8effa;box-shadow:inset 0 -3px #174f9e}
+.commute-app .app-nav-journey [data-view=current]:hover{background:#e2edfc;border-color:#174f9e}
+.commute-app .app-nav-journey [data-view=current][aria-current=page]{background:#174f9e;border-color:#123e7c;color:#fff;box-shadow:inset 0 -3px #0d2f60}
+.commute-app .app-nav-journey [data-view=current][aria-current=page]:hover{background:#123e7c}
+.commute-app .app-nav-journey [data-view=current][aria-current=page] .icon{--icon-fill:#174f9e}
+.commute-app .app-nav button:focus-visible{outline:3px solid #7250a0;outline-offset:2px}
+.commute-app:is(.large-text,[data-large-text=true]) .app-nav-journey [data-view=current]{font-size:1rem}
+.commute-app:is(.large-text,[data-large-text=true]) .app-nav-tools button{flex-basis:4.5rem}
+@media(max-width:360px){
+  .commute-app .app-nav-tools button{flex-basis:calc(33.333% - 4px)}
+}
+/* At enlarged text sizes, labels carry the utility destinations. Removing only
+   their decorative icons preserves reading space above the navigation dock. */
+@container main-navigation (max-width:15rem){
+  .commute-app .app-nav-tools{padding-top:4px}
+  .commute-app .app-nav-tools button{flex-basis:3.5rem;min-height:44px;padding-block:5px}
+  .commute-app .app-nav-tools .icon{display:none}
+  .commute-app .app-nav-journey [data-view=current]{padding-block:3px}
+}
+@media(max-width:680px){
+  .commute-app .app-nav{padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+  .commute-app.has-companion-trip .app-toast{bottom:calc(var(--nav-height,172px) + 110px)}
+}
+@media(min-width:681px){
+  .commute-app .app-toast{bottom:calc(var(--nav-height,164px) + max(20px,env(safe-area-inset-bottom)) + 12px)}
+}
+@media(max-width:680px) and (max-height:540px){
+  .commute-app .app-nav-journey button{flex-direction:row;min-height:44px}
+  .commute-app .app-nav-journey [data-view=current]{min-height:60px}
+  .commute-app .app-nav-tools button{flex-direction:row;min-height:44px}
+  .commute-app .app-nav-tools .icon{width:18px;height:18px}
+}
+@media(forced-colors:active){
+  .commute-app .app-nav button[aria-current=page]{outline:2px solid Highlight;outline-offset:-3px}
+  .commute-app .app-nav-journey [data-view=current][aria-current=page]{background:Highlight;color:HighlightText;border-color:Highlight}
+  .commute-app .app-nav button:focus-visible{outline:3px solid ButtonText;outline-offset:2px}
+}

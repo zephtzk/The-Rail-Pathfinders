@@ -69,7 +69,10 @@ $('app').innerHTML=`<div class="app-shell">
     <details id="route-map-details" class="map-route-note" hidden><summary>About this route map</summary><div id="route-map-key"></div><p id="route-map-note"></p></details>
   </div></main>
   <button id="trip-peek" class="trip-peek" hidden></button>
-  <nav class="app-nav" aria-label="Main navigation">${[['plan','plan','Plan'],['current','trip','Current trip'],['facilities','toilet','Facilities'],['saved','saved','Saved routes'],['caregiver','heart','Caregiver'],['spending','wallet','Spending'],['preferences','preferences','Settings'],['staff','info','Show to staff']].map(([id,i,label])=>`<button data-view="${id}" ${id==='plan'?'aria-current="page"':''}>${icon(i)}<span>${label}</span></button>`).join('')}</nav>
+  <nav class="app-nav" aria-label="Main navigation">${[
+    ['journey', [['plan','plan','Plan'],['current','trip','Current trip'],['saved','saved','Saved routes']]],
+    ['tools', [['facilities','toilet','Facilities'],['caregiver','heart','Caregiver'],['spending','wallet','Spending'],['preferences','preferences','Settings'],['staff','info','Show to staff']]],
+  ].map(([group,items])=>`<div class="app-nav-${group}">${items.map(([id,i,label])=>`<button type="button" data-view="${id}" ${id==='plan'?'aria-current="page"':''}>${icon(i)}<span>${label}</span></button>`).join('')}</div>`).join('')}</nav>
   <div id="app-message" class="app-toast" role="status" aria-live="polite"></div></div>`;
 
 function message(text){$('app-message').textContent=text;$('app-message').classList.add('is-visible');clearTimeout(message.timer);message.timer=setTimeout(()=>$('app-message').classList.remove('is-visible'),6000);}
@@ -193,5 +196,5 @@ async function boot(){try{[rail,bus,walking,build]=await Promise.all(['rail-netw
   mountR5Pages();renderPreferences();renderSaved();updateCurrent(companion.getActive());window.__copilotActiveId=companion.getActive()?.id;$('find-routes').disabled=false;$('planner-status').textContent='Ready for your next connection.';
   if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>message('Offline setup is unavailable. This device is not ready for offline guidance.'));
 }catch(e){$('planner-status').textContent=e.message;renderPreferences();}}
-new ResizeObserver(entries=>{const nav=entries[0].target,box=nav.getBoundingClientRect();document.body.style.setProperty('--nav-height',`${box.height}px`);document.body.style.setProperty('--nav-columns',box.width<parseFloat(getComputedStyle(document.documentElement).fontSize)*23?'3':'7');}).observe(document.querySelector('.app-nav'));
+new ResizeObserver(entries=>{const nav=entries[0].target;document.body.style.setProperty('--nav-height',`${nav.getBoundingClientRect().height}px`);}).observe(document.querySelector('.app-nav'));
 renderPreferences();boot();
