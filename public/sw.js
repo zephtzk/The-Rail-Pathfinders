@@ -1,7 +1,7 @@
 const CACHE='commute-copilot-v1';
 const SHELL=['/','/index.html','/multimodal.html','/replay.html','/icon.svg','/manifest.webmanifest','/src/rail-ui.js','/src/rail.css','/src/rail-engine.js','/src/multimodal-engine.js','/src/multimodal-ui.js','/src/pilot-validation.js','/src/journey-state.js','/src/journey-ui.js','/src/feed-health.js','/data/bus-network.json','/data/bus-manifest.json','/data/walking-links.json','/data/application-build.json','/data/rail-network.json','/data/rail-manifest.json','/src/app.js','/src/styles.css','/src/engine.js','/src/data.js','/src/storage.js','/src/live-data.js','/src/live-ui.js','/vendor/leaflet.js','/vendor/leaflet.css','/data/corridor.json','/data/sources.json'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('commute-copilot-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('commute-copilot-')&&k!==CACHE).map(k=>caches.delete(k)))).then(stopJourneyNotifications).then(()=>self.clients.claim())));
 self.addEventListener('message',event=>{
   if(event.data?.type!=='check-offline-readiness'||!event.ports?.[0])return;
   event.waitUntil((async()=>{
@@ -19,8 +19,12 @@ self.addEventListener('fetch',event=>{
   if(event.request.mode==='navigate'){event.respondWith(fetch(event.request).catch(async()=>await caches.match(url.pathname)||await caches.match('/')));return;}
   if(SHELL.includes(url.pathname))event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request)));
 });
-// No trip details or bearer credentials are stored in the notification receipt DB.
-function rememberPush(id){return new Promise((resolve,reject)=>{const open=indexedDB.open('commute-push-receipts',1);open.onupgradeneeded=()=>open.result.createObjectStore('receipts');open.onerror=()=>reject(open.error);open.onsuccess=()=>{const db=open.result,tx=db.transaction('receipts','readwrite'),store=tx.objectStore('receipts'),get=store.get(id);let fresh=false;get.onsuccess=()=>{fresh=!get.result;if(fresh)store.put(Date.now(),id);const cursor=store.openCursor();cursor.onsuccess=()=>{const item=cursor.result;if(item){if(Date.now()-item.value>86400000)item.delete();item.continue();}};};tx.oncomplete=()=>{db.close();resolve(fresh);};tx.onerror=()=>{db.close();reject(tx.error);};};});}
-self.addEventListener('push',event=>event.waitUntil((async()=>{let data;try{data=event.data?.json();}catch{return;}if(!data||typeof data.eventId!=='string'||data.eventId.length>200)return;if(!await rememberPush(data.eventId))return;await self.registration.showNotification('Journey updated',{body:'Open Commute Copilot to review your journey.',tag:'commute-journey-update',icon:'/icon.svg',data:{url:'/'}});})()));
-self.addEventListener('notificationclick',event=>{event.notification.close();event.waitUntil((async()=>{const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});const target=clients.find(c=>new URL(c.url).origin===self.location.origin);if(target){await target.focus();target.postMessage({type:'journey-notification'});}else await self.clients.openWindow('/');})());});
-self.addEventListener('pushsubscriptionchange',event=>event.waitUntil((async()=>{const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const client of clients)client.postMessage({type:'push-subscription-expired'});})()));
+// This build never displays journey push notifications, including late events
+// queued for an older version. Subscription cleanup needs no bearer credential.
+async function stopJourneyNotifications(){
+  try{const subscription=await self.registration.pushManager?.getSubscription();if(subscription)await subscription.unsubscribe();}catch{}
+  try{for(const notification of await self.registration.getNotifications({tag:'commute-journey-update'}))notification.close();}catch{}
+}
+self.addEventListener('push',event=>event.waitUntil(stopJourneyNotifications()));
+self.addEventListener('notificationclick',event=>{event.notification.close();});
+self.addEventListener('pushsubscriptionchange',event=>event.waitUntil(stopJourneyNotifications()));

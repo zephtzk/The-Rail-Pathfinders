@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHmac,createDecipheriv,createPublicKey,verify} from 'node:crypto';
+import {createHmac,createDecipheriv} from 'node:crypto';
 import {encryptPush,sendWebPush,base64url,unbase64url,validateSubscription} from '../server/push.js';
 
 const encode=new TextEncoder();
@@ -25,21 +25,13 @@ test('RFC8291 encrypted payload decrypts with independent HMAC and AES implement
   const body=await encryptPush(subscription,payload);assert.deepEqual(await decryptAsBrowser(body,pair,subscription),payload);
   const another=await encryptPush(subscription,payload);assert.notDeepEqual(Buffer.from(body),Buffer.from(another),'fresh salt and ECDH key per delivery');
 });
-test('actual Web Push request has valid ES256 VAPID claims and encrypted body',async()=>{
-  const {pair,subscription}=await browserSubscription(),vapid=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);
-  const privateJwk=await crypto.subtle.exportKey('jwk',vapid.privateKey),publicJwk=await crypto.subtle.exportKey('jwk',vapid.publicKey);
-  const env={VAPID_PUBLIC_KEY:base64url(await crypto.subtle.exportKey('raw',vapid.publicKey)),VAPID_PRIVATE_JWK:JSON.stringify(privateJwk),VAPID_SUBJECT:'mailto:test@example.com'};
-  const now=1700000000000,payload={eventId:'server-event-1',title:'Journey updated'};let requests=0;
-  const result=await sendWebPush(subscription,payload,env,async(url,options)=>{
-    requests++;assert.equal(url,subscription.endpoint);assert.equal(options.redirect,'error');assert.equal(options.method,'POST');assert.equal(options.headers['Content-Encoding'],'aes128gcm');
-    const authorization=options.headers.Authorization.match(/^vapid t=([^,]+), k=(.+)$/);assert.ok(authorization);assert.equal(authorization[2],env.VAPID_PUBLIC_KEY);
-    const [header,claims,signature]=authorization[1].split('.');
-    assert.equal(JSON.parse(Buffer.from(unbase64url(header)).toString()).alg,'ES256');
-    assert.deepEqual(JSON.parse(Buffer.from(unbase64url(claims)).toString()),{aud:'https://fcm.googleapis.com',exp:Math.floor(now/1000)+3600,sub:'mailto:test@example.com'});
-    assert.equal(verify('sha256',Buffer.from(`${header}.${claims}`),{key:createPublicKey({key:publicJwk,format:'jwk'}),dsaEncoding:'ieee-p1363'},unbase64url(signature)),true);
-    assert.deepEqual(await decryptAsBrowser(options.body,pair,subscription),payload);return {status:201};
-  },now);assert.equal(result.status,201);assert.equal(requests,1);
+test('delivery stays disabled even with credentials and a configured transport',async()=>{
+  let deliveries=0,requests=0;
+  const env={VAPID_PUBLIC_KEY:'configured',VAPID_PRIVATE_JWK:'configured',VAPID_SUBJECT:'mailto:test@example.com',PUSH_TEST_TRANSPORT:async()=>{deliveries++;}};
+  await assert.rejects(sendWebPush({}, {},env,async()=>{requests++;}),/notifications are disabled/);
+  assert.equal(deliveries,0);assert.equal(requests,0);
 });
+
 test('subscription endpoints cannot redirect requests to arbitrary or private hosts',async()=>{
   const {subscription}=await browserSubscription();
   for(const endpoint of ['http://fcm.googleapis.com/send','https://fcm.googleapis.com.attacker.test/','https://localhost/send','https://user:secret@fcm.googleapis.com/send','https://fcm.googleapis.com:8443/send'])assert.throws(()=>validateSubscription({...subscription,endpoint}));
