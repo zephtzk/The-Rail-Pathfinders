@@ -96,9 +96,9 @@ try{
   let hold=true,release,requestSeen;
   const pendingRequest=new Promise(resolve=>requestSeen=resolve),held=new Promise(resolve=>release=resolve),retrievedAt=Date.parse('2026-09-19T02:00:00Z');
   await providerContext.route('**/api/address/route',async route=>{const body=route.request().postDataJSON();if(hold){requestSeen();await held;}const start=Date.parse(`${body.date}T${body.departureTime}:00+08:00`),p=(name,lat)=>({name,lat,lng:103.8}),leg=(mode,a,b,from,to,extra={})=>({mode,startTime:start+a*1000,endTime:start+b*1000,duration:b-a,distance:mode==='WALK'?300:3000,from,to,route:'',headsign:'',geometry:null,...extra});await route.fulfill({json:{provider:'onemap',status:'ok',retrievedAt,itineraries:[{startTime:start,endTime:start+1500000,walkTime:600,legs:[leg('WALK',0,300,p('Synthetic public start address',1.3),p('Example bus stop A',1.301)),leg('BUS',420,1200,p('Example bus stop A',1.301),p('Example bus stop B',1.32),{route:'23A',headsign:'Public terminus'}),leg('WALK',1200,1500,p('Example bus stop B',1.32),p('Synthetic public destination address',1.321))]}]}});});
-  providerPage=await open(providerContext);await providerPage.waitForFunction(()=>document.querySelector('#app-location-status')?.dataset.usable==='true');await providerPage.locator('.address-search-disclosure > summary').click();
-  async function address(role){await providerPage.locator('#address-role').selectOption(role);await providerPage.locator('#address-query').fill(role+' public test address');await providerPage.locator('#address-search').click();await providerPage.locator('[data-address-index="0"]').click();}
-  await address('origin');await providerPage.waitForTimeout(1600);await address('destination');await timing(providerPage);
+  providerPage=await open(providerContext);await providerPage.locator('#app-location-status[data-usable="true"]').waitFor({state:'attached'});
+  async function address(role){await providerPage.locator(`#${role}`).fill(role+' public test address');await providerPage.locator(`#${role}-address-search`).click();await providerPage.locator(`#${role}-suggestions [data-address-index="0"]`).click();}
+  await address('origin');await address('destination');await timing(providerPage);
   await providerPage.locator('#find-routes').click();await pendingRequest;
   check('an in-flight provider search cannot expose Start or accept automatically',await providerPage.locator('#review-route').count()===0&&await active(providerPage)===null);
   await providerPage.locator('#destination').fill('changed while the provider was responding');release();
