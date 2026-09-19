@@ -1,0 +1,51 @@
+{
+  "startedAt": "2026-09-19T02:28:24.975Z",
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "anonymousFreshContext": true,
+  "physicalPhone": false,
+  "viewport": {
+    "width": 390,
+    "height": 900
+  },
+  "sourceMain": "10a13aede150787e6de757e06c0463be40c31baf",
+  "checks": [
+    {
+      "name": "Anonymous root loaded without authentication",
+      "passed": true
+    },
+    {
+      "name": "Hosted application hash matches release",
+      "passed": true
+    },
+    {
+      "name": "Static scheduled route found",
+      "passed": true
+    },
+    {
+      "name": "Journey explicitly accepted",
+      "passed": true
+    },
+    {
+      "name": "Staff page uses accepted journey",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime exceptions",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "httpStatus": 200,
+  "applicationBuild": {
+    "schemaVersion": 1,
+    "applicationSha256": "ad81331b6d39a1ce521862e4ba7119a6aff5a191287f871ac3a5116618a3b8d4",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "routeSummary": "38 min\nSuggested route\nEast West Line\nArrive 10:37\n0 transfers\n4 min",
+  "staffMessage": "Please help me with my current step: Start at Tampines (EW2) · follow signs to your platform",
+  "passed": true,
+  "finishedAt": "2026-09-19T02:28:40.704Z",
+  "browser": "153.0.4234.32"
+}

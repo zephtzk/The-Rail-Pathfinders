@@ -1,0 +1,42 @@
+{
+  "title": "Commute Copilot judges release",
+  "sourceCommit": "10a13aede150787e6de757e06c0463be40c31baf",
+  "candidateCommit": "ff78e06fb92584ad85872cdf190aaa20a75c6625",
+  "applicationSha256": "ad81331b6d39a1ce521862e4ba7119a6aff5a191287f871ac3a5116618a3b8d4",
+  "deployedAt": "2026-09-19T02:26:12.177574+00:00",
+  "sitesVersion": 5,
+  "publicVerified": true,
+  "deploymentVerified": true,
+  "siteUrl": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "accessMode": "public",
+  "accessRevision": 3,
+  "prUrl": "https://github.com/zephtzk/The-Rail-Pathfinders/pull/7",
+  "prMerged": true,
+  "busRegistryStops": 5208,
+  "busRegistryPatterns": 798,
+  "busRegistryServices": 602,
+  "busTimedStops": 5206,
+  "busTimedPatterns": 776,
+  "busTimedServices": 583,
+  "physicalPhoneTested": false,
+  "hostedConfiguredIntegrations": [],
+  "anonymousHttpVerification": {
+    "root": 200,
+    "applicationBuild": 200,
+    "exactApplicationHashMatch": true,
+    "browserUserAgent": true
+  },
+  "validation": {
+    "javascriptTests": 385,
+    "pythonTests": 44,
+    "builtAssets": 95,
+    "r5BrowserChecks": 159,
+    "r4BrowserChecks": 116,
+    "routeMapChecks": 24,
+    "trainColourChecks": 22,
+    "offlineLifecycleChecks": 11,
+    "finalMapLayerChecks": 28,
+    "captureChecks": 30
+  },
+  "validationNotes": "R5/R4/colour/offline suites passed before the final map-control-only follow-up. The final merged-source tree passed npm run check, route-map checks, map-layer checks and fresh screenshot walkthrough. Owner also passed 39 journey-sheet checks for that follow-up."
+}

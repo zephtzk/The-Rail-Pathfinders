@@ -1,107 +1,84 @@
-# Commute Copilot — The Rail Pathfinders
+# Commute Copilot - The Rail Pathfinders
 
-**Latest local bus coverage:** all 5,208 source stops, 798 route directions across 602 service numbers; routing estimates on 776 directions / 583 services / 5,206 stops. See [current island-wide audit](docs/R5_BUS_COVERAGE.md). Earlier R2 deployment and pilot descriptions below are historical and do not describe this checkout.
+A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a journey, compare options, follow one accepted trip, and get understandable help along the way.
 
-**R2 is deployed:** open [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site). Start with the [R2 publication record](docs/R2_PUBLICATION.md), [completed features and screenshots](docs/R2_DELIVERY.md), and [verification and limits](docs/R2_VERIFICATION.md).
+**Open the app:** [Commute Copilot](https://commute-copilot-nebula.simhongmen.chatgpt.site)
 
-The map-led flow is **Plan → compare → review → Start Journey → Current trip**, with **Saved routes** and **Preferences** available throughout. R2 adds original soft icons, clearer current/next actions, editable travel styles, typed endpoint suggestions, persisted civil-time choices, opt-in foreground location assistance and measured offline readiness. One accepted journey survives navigation and reloads.
+**Start here:** [Judges' illustrated user guide (PDF)](docs/Commute_Copilot_Judges_User_Guide.pdf)
 
-Sites **version 4** deploys merged R2 source `caf24113ff54560c975a5fac8683ec075c108798`. [PR #3](https://github.com/zephtzk/The-Rail-Pathfinders/pull/3) is merged into `main`. The existing URL and access are preserved: the owner plus three previously invited external viewers, access revision 2. Sign in using an authorized account. Local testing needs no account. GitHub and Sites publication are separate; a GitHub push alone does not deploy the app. Later documentation commits do not change the deployed application.
+**Release and verification:** [Judges' release record](docs/JUDGES_RELEASE.md)
 
+The public hosted release uses the R5 application, including wider bus coverage, bus-stop details, distinct walking/bus/train map paths, and service-coloured train instructions. It opens in a phone browser without an app account, APK or mandatory installation. Use Safari on iPhone or Chrome on Android. Internet is needed for the first load. If an earlier installation shows old controls, refresh, wait for loading/update, then refresh again; clearing browser data would remove local saved information.
 
-The browser workflows and local durable sharing are implemented. Hosted sharing has no declared D1 binding and remains unavailable; external Web Push and live LTA access are unverified. A verified continuous real accessible corridor and real toilet entrance paths remain blocked by missing checked data. Physical phones remain untested. See [R1 completion and setup](docs/UPGRADE_DELIVERY.md), [two-device rehearsal](docs/UPGRADE_DEMO.md), [facility/toilet coverage](docs/FACILITY_COVERAGE.md), [sharing setup](docs/SHARING.md), and [fares](docs/FARES.md).
+## Three-minute walkthrough
 
-| Entry page | Current use |
+1. Open **Plan**. Enter **Tampines (EW2)** and **Bugis (EW12)**, selecting each suggestion.
+2. Choose **Depart later**, **21 September 2026**, **10:00** (Singapore time), then **Find my route**. This fixed example uses the included dated dataset; it is not live travel advice.
+3. Compare arrival, transfers and walking. Select a route, tap **Continue**, review **Confirm your trip**, then **Start Journey**.
+4. Open **Current trip**. Confirm the step you want to demonstrate using **Update my current step** and **I am here**. The app does not infer boarding or arrival from time or GPS.
+5. Try **Settings > Simple guidance**, then **Show to staff**. Open **Station guide** to see station facts and their coverage limits.
+6. Try **Save route**, **Pin commute**, or **Spending > Set a budget**. Sample charges are manually entered examples, not payment transactions.
+
+For the guide's transfer example, choose **Fewer transfers** with a **15-minute extra-time allowance** in Settings, then plan **Haw Par Villa (CC26) to Aljunied (EW9)** on the same date/time. The example changes at Buona Vista; another preference may produce a different route. Leave **Require a verified step-free route** off for this demonstration: no complete real indoor accessible corridor has been verified.
+
+## What works in the hosted release
+
+| Capability | Availability and boundary |
 | --- | --- |
-| `/`, `/rail.html`, `/multimodal.html` | Unified R2 Plan, Current trip, Saved routes and Preferences. |
-| `/rail.html?legacy=1`, `/multimodal.html?legacy=1` | Historical planners retained for regression checks. |
-| `/replay.html` | Explicitly labelled fictional disruption Demo. |
-| `/data/application-build.json` | Compare the application SHA-256 with the candidate report before recording a test. |
+| Rail and bus-stop planning | Included static schedules/frequency estimates; no API key needed for the core demonstration. Select a suggestion to confirm an endpoint. |
+| Island-wide bus directory | All 5,208 stops in the retained source. 798 directional patterns and 602 exact service numbers are listed. Timed routing covers 776 patterns, 583 services and 5,206 stops on at least one eligible day. Availability still depends on the selected time/date. |
+| Route map | Dotted walking, patterned blue bus paths, service-coloured trains and clear labels. Geometry may be approximate. Same-terminal bay changes are labelled estimates, not verified indoor paths. |
+| Accepted journey | Explicit review/start, manual progress, pause/resume, simple guidance, staff assistance card, and local restore. |
+| Saved commutes and spending | Browser-local saved routes/places, fresh commute shortcuts, optional weekly/monthly budgets, charges/estimates/refunds and history. No card-account or payment connection. |
+| Offline guidance | Prepare an accepted trip online and use **Check offline availability**. Only proceed when the app reports readiness. Live feeds/new address requests and street-map tiles are not promised offline. |
+| Station information | Operator facts for selected stations; indoor directions remain work in progress. No verified working-lift, platform-door or step-free guarantee. |
+| Live bus arrivals and street-address itineraries | Implemented integrations, but not enabled on this hosted release: server-side LTA/OneMap credentials are not configured. The app reports unavailable states. |
+| Caregiver sharing and external push | Local durable sharing is implemented and tested. Hosted sharing has no D1 binding; background Web Push is not configured. Do not use these as required steps in the hosted judging demo. |
 
-The [Phase 4 publication report](docs/PHASE4_PUBLICATION.md) describes the historical version 3 release. Its hosted browser evidence and owner-only audience are historical, not new R2 verification. Use the [device checklist](DEVICE_CHECKLIST.md) alongside the R2 flow; retain the fixed fixture dates for historical tests.
+The bus snapshot is dated **18 September 2026**, with a reviewed window of **18 September-2 October 2026**. Rail coverage is **18 September-31 December 2026**, subject to source calendars and exceptions. All displayed planning times use **Asia/Singapore**. Bus ride/wait times are estimates, not a complete timetable or a guarantee of arrival.
 
-Use the fixed date **18 September 2026** for the checklist, even when testing later. Rail dates are **18 September–31 December 2026**, subject to actual calendars, exceptions and genuine after-midnight carryover. Bus services **2, 23 and 28** cover 261 stops, ordinary weekdays **18 September–2 October 2026**, with both boarding and alighting within **09:30–16:30**. Four map-supported exterior bus/rail paths are included at Paya Lebar and Bugis. All times are Asia/Singapore.
+## Run from source
 
-Bus timing uses published maximum off-peak headway and an uncalibrated ride model of 18 km/h plus 30 seconds per stop. Arrival estimates and deadlines are not guarantees. General address geocoding, real step-free assurance and broader bus coverage remain unsupported. Confirmed progress recalculation supports the accepted civil date; earlier progress corrections require a new reviewed acceptance. Current arrivals and notices are advisory only. Scheduled, synthetic and offline testing needs **no DataMall key**; hosted real advisory feeds need a securely configured `LTA_ACCOUNT_KEY`.
-
-See [coverage](docs/PHASE3_COVERAGE.md), [historical Phase 4 acceptance](docs/PHASE4_REPORT.md), [operations](docs/PHASE4_OPERATIONS.md) and the [milestone ledger](docs/MILESTONES.md). Physical Android Chrome and iPhone Safari checks remain **NOT TESTED**; desktop emulation does not close them.
-
-## Run and verify
-
-Requires Node.js 22.13+ (Node 24 tested) and Python 3.10+. The importer uses only Python's standard library.
+Use Node.js **22.13 or later** (Node 24 tested). Python **3.10 or later** is needed for import/full validation, not for the basic browser demonstration.
 
 ```sh
+git clone https://github.com/zephtzk/The-Rail-Pathfinders.git
+cd The-Rail-Pathfinders
 npm ci
-npm run check
+npm run build
 npm run dev
 ```
 
-Open `http://localhost:4173`. The development server serves built output; rebuild after edits. Use the process `PORT` environment variable if that port is occupied. No DataMall key is needed to use or repeat the included import.
+Open `http://localhost:4173`. The development server serves the last build; run `npm run build` after source changes. The local sharing database is created under ignored `.local-data/`; keep it private.
 
-```sh
-npm run import:rail
-npm run test:import
-npm test
-npm run benchmark:rail
-npm run test:rail-browser
-npm run test:multimodal-browser
-npm run import:bus
-npm run test:bus-import
-npm run benchmark:multimodal
-node tests/rail-offline-browser.mjs
-python scripts/verify-walking.py
-npm run test:browser
-node tests/live-browser.mjs
-```
-
-For the complete bounded readiness run (build, all existing unit/import checks, walking verification, Worker/comparison budgets and six browser suites):
+To open this local server on a phone using the same trusted Wi-Fi, run in PowerShell:
 
 ```powershell
-$env:BROWSER_EXECUTABLE='C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
-$env:READINESS_REQUIRE_CLEAN='1'
-npm run verify:readiness
+$env:HOST='0.0.0.0'
+$env:PORT='4173'
+npm run dev
 ```
 
-Run the clean-candidate check after committing all intended source changes. The runner starts its own no-secret loopback server on port 4181, stops it afterward and writes the exact commit, application/Worker hashes and logs to ignored `test-results/readiness-candidate/`. Set `READINESS_PORT` if occupied or `READINESS_OUTPUT` to retain another run. It does not call live providers or modify hosted state.
+Keep the computer/server awake. Open `http://<computer-LAN-IPv4>:4173/` on the phone, replacing the placeholder with the computer's actual LAN address. `localhost` on the phone refers to the phone, not the computer. If prompted, allow the server only on the intended private network. LAN HTTP supports the core/manual demo; use the hosted HTTPS URL for secure-context offline readiness or optional geolocation.
 
-Playwright requires installed Chromium or an existing Edge/Chrome via `BROWSER_EXECUTABLE`. Set `TEST_BASE_URL` to the root for rail tests and `/replay.html` for the two existing suites. `CAPTURE_DIR` selects browser evidence output. These tests are desktop emulation, not physical-phone evidence.
+Optional integrations use server environment values, never browser source: `LTA_ACCOUNT_KEY` for arrivals and `ONEMAP_TOKEN` for address search/routing. See [sharing setup](docs/SHARING.md) for local SQLite and hosted D1 requirements. Never commit keys, tokens, local databases or personal share links.
 
-## What is supported
+## Verification and limitations
 
-Query dates are **18 September–31 December 2026**, plus genuine after-midnight carryover from the final service day. Individual calendars and exceptions determine actual availability. The source contains **19 rail service patterns, 17,575 accepted trips and 333,231 stop times**. One impossible zero-second ride caused its whole trip to be quarantined, with the reason recorded.
+The release record identifies the exact application revision, build identity and checks performed. Desktop browser automation includes mobile/touch and enlarged-text layouts; it does not establish physical iPhone/Android performance. Real-phone checks remain to be performed.
 
-The model has **27 reviewed standard interchange groups**. Tap-out connections at Newton, Tampines and Bukit Panjang are excluded, while those stations remain selectable endpoints. Access and exit each assume 2 minutes. Interchange walking assumes 4–8 minutes; changing trains at the identical platform assumes 1 minute without extra walking. These are planning allowances, not measured paths or accessibility guarantees. The rail schematic connects scheduled stop coordinates; it cannot establish a walking link.
+```sh
+npm run check
+npm run test:r5-browser
+npm run test:r4-browser
+```
 
-Calendars follow the source literally. `SERVICE_PH` is an identifier, not holiday logic. Public-holiday substitutions absent from the supplied exceptions remain unverified.
+Browser tests need an installed browser and a running built server. Set `BROWSER_EXECUTABLE` and `TEST_BASE_URL` as documented in [R5 verification](docs/R5_VERIFICATION.md). Some tests deliberately use synthetic provider responses or historical scenarios; those are separate from the real static-data screenshots in the guide.
 
-Try **Yew Tee ↔ Punggol Coast**, 19 September, 08:10 departure, 11:00 deadline, 30-minute walking limit. The fastest routes use two transfers each way. **South View ↔ Punggol Coast** exercises three transfers. A BP journey on 20 September demonstrates a supplied cancellation exception. Unsupported dates, unknown stations, walking violations and impossible deadlines receive explanations.
+Useful references: [R5 delivery](docs/R5_DELIVERY.md), [bus coverage](docs/R5_BUS_COVERAGE.md), [station guidance](docs/R5_STATION_GUIDANCE.md), [address routing](docs/R5_ADDRESS_ROUTING.md), [fares](docs/FARES.md), [privacy and sharing](docs/SHARING.md), and [third-party notices](THIRD_PARTY_NOTICES.md).
 
-Preferences are fastest arrival, fewer transfers and less walking within an extra-time allowance and deadline. Quieter explicitly falls back to fastest because comparable journey crowding is unavailable. The default search horizon is six hours; a later explicit deadline can extend it up to 48 hours. After-midnight deadlines require the next day's date.
+Historical R2/R3/R4 and earlier publication records remain for provenance. They describe earlier releases, not the current hosted app. GitHub merges and hosted deployments are separate operations.
 
-## Versioned import and architecture
+## Competition submission
 
-`data/rail/sources/` holds the licensed immutable source ZIP and sanitised acquisition metadata. `scripts/create-rail-rules.py` materialises individually reviewed platform groups into `data/rail/validation.json`. Parent membership, names and proximity never infer transfers. `scripts/import-rail.py` validates the archive and emits `public/data/rail-network.json` and `rail-manifest.json`. Source, metadata, rules, importer and compiled artifact hashes are checked before every build.
-
-For a new snapshot, run `python scripts/download-rail.py --gui`, entering the DataMall key only in its masked local window. Without `--gui`, use a real terminal for hidden entry. One bounded download saves the archive and sanitised metadata, never credentials or signed URLs. Review the new archive, update pinned paths/rules, and validate before promoting it. Downloading new data does not automatically extend validated coverage. The included snapshot was acquired through the existing secure local session without extracting or persisting its key.
-
-- `src/rail-engine.js`: pure multi-criteria connection scan, stable source IDs, trip direction, dwell, boarding restrictions, calendars, carryover and explicit interchange rules.
-- `src/rail-ui.js` and `rail.css`: station choices, coverage, schedule provenance, timing explanation, preferences, schematic and saved guidance.
-- `src/engine.js`, `data.js`, `app.js`: preserved corridor replay. Phase 1 live notices and station crowding remain advisory there.
-- `public/sw.js`: caches the same-origin shell and pinned rail data, retaining original provenance; never caches API responses or OSM tiles.
-- `scripts/build.mjs`: static assets plus a Cloudflare-compatible Worker, serving compressed rail data with an identity fallback. `scripts/serve.mjs` runs it locally.
-
-The source has no shapes or transfers table. Explicit interchange rules are a separate versioned input. Independent reference-network tests and an event-state oracle validate routing; imported-data tests check an exact raw-source trip and multi-transfer journeys.
-
-## Original corridor and live panel
-
-At `/replay.html`, **Reset demo** restores Tampines 08:10 → Bugis 08:41, the historical **31-minute replay assumption**. Planned works uses a 49-minute alternative; the Paya Lebar disruption compares 09:03 with 08:59. These fictional scenarios remain tested and never alter the timetable planner.
-
-The pinned Saturday timetable instead has 2 minutes access + 5m20s wait + 31 minutes riding on `EWL_Main_WB_WE_31` + 2 minutes exit = **08:50:20**. The difference is intentional and traceable to the distinct data sources.
-
-For optional Phase 1 live information, build then run `python scripts/run-live-local.py --gui`. Enter the DataMall API key only in the masked field; it remains server-side in process memory. Station crowding is not carriage occupancy. The Phase 1 ledger retains its unobserved live-variant limits. EXTOL uses a separate SDK credential and is outside this phase.
-
-## Deployment and licence
-
-The merged R2 release and Sites version 4 deployment are recorded in the [R2 publication report](docs/R2_PUBLICATION.md). The existing Site identity and custom access revision 2 are preserved: the owner plus three previously invited external viewers. Physical-phone checks remain outstanding; further audience changes require the owner's request.
-
-Application code: MIT. LTA GTFS and DataMall data: [Singapore Open Data Licence v1.0](https://data.gov.sg/open-data-licence), attributed with retrieval time in the UI and manifest, not relicensed as MIT. Official map references establish interchange topology. Two operator locality-map JPEGs are retained in Git as provenance evidence, carry their original copyright notices, and are not application basemaps. The owner's confirmation of written redistribution permission is recorded in [publication authorization](docs/PUBLICATION_AUTHORIZATION.md); the permission document was not independently reviewed. See [third-party notices](THIRD_PARTY_NOTICES.md). Legacy corridor geometry: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Leaflet: BSD-2-Clause. No official endorsement or live service guarantee is implied.
+The NEBULA X participant pack (page 25) asks for a hosted prototype, GitHub repository/README, a 2-3 minute explanatory video, a short write-up and a results ZIP. The illustrated guide supports judging; it does not replace those other submission items. The organiser does not prescribe an APK, PWA installation or a particular phone OS. [Official competition site](https://nebulax.com.sg/)
