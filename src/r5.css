@@ -96,7 +96,7 @@
   .commute-app .app-nav button:focus-visible{outline:3px solid ButtonText;outline-offset:2px}
 }
 
-/* FR3: a horizontal grabber above the map tabs, with an accessible 44px target. */
+/* FR3: a full-width 24px grabber above map tabs with 44px button targets. */
 .commute-app .journey-sheet-header{flex-shrink:0;background:var(--surface)}
 @media(max-width:680px){
   .commute-app .journey-sheet-header{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0 8px 4px;border-bottom:1px solid var(--border)}
