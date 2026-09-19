@@ -1,0 +1,50 @@
+PASS browser geolocation is requested at startup before any trip
+PASS main map has a fresh approximate position dot before planning
+PASS Facilities reuses actual browser position without Locate me
+PASS startup has exactly one shared watch
+PASS fresh outdoor position produces clearly estimated current instruction
+PASS usable assistance removes redundant prominent outdoor checkpoint
+PASS manual recovery remains compact
+PASS continuous unique outdoor progress estimates later canonical step
+PASS location estimate does not mutate canonical progress or accepted route
+PASS location does not enable either caregiver permission
+PASS plan tab reuses the same watch
+PASS plan has no visible enable or locate request with usable assistance
+PASS saved tab reuses the same watch
+PASS saved has no visible enable or locate request with usable assistance
+PASS facilities tab reuses the same watch
+PASS facilities has no visible enable or locate request with usable assistance
+PASS caregiver tab reuses the same watch
+PASS caregiver has no visible enable or locate request with usable assistance
+PASS spending tab reuses the same watch
+PASS spending has no visible enable or locate request with usable assistance
+PASS preferences tab reuses the same watch
+PASS preferences has no visible enable or locate request with usable assistance
+PASS staff tab reuses the same watch
+PASS staff has no visible enable or locate request with usable assistance
+PASS current tab reuses the same watch
+PASS current has no visible enable or locate request with usable assistance
+PASS staff distinguishes estimate from accepted message
+PASS ordinary GPS refresh preserves alternate staff message
+PASS low accuracy withdraws estimate and preserves accepted guidance
+PASS low accuracy restores manual correction
+PASS boundary ambiguity does not claim a current step
+PASS location beyond unknown indoor transfer cannot skip enclosed steps
+PASS indoor confirmation remains visible even with usable location
+PASS GPS after manual indoor checkpoint cannot advance through it
+PASS explicit correction permits useful final outdoor estimate
+PASS GPS never automatically finishes the journey
+PASS hidden page clears shared watch and map position
+PASS hidden late callback cannot replace position
+PASS same enabled foreground session resumes once on return
+PASS return waits for a new fix before using assistance
+PASS local GPS remains usable offline
+PASS 320px enlarged text has no horizontal document overflow
+PASS explicit stop clears current position and geographic sharing
+PASS explicit disable survives reload without prompting
+PASS explicit enable recovers stopped session
+PASS denied permission provides manual fallback
+PASS denied Facilities offers manual area without a duplicate prompt
+PASS stored denial never starts a retry loop
+PASS previous unavailable state starts with useful manual fallback and no retry
+PASS no JavaScript runtime errors

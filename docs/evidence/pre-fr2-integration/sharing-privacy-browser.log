@@ -1,0 +1,8 @@
+PASS GPS callback preserves an unfinished manual selection and focus without confirming progress
+PASS Stop location persists across visibility changes and disables server geographic consent
+PASS Stop location cannot downgrade queued full revocation while offline
+PASS Failed revocation remains visibly pending/retryable and reconnect revokes server access
+PASS Stale legacy update after completion is ignored before conversion and cannot restart a journey
+PASS Completed journey can still revoke caregiver access
+PASS Lost acceptance response recovers pairing and explicitly starts only its accepted plan with consent off
+PASS No browser runtime exceptions (desktop browser automation, no physical-device inference)

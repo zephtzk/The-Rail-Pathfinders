@@ -1,0 +1,20 @@
+PASS mobile route summary: each train badge or marker meets 4.5:1 contrast
+PASS mobile route summary: train SVG strokes use the readable badge foreground
+PASS summary train fills use East West green and Circle yellow
+PASS bus summary keeps its distinct neutral style and bus icon
+PASS mobile route timeline: each train badge or marker meets 4.5:1 contrast
+PASS mobile route timeline: train SVG strokes use the readable badge foreground
+PASS walking and bus markers do not inherit rail fill
+PASS current trip instructions: each train badge or marker meets 4.5:1 contrast
+PASS current trip instructions: train SVG strokes use the readable badge foreground
+PASS restored instructions: each train badge or marker meets 4.5:1 contrast
+PASS restored instructions: train SVG strokes use the readable badge foreground
+PASS all imported service variants: each train badge or marker meets 4.5:1 contrast
+PASS all imported service variants: train SVG strokes use the readable badge foreground
+PASS every imported service has matching filled marker and label
+PASS current rail marker retains an explicit focus outline
+PASS all nine public lines are present for visual review
+PASS mobile all public lines: each train badge or marker meets 4.5:1 contrast
+PASS mobile all public lines: train SVG strokes use the readable badge foreground
+PASS mobile palette fits without horizontal scrolling
+PASS no browser application exceptions or console errors

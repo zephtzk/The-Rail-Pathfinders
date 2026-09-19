@@ -27,6 +27,16 @@ async function invokeObsolete(page){await page.evaluate(()=>window.__obsoleteSta
 let page,providerPage;
 try{
   page=await open(await context());
+  await page.locator('#destination').fill('EW9');
+  await page.evaluate(()=>{document.querySelector('#origin').focus();document.querySelector('#destination').focus();});
+  // Exercise the delayed blur callback itself; normal endpoint setup has no wait.
+  await page.waitForTimeout(180);
+  check('rapid endpoint refocus keeps suggestions open past the earlier blur timeout',await page.locator('#destination-suggestions').isVisible()&&await page.locator('#destination').getAttribute('aria-expanded')==='true'&&await page.evaluate(()=>document.activeElement.id==='destination'));
+  const firstDestination=page.locator('#destination-suggestions [role=option]').first(),destinationLabel=await firstDestination.locator('strong').innerText();
+  await firstDestination.click();
+  await page.evaluate(()=>{document.querySelector('#origin').focus();document.querySelector('#destination').focus();});
+  const selectedDestination=await page.locator('#destination').inputValue();
+  check('a suggestion remains selectable after rapid refocus without starting a journey',selectedDestination.startsWith(destinationLabel)&&selectedDestination.includes('(EW9)')&&!await page.locator('#destination-suggestions').isVisible()&&await page.locator('#destination').getAttribute('aria-expanded')==='false'&&await active(page)===null);
   await nav(page,'preferences');await page.locator('#simple-guidance-toggle').uncheck();
   await page.locator('[name=fareCategory]').selectOption('senior');await page.locator('[name=preference]').selectOption('fewer-transfers');await page.locator('[name=walkingLimitMinutes]').fill('40');await page.locator('#preferences-form .primary').click();
   await plan(page);
@@ -78,13 +88,15 @@ try{
   // A response that ignores cancellation models an already-arriving provider reply.
   // The generation guard must still prevent it from resurrecting an edited route.
   const providerContext=await context();
+  await providerContext.grantPermissions(['geolocation']);
+  await providerContext.setGeolocation({latitude:1.3005,longitude:103.8,accuracy:8});
   await providerContext.addInitScript(()=>{const fetch=window.fetch.bind(window);window.__addressBodies=0;window.fetch=async(input,init)=>{if(input!=='/api/address/route')return fetch(input,init);const {signal,...rest}=init??{};const response=await fetch(input,rest);await response.clone().text();window.__addressBodies++;return response;};});
   const points={origin:{id:'onemap:1.300000,103.800000',sourceId:'onemap:1.300000,103.800000',label:'Synthetic public origin',address:'Synthetic public start address',lat:1.3,lng:103.8,routingId:null,stationId:null},destination:{id:'onemap:1.321000,103.800000',sourceId:'onemap:1.321000,103.800000',label:'Synthetic public destination',address:'Synthetic public destination address',lat:1.321,lng:103.8,routingId:null,stationId:null}};
   await providerContext.route('**/api/address/search',route=>route.fulfill({json:{provider:'onemap',status:'ok',results:[points[route.request().postDataJSON().query.includes('origin')?'origin':'destination']]}}));
   let hold=true,release,requestSeen;
   const pendingRequest=new Promise(resolve=>requestSeen=resolve),held=new Promise(resolve=>release=resolve),retrievedAt=Date.parse('2026-09-19T02:00:00Z');
   await providerContext.route('**/api/address/route',async route=>{const body=route.request().postDataJSON();if(hold){requestSeen();await held;}const start=Date.parse(`${body.date}T${body.departureTime}:00+08:00`),p=(name,lat)=>({name,lat,lng:103.8}),leg=(mode,a,b,from,to,extra={})=>({mode,startTime:start+a*1000,endTime:start+b*1000,duration:b-a,distance:mode==='WALK'?300:3000,from,to,route:'',headsign:'',geometry:null,...extra});await route.fulfill({json:{provider:'onemap',status:'ok',retrievedAt,itineraries:[{startTime:start,endTime:start+1500000,walkTime:600,legs:[leg('WALK',0,300,p('Synthetic public start address',1.3),p('Example bus stop A',1.301)),leg('BUS',420,1200,p('Example bus stop A',1.301),p('Example bus stop B',1.32),{route:'23A',headsign:'Public terminus'}),leg('WALK',1200,1500,p('Example bus stop B',1.32),p('Synthetic public destination address',1.321))]}]}});});
-  providerPage=await open(providerContext);await providerPage.locator('.address-search-disclosure > summary').click();
+  providerPage=await open(providerContext);await providerPage.waitForFunction(()=>document.querySelector('#app-location-status')?.dataset.usable==='true');await providerPage.locator('.address-search-disclosure > summary').click();
   async function address(role){await providerPage.locator('#address-role').selectOption(role);await providerPage.locator('#address-query').fill(role+' public test address');await providerPage.locator('#address-search').click();await providerPage.locator('[data-address-index="0"]').click();}
   await address('origin');await providerPage.waitForTimeout(1600);await address('destination');await timing(providerPage);
   await providerPage.locator('#find-routes').click();await pendingRequest;
@@ -96,7 +108,7 @@ try{
   check('a fresh provider response still waits for explicit Start after stale rejection',await active(providerPage)===null&&await providerPage.locator('#review-route').isEnabled());
   await providerPage.locator('#review-route').click();const external=await active(providerPage);
   check('direct provider Start preserves geometry, source timestamp and canonical instructions',external.route.provider==='onemap'&&external.route.providerRetrievedAt===retrievedAt&&external.route.geometry.length===3&&external.route.steps.length===4&&external.plan.sourceTimes.onemap===retrievedAt&&!external.routingContext&&external.plan.departureDate==='2026-09-21');
-  check('provider Start emits once and keeps caregiver consent off',await providerPage.evaluate(()=>window.__starts.length===1)&&!external.permissions.progress&&!external.permissions.location&&external.sharing===null);
+  check('provider Start attaches fresh startup location with step zero, one action and caregiver consent off',external.location?.latitude===1.3005&&external.location.longitude===103.8&&external.location.accuracy===8&&Date.now()-external.location.timestamp<=60000&&external.permissions.geolocation==='granted'&&external.progress.stepIndex===0&&external.progress.kind==='unknown'&&external.progress.confirmedAt===null&&await providerPage.evaluate(()=>window.__starts.length===1)&&!external.permissions.progress&&!external.permissions.location&&external.sharing===null&&await providerPage.locator('#view-current').isVisible()&&await providerPage.locator('#start-companion,#enable-local-assistance').count()===0);
   check('no browser runtime errors',errors.length===0);
 }catch(error){
   errors.push(error.stack??String(error));

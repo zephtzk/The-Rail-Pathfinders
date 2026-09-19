@@ -1,0 +1,80 @@
+PASS current trip has one update action and removes both old shortcuts
+PASS picker begins collapsed with an explicit controlled region
+PASS keyboard activation opens adjacent picker and focuses its labelled dropdown
+PASS collapsed access and wait group keeps exact current canonical index
+PASS confirming grouped current phase does not jump to group start or boarding
+PASS opening and choosing a step alone never changes accepted progress
+PASS switching to simple guidance preserves the open pending selection without confirming it
+PASS switching to full guidance preserves the open pending selection without confirming it
+PASS foreground refresh preserves the open pending selection without confirming it
+PASS offline refresh preserves checkpoint-step focus and pending selection without confirming progress
+PASS online refresh preserves checkpoint-step focus and pending selection without confirming progress
+PASS hidden refresh preserves checkpoint-step focus and pending selection without confirming progress
+PASS visible refresh preserves checkpoint-step focus and pending selection without confirming progress
+PASS offline refresh preserves confirm-step focus and pending selection without confirming progress
+PASS online refresh preserves confirm-step focus and pending selection without confirming progress
+PASS hidden refresh preserves confirm-step focus and pending selection without confirming progress
+PASS visible refresh preserves confirm-step focus and pending selection without confirming progress
+PASS offline refresh does not steal focus after the user leaves the picker
+PASS online refresh does not steal focus after the user leaves the picker
+PASS hidden refresh does not steal focus after the user leaves the picker
+PASS visible refresh does not steal focus after the user leaves the picker
+PASS compact tick has an accessible name and follows the dropdown in keyboard order
+PASS tick explicitly confirms canonical boarding without altering route or completing trip
+PASS generic correction invalidates timetable seed while preserving original legs
+PASS successful confirmation closes picker and returns focus to current guidance
+PASS invalid selection "999" is rejected without state mutation
+PASS invalid selection "" is rejected without state mutation
+PASS invalid selection "02" is rejected without state mutation
+PASS selecting an earlier phase still requires explicit confirmation
+PASS V2 permits explicit backward position correction without reviving old timetable progress
+PASS keyboard collapse updates expanded state without changing journey
+PASS separate Staff navigation remains usable
+PASS accepting a different route resets canonical progress and clears old pending picker
+PASS accepted route replacement does not restore focus into the stale hidden picker
+PASS reopened replacement picker exposes only choices from the newly accepted route
+PASS current-step refresh uses the single app-load location session without another enable prompt
+PASS synthetic location-only update retains checkpoint-step DOM focus and unconfirmed selection
+PASS synthetic location-only update retains confirm-step DOM focus and unconfirmed selection
+PASS full mobile keeps dropdown and tick beside each other without overflow
+PASS full mobile tick retains a usable touch target
+PASS full 320-large-text keeps dropdown and tick beside each other without overflow
+PASS full 320-large-text tick retains a usable touch target
+PASS simple mobile keeps dropdown and tick beside each other without overflow
+PASS simple mobile tick retains a usable touch target
+PASS simple 320-large-text keeps dropdown and tick beside each other without overflow
+PASS simple 320-large-text tick retains a usable touch target
+PASS paused retains its phase-specific primary action
+PASS paused opening position picker does not execute its phase action
+PASS paused generic confirmation preserves status, review/block flags and detour phase
+PASS paused primary explicitly resumes journey
+PASS blocked retains its phase-specific primary action
+PASS blocked opening position picker does not execute its phase action
+PASS blocked generic confirmation preserves status, review/block flags and detour phase
+PASS blocked primary opens station tools without changing accepted journey
+PASS review retains its phase-specific primary action
+PASS review opening position picker does not execute its phase action
+PASS review generic confirmation preserves status, review/block flags and detour phase
+PASS review primary focuses proposed route without accepting it
+PASS detour retains its phase-specific primary action
+PASS detour opening position picker does not execute its phase action
+PASS detour generic confirmation preserves status, review/block flags and detour phase
+PASS detour primary opens station tools without changing accepted journey
+PASS detour-blocked retains its phase-specific primary action
+PASS detour-blocked opening position picker does not execute its phase action
+PASS detour-blocked generic confirmation preserves status, review/block flags and detour phase
+PASS detour-blocked primary opens station tools without changing accepted journey
+PASS detour-reached retains its phase-specific primary action
+PASS detour-reached opening position picker does not execute its phase action
+PASS detour-reached generic confirmation preserves status, review/block flags and detour phase
+PASS detour reached primary explicitly starts returning without advancing canonical route
+PASS detour-returning retains its phase-specific primary action
+PASS detour-returning opening position picker does not execute its phase action
+PASS detour-returning generic confirmation preserves status, review/block flags and detour phase
+PASS detour-returning primary opens station tools without changing accepted journey
+PASS station checkpoint retains explicit reached-toilet primary action
+PASS reached and resume confirmations keep trip active on return detour
+PASS return station confirmation restores onward journey without auto-arrival
+PASS completed journey exposes no current-step picker or action
+PASS cancelled journey exposes no current-step picker or action
+PASS current-step flows report no browser exceptions

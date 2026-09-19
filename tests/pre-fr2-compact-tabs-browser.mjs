@@ -44,7 +44,7 @@ try{
           const b=button.getBoundingClientRect(),range=document.createRange();range.selectNodeContents(button.querySelector('span'));
           return {id:button.dataset.view,x:b.x,y:b.y,width:b.width,height:b.height,right:b.right,bottom:b.bottom,bordered:parseFloat(getComputedStyle(button).borderTopWidth)>=1,labelFits:[...range.getClientRects()].every(r=>r.left>=b.left&&r.right<=b.right&&r.top>=b.top&&r.bottom<=b.bottom)};
         });
-        const landmarks=['#origin','#destination','#endpoint-help','.address-search-disclosure>summary','.time-options','#time-note','#edit-preferences','#find-routes','#current-summary h2','#current-summary .guidance-next','#current-summary .indoor-guidance-notice strong','#current-summary .indoor-guidance-notice p','#guidance-primary','#nearby-locate','#nearby-manual>summary','.nf-toolbar','#nearby-center','#nearby-feed','#nearby-count','#nearby-results .nf-empty h2','#nearby-results .nf-empty p'];
+        const landmarks=['#origin','#destination','#endpoint-help','.address-search-disclosure>summary','.time-options','#time-note','#edit-preferences','#find-routes','#current-summary h2','#current-summary .guidance-next','#current-summary .indoor-guidance-notice strong','#current-summary .indoor-guidance-notice p','#companion-active>p.muted','#location-estimate','#guidance-primary','#nearby-refresh','#nearby-manual>summary','.nf-toolbar','#nearby-center','#nearby-feed','#nearby-count','#nearby-results .nf-empty h2','#nearby-results .nf-empty p'];
         const visibleContent=landmarks.map(selector=>{const e=document.querySelector(selector);if(!e||!e.checkVisibility())return null;const r=e.getBoundingClientRect();const visibleHeight=Math.max(0,Math.min(p.bottom,r.bottom)-Math.max(p.top,r.top));return {selector,text:e.textContent.trim().slice(0,120),visibleHeight,height:r.height,fullyVisible:visibleHeight>=r.height-.5};}).filter(Boolean);
         return {navHeight:n.height,navTop:n.top,navWidth:n.width,navX:n.x,panelHeight:p.height,panelTop:p.top,panelBottom:p.bottom,scrollTop:panel.scrollTop,sheetState:document.querySelector('#main').dataset.sheetState,buttons,visibleContent,noOverflow:nav.scrollWidth<=nav.clientWidth&&document.documentElement.scrollWidth<=innerWidth};
       });
@@ -63,7 +63,7 @@ try{
           check(`${size.name} ${view}: default content visibility improves or already fits fully`,visibleTotal(measured)>visibleTotal(before)+10||(before.visibleContent.every(item=>item.fullyVisible)&&measured.visibleContent.every(item=>item.fullyVisible)));
         }
         if(['390','320'].includes(size.name)){
-          const required={plan:['#origin','#destination','#endpoint-help'],current:['#current-summary h2'],facilities:['#nearby-locate','#nearby-manual>summary','.nf-toolbar','#nearby-feed']}[view];
+          const required={plan:['#origin','#destination','#endpoint-help'],current:['#current-summary h2'],facilities:['#nearby-refresh','#nearby-manual>summary','.nf-toolbar','#nearby-feed']}[view];
           check(`${size.name} ${view}: key default content is fully readable`,required.every(selector=>measured.visibleContent.some(item=>item.selector===selector&&item.fullyVisible)));
         }
       }

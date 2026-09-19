@@ -61,7 +61,7 @@ try {
   await nav(page, 'facilities'); await settled(page);
   check('Facilities is reachable through the main navigation', await page.locator('#view-facilities').isVisible());
   check('Opening Facilities reuses the single location watch started on app load', await page.evaluate(() => window.facilityGeoCalls.length) === 1);
-  check('The initial state states the fixed 1 km radius and shared location wait without a redundant locate prompt', /Within 1 km/.test(await page.locator('.nf-intro').innerText()) && /Waiting for your device location/.test(await page.locator('#nearby-location-message').innerText()) && await page.locator('#nearby-locate').count() === 0);
+  check('The initial state states the fixed 1 km radius and shared location wait without a redundant locate prompt', /Within 1 km/.test(await page.locator('.nf-intro').innerText()) && /Locating/.test(await page.locator('#nearby-location-message').innerText()) && await page.locator('#nearby-locate').count() === 0);
   check('Actual unconfigured maintenance service is presented honestly', /Live lift maintenance is not connected/.test(await page.locator('#nearby-feed').innerText()));
   await manualBugis(page);
   check('Manual area selection moves keyboard focus out of the collapsed search', await page.evaluate(() => document.activeElement.id === 'nearby-center'));
@@ -151,7 +151,7 @@ try {
   await nav(testPage, 'facilities'); await settled(testPage);
   check('App load starts one bounded fresh location watch before Facilities opens', await testPage.evaluate(() => window.facilityGeoCalls.length === 1 && window.facilityGeoCalls[0].options.maximumAge === 0 && window.facilityGeoCalls[0].options.timeout === 12000));
   await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.3004, longitude: 103.8557, accuracy: 180}, timestamp: Date.now()}));
-  check('Low accuracy is labelled and does not establish a current search area', !await testPage.locator('#nearby-center').isVisible() && /low accuracy/i.test(await testPage.locator('#nearby-location-message').innerText()));
+  check('Low accuracy is labelled and does not establish a current search area', !await testPage.locator('#nearby-center').isVisible() && /low location accuracy/i.test(await testPage.locator('#nearby-location-message').innerText()));
   await testPage.evaluate(() => window.facilityGeoCalls[0].success({coords: {latitude: 1.3004, longitude: 103.8557, accuracy: 15}, timestamp: Date.now()}));
   check('A fresh accurate shared fix automatically populates nearby facilities', await cards(testPage).count() > 0 && /Your approximate device area/.test(await testPage.locator('#nearby-center').innerText()) && await testPage.locator('#nearby-locate').count() === 0);
   await testPage.locator('[data-nf-kind=toilet]').click();
@@ -194,7 +194,7 @@ try {
   await screenshot(testPage, 'controlled-shared-location-mobile');
   await testPage.evaluate(() => window.facilityGeoCalls[0].failure({code: 1}));
   await nav(testPage, 'plan'); await nav(testPage, 'facilities');
-  check('Permission denial offers manual selection and Settings recovery without retrying across tabs', /permission denied/i.test(await testPage.locator('#nearby-location-message').innerText()) && await testPage.locator('#nearby-manual > summary').isVisible() && await testPage.evaluate(() => window.facilityGeoCalls.length === 1));
+  check('Permission denial offers manual selection and Settings recovery without retrying across tabs', /Location denied.*Settings to retry/i.test(await testPage.locator('#nearby-location-message').innerText()) && await testPage.locator('#nearby-manual > summary').isVisible() && await testPage.evaluate(() => window.facilityGeoCalls.length === 1));
   await manualBugis(testPage);
 
   let pendingRefresh, refreshReached;

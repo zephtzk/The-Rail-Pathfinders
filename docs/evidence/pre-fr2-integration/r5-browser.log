@@ -1,0 +1,168 @@
+
+> commute-copilot@1.0.0 test:r5-browser
+> node tests/r5-product-browser.mjs && node tests/r5-arrivals-browser.mjs && node tests/r5-guidance-browser.mjs && node tests/r5-address-browser.mjs && node tests/guidance-r5-browser.mjs && node tests/r5-bus-browser.mjs && node tests/r5-journey-sheet-browser.mjs && node tests/r5-bus-stop-browser.mjs
+
+PASS calendar replaces native date field with formatted Singapore date
+PASS calendar Escape discards draft and returns focus
+PASS keyboard month navigation applies the chosen civil date
+PASS route search requires an explicit Start before creating a journey
+PASS flexible choices omit an earlier departure already in the past
+PASS explicit flexibility selection recalculates without accepting a trip
+PASS pinned commute is before full form and custom labels remain inert
+PASS shortcut recalculates Leave now without starting
+PASS reverse commute is explicit and exchanges the endpoints without starting
+PASS budget is optional by default
+PASS budget includes recorded estimates with exact dates, overrun and pending labels
+PASS accessible progress reports true percentage above 100
+PASS all personal history stays accessible including older and pending trips
+PASS confirmed fare replaces estimate exactly once in budget
+PASS refund updates same-period budget
+PASS switching calendar budget preserves every record
+PASS budget and ledger survive reload
+PASS budget fits narrow enlarged text
+PASS turning off budget retains all history
+PASS enlarged calendar has no horizontal overflow
+PASS unreadable ledger never claims zero spending or full remaining budget
+PASS no browser runtime errors
+PASS accepted boarding stop shows three exact matched predictions
+PASS live estimates and operator schedules are distinct
+PASS destination, direction and local last-checked time are visible
+PASS refresh is bounded and no automatic request happens
+PASS aged predictions become visibly stale
+PASS offline guidance never presents saved predictions as live
+PASS arrival checks never change canonical progress
+PASS no runtime errors
+PASS distinct staff page explains no accepted trip and no dispatch
+PASS fresh browser defaults to simple without writing a preference
+PASS restored simple mode shows one current instruction and WIP
+PASS next appropriate primary action opens the current step picker, finish is disclosed
+PASS explicit full guidance survives reload and preserves the accepted journey
+PASS restored full guidance shows the next instruction
+PASS explicit simple guidance survives reload and preserves the accepted journey
+PASS staff default matches accepted instruction
+PASS staff explicit alternate remains separate from accepted journey
+PASS automatic control restores current message
+PASS actual checkpoint retains exact canonical ride index
+PASS ride does not get blanket indoor WIP
+PASS paused default stops travel instructions
+PASS primary resume explicitly restores active trip
+PASS normal mode returns Next without changing trip
+PASS accepted replacement while staff is open resets alternate message
+PASS completed default has no further travel instruction
+PASS blocked main path takes precedence
+PASS facility review takes precedence
+PASS blocked detour does not offer outbound instruction
+PASS simple toggle preserves accepted outbound detour
+PASS staff default follows accepted toilet outbound step
+PASS manual reached action advances only toilet phase
+PASS manual resume enters return detour without advancing canonical index
+PASS staff default follows return phase
+PASS both mode toggles preserve returning detour
+PASS station shortcut selects and focuses accessible tab
+PASS map station page keyboard controls work
+PASS integrated touch across docked tabs selects station guide
+PASS large text station guide does not horizontally overflow
+PASS large-text station panel stays above docked controls with usable scroll area
+PASS large-text primary button remains reachable
+PASS cancelled staff message clears travel instruction
+PASS guidance flows report no browser exceptions
+PASS address searches are explicit and contain only the entered public query
+PASS provider result remains a preview until explicit Start journey
+PASS request contains coordinate endpoints and authoritative preferences
+PASS standalone provider timeline shows public service and stop names
+PASS provider map has a geometry/evidence notice in journey details
+PASS address route saves with endpoint records without inventing local station connections
+PASS planner details preserve unknown fare/accessibility and planned provider source
+PASS accepted address journey has canonical provider geometry and no local context
+PASS provider-aware reroute limitation is visible while accepted guidance remains
+PASS manual boarding confirmation retains original canonical index
+PASS staff automatic message follows accepted external service and destination
+PASS recipient can review the same provider instructions before accepting
+PASS shared acceptance preserves route geometry/preferences and leaves consent off
+PASS provider failure cannot replace accepted route or explicit progress
+PASS reload restores provider route and confirmed progress
+PASS actual offline reload keeps accepted public instruction and progress
+PASS browser reports no application exceptions
+PASS automatic staff message follows the accepted current instruction
+PASS explicit alternative asks staff to check lift access
+PASS component starts with simple guidance checked
+PASS both guidance toggles leave canonical accepted journey untouched
+PASS WIP remains visible in simple mode
+PASS progress refresh resets alternate to current instruction
+PASS train ride has no blanket indoor WIP notice
+PASS paused staff default does not instruct travel
+PASS station tab opens coverage with linked operator evidence
+PASS Home focuses and selects Map
+PASS ArrowRight selects Station guide
+PASS touch swipe across tabs selects Station guide
+PASS map touch gestures do not change pages
+PASS malicious labels are literal text without executable elements
+PASS 320px at 200 percent text has no horizontal document overflow
+PASS simple setting survives a new store instance
+PASS no browser exceptions
+PASS editing an endpoint cancels pending full-network search without freezing controls
+PASS cancelled search cannot repopulate old route results
+PASS cancellation leaves accepted trip unchanged
+PASS fresh full-network search completes after cancellation
+PASS fresh results preserve accepted trip and disable Start while it is active
+PASS UI continues scheduling frames through cancel and worker restart
+PASS mobile layout remains within viewport
+PASS no browser errors
+PASS mobile sheet starts at normal height with a 44px handle
+PASS map tabs dock to the panel in a compact single row
+PASS tap expands sheet below the header
+PASS docked tabs stay visible while covered map controls become inert
+PASS ArrowDown restores normal position
+PASS compact sheet hides and inerts content
+PASS compact handle stays above navigation
+PASS ArrowUp reopens compact sheet to normal
+PASS touch swipe up expands without a second click toggle
+PASS touch swipe down returns expanded sheet to normal
+PASS touch swipe down collapses normal sheet
+PASS short deliberate upward swipe reopens compact sheet
+PASS cancelled touch restores initial height
+PASS short accidental movement neither resizes nor taps
+PASS horizontal handle gesture does not resize or tap
+PASS mouse drag captures release outside the moving handle
+PASS Space opens compact sheet
+PASS Enter collapses expanded sheet
+PASS Escape restores normal sheet
+PASS content scrolls without moving the sheet
+PASS map touch leaves sheet position unchanged
+PASS navigation reopens content and removes handle from tool pages
+PASS returning to Plan restores normal sheet
+PASS active trip peek cannot cover compact handle
+PASS planner inputs retain normal interaction
+PASS Station guide compacts journey sheet and keeps docked controls visible
+PASS journey sheet resizes while Station guide is selected
+PASS Station guide scrolls without dragging the journey sheet
+PASS returning to Map retains compact sheet position
+PASS navigation from guide restores current journey and focus
+PASS 320px large-text expanded sheet preserves scroll area
+PASS 320px large-text compact handle stays usable above navigation
+PASS reduced-motion sheet adds no CSS transition
+PASS desktop keeps its regular sidebar and visible content
+PASS desktop map tabs stay attached to sidebar
+PASS return to mobile starts at normal height
+PASS sheet gestures and view changes preserve the accepted journey
+PASS main map contains no toilet-location markers
+PASS sheet verification reports no browser exceptions
+PASS unselected endpoints do not display bus stop details
+PASS rail suggestions retain the train icon
+PASS bus suggestions use a distinct bus drawing
+PASS bus suggestion subtitle contains only unique naturally sorted bus numbers
+PASS keyboard selection shows compact numbers and collapsed details with a bus field icon
+PASS keyboard expansion exposes stop identity, every listed direction and operator
+PASS unsupported timing stays listed with its planner limitation
+PASS departure changes retain open details for the same selected stop
+PASS touch collapses the disclosure and all compact numbers remain uncovered
+PASS editing immediately removes stale stop details and resets the field icon
+PASS clearing an endpoint leaves no prior stop service description
+PASS new stop selections show their own numbers and reset to collapsed
+PASS swapping endpoints exchanges stop details without retaining the other stop open state
+PASS reopening a saved bus route after reload restores both compact stop disclosures
+PASS selecting, editing, swapping and reopening endpoints preserve the accepted journey
+PASS expanded stop directions fit at 320px and 200 percent text without horizontal overflow
+PASS large-text service direction and operator scroll fully above the current-trip peek
+PASS desktop layout exposes readable bus stop directions without overflow
+PASS no browser runtime errors or build changes during verification

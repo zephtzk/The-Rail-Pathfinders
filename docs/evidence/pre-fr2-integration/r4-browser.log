@@ -1,0 +1,121 @@
+
+> commute-copilot@1.0.0 test:r4-browser
+> node tests/r4-flow-browser.mjs && node tests/r4-planner-browser.mjs && node tests/r4-spending-browser.mjs && node tests/r4-legacy-browser.mjs
+
+PASS selected route has one explicit Start journey action without duplicate preference editors
+PASS human timeline retains Circle-to-East West transfer
+PASS fare accessibility and sources remain available before starting
+PASS toilet and caregiver controls are outside the planner details
+PASS selected preferences and canonical leg mapping reach active journey
+PASS direct start opens current trip without an extra confirmation
+PASS checkpoint display is grouped without raw indices or platform IDs
+PASS real interchange remains selectable at original index
+PASS successful checkpoint focuses current guidance and scrolls the trip sheet
+PASS checkpoint preserves canonical route and explicit position
+PASS failed confirmation leaves checkpoint and scroll unchanged
+PASS paused guidance stays human-readable
+PASS station and toilet tools share one section
+PASS station limitation is distinct and real toilet directions stay gated
+PASS shared invitation uses same human timeline
+PASS accepted invitation retains preferences and sharing starts off
+PASS reload preserves confirmed canonical index and preferences
+PASS new selection cannot start while another trip is active
+PASS editing endpoints removes the stale Start action and details
+PASS ending current trip enables Start for the selected next trip
+PASS new start keeps canonical identity distinct
+PASS plan fits desktop
+PASS current fits desktop
+PASS saved fits desktop
+PASS caregiver fits desktop
+PASS spending fits desktop
+PASS preferences fits desktop
+PASS plan fits large-text
+PASS current fits large-text
+PASS saved fits large-text
+PASS caregiver fits large-text
+PASS spending fits large-text
+PASS preferences fits large-text
+PASS no browser runtime errors
+PASS station suggestion shows BP1 once
+PASS interchange suggestion preserves distinct public codes
+PASS bus stop suggestion keeps its code once and compact service numbers
+PASS selected bus stop details retain the accurate terminal direction
+PASS selected service 23 details show its real loop via Rochor Canal Road
+PASS one time button replaces native editor and separate scroll action
+PASS selected Singapore civil time is visible despite another browser timezone
+PASS clock opens picker at selected hour
+PASS arrow keys move focus across columns
+PASS minute keyboard selection wraps at midnight
+PASS apply preserves exact 23:59 without shifting civil date
+PASS apply returns focus to the time button
+PASS cancel discards wheel changes and restores focus
+PASS Escape after an earlier Apply never applies stale dialog return value
+PASS scrolling updates the applied minute
+PASS picker-selected timing produces real route options
+PASS saved deadline and displayed picker remain synchronized on reopen
+PASS fresh saved departure timing refreshes visible button
+PASS unsupported timetable date has a distinct coverage banner and action
+PASS bus source-date restriction is a data limit with explicit day-specific coverage
+PASS known walking constraint identifies the actionable setting
+PASS available routes outside arrival deadline explain the actual constraint
+PASS large-text picker fits a narrow screen
+PASS large-text picker keeps apply reachable by scrolling
+PASS no browser runtime errors
+PASS Today starts open; calendar week and month start collapsed
+PASS each period has its own transactions
+PASS pending count is in every applicable header at normal weight
+PASS periods have visible spacing
+PASS transaction rows retain padding inside their period card
+PASS earlier records remain accessible without appearing in current period totals
+PASS only the selected overlapping row opens an editor
+PASS confirming from week updates the single transaction and all overlapping totals
+PASS expanded periods remain open after saving
+PASS refund from month affects only the intended transaction once
+PASS removing an adjustment through another period targets the same transaction
+PASS pricing pending trip clears all three pending labels and retains other rows
+PASS deleting from month removes all copies and preserves the tombstone
+PASS reload retains edited records and default collapsed week/month
+PASS replay records stay separate from period spending
+PASS narrow large text spending fits without horizontal overflow
+PASS integrated Spending page shows Today transactions and collapsed larger periods
+PASS integrated Spending page fits narrow large text
+PASS saved route remains available beside spending
+PASS visiting Saved routes cannot replace a fare deletion handler
+PASS no browser exceptions
+PASS rail saved-route calendar cancellation preserves date and returns focus
+PASS rail saved calendar date reaches the fresh route
+PASS rail saved route keeps senior fare and step-free requirement
+PASS rail prepared trip hides the obsolete review action
+PASS rail planner calendar cancellation preserves date and returns focus
+PASS rail matching arrival date follows departure and refreshes its label
+PASS rail applying a calendar date clears stale Start Journey
+PASS rail editing removes stale Start Journey
+PASS rail replanning keeps one calendar per surviving form
+PASS rail replan uses the edited civil date and retains native time controls
+PASS rail replanning preserves saved hidden preferences
+PASS rail unverified saved step-free requirement still blocks starting
+PASS pilot saved-route calendar cancellation preserves date and returns focus
+PASS pilot saved calendar date reaches the fresh route
+PASS pilot saved route keeps senior fare and step-free requirement
+PASS pilot prepared trip hides the obsolete review action
+PASS pilot planner calendar cancellation preserves date and returns focus
+PASS pilot matching arrival date follows departure and refreshes its label
+PASS pilot applying a calendar date clears stale Start Journey
+PASS pilot editing removes stale Start Journey
+PASS pilot replanning keeps one calendar per surviving form
+PASS pilot replan uses the edited civil date and retains native time controls
+PASS pilot replanning preserves saved hidden preferences
+PASS pilot unverified saved step-free requirement still blocks starting
+PASS replay saved-route calendar cancellation preserves date and returns focus
+PASS replay saved calendar date reaches the fresh route
+PASS replay saved route keeps senior fare and step-free requirement
+PASS replay prepared trip hides the obsolete review action
+PASS replay planner calendar cancellation preserves date and returns focus
+PASS replay cancelling calendar leaves the trip modal and prepared journey open
+PASS replay applying a calendar date clears stale Start Journey
+PASS replay editing removes stale Start Journey
+PASS replay replanning keeps one calendar per surviving form
+PASS replay replan uses the edited civil date and retains native time controls
+PASS replay replanning preserves saved hidden preferences
+PASS replay accepted plan retains explicit walking edit and saved fare
+PASS legacy preference and invalidation flows have no uncaught page errors

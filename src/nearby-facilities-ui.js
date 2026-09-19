@@ -3,7 +3,8 @@ import {NEARBY_RADIUS_METERS,nearbyFacilities,nearbyFacilityStatus,formatFacilit
 import {suggestEndpoints} from './planner-model.js';
 import {addStreetMap} from './network-map.js';
 import {icon} from './icons.js';
-import {getAppLocation,locationDescription,usableLocation} from './location-assistance.js';
+import {getAppLocation,usableLocation} from './location-assistance.js';
+import {compactLocationStatus} from './location-ui.js';
 
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const time=value=>Number.isFinite(Date.parse(value))?new Intl.DateTimeFormat('en-SG',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Singapore'}).format(new Date(value))+' SGT':'Not supplied';
@@ -108,7 +109,7 @@ export function mountNearbyFacilities(host,{getPlaces=()=>[],fetcher=globalThis.
     $('refresh').disabled=loading;$('refresh').textContent=loading?'Checking…':'Refresh status';
     $('device-area').hidden=!manualOverride||!usableDevice();
     $('location-message').hidden=!manualOverride&&usableDevice();
-    $('location-message').textContent=manualOverride?'Manual search area selected. Your device location does not change this area.':`${locationDescription(locationState.position,{...locationState,now:now()})}${!usableDevice()?' Choose an area manually; location controls are in Settings.':''}`;
+    $('location-message').textContent=manualOverride?'Manual search area selected. Your device location does not change this area.':`${compactLocationStatus(locationState)}. Choose an area below.`;
     $('feed').textContent=feedText();$('feed').dataset.offline=String(!online());
     $('center').hidden=!center;
     if(center){const old=center.method==='device'&&!usableDevice();$('center').innerHTML=`<strong>${esc(old?'Last device search area':center.label)}</strong><span>1 km radius · nearest first${center.method==='device'?` · accuracy about ${Math.round(center.accuracy)} m · measured ${esc(time(new Date(center.at).toISOString()))}`:' · manual search area'}</span>${old?'<p class="nf-stale">This search area is no longer a usable current location estimate. Choose an area manually while location assistance recovers.</p>':''}`;}

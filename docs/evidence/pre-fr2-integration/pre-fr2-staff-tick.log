@@ -1,0 +1,50 @@
+PASS staff without an accepted trip retains its no-dispatch explanation and has no reset tick
+PASS fresh default is simple guidance without saving an explicit preference
+PASS automatic current instruction has no reset button
+PASS platform message applies immediately and exposes the reset tick
+PASS transfer message applies immediately and exposes the reset tick
+PASS exit message applies immediately and exposes the reset tick
+PASS lift message applies immediately and exposes the reset tick
+PASS alert message applies immediately and exposes the reset tick
+PASS compact tick has a meaningful accessible name and tooltip with no visible text
+PASS click resets to the actual current instruction, hides the tick and focuses the dropdown
+PASS Enter reset tick directly follows the dropdown in keyboard order
+PASS Enter keyboard focus is visibly outlined
+PASS Enter resets the message without changing journey state
+PASS Space reset tick directly follows the dropdown in keyboard order
+PASS Space keyboard focus is visibly outlined
+PASS Space resets the message without changing journey state
+PASS staff message choices and tick activation dispatch no journey state changes
+PASS offline refresh preserves manual message and request focus
+PASS online refresh preserves manual message and request focus
+PASS hidden refresh preserves manual message and request focus
+PASS visible refresh preserves manual message and request focus
+PASS offline refresh preserves manual message and automatic focus
+PASS online refresh preserves manual message and automatic focus
+PASS hidden refresh preserves manual message and automatic focus
+PASS visible refresh preserves manual message and automatic focus
+PASS leaving and returning to staff preserves a manual selection
+PASS selecting automatic in the dropdown itself restores the current instruction
+PASS an unconfirmed journey picker selection preserves the manual staff message
+PASS a confirmed current-step change automatically refreshes the card and removes the reset tick
+PASS accepted route replacement resets manual staff text while staff remains open
+PASS full staff tick matches current-step tick colour, border, size and glyph
+PASS full mobile keeps dropdown and tick adjacent without horizontal overflow
+PASS full mobile retains 48px touch targets
+PASS full mobile dropdown text respects the root text size
+PASS full mobile reset remains reachable and leaves journey unchanged
+PASS full 320-large-text keeps dropdown and tick adjacent without horizontal overflow
+PASS full 320-large-text retains 48px touch targets
+PASS full 320-large-text dropdown text respects the root text size
+PASS full 320-large-text reset remains reachable and leaves journey unchanged
+PASS simple staff tick matches current-step tick colour, border, size and glyph
+PASS simple mobile keeps dropdown and tick adjacent without horizontal overflow
+PASS simple mobile retains 56px touch targets
+PASS simple mobile dropdown text respects the root text size
+PASS simple mobile reset remains reachable and leaves journey unchanged
+PASS simple 320-large-text keeps dropdown and tick adjacent without horizontal overflow
+PASS simple 320-large-text retains 56px touch targets
+PASS simple 320-large-text dropdown text respects the root text size
+PASS simple 320-large-text reset remains reachable and leaves journey unchanged
+PASS staff controls make no sharing requests or network mutations
+PASS staff tick flows report no browser exceptions

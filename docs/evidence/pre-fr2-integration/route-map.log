@@ -1,0 +1,28 @@
+PASS finding the mixed route leaves accepted guidance empty
+PASS preview: waits do not shift the geometry-to-mode association
+PASS preview: walking is dotted gray with round caps
+PASS preview: trains are solid in East West and Downtown service colors
+PASS preview: buses retain a distinct blue line and white center pattern
+PASS preview: all route segments have casings and transfer stops are marked
+PASS preview: map badges and journey-panel key identify the services and travel modes
+PASS preview: route legend and details do not cover the map
+PASS mobile map stays clear with the route key collapsed in the journey panel
+PASS route key and source remain available in the journey panel
+PASS accepted route preserves all geometry with original step indices around waits
+PASS started: waits do not shift the geometry-to-mode association
+PASS started: walking is dotted gray with round caps
+PASS started: trains are solid in East West and Downtown service colors
+PASS started: buses retain a distinct blue line and white center pattern
+PASS started: all route segments have casings and transfer stops are marked
+PASS started: map badges and journey-panel key identify the services and travel modes
+PASS started: route legend and details do not cover the map
+PASS starting the journey preserves every preview map style
+PASS restored: waits do not shift the geometry-to-mode association
+PASS restored: walking is dotted gray with round caps
+PASS restored: trains are solid in East West and Downtown service colors
+PASS restored: buses retain a distinct blue line and white center pattern
+PASS restored: all route segments have casings and transfer stops are marked
+PASS restored: map badges and journey-panel key identify the services and travel modes
+PASS restored: route legend and details do not cover the map
+PASS reload restores the accepted geometry and the same map styles
+PASS browser reports no application exceptions or console errors

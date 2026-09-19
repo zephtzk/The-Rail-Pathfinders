@@ -1,0 +1,12 @@
+PASS /multimodal.html?legacy=1 access: usable GPS compacts outdoor recovery
+PASS /multimodal.html?legacy=1 GPS update preserves pending recovery fields and confirmation focus
+PASS /multimodal.html?legacy=1 denied-to-usable recovery does not dismiss an active confirmation
+PASS /multimodal.html?legacy=1 low-accuracy fallback expands manual correction
+PASS /multimodal.html?legacy=1 access: assistance leaves canonical legacy progress unchanged
+PASS /multimodal.html?legacy=1 wait: usable GPS retains explicit indoor/wait/boarding confirmation
+PASS /multimodal.html?legacy=1 wait: assistance leaves canonical legacy progress unchanged
+PASS /multimodal.html?legacy=1 ride: usable GPS retains explicit indoor/wait/boarding confirmation
+PASS /multimodal.html?legacy=1 ride: assistance leaves canonical legacy progress unchanged
+PASS /multimodal.html?legacy=1 transfer: usable GPS retains explicit indoor/wait/boarding confirmation
+PASS /multimodal.html?legacy=1 transfer: assistance leaves canonical legacy progress unchanged
+PASS legacy location controls produce no browser runtime errors

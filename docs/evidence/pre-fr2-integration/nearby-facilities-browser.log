@@ -1,0 +1,46 @@
+PASS Facilities is reachable through the main navigation
+PASS Opening Facilities reuses the single location watch started on app load
+PASS The initial state states the fixed 1 km radius and shared location wait without a redundant locate prompt
+PASS Actual unconfigured maintenance service is presented honestly
+PASS Manual area selection moves keyboard focus out of the collapsed search
+PASS Manual Bugis has real listed facilities without another geolocation request
+PASS Cards display ascending distances limited to the fixed radius
+PASS Manual centre and straight-line distance limitations are explicit
+PASS Real discovery cards never show station fixtures or invented open/operating claims
+PASS Lifts filter shows sourced nearby lifts only
+PASS Toilets filter shows sourced nearby toilets with unknown availability
+PASS Facility details distinguish listing and coordinate sources and dates
+PASS Coverage disclosure states location provenance and toilet/live-maintenance limits
+PASS All filter restores the nearest-first directory
+PASS Mobile Facilities has no horizontal overflow
+PASS Map fallback keeps facility pins and warns when street tiles fail
+PASS Show on map preserves selected facility details
+PASS Show on map transfers focus to the labelled map
+PASS Every map marker has a full facility name and distance for screen readers
+PASS Keyboard marker selection moves focus to the facility details
+PASS Show in list returns to and focuses the selected facility
+PASS Offline refresh keeps the packaged list and labels availability uncheckable
+PASS Directory browsing, filters, map and offline refresh leave localStorage unchanged
+PASS Desktop Facilities has no horizontal overflow
+PASS Narrow enlarged-text Facilities has no horizontal overflow
+PASS Enlarged facility controls fit each complete label without clipping
+PASS Unmocked street map settles with either actual tiles or an explicit provider-unavailable state
+PASS App load starts one bounded fresh location watch before Facilities opens
+PASS Low accuracy is labelled and does not establish a current search area
+PASS A fresh accurate shared fix automatically populates nearby facilities
+PASS Passive fixes preserve facility filters, expanded details and keyboard focus
+PASS A focused facility source link and its open disclosure survive a shared GPS callback
+PASS Shared fixes preserve the chosen map facility and marker keyboard focus
+PASS A live position update preserves an in-progress manual search
+PASS A later shared fix cannot replace a manually selected area
+PASS An empty controlled location shows partial-coverage guidance instead of asserting no nearby facilities exist
+PASS A device search that ages across tabs is labelled as a previous area rather than current position
+PASS Switching app tabs does not duplicate or stop the shared foreground watch
+PASS A new usable shared fix restores the current area automatically
+PASS Permission denial offers manual selection and Settings recovery without retrying across tabs
+PASS Refresh shows a disabled loading action and keeps nearby locations visible
+PASS Failed refresh gives an attempted time and retry action without erasing the directory
+PASS Controlled station-only maintenance warns without assigning a specific lift outage
+PASS Stale controlled maintenance responses are dated and never imply operation
+PASS Shared location and Facilities browsing preserve accepted guidance and caregiver consent
+PASS All real and controlled browser scenarios have no JavaScript runtime errors
