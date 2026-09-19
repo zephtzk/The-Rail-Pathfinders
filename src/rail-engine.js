@@ -1,4 +1,5 @@
 import {createSearchArena} from './search-arena.js';
+import {demoConnectionClosed} from './demo-closures.js';
 
 /**
  * Scheduled, station-to-station rail routing. No UI, geographic inference, live
@@ -288,6 +289,7 @@ export function createRailRouter(network) {
         if (connection.departure + stream.offset > horizon) break;
         if (connection.arrival + stream.offset + exit > horizon) continue;
         if (excluded.some(e => e.tripId === connection.trip.id && e.serviceDate === stream.serviceDate && (e.impactStartSeconds===undefined || (connection.arrival>=e.impactStartSeconds && connection.departure<=e.impactEndSeconds)) && (!e.fromStopId || (e.fromStopId === connection.from && e.toStopId === connection.to)))) continue;
+        if (demoConnectionClosed(input.demoClosures,connection.trip.routeId,connection.from,connection.to,connection.departure+stream.offset,connection.arrival+stream.offset)) continue;
         connection.departure+=stream.offset;connection.arrival+=stream.offset;
         connection.serviceDate=stream.serviceDate;
         if (!stream.occurrences.has(connection.trip)) stream.occurrences.set(connection.trip,`${stream.serviceDay}:${connection.trip.id}`);
@@ -343,7 +345,7 @@ export function createRailRouter(network) {
     }
     // Separate scratch values keep a later-alighting retry from changing the
     // base boarding used by other stops. Public legs copy their scalar fields.
-    const boardingOutput = {}, alightBoardingOutput = {};
+    const boardingOutput = {}, alightBoardingOutput = {}, demoBoardingOutput = {};
     function relaxTransfers(startLabel, initiallyReady = false) {
       const queue = [startLabel], boardingFlags = [initiallyReady];
       for (let i = 0; i < queue.length; i++) {
@@ -396,6 +398,33 @@ export function createRailRouter(network) {
             }
             // Rejected alightings allocate neither a label nor a predicate
             // closure; full-network searches can reject millions of these.
+            // A temporary closure may postpone a frequency ride. Retry from the
+            // matching closure's expiry using the ordinary headway/service-day
+            // rules; never invent an exact bus at the instant service resumes.
+            if (input.demoClosures?.length) {
+              const scoped = input.demoClosures.filter(rule=>rule.demo===true&&rule.routeId===pattern.id&&(!rule.edges||pattern.stops.slice(index,j).some((stop,k)=>rule.edges.some(edge=>edge[0]===stop.stopId&&edge[1]===pattern.stops[index+k+1].stopId))));
+              let supported = true;
+              for (let retry=0;retry<=scoped.length;retry++) {
+                const overlaps = scoped.filter(rule=>rideDeparture<rule.endSeconds&&time>rule.startSeconds);
+                if (!overlaps.length) break;
+                const readyAfterClosure = Math.max(label.time,...overlaps.map(rule=>rule.endSeconds));
+                if (retry===scoped.length||!Number.isFinite(readyAfterClosure)||readyAfterClosure+duration+exit>searchCutoff()) {supported=false;break;}
+                diagnostics.frequencyExpansions++;
+                if (interrupted()) return;
+                rideBoarding = frequency.boarding(pattern,index,readyAfterClosure,date,null,0,demoBoardingOutput);
+                rideDeparture = typeof rideBoarding==='number'?rideBoarding:rideBoarding?.seconds??null;
+                if (rideDeparture===null||rideDeparture<readyAfterClosure) {supported=false;break;}
+                time = rideDeparture+duration;
+                if (!frequency.canAlight(pattern,j,time,date,rideBoarding)) {
+                  rideBoarding = frequency.boardingForAlight?.(pattern,index,j,readyAfterClosure,date,duration,demoBoardingOutput);
+                  rideDeparture = typeof rideBoarding==='number'?rideBoarding:rideBoarding?.seconds??null;
+                  if (rideDeparture===null||rideDeparture<readyAfterClosure) {supported=false;break;}
+                  time = rideDeparture+duration;
+                }
+                if (time+exit>searchCutoff()||!frequency.canAlight(pattern,j,time,date,rideBoarding)) {supported=false;break;}
+              }
+              if (!supported) continue;
+            }
             if (dominatedBy(arrived.get(alight.stopId),time,label.boardings+1,label.walk,false)) continue;
             const next = arena.label(alight.stopId,time,label.walk,label.boardings+1,false,null);
             if (rideDeparture === departureEstimate && waitChain === null) waitChain = departureEstimate > label.time ? arena.wait(label.chain,label.stop,label.time,departureEstimate,true) : label.chain;
