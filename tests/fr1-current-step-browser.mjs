@@ -164,6 +164,7 @@ try{
     for(const size of [{width:390,height:844,font:'',label:'mobile'},{width:320,height:900,font:'200%',label:'320-large-text'}]){
       await page.setViewportSize({width:size.width,height:size.height});
       await seed('route',{index:1,simple});await page.evaluate(font=>document.documentElement.style.fontSize=font,size.font);await updateButton().click();
+      check(`${simple?'simple':'full'} ${size.label} exposes all three trip actions without a disclosure`,await page.locator('#trip-more-actions').count()===0&&JSON.stringify(await page.locator('.trip-actions button').allTextContents())===JSON.stringify(['End trip','Pause trip','Cancel trip'])&&(await Promise.all(['journey-finish','journey-pause','journey-cancel'].map(id=>page.locator('#'+id).isVisible()))).every(Boolean));
       const geometry=await page.evaluate(()=>{
         const rect=selector=>document.querySelector(selector).getBoundingClientRect();
         const picker=rect('#trip-position'),select=rect('#checkpoint-step'),tick=rect('#confirm-step');
@@ -175,9 +176,10 @@ try{
     }
   }
   await page.setViewportSize({width:390,height:844});
-  for(const [kind,label] of [['paused','Resume journey'],['blocked','Ask staff for help'],['review','Review changed directions'],['detour','Confirm a station checkpoint'],['detour-blocked','Ask staff for help'],['detour-reached','Resume from my toilet stop'],['detour-returning','Confirm a station checkpoint']]){
+  for(const [kind,label] of [['paused','Resume trip'],['blocked','Ask staff for help'],['review','Review changed directions'],['detour','Confirm a station checkpoint'],['detour-blocked','Ask staff for help'],['detour-reached','Resume from my toilet stop'],['detour-returning','Confirm a station checkpoint']]){
     await seed(kind,{simple:true});const before=await active();
     check(`${kind} retains its phase-specific primary action`,await page.locator('#guidance-primary').innerText()===label&&await page.locator('#guidance-current-step').innerText()==='Update my current step');
+    check(`${kind} retains visible end, pause or resume, and cancel actions`,JSON.stringify(await page.locator('.trip-actions button').allTextContents())===JSON.stringify(['End trip',kind==='paused'?'Resume trip':'Pause trip','Cancel trip'])&&(await Promise.all(['journey-finish','journey-pause','journey-cancel'].map(id=>page.locator('#'+id).isVisible()))).every(Boolean)&&await page.locator('#trip-more-actions').count()===0);
     await updateButton().click();
     check(`${kind} opening position picker does not execute its phase action`,await snapshot()===JSON.stringify(before)&&await page.locator('#guidance-primary').innerText()===label);
     await confirmButton().click();const confirmed=await active();

@@ -96,12 +96,12 @@
   .commute-app .app-nav button:focus-visible{outline:3px solid ButtonText;outline-offset:2px}
 }
 
-/* FR2: keep the resize handle and map pages together, with room for enlarged text. */
+/* FR3: a horizontal grabber above the map tabs, with an accessible 44px target. */
 .commute-app .journey-sheet-header{flex-shrink:0;background:var(--surface)}
 @media(max-width:680px){
-  .commute-app .journey-sheet-header{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:4px 8px;border-bottom:1px solid var(--border)}
-  .commute-app .journey-sheet-header .sheet-handle{flex:1 1 6rem;width:auto;min-width:0;padding:5px 4px;align-self:stretch;border-radius:10px}
-  .commute-app .journey-sheet-header .journey-sheet-dock{flex:2 1 11rem;min-width:0}
+  .commute-app .journey-sheet-header{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0 8px 4px;border-bottom:1px solid var(--border)}
+  .commute-app .journey-sheet-header .sheet-handle{flex:0 0 44px;width:100%;min-width:0;min-height:44px;padding:0;align-self:stretch;border-radius:10px}
+  .commute-app .journey-sheet-header .journey-sheet-dock{flex:0 0 auto;width:100%;min-width:0}
   .commute-app .journey-sheet-header .guidance-page-strip{padding:0;border:0}
   .commute-app .journey-sheet-header .guidance-page-strip button:first-child{flex:.65}
   .commute-app .journey-sheet-header .guidance-page-strip button{font-size:.8rem}

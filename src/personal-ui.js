@@ -14,7 +14,7 @@ export function mountPersonal({host,storage=browserStorage(),getPlan=()=>null,on
   addressSearch.cancel();
   const loaded=store.read(),all=loaded.state,state=visiblePersonalState(all),now=singaporeNow();
   const placeOptions=role=>state.places.map(p=>`<option value="${esc(p.id)}" ${selection[role]?.id===p.id?'selected':''}>${esc(p.label)}</option>`).join('');
-  host.innerHTML=`<section aria-labelledby="saved-title"><h2 id="saved-title">${showJourneys?'Saved routes &amp; places':'Your places'}</h2><p>Add the places you visit often. They are saved in this browser.</p><p role="status">${esc(message||loaded.error||'')}</p>
+  host.innerHTML=`<section aria-labelledby="saved-title"><h2 id="saved-title">${showJourneys?'Saved routes &amp; places':'Your places'}</h2><p>They are saved in this browser.</p><p role="status">${esc(message||loaded.error||'')}</p>
    <form id="place-add"><h3>Add a place</h3><label>Place name <input name="label" required maxlength="80" placeholder="Home, Work or Hospital" value="${esc(draft.label)}"></label>
    <label>Address or place in Singapore <input name="address" maxlength="160" autocomplete="off" placeholder="Street address, building or postcode" value="${esc(draft.query)}" aria-describedby="address-privacy"></label>
    <p class="field-note" id="address-privacy">Searching sends this address to Photon (Komoot), using OpenStreetMap data. Your place name stays here. Search runs only when you press Search addresses.</p>

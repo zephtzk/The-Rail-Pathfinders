@@ -74,7 +74,7 @@
 .commute-app .app-nav [aria-current="page"] .icon, .commute-app .app-nav .is-active .icon { --icon-fill: #bee7f7; }
 .commute-app .app-nav button:hover, .commute-app .app-nav a:hover { background: #eef2f0; }
 .commute-app .app-nav [aria-current="page"]:hover { background: #dceff9; }
-.commute-app .primary, .commute-app .secondary, .commute-app .quiet, .commute-app .icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; border: 0; border-radius: 15px; padding: 12px 17px; font-size: .875rem; line-height: 1.35; font-weight: 700; text-decoration: none; transition: background .15s, box-shadow .15s; }
+.commute-app .primary, .commute-app .secondary, .commute-app .quiet, .commute-app .icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; border: 0; border-radius: 15px; padding: 10px 17px; font-size: .875rem; line-height: 1.35; font-weight: 700; text-decoration: none; transition: background .15s, box-shadow .15s; }
 .commute-app .primary { color: #193d52; background: var(--accent); box-shadow: 0 2px 0 #68bada; }
 .commute-app .primary:hover { background: #78ceeF; box-shadow: 0 2px 0 #53a9cd; }
 .commute-app .primary:active { box-shadow: none; }
@@ -429,7 +429,7 @@
 .commute-app #saved-companion { margin-top: 24px; }
 .commute-app #caregiver-companion .companion-panel, .commute-app #spending-companion .companion-panel, .commute-app #saved-companion .companion-panel { margin: 0; }
 .commute-app .companion-panel > section > p, .commute-app .companion-panel > p { margin-block: 10px; }
-.commute-app .companion-panel button:not(.icon-button), .commute-app .reroute-tools button { min-height: 44px; border: 1px solid #d6e0e4; border-radius: 13px; padding: 10px 14px; background: white; font-size: .82rem; font-weight: 650; margin: 5px 3px 5px 0; }
+.commute-app .companion-panel button:not(.icon-button), .commute-app .reroute-tools button { min-height: 44px; border: 1px solid #d6e0e4; border-radius: 13px; padding: 8px 14px; background: white; font-size: .82rem; font-weight: 650; margin: 5px 3px 5px 0; }
 .commute-app .companion-panel button.primary { background: var(--accent); }
 .commute-app .companion-panel label { margin-block: 12px; }
 .commute-app .companion-panel h3 { margin-top: 18px; }

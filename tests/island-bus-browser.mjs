@@ -11,7 +11,7 @@ page.on('pageerror',e=>errors.push(e.message));
 const check=(label,value)=>{assert.ok(value,label);checks.push(label);console.log('PASS '+label);};
 try{
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
-  check('coverage states all 5208 source stops',/5,208/.test(await page.locator('#coverage-copy').textContent()));
+  check('coverage section is absent while all 5208 source stops remain available',await page.locator('.coverage-details,#coverage-copy').count()===0&&await page.evaluate(async()=>{const response=await fetch('/data/bus-network.json');return response.ok&&(await response.json()).stops.length===5208;}));
   await page.locator('#origin').fill('01349');await page.locator('#origin-suggestions .suggestion-option').first().click();
   check('previously omitted stop is selectable',/01349/.test(await page.locator('#origin').inputValue()));
   await page.locator('#origin-stop-details summary').click();
