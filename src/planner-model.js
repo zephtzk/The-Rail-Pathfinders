@@ -1,9 +1,14 @@
 import {singaporeNow} from './personal.js';
 
+const stopCode = id => String(id ?? '').replace(/^bus:/, '');
+const serviceOrder = new Intl.Collator('en', {numeric:true, sensitivity:'base'});
+
 // Terminals come from service metadata, never the ends of a sampled route segment.
 export function busDirectionLabel(pattern, stops = []) {
-  const names = new Map(stops.map(stop => [String(stop.id).replace(/^bus:/, ''), stop.name]));
-  const origin = names.get(String(pattern.originCode)), destination = names.get(String(pattern.destinationCode));
+  return directionLabel(pattern, new Map(stops.map(stop => [stopCode(stop.id), stop.name])));
+}
+function directionLabel(pattern, names) {
+  const origin = names.get(stopCode(pattern.originCode)), destination = names.get(stopCode(pattern.destinationCode));
   const service = `Bus ${pattern.serviceNo}`;
   if (pattern.loop || (pattern.originCode && pattern.originCode === pattern.destinationCode)) {
     return `${service} · loop${origin ? ` from ${origin}` : ''}${pattern.loopDescription?.trim() ? ` via ${pattern.loopDescription.trim()}` : ''}`;
@@ -14,16 +19,59 @@ export function busDirectionLabel(pattern, stops = []) {
   return `${service} · terminal names unavailable`;
 }
 
-export function endpointCatalog(network, bus, personal = {places:[]}) {
-  const directions = new Map();
+// Static source metadata, including listed services whose timing is unsupported.
+// The route engine still decides eligibility for the selected date and time.
+export function busStopDetails(bus, routingId) {
+  if (!String(routingId ?? '').startsWith('bus:')) return null;
+  const code = stopCode(routingId);
+  const stop = (bus.stops ?? []).find(item => stopCode(item.id) === code);
+  if (!stop) return null;
+  const names = new Map((bus.stops ?? []).map(item => [stopCode(item.id), item.name]));
+  const services = [];
   for (const pattern of bus.patterns ?? []) {
-    const label = busDirectionLabel(pattern, bus.stops);
+    const visits = [];
+    for (const [index, visit] of (pattern.stops ?? []).entries()) {
+      if (stopCode(visit.stopId) !== code) continue;
+      visits.push({
+        sequence:visit.sequence ?? index + 1,
+        visitNumber:visit.visitNumber ?? visits.length + 1,
+        terminatesHere:index === pattern.stops.length - 1 && stopCode(pattern.destinationCode) === code,
+      });
+    }
+    if (!visits.length) continue;
+    services.push({
+      patternId:pattern.id, serviceNo:String(pattern.serviceNo), direction:pattern.direction,
+      operator:pattern.operator, directionLabel:directionLabel(pattern, names),
+      loop:Boolean(pattern.loop || (pattern.originCode && pattern.originCode === pattern.destinationCode)),
+      originCode:pattern.originCode, destinationCode:pattern.destinationCode,
+      originName:names.get(stopCode(pattern.originCode)), destinationName:names.get(stopCode(pattern.destinationCode)),
+      timingSupported:pattern.timingSupported !== false, visits,
+    });
+  }
+  services.sort((a,b) => serviceOrder.compare(a.serviceNo,b.serviceNo) || serviceOrder.compare(String(a.direction ?? ''),String(b.direction ?? '')) || serviceOrder.compare(a.operator ?? '',b.operator ?? ''));
+  return {stopCode:code,name:stop.name,roadName:stop.roadName ?? '',services};
+}
+
+export function endpointCatalog(network, bus, personal = {places:[]}) {
+  const directions = new Map(), services = new Map();
+  const names = new Map((bus.stops ?? []).map(stop => [stopCode(stop.id), stop.name]));
+  for (const pattern of bus.patterns ?? []) {
+    const label = directionLabel(pattern, names);
     for (const stop of pattern.stops) {
-      const key = `bus:${stop.stopId}`;
-      directions.set(key, [...new Set([...(directions.get(key) ?? []), label])]);
+      const key = `bus:${stopCode(stop.stopId)}`;
+      if (!directions.has(key)) {directions.set(key, new Set());services.set(key, new Set());}
+      directions.get(key).add(label);
+      services.get(key).add(String(pattern.serviceNo));
     }
   }
-  const base = network.stations.map(s => {const codes=s.id.startsWith('bus:')?[s.id.slice(4)]:[...new Set([s.id,...(s.stopIds??[])].map(id=>id.split('_')[0]))];return {id:s.id,routingId:s.id,codes,label:s.name,lat:s.lat,lng:s.lon ?? s.lng,stationId:s.id,sourceId:`lta:${s.id}`,coverage:'supported',accessibility:'unknown',kind:s.id.startsWith('bus:')?'bus':'train',detail:s.id.startsWith('bus:')?[...(directions.get(s.id)??[]),s.roadName].filter(Boolean).join(' · '):`${codes.join(' / ')} · Rail station`};});
+  const base = network.stations.map(s => {
+    const isBus=s.id.startsWith('bus:');
+    const codes=isBus?[s.id.slice(4)]:[...new Set([s.id,...(s.stopIds??[])].map(id=>id.split('_')[0]))];
+    return {id:s.id,routingId:s.id,codes,label:s.name,lat:s.lat,lng:s.lon ?? s.lng,stationId:s.id,sourceId:`lta:${s.id}`,coverage:'supported',accessibility:'unknown',kind:isBus?'bus':'train',
+      detail:isBus?[...(services.get(s.id)??[])].sort(serviceOrder.compare).join(', '):`${codes.join(' / ')} · Rail station`,
+      ...(isBus?{stopCode:codes[0],roadName:s.roadName ?? '',searchText:[...(directions.get(s.id)??[]),s.roadName].filter(Boolean).join(' · ')}:{}),
+    };
+  });
   return [...(personal.places ?? []).map(p=>({...p,kind:'saved',routingId:p.routingId ?? p.stationId,detail:`Saved place · ${base.find(s=>s.id===(p.routingId??p.stationId))?.label ?? 'connection unverified'}`})),...base];
 }
 
@@ -49,7 +97,7 @@ export function plannerFeedback(result, input = {}, {railCoverage = {}, busCover
 export function suggestEndpoints(catalog,query,limit=10) {
   const q=String(query).trim().toLowerCase();
   const rank=p=>(p.codes??[p.routingId]).some(c=>c?.toLowerCase()===q)?2:Number(p.label.toLowerCase().startsWith(q));
-  return catalog.filter(p=>!q||`${p.label} ${p.routingId??''} ${p.detail}`.toLowerCase().includes(q)).sort((a,b)=>rank(b)-rank(a)).slice(0,limit);
+  return catalog.filter(p=>!q||`${p.label} ${p.routingId??''} ${p.detail} ${p.searchText??''}`.toLowerCase().includes(q)).sort((a,b)=>rank(b)-rank(a)).slice(0,limit);
 }
 export function resolveEndpoint(catalog,id,network) {
   const p=catalog.find(p=>p.id===id);
