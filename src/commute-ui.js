@@ -24,6 +24,7 @@ import {mountStaffCard} from './staff-card.js';
 import {mountMapStationPages,indoorNoticeHTML} from './station-guide.js';
 import {mountJourneySheet} from './journey-sheet.js';
 import {mountBusStopMap} from './bus-stop-map.js';
+import {mountMapLayerControls} from './map-layer-controls.js';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=id=>document.getElementById(id);
@@ -162,7 +163,22 @@ function drawMap(){if(!mapLayers)return;mapLayers.clearLayers();const active=com
   $('retry-street-map')?.addEventListener('click',()=>streetMap?.retry());if(points.length&&drawMap.last!==r?.id){drawMap.last=r?.id;fitMap();}}
 function fitMap(){if(drawMap.points?.length){const desktop=innerWidth>=960;map.fitBounds(drawMap.points,{paddingTopLeft:desktop?[500,95]:[32,90],paddingBottomRight:desktop?[60,65]:[32,50],maxZoom:14,animate:!reducedMotion()});}else map?.setView([1.335,103.86],12,{animate:!reducedMotion()});}
 $('recenter-map').onclick=fitMap;
-async function initMap(){try{map=L.map('commute-map',{zoomControl:false,scrollWheelZoom:false}).setView([1.335,103.86],12);streetMap=addStreetMap(map,{onStatus:status=>{mapFailed=['unavailable','offline'].includes(status.status);mapStatus=mapFailed?'Street map unavailable':status.status==='loading'?'Loading street map':'';drawMap();}});L.control.zoom({position:'topright'}).addTo(map);drawNetworkOverview(map,rail);mountBusStopMap(map,bus.stops,{onChoose:(role,code)=>{catalog=currentCatalog();const point=catalog.find(p=>p.id===`bus:${code}`);if(point){showView('plan');choose(role,point);}}});mapLayers=L.layerGroup().addTo(map);drawMap();}catch{$('map-caption').hidden=false;$('map-caption').textContent='Map unavailable. Text routes and saved guidance remain usable.';}}
+async function initMap(){try{
+  map=L.map('commute-map',{zoomControl:false,scrollWheelZoom:false}).setView([1.335,103.86],12);
+  streetMap=addStreetMap(map,{onStatus:status=>{mapFailed=['unavailable','offline'].includes(status.status);mapStatus=mapFailed?'Street map unavailable':status.status==='loading'?'Loading street map':'';drawMap();}});
+  L.control.zoom({position:'topright'}).addTo(map);
+  const trainLayer=drawNetworkOverview(map,rail);
+  let busLayer;
+  const layerControls=mountMapLayerControls(map,{
+    onBusToggle:visible=>busLayer.setVisible(visible),
+    onTrainToggle:visible=>visible?trainLayer.addTo(map):map.removeLayer(trainLayer)
+  });
+  busLayer=mountBusStopMap(map,bus.stops,{
+    onStatus:layerControls.setBusStatus,
+    onChoose:(role,code)=>{catalog=currentCatalog();const point=catalog.find(p=>p.id===`bus:${code}`);if(point){showView('plan');choose(role,point);}}
+  });
+  mapLayers=L.layerGroup().addTo(map);drawMap();
+}catch{$('map-caption').hidden=false;$('map-caption').textContent='Map unavailable. Text routes and saved guidance remain usable.';}}
 function connection(){$('network-status').innerHTML=`${icon(navigator.onLine?'online':'offline',16)} ${navigator.onLine?'Online':'Offline'}`;updateCurrent(companion?.getActive());}window.addEventListener('online',connection);window.addEventListener('offline',connection);
 async function boot(){try{[rail,bus,walking,build]=await Promise.all(['rail-network','bus-network','walking-links','application-build'].map(async n=>{const r=await fetch(`/data/${n}.json`);if(!r.ok)throw Error('Routing data could not be loaded. Reconnect to prepare this device.');return r.json();}));router=createMultimodalRouter(rail,bus,walking);plannerClient=createPlannerClient([rail,bus,walking]);for(const s of router.network.stations)names.set(s.id,s.name);for(const s of router.network.stops)names.set(s.id,`${s.name} (${s.id})`);catalog=currentCatalog();$('coverage-copy').innerHTML=`<p>Rail timetable: ${rail.coverage.startDate}–${rail.coverage.endDate}. All times are in Asia/Singapore. Dates outside coverage stay unavailable.</p><p>All ${bus.stops.length.toLocaleString('en-SG')} source bus stops are searchable. The directory includes ${bus.patterns.length} route directions across ${bus.availability.registryServiceNumberCount} service numbers. Zoom in on the map to select a bus stop.</p><p>${bus.availability.routablePatternCount} bus patterns across ${bus.availability.routableServiceNumberCount} services have at least one supported service day, ${bus.coverage.validFrom}–${bus.coverage.validThrough}. Per-stop weekday, Saturday and Sunday service windows apply where supported. Holiday routing needs a separately verified operator calendar; services without usable frequency data remain listed without journey estimates. Bus timings are bounded estimates, not live vehicle arrivals.</p><aside class="wip-banner"><h3>Work in progress — station connections</h3><p>Same-terminal bus changes use an estimated five-minute walking allowance; confirm the boarding bay. Bus/rail walking links require reviewed exterior connections. Indoor accessibility, door-to-door paths, crowding, shelter and real toilet paths remain unverified.</p></aside>`;
   initMap();companion=mountCompanion({host:$('companion-host'),showHeader:false,showDock:false,sectionHosts:{review:$('review-companion'),saved:$('saved-companion'),sharing:$('caregiver-companion'),spending:$('spending-companion')},getMap:()=>map,getSelected:()=>selected&&input?(selected.plan?{plan:selected.plan}:{route:selected,input,routingContext:acceptJourney(selected,input,build.applicationSha256)}):null,getPlaces:()=>catalog.filter(p=>p.kind!=='saved'),name,getFareOptions:()=>({busNetwork:bus}),onSelectPlan:p=>{preferences=preferencesStore.update(p.preferences);renderPreferences();catalog=currentCatalog();for(const point of [p.origin,p.destination])if(!catalog.some(existing=>existing.id===point.id)&&Number.isFinite(point.lat)&&Number.isFinite(point.lng)){externalPoints=[{...point,routingId:null,kind:'address',detail:'Saved public endpoint · online routing required'},...externalPoints.filter(existing=>existing.id!==point.id)].slice(0,12);}catalog=currentCatalog();for(const role of ['origin','destination']){resolved[role]=p[role].id;$(role).value=p[role].label;}restoreTiming(p);invalidate();showView('plan');},onEndpoint:(role,p)=>{catalog=currentCatalog();choose(role,p);showView('plan');}});
