@@ -59,6 +59,9 @@ function authorize(share,hash,now,roles) {
 }
 function view(share,role,now) {
   const base={id:share.id,revision:share.revision,expiresAt:share.expiresAt,role,paired:share.paired,sharingEpoch:share.sharingEpoch};
+  // A plan-view link is an explicit disclosure of this one proposed plan only.
+  // It never confers acceptance, journey control, progress or location access.
+  if(share.purpose==='plan-view')return {...base,purpose:'plan-view',readOnly:role==='viewer',sharedPlan:share.proposedPlan,planRevision:share.planRevision,status:'shared-plan'};
   if(['invite','editor'].includes(role))return {...base,proposedPlan:share.proposedPlan,planRevision:share.planRevision,status:share.paired?'paired':'awaiting-acceptance'};
   const progressAllowed=role==='traveller'||(share.consent.progress&&!share.sharingPaused&&!share.accessRevoked);
   const locationAllowed=role==='traveller'||(share.consent.location&&!share.sharingPaused&&!share.accessRevoked);
@@ -117,14 +120,17 @@ export async function handleSharingApi(request,env={},ctx={}) {
     const body=['GET','HEAD'].includes(request.method)?null:await readBody(request);
     if(url.pathname==='/api/shares'&&request.method==='POST') {
       const plan=validatePlan(body.plan),hours=body.expiresInHours??48;
+      const purpose=body.purpose??'handoff';
+      if(!['handoff','plan-view'].includes(purpose))throw error('Unsupported sharing purpose');
       if(!Number.isInteger(hours)||hours<1||hours>168)throw error('Expiry must be 1–168 hours');
       const id=randomCredential().slice(0,22),inviteToken=randomCredential(),editorToken=randomCredential(),viewerToken=randomCredential();
       const tokens={invite:await credentialHash(inviteToken),editor:await credentialHash(editorToken),viewer:await credentialHash(viewerToken)};
+      if(purpose==='plan-view')delete tokens.invite;
       await mutateSharing(store,state=>{
         if(Object.keys(state.shares).length>=20)throw error('Pilot sharing capacity reached; delete an old share or wait for retention cleanup',503);
-        state.shares[id]={id,revision:1,planRevision:1,proposedPlan:plan,acceptedPlan:null,status:'awaiting-acceptance',tokens,events:[],paired:false,consent:{progress:false,location:false},sharingPaused:false,sharingEpoch:0,accessRevoked:false,progress:null,location:null,createdAt:now,expiresAt:now+hours*3600000,purgeAt:now+hours*3600000+RETENTION};
+        state.shares[id]={id,purpose,revision:1,planRevision:1,proposedPlan:plan,acceptedPlan:null,status:purpose==='plan-view'?'shared-plan':'awaiting-acceptance',tokens,events:[],paired:false,consent:{progress:false,location:false},sharingPaused:false,sharingEpoch:0,accessRevoked:false,progress:null,location:null,createdAt:now,expiresAt:now+hours*3600000,purgeAt:now+hours*3600000+RETENTION};
       });
-      return response({id,revision:1,expiresAt:now+hours*3600000,inviteToken,editorToken,viewerToken},201);
+      return response({id,revision:1,expiresAt:now+hours*3600000,...(purpose==='plan-view'?{purpose}:{inviteToken}),editorToken,viewerToken},201);
     }
     const match=url.pathname.match(/^\/api\/shares\/([A-Za-z0-9_-]{22})(?:\/(accept|plan|progress|permissions|access))?$/);
     const pushPath=url.pathname==='/api/push/subscriptions';
@@ -135,6 +141,7 @@ export async function handleSharingApi(request,env={},ctx={}) {
       return response(view(share,role,now));
     }
     if(pushPath) {
+      if((await store.read()).value.shares[id]?.purpose==='plan-view')throw error('Access expired or unavailable',404);
       if(!['POST','DELETE'].includes(request.method))throw error('Method not allowed',405);
       let subscription=null;
       if(request.method==='POST')try{subscription=validateSubscription(body.subscription);}catch(problem){throw error(problem.message);}
@@ -152,6 +159,7 @@ export async function handleSharingApi(request,env={},ctx={}) {
     if(action==='accept'){travellerToken=await credentialHash(`commute-traveller-v1:${token}:${body.eventId}`);travellerHash=await credentialHash(travellerToken);}
     const result=await mutateSharing(store,state=>{
       const share=state.shares[id];
+      if(share?.purpose==='plan-view'&&!((action==='plan'&&request.method==='PATCH')||(!action&&request.method==='DELETE')))throw error('Access expired or unavailable',404);
       // The consumed invitation only retries its original acceptance operation;
       // it cannot GET data or pair a second traveller.
       if(action==='accept'&&request.method==='POST') {

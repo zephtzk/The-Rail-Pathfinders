@@ -33,19 +33,19 @@ export class SharingClient {
     if(!this.session||this.session.id!==session.id||this.token()!==(session.travellerToken??session.viewerToken??session.inviteToken??session.editorToken))return;
     // Even if a pause was requested while an upload was in flight, retain its
     // revision before the queued permission change executes. No data is queued.
-    this.session={...this.session,revision:result.revision,sharingEpoch:result.sharingEpoch??this.session.sharingEpoch,
+    this.session={...this.session,revision:result.revision,sharingEpoch:result.sharingEpoch??this.session.sharingEpoch,...(result.purpose?{purpose:result.purpose}:{}),
       ...(result.consent?{serverConsent:result.consent,sharingPaused:result.sharingPaused,accessRevoked:result.accessRevoked,collectionStopped:result.collectionStopped}:{})};
     this.persist();
   }
   async readNow(){if(!this.session)return null;if(this.session.inviteToken&&this.session.pendingAcceptance)return this.acceptNow(this.session.pendingAcceptance.consent);const s=this.session;const result=await this.api('/'+s.id);this.remember(result,s);this.needsRefresh=false;return result;}
   read(){return this.enqueue(()=>this.readNow());}
   async refreshIfNeeded(){if(this.needsRefresh)await this.readNow();}
-  create(plan){this.epoch++;return this.enqueue(async()=>{const result=await this.api('',{method:'POST',body:{plan,expiresInHours:24},token:null});this.session={...result,role:'caregiver'};this.lastSent=null;this.needsRefresh=false;this.persist();return result;});}
+  create(plan,{purpose='handoff'}={}){if(!['handoff','plan-view'].includes(purpose))throw Error('Unsupported sharing purpose');this.epoch++;return this.enqueue(async()=>{const result=await this.api('',{method:'POST',body:{plan,expiresInHours:24,...(purpose==='plan-view'?{purpose}:{})},token:null});this.session={...result,role:'caregiver'};this.lastSent=null;this.needsRefresh=false;this.persist();return result;});}
   useFragment(){
-    const match=location.hash.match(/^#(invite|caregiver)=([A-Za-z0-9_-]{22})\.([A-Za-z0-9_-]{43})$/);if(!match)return false;
+    const match=location.hash.match(/^#(invite|caregiver|view-trip)=([A-Za-z0-9_-]{22})\.([A-Za-z0-9_-]{43})$/);if(!match)return false;
     // Strip before storage or any later application navigation can expose it.
     history.replaceState(null,'',location.pathname+location.search);this.epoch++;this.lastSent=null;
-    this.session={id:match[2],role:match[1]==='invite'?'recipient':'caregiver',[match[1]==='invite'?'inviteToken':'viewerToken']:match[3]};this.persist();return true;
+    this.session={id:match[2],role:match[1]==='invite'?'recipient':match[1]==='view-trip'?'plan-viewer':'caregiver',...(match[1]==='view-trip'?{purpose:'plan-view'}:{}),[match[1]==='invite'?'inviteToken':'viewerToken']:match[3]};this.persist();return true;
   }
   accept(consent={progress:false,location:false}) {return this.enqueue(()=>this.acceptNow(consent));}
   async acceptNow(consent) {
@@ -98,7 +98,7 @@ export class SharingClient {
     await this.api('/'+session.id,{method:'DELETE',token,body:{eventId:crypto.randomUUID(),expectedRevision:current.revision}});this.session=null;this.needsRefresh=false;this.persist();
   });}
   propose(plan){return this.enqueue(async()=>{await this.refreshIfNeeded();const s=this.session;const result=await this.api(`/${s.id}/plan`,{method:'PATCH',token:s.editorToken,body:{eventId:crypto.randomUUID(),expectedRevision:s.revision,plan}});this.remember(result,s);return result;});}
-  links(){const s=this.session;if(!s)return {};const base=location.origin+'/';return {invite:s.inviteToken?`${base}#invite=${s.id}.${s.inviteToken}`:null,viewer:s.viewerToken?`${base}#caregiver=${s.id}.${s.viewerToken}`:null};}
+  links(){const s=this.session;if(!s)return {};const base=location.origin+'/';return {invite:s.inviteToken?`${base}#invite=${s.id}.${s.inviteToken}`:null,viewer:s.viewerToken?`${base}#${s.purpose==='plan-view'?'view-trip':'caregiver'}=${s.id}.${s.viewerToken}`:null};}
 }
 export async function enablePush(session){
   if(!('serviceWorker'in navigator)||!('PushManager'in window)||!('Notification'in window))throw Error('Web Push unavailable here. Journey updates remain in the app. On iPhone/iPad use an optional Home Screen installation.');
