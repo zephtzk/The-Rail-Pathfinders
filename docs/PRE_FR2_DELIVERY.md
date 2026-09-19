@@ -1,6 +1,6 @@
 # FR1 refinements ready for FR2
 
-The four follow-up implementations are combined on `codex/pre-fr2-integration`, from completed FR1 `0a3bfa1`. Local preview: **http://localhost:4227/**. The existing browser origin and local sharing database are preserved. FR2 tester sessions have not run, and the public site has not been updated.
+The four follow-up implementations are combined on `codex/pre-fr2-integration`, from completed FR1 `0a3bfa1`. Local preview: **http://localhost:4227/**. The existing browser origin and local sharing database are preserved. FR2 tester sessions have not run. The user subsequently authorized publication; this candidate is now public as **Sites version 6**. See [FR2 publication](FR2_PUBLICATION.md).
 
 ## Delivered
 
@@ -33,4 +33,4 @@ Final application SHA-256: `f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424
 
 Evidence uses installed desktop Edge, viewport/touch/text emulation and explicitly controlled location/provider responses. It does not establish physical-phone GPS accuracy, indoor paths, live maintenance availability or FR2 user acceptance. At 200% text and short landscape, scrolling or panel expansion remains necessary. Most packaged rail geometry is schematic and cannot support a reliable GPS step estimate; the app keeps accepted guidance and manual recovery instead.
 
-Repeat feature checks with `TEST_BASE_URL=http://127.0.0.1:4234`, installed Edge in `BROWSER_EXECUTABLE`, then `npm run test:pre-fr2-browser`. The local candidate server remains on 4234; the user-facing preview is 4227. No remote push, PR or deployment was attempted because remote publication approval remains outstanding.
+Repeat feature checks with `TEST_BASE_URL=http://127.0.0.1:4234`, installed Edge in `BROWSER_EXECUTABLE`, then `npm run test:pre-fr2-browser`. The local candidate server remains on 4234; the user-facing preview is 4227. At the implementation handoff, publication approval was outstanding. The later authorized Sites source push and successful public deployment are recorded in [FR2 publication](FR2_PUBLICATION.md); GitHub was not changed by that publication.

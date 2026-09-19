@@ -1,0 +1,24 @@
+{
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "applicationSha256": "f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424112a4bc54670",
+  "anonymous": true,
+  "checks": [
+    "Anonymous root loads without sign-in",
+    "Public build exactly matches verified FR2 candidate",
+    "Public service worker uses the new release cache",
+    "All eight tabs use the compact mobile dock",
+    "Simple guidance defaults on and style descriptions are collapsed",
+    "Real packaged route has one deliberate Start journey",
+    "Start label contrasts with blue background",
+    "Single Start accepts the real route with caregiver permissions off",
+    "Indoor current-step correction retains compact tick",
+    "Staff reset is the compact named tick",
+    "Staff tick restores current instruction",
+    "Public Facilities shows nearby sourced lifts and toilets",
+    "Unconfigured maintenance remains explicitly unknown",
+    "Browsing Staff and Facilities preserves journey identity",
+    "Public walkthrough has no runtime errors"
+  ],
+  "errors": [],
+  "environment": "Fresh unauthenticated desktop Edge with390x844 mobile/touch emulation, real public server and packaged CC26-to-EW9 timetable route; no physical-phone or GPS accuracy claim"
+}

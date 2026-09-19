@@ -1,0 +1,22 @@
+{
+  "phase": "FR2 testing",
+  "siteProjectId": "appgprj_6aad0ab90e5881919eca01b79f19aa24",
+  "versionId": "appgprj_6aad0ab90e5881919eca01b79f19aa24~appgver_64474e08e7008191944b2bcfba50a257",
+  "versionNumber": 6,
+  "deploymentId": "appgdep_6aae05a6e7048191ad7782172890db0c",
+  "deploymentStatus": "succeeded",
+  "url": "https://commute-copilot-nebula.simhongmen.chatgpt.site",
+  "publishedAt": "2026-09-19T03:48:03.145758+00:00",
+  "sourceCommit": "08493a74c12254ed1a6cdc4acce32a51d3ca7452",
+  "applicationSha256": "f40a6cc434ca66816c57ab3bd4edfe213336c3ede0ad73bd2424112a4bc54670",
+  "workerSha256": "cfa66148e820fce55ec1b9c43cf78c7225a0ebfb7096479bbd399ba0e9e70296",
+  "access": "public",
+  "accessRevision": 3,
+  "environmentRevision": 0,
+  "priorVersion": 5,
+  "priorSource": "10a13aede150787e6de757e06c0463be40c31baf",
+  "githubUpdated": false,
+  "publicBrowserChecks": 15,
+  "publicBrowserVerification": "public-browser-verification.json",
+  "physicalDeviceTesting": false
+}
