@@ -20,6 +20,12 @@ try{
  await page.locator('#replay-outcome').waitFor();
  check('Fresh replay returns to main with labelled example directions',await page.locator('#view-plan').isVisible()&&await page.locator('#demo-replay-result .transit-timeline').count()===1&&(await page.locator('#demo-replay-result').innerText()).includes('Example journey'));
  check('Fresh replay does not start a personal journey',await active(page)===null);
+ check('Explicit replay completion focuses its result heading',await page.locator('#replay-result-title').evaluate(node=>node===document.activeElement));
+ await page.locator('#origin').focus();
+ await page.evaluate(()=>{const host=document.querySelector('#demo-replay-result');window.replayScrollRequests=0;host.scrollIntoView=()=>{window.replayScrollRequests++;};});
+ await page.locator('#origin').pressSequentially('EW8');
+ check('Editing after replay retains input focus, text and cursor without scrolling to stale results',await page.locator('#origin').evaluate(node=>node===document.activeElement&&node.value==='EW8'&&node.selectionStart===3&&node.selectionEnd===3)&&await page.evaluate(()=>window.replayScrollRequests===0)&&await page.locator('#replay-outcome').getAttribute('data-status')==='changed');
+ await page.evaluate(()=>delete document.querySelector('#demo-replay-result').scrollIntoView);
  await page.locator('#close-replay').click();
  for(const [role,code]of [['origin','EW8'],['destination','EW12']]){await page.locator('#'+role).fill(code);await page.locator(`#${role}-suggestions [role=option]`).first().click();}
  await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');

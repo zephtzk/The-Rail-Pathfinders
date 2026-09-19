@@ -27,12 +27,12 @@ export async function replayJourney({incident,context,network,search,build}) {
 }
 export function mountDemoReplay({host,getContext,getNetwork,getBuild,search,name,onReturn,loadIncidents=()=>[]}) {
   let epoch=0,lastIncident=null;
-  function show(result){
+  function show(result,{focus=true}={}){
     const label=result.input?`${publicStationLabel(name(result.input.originId))} → ${publicStationLabel(name(result.input.destinationId))}`:'Your journey';
     host.hidden=false;host.innerHTML=`<section class="demo-replay-result" aria-labelledby="replay-result-title"><div class="service-panel-heading"><h2 id="replay-result-title" tabindex="-1">Demo replay · ${esc(label)}</h2><button type="button" class="quiet" id="close-replay">Close replay</button></div><p class="field-note"><strong>Simulated incident · not live travel advice</strong></p>${result.example?`<p class="notice"><strong>Example journey</strong> · ${esc(result.example)}</p>`:''}${result.incident?`<h3>${esc(result.incident.title)}</h3><p>${esc(result.incident.service)} · ${esc(result.incident.type)} · ${esc(result.incident.scope==='segment'?`${name(result.incident.from)} → ${name(result.incident.to)} (${result.incident.direction})`:'whole service')}<br>${esc(result.incident.startsAt)} – ${esc(result.incident.endsAt)}</p>`:''}<p id="replay-outcome" role="status" data-status="${esc(result.status)}">${esc(result.message)}</p>${result.effect?.status==='closure'?`<p class="field-note">${esc(result.effect.message)}</p>`:''}${result.directions?`<p><strong>${result.status==='advisory'?'Original timetable arrival (delay not included)':result.affected?'Demo estimated arrival':'Selected timetable arrival'}: ${clock(result.directions.arrivalSeconds)}</strong></p>${renderItineraryTimeline(result.directions,{name})}`:''}<button type="button" class="secondary" id="replay-services">Open Services</button></section>`;
     host.querySelector('#close-replay').onclick=()=>{epoch++;host.hidden=true;host.replaceChildren();};
     host.querySelector('#replay-services').onclick=()=>onReturn('facilities');
-    host.querySelector('h2').focus({preventScroll:true});host.scrollIntoView({block:'start'});
+    if(focus){host.querySelector('h2').focus({preventScroll:true});host.scrollIntoView({block:'start'});}
   }
   async function run(incident){
     lastIncident=incident??null;const token=++epoch;
@@ -42,7 +42,7 @@ export function mountDemoReplay({host,getContext,getNetwork,getBuild,search,name
     catch(error){if(token===epoch)show({incident:lastIncident,status:'unavailable',message:error.name==='AbortError'?'Replay cancelled. Your selected journey is unchanged.':'Replay routing is unavailable. Your selected journey is unchanged; try again after the routing data loads.'});}
   }
   const event=e=>run(e.detail?.incident??(e.detail?.demo===true?e.detail:null));
-  const changed=()=>{epoch++;if(!host.hidden)show({incident:lastIncident,status:'changed',message:'The journey or incident changed. Run the replay again from Services to check the latest selection.'});};
+  const changed=()=>{epoch++;if(!host.hidden)show({incident:lastIncident,status:'changed',message:'The journey or incident changed. Run the replay again from Services to check the latest selection.'},{focus:false});};
   window.addEventListener('demo:run-replay',event);
   window.addEventListener('demo:incidents-changed',changed);
   window.addEventListener('storage',event=>{if(event.key===null||event.key==='commute-copilot-demo-incidents-v1')changed();});
