@@ -93,8 +93,7 @@ try{
   await page.locator('#route-map-details > summary').click();
   check('route key and source remain available in the journey panel',await page.locator('#route-map-details').innerText().then(text=>text.includes('OneMap')&&text.includes('indoor'))&&await page.locator('.map-route-legend').isVisible());
   await page.locator('#route-map-details > summary').click();
-  await page.locator('#review-route').click();await page.locator('#start-companion').waitFor();
-  await page.locator('#start-companion').click();
+  await page.locator('#review-route').click();
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('commute-copilot-journey-v2'))?.status==='started');
   const accepted=await active();
   check('accepted route preserves all geometry with original step indices around waits',accepted.route.steps.length===8&&accepted.route.steps.filter(step=>step.type==='wait').length===3&&accepted.route.geometry.map(segment=>segment.stepIndex).join(',')==='0,2,4,6,7');

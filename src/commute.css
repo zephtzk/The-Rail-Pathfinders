@@ -466,6 +466,20 @@
 .commute-app .confirmation-details,.commute-app .confirmation-location{margin:1rem 0}
 .commute-app .confirmation-details>summary,.commute-app .confirmation-location>summary{padding:.6rem 0;color:#456779;cursor:pointer}
 .commute-app #start-companion{margin:1.1rem 0 0;width:100%}
+/* Start controls may live outside .copilot after their section is moved. */
+.commute-app button.primary.journey-start { color: #fff; background: #174f9e; border: 1px solid #174f9e; opacity: 1; min-height: 48px; white-space: normal; }
+.commute-app button.primary.journey-start:not(:disabled):hover { color: #fff; background: #123e7c; border-color: #123e7c; }
+.commute-app button.primary.journey-start:not(:disabled):active { color: #fff; background: #0c2a53; border-color: #0c2a53; box-shadow: none; }
+.commute-app button.primary.journey-start:focus-visible { outline: 3px solid #62438e; outline-offset: 4px; }
+.commute-app button.primary.journey-start:disabled { color: #fff; background: #526278; border-color: #526278; opacity: 1; box-shadow: none; cursor: not-allowed; }
+.commute-app button.journey-start .icon { color: inherit; stroke: currentColor; }
+.commute-app.simple-guidance button.journey-start { min-height: 56px; font-size: 1.1rem; }
+.commute-app .route-start-note { margin-top: 16px; color: var(--ink); }
+.commute-app .route-start-note.start-blocked { padding: 12px; border: 1px solid #866218; border-radius: 12px; background: #fff7dc; color: #49380f; }
+@media (forced-colors: active) {
+  .commute-app button.primary.journey-start { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
+  .commute-app button.primary.journey-start:disabled { color: GrayText; background: ButtonFace; border-color: GrayText; }
+}
 .commute-app #current-summary:focus{outline-offset:4px}
 
 .commute-app .app-nav button,.commute-app .app-nav span{overflow-wrap:normal;word-break:normal}

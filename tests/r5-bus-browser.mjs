@@ -17,7 +17,7 @@ let metrics;
 try{
   await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
   await endpoint('origin','EW2');await endpoint('destination','EW12');await later();
-  await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('#find-routes').click();await page.locator('#review-route').click();
   const accepted=JSON.stringify(await trip());
   await page.locator('.app-nav [data-view=plan]').click();await endpoint('origin','99009');await endpoint('destination','28009');await later();
   // These observe frame scheduling; they do not alter application state.
@@ -32,7 +32,7 @@ try{
   const searchStarted=performance.now();await page.locator('#find-routes').click();await page.locator('#review-route').waitFor();
   const searchMs=performance.now()-searchStarted;
   check('fresh full-network search completes after cancellation',await page.locator('.route-card').count()>0);
-  check('fresh results preserve accepted trip until explicit review and acceptance',JSON.stringify(await trip())===accepted);
+  check('fresh results preserve accepted trip and disable Start while it is active',JSON.stringify(await trip())===accepted&&await page.locator('#review-route').isDisabled());
   const frames=await page.evaluate(()=>{window.busFramesActive=false;return window.busFrameTimes;});
   const gaps=frames.slice(1).map((v,i)=>v-frames[i]);
   metrics={elapsedMs:performance.now()-before,newWorkerSearchMs:searchMs,animationFrames:frames.length,maxFrameGapMs:Math.max(0,...gaps),viewport:{width:390,height:844}};

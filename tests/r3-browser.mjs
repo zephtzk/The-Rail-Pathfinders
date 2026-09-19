@@ -41,7 +41,7 @@ try {
   check('saving a route does not start a trip or add station bookmarks',(await active())===null&&await page.locator('.personal-list [data-place]').count()===0);
   check('add a place does not ask for coordinates',await page.locator('#place-add input[name=lat], #place-add input[name=lng]').count()===0);
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/saved-mobile.png'});
-  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('[data-open]').click();await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');await page.locator('#find-routes').click();await page.locator('#review-route').click();
   const first=await active();check('reopened route retains preferences in the canonical journey',first.plan.preferences.travelStyle==='arjun');
   check('technical trip detail is collapsed by default',!await page.locator('#trip-details').evaluate(el=>el.open));
   check('connection helper explains its purpose',!await page.locator('#rerouting-host').innerText().then(t=>t.includes('Check connections from a confirmed point')));
@@ -57,7 +57,7 @@ try {
   check('ended trip hides obsolete active tools',await page.locator('#journey-cancel').count()===0&&!await page.locator('#rerouting-host').isVisible()&&!await page.locator('#trip-peek').isVisible());
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/cancelled-mobile.png'});
   await page.reload();await page.locator('#find-routes:not([disabled])').waitFor();await page.locator('.app-nav [data-view=current]').click();check('cancelled state survives reload',(await active()).status==='cancelled');
-  await plan();await page.locator('#review-route').click();await page.locator('#start-companion').click();check('a new trip can start after cancellation',(await active()).id!==first.id);
+  await plan();await page.locator('#review-route').click();check('a new trip can start after cancellation',(await active()).id!==first.id);
   await page.locator('#app-message').waitFor({state:'hidden'});await page.screenshot({animations:'disabled',path:out+'/current-mobile.png'});
   await page.locator('#journey-finish').click();await page.locator('#retry-fare').click();
   check('completed fare action opens Spending',await page.locator('#view-spending').isVisible());

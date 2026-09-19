@@ -31,7 +31,7 @@ try{
 
   await nav('plan');await endpoint('origin','CC26');await endpoint('destination','EW9');
   await page.locator('[data-time=depart-later]').click();await choosePlannerDate(page,'date','2026-09-21');await choosePlannerTime(page,'departureTime','10:00');
-  await page.locator('#find-routes').click();await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('#find-routes').click();await page.locator('#review-route').click();
   const initial=await active();
   check('actual packaged route starts with simple guidance and an Update action',initial.status==='started'&&await page.getByRole('button',{name:'Update my current step',exact:true}).isVisible());
   await page.getByRole('button',{name:'Update my current step',exact:true}).click();

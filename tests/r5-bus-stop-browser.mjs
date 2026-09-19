@@ -39,7 +39,7 @@ try{
   check('rail suggestions retain the train icon',await page.locator('#origin-option-0 .icon-trip').count()===1);
   await page.locator('#origin').press('ArrowDown');await page.locator('#origin').press('Enter');
   await select('destination','EW12');await later();await search();
-  await page.locator('#review-route').click();await page.locator('#start-companion').click();
+  await page.locator('#review-route').click();
   const accepted=await acceptedTrip();assert.ok(accepted,'fixture journey was accepted');await nav('plan');
 
   await page.locator('#origin').fill('59009');
