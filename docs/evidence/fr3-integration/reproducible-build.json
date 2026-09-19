@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-09-19T04:35:12.860Z",
+  "sourceCommit": "81cd07d008aa8f4a1bab378e40c5348488e1a988",
+  "node": "v24.16.0",
+  "zlib": "1.3.1-e00f703",
+  "status": "PASS",
+  "scope": "Clean Git archive build using the same locked installed Leaflet, QR encoder and Node/zlib runtime; not a Linux runtime execution or fresh registry install",
+  "records": [
+    {
+      "file": "dist/client/data/application-build.json",
+      "sha256": "06fd4d5aff1e2bbc7e5c8f7baf8254a873e665861822d43646582dcf8dfa9524",
+      "status": "PASS"
+    },
+    {
+      "file": "dist/server/index.js",
+      "sha256": "29b4646410d36f1e28d96cf7d54887e92fdc044174b0375667680d6f7d1e91af",
+      "status": "PASS"
+    }
+  ]
+}

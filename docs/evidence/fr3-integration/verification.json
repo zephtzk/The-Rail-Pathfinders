@@ -1,0 +1,55 @@
+{
+  "phase": "FR2 feedback integrated for FR3",
+  "javascriptTests": 514,
+  "pythonTests": 44,
+  "browserChecks": 387,
+  "browserSuites": [
+    {
+      "suite": "fr2-features",
+      "passed": 177
+    },
+    {
+      "suite": "journey-start",
+      "passed": 29
+    },
+    {
+      "suite": "address-share-offline",
+      "passed": 17
+    },
+    {
+      "suite": "fr1-integration",
+      "passed": 18
+    },
+    {
+      "suite": "journey-sheet",
+      "passed": 39
+    },
+    {
+      "suite": "location",
+      "passed": 50
+    },
+    {
+      "suite": "location-privacy",
+      "passed": 8
+    },
+    {
+      "suite": "spending",
+      "passed": 21
+    },
+    {
+      "suite": "route-map",
+      "passed": 28
+    }
+  ],
+  "builtAssets": 116,
+  "applicationSha256": "7a9ae51cc647623699b67e1f78297396e3bfd924867f884e42c6fb48b42cf667",
+  "workerSha256": "29b4646410d36f1e28d96cf7d54887e92fdc044174b0375667680d6f7d1e91af",
+  "sourceVerifiedCommit": "81cd07d008aa8f4a1bab378e40c5348488e1a988",
+  "validation": "Full npm run check, final affected FR2 browser rerun, core browser regressions, and clean committed-export reproducible build. Installed Edge desktop/mobile/touch/200% text emulation, controlled providers and real packaged route data; no physical-phone or live-provider claim.",
+  "integrationFixes": [
+    "OneMap 200 error envelope becomes unavailable",
+    "Cross-tab incident changes refresh notices and invalidate replay",
+    "Editing endpoints retains focus and cursor after replay",
+    "Compact location recovery and endpoint help"
+  ]
+}

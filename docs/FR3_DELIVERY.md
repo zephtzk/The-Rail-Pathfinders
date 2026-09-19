@@ -1,6 +1,6 @@
 # Final Review 3 delivery
 
-FR2 feedback is implemented in five parallel work chats and combined on `codex/fr2-integration`. The already published FR2 baseline was reconciled with GitHub main in [PR #9](https://github.com/zephtzk/The-Rail-Pathfinders/pull/9). This record will be completed with the final integration checks and publication result.
+FR2 feedback is implemented in five parallel work chats and combined on `codex/fr2-integration`. The already published FR2 baseline was reconciled with GitHub main in [PR #9](https://github.com/zephtzk/The-Rail-Pathfinders/pull/9). The combined implementation passes the final checks below. Publication is recorded separately after the production deployment succeeds.
 
 ## Changes for review
 
@@ -34,4 +34,11 @@ Data coverage remains the retained rail/bus snapshot, not a guarantee of live co
 - [Caregiver and layout](FR2_POLISH_DELIVERY.md)
 - [Fares and expenditure](FR2_FARES_DELIVERY.md)
 - [Demo authoring and incident log](FR2_DEMO_DELIVERY.md)
-- Services/replay and combined verification are appended when integration finishes.
+- [Services and replay](FR2_SERVICES_DELIVERY.md)
+- [Combined verification](evidence/fr3-integration/verification.json) and [reproducible build](evidence/fr3-integration/reproducible-build.json).
+
+## Combined verification
+
+The integrated app passes **514 JavaScript tests, 44 Python import/metadata tests, 387 browser checks**, and a clean committed-export comparison of the Worker and application build identity. The final FR2 browser rerun includes the replay/input-focus correction. The eight core regression suites cover journey start, address/sharing/offline restore, prior guidance, sheet gestures, location/privacy, spending and route rendering.
+
+The release uses 116 bundled client assets. Browser evidence uses installed Edge with mobile/touch and enlarged-text emulation; provider responses are explicitly controlled where necessary. FR3 user acceptance and physical-phone testing are the next review stage.
