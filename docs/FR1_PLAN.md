@@ -8,7 +8,7 @@ FR1 starts after publication of the public app and illustrated user guide. The h
 - Published app: merged PR #7, commit `10a13aede150787e6de757e06c0463be40c31baf`.
 - Published guide: merged PR #8. All FR1 branches start from fetched main `9c04b28f01b9ada8770e98906190699e1cc2e454`.
 - Coordination task: `01a0b783-872c-7800-ac70-61e3993c404d`.
-- Integration branch: `codex/fr1-integration`, isolated preview port 4207.
+- Integration branch: `codex/fr1-integration`, isolated preview port 4227 (4207 was already in use).
 
 ## Parallel implementation tasks
 
@@ -22,8 +22,8 @@ Each item has a separate task, Git branch and application worktree. The outer Ne
 | Finish journey wording | `codex/fr1-finish-label` | `01a0b790-75f8-72e1-b443-81a5f66508ca` | 4204 |
 | Rounded map and station buttons | `codex/fr1-rounded-controls` | `01a0b790-83f3-76a3-8313-1e1610a8da12` | 4205 |
 | Update current journey step | `codex/fr1-current-step` | `01a0b790-948b-78b1-8aac-ffb559abadf8` | 4206 |
-
 | Prominent centered Current trip tab | `codex/fr1-current-tab` | `01a0b792-0d47-78d0-bf8e-223f09891cb7` | 4208 |
+| Remove oversized route-map overlay | `codex/fr1-map-overlay` | `01a0b796-d2e6-7da0-8d3b-b5f63198df7f` | 4229 |
 
 ## Acceptance criteria
 
@@ -33,10 +33,9 @@ Each item has a separate task, Git branch and application worktree. The outer Ne
 4. Both full and simple guidance use the exact button label **Finish journey**.
 5. Map and station controls use consistent rounded corners with visible focus and usable touch targets.
 6. Current trip offers **Update my current step**, revealing the canonical journey-position selector with a compact accessible tick beside it. Selection alone does not advance progress. Staff assistance remains accessible from its own page.
-
 7. Current trip is visually larger and centered in mobile navigation, with proportions informed by Tribecar where suitable. All destinations remain reachable, with usable touch targets, selected/focus states, narrow-screen and large-text layouts.
+8. The persistent white BP / Route details card is removed from the map. Route geometry notes and attribution remain available in collapsed **About this route map** within the Plan / Current trip panel; failure and retry controls still work. This additional screenshot feedback was authorized in its separate FR1 task.
 
 ## Integration and review
 
 Feature tasks commit independently without pushing or deploying. Integration applies the finished commits sequentially, resolves shared UI files, runs the complete unit/import/build check and relevant R4/R5/facilities browser regressions, then inspects the combined narrow-screen UI. Physical-phone testing is recorded separately from browser emulation. FR1 implementation does not itself establish that the public deployment or PDF has been updated.
-

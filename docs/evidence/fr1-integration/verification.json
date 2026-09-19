@@ -1,0 +1,63 @@
+{
+  "phase": "Final Review 1 (FR1)",
+  "baseline": "9c04b28f01b9ada8770e98906190699e1cc2e454",
+  "application": {
+    "schemaVersion": 1,
+    "applicationSha256": "ed7492027e418df0d7b6802eb67fc325ed9f75f47801303cdbcf36812bca4a45",
+    "railNetworkSha256": "a7158eef5df2b5cbf345e3de03872205a61d9a4919f11b4745c192d4daf7b934",
+    "busNetworkSha256": "42afa3e7a1931472f079c03b7e5241f9b2df0f9c396a3e06b7af05312fd914a1",
+    "walkingSha256": "19299cbf9daf2014bb590b7b4c415311c2c996780fafd7bdb0cebd1f2c795598"
+  },
+  "javascriptTests": 415,
+  "pythonTests": 44,
+  "assets": 99,
+  "browserChecks": {
+    "FR1 current step": 79,
+    "FR1 nearby facilities": 40,
+    "FR1 navigation": 81,
+    "FR1 combined real-route walkthrough": 18,
+    "R4 browser": 116,
+    "R5 browser": 163,
+    "R3, route map, map failure and location/offline browser": 80
+  },
+  "browserCheckTotal": 577,
+  "additionalFlow": "Legacy facilities mobile-emulation scenario passed (no numeric count emitted).",
+  "finalWalkthrough": {
+    "checks": [
+      "clean browser uses simple guidance",
+      "all three style descriptions begin hidden",
+      "one description opens without selecting a travel style",
+      "actual packaged route starts with simple guidance and an Update action",
+      "choosing a later real step requires the tick",
+      "tick commits the selected canonical step only",
+      "finish wording is exact and staff shortcut was removed from current actions",
+      "route legend is collapsed in the panel instead of overlaying the map",
+      "Facilities shows real nearby lifts and toilets within the stated radius",
+      "unconfigured maintenance stays explicitly unknown",
+      "facility discovery preserves the accepted route and checkpoint",
+      "dedicated facility map is available without replacing journey progress",
+      "all eight destinations fit with Current trip larger and centered: mobile",
+      "all eight destinations fit with Current trip larger and centered: large-text",
+      "all eight destinations fit with Current trip larger and centered: desktop",
+      "Finish journey still completes the accepted trip",
+      "Staff page remains available after the new current action",
+      "combined walkthrough has no browser runtime errors"
+    ],
+    "errors": [],
+    "environment": "Desktop Edge mobile/touch and enlarged-text emulation; actual packaged CC26 to EW9 route on 21 September 2026, 10:00 SGT; blocked street tiles; unconfigured real local maintenance endpoint; no physical-phone verification"
+  },
+  "independentReview": "No actionable integration findings; all eight destinations and Facilities map/list spot-checked.",
+  "environment": "Local build on 4227; installed desktop Edge, mobile/touch, keyboard, 320px/200% text and offline emulation. Street tiles deliberately blocked for deterministic integration captures. Physical phones not tested.",
+  "scope": [
+    "Settings disclosure",
+    "Nearby facilities",
+    "Simple guidance default",
+    "Finish journey label",
+    "Rounded controls",
+    "Current-step dropdown and tick",
+    "Centered larger Current trip and separated tabs",
+    "Remove oversized map route-details overlay"
+  ],
+  "executionNote": "The combined walkthrough initially used innerText on a button in closed details; the assertion now reads its text content and the final walkthrough passed. The other three FR1 suites passed against the same application build. No production change was required for the assertion correction.",
+  "publication": "FR1 candidate; existing public deployment and PDF identify published R5, not this candidate."
+}

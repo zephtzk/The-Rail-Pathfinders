@@ -21,7 +21,7 @@ async function plan(){await page.locator('.app-nav [data-view=plan]').click();aw
 try {
   const response=await page.goto(base);await page.locator('#find-routes:not([disabled])').waitFor();
   check('app responses preserve a valid origin referrer',response.headers()['referrer-policy']==='strict-origin-when-cross-origin');
-  check('seven reachable pages share one map',await page.locator('.app-nav button').count()===7&&await page.locator('.leaflet-container').count()===1);
+  check('eight reachable pages retain the initial journey map',await page.locator('.app-nav button').count()===8&&await page.locator('.app-nav [data-view=facilities]').isVisible()&&await page.locator('.leaflet-container').count()===1);
   await page.locator('#retry-street-map').waitFor();
   check('blocked tiles leave a usable schematic and a deliberate retry',await page.locator('.leaflet-tile').count()===0&&await page.locator('.leaflet-overlay-pane path').count()>0&&tileRequests.length>0);
   check('tile request sends origin only',tileRequests.some(h=>h.referer===base+'/'));
