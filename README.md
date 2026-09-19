@@ -37,7 +37,7 @@ For the guide's transfer example, choose **Fewer transfers** with a **15-minute 
 | Station information | Operator facts for selected stations; indoor directions remain work in progress. No verified working-lift, platform-door or step-free guarantee. |
 | Services and demo incidents | Nearby facilities, service notices and persistent local demo incident logs. Simulated closures can be replayed against the selected route and current packaged data; official notices remain separately identified. |
 | Live bus arrivals and street-address itineraries | Server-side LTA/OneMap integrations. Availability depends on the configured credentials and provider response; use the app's current status. The core station/bus-stop demonstration does not require these integrations. |
-| Caregiver sharing | Read-only recipient links with persistent hosted storage. Recipients can view the shared plan; the provider can refresh it or cancel sharing. Links do not grant control of the trip or share geographic location. Journey notifications are disabled. |
+| Caregiver sharing | Read-only recipient links with persistent hosted storage. Recipients can view the shared plan; the provider can refresh it or cancel sharing. Links share the selected journey and its endpoints; they do not grant trip controls or provide ongoing device-location tracking. Journey notifications are disabled. |
 
 The bus snapshot is dated **18 September 2026**, with a reviewed window of **18 September-2 October 2026**. Rail coverage is **18 September-31 December 2026**, subject to source calendars and exceptions. All displayed planning times use **Asia/Singapore**. Bus ride/wait times are estimates, not a complete timetable or a guarantee of arrival.
 
