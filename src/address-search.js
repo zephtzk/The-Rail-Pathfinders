@@ -61,7 +61,7 @@ export function createOneMapAddressSearch({fetcher=globalThis.fetch,clock=Date.n
   async function search(value){
     cancel();const version=generation,query=text(value,161);
     if(query.length<2||query.length>160)throw Error('Enter an address or place name between 2 and 160 characters.');
-    const key=query.toLocaleLowerCase();if(cache.has(key))return structuredClone(cache.get(key));
+    const key=query.toLocaleLowerCase();if(cache.has(key))return structuredClone(cache.get(key)).map(point=>({...point,searchCached:true}));
     if(clock()-lastRequest<minIntervalMs)throw Error('Please wait a moment before searching again.');
     const requestController=new AbortController();controller=requestController;lastRequest=clock();const timer=setTimeout(()=>requestController.abort(),timeoutMs);
     try{

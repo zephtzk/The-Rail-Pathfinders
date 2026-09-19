@@ -67,13 +67,30 @@ test('expired access, network failure, huge bodies and malformed responses never
   const handle=createAddressAdapter({clock:()=>NOW});assert.equal((await handle(request('search',{query:'x'.repeat(5000)}))).status,400);
 });
 
+test('HTTP 200 provider errors remain unavailable for search and routing without leaking diagnostics',async()=>{
+  for(const endpoint of ['search','route'])for(const error of ['Missing token: synthetic-secret','Expired token: synthetic-secret','Invalid token: synthetic-secret',{message:'synthetic-secret'}]){
+    const payload=endpoint==='search'?{results:[],error}:{...upstream(),error};
+    const handle=createAddressAdapter({clock:()=>NOW,fetcher:async()=>json(payload)});
+    const result=await body(await handle(request(endpoint,endpoint==='search'?{query:'public road'}:input()),{ONEMAP_TOKEN:'synthetic-secret'}));
+    assert.equal(result.status,503);assert.equal(result.value.status,'unavailable');
+    assert.equal('results' in result.value,false);assert.equal('itineraries' in result.value,false);
+    assert.doesNotMatch(JSON.stringify(result.value),/synthetic-secret|Missing token|Expired token|Invalid token/);
+  }
+});
+
+test('a genuine empty OneMap search remains a successful empty result',async()=>{
+  const handle=createAddressAdapter({clock:()=>NOW,fetcher:async()=>json({results:[]})});
+  const result=await body(await handle(request('search',{query:'public road'}),{ONEMAP_TOKEN:'test'}));
+  assert.equal(result.status,200);assert.equal(result.value.status,'ok');assert.deepEqual(result.value.results,[]);
+});
+
 test('contract normalization rejects overlapping, missing, unsupported or inconsistent transit legs',()=>{
   for(const mutate of [r=>r.plan.itineraries[0].legs[1].startTime=NOW,r=>delete r.plan.itineraries[0].legs[0].from,r=>r.plan.itineraries[0].legs[1].mode='FERRY',r=>r.plan.itineraries[0].legs[1].duration=1]){const raw=upstream();mutate(raw);assert.deepEqual(normalizeProviderItineraries(raw),[]);}
   assert.throws(()=>normalizeProviderItineraries({itineraries:[]}));
 });
 
-test('canonical provider journey preserves public identity, wait phases, unknown fare and explicit progress',()=>{
-  const result=normal();assert.equal(result.status,'ok');const plan=result.plans[0];assert.ok(validatePlan(plan));assert.equal(plan.origin.label,'Public start address');assert.equal(plan.route.steps.length,4);assert.equal(plan.route.steps[1].type,'wait');assert.equal(plan.route.walkingSeconds,600);assert.equal(plan.route.departureSeconds,9*3600);assert.equal(plan.route.arrivalSeconds,9*3600+1500);assert.equal(plan.route.accessibility,'unknown');assert.equal(plan.route.fareEstimate.status,'unavailable');assert.equal(plan.route.legacyRoute,undefined);assert.doesNotMatch(JSON.stringify(plan),/My secret home|Private appointment/);
+test('canonical provider journey preserves public identity, wait phases, provider distance and explicit progress',()=>{
+  const result=normal();assert.equal(result.status,'ok');const plan=result.plans[0];assert.ok(validatePlan(plan));assert.equal(plan.origin.label,'Public start address');assert.equal(plan.route.steps.length,4);assert.equal(plan.route.steps[1].type,'wait');assert.equal(plan.route.walkingSeconds,600);assert.equal(plan.route.departureSeconds,9*3600);assert.equal(plan.route.arrivalSeconds,9*3600+1500);assert.equal(plan.route.accessibility,'unknown');assert.equal(plan.route.fareEstimate,undefined);assert.equal(plan.route.steps.find(s=>s.type==='ride').source.distanceMetres,4000);assert.equal(plan.route.legacyRoute,undefined);assert.doesNotMatch(JSON.stringify(plan),/My secret home|Private appointment/);
   let active=startJourney(plan,NOW);assert.equal(active.routingContext,undefined);active=confirmCheckpoint(active,{stepIndex:2,kind:'onboard'},NOW+1);assert.equal(active.progress.stepIndex,2);assert.equal(externalRerouteState(active).status,'unsupported');
   assert.deepEqual(checkpointChoices(plan.route).map(c=>c.stepIndex),[0,1,2,3]);
   const html=renderItineraryTimeline(plan.route);assert.match(html,/Example stop A → Example stop B/);assert.match(html,/Bus 23A/);

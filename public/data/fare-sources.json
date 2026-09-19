@@ -1,21 +1,69 @@
 {
-  "schemaVersion": 1,
-  "fareVersion": "ptc-2025-12-27.review-2026-09-18",
+  "schemaVersion": 2,
+  "fareVersion": "ptc-2025-12-27.review-2026-09-19",
   "effectiveFrom": "2025-12-27",
   "effectiveUntil": null,
-  "reviewedAt": "2026-09-18",
+  "reviewedAt": "2026-09-19",
   "ratesSource": "https://www.ptc.gov.sg/fares/public-transport-fares-and-passes/",
   "openDataSource": "https://data.gov.sg/datasets/d_2ca29f673b89e0cfddbb7c74516fa4d3/view",
-  "effectiveDateSource": "https://www.simplygo.com.sg/travel-fares/adult-fares",
-  "transferRulesSource": "https://www.simplygo.com.sg/transfer-fare-rules/",
+  "effectiveDateSource": "https://www.ptc.gov.sg/media-centre/newsroom/fare-review-exercise-2025/",
+  "transferRulesSource": "https://www.ptc.gov.sg/fares/distance-fares-and-transfer-rules/",
   "distanceSource": "https://www.lta.gov.sg/content/ltagov/en/map/fare-calculator.html",
   "distanceEvidence": [
-    {"from": "Paya Lebar (EW8 / CC9)", "to": "Bugis (EW12 / DT14)", "fareType": "Adult", "mode": "MRT/LRT", "officialDistanceMetres": 4800, "displayedCents": 149},
-    {"from": "Tampines (EW2 / DT32)", "to": "Bugis (EW12 / DT14)", "fareType": "Adult", "mode": "MRT/LRT", "officialDistanceMetres": 14100, "displayedCents": 202}
+    {
+      "from": "Paya Lebar (EW8 / CC9)",
+      "to": "Bugis (EW12 / DT14)",
+      "fareType": "Adult",
+      "mode": "MRT/LRT",
+      "officialDistanceMetres": 4800,
+      "displayedCents": 149
+    },
+    {
+      "from": "Tampines (EW2 / DT32)",
+      "to": "Bugis (EW12 / DT14)",
+      "fareType": "Adult",
+      "mode": "MRT/LRT",
+      "officialDistanceMetres": 14100,
+      "displayedCents": 202
+    }
   ],
-  "evidenceMethod": "Two manual public fare-calculator form queries, read from rendered result tables on 18 September 2026. No endpoint scraping, credentials or unofficial rail distance calculation. These are factual query results, not copied page artwork or a bulk database import.",
-  "distanceScope": "Only the two queried directions; continuous paid-area rail journey. No reverse pair or intermediate-station distance is inferred. Bus-only journeys use exact stop-occurrence Distance differences from the existing permitted LTA DataMall snapshot for basic services 2, 23 and 28.",
+  "evidenceMethod": "The two retained official fare distances were queried manually on 18 September 2026 (unchanged). Fare bands, effective date, transfer rules, shortest-distance rail principle and discount limitations were checked against the linked official PTC and SimplyGo pages on 19 September 2026. No private account data or credentials are used.",
+  "distanceScope": "Prefer the two retained official rail OD facts. Other rail journeys use explicitly estimated shortest paths over LTA GTFS stop-coordinate segments and reviewed paid-area interchanges, rounded up to 0.1 km. This is not track length or official fare distance; curves, omitted links and topology can change the charged fare. Basic bus journeys use exact DataMall stop-occurrence distance differences with distance-reset checks and a 3.2 km feeder cap. Mixed journeys combine eligible distances once. OneMap journeys use labelled provider-distance estimates when official distances cannot be resolved; provider transit distances never include access walks.",
   "busSourceVersion": "439b6cf16c91eb85e11f90dfb44bd477127842c1204bdc1139c35d8048cb181e",
-  "assumptions": ["Standard basic-service card fares", "Adult or eligible senior/PWD/student concession card", "Pre-07:45 rail, unknown payment/pass products and mixed journeys without reviewed distances require manual amounts", "No automatic disruption discount", "No free toilet gate re-entry", "Future planned fares use the displayed version and may change"],
-  "reuse": "Small manually transcribed factual fare results and numerical fare bands, with source attribution. No third-party branded layouts, artwork or private account records are redistributed. PTC's published MRT/LRT fare dataset is also available through data.gov.sg under its displayed data licence."
+  "assumptions": [
+    "Standard basic-service card fares; adult or eligible senior/PWD/student cards",
+    "Estimates are recorded only on explicit completion; actual confirmed charges replace them once",
+    "Rail rides within one continuous paid area form one OD leg; eligible bus/rail transfers priced together",
+    "Planned transfer times are not actual taps; five-transfer, two-hour, 15/45-minute and repeated-bus rules apply",
+    "No automatic early-morning or north-east off-peak discounts, promotions or payment-provider fees",
+    "Unknown cash/pass products, unverified tap-out transfers, gate-changing toilet detours and reroutes after boarding require manual amounts",
+    "No free toilet gate re-entry or disruption discount assumed",
+    "Future planned fares use the displayed checked table and may change; no unlimited future validity claim",
+    "Replay records remain separate from personal totals and budgets"
+  ],
+  "reuse": "Small manually transcribed factual fare results and numerical fare bands, with source attribution. No third-party branded layouts, artwork or private account records are redistributed. PTC's published MRT/LRT fare dataset is also available through data.gov.sg under its displayed data licence. Generated geographic estimates and bus categories derive from the existing LTA DataMall snapshots under the Singapore Open Data Licence; the generator verifies source hashes and records provenance.",
+  "transferExamplesSource": "https://www.simplygo.com.sg/transfer-fare-rules/",
+  "railPricingSource": "https://ask.gov.sg/ptc/questions/cmq0md92s00785l017w6x8nog",
+  "discountsSource": "https://www.ptc.gov.sg/fares/morning-pre-peak-fares/",
+  "distanceReviewedAt": "2026-09-18",
+  "railEstimateValidity": {
+    "validFrom": "2026-09-18",
+    "validThrough": "2026-12-31",
+    "generator": "scripts/build-fare-distances.mjs",
+    "method": "Shortest connected coordinate-distance graph, not elapsed time, endpoints alone, or fare calculator output."
+  },
+  "busClassificationValidity": {
+    "validFrom": "2026-09-18",
+    "validThrough": "2026-10-02",
+    "categories": [
+      "TRUNK",
+      "FEEDER"
+    ],
+    "unsupported": [
+      "EXPRESS",
+      "CITY_LINK",
+      "unclassified or private services"
+    ],
+    "method": "All 798 routing patterns have hash-checked category evidence from original BusServices source pages; only basic fare categories are priced."
+  }
 }

@@ -1,0 +1,8 @@
+.commute-app .endpoint-card{padding-inline-end:44px}
+.commute-app .endpoint-card>.endpoint-swap{right:4px;top:50%;transform:translateY(-50%);height:44px;min-height:44px}
+.commute-app .endpoint-input-row{display:flex;align-items:center;gap:4px}
+.commute-app .endpoint-input-row input{min-width:0;flex:1}
+.commute-app .endpoint-input-row .endpoint-clear{flex-shrink:0;font-size:1.3rem}
+.commute-app .endpoint-search-status{margin:.35rem 0;overflow-wrap:anywhere}
+.commute-app .suggestion-option span{min-width:0;overflow-wrap:anywhere}
+.commute-app .suggestion-option .icon{flex-shrink:0}

@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "finishing a real rail journey automatically records a non-null graph estimate",
+    "budget counts the completed estimate once",
+    "repeating journey completion cannot double-charge the ledger",
+    "record shows approximate label, effective date, checked date and official source",
+    "calculation details distinguish coordinate approximation from official fare distance",
+    "390px source disclosure has no horizontal overflow",
+    "manual charge replaces the estimate in totals while preserving its provenance",
+    "refund updates the same trip and budget once",
+    "budget combines one confirmed net charge and one labelled estimate without duplication",
+    "completed replay is stored separately and excluded from personal spending",
+    "replay view explicitly states exclusion and hides personal budget",
+    "returning to personal spending preserves budget and totals",
+    "390px completed spending has no horizontal overflow",
+    "reload preserves actual charge, refund, estimate and replay separation",
+    "no browser exceptions"
+  ],
+  "errors": [],
+  "browser": "153.0.4234.32",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "firstEstimateCents": 159,
+  "secondEstimateCents": 202,
+  "finalPersonalCents": 372,
+  "fixture": "Real source modules and journey transitions with synthetic test journeys; mobile browser emulation, not a live fare-payment check"
+}

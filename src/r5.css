@@ -95,3 +95,44 @@
   .commute-app .app-nav-journey [data-view=current][aria-current=page]{background:Highlight;color:HighlightText;border-color:Highlight}
   .commute-app .app-nav button:focus-visible{outline:3px solid ButtonText;outline-offset:2px}
 }
+
+/* FR2: keep the resize handle and map pages together, with room for enlarged text. */
+.commute-app .journey-sheet-header{flex-shrink:0;background:var(--surface)}
+@media(max-width:680px){
+  .commute-app .journey-sheet-header{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:4px 8px;border-bottom:1px solid var(--border)}
+  .commute-app .journey-sheet-header .sheet-handle{flex:1 1 6rem;width:auto;min-width:0;padding:5px 4px;align-self:stretch;border-radius:10px}
+  .commute-app .journey-sheet-header .journey-sheet-dock{flex:2 1 11rem;min-width:0}
+  .commute-app .journey-sheet-header .guidance-page-strip{padding:0;border:0}
+  .commute-app .journey-sheet-header .guidance-page-strip button:first-child{flex:.65}
+  .commute-app .journey-sheet-header .guidance-page-strip button{font-size:.8rem}
+  /* Tool pages have no map controls; their content starts at the shared panel inset. */
+  .commute-app .journey-sheet-header:has(>.sheet-handle[hidden]){padding:0;border:0}
+}
+
+/* A consistent rhythm across tabs, without shrinking text or touch targets. */
+.commute-app .panel-scroll{padding:20px 24px}
+.commute-app .view-heading{margin-bottom:16px}
+.commute-app .view-heading p:not(.eyebrow){margin-top:6px}
+.commute-app .companion-panel>h3:first-child{margin-top:0}
+.commute-app #saved-companion{margin-top:16px}
+.commute-app :is(#current-summary,#saved-routes>.empty-state).empty-state{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px 12px;text-align:left;padding:16px;border-radius:16px}
+.commute-app :is(#current-summary,#saved-routes>.empty-state).empty-state>.icon{grid-row:1 / span 2;width:40px;height:40px;padding:10px;margin:0;border-radius:12px}
+.commute-app :is(#current-summary,#saved-routes>.empty-state).empty-state>:is(h2,p){grid-column:2;max-width:none;margin:0}
+.commute-app :is(#current-summary,#saved-routes>.empty-state).empty-state>button{grid-column:1 / -1;justify-self:start;margin-top:4px;max-width:100%;white-space:normal}
+.commute-app .nearby-facilities .nf-intro{gap:.5rem}
+.commute-app .nearby-facilities .nf-actions{margin:.75rem 0 .4rem}
+.commute-app .nearby-facilities :is(.nf-manual,.nf-coverage){margin:.75rem 0;padding:.4rem .85rem}
+.commute-app .nearby-facilities summary{min-height:44px}
+.commute-app .nearby-facilities .nf-toolbar{margin:.75rem 0}
+.commute-app .staff-update-note:empty{display:none}
+.commute-app .companion-panel button.primary:not(:disabled):hover{color:#fff;background:var(--accent-strong)}
+.commute-app .companion-panel button.primary:not(:disabled):active{color:#fff;background:#0c2a53}
+@media(max-width:680px){
+  .commute-app .panel-scroll{padding:16px 21px 18px}
+}
+@media(max-width:360px){
+  .commute-app .panel-scroll{padding-inline:15px}
+}
+@media(forced-colors:active){
+  .commute-app .companion-panel button.primary{color:ButtonText;background:ButtonFace;border-color:ButtonText}
+}
