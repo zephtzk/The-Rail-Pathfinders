@@ -121,5 +121,3 @@ test('existing synthetic incident comparison keeps or accepts explicitly, with t
   assert.equal(context(active,{now:now+90001}).notice.source,'stale');
   assert.equal(context({...active,plan:{...active.plan,mode:'real'}}).notice,null,'synthetic events never pretend to affect a personal trip');
 });
-
-
