@@ -84,7 +84,7 @@ $('app').innerHTML=`<div class="app-shell">
     <details id="flexible-departure" class="flexible-departure"><summary>Flexible departure</summary><label>Departure window<select id="flex-window"><option value="15">15 minutes either way</option><option value="30">30 minutes either way</option><option value="60">1 hour either way</option></select></label><button type="button" class="secondary" id="compare-departures">Compare departures</button><div id="flex-results" role="status"></div></details><div id="route-results"></div><div id="plan-arrivals"></div><div id="review-companion" hidden></div>
     </section>
     <section id="view-current" class="view" hidden aria-labelledby="current-heading"><div class="view-heading"><p class="eyebrow">ONE STEP AT A TIME</p><h1 id="current-heading">Your current trip</h1></div><div id="current-summary" class="empty-state">${icon('trip',42)}<h2>Ready when you are.</h2><button class="secondary" data-go="plan">Plan a journey</button></div><section id="nebula-handoff" class="presentation-setting" hidden></section><div id="current-arrivals"></div><div id="companion-host"></div><div id="rerouting-host"></div></section>
-    <section id="view-facilities" class="view" hidden aria-labelledby="facilities-heading"><div class="view-heading"><p class="eyebrow">A LITTLE HELP NEARBY</p><h1 id="facilities-heading">Services</h1></div><button type="button" class="secondary" id="nebula-demo-open">Try the companion disruption demonstration</button><div id="services-host"></div><div id="nearby-facilities-host"></div></section>
+    <section id="view-facilities" class="view" hidden aria-labelledby="facilities-heading"><div class="view-heading"><p class="eyebrow">A LITTLE HELP NEARBY</p><h1 id="facilities-heading">Services</h1></div><button type="button" class="secondary" id="nebula-demo-open">Try the companion disruption demonstration</button><div id="services-host"></div><div id="nearby-facilities-host" role="region" aria-label="Nearby lifts and toilets" tabindex="-1"></div></section>
     <section id="view-saved" class="view" hidden aria-labelledby="saved-heading"><div class="view-heading"><p class="eyebrow">YOUR EVERYDAY JOURNEYS</p><h1 id="saved-heading">Saved routes</h1></div><div id="saved-routes"></div><div id="saved-companion"></div></section>
     <section id="view-caregiver" class="view" hidden aria-labelledby="caregiver-heading"><div class="view-heading"><p class="eyebrow">STAY CONNECTED</p><h1 id="caregiver-heading">Caregiver sharing</h1></div><div id="caregiver-companion"></div></section>
     <section id="view-spending" class="view" hidden aria-labelledby="spending-heading"><div class="view-heading"><p class="eyebrow">YOUR TRAVEL COSTS</p><h1 id="spending-heading">Journey spending</h1></div><div id="spending-companion"></div></section>
@@ -309,6 +309,12 @@ function mountServiceReplay(){
     }catch{message('Open Plan and select a route, then replay this incident from Services.');}})();
   }else if(location.hash==='#replay'){showView('demo');}
 }
+function navigateNebula(destination){
+  const comparison=destination==='disruptions'&&!$('rerouting-host').hidden?$('r2-comparison'):null;
+  showView(comparison?'current':destination==='disruptions'?'facilities':destination);
+  const target=comparison??(destination==='disruptions'?$('services-notices-heading'):destination==='facilities'?$('nearby-facilities-host'):null);
+  if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:'start'});}
+}
 async function prepareNebulaDemo(){
   const button=$('nebula-demo-prepare'),status=$('nebula-demo-status');
   try{
@@ -328,7 +334,7 @@ async function boot(){try{[rail,bus,walking,build]=await Promise.all(['rail-netw
   mountRerouting({host:$('rerouting-host'),demoHost:$('demo-routing'),companion,router,build:build.applicationSha256,name,message});
   mountDemoIncidents({host:$('demo-scenarios'),getNetwork:()=>router?.network,getDate:()=>input?.date});
   mountServiceReplay();
-  nebula=mountNebulaIntegration({host:nebulaHost,handoffHost:$('nebula-handoff'),getContext:()=>({active:companion.getActive(),network:router.network,build:build.applicationSha256,incidents:loadIncidentLog(),now:Date.now(),online:navigator.onLine}),getFeed:()=>services?.getFeed(),onDemo:()=>showView('demo'),onNavigate:destination=>{showView(destination==='disruptions'?'facilities':destination);if(destination==='disruptions'){$('services-notices-heading').focus({preventScroll:true});$('services-notices-heading').scrollIntoView({block:'start'});}}});
+  nebula=mountNebulaIntegration({host:nebulaHost,handoffHost:$('nebula-handoff'),getContext:()=>({active:companion.getActive(),network:router.network,build:build.applicationSha256,incidents:loadIncidentLog(),now:Date.now(),online:navigator.onLine}),getFeed:()=>services?.getFeed(),onDemo:()=>showView('demo'),onNavigate:navigateNebula});
   nebula.update();
   $('nebula-demo-prepare').onclick=prepareNebulaDemo;
   mountR5Pages();renderPreferences();renderSaved();updateCurrent(companion.getActive());window.__copilotActiveId=companion.getActive()?.id;$('find-routes').disabled=false;$('planner-status').textContent='Ready for your next connection.';

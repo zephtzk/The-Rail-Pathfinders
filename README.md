@@ -1,5 +1,7 @@
 # Commute Copilot - The Rail Pathfinders
 
+**Companion review candidate:** this branch adds the optional Nebula otter and accepted-journey Maps handoff. Start with the [candidate runbook](docs/companion/RUNBOOK.md) and [final review](docs/companion/FINAL_REVIEW.md). Run `npm ci --ignore-scripts`, `npm run build`, then `npm run dev:companion` to open it at http://127.0.0.1:4187. [Browse companion source](https://github.com/zephtzk/The-Rail-Pathfinders/tree/codex/nebula-companion-pivot) or [download candidate ZIP](https://github.com/zephtzk/The-Rail-Pathfinders/archive/refs/heads/codex/nebula-companion-pivot.zip). The production links and assessment documents below describe the existing submission, which remains unchanged. The candidate has not been published to a hosted URL.
+
 **For judges - final assessment write-up:** [FINAL_ASSESSMENT_WRITEUP.pdf](FINAL_ASSESSMENT_WRITEUP.pdf) (2-page write-up + 14-page illustrated user guide). [Text version](FINAL_ASSESSMENT_WRITEUP.md).
 
 A phone-friendly Singapore public-transport companion for NEBULA X PS2: plan a journey, compare options, follow one accepted trip, and get understandable help along the way.

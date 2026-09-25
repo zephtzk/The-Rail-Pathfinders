@@ -110,6 +110,7 @@ try{
         await destination(page,id);
         check(`${width}px: ${label} opens the existing ${view} view`,await page.locator(`#view-${view}`).isVisible()&&await action(page,'toggle').getAttribute('aria-expanded')==='false');
         if(id==='disruptions')check(`${width}px: Disruptions focuses service notices`,await page.locator('#services-notices-heading').evaluate(el=>document.activeElement===el));
+        if(id==='facilities')check(`${width}px: Facilities focuses the actual nearby facility controls`,await page.locator('#nearby-facilities-host').evaluate(el=>document.activeElement===el));
       }
       await nav(page,'preferences');await page.locator('#nebula-enabled').uncheck();
       check(`${width}px: Settings off exposes discoverable re-enable`,await action(page,'enable').isVisible()&&!await action(page,'toggle').isVisible());
@@ -160,7 +161,9 @@ try{
     await reveal(page,'#nebula-demo-prepare');await page.locator('#nebula-demo-prepare').click();await page.locator('#start-companion').waitFor();await page.locator('#start-companion').click();await page.locator('#view-current').waitFor({state:'visible'});
     const freshOriginal=await active(page);
     check('Acceptance rehearsal is independent of the declined journey',freshOriginal.id!==original.id&&freshOriginal.routingContext.decisions.length===0);
-    mark('fresh cancellation and Accept offer');await reveal(page,'#r2-demo-cancel');await page.locator('#r2-demo-cancel').click();await nav(page,'current');await page.locator('#r2-accept').waitFor();
+    mark('fresh cancellation and Accept offer');await reveal(page,'#r2-demo-cancel');await page.locator('#r2-demo-cancel').click();await destination(page,'disruptions');
+    check('Disruptions opens and focuses the pending accepted-trip comparison',await page.locator('#view-current').isVisible()&&await page.locator('#r2-comparison').evaluate(el=>document.activeElement===el));
+    await page.locator('#r2-accept').waitFor();
     check('Fresh offer waits for explicit acceptance',same((await active(page)).route,freshOriginal.route));
     await page.locator('#r2-accept').click();const accepted=await active(page);
     check('Accept updates the same journey with an accepted route revision',accepted.id===freshOriginal.id&&!same(accepted.route,freshOriginal.route)&&accepted.routeRevisions.length===freshOriginal.routeRevisions.length+1&&same(accepted.plan.destination,freshOriginal.plan.destination)&&same(accepted.route,accepted.plan.route));
