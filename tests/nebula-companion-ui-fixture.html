@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nebula companion — isolated synthetic fixture</title>
+  <link rel="stylesheet" href="/src/nebula-companion.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { font-family: system-ui, sans-serif; color: #18372c; background: #f4f6ed; }
+    body { margin: 0; padding: 20px 20px 100px; }
+    main { max-width: 760px; margin: auto; overflow-wrap: anywhere; }
+    h1 { font-size: 1.6rem; }
+    p { line-height: 1.55; }
+    section { padding: 20px; margin-block: 20px; border: 1px solid #b1c8b6; border-radius: 20px; background: #fff; }
+    button, input { font: inherit; }
+    button, input[type=text] { padding: 12px; }
+    input[type=text] { display: block; width: 100%; min-width: 0; }
+    label { display: block; margin-block: 12px; }
+    .fixture-long-content { height: 900px; background: linear-gradient(#f4f6ed, #d6e5d8); padding: 20px; }
+    .fixture-nav { position: fixed; inset: auto 0 0; height: 64px; background: #fff; border-top: 1px solid #8aab97; display: flex; align-items: center; justify-content: space-around; z-index: 1; font-size: 14px; }
+    dialog { max-width: min(90vw, 480px); border: 1px solid #406952; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Nebula companion</h1>
+    <p>Isolated UI fixture · synthetic data only · no provider or sharing requests</p>
+    <section aria-label="Fixture settings">
+      <h2>Settings</h2>
+      <label><input id="enabled-setting" type="checkbox"> Companion enabled</label>
+      <label>Test typing exclusion <input id="typing-input" type="text" autocomplete="off"></label>
+      <button id="app-button" type="button">App control</button>
+      <output id="settings-state" aria-live="polite"></output>
+    </section>
+    <section aria-label="Synthetic current journey">
+      <h2>Current journey</h2>
+      <p>Sample walking step to a sample boarding point. This fixture does not create or change an accepted trip.</p>
+      <p id="navigation-result">No companion destination selected.</p>
+    </section>
+    <div class="fixture-long-content">Scroll area for testing normal page scrolling.</div>
+  </main>
+  <nav class="fixture-nav" aria-label="Synthetic bottom navigation"><span>Plan</span><span>Current</span><span>Settings</span></nav>
+  <div id="companion-host"></div>
+  <dialog id="fixture-dialog"><h2>Sample dialog</h2><p>The companion should not compete with this dialog.</p><button id="close-dialog">Close dialog</button></dialog>
+  <script type="module">
+    // Instrument only this isolated test page; production code is not patched.
+    const trackedTargets = new Set([window, document, window.visualViewport].filter(Boolean));
+    const registered = [];
+    const originalAdd = EventTarget.prototype.addEventListener;
+    const originalRemove = EventTarget.prototype.removeEventListener;
+    const capture = options => typeof options === 'boolean' ? options : !!options?.capture;
+    EventTarget.prototype.addEventListener = function(type, callback, options) {
+      if (trackedTargets.has(this) && !registered.some(x => x.target === this && x.type === type && x.callback === callback && x.capture === capture(options))) {
+        registered.push({ target: this, type, callback, capture: capture(options) });
+      }
+      return originalAdd.call(this, type, callback, options);
+    };
+    EventTarget.prototype.removeEventListener = function(type, callback, options) {
+      const index = registered.findIndex(x => x.target === this && x.type === type && x.callback === callback && x.capture === capture(options));
+      if (index >= 0) registered.splice(index, 1);
+      return originalRemove.call(this, type, callback, options);
+    };
+    const { mountNebulaCompanion } = await import('/src/nebula-companion.js');
+    const storageKey = 'nebula-companion:candidate:20260925:fixture';
+    const navigations = [];
+    const snapshots = [];
+    const settings = document.querySelector('#enabled-setting');
+    const api = mountNebulaCompanion({
+      host: document.querySelector('#companion-host'), storageKey,
+      onNavigate: destination => {
+        navigations.push(destination);
+        document.querySelector('#navigation-result').textContent = `Selected ${destination}`;
+      },
+    });
+    // Playwright adds its own input listeners after mount. Track the exact
+    // records created by this module, so its cleanup is measured independently.
+    const moduleListeners = new Set(registered);
+    const unsubscribe = api.subscribe(state => {
+      snapshots.push({ ...state });
+      settings.checked = state.enabled;
+      document.querySelector('#settings-state').textContent = state.enabled ? 'Companion on' : 'Companion off';
+    });
+    settings.addEventListener('change', () => api.setEnabled(settings.checked));
+    document.querySelector('#close-dialog').addEventListener('click', () => document.querySelector('#fixture-dialog').close());
+    api.update({ notice: null, bottomInset: 64 });
+    window.fixture = {
+      api, storageKey, navigations, snapshots, unsubscribe, mountNebulaCompanion,
+      activeListeners: () => registered.filter(record => moduleListeners.has(record)).map(({ target, type, capture }) => ({ target: target === window ? 'window' : target === document ? 'document' : 'visualViewport', type, capture })),
+    };
+  </script>
+</body>
+</html>
