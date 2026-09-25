@@ -4,7 +4,8 @@ import {createPersonalStore,singaporeNow,instantiateTemplate,visiblePersonalStat
 import {createPreferencesStore,TRAVEL_STYLES} from './preferences.js';
 import {endpointCatalog,suggestEndpoints,resolveEndpoint,timeInput,clock,plannerFeedback,busStopDetails} from './planner-model.js';
 import {acceptJourney} from './journey-state.js';
-import {journeyCard} from './journey-v2.js';
+import {journeyCard,routeFromLegacy} from './journey-v2.js';
+import {mountNebulaIntegration} from './nebula-integration.js';
 import {mountDemoIncidents} from './demo-incidents-ui.js';
 import {mountRerouting} from './rerouting-ui.js';
 import {icon} from './icons.js';
@@ -43,6 +44,7 @@ const $=id=>document.getElementById(id);
 const mins=s=>`${Math.ceil(s/60)} min`;
 let storage;try{storage=window.localStorage;}catch{storage={getItem:()=>null,setItem:()=>{throw Error('Storage blocked');},removeItem:()=>{throw Error('Storage blocked');}};}
 const appLocation=getAppLocation();let locationSettingsCleanup,lastExecutionKey;
+const nebulaStyle=document.createElement('link');nebulaStyle.rel='stylesheet';nebulaStyle.href='/src/nebula-companion.css';document.head.append(nebulaStyle);
 const locationStyle=document.createElement('link');locationStyle.rel='stylesheet';locationStyle.href='/src/location.css';document.head.append(locationStyle);
 const addressStyle=document.createElement('link');addressStyle.rel='stylesheet';addressStyle.href='/src/address.css';document.head.append(addressStyle);
 const locationControlsStyle=document.createElement('link');locationControlsStyle.rel='stylesheet';locationControlsStyle.href='/src/location-controls.css';document.head.append(locationControlsStyle);
@@ -50,7 +52,7 @@ const personal=createPersonalStore(storage),preferencesStore=createPreferencesSt
 let preferences=preferencesStore.read().preferences,rail,bus,walking,router,build,catalog=[],routes=[],selected=null,input=null,companion,map,mapLayers,view='plan',resolved={origin:null,destination:null},searchEpoch=0,mapStatus='',streetMap,mapFailed=false;
 const shortcuts=createCommuteShortcuts(storage),presentationStore=createPresentationPreferences(storage),addressRouter=createAddressRouter(),endpointSearch={};
 let presentation=presentationStore.read(),plannerClient,planArrivals,currentArrivals,staffCard,mapPages,journeySheet,externalPoints=[],flexEpoch=0,baseCatalog=null;
-let services,replayController,replayClient;
+let services,replayController,replayClient,nebula;
 const reducedMotion=()=>reducedGuidanceMotion(presentation,{systemReducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
 const names=new Map();
 const name=id=>names.get(id)??id??'station';
@@ -81,14 +83,14 @@ $('app').innerHTML=`<div class="app-shell">
     </form><div class="planner-status" id="planner-status" role="status" aria-live="polite">Loading supported routes…</div>
     <details id="flexible-departure" class="flexible-departure"><summary>Flexible departure</summary><label>Departure window<select id="flex-window"><option value="15">15 minutes either way</option><option value="30">30 minutes either way</option><option value="60">1 hour either way</option></select></label><button type="button" class="secondary" id="compare-departures">Compare departures</button><div id="flex-results" role="status"></div></details><div id="route-results"></div><div id="plan-arrivals"></div><div id="review-companion" hidden></div>
     </section>
-    <section id="view-current" class="view" hidden aria-labelledby="current-heading"><div class="view-heading"><p class="eyebrow">ONE STEP AT A TIME</p><h1 id="current-heading">Your current trip</h1></div><div id="current-summary" class="empty-state">${icon('trip',42)}<h2>Ready when you are.</h2><button class="secondary" data-go="plan">Plan a journey</button></div><div id="current-arrivals"></div><div id="companion-host"></div><div id="rerouting-host"></div></section>
-    <section id="view-facilities" class="view" hidden aria-labelledby="facilities-heading"><div class="view-heading"><p class="eyebrow">A LITTLE HELP NEARBY</p><h1 id="facilities-heading">Services</h1></div><div id="services-host"></div><div id="nearby-facilities-host"></div></section>
+    <section id="view-current" class="view" hidden aria-labelledby="current-heading"><div class="view-heading"><p class="eyebrow">ONE STEP AT A TIME</p><h1 id="current-heading">Your current trip</h1></div><div id="current-summary" class="empty-state">${icon('trip',42)}<h2>Ready when you are.</h2><button class="secondary" data-go="plan">Plan a journey</button></div><section id="nebula-handoff" class="presentation-setting" hidden></section><div id="current-arrivals"></div><div id="companion-host"></div><div id="rerouting-host"></div></section>
+    <section id="view-facilities" class="view" hidden aria-labelledby="facilities-heading"><div class="view-heading"><p class="eyebrow">A LITTLE HELP NEARBY</p><h1 id="facilities-heading">Services</h1></div><button type="button" class="secondary" id="nebula-demo-open">Try the companion disruption demonstration</button><div id="services-host"></div><div id="nearby-facilities-host" role="region" aria-label="Nearby lifts and toilets" tabindex="-1"></div></section>
     <section id="view-saved" class="view" hidden aria-labelledby="saved-heading"><div class="view-heading"><p class="eyebrow">YOUR EVERYDAY JOURNEYS</p><h1 id="saved-heading">Saved routes</h1></div><div id="saved-routes"></div><div id="saved-companion"></div></section>
     <section id="view-caregiver" class="view" hidden aria-labelledby="caregiver-heading"><div class="view-heading"><p class="eyebrow">STAY CONNECTED</p><h1 id="caregiver-heading">Caregiver sharing</h1></div><div id="caregiver-companion"></div></section>
     <section id="view-spending" class="view" hidden aria-labelledby="spending-heading"><div class="view-heading"><p class="eyebrow">YOUR TRAVEL COSTS</p><h1 id="spending-heading">Journey spending</h1></div><div id="spending-companion"></div></section>
     <section id="view-preferences" class="view" hidden aria-labelledby="preferences-heading"><div class="view-heading"><p class="eyebrow">MAKE IT YOUR JOURNEY</p><h1 id="preferences-heading">How do you like to travel?</h1></div><div id="preferences-content"></div></section>
     <section id="view-staff" class="view staff-page" hidden aria-labelledby="staff-heading"><div class="view-heading"><p class="eyebrow">ASK FOR A HAND</p><h1 id="staff-heading">Show to staff</h1></div><div id="staff-content"></div></section>
-    <section id="view-demo" class="view" hidden aria-labelledby="demo-heading"><div class="view-heading"><p class="eyebrow">DEMO</p><h1 id="demo-heading">Try a journey scenario</h1></div><div id="demo-scenarios"></div><div id="demo-routing" hidden></div></section>
+    <section id="view-demo" class="view" hidden aria-labelledby="demo-heading"><div class="view-heading"><p class="eyebrow">DEMO</p><h1 id="demo-heading">Try a journey scenario</h1></div><section class="presentation-setting"><h2>Companion disruption demonstration</h2><p>Labelled rehearsal · 25 September 2026, 10:00 SGT · Paya Lebar to Bugis. Review and start it, then simulate a cancelled train and choose whether to keep or accept revised guidance. Demo trips stay outside personal spending.</p><button type="button" class="secondary" id="nebula-demo-prepare">Prepare 25 September demonstration</button><p id="nebula-demo-status" role="status"></p></section><div id="demo-scenarios"></div><div id="demo-routing" hidden></div></section>
   </div></main>
   <button id="trip-peek" class="trip-peek" hidden></button>
   <nav class="app-nav" aria-label="Main navigation">${[
@@ -97,6 +99,7 @@ $('app').innerHTML=`<div class="app-shell">
   ].map(([group,items])=>`<div class="app-nav-${group}">${items.map(([id,i,label])=>`<button type="button" data-view="${id}" ${id==='plan'?'aria-current="page"':''}>${icon(i)}<span>${label}</span></button>`).join('')}</div>`).join('')}</nav>
   <div id="app-message" class="app-toast" role="status" aria-live="polite"></div></div>`;
 
+const nebulaHost=document.createElement('div');nebulaHost.id='nebula-host';document.body.append(nebulaHost);
 function message(text){$('app-message').textContent=text;$('app-message').classList.add('is-visible');clearTimeout(message.timer);message.timer=setTimeout(()=>$('app-message').classList.remove('is-visible'),6000);}
 mountInstructionCards($('app'));
 const nearbyFacilitiesView=mountNearbyFacilities($('nearby-facilities-host'),{getPlaces:()=>catalog});
@@ -106,6 +109,7 @@ window.addEventListener('copilot:message',e=>message(e.detail.text));
 window.addEventListener('copilot:open-section',e=>showView(({sharing:'caregiver',spending:'spending',saved:'saved',review:'plan',staff:'staff'})[e.detail.section]??'current'));
 window.addEventListener('copilot:personal-changed',()=>{catalog=currentCatalog();renderSaved();});
 $('home-plan').onclick=()=>showView('plan');
+$('nebula-demo-open').onclick=()=>showView('demo');
 window.addEventListener('copilot:prepared-cleared',()=>{$('review-companion').hidden=true;});
 window.addEventListener('copilot:prepared',()=>{$('review-companion').hidden=false;showView('plan');$('review-companion').scrollIntoView({block:'start'});});
 document.querySelectorAll('.app-nav [data-view]').forEach(b=>b.onclick=()=>showView(b.dataset.view));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>showView(b.dataset.go));$('edit-preferences').onclick=()=>showView('preferences');$('open-demo').onclick=()=>$('demo-scenario-open')?.click();$('trip-peek').onclick=()=>showView('current');
@@ -142,6 +146,7 @@ document.querySelectorAll('[data-time]').forEach(b=>b.onclick=()=>{setTimeMode(b
 function travelStyleCards(p,expanded){return TRAVEL_STYLES.map(s=>`<div class="style-card travel-style-card ${s.id===p.travelStyle?'is-selected':''}"><button type="button" class="style-preset" id="style-preset-${s.id}" data-preset="${s.id}" aria-pressed="${s.id===p.travelStyle}"><span class="style-avatar">${icon(s.id==='rachel'?'work':s.id==='arjun'?'heart':'accessibility',24)}</span><strong>${esc(s.label)}</strong>${s.id===p.travelStyle?icon('check',18):''}</button><button type="button" class="style-disclosure" data-style-details="${s.id}" aria-label="About ${esc(s.label)}" aria-expanded="${expanded.has(s.id)}" aria-controls="style-description-${s.id}" title="Show or hide description">${icon('chevron-down',20)}</button><p class="style-description" id="style-description-${s.id}" ${expanded.has(s.id)?'':'hidden'}>${esc(s.explanation)}</p></div>`).join('');}
 function renderPreferences(){const p=preferences;const expanded=new Set([...$('preferences-content').querySelectorAll('[data-style-details][aria-expanded="true"]')].map(b=>b.dataset.styleDetails));const style=TRAVEL_STYLES.find(s=>s.id===p.travelStyle);$('edit-preferences').innerHTML=`<span>${icon(p.stepFree?'accessibility':'heart',20)} ${esc(style?.label??'Your travel preferences')}</span><small>${p.walkingLimitMinutes} min walking · ${esc(p.preference.replaceAll('-',' '))}</small>${icon('chevron-right',18)}`;
   $('preferences-content').innerHTML=`<section id="app-location-settings" class="location-settings"></section><section class="presentation-setting"><h2>Guidance display</h2><label class="check-row"><input id="simple-guidance-toggle" type="checkbox" ${presentation.simpleGuidance?'checked':''}> Simple guidance</label><p>One current instruction, larger controls and less movement.</p></section><div class="style-grid">${travelStyleCards(p,expanded)}</div><form id="preferences-form"><div class="field-pair"><label>Walking limit (minutes)<input type="number" min="0" max="240" name="walkingLimitMinutes" value="${p.walkingLimitMinutes}" required></label><label>Extra time allowed (minutes)<input type="number" min="0" max="120" name="maxExtraMinutes" value="${p.maxExtraMinutes}" required></label></div><label>Route priority<select name="preference">${[['fastest','Fastest arrival'],['fewer-transfers','Fewer transfers'],['less-walking','Less walking'],['quieter','Quieter (data unavailable)']].map(([id,label])=>`<option value="${id}" ${p.preference===id?'selected':''}>${label}</option>`).join('')}</select></label><label class="check-row"><input type="checkbox" name="stepFree" ${p.stepFree?'checked':''}> Require a verified step-free route</label><label class="check-row"><input type="checkbox" name="assistanceRequested" ${p.assistanceRequested?'checked':''}> Prefer assistance and advance planning</label><label>Fare category<select name="fareCategory">${[['adult','Adult card'],['senior','Senior concession card'],['pwd','Disability concession card'],['student','Student concession card']].map(([id,label])=>`<option value="${id}" ${p.fareCategory===id?'selected':''}>${label}</option>`).join('')}</select></label><aside class="wip-banner" data-instruction-card="travel-information"><h3>Work in progress — travel information</h3><p>Step-free paths, crowding and shelter are not verified. Preferences cannot establish an accessible path or a quieter train.</p></aside><button class="primary">Save preferences</button><p class="field-note">Applies to future searches. An accepted route changes only after your review.</p></form>`;
+  nebula?.renderSettings($('preferences-content'));
   locationSettingsCleanup?.();locationSettingsCleanup=mountLocationSettings($('app-location-settings'),{service:appLocation,onStop:()=>companion?companion.stopLocation():appLocation.stop()});
   $('preferences-content').insertAdjacentHTML('afterbegin',`<section class="presentation-setting text-size-setting" aria-labelledby="text-size-heading"><div class="text-size-heading"><h2 id="text-size-heading"><label for="text-size-slider">Text size</label></h2><output id="text-size-value" for="text-size-slider">${presentation.textSizePercent}%</output></div><p id="text-size-help">Adjust text across all tabs. Pinch or scroll on the map to zoom the map.</p><input id="text-size-slider" type="range" min="${TEXT_SIZE_MIN}" max="${TEXT_SIZE_MAX}" step="${TEXT_SIZE_STEP}" value="${presentation.textSizePercent}" aria-describedby="text-size-help" aria-valuetext="${presentation.textSizePercent} percent"><div class="text-size-cues" aria-hidden="true"><span>Compact</span><span>Normal 100%</span><span>Larger</span></div><button id="text-size-reset" type="button" class="secondary">Reset to default</button><p id="text-size-save-status" class="field-note" role="status"></p></section>`);
   const setTextSize=value=>{
@@ -304,6 +309,24 @@ function mountServiceReplay(){
     }catch{message('Open Plan and select a route, then replay this incident from Services.');}})();
   }else if(location.hash==='#replay'){showView('demo');}
 }
+function navigateNebula(destination){
+  const comparison=destination==='disruptions'&&!$('rerouting-host').hidden?$('r2-comparison'):null;
+  showView(comparison?'current':destination==='disruptions'?'facilities':destination);
+  const target=comparison??(destination==='disruptions'?$('services-notices-heading'):destination==='facilities'?$('nearby-facilities-host'):null);
+  if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:'start'});}
+}
+async function prepareNebulaDemo(){
+  const button=$('nebula-demo-prepare'),status=$('nebula-demo-status');
+  try{
+    const active=companion.getActive();if(active&&!['completed','cancelled'].includes(active.status))throw Error('Finish or cancel your current journey before preparing a demonstration.');
+    button.disabled=true;status.textContent='Preparing a labelled rehearsal from the packaged timetable…';
+    const query={...preferences,originId:'CC9',destinationId:'DT14',date:'2026-09-25',departureTime:'10:00',deadlineTime:'',mode:'mixed',walkingLimitMinutes:30,stepFree:false};
+    const result=await replayClient.route(query),route=result.recommended??result.routes?.[0];if(!route)throw Error('The packaged timetable cannot prepare this demonstration.');
+    const plan=routeFromLegacy(route,query,{name,source:'25 September companion demonstration using packaged timetable estimates'});plan.mode='replay';
+    for(const role of ['origin','destination']){const point=catalog.find(p=>p.id===query[role+'Id']);if(point)plan[role]={...plan[role],...point};}
+    companion.setPrepared(plan,{routingContext:acceptJourney(route,query,build.applicationSha256)});status.textContent='Demonstration prepared. Review it and choose Start journey.';
+  }catch(error){status.textContent=error.message;}finally{button.disabled=false;}
+}
 function connection(){currentArrivals?.refresh();updateNetworkStatus($('network-status'),navigator.onLine);updateCurrent(companion?.getActive());}window.addEventListener('online',connection);window.addEventListener('offline',connection);
 async function boot(){try{[rail,bus,walking,build]=await Promise.all(['rail-network','bus-network','walking-links','application-build'].map(async n=>{const r=await fetch(`/data/${n}.json`);if(!r.ok)throw Error('Routing data could not be loaded. Reconnect to prepare this device.');return r.json();}));router=createMultimodalRouter(rail,bus,walking);plannerClient=createPlannerClient([rail,bus,walking]);for(const s of router.network.stations)names.set(s.id,s.name);for(const s of router.network.stops)names.set(s.id,`${s.name} (${s.id})`);catalog=currentCatalog();
   initMap();companion=mountCompanion({getPresentation:()=>presentation,host:$('companion-host'),showHeader:false,showDock:false,sectionHosts:{review:$('review-companion'),saved:$('saved-companion'),sharing:$('caregiver-companion'),spending:$('spending-companion')},getMap:()=>map,getLocationContext:()=>({network:router?.network,walking}),getSelected:()=>selected&&input&&routes.includes(selected)?(selected.plan?{plan:selected.plan}:{route:selected,input,routingContext:acceptJourney(selected,input,build.applicationSha256)}):null,getPlaces:()=>catalog.filter(p=>!['saved','device-location'].includes(p.kind)),name,getFareOptions:()=>({busNetwork:bus}),onSelectPlan:p=>{preferences=preferencesStore.update(p.preferences);renderPreferences();catalog=currentCatalog();for(const point of [p.origin,p.destination])if(!catalog.some(existing=>existing.id===point.id)&&Number.isFinite(point.lat)&&Number.isFinite(point.lng)){externalPoints=[{...point,routingId:null,kind:'address',detail:'Saved public endpoint · online routing required'},...externalPoints.filter(existing=>existing.id!==point.id)].slice(0,12);}catalog=currentCatalog();for(const role of ['origin','destination']){resolved[role]=p[role].id;$(role).value=p[role].label;}restoreTiming(p);invalidate();showView('plan');},onEndpoint:(role,p)=>{catalog=currentCatalog();choose(role,p);showView('plan');}});
@@ -311,6 +334,9 @@ async function boot(){try{[rail,bus,walking,build]=await Promise.all(['rail-netw
   mountRerouting({host:$('rerouting-host'),demoHost:$('demo-routing'),companion,router,build:build.applicationSha256,name,message});
   mountDemoIncidents({host:$('demo-scenarios'),getNetwork:()=>router?.network,getDate:()=>input?.date});
   mountServiceReplay();
+  nebula=mountNebulaIntegration({host:nebulaHost,handoffHost:$('nebula-handoff'),getContext:()=>({active:companion.getActive(),network:router.network,build:build.applicationSha256,incidents:loadIncidentLog(),now:Date.now(),online:navigator.onLine}),getFeed:()=>services?.getFeed(),onDemo:()=>showView('demo'),onNavigate:navigateNebula});
+  nebula.update();
+  $('nebula-demo-prepare').onclick=prepareNebulaDemo;
   mountR5Pages();renderPreferences();renderSaved();updateCurrent(companion.getActive());window.__copilotActiveId=companion.getActive()?.id;$('find-routes').disabled=false;$('planner-status').textContent='Ready for your next connection.';
   if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>message('Offline setup is unavailable. This device is not ready for offline guidance.'));
 }catch(e){$('planner-status').textContent=e.message;renderPreferences();}}

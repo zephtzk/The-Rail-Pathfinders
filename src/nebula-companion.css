@@ -1,0 +1,124 @@
+/* Only companion descendants are styled. Mount outside transformed/inert app
+   panels. The app supplies bottomInset to reserve its navigation and safe area. */
+.nebula-companion {
+  --nebula-ink: #49335f;
+  --nebula-focus: #70449c;
+  --nebula-bottom-inset: 88px;
+  position: fixed;
+  z-index: 45;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(var(--nebula-bottom-inset) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  width: min(21rem, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  max-height: calc(100dvh - var(--nebula-bottom-inset) - env(safe-area-inset-bottom) - env(safe-area-inset-top) - 12px);
+  pointer-events: none;
+  color: var(--nebula-ink);
+  font: 400 1rem/1.35 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: start;
+  color-scheme: light;
+}
+.nebula-companion[data-dock="left"] { right: auto; left: max(12px, env(safe-area-inset-left)); align-items: flex-start; }
+.nebula-companion [hidden], .nebula-companion[hidden] { display: none !important; }
+.nebula-companion *, .nebula-companion *::before, .nebula-companion *::after { box-sizing: border-box; }
+.nebula-companion button {
+  appearance: none;
+  color: inherit;
+  font: inherit;
+  line-height: 1.3;
+  min-height: 44px;
+  min-width: 44px;
+  margin: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: pan-x pan-y;
+  overflow-wrap: anywhere;
+  -webkit-tap-highlight-color: transparent;
+}
+.nebula-companion button:focus-visible { outline: 3px solid var(--nebula-focus); outline-offset: 2px; }
+.nebula-companion__shelf {
+  min-height: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px;
+  scrollbar-width: thin;
+  pointer-events: auto;
+  /* This area only scrolls when expanded/notices need space. No scroll lock. */
+  touch-action: pan-y;
+}
+.nebula-companion__expanded { display: grid; gap: 10px; }
+.nebula-companion__actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
+  gap: 12px 8px;
+  padding: 4px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.nebula-companion .nebula-companion__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 2px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  font-size: .8125rem;
+  font-weight: 650;
+  text-align: center;
+}
+.nebula-companion__icon {
+  display: grid;
+  place-items: center;
+  width: max(48px, 2.6rem);
+  height: max(48px, 2.6rem);
+  border: 1px solid #cfc0df;
+  border-radius: 50%;
+  background: #f7f0ff;
+  box-shadow: 0 3px 10px #3520471a;
+}
+.nebula-companion__icon svg { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nebula-companion__action:nth-child(2) .nebula-companion__icon { background: #eff7ef; color: #34553f; border-color: #b5ccba; }
+.nebula-companion__action:nth-child(3) .nebula-companion__icon { background: #fff4e7; color: #75502e; border-color: #dcc3a8; }
+.nebula-companion__action:nth-child(4) .nebula-companion__icon { background: #edf3ff; color: #365278; border-color: #bacbe3; }
+.nebula-companion__action-label { max-width: 100%; padding: 3px 7px; border: 1px solid #dfd5e8; border-radius: 12px; background: #fffdfa; box-shadow: 0 2px 4px #3520470a; }
+.nebula-companion__action:hover .nebula-companion__icon { border-color: var(--nebula-focus); }
+.nebula-companion__preferences { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 6px; padding: 2px; }
+.nebula-companion[data-dock="left"] .nebula-companion__preferences { justify-content: flex-start; }
+.nebula-companion__preferences button, .nebula-companion .nebula-companion__enable { padding: 8px 12px; border: 1px solid #cfc0df; border-radius: 18px; background: #fffdfa; box-shadow: 0 2px 8px #35204712; font-size: .8125rem; font-weight: 600; }
+.nebula-companion .nebula-companion__toggle {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  max-width: 100%;
+  padding: 2px;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  font-weight: 700;
+  font-size: .8125rem;
+}
+.nebula-companion__toggle img { display: block; width: 64px; height: 64px; border-radius: 50%; border: 1px solid #dfd5e8; background: #fffaf3; object-fit: cover; pointer-events: none; }
+.nebula-companion__toggle > span { padding: 6px 11px; border-radius: 16px; background: #fffdfa; border: 1px solid #cfc0df; box-shadow: 0 3px 10px #3520471a; }
+.nebula-companion__chevron { display: inline-block; margin-left: .25em; }
+.nebula-companion .nebula-companion__enable { flex: 0 0 auto; }
+.nebula-companion__notice { display: flex; align-items: flex-start; gap: 4px; margin-bottom: 8px; padding: 10px 4px 10px 12px; border: 1px solid #d7c8e4; border-radius: 18px; background: #fffdfa; box-shadow: 0 3px 12px #35204712; pointer-events: auto; }
+.nebula-companion__notice-copy { flex: 1; min-width: 0; font-size: .8125rem; overflow-wrap: anywhere; }
+.nebula-companion__source { display: block; margin-bottom: 4px; font-size: .75rem; }
+.nebula-companion__message { display: block; }
+.nebula-companion__notice[data-source="demo"] { border-style: dashed; }
+.nebula-companion__notice[data-source="stale"] { color: #69481e; background: #fff8e9; border-color: #ceb386; }
+.nebula-companion__notice[data-severity="critical"] .nebula-companion__source { color: #9a3029; }
+.nebula-companion .nebula-companion__dismiss { flex: 0 0 44px; border: 0; border-radius: 50%; background: transparent; font-size: 1.25rem; }
+@media (max-height: 480px) { .nebula-companion__toggle img { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .nebula-companion *, .nebula-companion *::before, .nebula-companion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@media (forced-colors: active) { .nebula-companion__icon, .nebula-companion__action-label, .nebula-companion__toggle > span { border-color: ButtonText; } }

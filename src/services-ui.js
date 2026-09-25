@@ -101,5 +101,5 @@ export function mountServices({host,noticeHost,loadIncidents=()=>[],getContext=(
   window.addEventListener('focus',freshnessChanged);
   window.addEventListener('storage',storageChanged);
   readIncidents();render();void refresh();
-  return {refresh,setIncidents(value){incidents=serviceDemoIncidents(value);render();},render,destroy(){destroyed=true;request?.abort();window.removeEventListener('demo:incidents-changed',incidentsChanged);window.removeEventListener('offline',freshnessChanged);window.removeEventListener('online',freshnessChanged);window.removeEventListener('focus',freshnessChanged);window.removeEventListener('storage',storageChanged);}};
+  return {refresh,getFeed:()=>feed,setIncidents(value){incidents=serviceDemoIncidents(value);render();},render,destroy(){destroyed=true;request?.abort();window.removeEventListener('demo:incidents-changed',incidentsChanged);window.removeEventListener('offline',freshnessChanged);window.removeEventListener('online',freshnessChanged);window.removeEventListener('focus',freshnessChanged);window.removeEventListener('storage',storageChanged);}};
 }
