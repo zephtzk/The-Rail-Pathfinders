@@ -38,7 +38,9 @@
     "test:pre-fr2-browser": "node tests/pre-fr2-compact-tabs-browser.mjs && node tests/pre-fr2-staff-tick-browser.mjs && node tests/pre-fr2-start-journey-browser.mjs && node tests/pre-fr2-start-contrast-browser.mjs && node tests/pre-fr2-location-browser.mjs && node tests/location-privacy-browser.mjs && node tests/location-legacy-controls-browser.mjs",
     "test:fr2-browser": "node tests/fr2-search-browser.mjs && node tests/fr2-polish-browser.mjs && node tests/fr2-fares-browser.mjs && node tests/fr2-demo-browser.mjs && node tests/fr2-services-browser.mjs && node tests/services-ui-browser.mjs",
     "test:fr3-browser": "node tests/fr3-location-browser.mjs && node tests/fr3-cleanup-browser.mjs && node tests/fr3-instruction-cards-browser.mjs",
-    "test:fr3-text-size-browser": "node tests/fr3-text-size-browser.mjs"
+    "test:fr3-text-size-browser": "node tests/fr3-text-size-browser.mjs",
+    "dev:companion": "node scripts/serve-companion.mjs",
+    "test:companion-browser": "node tests/companion-integration-browser.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",

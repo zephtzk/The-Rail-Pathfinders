@@ -14,7 +14,7 @@ export function mountRerouting({host,demoHost,companion,router,build,name,messag
   const active=()=>companion.getActive();
   function supported(){const a=active();if(!a||a.status!=='started'||!a.routingContext)throw Error('Start or resume a journey before checking its route.');if(a.detour&&!['cancelled','resumed'].includes(a.detour.status))throw Error('Finish or cancel your toilet stop before checking the main route.');if(a.routingContext.build!==build)throw Error('Route information has changed. Your saved directions remain available; plan a new route to check connections.');return a;}
   const run=fn=>()=>{try{fn();}catch(e){message(e.message);}};
-  function render(){const a=active(),context=a?.routingContext,available=!!context&&a.status==='started'&&context.build===build,expanded=host.querySelector('.reroute-tools')?.open,noticesExpanded=host.querySelector('.service-notices')?.open;
+  function render(){const a=active();demoHost.hidden=!(a?.plan.mode==='replay'&&a.status==='started');const context=a?.routingContext,available=!!context&&a.status==='started'&&context.build===build,expanded=host.querySelector('.reroute-tools')?.open,noticesExpanded=host.querySelector('.service-notices')?.open;
 
     const external=externalRerouteState(a);
     if(external){host.hidden=false;host.innerHTML=`<details class="reroute-tools"><summary>Check address-route coverage</summary><p>${esc(external.message)}</p></details>`;return;}
