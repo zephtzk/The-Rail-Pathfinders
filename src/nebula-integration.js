@@ -18,7 +18,7 @@ export function mountNebulaIntegration({host,handoffHost,getContext,onNavigate,o
     const context=deriveNebulaJourneyContext(input);
     const official=officialServiceState(getFeed(),{now:Date.now(),online:navigator.onLine});
     const notice=context.notice??(official.items?.length?{label:official.fresh?'Official service notice — review Services':'Last known service notice — recheck Services',severity:'warning',source:official.fresh?'live':'stale'}:null);
-    pet.update({notice,bottomInset:Math.ceil(document.querySelector('.app-nav')?.getBoundingClientRect().height??88),suppressed:false});
+    pet.update({notice,bottomInset:Math.ceil(document.querySelector('.app-nav')?.getBoundingClientRect().height??88)+8,suppressed:false});
     const key=JSON.stringify([input.active?.id,input.active?.plan.mode,context.nextBoarding,context.handoffReason]);
     if(key===lastHandoff)return context;lastHandoff=key;
     handoffHost.replaceChildren();handoffHost.hidden=!input.active;
@@ -42,7 +42,7 @@ export function mountNebulaIntegration({host,handoffHost,getContext,onNavigate,o
   function renderSettings(target){
     settingsHost=target;
     const section=document.createElement('section');section.className='presentation-setting';
-    section.innerHTML='<h2>Nebula web companion</h2><label class="check-row"><input id="nebula-enabled" type="checkbox"> Show Nebula companion</label><p>The otter opens five tools in this app. When hidden, use the Show Nebula button or this setting to bring it back.</p>';
+    section.innerHTML='<h2>Nebula web companion</h2><label class="check-row"><input id="nebula-enabled" type="checkbox"> Show Nebula companion</label><p>The otter opens five tools in this app. When hidden, use the Enable Nebula button or this setting to bring it back.</p>';
     target.prepend(section);sync();section.querySelector('input').onchange=e=>pet.setEnabled(e.target.checked);
   }
   const refresh=()=>update();
